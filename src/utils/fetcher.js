@@ -3,8 +3,8 @@ import * as Schemas from "../schemas";
 
 import { getParseCsvPromise, parsePbfData } from "../utils";
 
-const orderInts = (a, b) => a - b;
-const onlyUnique = (value, index, self) => self.indexOf(value) === index;
+// const orderInts = (a, b) => a - b;
+// const onlyUnique = (value, index, self) => self.indexOf(value) === index;
 
 export const fetchFile = (fileInfo, dateLists) => {
   const { name, filetype, timespan, date } = fileInfo;
