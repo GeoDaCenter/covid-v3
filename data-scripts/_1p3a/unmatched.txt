@@ -1,0 +1,37 @@
+air forcemilitary
+apache(az)nn
+armymilitary
+benton and franklinwa
+bernalillo(nm)nn
+bristol bay plus lake peninsulaak
+central utahut
+cibola(nm)nn
+coconino(az)nn
+countytbanh
+douglasok
+federal correctional institution (fci)mi
+guamgu
+inmatesbop
+internationalco
+marine corpsmilitary
+mckinley(nm)nn
+michigan department of corrections (mdoc)mi
+navajo(az)nn
+navymilitary
+non-georgia residentga
+northern mariana islandsmp
+residents diagnosed outside of hihi
+san juan(nm)nn
+san juan(ut)nn
+sandoval(nm)nn
+socorro(nm)nn
+southeast utahut
+southwest utahut
+st. croixvi
+st. johnvi
+st. thomasvi
+staffbop
+tricountyut
+va hospitalsveteran affair
+vanoh
+yakutat plus hoonah-angoonak
