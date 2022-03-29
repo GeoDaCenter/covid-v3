@@ -31,57 +31,57 @@ export const fetcher = async (filesToFetch = [], dateLists) =>
     ? await Promise.allSettled(filesToFetch.map((file) => fetchFile(file, dateLists)))
     : () => [];
   
-    function reconcileData(payload, storedData){  
-      const { name, newData, timespan, error } = payload;
-      const dataError =
-        (newData?.dates && !newData.dates.length) ||
-        (newData &&
-          newData.columns &&
-          storedData[name] &&
-          storedData[name].columns &&
-          newData.columns.join("") === storedData[name].columns.join(""));
+    // function reconcileData(payload, storedData){  
+    //   const { name, newData, timespan, error } = payload;
+    //   const dataError =
+    //     (newData?.dates && !newData.dates.length) ||
+    //     (newData &&
+    //       newData.columns &&
+    //       storedData[name] &&
+    //       storedData[name].columns &&
+    //       newData.columns.join("") === storedData[name].columns.join(""));
     
-      // If the data doesn't exist, easy. Just plug in the full dataset
-      // and move on to the next
-      if (!storedData.hasOwnProperty(name)) {
-        storedData[name] = {
-          ...newData,
-          loaded: [timespan],
-        };
-      } else if (error || dataError) {
-        storedData[name].loaded.push(timespan);
-      } else {
-        const newDates = newData?.dates || [];
-        // Otherwise, we need to reconcile based on keys present in the 'dates'
-        // property, using the big query data as the most up-to-date vs the
-        // static fetched data, which may have been cached client-side
-        const datasetKeys = storedData[name].data
-          ? Object.keys(storedData[name].data)
-          : [];
-        // Loop through row (features) and date, using big query values as insertions
-        // and static as base, to reduce loop iterations
-        for (let x = 0; x < datasetKeys.length; x++) {
-          let tempValues = storedData[name].data[datasetKeys[x]];
-          for (let n = 0; n < newDates.length; n++) {
-            tempValues[newDates[n]] = newData.data[datasetKeys[x]][newDates[n]];
-          }
-          storedData[name].data[datasetKeys[x]] = tempValues;
-        }
+    //   // If the data doesn't exist, easy. Just plug in the full dataset
+    //   // and move on to the next
+    //   if (!storedData.hasOwnProperty(name)) {
+    //     storedData[name] = {
+    //       ...newData,
+    //       loaded: [timespan],
+    //     };
+    //   } else if (error || dataError) {
+    //     storedData[name].loaded.push(timespan);
+    //   } else {
+    //     const newDates = newData?.dates || [];
+    //     // Otherwise, we need to reconcile based on keys present in the 'dates'
+    //     // property, using the big query data as the most up-to-date vs the
+    //     // static fetched data, which may have been cached client-side
+    //     const datasetKeys = storedData[name].data
+    //       ? Object.keys(storedData[name].data)
+    //       : [];
+    //     // Loop through row (features) and date, using big query values as insertions
+    //     // and static as base, to reduce loop iterations
+    //     for (let x = 0; x < datasetKeys.length; x++) {
+    //       let tempValues = storedData[name].data[datasetKeys[x]];
+    //       for (let n = 0; n < newDates.length; n++) {
+    //         tempValues[newDates[n]] = newData.data[datasetKeys[x]][newDates[n]];
+    //       }
+    //       storedData[name].data[datasetKeys[x]] = tempValues;
+    //     }
     
-        // Reconcile and sort date indices
-        storedData[name].loaded.push(timespan);
+    //     // Reconcile and sort date indices
+    //     storedData[name].loaded.push(timespan);
     
-        if (storedData[name]?.dates?.length) {
-          storedData[name].dates = [
-            ...storedData[name].dates,
-            ...(newData?.dates || []),
-          ]
-            .filter(onlyUnique)
-            .sort(orderInts);
-        }
-      }
+    //     if (storedData[name]?.dates?.length) {
+    //       storedData[name].dates = [
+    //         ...storedData[name].dates,
+    //         ...(newData?.dates || []),
+    //       ]
+    //         .filter(onlyUnique)
+    //         .sort(orderInts);
+    //     }
+    //   }
     
-    }
+    // }
 
 export const fetchAndClean = async (filesToFetch=[], dateLists) => {
   const dataArray = await fetcher(filesToFetch, dateLists);
