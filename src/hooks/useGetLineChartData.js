@@ -10,20 +10,21 @@ async function fetchTimeSeries({
   totalPopulation,
 }) {
   const keysToFetch = selectionKeys.length
-    ? ["index", ...selectionKeys]
-    : ["index"];
+    ? [currentTimeseriesDataset, ...selectionKeys]
+    : [currentTimeseriesDataset];
   const timeseriesData = await Promise.allSettled(
-    keysToFetch.map((key) =>
+    keysToFetch.map((key, idx) =>
       fetch(
-        `${process.env.PUBLIC_URL}/timeseries/${currentTimeseriesDataset}/${key}.json`
-      ).then((r) => r.json())
+        `${process.env.PUBLIC_URL}/timeseries/${key}.json`
+      ).then((r) =>  r.json()
+      )
     )
   );
-
+  
   let chartData = [];
   for (let i = 0; i < keysToFetch.length; i++) {
     const id = keysToFetch[i];
-    const data = timeseriesData[i].value;
+    const data = i === 0 ? timeseriesData[i].value : timeseriesData[i].value[currentTimeseriesDataset];
     if (i === 0) {
       const pop = totalPopulation;
       for (let j = 0; j < data.dates.length; j++) {

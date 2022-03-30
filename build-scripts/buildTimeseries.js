@@ -30,14 +30,13 @@ const makeFolder = (fileName) => {
   } catch {}
 };
 
-const generateIndividualFiles = (fileName, multiplier, row) => {
+const generateIndividualRecords = (fileName, multiplier, row, mutableDataObject) => {
   let sumData = [];
   for (let i = 0; i < row.length; i++) {
     const entry = row[i];
     const values = cleanVals(entry.vals, multiplier);
-    fs.writeFileSync(path.join(__dirname, `../public/timeseries/${fileName}/${entry.geoid}.json`),
-      `${JSON.stringify(values)}`
-    );
+    !(entry.geoid in mutableDataObject) && (mutableDataObject[entry.geoid] = {});
+    mutableDataObject[entry.geoid][fileName] = values;
     for (let j = 0; j < values.length; j++) {
       sumData[j] = (values[j] || 0) + (sumData[j] || 0);
     }
@@ -46,7 +45,7 @@ const generateIndividualFiles = (fileName, multiplier, row) => {
 };
 
 const generateSummary = (fileName, dates, sumData, multiplier, row) => {
-  fs.writeFileSync(path.join(__dirname, `../public/timeseries/${fileName}/index.json`),
+  fs.writeFileSync(path.join(__dirname, `../public/timeseries/${fileName}.json`),
     `{
         "dates": ${JSON.stringify(dates)},
         "sumData": ${JSON.stringify(sumData)},
@@ -60,7 +59,8 @@ const onlyUnique = (value, index, self) => self.indexOf(value) === index;
 
 const splitPbfs = (fileList) => {
   console.log(`Splitting ${fileList.length} files.`);
-
+  let mutableDataObject = {};
+  
   fileList.forEach(function (file, idx) {
     const fileName = file.split(".").slice(0,-1).join(".");
     console.log(`${fileName}, writing ${idx + 1}/${fileList.length}...`);
@@ -71,7 +71,7 @@ const splitPbfs = (fileList) => {
       new Pbf(fs.readFileSync(path.join(__dirname, `../public/pbf/${file}`)))
     );
     const reversedDates = [...dates].reverse();
-    const sumData = generateIndividualFiles(fileName, multiplier, row);
+    const sumData = generateIndividualRecords(fileName, multiplier, row, mutableDataObject);
     generateSummary(fileName, dates, sumData, multiplier, row);
     const months = dates.map((date) => date.slice(0, -3)).filter(onlyUnique);
     const indexRanges = months.reduce(
@@ -103,6 +103,9 @@ const splitPbfs = (fileList) => {
       fs.writeFileSync(pathName, binaryData);
     }
   });
+  Object.keys(mutableDataObject).forEach(geoid => {
+    fs.writeFileSync(path.join(__dirname, `../public/timeseries/${geoid}.json`), JSON.stringify(mutableDataObject[geoid]))
+  })
 }
 const parseCsvLikePbf = (csvData, idCol, dataIndex) => {
   let returnObj = [];
@@ -117,6 +120,7 @@ const parseCsvLikePbf = (csvData, idCol, dataIndex) => {
 
 const splitCsvs = (fileList) => {
   const multiplier = 1;
+  let mutableDataObject = {}
   fileList.forEach(function ({file, idCol, dataIndex}, idx) {
     const fileName = file.split(".").slice(0,-1).join(".");
     makeFolder(fileName);
@@ -124,10 +128,13 @@ const splitCsvs = (fileList) => {
       if (err) throw err;
       const {data} = Papa.parse(string, {header: true});
       const parsed = parseCsvLikePbf(data, idCol, dataIndex);
-      const sumData = generateIndividualFiles(fileName, multiplier, parsed);
+      const sumData = generateIndividualRecords(fileName, multiplier, parsed, mutableDataObject);
       const dates = Object.keys(data[0]).slice(dataIndex)
       generateSummary(fileName, dates, sumData, multiplier, parsed);
     });
+  })  
+  Object.keys(mutableDataObject).forEach(geoid => {
+    fs.writeFileSync(path.join(__dirname, `../public/timeseries/${geoid}.json`), JSON.stringify(mutableDataObject[geoid]))
   })
 }
 
@@ -213,5 +220,9 @@ const csvsToParse = [
   },
 ]
 
-parsePbf()
-splitCsvs(csvsToParse)
+async function main(){
+  parsePbf()
+  splitCsvs(csvsToParse)
+}
+
+main()
