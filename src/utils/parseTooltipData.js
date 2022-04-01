@@ -16,7 +16,7 @@ export const parseTooltipData = ({
 
   const locProperties = properties[geoid];
   // const pop = locProperties && locProperties.population;
-  let tooltipData = {
+  let tooltipData = {  
     ...locProperties,
   };
 

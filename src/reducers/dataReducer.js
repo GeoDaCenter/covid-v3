@@ -4,56 +4,59 @@ const orderInts = (a, b) => a - b;
 const onlyUnique = (value, index, self) => self.indexOf(value) === index;
 
 function reconcileData(payload, storedData){  
+  console.log('RECONCILING DATA')
   const { name, newData, timespan, error } = payload;
-  const dataError =
-    (newData?.dates && !newData.dates.length) ||
+  const isStaticData = newData && !!newData.columns & !newData.dateIndices;
+  const dataError = 
+    (newData?.dateIndices && !newData.dateIndices.length) ||
     (newData &&
-      newData.columns &&
+      newData.dateIndices &&
       storedData[name] &&
-      storedData[name].columns &&
-      newData.columns.join("") === storedData[name].columns.join(""));
+      storedData[name].dates &&
+      newData.dateIndices.join("") === storedData[name].dates.join(""));
 
   // If the data doesn't exist, easy. Just plug in the full dataset
   // and move on to the next
   if (!storedData.hasOwnProperty(name)) {
     storedData[name] = {
-      ...newData,
-      loaded: [timespan],
+      loaded: [],
+      dates: [],
+      data: {}
     };
-  } else if (error || dataError) {
-    storedData[name].loaded.push(timespan);
-  } else {
-    const newDates = newData?.dates || [];
-    // Otherwise, we need to reconcile based on keys present in the 'dates'
-    // property, using the big query data as the most up-to-date vs the
-    // static fetched data, which may have been cached client-side
-    const datasetKeys = storedData[name].data
-      ? Object.keys(storedData[name].data)
-      : [];
-    // Loop through row (features) and date, using big query values as insertions
-    // and static as base, to reduce loop iterations
-    for (let x = 0; x < datasetKeys.length; x++) {
-      let tempValues = storedData[name].data[datasetKeys[x]];
-      for (let n = 0; n < newDates.length; n++) {
-        tempValues[newDates[n]] = newData.data[datasetKeys[x]][newDates[n]];
-      }
-      storedData[name].data[datasetKeys[x]] = tempValues;
-    }
-
-    // Reconcile and sort date indices
-    storedData[name].loaded.push(timespan);
-
-    if (storedData[name]?.dates?.length) {
-      storedData[name].dates = [
-        ...storedData[name].dates,
-        ...(newData?.dates || []),
-      ]
-        .filter(onlyUnique)
-        .sort(orderInts);
-    }
   }
-
+  // } else 
+  if (error || dataError) {
+    storedData[name].loaded.push(timespan);
+  } if (isStaticData) {
+    storedData[name] = {
+      ...newData
+    }
+  } else {
+    const {
+      data,
+      dateIndices
+    } = newData;
+    if (!data || !dateIndices) return;
+    
+    const geoids = Object.keys(data)
+    if (Object.keys(storedData[name].data).length === 0) {
+      for (let i=0; i<geoids.length;i++){
+        storedData[name].data[geoids[i]] = {}
+      }
+    }
+    for (let i=0; i<geoids.length;i++){
+      for (let j=0;j<dateIndices.length;j++){
+        storedData[name].data[geoids[i]][dateIndices[j]] = data[geoids[i]][j]; 
+      }
+    }
+    storedData[name].loaded.push(timespan);
+    storedData[name].dates = [
+      ...storedData[name].dates,
+      ...dateIndices
+    ].filter(onlyUnique).sort(orderInts);
+  }
 }
+
 export default function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case "LOAD_DOT_DENSITY_DATA":
@@ -71,7 +74,6 @@ export default function reducer(state = INITIAL_STATE, action) {
         action.payload,
         storedData
       );
-
       return {
         ...state,
         storedData,
@@ -81,7 +83,7 @@ export default function reducer(state = INITIAL_STATE, action) {
       let storedData = {
         ...state.storedData,
       };
-      action.payload.data.forEach(dataset => reconcileData(dataset, storedData))      
+      action.payload.data.forEach(dataset => reconcileData(dataset, storedData))
       return {
         ...state,
         storedData,

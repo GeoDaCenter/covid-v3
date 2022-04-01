@@ -1,6 +1,4 @@
 import * as Pbf from 'pbf';
-
-// PBF schemas
 import * as Schemas from '../schemas';
 
 const filterVal = (val, scale) => {
@@ -18,68 +16,45 @@ const filterVal = (val, scale) => {
   }
   return val * scale;
 };
-export const parsePbfData = (pbfData, fileInfo, dateList) => {
+
+const filterValues = (row, scale) => {
+  let cleanVals = [];
+  for (let i = 0; i < row.length; i++) {
+    cleanVals.push(filterVal(row[i], scale));
+  }
+  return cleanVals;
+}
+
+const cleanData = (data, scale) => {
   let returnData = {};
+  for (let i = 0; i < data.length; i++) {
+    returnData[data[i].geoid] = filterValues(data[i].vals, scale);
+  }
+  return returnData
+}
+
+const getDateIndices = (dateList, dates) => {
   let dateIndices = [];
-  let constructorIndices = [];
-  let columnNames = ['geoid', ...pbfData.dates];
+  for (let i = 0; i < dateList.length; i++) {
+    if (dates.includes(dateList[i])) {
+      dateIndices.push(i);
+    }
+  }
+  return dateIndices
+}
+
+export const parsePbfData = (pbfData, fileInfo, dateList) => {
+  const dateIndices = getDateIndices(dateList, pbfData.dates);
   // embedded scientific scale exponent in file name
   const scale = /.e-[0-9]/g.exec(fileInfo.name)
     ? 10 ** -+/.e-[0-9]/g.exec(fileInfo.name)[0]?.split('-')[1]
     : 1;
+  const cleanedData = cleanData(pbfData.row, scale);
 
-  for (let i = 0; i < dateList.length; i++) {
-    if (pbfData.dates.includes(dateList[i])) {
-      dateIndices.push(i);
-      constructorIndices.push(true);
-    } else {
-      constructorIndices.push(false);
-    }
+  return {
+    data: cleanedData,
+    dateIndices
   }
-
-  if (fileInfo.accumulate) {
-    for (let i = 0; i < pbfData.row.length; i++) {
-      returnData[pbfData.row[i].geoid] = [];
-      for (let n = 0, j = 0; n < constructorIndices.length; n++) {
-        if (constructorIndices[n]) {
-          returnData[pbfData.row[i].geoid].push(
-            pbfData.row[i].vals[j] <= -999
-              ? pbfData.row[i].vals[j] === -999
-                ? null
-                : undefined
-              : (pbfData.row[i].vals[j] * scale || 0) +
-                  (returnData[pbfData.row[i].geoid][n - 1] || 0) || null,
-          );
-          j++;
-        } else {
-          returnData[pbfData.row[i].geoid].push(
-            pbfData.row[i].vals[j] <= -999
-              ? pbfData.row[i].vals[j] === -999
-                ? null
-                : undefined
-              : pbfData.row[i].vals[j - 1] * scale || null,
-          );
-        }
-      }
-    }
-  } else {
-    for (let i = 0; i < pbfData.row.length; i++) {
-      returnData[pbfData.row[i].geoid] = [];
-      for (let n = 0, j = 0; n < constructorIndices.length; n++) {
-        if (constructorIndices[n]) {
-          returnData[pbfData.row[i].geoid].push(
-            filterVal(pbfData.row[i].vals[j], scale),
-          );
-          j++;
-        } else {
-          returnData[pbfData.row[i].geoid].push(
-            filterVal(pbfData.row[i].vals[j - 1], scale),
-          );
-        }
-      }
-    }
-  }
-  return { data: returnData, columns: columnNames, dates: dateIndices };
 };
 
 export default async function getParsePbf(fileInfo, dateList) {

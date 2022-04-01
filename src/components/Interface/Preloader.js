@@ -4,7 +4,7 @@ import colors from '../../config/colors';
 
 const PreloaderContainer = styled.div`
   position: fixed;
-  top:${({quiet}) => quiet ? '92%' : '50%'};
+  top:${({quiet}) => quiet ? 'calc(100% - 100px)' : '50%'};
   left:50%;
   transform:translate(-50%,-50%);
   min-width:100px;
