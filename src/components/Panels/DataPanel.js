@@ -66,25 +66,21 @@ const DataPanelContainer = styled.div`
   font-size: 100%;
   padding: 0;
   z-index: 5;
-  /* transform: translateX(100%); */
-  width: 0;
+  display:none;
   h4 {
     margin: 10px 0;
   }
   &.open {
-    width: auto;
+    display:initial;  
   }
   @media (max-width: 1024px) {
-    min-width: 50vw;
+    min-width: 25%;
   }
   @media (max-width: 600px) {
     width: 100%;
     left: 0;
     transform: translateX(-100%);
     z-index: 51;
-    &.open {
-      transform: none;
-    }
   }
 
   div {

@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef} from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import InputLabel from '@mui/material/InputLabel';
@@ -26,11 +26,11 @@ import {
   toggleDotDensityRace,
   setDotDensityBgOpacity,
 } from '../../actions';
-import { 
+import {
   StyledDropDown
 } from '..';
 import colors from '../../config/colors';
-import {findIn} from '../../utils';
+import { findIn } from '../../utils';
 import { fixedScales, colorScales } from '../../config/scales';
 
 /** STYLES */
@@ -44,21 +44,15 @@ const VariablePanelContainer = styled.div`
   /* min-height:calc(100vh - 50px); */
   /* width:min(25%, 350px); */
   background-color: ${colors.gray}fa;
-  box-shadow: 2px 0px 5px rgba(0,0,0,0.7);
+  /* box-shadow: 2px 0px 5px rgba(0,0,0,0.7); */
   padding:0;
   box-sizing: border-box;
-  transition:125ms all;
   font: 'Lato', sans-serif;
   max-height:calc(100vh - 50px);
   color:white;
-  z-index:0;
-  transition:250ms all;
+  z-index:100;
   display: flex;
   flex-direction: column;
-  &.hidden {
-    width:0;
-    /* transform: translateX(calc(-100% - 50px)); */
-  }
   h1,h2,h3,h4 {
     margin: 0 0 10px 0;
   }
@@ -71,6 +65,10 @@ const VariablePanelContainer = styled.div`
   @media (max-width:600px) {
     width:100%;
     display: ${(props) => (props.otherPanels ? 'none' : 'initial')};
+  }
+  
+  &.hidden {
+    display:none;
   }
   user-select:none;
 `;
@@ -294,34 +292,33 @@ const dotDensityAcsGroups = [
 const onlyUnique = (value, index, self) => self.indexOf(value) === index;
 
 function VariablePanel() {
-  console.log('variable panel');
   const dispatch = useDispatch();
   const variablePanelRef = useRef(null);
-  const currentData = useSelector(({params}) => params.currentData);
+  const currentData = useSelector(({ params }) => params.currentData);
 
-  const binMode = useSelector(({params}) => params.mapParams.binMode);
-  const mapType = useSelector(({params}) => params.mapParams.mapType);
-  const vizType = useSelector(({params}) => params.mapParams.vizType);
+  const binMode = useSelector(({ params }) => params.mapParams.binMode);
+  const mapType = useSelector(({ params }) => params.mapParams.mapType);
+  const vizType = useSelector(({ params }) => params.mapParams.vizType);
   const dotDensityParams = useSelector(
-    ({params}) => params.mapParams.dotDensityParams,
+    ({ params }) => params.mapParams.dotDensityParams,
   );
 
-  const overlay = useSelector(({params}) => params.mapParams.overlay);
-  const resource = useSelector(({params}) => params.mapParams.resource);
+  const overlay = useSelector(({ params }) => params.mapParams.overlay);
+  const resource = useSelector(({ params }) => params.mapParams.resource);
 
-  const panelState = useSelector(({ui}) => ui.panelState);
+  const panelState = useSelector(({ ui }) => ui.panelState);
 
-  const numerator = useSelector(({params}) => params.dataParams.numerator);
-  const variableName = useSelector(({params}) => params.dataParams.variableName);
-  const nType = useSelector(({params}) => params.dataParams.nType);
-  const nRange = useSelector(({params}) => params.dataParams.nRange);
-  const dType = useSelector(({params}) => params.dataParams.dType);
-  const rangeType = useSelector(({params}) => params.dataParams.rangeType);
+  const numerator = useSelector(({ params }) => params.dataParams.numerator);
+  const variableName = useSelector(({ params }) => params.dataParams.variableName);
+  const nType = useSelector(({ params }) => params.dataParams.nType);
+  const nRange = useSelector(({ params }) => params.dataParams.nRange);
+  const dType = useSelector(({ params }) => params.dataParams.dType);
+  const rangeType = useSelector(({ params }) => params.dataParams.rangeType);
 
-  const datasets = useSelector(({params}) => params.datasets);
+  const datasets = useSelector(({ params }) => params.datasets);
   const currentPreset = findIn(datasets, 'file', currentData);
-  const variableTree = useSelector(({params}) => params.variableTree);
-  const urlParamsTree = useSelector(({params}) => params.urlParamsTree);
+  const variableTree = useSelector(({ params }) => params.variableTree);
+  const urlParamsTree = useSelector(({ params }) => params.urlParamsTree);
   const allGeographies = Object.values(variableTree)
     .flatMap((o) => Object.keys(o))
     .filter(onlyUnique);
@@ -334,12 +331,12 @@ function VariablePanel() {
   );
 
   useLayoutEffect(() => {
-    dispatch({type:'SET_VARIABLE_MENU_WIDTH', payload: variablePanelRef.current.offsetWidth});
-  },[])
+    dispatch({ type: 'SET_VARIABLE_MENU_WIDTH', payload: variablePanelRef.current.offsetWidth });
+  }, [])
 
   useLayoutEffect(() => {
-    dispatch({type:'SET_VARIABLE_MENU_WIDTH', payload: variablePanelRef.current.offsetWidth});
-  },[panelState.variables])
+    dispatch({ type: 'SET_VARIABLE_MENU_WIDTH', payload: variablePanelRef.current.offsetWidth });
+  }, [panelState.variables])
 
   const handleMapType = (event, newValue) => {
     let nBins = newValue === 'hinge15_breaks' ? 6 : 8;
@@ -399,14 +396,14 @@ function VariablePanel() {
 
   const handleDotDensitySlider = (e, newValue) => dispatch(setDotDensityBgOpacity(newValue));
   const handleVariable = (e) => dispatch({
-    type:'CHANGE_VARIABLE',
+    type: 'CHANGE_VARIABLE',
     payload: e.target.value,
   })
   const handleGeography = (e) => dispatch({
-    type:'CHANGE_GEOGRAPHY',
+    type: 'CHANGE_GEOGRAPHY',
     payload: e.target.value,
   })
-  
+
   const handleDataset = (e) => {
     dispatch(
       setCurrentData(e.target.value),
@@ -500,9 +497,9 @@ function VariablePanel() {
                 id="date-select"
                 value={
                   nRange === null ||
-                  rangeType === 'custom' ||
-                  variableName.indexOf('Testing') !== -1 ||
-                  variableName.indexOf('Workdays') !== -1
+                    rangeType === 'custom' ||
+                    variableName.indexOf('Testing') !== -1 ||
+                    variableName.indexOf('Workdays') !== -1
                     ? 'x'
                     : nRange
                 }
@@ -881,34 +878,36 @@ function VariablePanel() {
           </TwoUp>
         </ControlsContainer>
       )}
-      <NoteContainer>
-        {/* <h3>Help us improve the Atlas!</h3>
-        <p>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSf0KdYeVyvwnz0RLnZijY3kdyFe1SwXukPc--a1HFPE1NRxyw/viewform?usp=sf_link" target="_blank" rel="noopener noreferrer">Take the Atlas v2 survey here </a>
-          or share your thoughts at <a href="mailto:contact@theuscovidatlas.org" target="_blank" rel="noopener noreferrer">contact@theuscovidatlas.org.</a>
-        </p>
-        <hr></hr> */}
-        <p className="note">
-          Data is updated with freshest available data at 3pm CST daily,<br/> at
-          minimum. In case of data discrepancy, local health departments<br/> are
-          considered most accurate as per CDC recommendations. <br/>More information
-          on <a href="data.html">data</a>, <a href="methods.html">methods</a>,
-          and <a href="FAQ.html">FAQ</a> at main site.
-        </p>
-        <div className="poweredByGeoda">
-          <a
-            href="https://geodacenter.github.io"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src={`${process.env.PUBLIC_URL}/assets/img/geoda-logo.png`}
-              alt="Geoda Logo"
-            />
-            POWERED BY GEODA
-          </a>
-        </div>
-      </NoteContainer>
+
+      {panelState.variables && (
+        <NoteContainer>
+          {/* <h3>Help us improve the Atlas!</h3>
+          <p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSf0KdYeVyvwnz0RLnZijY3kdyFe1SwXukPc--a1HFPE1NRxyw/viewform?usp=sf_link" target="_blank" rel="noopener noreferrer">Take the Atlas v2 survey here </a>
+            or share your thoughts at <a href="mailto:contact@theuscovidatlas.org" target="_blank" rel="noopener noreferrer">contact@theuscovidatlas.org.</a>
+          </p>
+          <hr></hr> */}
+          <p className="note">
+            Data is updated with freshest available data at 3pm CST daily,<br /> at
+            minimum. In case of data discrepancy, local health departments<br /> are
+            considered most accurate as per CDC recommendations. <br />More information
+            on <a href="data.html">data</a>, <a href="methods.html">methods</a>,
+            and <a href="FAQ.html">FAQ</a> at main site.
+          </p>
+          <div className="poweredByGeoda">
+            <a
+              href="https://geodacenter.github.io"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={`${process.env.PUBLIC_URL}/assets/img/geoda-logo.png`}
+                alt="Geoda Logo"
+              />
+              POWERED BY GEODA
+            </a>
+          </div>
+        </NoteContainer>)}
       {/* <button onClick={handleOpenClose} id="showHideLeft" className={panelState.variables ? 'active' : 'hidden'}>
         <Icon symbol="settings" />
       </button> */}

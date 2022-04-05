@@ -57,12 +57,41 @@ const DockContainer = styled.div`
     }
   }
   @media (max-width: 768px) {
-    width:100%;
+    width:100vw;
     top:0;
     height:80px;
     flex-direction:row;
     overflow-x:scroll;
     overflow-y:hidden;
+      /* overflow-y:scroll; */
+    ::-webkit-scrollbar {
+      width: 10px;
+      height:.5em;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: #2b2b2b;
+      height:1em;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: url("${process.env.PUBLIC_URL}/icons/grip.png"), #999;
+      background-position: center center;
+      background-repeat: no-repeat, no-repeat;
+      background-size: 50%, 100%;
+      transition: 125ms all;
+      height:1em;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: url("${process.env.PUBLIC_URL}/icons/grip.png"), #f9f9f9;
+      background-position: center center;
+      background-repeat: no-repeat, no-repeat;
+      background-size: 50%, 100%;
+    }
     button {
       height:50px;
       width:auto;
