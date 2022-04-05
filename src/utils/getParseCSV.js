@@ -36,7 +36,7 @@ export async function getParseCSV(fileInfo, dateList) {
       rtn[data[n][fileInfo.join]] = data[n];
     }
   }
-  return { data: rtn, columns: Object.keys(data[0]), dates: dateIndices };
+  return { data: rtn, columns: Object.keys(data[0]), dateIndices };
 }
 
 export const getParseCsvPromise = (fileInfo, dateList) =>
@@ -77,5 +77,5 @@ export const getParseCsvPromise = (fileInfo, dateList) =>
           rtn[data[n][fileInfo.join]] = data[n];
         }
       }
-      return { data: rtn, columns: Object.keys(data[0]), dates: dateIndices };
+      return { data: rtn, columns: Object.keys(data[0]), dateIndices };
     });
