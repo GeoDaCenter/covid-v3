@@ -110,7 +110,7 @@ const parseCsvLikePbf = (csvData, idCol, dataIndex) => {
   let returnObj = [];
   for (let i = 0; i < csvData.length; i++) {
     returnObj.push({
-      geoid: csvData[i][idCol],
+      geoid: +csvData[i][idCol],
       vals: Object.values(csvData[i]).slice(dataIndex),
     })
   }
@@ -120,18 +120,17 @@ const parseCsvLikePbf = (csvData, idCol, dataIndex) => {
 const splitCsvs = (fileList) => {
   const multiplier = 1;
   let mutableDataObject = {}
-  fileList.forEach(function ({file, idCol, dataIndex}, idx) {
+  for (let i=0; i<fileList.length; i++) {
+    const {file, idCol, dataIndex} = fileList[i];
     const fileName = file.split(".").slice(0,-1).join(".");
     makeFolder(fileName);
-    fs.readFile(path.join(__dirname, `../public/csv/${file}`), 'utf8', function(err, string) {
-      if (err) throw err;
-      const {data} = Papa.parse(string, {header: true});
-      const parsed = parseCsvLikePbf(data, idCol, dataIndex);
-      const sumData = generateIndividualRecords(fileName, multiplier, parsed, mutableDataObject);
-      const dates = Object.keys(data[0]).slice(dataIndex)
-      generateSummary(fileName, dates, sumData, multiplier, parsed);
-    });
-  })  
+    const string = fs.readFileSync(path.join(__dirname, `../public/csv/${file}`), 'utf8')
+    const {data} =  Papa.parse(string, {header: true})
+    const parsed = parseCsvLikePbf(data, idCol, dataIndex);
+    const sumData = generateIndividualRecords(fileName, multiplier, parsed, mutableDataObject);
+    const dates = Object.keys(data[0]).slice(dataIndex)
+    generateSummary(fileName, dates, sumData, multiplier, parsed);
+  }
   Object.keys(mutableDataObject).forEach(geoid => {
     fs.writeFileSync(path.join(__dirname, `../public/timeseries/${geoid}.json`), JSON.stringify(mutableDataObject[geoid]))
   })
@@ -220,7 +219,7 @@ const csvsToParse = [
 ]
 
 async function main(){
-  parsePbf()
+  // parsePbf()
   splitCsvs(csvsToParse)
 }
 
