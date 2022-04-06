@@ -4,7 +4,6 @@ const orderInts = (a, b) => a - b;
 const onlyUnique = (value, index, self) => self.indexOf(value) === index;
 
 function reconcileData(payload, storedData){  
-  console.log('RECONCILING DATA')
   const { name, newData, timespan, error } = payload;
   const isStaticData = newData && !!newData.columns & !newData.dateIndices;
   const dataError = 

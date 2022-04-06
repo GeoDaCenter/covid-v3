@@ -25,7 +25,6 @@ import {
   openContextMenu,
   setNotification,
   setTooltipInfo,
-  setDotDensityData,
   updateSelectionKeys,
   mapDidPan,
 } from "../../actions";
@@ -136,20 +135,12 @@ function MapSection({
   theme = "dark",
 }) {
   const noData = Object.keys(currentMapData).length === 0;
-  // console.log(noData)
   const isReport = !!manualViewport;
-  // fetch pieces of state from store
-  // const currentMapData = useSelector(state => state.mapData.data);
-  // const currentMapID = useSelector(state => state.mapData.params);
-  // const currentHeightScale = useSelector(state => state.mapData.heightScale);
   const dotDensityData = useSelector(({ data }) => data.dotDensityData);
-  // const storedGeojson = useSelector(({data}) => data.storedGeojson);
   const storedCartogramData = useSelector(
     ({ data }) => data.storedCartogramData
   );
-  // const currentMapGeography = storedGeojson[currentData]?.data||[]
   const colorFilter = useSelector(({ ui }) => ui.colorFilter);
-  // const storedLisaData = useSelector((state) => state.storedLisaData);
   const shouldPanMap = useSelector(({ ui }) => ui.shouldPanMap);
   const panelState = useSelector(({ ui }) => ui.panelState);
   const uiLeftPadding = useSelector(({ui}) => ui.panelState.variables ? ui.variableMenuWidth : 0);
@@ -315,14 +306,15 @@ function MapSection({
       .then((ab) => new Pbf(ab))
       .then((pbf) => Schemas.Dot.read(pbf).val)
       .then((data) => chunkArray(data, 4))
-      .then((chunks) => dispatch(setDotDensityData(chunks)));
+      // .then((chunks) => dispatch(setDotDensityData(chunks)));
 
   // change mapbox layer on viztype change or overlay/resource change
   useEffect(() => {
     if (mapParams.vizType === "dotDensity") {
       if (!dotDensityData.length) {
-        getDotDensityData();
+        getDotDensityData().then(dotDensityData => dispatch({type: 'LOAD_DOT_DENSITY_DATA', payload: dotDensityData}));
       }
+
     }
     parseMapboxLayers(MAP_STYLE.layers, mapParams, mapRef);
   }, [mapParams.overlay, mapParams.mapType, mapParams.vizType]);
@@ -512,7 +504,7 @@ function MapSection({
       });
     }
   }, []);
-
+  
   const FullLayers = {
     choropleth: new GeoJsonLayer({
       id: "choropleth",

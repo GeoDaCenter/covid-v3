@@ -15,7 +15,6 @@ export default function useGetTable({
       return data.storedData[fileSchema.name]
     })
   );
-  console.log('filesToFetch', filesToFetch)
   
   useEffect(() => {
     
@@ -31,7 +30,6 @@ export default function useGetTable({
         const getData = async () => FetcherWorker.fetcher(cleanedFilesToFetch, dateLists)
         getData()
           .then((dataArray) => {
-            console.log('dataArray', dataArray)
             if (dataArray.length) {
               dataArray.forEach(({ value: newData }, idx) => {
                 dispatch({

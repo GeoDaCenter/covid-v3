@@ -38,7 +38,6 @@ export default function useBackgroundLoadData({
       const getData = async () => FetcherWorker.fetchAndClean(filesToFetch, dateLists)
       setIsBackgroundLoading(true)
       getData().then(data => {
-        console.log(data)
         dispatch({
           type:"RECONCILE_TABLES",
           payload: {

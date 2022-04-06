@@ -58,7 +58,7 @@ const SliderAndTicksInner = styled.div``;
 
 const SpeedSlider = styled.div`
   position: absolute;
-  padding: 1em 1em 0 .5em !important;
+  padding: 1em 2em 0 1em!important;
   width: 15%;
   min-width:100px;
   max-width:150px;
@@ -69,12 +69,12 @@ const SpeedSlider = styled.div`
   p {
     text-align: center;
   }
-  // span.MuiSlider-rail {
-  //   display: initial !important;
-  // }
-  // span.MuiSlider-track {
-  //   display: initial !important;
-  // }
+  span.MuiSlider-rail {
+    display: initial !important;
+  }
+  span.MuiSlider-track {
+    display: initial !important;
+  }
   span.MuiSlider-thumbColorPrimary {
     transform:translateY(-7px) !important;
   }
@@ -209,8 +209,8 @@ function DateTitle({
   currIndex = 7,
   currRange = 7,
   rangeType = "",
-  handleChange = () => {},
-  handleRangeChange = () => {},
+  handleChange = () => { },
+  handleRangeChange = () => { },
 }) {
   if (!dates || !dates.length) {
     return null;
@@ -228,27 +228,27 @@ function DateTitle({
   const onChange =
     rangeType === "custom"
       ? (date, position) => {
-          try {
-            const dateString = JSON.stringify(date).slice(1, 11);
-            const dateIdx = dates.indexOf(dateString);
-            if (position === "start") {
-              handleRangeChange(null, [dateIdx, currIndex]);
-            } else {
-              handleRangeChange(null, [currIndex - currRange, dateIdx]);
-            }
-          } catch (error) {
-            console.log(error);
+        try {
+          const dateString = JSON.stringify(date).slice(1, 11);
+          const dateIdx = dates.indexOf(dateString);
+          if (position === "start") {
+            handleRangeChange(null, [dateIdx, currIndex]);
+          } else {
+            handleRangeChange(null, [currIndex - currRange, dateIdx]);
           }
+        } catch (error) {
+          console.log(error);
         }
+      }
       : (date) => {
-          try {
-            const dateString = JSON.stringify(date).slice(1, 11);
-            const dateIdx = dates.indexOf(dateString);
-            handleChange(null, dateIdx);
-          } catch (error) {
-            console.log(error);
-          }
-        };
+        try {
+          const dateString = JSON.stringify(date).slice(1, 11);
+          const dateIdx = dates.indexOf(dateString);
+          handleChange(null, dateIdx);
+        } catch (error) {
+          console.log(error);
+        }
+      };
   return (
     <DateSelectorContainer item xs={12}>
       {rangeType === "custom" && (

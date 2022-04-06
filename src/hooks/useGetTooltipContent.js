@@ -20,7 +20,7 @@ export default function useGetTooltipContent({
         ...Object.values(currDataset.tables).map(tableId => findIn(tables, 'id', tableId)),
         ...findAllDefaults(tables, currDataset.geography).map(dataspec => ({...dataspec}))
     ].filter((entry, index, self) => self.findIndex(f => f.table === entry.table) === index)
-    console.log(currTables)
+    
     const storedGeojson = useSelector(({data}) => data.storedGeojson);
     const storedData = useSelector(({data}) => data.storedData);
 

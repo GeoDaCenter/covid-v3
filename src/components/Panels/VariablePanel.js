@@ -291,6 +291,58 @@ const dotDensityAcsGroups = [
 // `;
 const onlyUnique = (value, index, self) => self.indexOf(value) === index;
 
+const DotDensityControlSection = ({ isCustom=false }) => {
+  const dispatch = useDispatch();
+  const handleDotDensitySlider = (e, newValue) => dispatch(setDotDensityBgOpacity(newValue));
+  const {dotDensityParams} = useSelector(({ params }) => params.mapParams )
+  return (
+    <DotDensityControls>
+              <p className="help-text">1 Dot = 500 People</p>
+              <BinsContainer>
+                {!isCustom && (
+                  <>
+                    <Switch
+                      checked={dotDensityParams.colorCOVID}
+                      onChange={() => dispatch(changeDotDensityMode())}
+                      name="dot density mode"
+                      disabled={isCustom}
+                    />
+                    <p>
+                      {dotDensityParams.colorCOVID
+                        ? 'Color by COVID Data'
+                        : 'Color by ACS Race / Ethnicity'}
+                    </p>
+                    <Gutter h={10} />
+                    <p className="help-text">
+                      Toggle ACS Race / Ethnicity Groups
+                    </p>
+                  </>
+                )}
+                <Gutter h={5} />
+                {dotDensityAcsGroups.map((group) => (
+                  <AcsRaceButton
+                    active={dotDensityParams.raceCodes[group.idx]}
+                    bgColor={colors.dotDensity[group.idx]}
+                    key={group.name + 'dd-button'}
+                    onClick={() => dispatch(toggleDotDensityRace(group.idx))}
+                  >
+                    {group.name}
+                  </AcsRaceButton>
+                ))}
+              </BinsContainer>
+              <Gutter h={20} />
+              <p className="help-text">Background Opacity</p>
+              <Slider
+                value={dotDensityParams.backgroundTransparency}
+                min={0}
+                step={0.01}
+                max={1}
+                onChange={handleDotDensitySlider}
+              />
+            </DotDensityControls>
+  )
+}
+
 function VariablePanel() {
   const dispatch = useDispatch();
   const variablePanelRef = useRef(null);
@@ -299,9 +351,6 @@ function VariablePanel() {
   const binMode = useSelector(({ params }) => params.mapParams.binMode);
   const mapType = useSelector(({ params }) => params.mapParams.mapType);
   const vizType = useSelector(({ params }) => params.mapParams.vizType);
-  const dotDensityParams = useSelector(
-    ({ params }) => params.mapParams.dotDensityParams,
-  );
 
   const overlay = useSelector(({ params }) => params.mapParams.overlay);
   const resource = useSelector(({ params }) => params.mapParams.resource);
@@ -394,7 +443,6 @@ function VariablePanel() {
 
   const handleVizTypeButton = (vizType) => dispatch(setMapParams({ vizType }));
 
-  const handleDotDensitySlider = (e, newValue) => dispatch(setDotDensityBgOpacity(newValue));
   const handleVariable = (e) => dispatch({
     type: 'CHANGE_VARIABLE',
     payload: e.target.value,
@@ -765,52 +813,7 @@ function VariablePanel() {
               </Select>
             </StyledDropDown>
         } */}
-          {vizType === 'dotDensity' && (
-            <DotDensityControls>
-              <p className="help-text">1 Dot = 500 People</p>
-              <BinsContainer>
-                {!isCustom && (
-                  <>
-                    <Switch
-                      checked={dotDensityParams.colorCOVID}
-                      onChange={() => dispatch(changeDotDensityMode())}
-                      name="dot density mode"
-                      disabled={isCustom}
-                    />
-                    <p>
-                      {dotDensityParams.colorCOVID
-                        ? 'Color by COVID Data'
-                        : 'Color by ACS Race / Ethnicity'}
-                    </p>
-                    <Gutter h={10} />
-                    <p className="help-text">
-                      Toggle ACS Race / Ethnicity Groups
-                    </p>
-                  </>
-                )}
-                <Gutter h={5} />
-                {dotDensityAcsGroups.map((group) => (
-                  <AcsRaceButton
-                    active={dotDensityParams.raceCodes[group.idx]}
-                    bgColor={colors.dotDensity[group.idx]}
-                    key={group.name + 'dd-button'}
-                    onClick={() => dispatch(toggleDotDensityRace(group.idx))}
-                  >
-                    {group.name}
-                  </AcsRaceButton>
-                ))}
-              </BinsContainer>
-              <Gutter h={20} />
-              <p className="help-text">Background Opacity</p>
-              <Slider
-                value={dotDensityParams.backgroundTransparency}
-                min={0}
-                step={0.01}
-                max={1}
-                onChange={handleDotDensitySlider}
-              />
-            </DotDensityControls>
-          )}
+          {vizType === 'dotDensity' && <DotDensityControlSection isCustom={isCustom} />}
           <Gutter h={20} />
           <TwoUp id="overlaysResources">
             <StyledDropDown>

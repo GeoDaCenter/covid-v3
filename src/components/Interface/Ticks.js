@@ -25,7 +25,6 @@ export default function Ticks({ available, fullLength }) {
   }
 
   useEffect(() => {
-    console.log('rendering ticks')
     const canvas = canvasRef.current
     const context = canvas.getContext('2d')
     for (let i = 0; i < fullLength; i++) {
