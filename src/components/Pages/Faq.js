@@ -8,8 +8,7 @@ import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 
-import { ContentContainer, Gutter } from '../../styled_components';
-import { NavBar, Footer } from '../';
+import { NavBar, Footer, ContentContainer, Gutter } from '../../components';
 import colors from '../../config/colors';
 
 const FaqPage = styled.div`

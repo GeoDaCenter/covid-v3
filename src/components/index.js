@@ -4,6 +4,7 @@ import BinsList from './Map/BinsList';
 import ChartLabel from './Charts/ChartLabel';
 import { ChartTitle } from './Charts/ChartTitle';
 import ComboBox from './Interface/ComboBox';
+import {ContentContainer} from './Layout/ContentContainer';
 import ContextMenu from './Interface/ContextMenu';
 import ControlPopover, { ControlElementMapping } from './Interface/ControlPopover';
 import CsvDownloader from './CsvDownloader';
@@ -80,6 +81,7 @@ export {
   ChartLabel,
   ChartTitle,
   ComboBox,
+  ContentContainer,
   ContextMenu,
   ControlElementMapping,
   ControlPopover,

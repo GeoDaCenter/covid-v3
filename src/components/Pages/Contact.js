@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { ContentContainer, Gutter } from '../../styled_components';
-import { NavBar, Footer } from '../';
+import { NavBar, Footer, ContentContainer, Gutter } from '../../components';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';

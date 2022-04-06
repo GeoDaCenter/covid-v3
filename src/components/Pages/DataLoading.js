@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ContentContainer, Gutter } from '../../styled_components';
-import { NavBar, Footer } from '../';
+import { NavBar, Footer, ContentContainer, Gutter  } from '../../components';
 
 const DataLoadingPage = styled.div`
   background: white;

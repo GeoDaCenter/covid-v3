@@ -10,10 +10,10 @@ import {
   HeroMap,
   Footer,
   FastTrackInsights,
+  Gutter
 } from '../../components';
 import { MAPBOX_ACCESS_TOKEN } from '../../config';
 import colors from '../../config/colors';
-import { Gutter } from '../../styled_components';
 
 const HomePage = styled.div`
   h1 {

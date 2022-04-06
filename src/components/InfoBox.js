@@ -1,18 +1,18 @@
 // This component has the wiki/manual/info
 
 // Library import
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import styled from "styled-components";
 
 // MUI import
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 
 // Config/component import
-import colors from '../config/colors';
-import { pages } from '../wiki';
-import { StyledDropDown } from '../styled_components';
+import colors from "../config/colors";
+import { pages } from "../wiki";
+import { StyledDropDown } from "../components/Interface/StyledDropDown";
 
 //// Component Styling
 // Main container for component
@@ -21,7 +21,7 @@ const InfoContainer = styled.div`
   color: ${colors.white};
   padding: 0;
   overflow: hidden;
-  display: ${(props) => (props.active ? 'initial' : 'none')};
+  display: ${(props) => (props.active ? "initial" : "none")};
   border-radius: 4px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -75,7 +75,7 @@ const DrawerButton = styled.button`
   outline: none;
   line-height: 2;
   transition: 250ms;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   opacity: ${(props) => (props.active ? 1 : 0.6)};
   &:hover {
     opacity: 1;
@@ -121,7 +121,7 @@ const BodyContainer = styled.div`
     color: ${colors.yellow};
     padding: 0;
     &:after {
-      content: ' ⚼';
+      content: " ⚼";
     }
   }
   @media (max-width: 1024px) {
@@ -151,7 +151,7 @@ const TutorialButton = styled.button`
   margin: 5px;
   display: inline-block;
   color: ${colors.white};
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   padding: 10px;
   transition: 250ms all;
   &:hover {
@@ -181,35 +181,36 @@ const PagesDropDown = styled(StyledDropDown)`
 // Tutorials
 const tutorialInfo = [
   {
-    title: 'Choropleth Maps',
+    title: "Choropleth Maps",
     subtitle:
-      'Explore counts and percentages of cases, deaths, hosipital beds, and testing data.',
-    link: 'choropleth-tutorial',
+      "Explore counts and percentages of cases, deaths, hosipital beds, and testing data.",
+    link: "choropleth-tutorial",
   },
   {
-    title: 'Hotspots',
-    subtitle: 'Find groups of counties and states affected by the virus.',
-    link: 'hotspot-tutorial',
+    title: "Hotspots",
+    subtitle: "Find groups of counties and states affected by the virus.",
+    link: "hotspot-tutorial",
   },
   {
-    title: 'Emerging Trends',
-    subtitle: 'Locate areas that will soon be significantly affected by COVID.',
-    link: 'emerging-tutorial',
+    title: "Emerging Trends",
+    subtitle: "Locate areas that will soon be significantly affected by COVID.",
+    link: "emerging-tutorial",
   },
   {
-    title: 'Change Over Time',
-    subtitle: 'See the history of the virus by county and state.',
-    link: 'change-tutorial',
+    title: "Change Over Time",
+    subtitle: "See the history of the virus by county and state.",
+    link: "change-tutorial",
   },
 ];
 
 // Infobox component
 const InfoBox = () => {
+  console.log("INFPO BOX RENDERED");
   // Redux -- just panel state open/closed
-  const panelOpen = useSelector(({ui}) => ui.panelState.tutorial);
+  const panelOpen = useSelector(({ ui }) => ui.panelState.tutorial);
 
   // Selected Article (local state)
-  const [currArticle, setCurrArticle] = useState('welcome');
+  const [currArticle, setCurrArticle] = useState("welcome");
 
   // Handle selection based on article name
   const handleSelect = (e) => setCurrArticle(e.target.value);
@@ -219,16 +220,16 @@ const InfoBox = () => {
       {/* List of available articles :: On click sets article */}
       <Drawer>
         {Object.keys(pages).map((page) =>
-          pages[page]['pageName'] !== null ? (
+          pages[page]["pageName"] !== null ? (
             <DrawerButton
               onClick={() => setCurrArticle(page)}
               active={currArticle === page}
             >
-              {pages[page]['pageName']}
+              {pages[page]["pageName"]}
             </DrawerButton>
           ) : (
-            ''
-          ),
+            ""
+          )
         )}
       </Drawer>
       <PagesDropDown id="selectPage">
@@ -239,29 +240,29 @@ const InfoBox = () => {
           onChange={handleSelect}
         >
           {Object.keys(pages).map((page) =>
-            pages[page]['pageName'] !== null ? (
+            pages[page]["pageName"] !== null ? (
               <MenuItem value={page} key={page}>
-                {pages[page]['pageName']}
+                {pages[page]["pageName"]}
               </MenuItem>
             ) : (
-              <MenuItem value={page} key={page} style={{ display: 'none' }}>
-                {pages[page]['pageName']}
+              <MenuItem value={page} key={page} style={{ display: "none" }}>
+                {pages[page]["pageName"]}
               </MenuItem>
-            ),
+            )
           )}
         </Select>
       </PagesDropDown>
       <BodyContainer>
-        {pages[currArticle]['content']}
-        {currArticle === 'getting-started' &&
+        {pages[currArticle]["content"]}
+        {currArticle === "getting-started" &&
           tutorialInfo.map((tutorial) => (
             <TutorialButton onClick={() => setCurrArticle(tutorial.link)}>
               <h3>{tutorial.title}</h3>
               <p>{tutorial.subtitle}</p>
             </TutorialButton>
           ))}
-        {currArticle.includes('tutorial') && (
-          <TutorialButton onClick={() => setCurrArticle('getting-started')}>
+        {currArticle.includes("tutorial") && (
+          <TutorialButton onClick={() => setCurrArticle("getting-started")}>
             Return to Tutorials
           </TutorialButton>
         )}

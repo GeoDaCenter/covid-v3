@@ -11,8 +11,7 @@ import MapboxGLMap from 'react-map-gl';
 import MAP_STYLE from '../../config/style.json';
 import { MAPBOX_ACCESS_TOKEN } from '../../config';
 
-import { ContentContainer, Gutter } from '../../styled_components';
-import { StaticNavbar, Footer } from '../';
+import { ContentContainer, Gutter, StaticNavbar, Footer } from '../../components';
 
 const view = new MapView({ repeat: true });
 const MichiganPage = styled.div`

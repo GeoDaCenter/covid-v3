@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
-import { ContentContainer } from '../../styled_components';
-import { NavBar, Footer } from '../';
+import { ContentContainer, NavBar, Footer } from '../../components';
 
 const ErrorPage = styled.div`
   background: white;

@@ -6,9 +6,9 @@ import { useGeoda } from '../../contexts/Geoda';
 
 import { setPanelState, addCustomData } from '../../actions';
 import { colorScales } from '../../config/scales';
+import { StyledDropDown, Gutter } from '../../components';
 
 import Select from '@mui/material/Select';
-import { StyledDropDown, Gutter } from '../../styled_components';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 

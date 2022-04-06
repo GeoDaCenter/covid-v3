@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
-import { ContentContainer } from '../../styled_components';
 import Grid from '@mui/material/Grid';
-import { MemberGrid, NavBar, Footer } from '../../components';
+import { MemberGrid, NavBar, Footer, ContentContainer } from '../../components';
 import { contributors } from '../../meta/contributors';
 import { coreTeam } from '../../meta/coreTeam';
 import colors from '../../config/colors';

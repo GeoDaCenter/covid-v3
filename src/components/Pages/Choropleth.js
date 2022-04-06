@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import { ContentContainer, Gutter } from '../../styled_components';
-import { NavBar, Footer } from '../';
+import { NavBar, Footer, ContentContainer, Gutter } from '../../components';
 import colors from '../../config/colors';
 
 const ChoroplethPage = styled.div`

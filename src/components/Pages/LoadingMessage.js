@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ContentContainer } from '../../styled_components';
+import { ContentContainer } from '../../components';
 import colors from '../../config/colors';
 
 const PreloaderPage = styled.div`

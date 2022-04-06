@@ -8,7 +8,7 @@ import {
   Grid,
 } from '@mui/material';
 import colors from '../config/colors';
-import { Gutter } from '../styled_components';
+import { Gutter } from '../components/';
 import * as JSZip from 'jszip';
 
 const CsvDownloaderContainer = styled.div`

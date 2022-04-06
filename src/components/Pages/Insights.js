@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Grid from '@mui/material/Grid';
 
-import { ContentContainer, Gutter } from '../../styled_components';
-import { NavBar, Footer } from '../';
+import { ContentContainer, Gutter, NavBar, Footer } from '../../components';
 import colors from '../../config/colors';
 
 const InsightsPage = styled.div`
