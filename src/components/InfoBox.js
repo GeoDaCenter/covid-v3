@@ -205,7 +205,6 @@ const tutorialInfo = [
 
 // Infobox component
 const InfoBox = () => {
-  console.log("INFPO BOX RENDERED");
   // Redux -- just panel state open/closed
   const panelOpen = useSelector(({ ui }) => ui.panelState.tutorial);
 
