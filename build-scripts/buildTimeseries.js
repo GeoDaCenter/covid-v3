@@ -219,7 +219,7 @@ const csvsToParse = [
 ]
 
 async function main(){
-  // parsePbf()
+  parsePbf()
   splitCsvs(csvsToParse)
 }
 
