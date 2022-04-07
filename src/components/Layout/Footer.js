@@ -168,7 +168,7 @@ const Footer = (props) => {
         {props.signUp && <hr className="footerHr" />}
         <LinkLists container spacing={1}>
           <Grid item xs={6} md={3}>
-            <p>
+            <span>
               <h6>Explore</h6>
               <ul>
                 <li>
@@ -184,10 +184,10 @@ const Footer = (props) => {
                   <NavLink to="/faq">Help + Faq</NavLink>
                 </li>
               </ul>
-            </p>
+            </span>
           </Grid>
           <Grid item xs={6} md={4}>
-            <p>
+            <span>
               <h6>About</h6>
               <ul>
                 <li>
@@ -221,7 +221,7 @@ const Footer = (props) => {
                   <NavLink to="/privacy">Privacy Policy</NavLink>
                 </li>
               </ul>
-            </p>
+            </span>
           </Grid>
           <Grid item xs={12} md={5}>
             <img
