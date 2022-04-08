@@ -31,7 +31,7 @@ import {
 import {
   // findIn,
   getCSV,
-  getCartogramCenter,
+  // getCartogramCenter,
   parseMapboxLayers,
   shallowCompare,
 } from "../../utils";
@@ -129,6 +129,9 @@ function MapSection({
   currentData,
   mapParams,
   currIdCol,
+  cartogramData,
+  cartogramCenter,
+  cartogramDataSnapshot,
   manualViewport = false,
   hoverGeoid = null,
   highlightGeoids = [],
@@ -137,13 +140,10 @@ function MapSection({
   const noData = Object.keys(currentMapData).length === 0;
   const isReport = !!manualViewport;
   const dotDensityData = useSelector(({ data }) => data.dotDensityData);
-  const storedCartogramData = useSelector(
-    ({ data }) => data.storedCartogramData
-  );
   const colorFilter = useSelector(({ ui }) => ui.colorFilter);
   const shouldPanMap = useSelector(({ ui }) => ui.shouldPanMap);
   const panelState = useSelector(({ ui }) => ui.panelState);
-  const uiLeftPadding = useSelector(({ui}) => ui.panelState.variables ? ui.variableMenuWidth : 0);
+  const uiLeftPadding = useSelector(({ ui }) => ui.panelState.variables ? ui.variableMenuWidth : 0);
 
   const isPoint = currentMapGeography?.features
     ? currentMapGeography.features[0].geometry.type === "Point"
@@ -278,27 +278,22 @@ function MapSection({
   // needs a separate rule from the above effect due to state and county cartograms
   // having separate locations
   useEffect(() => {
-    if (mapParams.vizType !== "cartogram") return;
-
-    if (storedCartogramData.length) {
-      let center = getCartogramCenter(storedCartogramData);
-      if (isNaN(center[0])) return;
-      let roundedCenter = [Math.floor(center[0]), Math.floor(center[1])];
-      if (
-        (storedCenter === null || roundedCenter[0] !== storedCenter[0]) &&
-        center
-      ) {
-        setViewport({
-          latitude: center[1],
-          longitude: center[0],
-          zoom: currentData.includes("state") ? 6 : 5,
-          bearing: 0,
-          pitch: 0,
-        });
-        setStoredCenter(roundedCenter);
-      }
+    if (mapParams.vizType !== "cartogram" || !cartogramCenter) return
+    if (
+      JSON.stringify(storedCenter) !== JSON.stringify(cartogramCenter)
+      &&
+      cartogramCenter[0] !== 0 && cartogramCenter[1] !== 0
+    ) {
+      setViewport({
+        latitude: cartogramCenter[1],
+        longitude: cartogramCenter[0],
+        zoom: currentData.includes("state") ? 6 : 5,
+        bearing: 0,
+        pitch: 0,
+      });
+      setStoredCenter(cartogramCenter);
     }
-  }, [storedCartogramData, currentData, mapParams.vizType]);
+  }, [JSON.stringify(cartogramCenter), mapParams.vizType]);
 
   const getDotDensityData = async () =>
     fetch(`${process.env.PUBLIC_URL}/pbf/dotDensityFlatGeoid.pbf`)
@@ -306,13 +301,13 @@ function MapSection({
       .then((ab) => new Pbf(ab))
       .then((pbf) => Schemas.Dot.read(pbf).val)
       .then((data) => chunkArray(data, 4))
-      // .then((chunks) => dispatch(setDotDensityData(chunks)));
+  // .then((chunks) => dispatch(setDotDensityData(chunks)));
 
   // change mapbox layer on viztype change or overlay/resource change
   useEffect(() => {
     if (mapParams.vizType === "dotDensity") {
       if (!dotDensityData.length) {
-        getDotDensityData().then(dotDensityData => dispatch({type: 'LOAD_DOT_DENSITY_DATA', payload: dotDensityData}));
+        getDotDensityData().then(dotDensityData => dispatch({ type: 'LOAD_DOT_DENSITY_DATA', payload: dotDensityData }));
       }
 
     }
@@ -464,14 +459,14 @@ function MapSection({
             );
           }
         }
-      } catch {}
+      } catch { }
     } else {
       try {
         setHighlightGeog([objectID]);
         dispatch(updateSelectionKeys(objectID, "update"));
         window.localStorage.setItem("SHARED_GEOID", objectID);
         window.localStorage.setItem("SHARED_VIEW", JSON.stringify(viewport));
-      } catch {}
+      } catch { }
     }
   };
 
@@ -504,23 +499,23 @@ function MapSection({
       });
     }
   }, []);
-  
+
   const FullLayers = {
     choropleth: new GeoJsonLayer({
       id: "choropleth",
       data: currentMapGeography,
       getFillColor: (d) =>
         !colorFilter ||
-        currentMapData[d.properties[currIdCol]]?.color?.length === 4
+          currentMapData[d.properties[currIdCol]]?.color?.length === 4
           ? currentMapData[d.properties[currIdCol]]?.color || [120, 120, 120]
           : [
-              ...(currentMapData[d.properties[currIdCol]]?.color || [0, 0, 0]),
-              0 +
-                (!colorFilter ||
-                  colorFilter ===
-                    currentMapData[d.properties[currIdCol]]?.color) *
-                  225,
-            ],
+            ...(currentMapData[d.properties[currIdCol]]?.color || [0, 0, 0]),
+            0 +
+            (!colorFilter ||
+              colorFilter ===
+              currentMapData[d.properties[currIdCol]]?.color) *
+            225,
+          ],
       getElevation: (d) => currentMapData[d.properties[currIdCol]]?.value || 0,
       elevationScale: currentHeightScale || 1,
       getPointRadius: 250,
@@ -596,26 +591,25 @@ function MapSection({
     }),
     cartogram: new ScatterplotLayer({
       id: "cartogram layer",
-      data: currentMapGeography?.features || [],
+      data: cartogramData,
       pickable: true,
-      getPosition: (d) => currentMapData[d.properties[currIdCol]].position,
-      getFillColor: (d) => currentMapData[d.properties[currIdCol]].color,
-      getRadius: (d) => currentMapData[d.properties[currIdCol]].radius,
+      getPosition: (d) => d.position,
+      getFillColor: (d) => currentMapData[d.id].color,
+      getRadius: (d) => d.radius,
       onHover: handleMapHover,
       radiusScale: currentData.includes("state") ? 9 : 6,
       updateTriggers: {
-        data: currentMapGeography,
-        getPosition: [currentMapID, storedCartogramData],
-        getFillColor: [currentMapID, storedCartogramData],
-        getRadius: [currentMapID, storedCartogramData],
-        transitions: [currentMapID, storedCartogramData],
+        data: [cartogramDataSnapshot],
+        getPosition: [cartogramDataSnapshot],
+        getFillColor: [currentMapID],
+        getRadius: [cartogramDataSnapshot]
       },
     }),
     cartogramText: new TextLayer({
       id: "cartogram text layer",
-      data: currentMapGeography?.features || [],
-      getPosition: (d) => currentMapData[d.properties[currIdCol]].position,
-      getSize: (d) => currentMapData[d.properties[currIdCol]].radius,
+      data: cartogramData,
+      getPosition: (d) => d.position,
+      getSize: (d) => d.radius,
       sizeScale: 4,
       backgroundColor: [240, 240, 240],
       pickable: false,
@@ -627,9 +621,9 @@ function MapSection({
       wordBreak: "break-word",
       getText: (d) => d.properties.NAME,
       updateTriggers: {
-        data: currentMapGeography,
-        getPosition: [currentMapID, storedCartogramData],
-        getSize: [currentMapID, storedCartogramData],
+        data: [cartogramDataSnapshot],
+        getPosition: [cartogramDataSnapshot],
+        getSize: [cartogramDataSnapshot],
       },
     }),
     // cartogramBackground: new PolygonLayer({
@@ -760,10 +754,10 @@ function MapSection({
         d.type === 0
           ? "invitedVaccineSite"
           : d.type === 1
-          ? "participatingVaccineSite"
-          : d.type === 3
-          ? "megaSite"
-          : "",
+            ? "participatingVaccineSite"
+            : d.type === 3
+              ? "megaSite"
+              : "",
       getSize: (d) => (d.type === 3 ? 200000 : 1000),
       getPosition: (d) => [d.lon, d.lat],
       sizeUnits: "meters",
@@ -779,7 +773,7 @@ function MapSection({
   const getLayers = useCallback(
     (layers, vizType, overlays, resources, currData) => {
       let LayerArray = [];
-      
+
       if (vizType === "cartogram") {
         // LayerArray.push(layers['cartogramBackground'])
         LayerArray.push(layers["cartogram"]);
@@ -832,7 +826,6 @@ function MapSection({
   const touchListener = (e) => {
     // setX(e?.targetTouches[0]?.clientX-15)
     // setY(e?.targetTouches[0]?.clientY-15)
-    // console.log(e)
   };
 
   const removeListeners = () => {
@@ -921,9 +914,9 @@ function MapSection({
       );
     }
   }, []);
-  
+
   return (
-    <MapContainerOuter {...{noData, isReport}}>
+    <MapContainerOuter {...{ noData, isReport }}>
       <MapContainer
         onKeyDown={handleKeyDown}
         onKeyUp={handleKeyUp}

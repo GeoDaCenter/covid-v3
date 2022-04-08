@@ -79,7 +79,7 @@ export default function useLoadData({
       ? false
       : findSecondaryMonth(index, dateLists.isoDateList),
   ]).flat().filter(f => !!f).filter(onlyUniqueArray);
-
+  
   const [numeratorParams, denominatorParams] = [
     currTimespans.map(timespan => ({...defaultNumeratorParams, timespan})),
     currTimespans.map(timespan => ({...defaultDenominatorParams, timespan}))
@@ -125,6 +125,22 @@ export default function useLoadData({
     })
   }, [numeratorDataReady, denominatorDataReady, geojsonDataReady]);
   
+  // const {// isBackgroundLoading: adjacentMonthLoading
+  // } =
+  useBackgroundLoadData({
+    currentGeography: currDataset.geography,
+    tables: tables.filter(({name}) => (!defaultNumeratorParams.name || defaultNumeratorParams.name === name) && (!defaultDenominatorParams.name || defaultDenominatorParams.name === name)),
+    shouldFetch: !!numeratorDataReady && !!denominatorDataReady && !!geojsonDataReady,
+    currTimespans,
+    dateLists,
+    numeratorParams,
+    denominatorParams,
+    adjacentMonths: [
+      dateLists.isoDateList[currIndex-30]?.slice(0, 7),
+      dateLists.isoDateList[currIndex+30]?.slice(0, 7)
+    ]
+  });
+
   const {
     isBackgroundLoading
   } = useBackgroundLoadData({

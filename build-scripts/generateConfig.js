@@ -138,26 +138,39 @@ const getDateLists = () => {
 
 const filesToParse = [
     'covid_confirmed_usafacts',
+    'covid_confirmed_usafacts_state',
     'covid_confirmed_usafacts_h',
     'covid_confirmed_nyt',
+    'covid_confirmed_nyt_state',
     'covid_confirmed_cdc',
     'covid_confirmed_1p3a',
+    'covid_confirmed_1p3a_state',
     'covid_deaths_usafacts',
+    'covid_deaths_usafacts_state',
     'covid_deaths_usafacts_h',
     'covid_deaths_nyt',
+    'covid_deaths_nyt_state',
     'covid_deaths_cdc',
     'covid_deaths_1p3a',
+    'covid_deaths_1p3a_state',
     'covid_tcap_cdc',
+    'covid_tcap_cdc_state',
     'covid_ccpt_cdc',
+    'covid_ccpt_cdc_state',
     'covid_testing_cdc',
+    'covid_testing_cdc_state',
     'covid_wk_pos_cdc',
+    'covid_wk_pos_cdc_state',
     'mobility_fulltime_workdays_safegraph',
     'mobility_home_workdays_safegraph',
     'mobility_parttime_workdays_safegraph',
     'vaccination_fully_vaccinated_cdc_h',
     'vaccination_fully_vaccinated_cdc',
+    'vaccination_fully_vaccinated_cdc_state',
     'vaccination_one_or_more_doses_cdc_h',
-    'vaccination_one_or_more_doses_cdc'
+    'vaccination_one_or_more_doses_cdc',
+    'vaccination_one_or_more_doses_cdc_state',
+
 ]
 
 function parseFiles(filesToParse) {
@@ -175,7 +188,7 @@ function parseFiles(filesToParse) {
     })
     fs.writeFileSync(path.join(basePath, 'dataDateRanges.js'), `
     // this is a generated file, do not edit directly. See data-scripts/build-scripts/parseColumns.js
-    export default ${JSON.stringify(dateRanges)}
+    const dataDateRanges = ${JSON.stringify(dateRanges)}; export default dataDateRanges;
     `)
     console.log('Parsing complete.')
 };

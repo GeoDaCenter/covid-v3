@@ -249,6 +249,7 @@ const MapContainerInner = () => {
   const [
     currentMapGeography,
     currentMapData,
+    { cartogramData, cartogramCenter, cartogramDataSnapshot },
     currentMapID,
     currentBins,
     currentHeightScale,
@@ -269,6 +270,9 @@ const MapContainerInner = () => {
       currentMapData={currentMapData}
       currentMapID={currentMapID}
       currentHeightScale={currentHeightScale}
+      cartogramData={cartogramData}
+      cartogramCenter={cartogramCenter}
+      cartogramDataSnapshot={cartogramDataSnapshot}
       isLoading={isLoading}
       mapParams={mapParams}
       currentData={currentData}

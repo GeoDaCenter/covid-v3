@@ -1,42 +1,8 @@
-// branchless variant
-// const dataFn = (numeratorData, numeratorProperty, index, range, denominatorData, denominatorProperty, denominatorIndex, denominatorRange, scale)  => {
-
-//     return (
-//       (
-//         (
-//           (
-//             (numeratorData[index]||numeratorData[numeratorProperty])
-//             -
-//             ((range!==null)&&(numeratorData[index-range]))
-//           )
-
-//           /
-//           (range+(range===null))
-//         )
-//       /
-//         (
-//           (
-//             (
-//               (denominatorData[denominatorIndex]||denominatorData[denominatorProperty])
-//               -
-//               ((denominatorRange!==null)&&(denominatorData[denominatorIndex-denominatorRange]))
-//             )
-//             /
-//             (denominatorRange+(denominatorRange===null))
-//           )
-//           ||
-//             (denominatorData[denominatorProperty])
-//           ||
-//           1
-//         )
-//       )
-//       *
-//       scale
-//     )
-// }
-
-// export default dataFn;
-
+/**
+ * @param  {} numeratorData
+ * @param  {} denominatorData
+ * @param  {} dataParams
+ */
 const dataFn = (numeratorData, denominatorData, dataParams) => {
   const { nProperty, nIndex, dProperty, dIndex, nType, dType, scale } =
     dataParams;
@@ -116,3 +82,41 @@ const dataFn = (numeratorData, denominatorData, dataParams) => {
 };
 
 export default dataFn;
+
+
+// Pretty sweet branchless variant
+// const dataFn = (numeratorData, numeratorProperty, index, range, denominatorData, denominatorProperty, denominatorIndex, denominatorRange, scale)  => {
+
+//     return (
+//       (
+//         (
+//           (
+//             (numeratorData[index]||numeratorData[numeratorProperty])
+//             -
+//             ((range!==null)&&(numeratorData[index-range]))
+//           )
+
+//           /
+//           (range+(range===null))
+//         )
+//       /
+//         (
+//           (
+//             (
+//               (denominatorData[denominatorIndex]||denominatorData[denominatorProperty])
+//               -
+//               ((denominatorRange!==null)&&(denominatorData[denominatorIndex-denominatorRange]))
+//             )
+//             /
+//             (denominatorRange+(denominatorRange===null))
+//           )
+//           ||
+//             (denominatorData[denominatorProperty])
+//           ||
+//           1
+//         )
+//       )
+//       *
+//       scale
+//     )
+// }
