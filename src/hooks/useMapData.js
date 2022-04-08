@@ -141,6 +141,7 @@ export function useCartogramMap({
     cartogramDataSnapshot: ''
   });
   const [geodaTimeout, setGeodaTimeout] = useState(null);
+  const debounceDelay = dataForCartogram && dataForCartogram.length < 500 ? 0 : 250;
 
   useEffect(() => {
     clearTimeout(geodaTimeout);
@@ -179,7 +180,7 @@ export function useCartogramMap({
           })      
         setCartogramData(cartogramValues);
       }
-      setGeodaTimeout(setTimeout(getCartogramData, 250));
+      setGeodaTimeout(setTimeout(getCartogramData, debounceDelay));
     }
   },[
     dataReady,
@@ -431,7 +432,6 @@ export default function useMapData({
   });
 
   const [colorAndValueData, heightScale] = useMemo(() => {
-    console.log('GENERATING JOIN DATA')
     const data = generateJoinData({
       binData: mapData,
       bins,
