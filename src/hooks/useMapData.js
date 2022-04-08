@@ -38,9 +38,7 @@ const generateJoinData = ({
   //     ? getPctHeight
   //     : getStandardHeight
   let joinData = {};
-  if (mapParams.vizType === "cartogram") {
-  } else if (mapParams.mapType === "lisa") {
-    console.log(' generating lisa data')
+  if (mapParams.mapType === "lisa") {
     for (let i = 0; i < geoids.length; i++) {
       joinData[geoids[i]] = {
         color: colorScales.lisa[lisaData[i]],
@@ -87,7 +85,7 @@ export function useLisaMap({
 }) {
   const { geoda, geodaReady } = useGeoda();
   const dispatch = useDispatch();
-  const storedGeojson = useSelector(({data})=>data.storedGeojson);
+  const storedGeojson = useSelector(({ data }) => data.storedGeojson);
   const [data, setData] = useState({
     lisaData: [],
     lisaVarId: '',
@@ -123,40 +121,74 @@ export function useLisaMap({
   }, [geodaReady, currentData, shouldUseLisa, varId, dataReady]);
   return [
     data.lisaData,
-    data.lisaVarId    
+    data.lisaVarId
   ]
 }
 
 export function useCartogramMap({
-  geoda = {},
   mapId = "",
   dataForCartogram,
   shouldUseCartogram = false,
+  dataReady,
+  varId,
+  order,
+  geojsonData
 }) {
-  const [cartoramData, setCartogramData] = useState({});
+  const { geoda, geodaReady } = useGeoda();
+  const [cartogramData, setCartogramData] = useState({
+    cartogramData: [],
+    cartogramCenter: [0,0],
+    cartogramDataSnapshot: ''
+  });
+  const [geodaTimeout, setGeodaTimeout] = useState(null);
 
-  useMemo(async () => {
+  useEffect(() => {
+    clearTimeout(geodaTimeout);
     if (
       shouldUseCartogram &&
-      typeof geoda === "function" &&
+      geodaReady &&
       dataForCartogram.length &&
       mapId.length
     ) {
-      let cartogramValues = await geoda
-        .cartogram(mapId, dataForCartogram)
-        .then((data) =>
-          data.map((f, i) => ({ ...f, value: dataForCartogram[i] }))
-        );
-      setCartogramData(cartogramValues);
+      const getCartogramData = async () => {
+        let cartogramValues = await geoda
+          .cartogram(mapId, dataForCartogram)
+          .then((data) => {
+            const cartogramData = [];
+            let cartogramCenter = [0, 0];
+            for (let i = 0; i < data.length; i++) {
+              cartogramData.push({
+                ...data[i],
+                value: dataForCartogram[i],
+                id: order[data[i].properties.id],
+                properties: {
+                  ...geojsonData.features[i].properties
+                }
+              })
+              cartogramCenter[0] += data[i].position[0];
+              cartogramCenter[1] += data[i].position[1];
+            }
+            cartogramCenter[0] /= data.length;
+            cartogramCenter[1] /= data.length;
+            
+            return {
+              cartogramData,
+              cartogramCenter,
+              cartogramDataSnapshot: varId
+            }
+          })      
+        setCartogramData(cartogramValues);
+      }
+      setGeodaTimeout(setTimeout(getCartogramData, 250));
     }
-  }, [
-    JSON.stringify(dataForCartogram),
+  },[
+    dataReady,
+    varId,
     shouldUseCartogram,
     mapId,
-    typeof geoda,
-  ]);
-
-  return cartoramData;
+    geodaReady
+  ])
+  return cartogramData;
 }
 
 const getAsyncBins = async (geoda, mapParams, binData) =>
@@ -205,7 +237,7 @@ function useGetBins({
           dIndex: 0,
           nIndex: 0,
         }) ===
-          JSON.stringify({ ...mapParams, ...dataParams, dIndex: 0, nIndex: 0 })
+        JSON.stringify({ ...mapParams, ...dataParams, dIndex: 0, nIndex: 0 })
       ) {
         // console.log("diff params, not dynamic");
         return;
@@ -241,13 +273,13 @@ function useGetBins({
             mapParams.mapType === "natural_breaks"
               ? nb
               : [
-                  "Lower Outlier",
-                  "< 25%",
-                  "25-50%",
-                  "50-75%",
-                  ">75%",
-                  "Upper Outlier",
-                ],
+                "Lower Outlier",
+                "< 25%",
+                "25-50%",
+                "50-75%",
+                ">75%",
+                "Upper Outlier",
+              ],
           breaks: nb,
         });
         setBinnedParams({
@@ -269,12 +301,20 @@ function useGetBins({
   ]); //todo update depenency array if needed for some dataparam roperties
   return bins;
 }
-
+/**
+ * @param  {Object} {dataParams Paramters for data handling, including numerator and denominator tables, column or index accessors
+ * @param  {String} currentData The name of the current Geojson file loaded on the map
+ * @param  {Object} mapParams} Map Params for map modes, bin types, etc.
+ */
 export default function useMapData({
   dataParams,
   currentData,
   mapParams
 }) {
+  const { geoda } = useGeoda();
+  const [mapSnapshot, setMapSnapshot] = useState(0);
+  // Based on the data params and current geojson, useLoadData does the heavy lifting on
+  // bringing us the majority of what we need. dataReady will be the trigger for much of the rest of this hook
   const {
     geojsonData,
     numeratorData,
@@ -287,17 +327,19 @@ export default function useMapData({
     dataParams,
     currentData
   });
-  // console.log('MAP DATA RENDERED')
+
+  /**
+   * currIndex is the reconcile index in case of null index, which defaults to most recent
+   *  or an index outside of the current data range when changing datasets. 
+   */
   const combinedParams = {
     ...dataParams,
-    nIndex:  dataParams?.nType && dataParams.nType.includes("time") ? currIndex : dataParams.nIndex,
-    dIndex:  dataParams?.dType && dataParams.dType.includes("time") ? currIndex : dataParams.dIndex,
+    nIndex: dataParams?.nType && dataParams.nType.includes("time") ? currIndex : dataParams.nIndex,
+    dIndex: dataParams?.dType && dataParams.dType.includes("time") ? currIndex : dataParams.dIndex,
   }
-  // const dispatch = useDispatch();
-  const { geoda } = useGeoda();
-  const [mapSnapshot, setMapSnapshot] = useState(0);
+  // hashed params  
   const varId = getVarId(currentData, combinedParams, mapParams, dataReady);
-  // debugger;
+
   const binIndex =
     !!dateIndices
       ? mapParams.binMode === "dynamic" &&
@@ -306,49 +348,52 @@ export default function useMapData({
         : dateIndices.slice(-1)[0]
       : null;
 
-      const binData = useMemo(
-        () => {
-          return getDataForBins({
-            numeratorData:
-              combinedParams.numerator === "properties"
-                ? geojsonData?.properties
-                : numeratorData?.data,
-            denominatorData:
-              combinedParams.denominator === "properties"
-                ? geojsonData?.properties
-                : denominatorData?.data,
-            dataParams: combinedParams,
-            binIndex,
-            fixedOrder:
-              geojsonData?.order?.indexOrder &&
-              Object.values(geojsonData.order.indexOrder),
-            dataReady,
-          })},
-        [JSON.stringify({...combinedParams, nIndex:0, dIndex:0}), JSON.stringify(mapParams), binIndex, dataReady, currentData]
-      );
+  // used to generate bins
+  const binData = useMemo(
+    () => {
+      return getDataForBins({
+        numeratorData:
+          combinedParams.numerator === "properties"
+            ? geojsonData?.properties
+            : numeratorData?.data,
+        denominatorData:
+          combinedParams.denominator === "properties"
+            ? geojsonData?.properties
+            : denominatorData?.data,
+        dataParams: combinedParams,
+        binIndex,
+        fixedOrder:
+          geojsonData?.order?.indexOrder &&
+          Object.values(geojsonData.order.indexOrder),
+        dataReady,
+      })
+    },
+    [JSON.stringify({ ...combinedParams, nIndex: 0, dIndex: 0 }), JSON.stringify(mapParams), binIndex, dataReady, currentData]
+  );
 
-      const mapData = useMemo(
-        () => binIndex === combinedParams.nIndex || combinedParams.nIndex === null 
-          ? binData 
-          : getDataForBins({
-            numeratorData:
-              combinedParams.numerator === "properties"
-                ? geojsonData?.properties
-                : numeratorData?.data,
-            denominatorData:
-              combinedParams.denominator === "properties"
-                ? geojsonData?.properties
-                : denominatorData?.data,
-            dataParams: combinedParams,
-            binIndex: false,
-            fixedOrder:
-              geojsonData?.order?.indexOrder &&
-              Object.values(geojsonData.order.indexOrder),
-            dataReady,
-          }),
-        [JSON.stringify(combinedParams), JSON.stringify(mapParams), dataReady, currentData]
-      );
-      
+  // different than binData in that this can be a different date index
+  // Meaning, bin on the most recent, then draw map on a different date
+  const mapData = useMemo(
+    () => binIndex === combinedParams.nIndex || combinedParams.nIndex === null
+      ? binData
+      : getDataForBins({
+        numeratorData:
+          combinedParams.numerator === "properties"
+            ? geojsonData?.properties
+            : numeratorData?.data,
+        denominatorData:
+          combinedParams.denominator === "properties"
+            ? geojsonData?.properties
+            : denominatorData?.data,
+        dataParams: combinedParams,
+        binIndex: false,
+        fixedOrder:
+          geojsonData?.order?.indexOrder &&
+          Object.values(geojsonData.order.indexOrder),
+        dataReady,
+      }),
+    [JSON.stringify(combinedParams), JSON.stringify(mapParams), dataReady, currentData]
+  );
 
   const bins = useGetBins({
     currentData,
@@ -361,7 +406,7 @@ export default function useMapData({
 
   const [
     lisaData,
-    lisaVarId    
+    lisaVarId
   ] = useLisaMap({
     currentData,
     dataForLisa: mapData,
@@ -371,12 +416,22 @@ export default function useMapData({
     dataReady
   });
 
-  const cartogramData = useCartogramMap({
+  const {
+    cartogramData,
+    cartogramCenter,
+    cartogramDataSnapshot
+  } = useCartogramMap({
     mapId: geojsonData?.mapId,
     dataForCartogram: mapData,
-    shouldUseCartogram: dataReady && mapParams.mapType === "cartogram",
+    shouldUseCartogram: dataReady && mapParams.vizType === "cartogram",
+    dataReady,
+    varId,
+    order: geojsonData?.order?.indexOrder,
+    geojsonData: geojsonData?.data
   });
+
   const [colorAndValueData, heightScale] = useMemo(() => {
+    console.log('GENERATING JOIN DATA')
     const data = generateJoinData({
       binData: mapData,
       bins,
@@ -398,15 +453,17 @@ export default function useMapData({
     currentData
     // JSON.stringify(cartogramData),
   ]);
-    
+
   const sanitizedHeightScale = !isNaN(heightScale) && heightScale !== Infinity ? heightScale : 1;
+
   return [
     geojsonData?.data, // geography
     colorAndValueData, // color and value data
+    { cartogramData, cartogramCenter, cartogramDataSnapshot }, // cartogram data
     mapSnapshot, // string params for updater dep arrays
     bins, // bins for legend etc,
     sanitizedHeightScale, // height scale
-    !(dataReady && (bins?.breaks||lisaData) && Object.keys(colorAndValueData).length),
+    !(dataReady && (bins?.breaks || lisaData) && Object.keys(colorAndValueData).length),
     geojsonData,
     currIndex,
     isBackgroundLoading
