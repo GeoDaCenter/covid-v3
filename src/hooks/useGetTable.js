@@ -9,15 +9,13 @@ export default function useGetTable({
   shouldFetch = false,
   dateLists = {},
 }) {
-  const dispatch = useDispatch();
-  const accessedData = useSelector(({ data }) => 
-    filesToFetch.map((fileSchema) => {
-      return data.storedData[fileSchema.name]
-    })
-  );
-  
-  useEffect(() => {
-    
+  const dispatch = useDispatch();  
+  const storedData = useSelector(({data}) => data.storedData);
+  const accessedData = filesToFetch.map((fileSchema) => storedData[fileSchema.name])
+  // const currentLoadedTables = Object.assign(...Object.entries(storedData).map(([key, value]) => ({
+  //   [key]: value.loaded
+  // })))
+  useEffect(() => {    
     if (shouldFetch) {
       if (filesToFetch[0] && !filesToFetch[0].noFile) {
         const cleanedFilesToFetch = filesToFetch.filter((fileSchema, idx) => {
@@ -53,10 +51,10 @@ export default function useGetTable({
       filesToFetch.length &&
       filesToFetch.every(({ name, timespan }, idx) => {
         const missingParams = !name || !timespan;
-        const dataIsLoaded =
-          accessedData[idx] && accessedData[idx]?.loaded?.includes(timespan);
+        const temporalDataLoaded = accessedData[idx] && accessedData[idx]?.loaded?.includes(timespan) 
+        const xSectionDataLoaded = accessedData[idx] && accessedData[idx]?.columns?.length > 0;
         const fileIsNull = filesToFetch.length === 1 && filesToFetch[0].noFile;
-        return dataIsLoaded || fileIsNull || missingParams;
+        return temporalDataLoaded || xSectionDataLoaded || fileIsNull || missingParams;
       });
     const returnData = dataReady ? accessedData[0] : undefined;
     const error = false;
@@ -67,5 +65,5 @@ export default function useGetTable({
     };
   }, [JSON.stringify(accessedData[0]?.loaded), JSON.stringify(filesToFetch)]);
   
-  return [returnData, dataReady, error];
+  return [returnData, dataReady, error]; //currentLoadedTables
 }

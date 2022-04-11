@@ -54,7 +54,7 @@ const getDataForBins = ({
   if (dataParams.numerator.indexOf('vaccin') !== -1)
     conditionalCheck = (val) => (val > 100 ? true : false);
   for (let i = 0; i < rtn.length; i++) {
-    if (rtn[i] < 0 || conditionalCheck(rtn[i])) rtn[i] = 0;
+    if (rtn[i] < 0 || conditionalCheck(rtn[i])) rtn[i] = 100;
   }
   
   return rtn;

@@ -1,12 +1,12 @@
-import { useMemo, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useMemo, useState } from "react";
 import useLoadData from "./useLoadData";
+import useGetBins from "./useGetBins";
+import useLisaMap from './useLisaMap';
+import useCartogramMap from './useCartogramMap';
 import { useGeoda } from "../contexts/Geoda";
 import { getVarId, getDataForBins } from "../utils";
-import { fixedScales } from "../config/scales";
 import { colorScales } from "../config/scales";
-// function getAndCacheWeights
-// function getAndCacheCentroids
+
 const maxDesirableHeight = 500_000;
 
 const getContinuousColor = (val, breaks, colors, useZero = false) => {
@@ -22,21 +22,12 @@ const generateJoinData = ({
   binData,
   bins,
   lisaData,
-  // cartogramData,
   mapParams,
-  // dataParams,
   order,
-  dataReady,
-  // storedGeojson,
+  dataReady
 }) => {
   if (!dataReady || (mapParams.mapType !== 'lisa' && !bins.breaks) || (mapParams.mapType === 'lisa' && !lisaData.length)) return [{}, undefined];
   const geoids = Object.values(order);
-
-  // const getColor = getColorFunction(mapParams.mapType)
-  // const mapFn = getMapFunction(mapParams.mapType, dataParams.numerator)
-  // const getHeight = dataParams.variableName.toLowerCase().includes("percent")
-  //     ? getPctHeight
-  //     : getStandardHeight
   let joinData = {};
   if (mapParams.mapType === "lisa") {
     for (let i = 0; i < geoids.length; i++) {
@@ -62,246 +53,7 @@ const generateJoinData = ({
   return [joinData, maxDesirableHeight / Math.max(...binData)];
 };
 
-const getLisa = async (currentGeojson, geoda, dataForLisa) => {
-  const weights =
-    currentGeojson && "Queen" in currentGeojson.weights
-      ? currentGeojson.weights.Queen
-      : await geoda.getQueenWeights(currentGeojson.mapId);
-  const lisaValues = await geoda.localMoran(weights, dataForLisa);
 
-  return {
-    lisaValues,
-    shouldCacheWeights: !("Queen" in currentGeojson.weights),
-    weights,
-  };
-};
-
-export function useLisaMap({
-  currentData,
-  dataForLisa = [],
-  shouldUseLisa = false,
-  varId,
-  dataReady
-}) {
-  const { geoda, geodaReady } = useGeoda();
-  const dispatch = useDispatch();
-  const storedGeojson = useSelector(({ data }) => data.storedGeojson);
-  const [data, setData] = useState({
-    lisaData: [],
-    lisaVarId: '',
-  });
-  useEffect(() => {
-    if (
-      shouldUseLisa &&
-      geodaReady &&
-      dataForLisa.length &&
-      storedGeojson[currentData] &&
-      dataReady
-    ) {
-      getLisa(storedGeojson[currentData], geoda, dataForLisa).then(
-        ({ lisaValues, shouldCacheWeights, weights }) => {
-          setData({
-            lisaData: lisaValues.clusters,
-            lisaVarId: varId,
-          });
-          if (shouldCacheWeights) {
-            dispatch({
-              type: "ADD_WEIGHTS",
-              payload: {
-                id: currentData,
-                weights,
-              },
-            });
-          }
-        }
-      );
-    } else {
-      return null;
-    }
-  }, [geodaReady, currentData, shouldUseLisa, varId, dataReady]);
-  return [
-    data.lisaData,
-    data.lisaVarId
-  ]
-}
-
-export function useCartogramMap({
-  mapId = "",
-  dataForCartogram,
-  shouldUseCartogram = false,
-  dataReady,
-  varId,
-  order,
-  geojsonData
-}) {
-  const { geoda, geodaReady } = useGeoda();
-  const [cartogramData, setCartogramData] = useState({
-    cartogramData: [],
-    cartogramCenter: [0,0],
-    cartogramDataSnapshot: ''
-  });
-  const [geodaTimeout, setGeodaTimeout] = useState(null);
-  const debounceDelay = dataForCartogram && dataForCartogram.length < 500 ? 0 : 250;
-
-  useEffect(() => {
-    clearTimeout(geodaTimeout);
-    if (
-      shouldUseCartogram &&
-      geodaReady &&
-      dataForCartogram.length &&
-      mapId.length
-    ) {
-      const getCartogramData = async () => {
-        let cartogramValues = await geoda
-          .cartogram(mapId, dataForCartogram)
-          .then((data) => {
-            const cartogramData = [];
-            let cartogramCenter = [0, 0];
-            for (let i = 0; i < data.length; i++) {
-              cartogramData.push({
-                ...data[i],
-                value: dataForCartogram[i],
-                id: order[data[i].properties.id],
-                properties: {
-                  ...geojsonData.features[i].properties
-                }
-              })
-              cartogramCenter[0] += data[i].position[0];
-              cartogramCenter[1] += data[i].position[1];
-            }
-            cartogramCenter[0] /= data.length;
-            cartogramCenter[1] /= data.length;
-            
-            return {
-              cartogramData,
-              cartogramCenter,
-              cartogramDataSnapshot: varId
-            }
-          })      
-        setCartogramData(cartogramValues);
-      }
-      setGeodaTimeout(setTimeout(getCartogramData, debounceDelay));
-    }
-  },[
-    dataReady,
-    varId,
-    shouldUseCartogram,
-    mapId,
-    geodaReady
-  ])
-  return cartogramData;
-}
-
-const getAsyncBins = async (geoda, mapParams, binData) =>
-  mapParams.mapType === "natural_breaks"
-    ? await geoda.quantileBreaks(mapParams.nBins, binData)
-    : await geoda.hinge15Breaks(binData);
-
-function useGetBins({
-  currentData,
-  mapParams,
-  dataParams,
-  binData,
-  geoda,
-  dataReady,
-}) {
-  const [bins, setBins] = useState({});
-  const [binnedParams, setBinnedParams] = useState({
-    mapParams: JSON.stringify(mapParams),
-    dataParams: JSON.stringify(dataParams),
-    dataReady,
-    geoda: typeof geoda,
-    currentData: null,
-  });
-
-  useEffect(() => {
-    if (!dataReady) return;
-
-    // if you already have bins....
-    if (bins.bins && binnedParams.currentData === currentData) {
-      if (
-        binnedParams.mapParams === JSON.stringify(mapParams) &&
-        binnedParams.dataReady === dataReady &&
-        binnedParams.geoda === typeof geoda &&
-        typeof geoda === "function" &&
-        binnedParams.dataParams === JSON.stringify(dataParams)
-      ) {
-        console.log("same params");
-        return;
-      }
-
-      if (
-        mapParams.binMode !== "dynamic" &&
-        JSON.stringify({
-          ...JSON.parse(binnedParams.mapParams),
-          ...JSON.parse(binnedParams.dataParams),
-          dIndex: 0,
-          nIndex: 0,
-        }) ===
-        JSON.stringify({ ...mapParams, ...dataParams, dIndex: 0, nIndex: 0 })
-      ) {
-        // console.log("diff params, not dynamic");
-        return;
-      }
-    }
-    if (mapParams.mapType === "lisa") {
-      setBins(fixedScales["lisa"]);
-      setBinnedParams({
-        mapParams: JSON.stringify(mapParams),
-        dataParams: JSON.stringify(dataParams),
-        dataReady,
-        geoda: typeof geoda,
-        currentData,
-      });
-    } else if (
-      dataParams.fixedScale !== null &&
-      dataParams.fixedScale !== undefined &&
-      fixedScales[dataParams.fixedScale]
-    ) {
-      setBins(fixedScales[dataParams.fixedScale]);
-      setBinnedParams({
-        mapParams: JSON.stringify(mapParams),
-        dataParams: JSON.stringify(dataParams),
-        dataReady,
-        geoda: typeof geoda,
-        currentData,
-      });
-    } else if (typeof geoda === "function") {
-      // console.log("generating bins");
-      getAsyncBins(geoda, mapParams, binData).then((nb) => {
-        setBins({
-          bins:
-            mapParams.mapType === "natural_breaks"
-              ? nb
-              : [
-                "Lower Outlier",
-                "< 25%",
-                "25-50%",
-                "50-75%",
-                ">75%",
-                "Upper Outlier",
-              ],
-          breaks: nb,
-        });
-        setBinnedParams({
-          mapParams: JSON.stringify(mapParams),
-          dataParams: JSON.stringify(dataParams),
-          dataReady,
-          geoda: typeof geoda,
-          currentData,
-        });
-      });
-    }
-    return {};
-  }, [
-    JSON.stringify(mapParams),
-    JSON.stringify(dataParams),
-    typeof geoda,
-    dataReady,
-    currentData
-  ]); //todo update depenency array if needed for some dataparam roperties
-  return bins;
-}
 /**
  * @param  {Object} {dataParams Paramters for data handling, including numerator and denominator tables, column or index accessors
  * @param  {String} currentData The name of the current Geojson file loaded on the map
@@ -371,6 +123,8 @@ export default function useMapData({
     },
     [JSON.stringify({ ...combinedParams, nIndex: 0, dIndex: 0 }), JSON.stringify(mapParams), binIndex, dataReady, currentData]
   );
+  // console.table(combinedParams)
+  // console.log(binData)
 
   // different than binData in that this can be a different date index
   // Meaning, bin on the most recent, then draw map on a different date
