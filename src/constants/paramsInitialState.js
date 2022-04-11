@@ -67,6 +67,7 @@ const INITIAL_STATE = {
     dataNote: null,
     zAxisParams: null,
     storedRange: null,
+    ...variables.find(variable => variable.variableName === "Confirmed Count per 100K Population"),
     ...currVariable,
   },
   storedRange: null,

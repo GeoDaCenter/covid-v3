@@ -24,7 +24,8 @@ const generateJoinData = ({
   lisaData,
   mapParams,
   order,
-  dataReady
+  dataReady,
+  shouldSeparateZero=false
 }) => {
   if (!dataReady || (mapParams.mapType !== 'lisa' && !bins.breaks) || (mapParams.mapType === 'lisa' && !lisaData.length)) return [{}, undefined];
   const geoids = Object.values(order);
@@ -37,14 +38,13 @@ const generateJoinData = ({
       };
     }
   } else {
-    const shouldUseZero = JSON.stringify(mapParams.colorScale[0]) === JSON.stringify([240, 240, 240])
     for (let i = 0; i < geoids.length; i++) {
       joinData[geoids[i]] = {
         color: getContinuousColor(
           binData[i],
           bins.breaks,
           mapParams.colorScale,
-          shouldUseZero
+          shouldSeparateZero
         ),
         value: binData[i],
       };
@@ -157,6 +157,7 @@ export default function useMapData({
     binData,
     geoda,
     dataReady,
+    // shouldSeparateZero: dataParams.separateZero // enabling this bins only non-zero values
   });
 
   const [
@@ -184,7 +185,7 @@ export default function useMapData({
     order: geojsonData?.order?.indexOrder,
     geojsonData: geojsonData?.data
   });
-
+  
   const [colorAndValueData, heightScale] = useMemo(() => {
     const data = generateJoinData({
       binData: mapData,
@@ -195,6 +196,7 @@ export default function useMapData({
       dataParams: combinedParams,
       order: geojsonData?.order?.indexOrder,
       dataReady,
+      shouldSeparateZero: dataParams.separateZero 
     });
     !!data && setMapSnapshot(`${new Date().getTime()}`.slice(-6));
     return data;

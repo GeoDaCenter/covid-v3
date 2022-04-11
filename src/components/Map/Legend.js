@@ -159,19 +159,34 @@ const DataNote = styled.p`
   }
 `;
 
+const ZERO_COLOR = [240,240,240];
+
 export const LegendInner = ({
   currentBins,
   colorScale,
   fixedScale,
   handleHover = () => {},
   colorFilter,
+  shouldSeparateZero
 }) => (
   <span>
-    <BinBars
-      firstBinZero={
-        `${colorScale[0]}` === `240,240,240` && fixedScale === undefined
-      }
-    >
+    <BinBars firstBinZero={shouldSeparateZero}>
+      {shouldSeparateZero && (
+        <button
+        onMouseEnter={() => handleHover(ZERO_COLOR)}
+        onMouseLeave={() => handleHover(null)}
+        onFocus={() => handleHover(ZERO_COLOR)}
+        onBlur={() => handleHover(null)}
+        className={`bin color ${colorFilter === ZERO_COLOR && "active"}`}
+        key={`${ZERO_COLOR[0]}${ZERO_COLOR[1]}`}
+      >
+        <span
+          style={{
+            backgroundColor: `rgb(${ZERO_COLOR[0]},${ZERO_COLOR[1]},${ZERO_COLOR[2]})`,
+          }}
+        ></span>
+      </button>
+      )}
       {colorScale.map((color) => (
         <button
           onMouseEnter={() => handleHover(color)}
@@ -190,10 +205,10 @@ export const LegendInner = ({
       ))}
     </BinBars>
     <BinLabels
-      firstBinZero={`${colorScale[0]}` === `240,240,240`}
+      firstBinZero={shouldSeparateZero}
       binLength={currentBins?.length}
     >
-      {`${colorScale[0]}` === `240,240,240` && fixedScale === null && (
+      {shouldSeparateZero && (
         <div className="bin firstBin">0</div>
       )}
 
@@ -209,6 +224,7 @@ const Legend = ({
   resource,
   fixedScale,
   note,
+  shouldSeparateZero,
 }) => {
   const dispatch = useDispatch();
   const colorFilter = useSelector(({ ui }) => ui.colorFilter);
@@ -236,6 +252,7 @@ const Legend = ({
                   fixedScale,
                   handleHover,
                   colorFilter,
+                  shouldSeparateZero
                 }}
               />
             )}

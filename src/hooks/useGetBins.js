@@ -1,7 +1,7 @@
 import { useState, useEffect} from "react";
 import { fixedScales } from "../config/scales";
 
-const getAsyncBins = async (geoda, mapParams, binData) =>
+const getAsyncBins = async (geoda, mapParams, binData, shouldSeparateZero) =>
     mapParams.mapType === "natural_breaks"
         ? await geoda.quantileBreaks(mapParams.nBins, binData)
         : await geoda.hinge15Breaks(binData);
@@ -13,7 +13,9 @@ export default function useGetBins({
     binData,
     geoda,
     dataReady,
+    shouldSeparateZero
 }) {
+    console.log(shouldSeparateZero)
     const [bins, setBins] = useState({});
     const [binnedParams, setBinnedParams] = useState({
         mapParams: JSON.stringify(mapParams),
@@ -76,8 +78,11 @@ export default function useGetBins({
                 currentData,
             });
         } else if (typeof geoda === "function") {
-            // console.log("generating bins");
-            getAsyncBins(geoda, mapParams, binData).then((nb) => {
+            const filteredData = shouldSeparateZero 
+                ? binData.filter(d => d !== 0) 
+                : binData
+            console.log(binData, filteredData)
+            getAsyncBins(geoda, mapParams, filteredData).then((nb) => {
                 setBins({
                     bins:
                         mapParams.mapType === "natural_breaks"

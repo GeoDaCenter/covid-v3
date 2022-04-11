@@ -285,6 +285,7 @@ const MapContainerInner = () => {
       fixedScale={fixedScale}
       resource={mapParams.resource}
       note={dataNote}
+      shouldSeparateZero={dataParams.separateZero}
     />
   </>
 }
