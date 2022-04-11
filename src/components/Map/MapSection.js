@@ -279,11 +279,7 @@ function MapSection({
   // having separate locations
   useEffect(() => {
     if (mapParams.vizType !== "cartogram" || !cartogramCenter) return
-    if (
-      JSON.stringify(storedCenter) !== JSON.stringify(cartogramCenter)
-      &&
-      cartogramCenter[0] !== 0 && cartogramCenter[1] !== 0
-    ) {
+    if (storedCenter === null && cartogramCenter[0] !== 0 && cartogramCenter[1] !== 0) {
       setViewport({
         latitude: cartogramCenter[1],
         longitude: cartogramCenter[0],
