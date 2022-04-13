@@ -85,12 +85,24 @@ const splitPbfs = (fileList) => {
       []
     );
     // generate rows
-    for (let i = 0; i < months.length; i++) {
-      const month = i === months.length - 1 ? "latest" : months[i];
-      const range = month === "latest" && indexRanges[i][1] - indexRanges[i][0] < 14
-        ? [indexRanges[i][0]-14, indexRanges[i][1]]
-        : indexRanges[i];
+    const month = "latest"
+    const range = [indexRanges[0][0]-14, indexRanges[0][1]]
+    const monthData = new Schema.Rows();
+    const rowData = row.map((data) => {
+      const entry = new Schema.Entry();
+      entry.setGeoid(data.geoid);
+      entry.setValsList(data.vals.slice(range[0], range[1]));
+      return entry;
+    });
+    monthData.setDatesList(dates.slice(range[0], range[1]));
+    monthData.setRowList(rowData);
+    const binaryData = monthData.serializeBinary();
+    const pathName = path.join(__dirname, `../public/pbf/${fileName}.${month}.pbf`);
+    fs.writeFileSync(pathName, binaryData);
 
+    for (let i = 0; i < months.length; i++) {
+      const month = months[i];
+      const range = indexRanges[i];
       const monthData = new Schema.Rows();
       const rowData = row.map((data) => {
         const entry = new Schema.Entry();

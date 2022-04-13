@@ -64,7 +64,7 @@ export default function useMapData({
   currentData,
   mapParams
 }) {
-  const { geoda } = useGeoda();
+  const { geoda, geodaReady } = useGeoda();
   const [mapSnapshot, setMapSnapshot] = useState(0);
   // Based on the data params and current geojson, useLoadData does the heavy lifting on
   // bringing us the majority of what we need. dataReady will be the trigger for much of the rest of this hook
@@ -156,6 +156,7 @@ export default function useMapData({
     dataParams: combinedParams,
     binData,
     geoda,
+    geodaReady,
     dataReady,
     // shouldSeparateZero: dataParams.separateZero // enabling this bins only non-zero values
   });

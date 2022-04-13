@@ -12,6 +12,7 @@ import { useGeoda } from "../contexts/Geoda";
 import useGetTable from "./useGetTable";
 import useGetGeojson from "./useGetGeojson";
 import useBackgroundLoadData from "./useBackgroundLoadData";
+import dataDateRanges from "../config/dataDateRanges";
 
 const dateLists = getDateLists();
 
@@ -38,6 +39,7 @@ export default function useLoadData({
   const tables = useSelector(({params}) => params.tables);
   // const dataParams = useSelector(({params}) => params.dataParams);
   // const currentData = useSelector(({params}) => params.currentData);
+  const dynamicBinning = useSelector(({params}) => params.mapParams.binMode === "dynamic");
   const firstLoad = useRef(true)
 
   // current state data params
@@ -47,8 +49,6 @@ export default function useLoadData({
     dataParams?.dType && dataParams.dType.includes("time")
   ]
   const isTimeSeries =  nIsTimeSeries || dIsTimeSeries;
-  // console.log('USE LOAD DATA RENDERED')
-  // const storedData = useSelector(({data}) => data.storedData);
 
   const defaultNumeratorParams = getFetchParams({
     dataParams,
@@ -71,15 +71,24 @@ export default function useLoadData({
     : null
 
   const currRangeIndex = currIndex - (dataParams.nRange || dataParams.dRange) 
-  const currTimespans = [currIndex, currRangeIndex].map(index => [
-    !currIndex || dateLists.isoDateList.length - index < 30
+  const currDatesAvailable = dataDateRanges[defaultNumeratorParams?.name?.split('.')[0]];
+  const latestAvailableDate = currDatesAvailable.length - [...currDatesAvailable].reverse().findIndex(f => f === 1)
+  const binTimespans = [
+    "latest", 
+    dateLists.isoDateList[latestAvailableDate-(dataParams.nRange || dataParams.dRange)]?.slice(0, 7), 
+    findSecondaryMonth(latestAvailableDate-(dataParams.nRange || dataParams.dRange), dateLists.isoDateList)
+  ]
+  const mapTimespans = [currIndex, currRangeIndex].map(index => [
+    !currIndex || latestAvailableDate - index < 30
       ? "latest"
       : dateLists.isoDateList[index]?.slice(0, 7),
-    !currIndex || dateLists.isoDateList.length - index < 30
-      ? false
-      : findSecondaryMonth(index, dateLists.isoDateList),
-  ]).flat().filter(f => !!f).filter(onlyUniqueArray);
+    !currIndex || latestAvailableDate - index < 30
+      ? null
+      : findSecondaryMonth(index, dateLists.isoDateList)
+  ]).flat()
   
+  const currTimespans = [...binTimespans, ...mapTimespans].filter(f => !!f).filter(onlyUniqueArray);
+
   const [numeratorParams, denominatorParams] = [
     currTimespans.map(timespan => ({...defaultNumeratorParams, timespan})),
     currTimespans.map(timespan => ({...defaultDenominatorParams, timespan}))
@@ -103,6 +112,7 @@ export default function useLoadData({
     currDataset,
     storedGeojson
   });
+  console.log('NUMERATORDATA', dynamicBinning)
   const dateIndices = numeratorData ? numeratorData.dates : null;
 
   // First load fix numerator index

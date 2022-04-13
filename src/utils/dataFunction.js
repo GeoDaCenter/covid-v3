@@ -9,7 +9,7 @@ const dataFn = (numeratorData, denominatorData, dataParams) => {
 
   const nRange = nIndex <= dataParams.nRange ? nIndex : dataParams.nRange;
   const dRange = dIndex <= dataParams.dRange ? dIndex : dataParams.dRange;
-
+  
   if (numeratorData === undefined || denominatorData === undefined) {
     return null;
   }

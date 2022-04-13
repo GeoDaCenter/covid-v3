@@ -3,7 +3,7 @@ import { fixedScales } from "../config/scales";
 
 const getAsyncBins = async (geoda, mapParams, binData, shouldSeparateZero) =>
     mapParams.mapType === "natural_breaks"
-        ? await geoda.quantileBreaks(mapParams.nBins, binData)
+        ? await geoda.naturalBreaks(mapParams.nBins, binData)
         : await geoda.hinge15Breaks(binData);
 
 export default function useGetBins({
@@ -12,16 +12,16 @@ export default function useGetBins({
     dataParams,
     binData,
     geoda,
+    geodaReady,
     dataReady,
     shouldSeparateZero
 }) {
-    console.log(shouldSeparateZero)
     const [bins, setBins] = useState({});
     const [binnedParams, setBinnedParams] = useState({
         mapParams: JSON.stringify(mapParams),
         dataParams: JSON.stringify(dataParams),
         dataReady,
-        geoda: typeof geoda,
+        geodaReady,
         currentData: null,
     });
 
@@ -31,10 +31,10 @@ export default function useGetBins({
         // if you already have bins....
         if (bins.bins && binnedParams.currentData === currentData) {
             if (
+                geodaReady &&
                 binnedParams.mapParams === JSON.stringify(mapParams) &&
                 binnedParams.dataReady === dataReady &&
-                binnedParams.geoda === typeof geoda &&
-                typeof geoda === "function" &&
+                binnedParams.geodaReady === geodaReady &&
                 binnedParams.dataParams === JSON.stringify(dataParams)
             ) {
                 console.log("same params");
@@ -61,7 +61,7 @@ export default function useGetBins({
                 mapParams: JSON.stringify(mapParams),
                 dataParams: JSON.stringify(dataParams),
                 dataReady,
-                geoda: typeof geoda,
+                geodaReady,
                 currentData,
             });
         } else if (
@@ -74,14 +74,14 @@ export default function useGetBins({
                 mapParams: JSON.stringify(mapParams),
                 dataParams: JSON.stringify(dataParams),
                 dataReady,
-                geoda: typeof geoda,
+                geodaReady,
                 currentData,
             });
-        } else if (typeof geoda === "function") {
+        } else if (geodaReady) {
             const filteredData = shouldSeparateZero 
                 ? binData.filter(d => d !== 0) 
                 : binData
-            console.log(binData, filteredData)
+                
             getAsyncBins(geoda, mapParams, filteredData).then((nb) => {
                 setBins({
                     bins:
@@ -101,7 +101,7 @@ export default function useGetBins({
                     mapParams: JSON.stringify(mapParams),
                     dataParams: JSON.stringify(dataParams),
                     dataReady,
-                    geoda: typeof geoda,
+                    geodaReady,
                     currentData,
                 });
             });
@@ -110,7 +110,7 @@ export default function useGetBins({
     }, [
         JSON.stringify(mapParams),
         JSON.stringify(dataParams),
-        typeof geoda,
+        geodaReady,
         dataReady,
         currentData
     ]); //todo update depenency array if needed for some dataparam roperties

@@ -420,7 +420,7 @@ function DateSlider() {
                 getAriaValueText={valuetext}
                 valueLabelFormat={valuetext}
                 aria-labelledby="aria-valuetext"
-                min={7}
+                min={0}
                 max={allDates.length}
                 step={1}
               />
@@ -433,7 +433,7 @@ function DateSlider() {
                 getAriaValueText={valuetext}
                 valueLabelFormat={valuetext}
                 aria-labelledby="aria-valuetext"
-                min={7}
+                min={0}
                 max={allDates.length}
                 step={1}
               />
