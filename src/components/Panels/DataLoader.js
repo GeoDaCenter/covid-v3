@@ -636,7 +636,14 @@ export default function DataLoader() {
       type:'LOAD_GEOJSON',
       payload: {'customdata': currentGeojson}
     })
-    dispatch(addCustomData(selectedFile, currentGeojson, variables));
+    // dispatch({
+    //   type: 'ADD_CUSTOM_DATA_SPECS',
+    //   payload: {
+    //     selectedFile, 
+    //     currentGeojson, 
+    //     variables
+    //   }
+    // });
     closePanel();
     handleClose();
   };
