@@ -174,10 +174,11 @@ const filesToParse = [
 ]
 
 function parseFiles(filesToParse) {
-    console.log('Generating column parsing.')
+    console.log('Generating column parsing.', JSON.stringify(filesToParse))
     const { isoDateList, usDateList } = getDateLists();
     const dateRanges = {};
-    filesToParse.forEach(file => {
+    for (let i=0; i<filesToParse.length; i++) {
+        const file = filesToParse[i]
         try {
             const fileData = fs.readFileSync(path.join(__dirname,`../public/csv/${file}.csv`), 'utf-8');
             const fields = Papa.parse(fileData, { header: true }).meta.fields
@@ -185,7 +186,8 @@ function parseFiles(filesToParse) {
         } catch (error) {
             console.log(error)
         }
-    })
+    }
+    
     fs.writeFileSync(path.join(basePath, 'dataDateRanges.js'), `
     // this is a generated file, do not edit directly. See data-scripts/build-scripts/parseColumns.js
     const dataDateRanges = ${JSON.stringify(dateRanges)}; export default dataDateRanges;

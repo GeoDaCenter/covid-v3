@@ -39,7 +39,7 @@ export default function useLoadData({
   const tables = useSelector(({params}) => params.tables);
   // const dataParams = useSelector(({params}) => params.dataParams);
   // const currentData = useSelector(({params}) => params.currentData);
-  const dynamicBinning = useSelector(({params}) => params.mapParams.binMode === "dynamic");
+  // const dynamicBinning = useSelector(({params}) => params.mapParams.binMode === "dynamic");
   const firstLoad = useRef(true)
 
   // current state data params

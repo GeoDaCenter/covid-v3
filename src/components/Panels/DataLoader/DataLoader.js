@@ -10,12 +10,10 @@ import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 
 import styled from "styled-components";
 import { Gutter } from "../..";
 import colors from "../../../config/colors";
-import { colorScales } from "../../../config/scales";
 
 import { VariableEditor, VariableTextField } from "./VariableEditor";
 import { Steps, StepButtons } from "./Steps";
@@ -34,10 +32,10 @@ const style = {
   width: 1140,
   maxWidth: {
     xs: "95vw",
-    sm: "95vw",
-    md: "90vw",
-    lg: "80vw",
-    xl: "80vw",
+    sm: "75vw",
+    md: "50vw",
+    lg: "40vw",
+    xl: "30vw",
   },
   bgcolor: colors.gray,
   border: "1px solid #000",
@@ -67,6 +65,8 @@ const FileForm = styled.form`
   opacity: ${(props) => (props.complete ? 0.5 : 1)};
   transition: 250ms all;
   transition-delay: 3s all;
+  max-width: 600px;
+  display: block;
 `;
 
 const CardContainer = styled(Grid)`
@@ -93,6 +93,17 @@ const VariableCard = styled(Card)`
   }
 `;
 
+const CloseButton = styled.button`
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.5em;
+  background:none;
+  color:white;
+  border:none;
+  font-size:1.5rem;
+  cursor:pointer;
+`;
 
 const steps = ["Load your GeoJSON", "Configure your Variables"];
 
@@ -240,90 +251,95 @@ export default function DataLoader() {
   };
 
   return (
-    
     <Modal
       open={open}
       onClose={handleClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
+      aria-labelledby="loader-modal-modal-title"
+      aria-describedby="loader-modal-modal-description"
     >
       <Box sx={style}>
         <ModalInner>
-        <Gutter h={15} />
-        <h2>Atlas Data Loader</h2>
-        <Steps
-          activeStep={activeStep}
-          setActiveStep={setActiveStep}
-          steps={steps}
-          currentGeojson={currentGeojson}
-        />
-        {activeStep === 0 && (
-          <FileForm onSubmit={handleFileSubmission}>
-            <label for="filename">
-              {uploadTab
-                ? "Select your GeoJSON for Upload"
-                : "Enter a valid GeoJSON URL"}
-            </label>
-            <Gutter h={15} />
-            <HelperText>
-              For more information on formatting your data and privacy, click{" "}
-              <a href="/data-loading">here</a>.
-            </HelperText>
-            <HelperText>
-              You can load your file directly, or select a remote link to fetch
-              data from.
-            </HelperText>
-            <Gutter h={15} />
+          <h2 id="loader-modal-modal-title">Atlas Data Loader</h2>
+          <p id="loader-modal-modal-description">
+            The Atlas Data Loader helps you to visualize and analyze your data
+            by loading it in the Atlas web interface. You must use a GeoJSON
+            data file in the WGS84 projection.
+          </p>
+          <Gutter h={15} />
+          <Steps
+            activeStep={activeStep}
+            setActiveStep={setActiveStep}
+            steps={steps}
+            currentGeojson={currentGeojson}
+          />
+          <Gutter h={15} />
+          {activeStep === 0 && (
+            <FileForm onSubmit={handleFileSubmission}>
+              <label for="filename">
+                {uploadTab
+                  ? "Select your GeoJSON for Upload"
+                  : "Enter a valid GeoJSON URL"}
+              </label>
+              <Gutter h={15} />
+              <HelperText>
+                For more information on formatting your data and privacy, click{" "}
+                <a href="/data-loading">here</a>.
+              </HelperText>
+              <HelperText>
+                You can load your file directly, or select a remote link to
+                fetch data from.
+              </HelperText>
+              <Gutter h={15} />
 
-            <FormButton
-              onClick={handleUploadTab}
-              data-id={"file-upload"}
-              active={uploadTab}
-            >
-              File Upload
-            </FormButton>
-            <FormButton
-              onClick={handleUploadTab}
-              data-id={"file-link"}
-              active={!uploadTab}
-            >
-              File Link
-            </FormButton>
-            <Gutter h={15} />
-            {uploadTab && (
-              <FileUploader
-                onFileSelectSuccess={(file) => {
-                  setFileMessage(false);
-                  setSelectedFile(file);
-                }}
-                onFileSelectError={({ error }) =>
-                  setFileMessage({
-                    type: "error",
-                    body: error,
-                  })
-                }
-              />
-            )}
-            {!uploadTab && (
-              <VariableTextField
-                id="remoteUrl"
-                label="Remote Data URL"
-                onChange={(event) => setRemoteUrl(event.target.value)}
-                aria-describedby="remote-data-helper"
-                value={remoteUrl}
-                placeholder="eg https://raw.githubusercontent.com/..."
-              />
-            )}
+              <FormButton
+                onClick={handleUploadTab}
+                data-id={"file-upload"}
+                active={uploadTab}
+              >
+                File Upload
+              </FormButton>
+              <FormButton
+                onClick={handleUploadTab}
+                data-id={"file-link"}
+                active={!uploadTab}
+              >
+                File Link
+              </FormButton>
+              <Gutter h={15} />
+              {uploadTab && (
+                <FileUploader
+                  onFileSelectSuccess={(file) => {
+                    setFileMessage(false);
+                    setSelectedFile(file);
+                  }}
+                  onFileSelectError={({ error }) =>
+                    setFileMessage({
+                      type: "error",
+                      body: error,
+                    })
+                  }
+                />
+              )}
+              {!uploadTab && (
+                <VariableTextField
+                  id="remoteUrl"
+                  label="Remote Data URL"
+                  onChange={(event) => setRemoteUrl(event.target.value)}
+                  aria-describedby="remote-data-helper"
+                  value={remoteUrl}
+                  placeholder="eg https://raw.githubusercontent.com/..."
+                />
+              )}
 
-            <input type="submit" value="Validate" />
-            {fileMessage && (
-              <MessageText type={fileMessage.type}>
-                {fileMessage.body}
-              </MessageText>
-            )}
-          </FileForm>
-        )}
-        {/* {activeStep === 1 && <>
+              <input type="submit" value="Validate" />
+              {fileMessage && (
+                <MessageText type={fileMessage.type}>
+                  {fileMessage.body}
+                </MessageText>
+              )}
+            </FileForm>
+          )}
+          {/* {activeStep === 1 && <>
                     <label for="idSelect">Select your data's ID column</label>
                     <Gutter h={15}/>
                     <HelperText>Choose a column that represents your data's featured ID, <br/>such as GEOID or FIPS code, ZIP code, or other geographic identifier.</HelperText>                   
@@ -341,66 +357,69 @@ export default function DataLoader() {
                         </StyledDropDown>
                     </FormDropDownContainer>
                 </>} */}
-        {activeStep === 1 && (
-          <>
-            <label for="idSelect">Configure your variables</label>
-            <Gutter h={15} />
-            <CardContainer
-              container
-              spacing={2}
-              justify="center"
-              alignItems="flex-start"
-            >
-              {variables.map((variable, idx) => (
+          {activeStep === 1 && (
+            <>
+              <label for="idSelect">Configure your variables</label>
+              <Gutter h={15} />
+              <CardContainer
+                container
+                spacing={2}
+                justify="center"
+                alignItems="flex-start"
+              >
+                {variables.map((variable, idx) => (
+                  <Grid item xs={12} md={6} lg={4}>
+                    <VariableCard>
+                      <CardContent>
+                        <p>{variable.variableName}</p>
+                      </CardContent>
+                      <CardActions>
+                        <button onClick={() => handleOpenEditor(idx)}>
+                          Edit
+                        </button>
+                      </CardActions>
+                    </VariableCard>
+                  </Grid>
+                ))}
                 <Grid item xs={12} md={6} lg={4}>
                   <VariableCard>
-                    <CardContent>
-                      <p>{variable.variableName}</p>
-                    </CardContent>
                     <CardActions>
-                      <button onClick={() => handleOpenEditor(idx)}>
-                        Edit
+                      <button
+                        onClick={() => setEditor({ open: true, idx: false })}
+                      >
+                        Add a variable
                       </button>
                     </CardActions>
                   </VariableCard>
                 </Grid>
-              ))}
-              <Grid item xs={12} md={6} lg={4}>
-                <VariableCard>
-                  <CardActions>
-                    <button
-                      onClick={() => setEditor({ open: true, idx: false })}
-                    >
-                      Add a variable
-                    </button>
-                  </CardActions>
-                </VariableCard>
-              </Grid>
-            </CardContainer>
-            {!!editor.open && (
-              <VariableEditor
-                fileName={selectedFile.name}
-                columns={currentGeojson.columns}
-                idx={editor.idx}
-                variables={variables}
-                setVariables={setVariables}
-                handleClose={handleCloseEditor}
-              />
-            )}
-            {!!variables.length && (
-              <FormButton onClick={handleLoadData}>Load Data</FormButton>
-            )}
-          </>
-        )}
-        <Gutter h={30} />
-        <StepButtons
-          activeStep={activeStep}
-          setActiveStep={setActiveStep}
-          currentGeojson={currentGeojson}
-          steps={steps}
-        />
-        <Gutter h={15} />
-      </ModalInner>
+              </CardContainer>
+              {!!editor.open && (
+                <VariableEditor
+                  fileName={selectedFile.name}
+                  columns={currentGeojson.columns}
+                  idx={editor.idx}
+                  variables={variables}
+                  setVariables={setVariables}
+                  handleClose={handleCloseEditor}
+                />
+              )}
+              {!!variables.length && (
+                <FormButton onClick={handleLoadData}>Load Data</FormButton>
+              )}
+            </>
+          )}
+          <Gutter h={30} />
+          <StepButtons
+            activeStep={activeStep}
+            setActiveStep={setActiveStep}
+            currentGeojson={currentGeojson}
+            steps={steps}
+          />
+          <Gutter h={15} />
+        </ModalInner>
+        <CloseButton onClick={handleClose} title="Close Report Builder">
+          ×
+        </CloseButton>
       </Box>
     </Modal>
   );

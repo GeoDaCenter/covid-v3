@@ -195,13 +195,13 @@ function IconDock(){
       activeState: panelState.builder,
       onClick: () => dispatch({ type: 'TOGGLE_PANEL', payload: 'reportBuilder' }),
     },
-    {
-      symbol: 'sliders',
-      id: 'user-preferences-button',
-      ariaLabel: 'User Preferences',
-      activeState: panelState.preferences,
-      onClick: () => dispatch({ type: 'TOGGLE_PANEL', payload: 'preferences' }),
-    },
+    // {
+    //   symbol: 'sliders',
+    //   id: 'user-preferences-button',
+    //   ariaLabel: 'User Preferences',
+    //   activeState: panelState.preferences,
+    //   onClick: () => dispatch({ type: 'TOGGLE_PANEL', payload: 'preferences' }),
+    // },
     {
       symbol: 'info',
       id: 'info-button',
