@@ -50,7 +50,7 @@ const VariablePanelContainer = styled.div`
   font: 'Lato', sans-serif;
   max-height:calc(100vh - 50px);
   color:white;
-  z-index:100;
+  z-index:10;
   display: flex;
   flex-direction: column;
   h1,h2,h3,h4 {
