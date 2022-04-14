@@ -19,7 +19,7 @@ const TooltipContentDiv = styled(Popper)`
     background: black;
     padding: 10px;
     margin: 0;
-    borderradius: 4px;
+    border-radius: 4px;
     color: white;
     // transform:translateX(65%);
     box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),

@@ -24,7 +24,7 @@ const findDefaultOrCurrent = (
   datasetName
 ) => {
   const relevantTables = tables.filter(
-    (f) => f.id === variableParams.numerator
+    (f) => f.table === variableParams.numerator
   );
   const availableGeographies = relevantTables.map((f) => f.geography);
   const availableDatasets = datasets.filter(
@@ -37,6 +37,7 @@ const findDefaultOrCurrent = (
   const anyDataset = datasets.filter((f) =>
     availableGeographies.includes(f.geography)
   );
+  
   return anyDataset[0].file;
 };
 
@@ -446,12 +447,13 @@ var reducer = (state = INITIAL_STATE, action) => {
         colorFilter: action.payload,
       };
     }
-    case "ADD_CUSTOM_DATA": {
-      const dataName = resolveName(
-        action.payload.selectedFile?.name.split(".geojson")[0],
-        Object.keys(state.storedGeojson)
-      );
-
+    case "ADD_CUSTOM_DATA_SPECS": {
+      const {
+        dataName,
+        variables: newVariables
+      } = action.payload;
+      
+  
       let variables = [...state.variables];
 
       const datasetTree = {
@@ -474,7 +476,7 @@ var reducer = (state = INITIAL_STATE, action) => {
           id: dataName,
         },
       ];
-
+      
       const datasets = [
         ...state.datasets,
         {
@@ -483,6 +485,7 @@ var reducer = (state = INITIAL_STATE, action) => {
           geography: dataName,
           join: "idx",
           tables: {},
+          isCustom: true
         },
       ];
 
@@ -490,9 +493,9 @@ var reducer = (state = INITIAL_STATE, action) => {
         [`HEADER: ${dataName}`]: {},
       };
       const variablesList = state.variables.map((f) => f.variableName);
-      for (let i = 0; i < action.payload.variables.length; i++) {
+      for (let i = 0; i < newVariables.length; i++) {
         let currVariable = resolveName(
-          action.payload.variables[i].variableName,
+          newVariables[i].variableName,
           variablesList
         );
         variablesList.push(currVariable);

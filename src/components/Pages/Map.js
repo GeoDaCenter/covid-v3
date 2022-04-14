@@ -330,6 +330,7 @@ const MapPageContainer = () => {
 
       {/* <PrintLayout /> */}
       <ReportBuilder />
+      <DataLoader />
       {!!showTopPanel && <TopPanel />}
       <Popover />
       <NotificationBox />
@@ -352,7 +353,6 @@ const MapPageContainer = () => {
         />
       )}
       <MapTooltipContent />
-      {panelState.dataLoader && <DataLoader />}
     </MapContainer>
   );
 };

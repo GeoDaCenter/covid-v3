@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useMemo, useRef } from "react";
 import { useSelector } from "react-redux";
 import { ErrorBoundary } from "react-error-boundary";
 import { HoverDiv } from "../../components";
@@ -202,6 +202,7 @@ export default function MapTooltipContent() {
   const { x, y, data, geoid } = useSelector(({ ui }) => ui.tooltipInfo) || {};
   const tooltipRef = useRef(null);
   const tooltipContent = useGetTooltipContent({ data, geoid });
+  const tooltipText = useMemo(() => <TooltipEngine tooltipContent={tooltipContent} data={data} />,[JSON.stringify({tooltipContent, data})])
   if (!tooltipContent || !Object.keys(tooltipContent).length) return <></>;
   const bounds =
     tooltipRef.current && tooltipRef.current.getBoundingClientRect();
@@ -213,7 +214,6 @@ export default function MapTooltipContent() {
         : 0
       })`,
   };
-
   return (
     <ErrorBoundary>
       <HoverDiv
@@ -227,7 +227,7 @@ export default function MapTooltipContent() {
         }}
         ref={tooltipRef}
       >
-        <TooltipEngine tooltipContent={tooltipContent} data={data} />
+        {tooltipText}
       </HoverDiv>
     </ErrorBoundary>
   );

@@ -1,6 +1,5 @@
 import { useDispatch } from "react-redux";
 import { useMemo } from "react";
-import { indexGeoProps, getIdOrder } from "../utils";
 
 export default function useGetGeojson({
   geoda = {},
@@ -18,17 +17,13 @@ export default function useGetGeojson({
         `${process.env.PUBLIC_URL}/geojson/${currDataset.file}`,
         currDataset.join
       );
-      const properties = indexGeoProps(data, currDataset.join);
-      const order = getIdOrder(data?.features || [], currDataset.join);
       dispatch({
         type: "LOAD_GEOJSON",
         payload: {
           [currDataset.file]: {
             data,
             mapId,
-            weights: {},
-            properties,
-            order,
+            joinCol: currDataset.join,
           },
         },
       });

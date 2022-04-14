@@ -181,13 +181,13 @@ function IconDock(){
       activeState: panelState.scatterChart,
       onClick: () => dispatch({ type: 'TOGGLE_PANEL', payload: 'scatterChart' }),
     },
-    // {
-    //   symbol:'addData',
-    //   id: 'add-data-button',
-    //   ariaLabel: 'Add Custom Data',
-    //   activeState: panelState.dataLoader,
-    //   onClick: () => dispatch({ type: 'TOGGLE_PANEL', payload: 'dataLoader' }),
-    // },
+    {
+      symbol:'addData',
+      id: 'add-data-button',
+      ariaLabel: 'Add Custom Data',
+      activeState: panelState.dataLoader,
+      onClick: () => dispatch({ type: 'TOGGLE_PANEL', payload: 'dataLoader' }),
+    },
     {
       symbol: 'report',
       id: 'report-button',
@@ -195,13 +195,13 @@ function IconDock(){
       activeState: panelState.builder,
       onClick: () => dispatch({ type: 'TOGGLE_PANEL', payload: 'reportBuilder' }),
     },
-    // {
-    //   symbol: 'sliders',
-    //   id: 'user-preferences-button',
-    //   ariaLabel: 'User Preferences',
-    //   activeState: panelState.preferences,
-    //   onClick: () => dispatch({ type: 'TOGGLE_PANEL', payload: 'preferences' }),
-    // },
+    {
+      symbol: 'sliders',
+      id: 'user-preferences-button',
+      ariaLabel: 'User Preferences',
+      activeState: panelState.preferences,
+      onClick: () => dispatch({ type: 'TOGGLE_PANEL', payload: 'preferences' }),
+    },
     {
       symbol: 'info',
       id: 'info-button',

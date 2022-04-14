@@ -72,7 +72,10 @@ export default function useLoadData({
 
   const currRangeIndex = currIndex - (dataParams.nRange || dataParams.dRange) 
   const currDatesAvailable = dataDateRanges[defaultNumeratorParams?.name?.split('.')[0]];
-  const latestAvailableDate = currDatesAvailable.length - [...currDatesAvailable].reverse().findIndex(f => f === 1)
+  const latestAvailableDate = currDatesAvailable && currDatesAvailable.length
+    ? currDatesAvailable.length - [...currDatesAvailable].reverse().findIndex(f => f === 1)
+    : null
+    
   const binTimespans = [
     "latest", 
     dateLists.isoDateList[latestAvailableDate-(dataParams.nRange || dataParams.dRange)]?.slice(0, 7), 
@@ -112,7 +115,7 @@ export default function useLoadData({
     currDataset,
     storedGeojson
   });
-  console.log('NUMERATORDATA', dynamicBinning)
+  
   const dateIndices = numeratorData ? numeratorData.dates : null;
 
   // First load fix numerator index

@@ -1,4 +1,5 @@
 import INITIAL_STATE from "../constants/dataInitialState";
+import { indexGeoProps, getIdOrder } from "../utils";
 
 const orderInts = (a, b) => a - b;
 const onlyUnique = (value, index, self) => self.indexOf(value) === index;
@@ -110,15 +111,23 @@ export default function reducer(state = INITIAL_STATE, action) {
         },
       };
     }
-    case "LOAD_GEOJSON":
-      // data
+    case "LOAD_GEOJSON":{
+      const [fileName, geojson] = Object.entries(action.payload)[0]
+      const properties = indexGeoProps(geojson.data, geojson.joinCol);
+      const order = getIdOrder(geojson?.data?.features || [], geojson.joinCol);
       return {
         ...state,
         storedGeojson: {
           ...state.storedGeojson,
-          ...action.payload,
-        },
-      };
+          [fileName]: {
+            ...geojson,
+            properties,
+            order,
+            weights: {}
+          }
+        }
+      }
+    }
     case "LOAD_RESOURCE":
       return {
         ...state,
@@ -133,11 +142,12 @@ export default function reducer(state = INITIAL_STATE, action) {
         isTicking: action.payload
       }
     }
-    case "SET_CAN_LOAD_IN_BACKGROUND":
+    case "SET_CAN_LOAD_IN_BACKGROUND":{
       return {
         ...state,
         canLoadInBackground: action.payload && !state.isTicking,
       }
+    }
     default:
       return state;
   }

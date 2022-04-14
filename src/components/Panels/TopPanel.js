@@ -28,6 +28,9 @@ const TopDrawer = styled.div`
     padding: 0;
   }
 
+  @media (max-width: 1440px) {
+    width: 30vw;
+  }
   @media (max-width: 768px) {
     width: 100%;
     max-width: 100%;

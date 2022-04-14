@@ -9,7 +9,7 @@ import ContextMenu from './Interface/ContextMenu';
 import ControlPopover, { ControlElementMapping } from './Interface/ControlPopover';
 import CsvDownloader from './CsvDownloader';
 import DataDetails from './DataDetails';
-import DataLoader from './Panels/DataLoader';
+import DataLoader from './Panels/DataLoader/DataLoader';
 import DataPanel from './Panels/DataPanel';
 import DateSlider from './Interface/Slider';
 import Draggable from './Interface/Draggable';
