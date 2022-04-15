@@ -3,7 +3,8 @@ import FormControl from '@mui/material/FormControl';
 import colors from '../../config/colors';
 
 export const StyledDropDown = styled(FormControl)`
-  margin:0 10px 0 0;
+  margin:0;
+  max-width:35ch;
   color:${props => props.active ? colors.yellow : colors.white};
   padding:0;
   .MuiInputBase-root {

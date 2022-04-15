@@ -348,11 +348,7 @@ var reducer = (state = INITIAL_STATE, action) => {
       }
       return {
         ...state,
-        selectionKeys,
-        panelState: {
-          ...state.panelState,
-          info: true,
-        },
+        selectionKeys
       };
     }
     case "SET_ANCHOR_EL":

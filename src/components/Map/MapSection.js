@@ -27,6 +27,7 @@ import {
   setTooltipInfo,
   updateSelectionKeys,
   mapDidPan,
+  setPanelState,
 } from "../../actions";
 import {
   // findIn,
@@ -433,7 +434,7 @@ function MapSection({
     if (e.rightButton) return;
     const objectID = +info.object?.properties[currIdCol];
     if (!objectID) return;
-
+    dispatch(setPanelState({info:true}))
     if (multipleSelect) {
       try {
         if (highlightGeog.indexOf(objectID) === -1) {

@@ -88,7 +88,7 @@ export default function Reducer(state = INITIAL_STATE, action) {
         ...state,
         panelState: {
           ...state.panelState,
-          ...action.payload,
+          ...action.payload.params,
         },
       };
     case "TOGGLE_PANEL": {

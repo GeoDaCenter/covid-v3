@@ -208,10 +208,8 @@ const getDefaultDimensions = () => ({
   defaultWidthLong:
     window.innerWidth <= 1024
       ? window.innerWidth * 0.8
-      : window.innerWidth <= 1400
-      ? 400
-      : 500,
-  defaultHeight: window.innerWidth <= 1024 ? window.innerHeight * 0.4 : 300,
+      : window.innerWidth * 0.25,
+  defaultHeight: window.innerWidth <= 1024 ? window.innerHeight * 0.4 : window.innerHeight * .35,
   defaultHeightManual:
     window.innerWidth <= 1024
       ? window.innerHeight * 0.7
