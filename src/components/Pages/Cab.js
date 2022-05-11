@@ -21,13 +21,6 @@ const CabPage = styled.div`
 `;
 const cabMembers = [
   {
-    name: 'Jay Bhatt',
-    img: 'cab/jbhatt.jpg',
-    title:
-      'Chief Clinical Product Officer and Medical Director, Medical Home Network',
-    bio: `Jay Bhatt, D.O., MPH, MPA is a physician executive, internist, geriatrician, public health innovator and widely quoted expert on healthcare transformation and improving healthcare outcomes.These include cross-sector initiatives; the application of predictive analytics and informatics; using Medicare and Medicaid as opportunities to redesign the healthcare system; addressing the social determinants of health to lower costs, improve outcomes and eliminate inequities; technology innovation; and emergency preparedness.`,
-  },
-  {
     name: 'Jim Bloyd',
     link: '-',
     img: 'cab/jbloyd.jpg',
@@ -50,6 +43,12 @@ const cabMembers = [
     bio: "Germán A. Cadenas PhD is an assistant professor in the Counseling Psychology Program at Lehigh's College of Education. Cadenas focuses his research on the psychology of undocumented immigrants and underrepresented minorities, particularly their critical consciousness development and its links to higher education outcomes, work and career development, and psychological wellbeing.  Professor Cadenas has conducted several research studies related to DACA students and higher education.",
   },
   {
+    "name": "Chelsea Cross", 
+    "img": "cab/ccross.jpg", 
+    "title": "Chief of Staff, Data for Black Lives",
+    "bio":'Chelsea Cross is the Chief of Staff at Data for Black Lives (D4BL). Ever since she was a child, she knew she wanted to impact the world directly. After studying public health at Brown University, Chelsea went on to serve the indigenous population of Hawai’i as a teacher while earning a master’s degree in education from Johns Hopkins University. Witnessing in her classroom, day after day, the social determinants of health affect her students’ academic performance, Chelsea went back into the medical field and became one of the youngest managers of the largest hospital network in Hawai’i–Kapiolani Medical Center–before moving to Wisconsin frustrated with the policies in both the medical and education sectors. Motivated, Chelsea shifted her focus to politics, where her background would propel and enable her to continue to make a change in this world. As a Black woman and a Jew, she is no stranger to navigating spaces with conflicting identities. Chelsea managed multiple statewide political campaigns before joining D4BL. Her current passion lies in the conundrum that is establishing transparent messaging and providing robust data in America, 2022, that creates a seat at the table for everyone. The fight to ensure everyone’s needs in Maslow’s Hierarchy are met is the type of challenge that Chelsea relishes. She brings passion, a desire to learn, and enthusiasm to this world.'
+},
+  {
     name: 'Laurie Francis',
     img: 'cab/lfrancis.jpg',
     title: 'Chief Executive Officer, Partnership Health Center',
@@ -68,12 +67,6 @@ const cabMembers = [
     title:
       'Senior Manager of Racial Justice & Equity, C4 Innovations CEO, Formerly Inc.',
     bio: 'Daryl M. McGraw is a Senior Manager of Racial Justice & Equity at C4 Innovations and the founder and president of Formerly Inc. His skills include policy development, contract management, and project coordination, and he collaborates with grassroots peer-advocacy agencies and the Connecticut Department of Corrections. Daryl is the former Program Director for the Yale University Department of Psychiatry. In this role, he served as the Director of the Office of Recovery Community Affairs for Connecticut’s Department of Mental Health and Addiction Services. He holds state certifications as an addictions counselor, recovery support specialist, and criminal justice professional. He has a bachelor’s degree in human services and a master’s degree in organizational management and leadership, both from  Springfield College.',
-  },
-  {
-    name: 'Jamelle Watson',
-    img: 'cab/jwatson.jpg',
-    title: 'Director of Research, Data for Black Lives',
-    bio: 'As Director of Research at Data for Black Lives, Jamelle Watson-Daniels is building a research strategy and agenda to uplift Black organizers/activists and establish a just standard for rigorous research development. She is crafting a vision for the role of Data for Black Lives in the fields of machine learning, algorithmic fairness/accountability/recourse, artificial intelligence, etc. Jamelle is a scientist, researcher and visionary from a small town outside of St. Louis, MO. With her interdisciplinary research experiences, Jamelle focuses on empowering and centering those most marginalized in the mission to use data as protest, accountability and collective action. Her personal research interests involve utilizing techniques from optimization, network modeling, data science, algorithmic fairness and more.  From initial conception to algorithmic deployment, Jamelle believes agency and power must be shifted from the hands of a few tech giants to the masses of people fighting for liberation.',
   },
   {
     name: (
