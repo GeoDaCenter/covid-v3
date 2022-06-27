@@ -16,7 +16,7 @@ const Container = styled.div`
     background: white;
     height: 36px;
     border-radius: 0px;
-    padding: 0 35px;
+    padding: 0 5px;
   }
   .MuiAutocomplete-inputRoot[class*='MuiInput-root']
     .MuiAutocomplete-input:first-child {
@@ -35,27 +35,46 @@ const Container = styled.div`
     background-size: 20px 20px;
     height: 20px;
     width: 20px;
-    transform: translate(8px, -9px);
     border-bottom: none !important;
   }
-`;
-
-const StyledOption = styled.span`
-  span {
-    display: block;
-    font-size: 12px;
-    &:first-child {
-      font-size: 16px;
-      font-weight: bold;
-    }
+  .MuiOutlinedInput-input {
+    color:black;
   }
 `;
 
-const Geocoder = (props) => {
+const StyledOption = styled.button`
+  cursor:pointer;
+  background:none;
+  color:black;
+  width:100%;
+  border:none;
+  text-align:left;
+  padding:.5em .75em;
+  span {
+    display: block;
+    font-size: 1em;
+    &:first-child {
+      font-size: 1.375em;
+      font-weight: bold;
+      padding-bottom:.5em;
+    }
+  }
+  &:hover{
+    background: rgba(0,0,0,0.1);
+  }
+`;
+
+const Geocoder = ({
+  placeholder,
+  onChange,
+  style,
+  API_KEY
+}) => {
   const [searchState, setSearchState] = useState({
     results: [],
     value: '',
   });
+  console.log('searchState', searchState)
 
   const loadResults = (results) => {
     setSearchState((prev) => ({
@@ -72,7 +91,7 @@ const Geocoder = (props) => {
   };
 
   const buildAddress = (text) =>
-    `https://api.mapbox.com/geocoding/v5/mapbox.places/${text}.json?access_token=${props.API_KEY}&country=US&autocomplete=true&types=region%2Cdistrict%2Cpostcode%2Clocality%2Cplace%2Caddress`;
+    `https://api.mapbox.com/geocoding/v5/mapbox.places/${text}.json?access_token=${API_KEY}&country=US&autocomplete=true&types=region%2Cdistrict%2Cpostcode%2Clocality%2Cplace%2Caddress`;
 
   const getMapboxResults = async (text, callback) =>
     fetch(buildAddress(text))
@@ -123,22 +142,21 @@ const Geocoder = (props) => {
         getOptionLabel={(option) => option.place_name}
         onChange={(source, selectedOption) => {
           clearInput();
-          props.onChange(selectedOption);
+          onChange(selectedOption);
         }}
-        renderOption={(option, idx) => (
-          <React.Fragment>
-            <StyledOption id={idx}>
+        renderOption={(_key, option) => (
+            <StyledOption id={_key.key} onClick={() => onChange(option)}>
               <span>{option?.place_name && option.place_name.split(',')[0]}</span>
               <span>{formatPlaceContext(option?.context)}</span>
             </StyledOption>
-          </React.Fragment>
         )}
         renderInput={(params) => (
           <TextField
             {...params}
             margin="normal"
-            placeholder={props.placeholder}
+            placeholder={placeholder}
             InputProps={{ ...params.InputProps, type: 'search' }}
+            value={searchState.value}
             onChange={(e) => {
               setSearchState((prev) => ({
                 ...prev,
@@ -148,7 +166,7 @@ const Geocoder = (props) => {
             }}
           />
         )}
-        style={props.style}
+        style={style}
       />
     </Container>
   );

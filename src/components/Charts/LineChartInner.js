@@ -14,9 +14,7 @@ import {
   Legend,
   ReferenceLine,
 } from "recharts";
-
 import { ChartTitle, ChartLabel, Icon } from "../../components";
-
 import colors from "../../config/colors";
 import useGetLineChartData from "../../hooks/useGetLineChartData";
 
@@ -25,11 +23,6 @@ const ChartContainer = styled.span`
     color: white;
   }
   user-select: none;
-  /* flex: 1 0 auto; */
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
 `;
 
 const DockPopButton = styled.button`
@@ -109,6 +102,7 @@ const getDateRange = ({ startDate, endDate }) => {
   }
   return dateArray;
 };
+
 const rangeIncrement = (maximum) => {
   let returnArray = [];
   const increment = 2 * 10 ** (`${maximum}`.length - 1);
@@ -165,23 +159,23 @@ const CustomTooltip = ({ active, payload, background }) => {
 
 const LabelText = {
   cases: {
-    x1label: "Cumulative Cases",
-    x2label: "New Cases (7 Day Average)",
+    x2label: "Cumulative Cases",
+    x1label: "New Cases (7 Day Average)",
     title: "Cases",
   },
   deaths: {
-    x1label: "Cumulative Deaths",
-    x2label: "New Deaths (7 Day Average)",
+    x2label: "Cumulative Deaths",
+    x1label: "New Deaths (7 Day Average)",
     title: "Deaths",
   },
   vaccines_fully_vaccinated: {
-    x1label: "Total Vaccinations",
-    x2label: "New Vaccinations (7 Day Average)",
+    x2label: "Total Vaccinations",
+    x1label: "New Vaccinations (7 Day Average)",
     title: "Population Fully Vaccinated",
   },
   testing_wk_pos: {
-    x1label: "",
-    x2label: "Testing Positivity (7 Day Average)",
+    x2label: "",
+    x1label: "Testing Positivity (7 Day Average)",
     title: "Testing Positivity",
   },
 };
@@ -262,7 +256,8 @@ function LineChartInner({
           }
         />
         <YAxis
-          yAxisId="left"
+          yAxisId="right"
+          orientation="right"
           type="number"
           scale={logChart ? "log" : "linear"}
           domain={[0.01, "dataMax"]}
@@ -285,8 +280,7 @@ function LineChartInner({
           }
         />
         <YAxis
-          yAxisId="right"
-          orientation="right"
+          yAxisId="left"
           scale={logChart ? "log" : "linear"}
           domain={[0.01, "dataMax"]}
           allowDataOverflow
@@ -448,7 +442,18 @@ function LineChartInner({
     } else {
       return null
     }
-  }, [JSON.stringify({ maximums, chartData })])
+  }, [JSON.stringify({
+    maximums, 
+    chartData, 
+    docked,
+    table,
+    logChart,
+    showSummarized,
+    populationNormalized,
+    shouldShowVariants,
+    colorScheme,
+    geoid
+  })])
 
   if (maximums && chartData) {
     return (
@@ -470,12 +475,12 @@ function LineChartInner({
             <span>7-Day Average New Cases</span>
           </ChartTitle>
         )}
-        <ChartLabel color={mediumColor} left={-35}>
+        <ChartLabel color={highlightColor} left={colorScheme === "light" ? -45 : -65}>
           {x1label}
         </ChartLabel>
         <ChartLabel
-          color={highlightColor}
-          right={colorScheme === "light" ? -45 : -65}
+          color={mediumColor}
+          right={-35}
         >
           {x2label}
         </ChartLabel>
@@ -519,4 +524,4 @@ function LineChartInner({
   }
 }
 
-export default React.memo(LineChartInner);
+export default LineChartInner
