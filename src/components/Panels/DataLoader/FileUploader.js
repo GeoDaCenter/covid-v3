@@ -9,5 +9,5 @@ export const FileUploader = ({ onFileSelectSuccess, onFileSelectError }) => {
     }
   };
 
-  return <input type="file" onChange={handleFileInput} />;
+  return <input aria-labelledby="filename-label" type="file" onChange={handleFileInput} />;
 };

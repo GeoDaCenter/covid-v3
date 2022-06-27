@@ -21,6 +21,7 @@ import { FileUploader } from "./FileUploader";
 import { validateGeojson } from "./utils";
 import { FormButton } from "./FormButton";
 import { HelperText } from "./HelperText";
+import { Typography } from "@mui/material";
 
 const ModalInner = styled.div``;
 
@@ -56,8 +57,8 @@ const MessageText = styled.p`
     props.type === "error"
       ? colors.red
       : props.type === "wait"
-      ? colors.yellow
-      : colors.lightblue};
+        ? colors.yellow
+        : colors.lightblue};
   padding: 0.5em;
 `;
 
@@ -71,7 +72,7 @@ const FileForm = styled.form`
 
 const CardContainer = styled(Grid)`
   max-height: 50vh;
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 
 const VariableCard = styled(Card)`
@@ -259,12 +260,12 @@ export default function DataLoader() {
     >
       <Box sx={style}>
         <ModalInner>
-          <h2 id="loader-modal-modal-title">Atlas Data Loader</h2>
-          <p id="loader-modal-modal-description">
+          <Typography variant="h3">Atlas Data Loader</Typography>
+          <Typography variant="body1">
             The Atlas Data Loader helps you to visualize and analyze your data
             by loading it in the Atlas web interface. You must use a GeoJSON
             data file in the WGS84 projection.
-          </p>
+          </Typography>
           <Gutter h={15} />
           <Steps
             activeStep={activeStep}
@@ -275,63 +276,64 @@ export default function DataLoader() {
           <Gutter h={15} />
           {activeStep === 0 && (
             <FileForm onSubmit={handleFileSubmission}>
-              <label for="filename">
+              <Typography variant="body1" id="filename-label">
                 {uploadTab
                   ? "Select your GeoJSON for Upload"
                   : "Enter a valid GeoJSON URL"}
-              </label>
+              </Typography>
               <Gutter h={15} />
-              <HelperText>
+              <Typography variant="body1">
                 For more information on formatting your data and privacy, click{" "}
                 <a href="/data-loading">here</a>.
-              </HelperText>
-              <HelperText>
+              </Typography>
+              <Typography variant="body1">
                 You can load your file directly, or select a remote link to
                 fetch data from.
-              </HelperText>
+              </Typography>
               <Gutter h={15} />
-
-              <FormButton
-                onClick={handleUploadTab}
-                data-id={"file-upload"}
-                active={uploadTab}
-              >
-                File Upload
-              </FormButton>
-              <FormButton
-                onClick={handleUploadTab}
-                data-id={"file-link"}
-                active={!uploadTab}
-              >
-                File Link
-              </FormButton>
-              <Gutter h={15} />
-              {uploadTab && (
-                <FileUploader
-                  onFileSelectSuccess={(file) => {
-                    setFileMessage(false);
-                    setSelectedFile(file);
-                  }}
-                  onFileSelectError={({ error }) =>
-                    setFileMessage({
-                      type: "error",
-                      body: error,
-                    })
-                  }
-                />
-              )}
-              {!uploadTab && (
-                <VariableTextField
-                  id="remoteUrl"
-                  label="Remote Data URL"
-                  onChange={(event) => setRemoteUrl(event.target.value)}
-                  aria-describedby="remote-data-helper"
-                  value={remoteUrl}
-                  placeholder="eg https://raw.githubusercontent.com/..."
-                />
-              )}
-
-              <input type="submit" value="Validate" />
+              <Box sx={{ display: 'flex', flexDirection:'column' }}>
+                <Box sx={{pb: 2}}>
+                  <FormButton
+                    onClick={handleUploadTab}
+                    data-id={"file-upload"}
+                    active={uploadTab}
+                  >
+                    File Upload
+                  </FormButton>
+                  <FormButton
+                    onClick={handleUploadTab}
+                    data-id={"file-link"}
+                    active={!uploadTab}
+                  >
+                    File Link
+                  </FormButton>
+                </Box>
+                {uploadTab && (
+                  <FileUploader
+                    onFileSelectSuccess={(file) => {
+                      setFileMessage(false);
+                      setSelectedFile(file);
+                    }}
+                    onFileSelectError={({ error }) =>
+                      setFileMessage({
+                        type: "error",
+                        body: error,
+                      })
+                    }
+                  />
+                )}
+                {!uploadTab && (
+                  <VariableTextField
+                    id="remoteUrl"
+                    label="Remote Data URL"
+                    onChange={(event) => setRemoteUrl(event.target.value)}
+                    aria-describedby="remote-data-helper"
+                    value={remoteUrl}
+                    placeholder="eg https://raw.githubusercontent.com/..."
+                  />
+                )}
+                <input type="submit" value="Validate" style={{marginTop:'1em'}} />
+              </Box>
               {fileMessage && (
                 <MessageText type={fileMessage.type}>
                   {fileMessage.body}
