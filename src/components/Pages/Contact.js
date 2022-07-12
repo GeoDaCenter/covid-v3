@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { NavBar, Footer, ContentContainer, Gutter } from '../../components';
 import InputLabel from '@mui/material/InputLabel';
@@ -27,6 +27,9 @@ const ContactPage = styled.div`
     &:hover {
       opacity: 1;
     }
+  }
+  textarea, .MuiInputBase-root {
+    color:black;
   }
 `;
 
@@ -315,6 +318,19 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const category = urlParams.get('category');
+    const message = urlParams.get('message');
+    const id = urlParams.get('id');
+    setFormData(prev => ({
+      ...prev,
+      Category: category || prev.Category,
+      Message: id ? `Dear Atlas Staff, I'm writing to report harmful content in story \nBelow is a brief description of why this content is harmful: \n \n ### \n Do not edit below this line: \n Story Id: ${id} \n ###`: message || prev.Message,
+    })
+    )
+  }, [])
+
   const generateURL = async (data, url) => {
     let returnURL = `${url}?Date=${encodeURIComponent(
       new Date().toISOString().slice(0, 10),
@@ -360,7 +376,6 @@ export default function Contact() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   const handleSelect = (e) =>
     setFormData((prev) => ({ ...prev, Category: e.target.value }));
-
   return (
     <ContactPage>
       <NavBar light />
@@ -423,6 +438,7 @@ export default function Contact() {
                   <MenuItem value={'Bug'}>Bug Report or Error</MenuItem>
                   <MenuItem value={'DataQuestion'}>Data Question</MenuItem>
                   <MenuItem value={'FeatureRequest'}>Feature Request</MenuItem>
+                  <MenuItem value={'HarmfulContent'}>Report Harmful Content</MenuItem>
                   <MenuItem value={'TechOpenSource'}>
                     Technical or Open Source Questions
                   </MenuItem>
@@ -475,6 +491,9 @@ export default function Contact() {
             <Grid item xs={12} md={8}>
               <InputBlock fullWidth={true}>
                 <TextField
+                sx={{
+                  color:'black !important'
+                }}
                   id="message"
                   label="Message"
                   multiline
@@ -483,6 +502,7 @@ export default function Contact() {
                   variant="outlined"
                   name="Message"
                   onChange={handleChange}
+                  value={formData.Message}
                   error={formErrors['Message']}
                   helperText={formErrors['Message'] && 'Please enter a message'}
                 />

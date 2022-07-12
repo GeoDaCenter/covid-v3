@@ -9,6 +9,7 @@ import { Home, LoadingMessage, ErrorPage } from "./components/";
 import colors from "./config/colors";
 import useTrackUserActions from "./hooks/useTrackUserActions.js";
 
+const Archive = React.lazy(() => import("./components/Pages/Archive"));
 const About = React.lazy(() => import("./components/Pages/About"));
 const Api = React.lazy(() => import("./components/Pages/Api"));
 const Cab = React.lazy(() => import("./components/Pages/Cab"));
@@ -99,6 +100,8 @@ export default function App() {
                 <Route path="/map.html" component={Map} />
                 <Route path="/about" component={About} />
                 <Route path="/about.html" component={About} />
+                <Route path="/archive" component={Archive} />
+                <Route path="/archive.html" component={Archive} />
                 <Route path="/cab" component={Cab} />
                 <Route path="/contact" component={Contact} />
                 <Route path="/contact.html" component={Contact} />
