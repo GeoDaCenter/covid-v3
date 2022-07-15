@@ -6,7 +6,9 @@ import { Box } from '@mui/system';
 import { Button, Grid, Modal, Typography } from '@mui/material';
 import colors from '../../config/colors';
 import Plyr from "plyr-react";
-import "plyr/dist/plyr.css";
+import { findCounty } from '../../utils';
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 
 const ArchivePage = styled.div`
   background: white;
@@ -33,40 +35,48 @@ const getCounts = (stories) => {
         tags: {},
         state: {},
         urbanicity: {},
-        type: {}
+        type: {},
+        county: {}
     }
     if (!stories) return counts;
-
     for (let i = 0; i < stories.length; i++) {
         const story = stories[i];
-        counts.theme[story.theme] = (counts.theme[story.theme] || 0) + 1;
-
-        if (story.tags) {
+        const {
+            state,
+            county,
+            theme,
+            tags,
+            urbanicity,
+            type
+        } = story;
+        theme && (counts.theme[theme] = (counts.theme[theme] || 0) + 1);
+        state && (counts.state[state] = (counts.state[state] || 0) + 1)
+        urbanicity && (counts.urbanicity[urbanicity] = (counts.urbanicity[urbanicity] || 0) + 1);
+        type && (counts.type[type] = (counts.type[type] || 0) + 1);
+        county && (counts.county[county] = (counts.county[county] || 0) + 1);
+        if (tags) {
             for (let j = 0; j < story.tags.length; j++) {
                 const tag = story.tags[j];
                 counts.tags[tag] = (counts.tags[tag] || 0) + 1;
             }
         }
-
-        if (story.county) {
-            const state = story.county.split(',').slice(-1)[0].trim();
-            counts.state[state] = (counts.state[state] || 0) + 1;
-        }
-        //TODO
-        // const urbanicity = urbancitiyDict[story.county];
-        // counts.Urbanicity[urbanicity] = (counts.Urbanicity[urbanicity] || 0) + 1;
-
-        counts.type[story.type] = (counts.type[story.type] || 0) + 1;
     }
     return counts
 }
 
 const useStories = ({
     selectedStory = {},
-    filters = []
+    filters = [],
+    singleStoryId = ''
 }) => {
-    const { data: allStories, error } = useSWR(`${process.env.REACT_APP_STORIES_PUBLIC_URL}/index.json`, (url) => fetch(url).then(r => r.json()));
-
+    const { data: allStories, error } = useSWR(
+        `${process.env.REACT_APP_STORIES_PUBLIC_URL}/index.json`,
+        (url) => fetch(url)
+            .then(r => r.json())
+            .then(rows => rows.map(row =>
+                ({ ...row, ...findCounty(row.fips) })
+            ))
+    );
     // based on filters, return relevant stories
     // filter schema is:
     // { 
@@ -99,7 +109,6 @@ const useStories = ({
 
         const stories = allStories.filter(story => doFilter(story, filters));
         const counts = getCounts(stories);
-        console.log(stories, counts);
 
         return {
             counts,
@@ -124,24 +133,20 @@ const useStories = ({
         const county = selectedStory.county;
         const theme = selectedStory.theme;
         const state = selectedStory.county.split(',').slice(-1)[0];
-
         return allStories.map(story => {
             if (story.id === selectedStory.id) {
                 return false;
             }
             let matchCriteria = 0;
-
             if (story.theme === theme) matchCriteria++;
             if (story.county === county) matchCriteria++;
             if (story.county.includes(state)) matchCriteria++;
             story.tags.forEach(tag => tags.includes(tag) && matchCriteria++);
-
             return matchCriteria && {
                 ...story,
                 matchCriteria
             }
         }).filter(story => story).sort((a, b) => b.matchCriteria - a.matchCriteria)
-
     }, [JSON.stringify(selectedStory), allStories?.length]);
 
     return {
@@ -167,7 +172,6 @@ const StoryCard = ({
     setActiveStory
 }) => {
     const {
-        storyId,
         theme,
         county,
         tags,
@@ -179,7 +183,7 @@ const StoryCard = ({
     return <Grid container sx={{ width: '100%', m: 1, mb: 2 }}>
         <Grid item sm={3} md={1} sx={{ px: 2 }} alignItems="center">
             <IconContainer>
-                <Icon symbol="video" style={{ maxWidth: '1rem' }} />
+                <Icon symbol={type} style={{ maxWidth: '1rem' }} />
             </IconContainer>
         </Grid>
         <Grid item sm={9} md={3}>
@@ -192,7 +196,7 @@ const StoryCard = ({
         </Grid>
         <Grid item sm={4} md={3}>
             <RowTitle>Tags</RowTitle>
-            <RowBody>{tags.map(t => `#${t}`).join(',')}</RowBody>
+            <RowBody>{tags.map(t => `#${t}`).join(', ')}</RowBody>
         </Grid>
         <Grid item sm={4} md={2}>
             <Button onClick={() => setActiveStory(story)} variant="contained" sx={{ color: colors.darkgray, textTransform: 'none' }}>
@@ -202,36 +206,113 @@ const StoryCard = ({
     </Grid>
 }
 
+const FilterRow = ({
+    property,
+    value,
+    count,
+    handleFilter,
+    filters
+}) => {
+    const isFiltered = !!filters.find(f => f.property === property && f.value === value);
+
+    return <Button
+        onClick={() => handleFilter({ property, value })}
+        sx={
+            isFiltered ? {
+                color: 'black',
+                px: .5,
+                py: .25,
+                my: .25,
+                textTransform: 'none',
+                width: '100%',
+                justifyContent: "space-between",
+                background: colors.skyblue
+            } : {
+                color: 'black',
+                px: .5,
+                py: .25,
+                my: .25,
+                textTransform: 'none',
+                width: '100%',
+                justifyContent: "space-between"
+            }}
+    >
+        <Box>
+            {value}
+            {isFiltered && <span style={{ marginLeft: '.5rem', fontWeight: 'bold' }}>&times;</span>}
+        </Box>
+        <Box>
+            {count}
+        </Box>
+    </Button>
+}
+const sortByValue = ([_a,a], [_b,b]) => b - a;
+
 const FilterSection = ({
     title,
     counts,
-    handleFilter
+    handleFilter,
+    filters
 }) => {
     return <Box sx={{ pb: 4 }}>
         <Typography sx={{ textTransform: 'capitalize' }} variant="h6">{title}</Typography>
         <hr />
-        {Object.entries(counts).map(([value, count], i) => (
-            <Button key={i} onClick={() => handleFilter({ property: title, value })} sx={{ color: 'black', px: 0, textTransform: 'none', width: '100%', justifyContent: "space-between" }}>
-                <Box>
-                    {value}
-                </Box>
-                <Box>
-                    {count}
-                </Box>
-            </Button>
+        {Object.entries(counts).sort(sortByValue).map(([value, count], i) => (
+            <FilterRow
+                key={i}
+                property={title}
+                count={count}
+                value={value}
+                handleFilter={handleFilter}
+                filters={filters}
+            />
         ))}
     </Box>
 
 }
 const containsProperties = ["tags", "state"]
+const SidebarContainer = styled(Grid)`
+    /* max-height: 80vh;
+    overflow-y:auto;
+    margin-top:1em;
+    padding-right:1em;
+    
+    ::-webkit-scrollbar {
+            width: .5rem;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #eee;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: url("${process.env.PUBLIC_URL}/icons/grip.png"), #ccc;
+            background-position: center center;
+            background-repeat: no-repeat, no-repeat;
+            background-size: 50%, 100%;
+            transition: 125ms all;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: url("${process.env.PUBLIC_URL}/icons/grip.png"), #aaa;
+            background-position: center center;
+            background-repeat: no-repeat, no-repeat;
+            background-size: 50%, 100%;
+        } */
+`
 const ArchiveSidebar = ({
     counts,
+    filters,
     setFilters
 }) => {
     const handleFilter = ({ property, value }) => {
         setFilters(filters => {
-            if (filters.find(f => f.property === property)) {
-                return filters.filter(f => f.property !== property)
+            const prevIndex = filters.findIndex(f => f.property === property && f.value === value);
+            if (prevIndex !== -1) {
+                return filters.slice(0, prevIndex).concat(filters.slice(prevIndex + 1));
             } else {
                 return [...filters, {
                     property,
@@ -241,15 +322,17 @@ const ArchiveSidebar = ({
             }
         })
     }
-    return <Grid item xs={12} md={3}>
-        {Object.entries(counts).map(([title, values]) => (
+    return <SidebarContainer item xs={12} md={3}>
+        {Object.entries(counts).map(([title, values], i) => (
             <FilterSection
+                key={i}
+                filters={filters}
                 title={title}
                 counts={values}
                 handleFilter={handleFilter}
             />
         ))}
-    </Grid>
+    </SidebarContainer>
 }
 
 const ArchiveBody = ({
@@ -259,8 +342,8 @@ const ArchiveBody = ({
     return <Grid item xs={12} md={9}>
         <Grid container spacing={3} sx={{ p: 1 }}>
             <Typography variant="h5" sx={{ pb: 3, pt: 1 }}>Entries</Typography>
-            {stories.map(story => (
-                <StoryCard story={story} setActiveStory={setActiveStory} />
+            {stories.map((story, i) => (
+                <StoryCard key={i} story={story} setActiveStory={setActiveStory} />
             )
             )}
         </Grid>
@@ -287,6 +370,53 @@ const HarmLink = styled.a`
     color:white;
     text-decoration:none;
 `
+const WrittenContainer = styled.div`
+    max-height: ${({ tall }) => tall ? '50vh' : '20vh'};
+    padding:.5rem;
+    overflow-y: auto;
+    
+    ::-webkit-scrollbar {
+        width: .5rem;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #2b2b2b77;
+        border:1px solid #999;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: url("${process.env.PUBLIC_URL}/icons/grip.png"), #999;
+        background-position: center center;
+        background-repeat: no-repeat, no-repeat;
+        background-size: 50%, 100%;
+        transition: 125ms all;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: url("${process.env.PUBLIC_URL}/icons/grip.png"), #f9f9f9;
+        background-position: center center;
+        background-repeat: no-repeat, no-repeat;
+        background-size: 50%, 100%;
+    }
+`
+
+const MarkdownViewer = ({
+    content = "",
+    url = "",
+    id,
+    tall = false
+}) => {
+    const fetcher = url
+        ? () => fetch(url).then(res => res.text()).then(text => text.replaceAll("<br>", "\n &nbsp;"))
+        : () => Promise.resolve(content)
+    const { data: text } = useSWR(id, fetcher)
+    return <WrittenContainer tall={tall}>
+        {!!text && <ReactMarkdown>{text}</ReactMarkdown>}
+    </WrittenContainer>
+}
 
 const StoryPlayer = ({
     story
@@ -294,30 +424,56 @@ const StoryPlayer = ({
     if (!story?.type) {
         return null;
     }
-
-    if (story.type === "video") {
-        const mediaUrl = `${process.env.REACT_APP_STORIES_PUBLIC_URL}/${story.id}.${story.fileType}`
-        const captionUrl = `${process.env.REACT_APP_STORIES_PUBLIC_URL}/${story.id}.vtt`
-        const videoSrc = {
-            type: "video",
-            sources: [
-                {
-                    src: mediaUrl
-                }
-            ],
-            tracks: [
-                {
-                    kind: 'captions',
-                    label: 'English',
-                    srcLang: 'en',
-                    src: captionUrl
-                }
-            ]
-        };
-        return <Plyr source={videoSrc} crossOrigin="anonymous" />
+    switch (story.type) {
+        case "video": {
+            const mediaUrl = `${process.env.REACT_APP_STORIES_PUBLIC_URL}/${story.id}${story.fileType}`
+            const captionUrl = `${process.env.REACT_APP_STORIES_PUBLIC_URL}/${story.id}_otter_ai.vtt`
+            const videoSrc = {
+                type: "video",
+                sources: [
+                    {
+                        src: mediaUrl
+                    }
+                ],
+                tracks: [
+                    {
+                        kind: 'captions',
+                        label: 'English',
+                        srcLang: 'en',
+                        src: captionUrl
+                    }
+                ]
+            };
+            return <Plyr source={videoSrc} crossOrigin="anonymous" />
+        }
+        case "photo": {
+            const photoUrl = `${process.env.REACT_APP_STORIES_PUBLIC_URL}/${story.id}${story.fileType}`
+            const captionUrl = `${process.env.REACT_APP_STORIES_PUBLIC_URL}/${story.id}.md`
+            return <>
+                <img src={photoUrl} style={{ maxWidth: '100%', maxHeight: '50vh', display: 'block', margin: '0 auto' }} />
+                <MarkdownViewer id={story.id} url={captionUrl} />
+            </>
+        }
+        case "written": {
+            const contentUrl = `${process.env.REACT_APP_STORIES_PUBLIC_URL}/${story.id}${story.fileType}`
+            return <MarkdownViewer id={story.id} url={contentUrl} tall />
+        }
+        case "audio":
+        case "phone":
+            const audioUrl = `${process.env.REACT_APP_STORIES_PUBLIC_URL}/${story.id}${story.fileType}`
+            // const type = story.type === "audio" ? "audio/mpeg" : "audio/wav"
+            const audioSrc = {
+                type: 'audio',
+                sources: [
+                    {
+                        src: audioUrl
+                    }
+                ],
+            };
+            return <Plyr source={audioSrc} crossOrigin="anonymous" />
+        default:
+            return null
     }
-
-    return null
 }
 const StoryContainer = ({
     story
@@ -329,11 +485,13 @@ const StoryContainer = ({
     const {
         storyId,
         theme,
-        county,
+        fips,
         tags,
         type,
         title,
+        county
     } = story;
+
 
     const entryTitle = title?.length ? title : `A ${type} story`
     return <GradientBox>
@@ -359,11 +517,11 @@ const StoryContainer = ({
                         Tags
                     </Typography>
                     <Typography variant="h6" sx={{ pb: 1 }}>
-                        {tags.map(t => `#${t}`).join(',')}
+                        {tags.map(t => `#${t}`).join(', ')}
                     </Typography>
                 </>}
             </Grid>
-
+            <Grid item xs={12} sx={{pt: 2, borderTop: '1px solid #ffffff44'}}></Grid>
             <Grid item xs={12} md={6}>
                 <ShareLink href="https://stories.uscovidatlas.org/" target="_blank" rel="noopener noreferrer">
                     Want to contribute to Atlas Stories?
@@ -417,7 +575,7 @@ export default function Archive() {
             <NavBar light />
             <ContentContainer>
                 <Grid container spacing={3}>
-                    <ArchiveSidebar counts={counts} setFilters={setFilters} />
+                    <ArchiveSidebar counts={counts} setFilters={setFilters} filters={filters} />
                     <ArchiveBody stories={stories} setActiveStory={setActiveStory} />
                 </Grid>
             </ContentContainer>

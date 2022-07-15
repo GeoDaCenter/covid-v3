@@ -14,6 +14,9 @@ import {
   findTableOrDefault,
 } from "./find";
 import {
+  findCounty
+} from "./findCounty.js";
+import {
   fetchFile,
   fetcher
 } from './fetcher'
@@ -75,6 +78,7 @@ export {
   fetchFile,
   findAllCurrentTables,
   findAllDefaults,
+  findCounty,
   findIn,
   findDates,
   findDateIndices,
