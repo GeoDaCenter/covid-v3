@@ -322,7 +322,6 @@ function MapSection({
   } = useStories({
     selectedStory
   });
-  console.log(selectedStory)
 
   // change mapbox layer on viztype change or overlay/resource change
   useEffect(() => {

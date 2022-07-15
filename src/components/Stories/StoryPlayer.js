@@ -29,7 +29,7 @@ export const StoryPlayer = ({
                     }
                 ]
             };
-            return <Plyr source={videoSrc} crossOrigin="anonymous" />
+            return <div><Plyr source={videoSrc} crossOrigin="anonymous" /></div>
         }
         case "photo": {
             const photoUrl = `${process.env.REACT_APP_STORIES_PUBLIC_URL}/${story.id}${story.fileType}`
@@ -55,7 +55,7 @@ export const StoryPlayer = ({
                     }
                 ],
             };
-            return <Plyr source={audioSrc} crossOrigin="anonymous" />
+            return <div><Plyr source={audioSrc} crossOrigin="anonymous" /></div>
         default:
             return null
     }

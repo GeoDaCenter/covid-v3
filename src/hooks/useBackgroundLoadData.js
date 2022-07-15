@@ -2,11 +2,9 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   findAllDefaults,
-  // fetcher
 } from '../utils';
-// import { createSelector } from 'reselect'
-import _FetcherWorker from 'comlink-loader!../utils/fetcher';// eslint-disable-line import/no-webpack-loader-syntax
-const FetcherWorker = new _FetcherWorker();
+import { wrap } from "comlink";
+const FetcherWorker =  wrap(new Worker(new URL('../workers/fetcher', import.meta.url)));
 
 export default function useBackgroundLoadData({
   currentGeography = '',

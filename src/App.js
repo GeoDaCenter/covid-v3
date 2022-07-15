@@ -24,6 +24,8 @@ const Download = React.lazy(() => import("./components/Pages/Download"));
 const Faq = React.lazy(() => import("./components/Pages/Faq"));
 const Hotspots = React.lazy(() => import("./components/Pages/Hotspots"));
 const Insights = React.lazy(() => import("./components/Pages/Insights"));
+const Learn = React.lazy(() => import("./components/Pages/Learn"));
+const LearnTopic = React.lazy(() => import("./components/Pages/LearnTopic"));
 const Map = React.lazy(() => import("./components/Pages/Map"));
 const MichiganMasks = React.lazy(() =>
   import("./components/Pages/MichiganMasks")
@@ -135,6 +137,8 @@ export default function App() {
                 <Route path="/conduct" component={CodeOfConduct} />
                 <Route path="/conduct.html" component={CodeOfConduct} />
                 <Route path="/privacy" component={PrivacyPolicy} />
+                <Route path="/learn" component={Learn} exact />
+                <Route path="/learn/:topic" component={LearnTopic} exact />
                 <Route
                   path="/500000"
                   exact

@@ -16,10 +16,6 @@ import {
 import {
   findCounty
 } from "./findCounty.js";
-import {
-  fetchFile,
-  fetcher
-} from './fetcher'
 import { findClosestValue, findDateIncrement, findDateDecrement } from "./findClosestValue";
 import { findNextIndex, findPreviousIndex } from "./findNextIndex";
 import { findSecondaryMonth } from './findSecondaryMonth'
@@ -74,8 +70,6 @@ export {
   colLookup,
   dataFn,
   debounce,
-  fetcher,
-  fetchFile,
   findAllCurrentTables,
   findAllDefaults,
   findCounty,
