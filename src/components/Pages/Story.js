@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { ContentContainer, NavBar, Footer } from "../../components";
 import { useStories } from "../../hooks/useStories";
-import { ArchiveBody } from "../Stories/ArchiveBody";
 import {StoryContainer} from '../Stories/StoryContainer';
 
 const StoryPage = styled.div`
