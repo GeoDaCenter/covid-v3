@@ -20,7 +20,6 @@ import { Steps, StepButtons } from "./Steps";
 import { FileUploader } from "./FileUploader";
 import { validateGeojson } from "./utils";
 import { FormButton } from "./FormButton";
-import { HelperText } from "./HelperText";
 import { Typography } from "@mui/material";
 
 const ModalInner = styled.div``;

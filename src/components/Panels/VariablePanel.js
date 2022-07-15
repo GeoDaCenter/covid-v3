@@ -118,35 +118,35 @@ div.poweredByGeoda {
     }
   }
 `;
-const ButtonGroup = styled.div`
-  button:first-of-type {
-    border-radius: 0.5em 0 0 0.5em;
-  }
-  button:last-of-type {
-    border-radius: 0 0.5em 0.5em 0;
-  }
-`;
+// const ButtonGroup = styled.div`
+//   button:first-of-type {
+//     border-radius: 0.5em 0 0 0.5em;
+//   }
+//   button:last-of-type {
+//     border-radius: 0 0.5em 0.5em 0;
+//   }
+// `;
 
-const VizTypeButton = styled.button`
-  background: ${(props) => (props.active ? colors.white : "none")};
-  color: ${(props) => (props.active ? colors.darkgray : colors.white)};
-  outline: none;
-  border: 1px solid ${colors.white}77;
-  padding: 0.25em 0.75em;
-  margin: 0;
-  font-family: "Lato", sans-serif;
-  font-size: 0.875rem;
-  cursor: ${(props) => (props.disabled ? "none" : "pointer")};
-  pointer-events: ${(props) => (props.disabled ? "none" : "initial")};
-  opacity: ${(props) => (props.disabled ? ".25" : "1")};
-  transition: 250ms all;
-  letter-spacing: 0.02857em;
-  font-weight: 500;
-  &:hover {
-    background: ${colors.lightgray};
-    color: ${colors.darkgray};
-  }
-`;
+// const VizTypeButton = styled.button`
+//   background: ${(props) => (props.active ? colors.white : "none")};
+//   color: ${(props) => (props.active ? colors.darkgray : colors.white)};
+//   outline: none;
+//   border: 1px solid ${colors.white}77;
+//   padding: 0.25em 0.75em;
+//   margin: 0;
+//   font-family: "Lato", sans-serif;
+//   font-size: 0.875rem;
+//   cursor: ${(props) => (props.disabled ? "none" : "pointer")};
+//   pointer-events: ${(props) => (props.disabled ? "none" : "initial")};
+//   opacity: ${(props) => (props.disabled ? ".25" : "1")};
+//   transition: 250ms all;
+//   letter-spacing: 0.02857em;
+//   font-weight: 500;
+//   &:hover {
+//     background: ${colors.lightgray};
+//     color: ${colors.darkgray};
+//   }
+// `;
 
 const DotDensityControls = styled.div`
   border: 1px solid ${colors.white}77;
@@ -448,7 +448,7 @@ function VariablePanel() {
     );
   };
 
-  const handleVizTypeButton = (vizType) => dispatch(setMapParams({ vizType }));
+  // const handleVizTypeButton = (vizType) => dispatch(setMapParams({ vizType }));
 
   const handleVariable = (e) =>
     dispatch({

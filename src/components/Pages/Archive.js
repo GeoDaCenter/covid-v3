@@ -414,7 +414,7 @@ const MarkdownViewer = ({
         : () => Promise.resolve(content)
     const { data: text } = useSWR(id, fetcher)
     return <WrittenContainer tall={tall}>
-        {!!text && <ReactMarkdown>{text}</ReactMarkdown>}
+        {!!text && <ReactMarkdown remarkPlugins={[remarkGfm]} >{text}</ReactMarkdown>}
     </WrittenContainer>
 }
 
@@ -450,7 +450,7 @@ const StoryPlayer = ({
             const photoUrl = `${process.env.REACT_APP_STORIES_PUBLIC_URL}/${story.id}${story.fileType}`
             const captionUrl = `${process.env.REACT_APP_STORIES_PUBLIC_URL}/${story.id}.md`
             return <>
-                <img src={photoUrl} style={{ maxWidth: '100%', maxHeight: '50vh', display: 'block', margin: '0 auto' }} />
+                <img alt="user story submission" src={photoUrl} style={{ maxWidth: '100%', maxHeight: '50vh', display: 'block', margin: '0 auto' }} />
                 <MarkdownViewer id={story.id} url={captionUrl} />
             </>
         }
@@ -483,9 +483,7 @@ const StoryContainer = ({
     }
 
     const {
-        storyId,
         theme,
-        fips,
         tags,
         type,
         title,
@@ -565,7 +563,7 @@ export default function Archive() {
     const {
         stories,
         counts,
-        relatedStories
+        // relatedStories
     } = useStories({
         filters
     })
