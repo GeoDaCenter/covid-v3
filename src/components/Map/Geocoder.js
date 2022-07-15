@@ -74,7 +74,6 @@ const Geocoder = ({
     results: [],
     value: '',
   });
-  console.log('searchState', searchState)
 
   const loadResults = (results) => {
     setSearchState((prev) => ({

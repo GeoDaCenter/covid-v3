@@ -867,6 +867,10 @@ function VariablePanel() {
                 <MenuItem value="" key={"None"}>
                   None
                 </MenuItem>
+                <MenuItem value={"stories"} key={"stories"}>
+                  Stories [WIP]
+                  <Tooltip id="Stories" />
+                </MenuItem>
                 <MenuItem
                   value={"native_american_reservations"}
                   key={"native_american_reservations"}

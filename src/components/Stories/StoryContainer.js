@@ -2,10 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { Grid, Typography } from '@mui/material';
 import { StoryPlayer } from './StoryPlayer';
+import { ArchiveBody } from './ArchiveBody';
 
 const GradientBox = styled.div`
-    background: ${({noBg}) => noBg ? 'none' : 'rgb(24,113,119)'};
-    background: ${({noBg}) => noBg ? 'none' : 'linear-gradient(180deg, rgba(24,113,119,1) 0%, rgba(102,69,20,1) 100%)'};
+    background: ${({ noBg }) => noBg ? 'none' : 'rgb(24,113,119)'};
+    background: ${({ noBg }) => noBg ? 'none' : 'linear-gradient(180deg, rgba(24,113,119,1) 0%, rgba(102,69,20,1) 100%)'};
     color: white;
     padding: 1em;
     position:relative;
@@ -33,7 +34,9 @@ const ShareButton = styled.a`
 
 export const StoryContainer = ({
     story,
-    noBg=false
+    noBg = false,
+    relatedStories = [],
+    relatedStoriesCallback = () => { }
 }) => {
     if (!story.type) {
         return null
@@ -76,7 +79,7 @@ export const StoryContainer = ({
                     </Typography>
                 </>}
             </Grid>
-            <Grid item xs={12} sx={{pt: 2, borderTop: '1px solid #ffffff44'}}></Grid>
+            <Grid item xs={12} sx={{ pt: 2, borderTop: '1px solid #ffffff44' }}></Grid>
             <Grid item xs={12} md={6}>
                 <ShareLink href="https://stories.uscovidatlas.org/" target="_blank" rel="noopener noreferrer">
                     Want to contribute to Atlas Stories?
@@ -91,5 +94,12 @@ export const StoryContainer = ({
             </Grid>
         </Grid>
         <ShareButton a href={`${process.env.PUBLIC_URL}/story/${story.id}`}>Share</ShareButton>
+        {!!relatedStories?.length && (<>
+            <hr />
+            <h2>Here are some related stories:</h2>
+            <ArchiveBody stories={relatedStories} setActiveStory={relatedStoriesCallback} />
+        </>)}
     </GradientBox>
+
+
 }

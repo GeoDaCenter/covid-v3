@@ -23,18 +23,21 @@ const Story = ({ history, location, match }) => {
   } = useStories({
     singleStoryId: storyId
   })
-  
+  const handleRelatedStory = ({id}) => {
+    // history.push(`${process.env.PUBLIC_URL}/story/${id}`)
+    window.location.href = `${process.env.PUBLIC_URL}/story/${id}`
+  }
+
   return (
     <StoryPage>
       <NavBar light />
       <ContentContainer>
-        <StoryContainer story={activeStory} noBg />
-        <hr />
-        <h2>Here are some related stories:</h2>
-        <ArchiveBody stories={relatedStories} setActiveStory={({id}) => {
-          // history.push(`${process.env.PUBLIC_URL}/story/${id}`)
-          window.location.href = `${process.env.PUBLIC_URL}/story/${id}`
-        }}/>
+        <StoryContainer 
+          story={activeStory} 
+          noBg 
+          relatedStories={relatedStories} 
+          relatedStoriesCallback={handleRelatedStory}
+          />
       </ContentContainer>
       <Footer />
     </StoryPage>

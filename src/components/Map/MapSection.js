@@ -41,9 +41,11 @@ import colors from "../../config/colors";
 import MAP_STYLE_DARK from "../../config/style.json";
 import MAP_STYLE_LIGHT from "../../config/style_light.json";
 import { useViewport, useSetViewport } from "../../contexts/Viewport";
+import { useStories } from "../../hooks/useStories";
 // import useFindViewport from "../../hooks/useFindViewport";
 // PBF schemas
 import * as Schemas from "../../schemas";
+import { StoryContainer } from "../Stories/StoryContainer";
 
 const MAP_STYLES = {
   light: MAP_STYLE_LIGHT,
@@ -106,6 +108,18 @@ const GeocoderContainer = styled.div`
     display: none;
   }
 `;
+
+const StoryViewerPanel = styled.div`
+  position: fixed;
+  right:0;
+  top:50px;
+  height:calc(100vh - 50px);
+  width:500px;
+  overflow-y:auto;
+  z-index:500;
+  background:${colors.darkgray};
+  box-sizing:border-box;
+`
 
 //create your forceUpdate hook
 // function useForceUpdate() {
@@ -292,13 +306,23 @@ function MapSection({
     }
   }, [JSON.stringify(cartogramCenter), mapParams.vizType]);
 
-  const getDotDensityData = async () =>
+  const getDotDensityData = async () => (
     fetch(`${process.env.PUBLIC_URL}/pbf/dotDensityFlatGeoid.pbf`)
       .then((r) => r.arrayBuffer())
       .then((ab) => new Pbf(ab))
       .then((pbf) => Schemas.Dot.read(pbf).val)
       .then((data) => chunkArray(data, 4))
-  // .then((chunks) => dispatch(setDotDensityData(chunks)));
+  );
+  // story state
+  const [selectedStory, setSelectedStory] = useState({});
+  // fetching stories from index
+  const {
+    stories,
+    relatedStories
+  } = useStories({
+    selectedStory
+  });
+  console.log(selectedStory)
 
   // change mapbox layer on viztype change or overlay/resource change
   useEffect(() => {
@@ -434,7 +458,7 @@ function MapSection({
     if (e.rightButton) return;
     const objectID = +info.object?.properties[currIdCol];
     if (!objectID) return;
-    dispatch(setPanelState({info:true}))
+    dispatch(setPanelState({ info: true }))
     if (multipleSelect) {
       try {
         if (highlightGeog.indexOf(objectID) === -1) {
@@ -497,6 +521,18 @@ function MapSection({
     }
   }, []);
 
+  const handleStoryClick = (e) => {
+    if (e?.object) {
+      const entry = e.object
+      setSelectedStory(entry);
+      setViewport((viewState) => ({
+        ...viewState,
+        latitude: entry.centroid[1],
+        longitude: entry.centroid[0],
+        zoom: 10,
+      }))
+    }
+  }
   const FullLayers = {
     choropleth: new GeoJsonLayer({
       id: "choropleth",
@@ -601,6 +637,21 @@ function MapSection({
         getFillColor: [currentMapID],
         getRadius: [cartogramDataSnapshot]
       },
+    }),
+    stories: new ScatterplotLayer({
+      id: "stories",
+      data: stories,
+      pickable: true,
+      getPosition: (d) => d.centroid,
+      getFillColor: [45, 147, 108],
+      getLineColor: [240,240,240],
+      getLineWidth: 1,
+      lineWidthMinPixels: 2,
+      lineWidthMaxPixels: 2,
+      radiusMinPixels: 10,
+      radiusMaxPixels: 20,
+      getRadius: 5000,
+      onClick: handleStoryClick,
     }),
     cartogramText: new TextLayer({
       id: "cartogram text layer",
@@ -799,7 +850,7 @@ function MapSection({
         LayerArray.push(layers["clinic"]);
       if (resources && resources.includes("vaccinationSites"))
         LayerArray.push(layers["vaccinationSites"]);
-
+      if (overlays && overlays.includes("stories")) LayerArray.push(layers["stories"]);
       return LayerArray;
     }
   );
@@ -905,6 +956,7 @@ function MapSection({
           "vaccinationSites",
           "hospitals",
           "clinic",
+          "stories"
         ].includes(layerKeys[i])
           ? "state-label"
           : "water"
@@ -973,6 +1025,15 @@ function MapSection({
           </GeocoderContainer>
         )}
       </MapContainer>
+      {!!selectedStory?.id && (
+        <StoryViewerPanel>
+          <StoryContainer 
+            story={selectedStory} 
+            relatedStories={relatedStories}
+            relatedStoriesCallback={(story) => handleMapClick({object:story})}
+            />
+        </StoryViewerPanel>
+      )}
     </MapContainerOuter>
   );
 }
