@@ -221,15 +221,15 @@ const RolesContent = [
     topics: [
       {
         text: "Load your own zip-code level data",
-        link: "",
+        link: "/learn/load-your-own-data",
       },
       {
         text: "Create a customizable report",
-        link: "",
+        link: "/learn/create-a-reprot",
       },
       {
         text: "Examine change over time",
-        link: "",
+        link: "/learn/examine-change-over-time",
       },
     ],
     quote: {
@@ -250,15 +250,15 @@ const RolesContent = [
     topics: [
       {
         text: "Load your own zip-code level data",
-        link: "",
+        link: "/learn/load-your-own-data",
       },
       {
         text: "Create a customizable report",
-        link: "",
+        link: "/learn/create-a-reprot",
       },
       {
         text: "Examine change over time",
-        link: "",
+        link: "/learn/examine-change-over-time",
       },
     ],
     quote: {
@@ -278,15 +278,15 @@ const RolesContent = [
     topics: [
       {
         text: "Load your own zip-code level data",
-        link: "",
+        link: "/learn/load-your-own-data",
       },
       {
         text: "Create a customizable report",
-        link: "",
+        link: "/learn/create-a-reprot",
       },
       {
         text: "Examine change over time",
-        link: "",
+        link: "/learn/examine-change-over-time",
       },
     ],
     quote: {

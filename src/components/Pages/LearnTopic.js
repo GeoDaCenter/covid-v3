@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 // import { NavLink } from 'react-router-dom';
 
@@ -24,8 +25,20 @@ export default function Learn({
     params: { topic },
   } = match;
   const Content = MdxPages[topic]?.default;
+  const config = MdxPages[topic]?.config;
+  const {
+    description,
+    title,
+    slug,
+  } = config || {};
+
   return (
     <LearnPage>
+      <Helmet>
+        <title>{title || 'US Covid Atlas :: Learn'}</title>
+        <meta name="description" content={description || "Learn about the US Covid Atlas"} />
+        <link rel="canonincal" href={`https://uscovidatlas.com/learn/${slug}`} />
+      </Helmet>
       <NavBar light />
       <ContentContainer>
         {Content ? <Content /> : 'No content found. Sorry!'}
