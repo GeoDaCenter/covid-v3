@@ -38,7 +38,7 @@ export default function useGetTable({
               });
             }
           })
-          .catch(() => console.log("error fetching table"));
+          .catch((e) => console.log("error fetching table!", e, cleanedFilesToFetch));
       }
     }
   }, [shouldFetch, JSON.stringify(filesToFetch)]);
