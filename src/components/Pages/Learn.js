@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import {
@@ -117,10 +117,22 @@ const UseCaseText = styled(Grid)`
   }
 `;
 
+const RoleContainer = styled.div`
+  display: flex;
+  max-width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`
+
 const RoleButton = styled(Button)`
   text-transform: none;
   font-size: 1.5rem;
   flex-direction: column;
+  padding:1em 2em;
   /* white-space: nowrap; */
 `;
 
@@ -318,7 +330,7 @@ export default function Learn() {
     sections[sectionId]?.current &&
       sections[sectionId].current.scrollIntoView({
         behavior: "smooth",
-        block: "end",
+        block: "start",
       });
   };
 
@@ -382,18 +394,16 @@ export default function Learn() {
           <Typography variant="h2" element="h4">
             Choose a category
           </Typography>
-          <Grid container spacing={5} sx={{ py: 4 }}>
+          <RoleContainer>
             {Roles.map(({ title, sectionId, icon, iconColor }) => (
-              <Grid item xs={12} sm={6} md={3} key={sectionId}>
-                <RoleButton onClick={() => handleScroll(sectionId)}>
+                <RoleButton onClick={() => handleScroll(sectionId)} ley={sectionId}>
                   <RoleIcon color={iconColor}>
                     <Icon symbol={icon} style={{ width: "4rem" }} />
                   </RoleIcon>
                   {title}
                 </RoleButton>
-              </Grid>
             ))}
-          </Grid>
+          </RoleContainer>
         </FullHeightContent>
       </FullHeightContainer>
       {RolesContent.map(
