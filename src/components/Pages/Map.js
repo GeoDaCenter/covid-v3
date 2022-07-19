@@ -262,7 +262,7 @@ const MapContainerInner = () => {
   });
   
   return <>    
-    <Preloader loading={isLoading || isBackgroundLoading} quiet={isBackgroundLoading} message={isBackgroundLoading ? 'Additional data loading' : 'Loading'}/>
+    <Preloader loading={isLoading || isBackgroundLoading} quiet={isBackgroundLoading} message={isBackgroundLoading ? 'Loading additional data...' : 'Loading'}/>
     <MapSection
       currentMapGeography={currentMapGeography}
       currentMapData={currentMapData}

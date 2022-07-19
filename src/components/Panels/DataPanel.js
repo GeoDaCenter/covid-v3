@@ -366,7 +366,7 @@ export default function DataPanel({
                 Total Number
                 <br className="bigOnly" /> Fully Vaccinated
               </p>
-              <h3>{sidebarData.fully_vaccinated.toLocaleString("en")}</h3>
+              <h3>{sidebarData?.fully_vaccinated?.toLocaleString("en")}</h3>
             </ReportSection>
           )}
           {sidebarData.hasOwnProperty("one_dose") && (

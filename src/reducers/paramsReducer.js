@@ -118,11 +118,13 @@ var reducer = (state = INITIAL_STATE, action) => {
         return {
           ...state,
           currentData: sameDatasetDifferentGeography[0].file,
+          selectionKeys: []
         };
       } else {
         return {
           ...state,
           currentData: relevantDatasets[0].file,
+          selectionKeys: []
         };
       }
     }
@@ -191,6 +193,7 @@ var reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         currentData,
+        selectionKeys: currentData === state.currentData ? state.selectionKeys : [],
         currentTable,
         dataParams: currVariableParams,
         mapParams,

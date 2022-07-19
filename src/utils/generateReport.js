@@ -138,7 +138,7 @@ export const generateReport = ({
   let report = {};
   const { geography } = currDataset; //file, geography, join, name, tables
   const properties = storedGeojson[currentData].properties;
-
+  try {
   report.name =
     selectionKeys.length > 3
       ? ["County"].includes(geography)
@@ -151,7 +151,7 @@ export const generateReport = ({
           )
           .join(", ")
       : selectionKeys.map((key) => properties[key].name).join(", ");
-
+  
   report.population = aggregateProperty(
     properties,
     properties,
@@ -627,6 +627,7 @@ export const generateReport = ({
   //     report.doses_dist100 = (report.doses_dist / report.population) * 100;
   //   }
   // } catch {}
-
+  } catch (e) {
+  }
   return report;
 };
