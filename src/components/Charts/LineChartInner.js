@@ -321,12 +321,12 @@ function LineChartInner({
               name={selectionNames[idx] + " Cumulative"}
               stroke={
                 selectionKeys.length === 1
-                  ? highlightColor
+                  ? mediumColor
                   : selectionKeys.length > qualtitiveScale.length
                     ? mediumColor
                     : qualtitiveScale[idx]
               }
-              strokeDasharray={"2,2"}
+              // strokeDasharray={"2,2"}
               dot={false}
               isAnimationActive={false}
               key={`line-${idx}`}
