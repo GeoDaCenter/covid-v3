@@ -33,10 +33,17 @@ const CustomizedDot = (props) => {
   return null;
 };
 
-const TwoWeekLineChart = (props) => {
+const TwoWeekLineChart = ({
+  data,
+  schema
+}) => {
+  if (!data || !schema) {
+    return null;
+  }
+
   // map data into object
-  let data = props.data.map((d) => {
-    return { val: d / props.data[0] };
+  let cleanedData = data.map((d) => {
+    return { val: d / data[0] };
   });
 
   let schemas = {
@@ -50,11 +57,14 @@ const TwoWeekLineChart = (props) => {
   const colorScale = d3
     .scaleLinear()
     .domain([0, 0.5, 1])
-    .range(schemas[props.schema]);
+    .range(schemas[schema]);
 
   // change over past two weeks
-  const delta = props.data[13] - props.data[0];
-
+  const delta = data[13] - data[0];
+  if (isNaN(delta)) {
+    return null;
+  }
+  
   const lineColor = (delta, start) => {
     let pctChange = delta / start;
     return colorScale(pctChange + 0.5);
@@ -73,18 +83,18 @@ const TwoWeekLineChart = (props) => {
 
   return (
     <LineContainer>
-      <LineChart data={data} width={60} height={30}>
+      <LineChart data={cleanedData} width={60} height={30}>
         <YAxis domain={['dataMin', 'dataMax']} hide={true} />
         <Line
           type="linear"
           dataKey="val"
-          stroke={lineColor(delta, props.data[0])}
+          stroke={lineColor(delta, data[0])}
           strokeWidth={2}
           isAnimationActive={false}
           dot={
             <CustomizedDot
-              color={lineColor(delta, props.data[0])}
-              angle={calcAngle(props.data[12] - props.data[10], props.data[12])}
+              color={lineColor(delta, data[0])}
+              angle={calcAngle(data[12] - data[10], data[12])}
             />
           }
         />
