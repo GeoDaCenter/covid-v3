@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Grid, Typography } from '@mui/material';
+import colors from '../../config/colors';
 import { StoryPlayer } from './StoryPlayer';
 import { ArchiveBody } from './ArchiveBody';
 
@@ -26,11 +27,63 @@ const HarmLink = styled.a`
     text-decoration:none;
 `
 
-const ShareButton = styled.a`
+const StyledShareButton = styled.a`
     position: absolute;
     top:0;
     right:0;
+    color: ${({ light }) => light ? colors.teal : colors.white};
+    text-decoration:none;
+    padding:1em;
+    cursor:pointer;
 `
+const ShareNotificationText = styled.p`
+    position: absolute;
+    top:2em;
+    right:0;
+    color:green;
+`
+const ShareDummyInput = styled.input`
+    position: fixed;
+    left: 110%;
+    top: 110%; 
+`
+
+const ShareButton = ({
+    light,
+    story,
+    title
+}) => {
+    const url = `${process.env.PUBLIC_URL}/story/${story.id}`
+
+    const [shared, setShared] = React.useState(false)
+    const handleShare = async (params) => {
+        const shareData = {
+            title,
+            text: `A ${story.type} story of the pandemic in ${story.county}.`,
+            url
+        };
+
+        try {
+            await navigator.share(shareData);
+        } catch (err) {
+            let copyText = document.querySelector('#share-url');
+            copyText.value = `${shareData.url}`;
+            copyText.style.display = 'block';
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value);
+            copyText.style.display = 'none';
+            setShared(true);
+            setTimeout(() => setShared(false), 5000);
+        }
+    };
+
+    return <>
+        <StyledShareButton onClick={handleShare} light={light}>Share</StyledShareButton>
+        {shared && <ShareNotificationText>Link copied to clipboard!</ShareNotificationText>}
+        <ShareDummyInput type="text" value="" id="share-url" readOnly />
+    </>
+}
 
 export const StoryContainer = ({
     story,
@@ -93,7 +146,7 @@ export const StoryContainer = ({
                 </HarmLink>
             </Grid>
         </Grid>
-        <ShareButton a href={`${process.env.PUBLIC_URL}/story/${story.id}`}>Share</ShareButton>
+        <ShareButton light={noBg} story={story} title={entryTitle}>Share</ShareButton>
         {!!relatedStories?.length && (<>
             <hr />
             <h2>Here are some related stories:</h2>

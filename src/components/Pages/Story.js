@@ -6,9 +6,6 @@ import {StoryContainer} from '../Stories/StoryContainer';
 
 const StoryPage = styled.div`
   background: white;
-  ul li {
-    margin-bottom: 16px;
-  }
 `;
 
 const Story = ({ history, location, match }) => {
