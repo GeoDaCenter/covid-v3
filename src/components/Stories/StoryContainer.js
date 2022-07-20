@@ -4,6 +4,7 @@ import { Grid, Typography } from '@mui/material';
 import colors from '../../config/colors';
 import { StoryPlayer } from './StoryPlayer';
 import { ArchiveBody } from './ArchiveBody';
+import { Gutter } from '../Layout/Gutter';
 
 const GradientBox = styled.div`
     background: ${({ noBg }) => noBg ? 'none' : 'rgb(24,113,119)'};
@@ -149,7 +150,13 @@ export const StoryContainer = ({
         <ShareButton light={noBg} story={story} title={entryTitle}>Share</ShareButton>
         {!!relatedStories?.length && (<>
             <hr />
+            <br/>
+            <Gutter h={'2em'} />
+            <br/>
             <h2>Here are some related stories:</h2>
+            <br/>
+            <Gutter h={'2em'} />
+            <br/>
             <ArchiveBody stories={relatedStories} setActiveStory={relatedStoriesCallback} />
         </>)}
     </GradientBox>

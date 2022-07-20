@@ -13,6 +13,8 @@ const RowBody = styled.p`
 
 const IconContainer = styled.div`
   max-width: 2rem;
+  min-width:1rem;
+  height:100%;
 `;
 
 export const StoryCard = ({ story, setActiveStory }) => {

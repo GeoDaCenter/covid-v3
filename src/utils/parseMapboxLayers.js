@@ -40,7 +40,7 @@ const checkAdmin = (mapParams) => {
 };
 
 const checkLabel = (mapParams) => {
-  if (mapParams.overlay.length && !mapParams.overlay.includes('blackbelt'))
+  if (mapParams.overlay.length && (!mapParams.overlay.includes('blackbelt') && !mapParams.overlay.includes('stories')))
     return [['setLayoutProperty', 'visibility', 'none']];
   return [['setLayoutProperty', 'visibility', 'visible']];
 };

@@ -41,11 +41,9 @@ import colors from "../../config/colors";
 import MAP_STYLE_DARK from "../../config/style.json";
 import MAP_STYLE_LIGHT from "../../config/style_light.json";
 import { useViewport, useSetViewport } from "../../contexts/Viewport";
-import { useStories } from "../../hooks/useStories";
-// import useFindViewport from "../../hooks/useFindViewport";
-// PBF schemas
 import * as Schemas from "../../schemas";
-import { StoryContainer } from "../Stories/StoryContainer";
+import { useStoriesContext } from "../../contexts/StoriesContext";
+import IconClusterLayer from "../../CustomLayers/icon-cluster-layer";
 
 const MAP_STYLES = {
   light: MAP_STYLE_LIGHT,
@@ -62,6 +60,184 @@ const ICON_MAPPING = {
   participatingVaccineSite: { x: 128, y: 128, width: 128, height: 128 },
   megaSite: { x: 256, y: 128, width: 128, height: 128 },
 };
+
+const STORY_ICON_MAPPING = {
+  "marker-1": {
+    "x": 0,
+    "y": 0,
+    "width": 128,
+    "height": 128,
+    "anchorY": 128
+  },
+  "marker-2": {
+    "x": 128,
+    "y": 0,
+    "width": 128,
+    "height": 128,
+    "anchorY": 128
+  },
+  "marker-3": {
+    "x": 256,
+    "y": 0,
+    "width": 128,
+    "height": 128,
+    "anchorY": 128
+  },
+  "marker-4": {
+    "x": 384,
+    "y": 0,
+    "width": 128,
+    "height": 128,
+    "anchorY": 128
+  },
+  "marker-5": {
+    "x": 0,
+    "y": 128,
+    "width": 128,
+    "height": 128,
+    "anchorY": 128
+  },
+  "marker-6": {
+    "x": 128,
+    "y": 128,
+    "width": 128,
+    "height": 128,
+    "anchorY": 128
+  },
+  "marker-7": {
+    "x": 256,
+    "y": 128,
+    "width": 128,
+    "height": 128,
+    "anchorY": 128
+  },
+  "marker-8": {
+    "x": 384,
+    "y": 128,
+    "width": 128,
+    "height": 128,
+    "anchorY": 128
+  },
+  "marker-9": {
+    "x": 0,
+    "y": 256,
+    "width": 128,
+    "height": 128,
+    "anchorY": 128
+  },
+  "marker-10": {
+    "x": 128,
+    "y": 256,
+    "width": 128,
+    "height": 128,
+    "anchorY": 128
+  },
+  "marker-20": {
+    "x": 256,
+    "y": 256,
+    "width": 128,
+    "height": 128,
+    "anchorY": 128
+  },
+  "marker-30": {
+    "x": 384,
+    "y": 256,
+    "width": 128,
+    "height": 128,
+    "anchorY": 128
+  },
+  "marker-40": {
+    "x": 0,
+    "y": 384,
+    "width": 128,
+    "height": 128,
+    "anchorY": 128
+  },
+  "marker-50": {
+    "x": 128,
+    "y": 384,
+    "width": 128,
+    "height": 128,
+    "anchorY": 128
+  },
+  "marker-60": {
+    "x": 256,
+    "y": 384,
+    "width": 128,
+    "height": 128,
+    "anchorY": 128
+  },
+  "marker-70": {
+    "x": 384,
+    "y": 384,
+    "width": 128,
+    "height": 128,
+    "anchorY": 128
+  },
+  "marker-80": {
+    "x": 0,
+    "y": 512,
+    "width": 128,
+    "height": 128,
+    "anchorY": 128
+  },
+  "marker-90": {
+    "x": 128,
+    "y": 512,
+    "width": 128,
+    "height": 128,
+    "anchorY": 128
+  },
+  "marker-100": {
+    "x": 256,
+    "y": 512,
+    "width": 128,
+    "height": 128,
+    "anchorY": 128
+  },
+  "marker": {
+    "x": 384,
+    "y": 512,
+    "width": 128,
+    "height": 128,
+    "anchorY": 128
+  },
+  "written": {
+    "x": 128,
+    "y": 640,
+    "width": 128,
+    "height": 128,
+    "anchorY": 128
+  },
+  "photo": {
+    "x": 384,
+    "y": 640,
+    "width": 128,
+    "height": 128,
+    "anchorY": 128
+  },
+  "video": {
+    "x": 0,
+    "y": 768,
+    "width": 128,
+    "height": 128,
+    "anchorY": 128
+  },
+  "audio": {
+    "x": 256,
+    "y": 640,
+    "width": 128,
+    "height": 128,
+    "anchorY": 128
+  },
+  "phone": {
+    "x": 0,
+    "y": 640,
+    "width": 128,
+    "height": 128,
+    "anchorY": 128
+  },
+}
 
 // component styling
 const MapContainerOuter = styled.div`
@@ -109,18 +285,6 @@ const GeocoderContainer = styled.div`
   }
 `;
 
-const StoryViewerPanel = styled.div`
-  position: fixed;
-  right:0;
-  top:50px;
-  height:calc(100vh - 50px);
-  width:500px;
-  overflow-y:auto;
-  z-index:500;
-  background:${colors.darkgray};
-  box-sizing:border-box;
-`
-
 //create your forceUpdate hook
 // function useForceUpdate() {
 //   const [, setValue] = useState(0); // integer state
@@ -167,6 +331,12 @@ function MapSection({
   const contextViewport = useViewport();
   const viewport = manualViewport || contextViewport;
   const setViewport = useSetViewport();
+  const {
+    stories,
+    selectedStory,
+    setSelectedStory,
+  } = useStoriesContext()
+
   const currMapViewport = null; //useFindViewport(storedGeojson[currentData]?.mapId);
   // component state elements
   // hover and highlight geographibes
@@ -313,15 +483,7 @@ function MapSection({
       .then((pbf) => Schemas.Dot.read(pbf).val)
       .then((data) => chunkArray(data, 4))
   );
-  // story state
-  const [selectedStory, setSelectedStory] = useState({});
-  // fetching stories from index
-  const {
-    stories,
-    relatedStories
-  } = useStories({
-    selectedStory
-  });
+
 
   // change mapbox layer on viztype change or overlay/resource change
   useEffect(() => {
@@ -521,17 +683,26 @@ function MapSection({
   }, []);
 
   const handleStoryClick = (e) => {
-    if (e?.object) {
-      const entry = e.object
-      setSelectedStory(entry);
-      setViewport((viewState) => ({
-        ...viewState,
-        latitude: entry.centroid[1],
-        longitude: entry.centroid[0],
-        zoom: 10,
-      }))
+    if (e?.objects?.length) {
+      setSelectedStory(e.objects[0]);
+    } else if (e?.object) {
+      setSelectedStory(e.object);
     }
   }
+
+  useEffect(() => {
+    selectedStory?.centroid?.length && (
+      setViewport((viewState) => ({
+        ...viewState,
+        latitude: selectedStory.centroid[1],
+        longitude: selectedStory.centroid[0],
+        zoom: 10,
+        transitionDuration: "auto",
+        transitionInterpolator: new FlyToInterpolator(),
+      }))
+    )
+  }, [selectedStory?.id])
+
   const FullLayers = {
     choropleth: new GeoJsonLayer({
       id: "choropleth",
@@ -637,20 +808,16 @@ function MapSection({
         getRadius: [cartogramDataSnapshot]
       },
     }),
-    stories: new ScatterplotLayer({
+    stories: new IconClusterLayer({
       id: "stories",
       data: stories,
+      iconMapping: STORY_ICON_MAPPING,
+      iconAtlas: `${process.env.PUBLIC_URL}/icons/story-map-icons.png`,
       pickable: true,
       getPosition: (d) => d.centroid,
-      getFillColor: [45, 147, 108],
-      getLineColor: [240,240,240],
-      getLineWidth: 1,
-      lineWidthMinPixels: 2,
-      lineWidthMaxPixels: 2,
-      radiusMinPixels: 10,
-      radiusMaxPixels: 20,
-      getRadius: 5000,
       onClick: handleStoryClick,
+      sizeScale:60,
+      activeId: selectedStory?.id
     }),
     cartogramText: new TextLayer({
       id: "cartogram text layer",
@@ -1024,15 +1191,6 @@ function MapSection({
           </GeocoderContainer>
         )}
       </MapContainer>
-      {!!selectedStory?.id && (
-        <StoryViewerPanel>
-          <StoryContainer 
-            story={selectedStory} 
-            relatedStories={relatedStories}
-            relatedStoriesCallback={(story) => handleMapClick({object:story})}
-            />
-        </StoryViewerPanel>
-      )}
     </MapContainerOuter>
   );
 }

@@ -40,6 +40,7 @@ import { fitBounds } from "@math.gl/web-mercator";
 import colors from "../../config/colors";
 
 import useMapData from "../../hooks/useMapData";
+import { StoryViewerPane } from "../Panels/StoryViewerPane";
 
 // Main function, App. This function does 2 things:
 // 1: App manages the majority of the side effects when the state changes.
@@ -302,7 +303,6 @@ const MapPageContainer = () => {
       );
   }, []);
 
-
   return (
     <MapContainer>
       {false && (
@@ -321,6 +321,9 @@ const MapPageContainer = () => {
         <RightPaneContainer>
           {panelState.lineChart && (
             <LineChart defaultDimensions={defaultDimensions} />
+          )}
+          {panelState.storiesPane && (
+            <StoryViewerPane />
           )}
           {panelState.scatterChart && <Scatterchart />}
           <DataPanel />

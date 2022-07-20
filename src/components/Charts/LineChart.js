@@ -21,7 +21,6 @@ const ChartContainer = styled.span`
   width: 100%;
   height: 100%;
   z-index: 0;
-  position: relative;
 `;
 
 const PopOutContainer = styled.div`
@@ -46,7 +45,7 @@ const DockPopButton = styled.button`
 `;
 
 export default function LineChartOuter({ defaultDimensions }) {
-  const [isPoppedOut, setIsPoppedOut] = useState(false);
+  const [isPoppedOut, setIsPoppedOut] = useState(true);
   const [table, setTable] = useState("cases");
   const [logChart, setLogChart] = useState(false);
   const [showSummarized, setShowSummarized] = useState(true);
@@ -61,7 +60,7 @@ export default function LineChartOuter({ defaultDimensions }) {
   return isPoppedOut ? (
     <Draggable
       z={9}
-      defaultX={defaultDimensions.defaultXLong}
+      defaultX={defaultDimensions.defaultX - 200}
       defaultY={defaultDimensions.defaultY}
       title="lineChart"
       allowCollapse={false}

@@ -15,7 +15,8 @@ const INITIAL_STATE ={
     contextPos: { x: null, y: null },
     dataLoader: false,
     scatterChart: false,
-    reportBuilder: false
+    reportBuilder: false,
+    storiesPane: false
   },
   tooltipInfo: {
     x: 0,

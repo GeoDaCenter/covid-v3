@@ -195,6 +195,13 @@ function IconDock(){
       activeState: panelState.builder,
       onClick: () => dispatch({ type: 'TOGGLE_PANEL', payload: 'reportBuilder' }),
     },
+    {
+      symbol: 'story',
+      id: 'stories-button',
+      ariaLabel: 'Stories',
+      activeState: panelState.storiesPane,
+      onClick: () => dispatch({ type: 'TOGGLE_PANEL', payload: 'storiesPane' }),
+    },
     // {
     //   symbol: 'sliders',
     //   id: 'user-preferences-button',
