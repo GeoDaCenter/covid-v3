@@ -197,10 +197,10 @@ export default function LineChartOuter({ defaultDimensions }) {
                   text: "Fully Vaccinated Persons",
                   value: "vaccines_fully_vaccinated",
                 },
-                {
-                  text: "Weekly Positivity",
-                  value: "testing_wk_pos",
-                },
+                // {
+                //   text: "Weekly Positivity",
+                //   value: "testing_wk_pos",
+                // },
               ],
             },
             action: (e) => setTable(e.target.value),
