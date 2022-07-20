@@ -59,7 +59,7 @@ const MapButtonContainer = styled.div`
   position: absolute;
   left: 10px;
   bottom: 50px;
-  z-index: 10;
+  /* z-index: 10; */
   transition: 250ms all;
   @media (max-width: 768px) {
     bottom: 100px;

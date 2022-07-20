@@ -6,8 +6,8 @@ import colors from '../../config/colors';
 
 // Styled components
 const TopDrawer = styled.div`
-  position: fixed;
-  top: 50px;
+  position: absolute;
+  top: 0;
   left: calc(50vw);
   transform:translateX(-50%);
   background: ${colors.gray};
@@ -20,7 +20,7 @@ const TopDrawer = styled.div`
   border-top:none;
   border-radius: 0;
   transition: 250ms all;
-  z-index:6;
+  /* z-index:6; */
   hr {
     opacity: 0.5;
   }

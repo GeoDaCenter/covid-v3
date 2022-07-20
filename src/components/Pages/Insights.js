@@ -178,13 +178,13 @@ export default function Insights() {
 
   const [tabValue, setTabValue] = useState(
     window.location.hash.length
-      ? ['#blog', '#research', '#stories'].indexOf(window.location.hash)
+      ? ['#blog', '#research', '#viz'].indexOf(window.location.hash)
       : 0,
   );
 
   const handleHashChange = () => {
     setTabValue(
-      ['#blog', '#research', '#stories'].indexOf(window.location.hash),
+      ['#blog', '#research', '#viz'].indexOf(window.location.hash),
     );
   };
 
@@ -223,7 +223,7 @@ export default function Insights() {
             active={tabValue === 2}
             onClick={() => setTabValue(2)}
           >
-            Stories
+            Viz
           </Tab>
         </TabBar>
         <TabPanel display={tabValue === 0}>

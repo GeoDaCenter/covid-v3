@@ -21,6 +21,7 @@ const ChartContainer = styled.span`
   width: 100%;
   height: 100%;
   z-index: 0;
+  position: relative;
 `;
 
 const PopOutContainer = styled.div`

@@ -68,7 +68,7 @@ const NavbarContainer = styled.nav`
     cursor: pointer;
     &:hover {
       background: ${(props) =>
-        props.light ? colors.teal : colors.lightgray}55;
+    props.light ? colors.teal : colors.lightgray}55;
       color: ${(props) => (props.light ? colors.teal : colors.yellow)};
     }
     &.active {
@@ -88,6 +88,23 @@ const NavbarContainer = styled.nav`
   button.active::after {
     color: #eee;
   }
+  @media (max-width: 1025px) {
+    button {
+      color: ${(props) => (props.light ? colors.darkgray : colors.lightgray)};
+      font-size: 0.9rem;
+      color: white;
+      font-weight: bold;
+      font-size: 2rem;
+      text-align:left;
+      margin:0;
+    }
+    button::after {
+      content: '❱';
+      transform: scaleY(0.75) translate(5px, 5px);
+      padding-bottom: 15px;
+      color: ${colors.white};
+    }
+  }
 `;
 
 const NavLogo = styled.div`
@@ -105,12 +122,14 @@ const NavItems = styled.div`
   @media (max-width: 1025px) {
     position: absolute;
     top: 50px;
+    padding-left: ${({ navOpen }) => navOpen ? '-5vw' : '5vw'}; 
+    transition: 250ms all;
     width: 100%;
     height: calc(100vh - 50px);
     background: ${(props) => (props.light ? colors.teal : colors.black)}ee;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     ul {
       flex-direction: column;
       z-index: 500;
@@ -121,8 +140,7 @@ const NavItems = styled.div`
           font-weight: bold;
           font-size: 2rem;
           &:hover {
-            background: ${(props) =>
-              props.light ? colors.lightblue : colors.black}ee;
+            background: ${(props) => props.light ? colors.lightblue : colors.black}ee;
           }
         }
       }
@@ -157,6 +175,9 @@ const Shade = styled.button`
   border: none;
   animation: ${fadeIn} 250ms linear 1;
   cursor: pointer;
+  @media (max-width: 1025px) {
+    display: none;
+  }
 `;
 
 const SuperDropdown = styled.div`
@@ -176,7 +197,38 @@ const SuperDropdown = styled.div`
   a {
     color: ${colors.white};
   }
+  @media (max-width: 1025px) {
+    display: none;
+  }
 `;
+
+const MobileNestedNav = styled.div`
+  position:fixed;
+  right:0;
+  top:50%;
+  transform:translateY(-50%);
+  span {
+    height:fit-content;
+  }
+  a {
+    letter-spacing:initial;
+    color: white;
+    line-height:1;
+    padding:0 2em 0 0;
+    max-width: 12ch;
+    text-align:left;
+    span {
+      display:none;
+    }
+  }
+  p {
+    color:white;
+    font-size:1.2rem;
+  }
+  @media (min-width: 1025px) {
+    display: none;
+  }
+`
 
 const PageSection = styled.span`
   padding: 0.5em 2em;
@@ -222,57 +274,23 @@ const NavHamburger = styled.button`
 `;
 
 const pageDropDowns = {
-  INSIGHTS: [
+  LEARN: [
     {
-      header: 'Research',
+      header: 'Tutorials & Toolkit',
       desc: 'Peer-reviewed academic research related to efforts to better understand COVID-19 and the tools we use.',
-      link: '/insights#research',
+      link: '/learn',
     },
     {
-      header: 'Blog',
+      header: 'Methods',
       desc: "Snapshots and short-form articles of what we're seeing and how we're working.",
-      link: '/insights#blog',
+      link: '/methods',
     },
     {
-      header: 'Stories',
+      header: 'FAQ',
       desc: 'Data visualizations that highlight the challenges, reality, and complexity of COVID-19.',
-      link: '/insights#stories',
+      link: '/faq',
     },
   ],
-  DATA: [
-    {
-      header: 'Docs',
-      desc: 'Detailed documentation on the data sources used in the Atlas including sources, limitations, and how to access to raw data.',
-      link: '/docs',
-    },
-    {
-      header: 'Download',
-      desc: 'Interactive data downloader to access cleaned CSV data on the Atlas.',
-      link: '/download',
-    },
-    {
-      header: 'API',
-      desc: 'Sign up for access to data and spatial statistics via the Atlas API',
-      link: '/api',
-    },
-  ],
-  // 'METHODS':[
-  //   {
-  //     header: 'Mapping',
-  //     desc: 'How we use spatial statistics, cartography, and geographic information science to produce the Atlas.',
-  //     link: '/methods#mapping'
-  //   },
-  //   {
-  //     header: 'Infrastructure',
-  //     desc: 'The data and statistical backbone of the Atlas.',
-  //     link: '/methods#infrastructure'
-  //   },
-  //   {
-  //     header: 'Data Collection',
-  //     desc: 'Our structure for daily data updates, scraping, collection, and aggregation.',
-  //     link: '/methods#data'
-  //   },
-  // ],
   ABOUT: [
     {
       header: 'Overview',
@@ -295,6 +313,74 @@ const pageDropDowns = {
     //   link: '/faq'
     // },
   ],
+  DATA: [
+    {
+      header: 'Docs',
+      desc: 'Detailed documentation on the data sources used in the Atlas including sources, limitations, and how to access to raw data.',
+      link: '/docs',
+    },
+    {
+      header: 'Download',
+      desc: 'Interactive data downloader to access cleaned CSV data on the Atlas.',
+      link: '/download',
+    },
+    {
+      header: 'API',
+      desc: 'Sign up for access to data and spatial statistics via the Atlas API',
+      link: '/api',
+    },
+  ],
+  INSIGHTS: [
+    {
+      header: 'Research',
+      desc: 'Peer-reviewed academic research related to efforts to better understand COVID-19 and the tools we use.',
+      link: '/insights#research',
+    },
+    {
+      header: 'Blog',
+      desc: "Snapshots and short-form articles of what we're seeing and how we're working.",
+      link: '/insights#blog',
+    },
+    {
+      header: 'Data Viz',
+      desc: 'Data visualizations that highlight the challenges, reality, and complexity of COVID-19.',
+      link: '/insights#viz',
+    },
+  ],
+  STORIES: [
+    {
+      header: 'Submit',
+      desc: 'Peer-reviewed academic research related to efforts to better understand COVID-19 and the tools we use.',
+      link: '/insights#research',
+    },
+    {
+      header: 'Explore Map',
+      desc: "Snapshots and short-form articles of what we're seeing and how we're working.",
+      link: '/map',
+    },
+    {
+      header: 'Archive',
+      desc: 'Data visualizations that highlight the challenges, reality, and complexity of COVID-19.',
+      link: '/archive',
+    },
+  ],
+  // 'METHODS':[
+  //   {
+  //     header: 'Mapping',
+  //     desc: 'How we use spatial statistics, cartography, and geographic information science to produce the Atlas.',
+  //     link: '/methods#mapping'
+  //   },
+  //   {
+  //     header: 'Infrastructure',
+  //     desc: 'The data and statistical backbone of the Atlas.',
+  //     link: '/methods#infrastructure'
+  //   },
+  //   {
+  //     header: 'Data Collection',
+  //     desc: 'Our structure for daily data updates, scraping, collection, and aggregation.',
+  //     link: '/methods#data'
+  //   },
+  // ],
 };
 
 export default function NavBar(props) {
@@ -315,7 +401,17 @@ export default function NavBar(props) {
     document.addEventListener('scroll', listener);
   };
 
-  const toggleNavOpen = () => (navOpen ? setNavOpen(false) : setNavOpen(true));
+  const toggleNavOpen = () => {
+    setNavOpen(prev => {
+      if (prev) {
+        setCurrentDropdown(false)
+        return !prev;
+      } else {
+        return !prev;
+      }
+    })
+  }
+
   const handleResize = () => {
     setCurrentDropdown(false);
     setNavOpen(false);
@@ -354,38 +450,25 @@ export default function NavBar(props) {
             </a>
           </NavLogo>
           {(navOpen || dims.width > 1024) && (
-            <NavItems light={props.light}>
+            <NavItems light={props.light} navOpen={currentDropdown}>
               <ul>
                 <li>
                   <a href="/map">MAP</a>
                 </li>
                 <li>
-                  {dims.width > 1024 ? (
-                    <NavButton page="INSIGHTS" />
-                  ) : (
-                    <a href="/insights">INSIGHTS</a>
-                  )}
+                  <NavButton page="LEARN" />
                 </li>
                 <li>
-                  {dims.width > 1024 ? (
-                    <NavButton page="DATA" />
-                  ) : (
-                    <a href="/data">DATA</a>
-                  )}
-                </li>
-                {/* <li>{dims.width > 1024 ? <NavButton page="METHODS" /> : <a href="/methods">METHODS</a>}</li> */}
-                <li>
-                  {dims.width > 1024 ? (
-                    <NavButton page="ABOUT" />
-                  ) : (
-                    <a href="/about">ABOUT</a>
-                  )}
+                  <NavButton page="ABOUT" />
                 </li>
                 <li>
-                  <a href="/methods">METHODS</a>
+                  <NavButton page="DATA" />
                 </li>
                 <li>
-                  <a href="/faq">FAQ</a>
+                  <NavButton page="INSIGHTS" />
+                </li>
+                <li>
+                  <NavButton page="STORIES" />
                 </li>
                 <li>
                   <a href="/contact">CONTACT</a>
@@ -393,6 +476,17 @@ export default function NavBar(props) {
               </ul>
             </NavItems>
           )}
+          {currentDropdown && <MobileNestedNav light={props.light}>
+            <p>Pages</p>
+            {pageDropDowns[currentDropdown].map((entry) => (
+              <PageSection key={entry.header}>
+                <a href={entry.link}>
+                  {entry.header}
+                  <span>❱</span>
+                </a>
+              </PageSection>
+            ))}
+          </MobileNestedNav>}
           {dims.width <= 1024 && (
             <NavHamburger onClick={toggleNavOpen} light={props.light}>
               {navOpen ? close : hamburger}
