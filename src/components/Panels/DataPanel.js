@@ -239,7 +239,7 @@ export default function DataPanel({
   });
   const dates = useSelector(({params}) => params.dates);
   // Set expanded or contracted view
-  const handleExpandContract = (event) => setExpanded(event.target.value);
+  // const handleExpandContract = (event) => setExpanded(event.target.value);
   return (
     <DataPanelContainer
       className={panelOpen ? "open" : ""}
@@ -255,7 +255,7 @@ export default function DataPanel({
           </ReportContainer>
         </ReportWrapper>
       )}
-      {!!selectionKeys.length && (
+      {/* {!!selectionKeys.length && (
         <ExpandSelect>
           <Select
             labelId="expand-view-label"
@@ -268,7 +268,7 @@ export default function DataPanel({
             <MenuItem value={'text'}>Text</MenuItem>
           </Select>
         </ExpandSelect>
-      )}
+      )} */}
       <ReportWrapper>
         {expanded === 'text' && <ReportContainer>
           <TextStatistics geoid={selectionKeys[0]} />
@@ -301,6 +301,10 @@ export default function DataPanel({
                       schema="cases/deaths"
                     />
                   )}
+                    
+                {sidebarData.hasOwnProperty("casesIndex") && (
+                  <h6 className="alt-index">{sidebarData.casesIndex}</h6>
+                )}
                 </div>
                 Total Deaths
                 <div className="numberChartContainer">
@@ -310,6 +314,9 @@ export default function DataPanel({
                       data={sidebarData.deaths14}
                       schema="cases/deaths"
                     />
+                  )}
+                  {sidebarData.hasOwnProperty("deathsIndex") && (
+                    <h6 className="alt-index">{sidebarData.deathsIndex}</h6>
                   )}
                 </div>
                 <p>7-Day Average of New Cases</p>

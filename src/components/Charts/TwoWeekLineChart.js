@@ -37,7 +37,7 @@ const TwoWeekLineChart = ({
   data,
   schema
 }) => {
-  if (!data || !schema) {
+  if (!data || !schema || !data?.length) {
     return null;
   }
 

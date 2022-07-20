@@ -174,13 +174,13 @@ function IconDock(){
       activeState: panelState.lineChart,
       onClick: () => dispatch({ type: 'TOGGLE_PANEL', payload: 'lineChart' }),
     },
-    {
-      symbol: 'scatterChart',
-      id: 'scatterPlot-button',
-      ariaLabel: 'Scatterplot Chart',
-      activeState: panelState.scatterChart,
-      onClick: () => dispatch({ type: 'TOGGLE_PANEL', payload: 'scatterChart' }),
-    },
+    // {
+    //   symbol: 'scatterChart',
+    //   id: 'scatterPlot-button',
+    //   ariaLabel: 'Scatterplot Chart',
+    //   activeState: panelState.scatterChart,
+    //   onClick: () => dispatch({ type: 'TOGGLE_PANEL', payload: 'scatterChart' }),
+    // },
     {
       symbol:'addData',
       id: 'add-data-button',
