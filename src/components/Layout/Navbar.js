@@ -1,3 +1,4 @@
+import { experimentalStyled } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import colors from '../../config/colors';
@@ -277,17 +278,17 @@ const pageDropDowns = {
   LEARN: [
     {
       header: 'Tutorials & Toolkit',
-      desc: 'Peer-reviewed academic research related to efforts to better understand COVID-19 and the tools we use.',
+      desc: 'Tools and tips for using the Atlas, for all levels.',
       link: '/learn',
     },
     {
       header: 'Methods',
-      desc: "Snapshots and short-form articles of what we're seeing and how we're working.",
+      desc: "Overview of the methods behind our analytics and data tools.",
       link: '/methods',
     },
     {
       header: 'FAQ',
-      desc: 'Data visualizations that highlight the challenges, reality, and complexity of COVID-19.',
+      desc: 'Frequently asked questions and answers.',
       link: '/faq',
     },
   ],
@@ -350,17 +351,17 @@ const pageDropDowns = {
   STORIES: [
     {
       header: 'Submit',
-      desc: 'Peer-reviewed academic research related to efforts to better understand COVID-19 and the tools we use.',
+      desc: 'Share your story of the pandemic and uplift the real experiences behind the data.',
       link: '/insights#research',
     },
     {
       header: 'Explore Map',
-      desc: "Snapshots and short-form articles of what we're seeing and how we're working.",
+      desc: "View stories from across the country on the Atlas map.",
       link: '/map',
     },
     {
       header: 'Archive',
-      desc: 'Data visualizations that highlight the challenges, reality, and complexity of COVID-19.',
+      desc: 'Explore stories by tag, topic, theme, and area in the complete archive.',
       link: '/archive',
     },
   ],

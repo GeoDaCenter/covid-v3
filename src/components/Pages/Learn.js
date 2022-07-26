@@ -149,56 +149,62 @@ const RoleIcon = styled.div`
 
 const TutorialsAndDemos = [
   {
-    title: "Load your own data",
-    description: "Placeholder description",
-    slug: "load-your-own-data",
+    title: "Getting Started: Atlas 101",
+    description: "Your first stop: An introduction to the US Covid Atlas",
+    slug: "getting-started",
   },
   {
-    title: "Identify Emerging Trends",
-    description: "Placeholder description",
-    slug: "identify-emerging-trends",
+    title: "Basic Thematic Maps",
+    description: "Create maps to visualize data using color, shading, and shape",
+    slug: "thematic-maps",
   },
   {
-    title: "Create a Choropleth Map",
-    description: "Placeholder description",
-    slug: "create-a-choropleth-map",
+    title: "Spatial and Time Scales",
+    description: "Learn to use different spatial and time visualization features",
+    slug: "spatial-time-scales",
   },
   {
-    title: "Find Hotspots",
-    description: "Placeholder description",
+    title: "Hotspot Maps",
+    description: "Identify area hotspots and coldspots using spatial analysis",
     slug: "find-hotspots",
   },
   {
-    title: "Create a Report",
-    description: "Placeholder description",
-    slug: "create-a-report",
+    title: "Community Contexts",
+    description: "Explore community health data, identify nearby resources, and overlay affected communities",
+    slug: "community-contexts",
   },
   {
-    title: "Examine Change over Time",
-    description: "Placeholder description",
-    slug: "examine-change-over-time",
+    title: "Emerging Trends",
+    description: "Explore how trends emerge over time with the time graph and other features",
+    slug: "emerging-trends",
   },
   {
-    title: "Find Hotspots",
-    description: "Placeholder description",
-    slug: "find-hotspots",
+    title: "Sharing Data & Findings",
+    description: "Learn how to download data and embed and share maps directly",
+    slug: "sharing-data",
   },
   {
-    title: "Create a Report",
-    description: "Placeholder description",
-    slug: "create-a-report",
+    title: "Community Reports",
+    description: "Create custom community data reports in an easy-to-share format",
+    slug: "community-reports",
   },
   {
-    title: "Examine Change over Time",
-    description: "Placeholder description",
-    slug: "examine-change-over-time",
+    title: "Add Custom Data",
+    description: "Load your own spatial data and create custom visualizations in the Atlas",
+    slug: "add-custom-data",
   },
 ];
 
 const Roles = [
   {
-    title: "Policy & Governance",
-    sectionId: "policy-and-governance",
+    title: "Public Health",
+    sectionId: "health",
+    icon: "health",
+    iconColor: "skyblue",
+  },
+  {
+    title: "Policy",
+    sectionId: "policy",
     icon: "policy",
     iconColor: "orange",
   },
@@ -215,17 +221,77 @@ const Roles = [
     iconColor: "lightgray",
   },
   {
-    title: "Public Awareness",
-    sectionId: "public-awareness",
-    icon: "awareness",
-    iconColor: "skyblue",
+    title: "Media",
+    sectionId: "media",
+    icon: "media",
+    iconColor: "green",
   },
 ];
 
 const RolesContent = [
   {
+    ref: "health",
+    title: "Public Health",
+    image: "/img/learn/hand-book.jpg",
+    imageAlt: "",
+    description:
+      " ",
+    topics: [
+      {
+        text: "Test1",
+        link: "/learn/load-your-own-data",
+      },
+      {
+        text: "Test2",
+        link: "/learn/create-a-reprot",
+      },
+      {
+        text: "Test3",
+        link: "/learn/examine-change-over-time",
+      },
+    ],
+    quote: {
+      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+      author: "Jay Bhatt, Primary Health Physician and Media Correspondent",
+    },
+    background: "#e79b45",
+    icon: "policy",
+    iconText: "Policy",
+  },
+  
+  {
+    ref: "policy",
+    title: "Policy",
+    image: "/img/learn/hand-book.jpg",
+    imageAlt: "",
+    description:
+      "Use the U.S COVID Atlas to inform public health safety guidelines and evaluate policy and governance. ",
+    topics: [
+      {
+        text: "Load your own zip-code level data",
+        link: "/learn/load-your-own-data",
+      },
+      {
+        text: "Create a customizable report",
+        link: "/learn/create-a-reprot",
+      },
+      {
+        text: "Examine change over time",
+        link: "/learn/examine-change-over-time",
+      },
+    ],
+    quote: {
+      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+      author: "Jay Bhatt, Primary Health Physician and Media Correspondent",
+    },
+    background: "#D8D8D8",
+    icon: "policy",
+    iconText: "Policy",
+  },
+
+  {
     ref: "advocacy",
-    title: "Are you a community Health Leader?",
+    title: "Advocacy",
     image: "/img/learn/highfive-team.jpg",
     imageAlt: "",
     description:
@@ -252,6 +318,7 @@ const RolesContent = [
     icon: "advocacy",
     iconText: "Advocacy",
   },
+
   {
     ref: "research",
     title: "Are you a Public Health Researcher?",
@@ -277,16 +344,18 @@ const RolesContent = [
       text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
       author: "Jay Bhatt, Primary Health Physician and Media Correspondent",
     },
+    background: "#d8d8d8",
     icon: "research",
     iconText: "Research",
   },
+
   {
-    ref: "policy-and-governance",
-    title: "Are you a Public Health Officer?",
+    ref: "media",
+    title: "Media",
     image: "/img/learn/hand-book.jpg",
     imageAlt: "",
     description:
-      "Use the U.S COVID Atlas to inform public health safety guidelines and  evaluate policy and governance. ",
+      "Media and journalists ",
     topics: [
       {
         text: "Load your own zip-code level data",
@@ -306,9 +375,10 @@ const RolesContent = [
       author: "Jay Bhatt, Primary Health Physician and Media Correspondent",
     },
     background: "#e79b45",
-    icon: "policy",
-    iconText: "Policy & Governance",
+    icon: "media",
+    iconText: "media",
   },
+  
 ];
 
 export default function Learn() {
@@ -320,7 +390,7 @@ export default function Learn() {
 
   const sections = {
     tutorials: tutorialsRef,
-    "policy-and-governance": policyRef,
+    "policy": policyRef,
     advocacy: advocacyRef,
     research: researchRef,
     "public-awareness": publicAwarenessRef,
