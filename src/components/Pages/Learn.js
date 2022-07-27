@@ -232,7 +232,7 @@ const RolesContent = [
   {
     ref: "health",
     title: "Public Health",
-    image: "/img/learn/hand-book.jpg",
+    image: "/img/learn/public-health.jpeg",
     imageAlt: "",
     description:
       " ",
@@ -255,8 +255,8 @@ const RolesContent = [
       author: "Jay Bhatt, Primary Health Physician and Media Correspondent",
     },
     background: "#e79b45",
-    icon: "policy",
-    iconText: "Policy",
+    icon: "health",
+    iconText: "Public Health",
   },
   
   {
@@ -292,7 +292,7 @@ const RolesContent = [
   {
     ref: "advocacy",
     title: "Advocacy",
-    image: "/img/learn/highfive-team.jpg",
+    image: "/img/learn/advocacy.jpeg",
     imageAlt: "",
     description:
       "Use the U.S COVID Atlas to identify and advocate for vulnerable neighborhoods and promote targetted public safety measures. ",
@@ -321,8 +321,8 @@ const RolesContent = [
 
   {
     ref: "research",
-    title: "Are you a Public Health Researcher?",
-    image: "/img/learn/book.jpg",
+    title: "Research",
+    image: "/img/learn/research.jpeg",
     imageAlt: "",
     description:
       "Use the U.S COVID Atlas to explore trends in COVID case rates, vaccinations, hospitalizations, and variation between tract & zip-codes to understand inequities and support advocacy and governance efforts.",
@@ -352,7 +352,7 @@ const RolesContent = [
   {
     ref: "media",
     title: "Media",
-    image: "/img/learn/hand-book.jpg",
+    image: "/img/learn/media.jpeg",
     imageAlt: "",
     description:
       "Media and journalists ",
