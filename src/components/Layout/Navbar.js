@@ -278,12 +278,12 @@ const pageDropDowns = {
   LEARN: [
     {
       header: 'Tutorials & Toolkit',
-      desc: 'Tools and tips for using the Atlas, for all levels.',
+      desc: 'Tutorials for using the Atlas, for all levels.',
       link: '/learn',
     },
     {
       header: 'Methods',
-      desc: "Overview of the methods behind our analytics and data tools.",
+      desc: "Overview of the methods behind our analytics and data.",
       link: '/methods',
     },
     {
