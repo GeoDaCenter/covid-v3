@@ -166,7 +166,7 @@ const TutorialsAndDemos = [
   {
     title: "Hotspot Maps",
     description: "Identify area hotspots and coldspots using spatial analysis",
-    slug: "find-hotspots",
+    slug: "hotspot-maps",
   },
   {
     title: "Community Contexts",
