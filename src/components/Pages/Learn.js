@@ -160,27 +160,27 @@ const TutorialsAndDemos = [
   },
   {
     title: "Spatial and Time Scales",
-    description: "Learn to use different spatial and time visualization features",
+    description: "Explore data with spatial and time visualization features",
     slug: "spatial-time-scales",
   },
   {
     title: "Hotspot Maps",
-    description: "Identify area hotspots and coldspots using spatial analysis",
+    description: "Identify area hotspots and 'coldspots' using spatial analysis",
     slug: "hotspot-maps",
   },
   {
     title: "Community Contexts",
-    description: "Explore community health data, identify nearby resources, and overlay affected communities",
+    description: "Explore community health data, identify nearby resources, and overlay impacted communities",
     slug: "community-contexts",
   },
   {
     title: "Emerging Trends",
-    description: "Explore how trends emerge over time with the time graph and other features",
+    description: "Explore how trends emerge and evolve over time",
     slug: "emerging-trends",
   },
   {
     title: "Sharing Data & Findings",
-    description: "Learn how to download data and embed and share maps directly",
+    description: "Learn  to download data and embed and share maps directly",
     slug: "sharing-data",
   },
   {
@@ -190,7 +190,7 @@ const TutorialsAndDemos = [
   },
   {
     title: "Add Custom Data",
-    description: "Load your own spatial data and create custom visualizations in the Atlas",
+    description: "Load your own spatial data and create custom visualizations",
     slug: "add-custom-data",
   },
 ];
