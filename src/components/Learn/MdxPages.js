@@ -7,7 +7,7 @@ import * as GettingStarted from './GettingStarted.mdx'
 import * as HotspotMaps from './HotspotMaps.mdx'
 import * as SharingDataFindings from './SharingDataFindings.mdx'
 import * as ThematicMaps from './ThematicMaps.mdx'
-
+import * as Stylesheet from './Stylesheet.mdx'
 
 const pages = {
     [AddCustomData.config.slug]: AddCustomData,
@@ -19,6 +19,7 @@ const pages = {
     [HotspotMaps.config.slug]: HotspotMaps,
     [SharingDataFindings.config.slug]: SharingDataFindings,
     [ThematicMaps.config.slug]: ThematicMaps,
+    [Stylesheet.config.slug]: Stylesheet,
 }
 
 export default pages
