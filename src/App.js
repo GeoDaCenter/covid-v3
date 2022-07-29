@@ -38,6 +38,10 @@ const Story = React.lazy(() => import("./components/Pages/Story"));
 const Time = React.lazy(() => import("./components/Pages/Time"));
 const Trends = React.lazy(() => import("./components/Pages/Trends"));
 
+
+// dev pages
+const IconDict = React.lazy(() => import("./components/_dev/_iconDictionary"));
+
 const theme = createTheme({
   typography: {
     fontFamily: "'Lato', sans-serif",
@@ -147,6 +151,9 @@ export default function App() {
                     return null;
                   }}
                 />
+                {/* Dev Pages */}
+                <Route component={IconDict} path="/_dev/icons" exact />
+                {/* Error Pages */}
                 <Route component={ErrorPage} />
                 <Route />
               </Switch>
