@@ -235,24 +235,24 @@ const RolesContent = [
     image: "/img/learn/public-health.jpeg",
     imageAlt: "",
     description:
-      " ",
+      "Public health professionals need access to reliable data easily accessible data. The Atlas is a public health data visualization tool that can help you explore trends over time to understand and inform public health decisions. Grab screenshots of maps, share a unique link to a specific county map view, or embed an Atlas map view on your website to bolster public health communications.",
     topics: [
       {
-        text: "Test1",
-        link: "/learn/load-your-own-data",
+        text: "Creating Thematic Maps",
+        link: "/learn/thematic-maps",
       },
       {
-        text: "Test2",
-        link: "/learn/create-a-reprot",
+        text: "Exploring Changes Over Time",
+        link: "/learn/emerging-trends",
       },
       {
-        text: "Test3",
-        link: "/learn/examine-change-over-time",
+        text: "Sharing Data and Findings",
+        link: "/learn/sharing-data",
       },
     ],
     quote: {
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-      author: "Jay Bhatt, Primary Health Physician and Media Correspondent",
+      text: "",
+      author: "",
     },
     background: "#e79b45",
     icon: "health",
@@ -265,24 +265,24 @@ const RolesContent = [
     image: "/img/learn/hand-book.jpg",
     imageAlt: "",
     description:
-      "Use the U.S COVID Atlas to inform public health safety guidelines and evaluate policy and governance. ",
+      "Policy and decisionmakers can better understand impact in their communities using Atlas data and tools. Create a customizable Community Report to communicate data and findings in an easy-to-share online or printable format. Present data tables, maps, and line charts to communicate with stakeholders. Analyze the impact of policy responses over time with temporal exploration.",
     topics: [
       {
-        text: "Load your own zip-code level data",
-        link: "/learn/load-your-own-data",
+        text: "Creating Thematic Maps",
+        link: "/learn/thematic-maps",
       },
       {
-        text: "Create a customizable report",
-        link: "/learn/create-a-reprot",
+        text: "Spatial and Time Scales",
+        link: "/learn/spatial-time-scales",
       },
       {
-        text: "Examine change over time",
-        link: "/learn/examine-change-over-time",
+        text: "Customizable Community Reports",
+        link: "/learn/community-reports",
       },
     ],
     quote: {
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-      author: "Jay Bhatt, Primary Health Physician and Media Correspondent",
+      text: "",
+      author: "",
     },
     background: "#D8D8D8",
     icon: "policy",
@@ -295,24 +295,24 @@ const RolesContent = [
     image: "/img/learn/advocacy.jpeg",
     imageAlt: "",
     description:
-      "Use the U.S COVID Atlas to identify and advocate for vulnerable neighborhoods and promote targetted public safety measures. ",
+      "Enhance advocacy efforts by linking pandemic trends with community conditions. Click on counties for more information on health and socioeconomic indicators, like median income and percent of essential workers. Overlay boundaries of disproportionately impacted communities such as hypersegregated cities and federal Native American Reservations. Visualize racial and ethnic group populations by county to compare with COVID trends.",
     topics: [
       {
-        text: "Load your own zip-code level data",
-        link: "/learn/load-your-own-data",
+        text: "Explore Community Contexts",
+        link: "/learn/community-contexts",
       },
       {
-        text: "Create a customizable report",
-        link: "/learn/create-a-reprot",
+        text: "Share Data and Findings",
+        link: "/learn/sharing-data",
       },
       {
-        text: "Examine change over time",
-        link: "/learn/examine-change-over-time",
+        text: "Add Custom Data",
+        link: "/learn/add-custom-data",
       },
     ],
     quote: {
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-      author: "Jay Bhatt, Primary Health Physician and Media Correspondent",
+      text: "",
+      author: "",
     },
     background: "#e8d48e",
     icon: "advocacy",
@@ -325,24 +325,24 @@ const RolesContent = [
     image: "/img/learn/research.jpeg",
     imageAlt: "",
     description:
-      "Use the U.S COVID Atlas to explore trends in COVID case rates, vaccinations, hospitalizations, and variation between tract & zip-codes to understand inequities and support advocacy and governance efforts.",
+      "Explore validated state- and county-level COVID rates and community contextual data from the start of the pandemic until today. The Atlas features data from multiple sources so you can visualize and compare trends across time and place. View raw totals or population-averaged rates for COVID and health indicators. Download data for your own independent research and analysis.",
     topics: [
       {
-        text: "Load your own zip-code level data",
-        link: "/learn/load-your-own-data",
+        text: "Hotspot Analysis and Maps",
+        link: "/learn/hotspot-maps",
       },
       {
-        text: "Create a customizable report",
-        link: "/learn/create-a-reprot",
+        text: "Identifying Trends Over Time",
+        link: "/learn/emerging-trends",
       },
       {
-        text: "Examine change over time",
-        link: "/learn/examine-change-over-time",
+        text: "Sharing Data and Fidings",
+        link: "/learn/sharing-data",
       },
     ],
     quote: {
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-      author: "Jay Bhatt, Primary Health Physician and Media Correspondent",
+      text: "",
+      author: "",
     },
     background: "#d8d8d8",
     icon: "research",
@@ -355,28 +355,28 @@ const RolesContent = [
     image: "/img/learn/media.jpeg",
     imageAlt: "",
     description:
-      "Media and journalists ",
+      "Report data and embed maps for fact-based journalism. Compare multiple validated county- and state-level data sources for the entire country to check local reporting and case or vaccination trends. Look back to the day, week, or month of major events in your region and watch how COVID rates changed. Download data to conduct analyses for further reporting and investigation.",
     topics: [
       {
-        text: "Load your own zip-code level data",
-        link: "/learn/load-your-own-data",
+        text: "Identifying Trends Over Time",
+        link: "/learn/emerging-trends",
       },
       {
-        text: "Create a customizable report",
-        link: "/learn/create-a-reprot",
+        text: "Understanding Community Contexts",
+        link: "/learn/community-contexts",
       },
       {
-        text: "Examine change over time",
-        link: "/learn/examine-change-over-time",
+        text: "Creating Thematic Maps",
+        link: "/learn/thematic-maps",
       },
     ],
     quote: {
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-      author: "Jay Bhatt, Primary Health Physician and Media Correspondent",
+      text: "",
+      author: "",
     },
     background: "#e79b45",
     icon: "media",
-    iconText: "media",
+    iconText: "Media",
   },
   
 ];
@@ -519,7 +519,7 @@ export default function Learn() {
                   <Typography element="p">{description}</Typography>
                   <Gutter h={"4em"} />
                   <Typography element="p">
-                    Sample Use Cases and Tutorial:
+                    Get started with these tutorials:
                   </Typography>
                   <ul>
                     {topics.map(({ text, link }) => (
