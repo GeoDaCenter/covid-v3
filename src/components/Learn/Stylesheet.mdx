@@ -1,0 +1,74 @@
+import HintBox from '../Toolkit/HintBox';
+
+export const config = {
+    slug: 'stylesheet',
+    title: 'Demo Page - Stylesheet',
+    description: 'Dev only.',
+}
+
+# Stylesheet
+
+<hr/>
+
+Headings 
+# Heading 1
+## Heading 2
+### Heading 3
+#### Heading 4
+##### Heading 5
+###### Heading 6
+
+<hr/>
+
+Paragraph text looks like this
+
+*Italic text looks like this*
+
+__Bold text looks like this__
+
+<hr/>
+
+Ordered list:
+
+1. Item 1
+2. Item 2
+3. Item 3
+4. Item 4
+5. Item 5
+
+Unordered list:
+
+* Item a
+* Item b
+* Item c
+* Item d
+* Item e
+
+<hr/>
+
+<a href="#">A link looks like this</a>
+
+ And tables like this:
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `name` | string | Name of the resource |
+| `path` | string | Path to the resource |
+
+
+<hr/>
+
+Custom components: 
+
+<HintBox>
+    <strong>Hint:</strong>
+    <br />
+    <em>This is a hint.</em>
+    ##### Can contain any valid html or markdown.
+</HintBox>
+<HintBox icon="policy">
+    <strong>Wonk Alert:</strong>
+    <br />
+    Use the property <code>`icon="iconname"`</code> to add an icon.
+
+    Available icons are viewable at <a href="/_dev/icons" target="_blank" rel="noopener noreferrer">/_dev/icons</a>
+</HintBox>

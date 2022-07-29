@@ -10,10 +10,35 @@ import styled from 'styled-components';
 // import Typography from '@mui/material/Typography';
 
 import { NavBar, Footer, ContentContainer } from '../../components';
+import colors from '../../config/colors';
 import MdxPages from '../Learn/MdxPages';
 
 const LearnPage = styled.div`
   background: white;
+  ol {
+    list-style: none;
+    counter-reset: item;
+    margin:.5rem 0 .5rem .5rem;
+  }
+
+  ol li {
+    position: relative;
+    counter-increment: item;
+    padding:0 0 1rem .5rem;
+  }
+  
+  ol li:before {
+    position: absolute;
+    content: counter(item);
+    width: 1.75rem;
+    height: 1.75rem;
+    left:-1.75rem;
+    top:0;
+    background: ${colors.teal};
+    color:white;
+    text-align: center;
+    border-radius:50%;
+  }
 `;
 
 export default function Learn({
@@ -24,8 +49,10 @@ export default function Learn({
   const {
     params: { topic },
   } = match;
+
   const Content = MdxPages[topic]?.default;
   const config = MdxPages[topic]?.config;
+  
   const {
     description,
     title,

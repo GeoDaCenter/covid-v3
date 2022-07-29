@@ -384,16 +384,20 @@ const RolesContent = [
 export default function Learn() {
   const tutorialsRef = useRef(null);
   const policyRef = useRef(null);
+  const healthRef = useRef(null);
   const advocacyRef = useRef(null);
   const researchRef = useRef(null);
-  const publicAwarenessRef = useRef(null);
+  const mediaRef = useRef(null);
+  // const publicAwarenessRef = useRef(null);
 
   const sections = {
     tutorials: tutorialsRef,
-    "policy": policyRef,
+    health: healthRef,
+    policy: policyRef,
     advocacy: advocacyRef,
     research: researchRef,
-    "public-awareness": publicAwarenessRef,
+    // "public-awareness": publicAwarenessRef,
+    media: mediaRef,
   };
 
   const handleScroll = (sectionId) => {
