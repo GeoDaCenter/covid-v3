@@ -21,6 +21,10 @@ const Container = styled.div`
 const IconContainer = styled.div`
     width:6rem;
     padding:0 1rem;
+    svg {
+        width:100% !important;
+        height:100% !important;
+    }
 
 `
 

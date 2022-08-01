@@ -39,6 +39,16 @@ const LearnPage = styled.div`
     text-align: center;
     border-radius:50%;
   }
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+    transform:translateY(3px);
+  }
+
+  table {
+    border: 1px
+  }
 `;
 
 export default function Learn({

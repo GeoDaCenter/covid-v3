@@ -28,6 +28,38 @@ const LearnPage = styled(ContentContainer)`
   }
 `;
 
+const ButtonsContainer = styled(Box)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin:0 auto;
+`
+
+const CTAButton = styled(Button)`
+  display:inline-block;
+  font-size: 1.5rem;
+  text-transform: none;
+  padding: .25em 1em;
+`
+
+const CTALink = styled.a`
+  display:inline-block;
+  font-size: 1.5rem !important;
+  text-transform: none;
+  background: ${colors.teal}88;
+  color: ${colors.white};
+  padding: .35em 1em;
+  font-weight: light !important;
+  margin-left: .5rem;
+  border-radius:.125em;
+  transition:250ms all;
+  &:hover {
+    background: ${colors.teal};
+  }
+
+`
+
 const FullHeightContainer = styled.div`
   min-height: 100vh;
   width: 100%;
@@ -69,12 +101,11 @@ const UseCaseImage = styled(Grid)`
   position: relative;
   img {
     max-width: 100%;
+    width:100%;
   }
   div {
     background: ${colors.darkgray};
     padding:1em;
-    width:fit-content;
-    height:fit-content;
   }
   p {
     color:${colors.lightgray};
@@ -422,20 +453,22 @@ export default function Learn() {
             to bolster planning efforts. Scroll to access tutorials, explore
             uses by role, and more.
           </Typography>
-          <Button
-            variant="outlined"
-            color="primary"
-            onClick={() => handleScroll("tutorials")}
-            sx={{
-              fontSize: "1.5rem",
-              margin: "0 auto",
-              display: "block",
-              textTransform: "none",
-              mt: 5,
-            }}
-          >
-            Start Exploring the Atlas
-          </Button>
+          <ButtonsContainer>
+            <CTAButton
+              variant="outlined"
+              color="primary"
+              onClick={() => handleScroll("tutorials")}
+            >
+              Explore tutorials
+            </CTAButton>
+            
+            <CTALink
+              download
+              href={`${process.env.PUBLIC_URL}/toolkit/Atlas Resource Guide.pdf`}
+            >
+              Download the Toolkit
+            </CTALink>
+          </ButtonsContainer>
         </FullHeightContent>
       </FullHeightContainer>
       <FullHeightContainer
@@ -490,8 +523,7 @@ export default function Learn() {
           topics,
           quote,
           background,
-          icon,
-          iconText,
+          icon
         }) => (
           <FullHeightContainer ref={sections[ref]} style={{ background }}>
             <FullHeightContent>
@@ -508,7 +540,6 @@ export default function Learn() {
                     }}
                   >
                     <Icon symbol={icon} style={{ width: "4rem" }} />
-                    <Typography>{iconText}</Typography>
                   </RoleIcon>
                 </UseCaseImage>
                 <UseCaseText
