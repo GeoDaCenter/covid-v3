@@ -46,8 +46,12 @@ const LearnPage = styled.div`
     transform:translateY(3px);
   }
 
-  table {
-    border: 1px
+  table, th, td {
+    border: 1px solid;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding:.25em .5em;
   }
 `;
 
