@@ -8,9 +8,11 @@ import {
   ContentContainer,
   Gutter,
   Icon,
+  HintBox,
 } from "../../components";
 import colors from "../../config/colors";
 // import colors from '../../config/colors';
+
 const LearnPage = styled(ContentContainer)`
   background: white;
   max-width: 100%;
@@ -266,7 +268,8 @@ const RolesContent = [
     image: "/img/learn/public-health.jpeg",
     imageAlt: "",
     description:
-      "Public health professionals need access to reliable data easily accessible data. The US Covid Atlas can help fill in the gaps. The Atlas lets you explore trends over time to understand and inform public health decisions. Grab screenshots of maps, share a unique link to a specific county map view, or embed an Atlas map view on your website to bolster public health communications.",
+    <span> <b>Public health professionals need access to reliable data easily accessible data.</b> The US Covid Atlas can help fill in the gaps. The Atlas lets you explore trends over time to understand and inform public health decisions. Grab screenshots of maps, share a unique link to a specific county map view, or embed an Atlas map view on your website to bolster public outreach and communications. </span>
+      ,
     topics: [
       {
         text: "Creating Thematic Maps",
@@ -281,8 +284,24 @@ const RolesContent = [
         link: "/learn/sharing-data",
       },
     ],
+    useCasesTitle: "How has the Atlas been used in public health?",
+    useCases: [
+      {
+        text: "Assessing spatial and racial disparities in COVID-19 mortality",
+        link: "https://medium.com/covidatlas/assessing-spatial-racial-disparities-in-covid-19-mortality-fbd2e389a33e",
+      },
+      {
+        text: "Understanding how COVID was impacting rural areas early in the pandemic",
+        link: "https://www.youtube.com/watch?v=uqGXzWCD9Xk",
+      },
+      {
+        text: "Exploring where new hotspots were forming during the Delta variant wave",
+        link: "https://www.youtube.com/watch?v=uqGXzWCD9Xk",
+      },
+    ],
     quote: {
-      text: "",
+      text: 
+      <span>Want to be featured here? <a href="/contact">Let us know</a> how you use the Atlas.</span>,
       author: "",
     },
     background: "#e79b45",
@@ -296,7 +315,8 @@ const RolesContent = [
     image: "/img/learn/hand-book.jpg",
     imageAlt: "",
     description:
-      "Policy and decisionmakers can better understand impact in their communities using Atlas data and tools. Create a customizable Community Report to communicate data and findings in an easy-to-share online or printable format. Present data tables, maps, and line charts to communicate with stakeholders. Analyze the impact of policy responses over time with temporal exploration.",
+      <span><b>Policy relies on data-driven evidence.</b> Policymakers and staff can explore the impacts of events in their communities using Atlas data and tools. Create a customizable Community Report to communicate data and findings in an easy-to-share online or printable format. Present data tables, maps, and line charts to communicate with stakeholders. Analyze the impact of policy responses over time with temporal exploration.
+        </span>,
     topics: [
       {
         text: "Creating Thematic Maps",
@@ -311,8 +331,19 @@ const RolesContent = [
         link: "/learn/community-reports",
       },
     ],
+    useCasesTitle: "How has the Atlas been used in policy contexts?",
+    useCases: [
+      {
+        text: "Mapping Michigan’s COVID-19 rates alongside local school district masking policies",
+        link: "https://medium.com/covidatlas/masking-rules-in-michigan-schools-covid-data-and-citizen-science-3127a3f1669b",
+      },
+      {
+        text: "Evaluating the impact of early COVID outbreaks on food supply chains and workers",
+        link: "https://medium.com/covidatlas/unpacking-the-covid-outbreaks-in-the-meatpacking-industry-2c03ffe8264d",
+      },
+    ],
     quote: {
-      text: "",
+      text: <span>Want to be featured here? <a href="/contact">Let us know</a> how you use the Atlas.</span>,
       author: "",
     },
     background: "#D8D8D8",
@@ -326,7 +357,9 @@ const RolesContent = [
     image: "/img/learn/advocacy.jpeg",
     imageAlt: "",
     description:
-      "Enhance advocacy efforts by linking pandemic trends with community conditions. Click on counties for more information on health and socioeconomic indicators, like median income and percent of essential workers. Overlay boundaries of disproportionately impacted communities such as hypersegregated cities and federal Native American Reservations. Visualize racial and ethnic group populations by county to compare with COVID trends.",
+      <span>
+        <b>Strengthen your advocacy with pandemic data linked to community statistics and social determinants of health.</b> Click on counties for more information on health and socioeconomic indicators, like median income and percent of essential workers. Overlay boundaries of disproportionately impacted communities such as hypersegregated cities and federal Native American Reservations. Visualize racial and ethnic group populations by county to compare with COVID trends.
+      </span>,
     topics: [
       {
         text: "Explore Community Contexts",
@@ -341,8 +374,23 @@ const RolesContent = [
         link: "/learn/add-custom-data",
       },
     ],
+    useCasesTitle: "How has the Atlas been used in advocacy?",
+    useCases: [
+      {
+        text: "Evaluating conditions in the Arkansas Delta to help make care decisions for aging family members",
+        link: "https://medium.com/covidatlas/using-the-u-s-covid-atlas-in-the-arkansas-delta-dbddcf41fa01",
+      },
+      {
+        text: "Calling attention to risks associated with in-person worship and religious gatherings during the pandemic",
+        link: "https://medium.com/covidatlas/whats-wrong-with-these-people-f6ac287dbca3",
+      },
+      {
+        text: "Advocating for more complex perspectives in public health maps, linking contexts of history and place",
+        link: "https://www.statnews.com/2021/03/31/integrate-social-determinants-time-place-public-health-maps/",
+      },
+    ],
     quote: {
-      text: "",
+      text: <span>Want to be featured here? <a href="/contact">Let us know</a> how you use the Atlas.</span>,
       author: "",
     },
     background: "#e8d48e",
@@ -371,8 +419,23 @@ const RolesContent = [
         link: "/learn/sharing-data",
       },
     ],
+    useCasesTitle: "How has the Atlas been used in research?",
+    useCases: [
+      {
+        text: "Assessing the structural barriers and racial group disparities of COVID-19 mortality with spatial analysis",
+        link: "https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2789619",
+      },
+      {
+        text: "Exploring dimensions of uncertainty with a spatiotemporal review of five COVID-19 datasets",
+        link: "https://www.tandfonline.com/doi/full/10.1080/15230406.2021.1975311",
+      },
+      {
+        text: "Creating a dynamic cyberinfrastructure for interactive exploration of the pandemic",
+        link: "https://onlinelibrary.wiley.com/doi/10.1111/tgis.12786",
+      },
+    ],
     quote: {
-      text: "",
+      text: <span>Want to be featured here? <a href="/contact">Let us know</a> how you use the Atlas.</span>,
       author: "",
     },
     background: "#d8d8d8",
@@ -401,8 +464,19 @@ const RolesContent = [
         link: "/learn/thematic-maps",
       },
     ],
+    useCasesTitle: "How has the Atlas been used in media and journalism?",
+    useCases: [
+      {
+        text: "Investigating the link between COVID-19 mortality and internet access",
+        link: "https://www.vox.com/22979086/covid-pandemic-deaths-mortality-broadband-internet-access",
+      },
+      {
+        text: "Reporting on holiday travel during pandemic and infection positivity rates",
+        link: "https://www.nbcnews.com/meet-the-press/video/holiday-travel-busts-open-divided-political-and-vaccine-bubbles-127343685885",
+      },
+    ],
     quote: {
-      text: "",
+      text: <span>Want to be featured here? <a href="/contact">Let us know</a> how you use the Atlas.</span>,
       author: "",
     },
     background: "#e79b45",
@@ -521,6 +595,8 @@ export default function Learn() {
           imageAlt,
           description,
           topics,
+          useCases,
+          useCasesTitle,
           quote,
           background,
           icon
@@ -554,7 +630,7 @@ export default function Learn() {
                   <Typography element="p">{description}</Typography>
                   <Gutter h={"4em"} />
                   <Typography element="p">
-                    Get started with these tutorials:
+                    Get started with these relevant tutorials:
                   </Typography>
                   <ul>
                     {topics.map(({ text, link }) => (
@@ -563,6 +639,18 @@ export default function Learn() {
                       </li>
                     ))}
                   </ul>
+                  <Gutter h={"4em"} />
+                  <Typography element="p">
+                    {useCasesTitle}
+                  </Typography>
+                  <ul>
+                    {useCases.map(({ text, link }) => (
+                      <li key={text}>
+                        <a href={link}>{text}</a>
+                      </li>
+                    ))}
+                  </ul>
+                  
                   <Typography variant="h4" element="h4">
                     {quote.text}
                   </Typography>
