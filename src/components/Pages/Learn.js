@@ -266,7 +266,7 @@ const RolesContent = [
     image: "/img/learn/public-health.jpeg",
     imageAlt: "",
     description:
-      "Public health professionals need access to reliable data easily accessible data. The Atlas is a public health data visualization tool that can help you explore trends over time to understand and inform public health decisions. Grab screenshots of maps, share a unique link to a specific county map view, or embed an Atlas map view on your website to bolster public health communications.",
+      "Public health professionals need access to reliable data easily accessible data. The US Covid Atlas can help fill in the gaps. The Atlas lets you explore trends over time to understand and inform public health decisions. Grab screenshots of maps, share a unique link to a specific county map view, or embed an Atlas map view on your website to bolster public health communications.",
     topics: [
       {
         text: "Creating Thematic Maps",
