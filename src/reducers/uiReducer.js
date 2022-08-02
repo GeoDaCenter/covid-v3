@@ -11,12 +11,11 @@ export default function Reducer(state = INITIAL_STATE, action) {
         typeof action.payload.data === "string"
           ? false
           : action.payload.data;
-
       const tooltipInfo = {
         x: action.payload.x + 60 + state.variableMenuWidth,
         y: action.payload.y + 10 + 50,
         data,
-        geoid: +action.payload.data,
+        geoid: +action.payload.id,
       };
       return {
         ...state,

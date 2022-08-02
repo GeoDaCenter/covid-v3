@@ -11,6 +11,7 @@ export default function useGetTable({
   const dispatch = useDispatch();  
   const storedData = useSelector(({data}) => data.storedData);
   const accessedData = filesToFetch.map((fileSchema) => storedData[fileSchema.name])
+  
   useEffect(() => {    
     if (shouldFetch) {
       if (filesToFetch[0] && !filesToFetch[0].noFile) {
@@ -49,7 +50,7 @@ export default function useGetTable({
         const missingParams = !name || !timespan;
         const temporalDataLoaded = accessedData[idx] && accessedData[idx]?.loaded?.includes(timespan) 
         const xSectionDataLoaded = accessedData[idx] && accessedData[idx]?.columns?.length > 0;
-        const fileIsNull = filesToFetch.length === 1 && filesToFetch[0].noFile;
+        const fileIsNull = filesToFetch.every(({noFile}) => noFile);
         return temporalDataLoaded || xSectionDataLoaded || fileIsNull || missingParams;
       });
     const returnData = dataReady ? accessedData[0] : undefined;

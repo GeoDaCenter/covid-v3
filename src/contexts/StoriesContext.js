@@ -21,9 +21,9 @@ export const StoriesProvider = ({ children }) => {
     selectedStory
   });
   
-  useEffect(() => {
-    dispatch({ type: 'SET_PANELS', payload: { params: { storiesPane: true } } })
-  }, [selectedStory?.id])
+  // useEffect(() => {
+  //   dispatch({ type: 'SET_PANELS', payload: { params: { storiesPane: true } } })
+  // }, [selectedStory?.id])
 
   return (
     <StoriesContext.Provider value={{ stories, relatedStories, setSelectedStory, selectedStory }}>

@@ -32,6 +32,7 @@ function reconcileData(payload, storedData){
       ...newData
     }
   } else {
+    if (!newData) return;
     const {
       data,
       dateIndices

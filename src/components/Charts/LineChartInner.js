@@ -159,23 +159,23 @@ const CustomTooltip = ({ active, payload, background }) => {
 
 const LabelText = {
   cases: {
-    x2label: "Cumulative Cases",
-    x1label: "New Cases (7 Day Average)",
+    x1label: "Cumulative Cases",
+    x2label: "7 Day Average",
     title: "Cases",
   },
   deaths: {
-    x2label: "Cumulative Deaths",
-    x1label: "New Deaths (7 Day Average)",
+    x1label: "Cumulative Deaths",
+    x2label: "7 Day Average",
     title: "Deaths",
   },
   vaccines_fully_vaccinated: {
-    x2label: "Total Vaccinations",
-    x1label: "New Vaccinations (7 Day Average)",
+    x1label: "Total Vaccinations",
+    x2label: "7 Day Average",
     title: "Population Fully Vaccinated",
   },
   testing_wk_pos: {
-    x2label: "",
-    x1label: "Testing Positivity (7 Day Average)",
+    x1label: "",
+    x2label: "7 Day Average",
     title: "Testing Positivity",
   },
 };
@@ -236,87 +236,25 @@ function LineChartInner({
   const handleLegendLeave = () => setActiveLine(false);
   const { x1label, x2label, title } = LabelText[table];
   const memoizedInnerComponents = useMemo(() => {
+    console.log('rendering chart')
     if (maximums && chartData) {
       return <>
-        <XAxis
-          dataKey="date"
-          ticks={dateRange}
-          minTickGap={-50}
-          tick={
-            <CustomTick
-              style={{
-                fill: gridColor,
-                fontSize: "10px",
-                fontFamily: "Lato",
-                fontWeight: 600,
-                transform: "translateY(10px)",
-              }}
-              labelFormatter={dateFormatter}
-            />
-          }
-        />
-        <YAxis
-          yAxisId="right"
-          orientation="right"
-          type="number"
-          scale={logChart ? "log" : "linear"}
-          domain={[0.01, "dataMax"]}
-          allowDataOverflow
-          ticks={
-            selectionKeys.length === 0
-              ? rangeIncrement({ maximum: maximums.sum })
-              : []
-          }
-          tick={
-            <CustomTick
-              style={{
-                fill: mediumColor,
-                fontSize: "10px",
-                fontFamily: "Lato",
-                fontWeight: 600,
-              }}
-              labelFormatter={numberFormatter}
-            />
-          }
-        />
-        <YAxis
-          yAxisId="left"
-          scale={logChart ? "log" : "linear"}
-          domain={[0.01, "dataMax"]}
-          allowDataOverflow
-          ticks={
-            selectionKeys.length === 0
-              ? rangeIncrement({ maximum: maximums.count })
-              : []
-          }
-          tick={
-            <CustomTick
-              style={{
-                fill: highlightColor,
-                fontSize: "10px",
-                fontFamily: "Lato",
-                fontWeight: 600,
-              }}
-              labelFormatter={numberFormatter}
-            />
-          }
-        />
-
-        {selectionKeys.length === 0 ? (
+        {selectionKeys.length === 0 && (
           <Line
             type="monotone"
-            yAxisId="left"
+            yAxisId="right"
             dataKey={`sum${populationNormalized ? "100k" : ""}`}
             name={x1label}
             stroke={mediumColor}
             dot={false}
             isAnimationActive={false}
           />
-        ) : (
+        )}
+        {selectionKeys.length === 1 && (
           selectionKeys.map((geoid, idx) => (
             <Line
               type="monotone"
-              yAxisId="left"
+              yAxisId="right"
               dataKey={`${geoid}Sum${populationNormalized ? "100k" : ""}`}
               name={selectionNames[idx] + " Cumulative"}
               stroke={
@@ -333,21 +271,22 @@ function LineChartInner({
             />
           ))
         )}
-        {selectionKeys.length === 0 ? (
+        {selectionKeys.length === 0 && (
           <Line
             type="monotone"
-            yAxisId="right"
+            yAxisId="left"
             dataKey={`weekly${populationNormalized ? "100k" : ""}`}
             name={x2label}
             stroke={highlightColor}
             dot={false}
             isAnimationActive={false}
           />
-        ) : (
+        )}
+        {selectionKeys.length > 0 && (
           selectionKeys.map((geoid, idx) => (
             <Line
               type="monotone"
-              yAxisId="right"
+              yAxisId="left"
               key={`line-weekly-${geoid}`}
               dataKey={`${geoid}Weekly${populationNormalized ? "100k" : ""
                 }`}
@@ -443,8 +382,9 @@ function LineChartInner({
       return null
     }
   }, [JSON.stringify({
-    maximums, 
-    chartData, 
+    maximums,
+    selectionKeys,
+    chartData,
     docked,
     table,
     logChart,
@@ -454,7 +394,6 @@ function LineChartInner({
     colorScheme,
     geoid
   })])
-
   if (maximums && chartData) {
     return (
       <ChartContainer id="lineChart">
@@ -475,14 +414,17 @@ function LineChartInner({
             <span>7-Day Average New Cases</span>
           </ChartTitle>
         )}
-        <ChartLabel color={highlightColor} left={colorScheme === "light" ? -45 : -65}>
-          {x1label}
+        <ChartLabel
+          color={highlightColor}
+          left={colorScheme === "light" ? -20 : -30}
+        >
+          {x2label}
         </ChartLabel>
         <ChartLabel
           color={mediumColor}
           right={-35}
         >
-          {x2label}
+          {x1label}
         </ChartLabel>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
@@ -495,6 +437,62 @@ function LineChartInner({
             }}
             onClick={isTimeseries ? handleChange : null}
           >
+            <XAxis
+          dataKey="date"
+          ticks={dateRange}
+          minTickGap={-50}
+          tick={
+            <CustomTick
+              style={{
+                fill: gridColor,
+                fontSize: "10px",
+                fontFamily: "Lato",
+                fontWeight: 600,
+                transform: "translateY(10px)",
+              }}
+              labelFormatter={dateFormatter}
+            />
+          }
+        />
+        <YAxis
+          yAxisId="right"
+          orientation="right"
+          type="number"
+          scale={logChart ? "log" : "linear"}
+          domain={[0.01, "dataMax"]}
+          allowDataOverflow
+          ticks={rangeIncrement({ maximum: maximums.count })}
+          tick={
+            <CustomTick
+              style={{
+                fill: mediumColor,
+                fontSize: "10px",
+                fontFamily: "Lato",
+                fontWeight: 600,
+              }}
+              labelFormatter={numberFormatter}
+            />
+          }
+        />
+        <YAxis
+          yAxisId="left"
+          orientation="left"
+          scale={logChart ? "log" : "linear"}
+          domain={[0.01, "dataMax"]}
+          allowDataOverflow
+          ticks={rangeIncrement({ maximum: maximums.sum })}
+          tick={
+            <CustomTick
+              style={{
+                fill: highlightColor,
+                fontSize: "10px",
+                fontFamily: "Lato",
+                fontWeight: 600,
+              }}
+              labelFormatter={numberFormatter}
+            />
+          }
+        />
             {memoizedInnerComponents}
             <Tooltip
               content={({ active, payload }) => (
@@ -508,7 +506,7 @@ function LineChartInner({
               )}
             />
             <ReferenceArea
-              yAxisId="left"
+              yAxisId="right"
               x1={chartData[currIndex - currRange]?.date || 0}
               x2={chartData[currIndex]?.date || 0}
               fill="white"

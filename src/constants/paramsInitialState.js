@@ -1,8 +1,11 @@
 import {
-  defaultData,
   variableTree,
   urlParamsTree,
 } from "../config/index";
+
+import {
+  defaultData,
+} from "../config/defaults";
 
 import variables from "../config/variables";
 import tables from "../config/tables";

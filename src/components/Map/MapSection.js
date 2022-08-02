@@ -592,12 +592,13 @@ function MapSection({
         setTooltipInfo(
           x,
           y,
-          object?.properties ? object.properties[currIdCol] : object
+          object?.properties ? object.properties[currIdCol] : object,
+          object?.properties || object
         )
       );
     } else {
       hoverGeog && setHoverGeog(null);
-      dispatch(setTooltipInfo(x, y, null));
+      dispatch(setTooltipInfo(x, y, null, null));
     }
 
     if (
@@ -1137,7 +1138,7 @@ function MapSection({
         onKeyUp={handleKeyUp}
         onMouseDown={(e) => {
           boxSelect && handleBoxSelect(e);
-          dispatch(setTooltipInfo(null, null, null));
+          dispatch(setTooltipInfo(null, null, null, null));
         }}
         id="mapContainer"
         onMouseUp={(e) => boxSelect && handleBoxSelect(e)}

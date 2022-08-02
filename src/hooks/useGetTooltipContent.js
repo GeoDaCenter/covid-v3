@@ -25,20 +25,27 @@ export default function useGetTooltipContent({
     const storedData = useSelector(({data}) => data.storedData);
 
     const tooltipContent = useMemo(() => {
-        if (data) {
-            return data
-        } else {
-            return parseTooltipData({
-                currentData,
-                currDataset,
-                currIndex,
-                currTables,
-                geoid,
-                storedGeojson,
-                storedData
-            })
+        const tooltipData = parseTooltipData({
+            currentData,
+            currDataset,
+            currIndex,
+            currTables,
+            geoid,
+            storedGeojson,
+            storedData
+        })
+
+        return {
+            ...tooltipData,
+            ...data
         }
     },[JSON.stringify(data), geoid, currIndex, currentData])
+    if (currentData.includes('customdata')){
+        return {
+            ...tooltipContent,
+            custom: true
+        }
+    }
 
     return tooltipContent
 

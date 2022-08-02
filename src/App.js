@@ -75,21 +75,42 @@ const theme = createTheme({
     tonalOffset: 0.2,
   },
   overrides: {
-    MuiTooltip: {
-      borderRadius: 0,
-      tooltip: {
-        borderRadius: 0,
+    // MuiTooltip: {
+    //   borderRadius: 0,
+    //   tooltip: {
+    //     borderRadius: 0,
+    //   },
+    // },
+    // MuiPopper: {
+    //   borderRadius: 0,
+    //   tooltip: {
+    //     borderRadius: 0,
+    //   },
+    // },
+    // MuiInputLabel: {
+    //   root: {
+    //     color: 'white'
+    //   }
+    // },
+    // MuiOutlinedInput: {
+    //   root: {
+    //     borderColor: 'white',
+    //     background: 'red'
+    //   },
+    // },
+    MuiInputLabel: {
+      outlined: {
+        color: 'white',
       },
     },
-    MuiPopper: {
-      borderRadius: 0,
-      tooltip: {
-        borderRadius: 0,
+    MuiInputBase: {
+      root: {
+        color: 'red',
+      },
+      input: {
+        borderColor: 'red',
       },
     },
-    MuiPaper: {
-      backgroundColor:'red',
-    }
   }
 });
 

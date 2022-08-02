@@ -1,6 +1,3 @@
-// import { findIn } from "../utils";
-// import { tooltipTables } from "../config/defaults";
-
 export const parseTooltipData = ({
   currentData,
   currDataset,
@@ -42,29 +39,6 @@ export const parseTooltipData = ({
       }
     }
   }
-
-  // for (const table in currentTables) {
-  //   if (
-  //     state.storedData.hasOwnProperty(currentTables[table].file) &&
-  //     tooltipTables.includes(table) &&
-  //     state.storedData[currentTables[table].file].data.hasOwnProperty(geoid)
-  //   ) {
-  //     const tempVal =
-  //       state.storedData[currentTables[table].file].data[geoid][
-  //         state.dataParams.nIndex
-  //       ];
-  //     if (tempVal !== null && tempVal !== undefined)
-  //       tooltipData[table] = tempVal;
-
-  //     if (table === 'cases' || table === 'deaths')
-  //       tooltipData[`daily_${table}`] =
-  //         state.storedData[currentTables[table].file].data[geoid][
-  //           state.dataParams.nIndex
-  //         ] -
-  //         state.storedData[currentTables[table].file].data[geoid][
-  //           state.dataParams.nIndex - 1
-  //         ];
-  //   }
-  // }
+  
   return tooltipData;
 };

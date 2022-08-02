@@ -13,7 +13,10 @@ import { HelperText } from "./HelperText";
 import colors from "../../../config/colors";
 import { colorScales } from "../../../config/scales";
 import { FormButton } from "./FormButton";
-const ModalInner = styled.div``;
+const ModalInner = styled.div`
+  margin:0 auto;
+  max-width:fit-content;
+`;
 
 const style = {
   position: "absolute",
@@ -88,6 +91,7 @@ export const VariableEditor = ({
   handleClose,
   idx,
 }) => {
+  console.log(fileName)
   const [variableInfo, setVariableInfo] = useState(
     idx !== false
       ? variables[idx]
@@ -127,7 +131,7 @@ export const VariableEditor = ({
       colorScale: null || variableInfo.colorScale,
       dataNote: null,
     };
-    if (idx) {
+    if (idx !== false) {
       setVariables((prev) => {
         prev[idx] = fullSpec;
         return prev;
@@ -166,6 +170,7 @@ export const VariableEditor = ({
             Variable Name
           </VariableLabel>
           <VariableTextField
+            fullWidth
             required
             id="variableName"
             label="Variable Name"
@@ -180,7 +185,10 @@ export const VariableEditor = ({
           </HelperText>
           <Gutter h={30} />
 
-          <StyledDropDown id="numerSelect">
+          <StyledDropDown 
+            id="numerSelect" 
+            fullWidth
+          >
             <InputLabel htmlFor="numerSelect" required>
               Numerator Column
             </InputLabel>
@@ -207,7 +215,10 @@ export const VariableEditor = ({
           </HelperText>
           <Gutter h={30} />
 
-          <StyledDropDown id="denomSelect">
+          <StyledDropDown 
+            id="denomSelect"
+            fullWidth
+            >
             <InputLabel htmlFor="denomSelect">
               Denominator Column (Optional)
             </InputLabel>
@@ -234,7 +245,10 @@ export const VariableEditor = ({
 
           <Gutter h={30} />
 
-          <StyledDropDown id="colorScaleSelect">
+          <StyledDropDown 
+            id="colorScaleSelect"
+            fullWidth
+            >
             <InputLabel htmlFor="colorScaleSelect">Color Scale</InputLabel>
             <Select
               value={variableInfo.colorScale}

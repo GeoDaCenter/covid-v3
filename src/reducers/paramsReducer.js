@@ -23,6 +23,9 @@ const findDefaultOrCurrent = (
   variableParams,
   datasetName
 ) => {
+  if (variableParams.customData) {
+    return variableParams.customData;
+  }
   const relevantTables = tables.filter(
     (f) => f.table === variableParams.numerator
   );
@@ -181,15 +184,20 @@ var reducer = (state = INITIAL_STATE, action) => {
           ? currIndex
           : findClosestValue(currIndex, dataDateRanges[dataName]);
       // scales
-      const colorScale = currVariableParams.colorScale
-        ? colorScales[currVariableParams.colorScale]
-        : colorScales["natural_breaks"];
+      let colorScale = []
+      if (state.mapParams.mapType === 'natural_breaks'){
+        colorScale = currVariableParams.colorScale
+          ? colorScales[currVariableParams.colorScale]
+          : colorScales["natural_breaks"];
+      } else {
+        colorScale = state.mapParams.colorScale
+      }
 
       const mapParams = {
         ...state.mapParams,
         colorScale,
       };
-
+      
       return {
         ...state,
         currentData,
@@ -501,6 +509,7 @@ var reducer = (state = INITIAL_STATE, action) => {
         variables.unshift({
           ...action.payload.variables[i],
           variableName: currVariable,
+          customData: dataName
         });
 
         variableTree[currVariable] = {

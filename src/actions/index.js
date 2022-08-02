@@ -386,13 +386,14 @@ export const openContextMenu = (params) => {
   };
 };
 
-export const setTooltipInfo = (x, y, data) => {
+export const setTooltipInfo = (x, y, id, data) => {
   return {
     type: 'SET_TOOLTIP_INFO',
     payload: {
       x,
       y,
-      data,
+      id,
+      data
     },
   };
 };

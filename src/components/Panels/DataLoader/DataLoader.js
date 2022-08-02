@@ -20,7 +20,7 @@ import { Steps, StepButtons } from "./Steps";
 import { FileUploader } from "./FileUploader";
 import { validateGeojson } from "./utils";
 import { FormButton } from "./FormButton";
-import { Typography } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 
 const ModalInner = styled.div``;
 
@@ -65,8 +65,14 @@ const FileForm = styled.form`
   opacity: ${(props) => (props.complete ? 0.5 : 1)};
   transition: 250ms all;
   transition-delay: 3s all;
-  max-width: 600px;
   display: block;
+  
+  .MuiOutlinedInput-notchedOutline {
+    border-color: ${colors.white};
+  }
+  .MuiInputLabel-root {
+    color: ${colors.white};
+  }
 `;
 
 const CardContainer = styled(Grid)`
@@ -75,6 +81,7 @@ const CardContainer = styled(Grid)`
 `;
 
 const VariableCard = styled(Card)`
+  color: ${colors.black};
   &.MuiPaper-root {
     background-color: ${colors.lightgray};
     button {
@@ -290,8 +297,8 @@ export default function DataLoader() {
                 fetch data from.
               </Typography>
               <Gutter h={15} />
-              <Box sx={{ display: 'flex', flexDirection:'column' }}>
-                <Box sx={{pb: 2}}>
+              <Box sx={{ display: 'flex', flexDirection:'column', width:"100%"}}>
+                <Box sx={{pb: 2, margin: '0 auto'}}>
                   <FormButton
                     onClick={handleUploadTab}
                     data-id={"file-upload"}
@@ -322,7 +329,8 @@ export default function DataLoader() {
                   />
                 )}
                 {!uploadTab && (
-                  <VariableTextField
+                  <>
+                  <TextField
                     id="remoteUrl"
                     label="Remote Data URL"
                     onChange={(event) => setRemoteUrl(event.target.value)}
@@ -330,6 +338,10 @@ export default function DataLoader() {
                     value={remoteUrl}
                     placeholder="eg https://raw.githubusercontent.com/..."
                   />
+                  <label>
+                    * must be <a style={{color:'white'}} href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS" target="_blank">Cross-Origin Accessible</a>
+                  </label>
+                  </>
                 )}
                 <input type="submit" value="Validate" style={{marginTop:'1em'}} />
               </Box>
