@@ -19,7 +19,7 @@ import {
   setVariableParams,
   setMapParams,
   setCurrentData,
-  // setPanelState,
+  setPanelState,
   // setParametersAndData,
   setNotification,
   changeDotDensityMode,
@@ -30,6 +30,7 @@ import { StyledDropDown } from "..";
 import colors from "../../config/colors";
 import { findIn } from "../../utils";
 import { fixedScales, colorScales } from "../../config/scales";
+import { Button, Grid } from "@mui/material";
 
 /** STYLES */
 const VariablePanelContainer = styled.div`
@@ -225,6 +226,12 @@ const ListSubheader = styled(MenuItem)`
   font-variant: small-caps;
   font-weight: 800;
 `;
+
+const storiesButtonStyles = {
+  background: colors.teal,
+  textTransform: 'none',
+  color: colors.white
+}
 
 const AcsRaceButton = styled.button`
   background: ${(props) =>
@@ -526,10 +533,28 @@ function VariablePanel() {
     >
       {panelState.variables && (
         <ControlsContainer>
+        <Grid xs={12} md={12} lg={6}>
           <h2>
             Data Sources &amp;
             <br /> Map Variables
           </h2>
+        </Grid>
+          <Grid xs={12} md={12} lg={6}>
+            <Button 
+              variant="contained" 
+              sx={storiesButtonStyles}
+              onClick={() => {
+                dispatch(setPanelState({ storiesPane: true, lineChart: false }));
+                dispatch(
+                  setMapParams({
+                    overlay: 'stories'
+                  })
+                );
+              }}
+              >
+                <b>New:</b>&nbsp;See Atlas Stories
+            </Button>
+          </Grid>
           <Gutter h={20} />
           <StyledDropDown id="variableSelect">
             <InputLabel htmlFor="variableSelect">Variable</InputLabel>
@@ -868,7 +893,7 @@ function VariablePanel() {
                   None
                 </MenuItem>
                 <MenuItem value={"stories"} key={"stories"}>
-                  Stories [WIP]
+                  Stories
                   <Tooltip id="Stories" />
                 </MenuItem>
                 <MenuItem

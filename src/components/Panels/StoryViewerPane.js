@@ -30,7 +30,7 @@ export const StoryViewerPane = () => {
                 relatedStories={relatedStories}
                 relatedStoriesCallback={(story) => setSelectedStory(story)}
             />) : (
-                <h2 style={{color:'white', margin: '1em'}}>Open the <i>Stories</i> overlay and select a story to get started.</h2>
+                <h2 style={{color:'white', margin: '1em'}}>Click a story on the map to get started!</h2>
             )}
         </StoryViewerPanel>
     )
