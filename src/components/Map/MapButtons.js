@@ -42,7 +42,7 @@ export const NavInlineButton = styled.button`
     box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     position: absolute;
-    transform: translate(-120%, -25%);
+    transform: translate(.5em, -25%);
     padding: 5px;
     width: 150px;
     pointer-events: none;

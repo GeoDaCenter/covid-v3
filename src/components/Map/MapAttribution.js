@@ -6,9 +6,10 @@ const MapAttributionContainer = styled.div``;
 const MapAttributionText = styled.span`
   position: absolute;
   width: auto;
-  right: 3em;
+  max-width:90vw;
+  left: 3em;
   bottom: 1.25em;
-  text-align: right;
+  text-align: left;
   background: white;
   white-space: nowrap;
   display: inline-block;
@@ -60,6 +61,7 @@ export default function MapAttribution() {
         role="list"
         id="map-attribution-list"
       >
+        Basemap data &nbsp; 
         <a
           href="https://www.mapbox.com/about/maps/"
           target="_blank"
