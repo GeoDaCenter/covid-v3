@@ -23,14 +23,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 1140,
-  maxWidth: {
-    xs: "95vw",
-    sm: "95vw",
-    md: "90vw",
-    lg: "80vw",
-    xl: "80vw",
-  },
+  width: 'fit-content',
   bgcolor: colors.gray,
   border: "1px solid #000",
   fontFamily: "'Lato', sans-serif",
@@ -56,17 +49,15 @@ const ColorBarContainer = styled.span`
 
 export const VariableTextField = styled(TextField)`
   &.MuiFormControl-root {
-    margin-top: -1em;
-    border-bottom: 1px solid white;
+    /* margin-top: -1em; */
+    /* border-bottom: 1px solid white; */
   }
   label {
-    visibility: hidden;
-    display: none;
-    text-align: center;
-  }
-  input {
     color: white;
-    text-align: center;
+  }
+  fieldset {
+    color: white;
+    border-color: white;
   }
 `;
 
@@ -164,11 +155,10 @@ export const VariableEditor = ({
       <Box sx={style}>
         <ModalInner>
           <h3>Variable Editor</h3>
-          <Gutter h={30} />
+          <Gutter h={15} />
+          <p>Fill out the form below to add a new variable.</p>
+          <Gutter h={15} />
 
-          <VariableLabel htmlFor="variableName" required>
-            Variable Name
-          </VariableLabel>
           <VariableTextField
             fullWidth
             required
@@ -210,8 +200,7 @@ export const VariableEditor = ({
           <HelperText id="numer-name-helper">
             The column for your variable.
             <br />
-            If you want to normalize your data,
-            <br /> the top of your expression.
+            If you want to normalize your data, the top of your expression.
           </HelperText>
           <Gutter h={30} />
 
@@ -283,7 +272,7 @@ export const VariableEditor = ({
                   type="number"
                   value={variableInfo.scale3D}
               /> */}
-          <Gutter h={30} />
+          {/* <Gutter h={15} /> */}
 
           <FormButton onClick={handleSave}>Save Variable</FormButton>
         </ModalInner>
