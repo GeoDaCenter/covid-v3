@@ -1,3 +1,7 @@
+import HintBox from '../Toolkit/HintBox';
+import Icon from '../Interface/Icon';
+import Grid from '@mui/material/Grid';
+
 export const config = {
     slug: 'getting-started',
     title: 'Getting Started :: US Covid Atlas Learn',
@@ -6,13 +10,117 @@ export const config = {
 
 # Getting Started: Atlas 101
 
+<Grid container spacing={8}>
+
+    <Grid item xs={12} md={10}>
+
+    <br />
+
+    Welcome to the US Covid Atlas! In a quickly changing pandemic landscape, the US Covid Atlas connects case data and community indicators across the United States and helps you visualize current and historical data to better understand the often unequal impact of the pandemic. This Learning Tutorials provide an overview, with step-by-step instructions, on how to use the Atlas and its tools and features. Resources in the US Covid Atlas **Learn  Toolkit** will help you: 
+
+    <br />
+
+    - Explore data and choose your variables of interest; 
+    - Learn how to map and visualize US county and state COVID-19 and contextual data; 
+    - Focus on the impacts on communities using various data tools and visualization options; 
+    - Easily export and share Atlas maps and data and customize community reports. 
+    
+    <br />
+    Get started with an orientation to the main mapping application. 
+    </Grid>
+
+</Grid>
+
+
 ## Map Orientation
 
-Start exploring the Atlas by navigating to theuscovidatlas.org/map. After a few seconds, the main map will load. If you are returning to the Atlas and new data or features are available, you will see an option on the bottom right side of the map to reload. 
+<Grid container spacing={8}>
 
-- The Main Map is shown at the center of the screen and takes up the majority of the view. A Map Legend can be found at the bottom of the screen, and the Map Control panel allowing you to zoom in, out, and more is at the left side. 
-- At the far left side of the screen, you will see the Map Navigation panel. Data Sources & Map Variables is selected as the default, presented as a left sidebar.
-At the top of the screen, you’ll find the Time Slider & Calendar panel, used to select time.
-- At the right side of the screen, you’ll see the Cases floating panel, which you can move. This shows a graph of cases over time, with multiple options for viewing in-depth.
-Once you click on the map, a scrollable right sidebar appears. - This Community Data panel provides more contextual information of the county clicked on within the main map.
-- At the top of the screen, you’ll find the main Site Navigation panel. 
+    <Grid item xs={12} md={10}>
+    Start exploring the Atlas by navigating to [theuscovidatlas.org/map](theuscovidatlas.org/map). After a few seconds, the main map will load. If you are returning to the Atlas and new data or features are available, you will see an option on the bottom right side of the map to reload. 
+
+    After selecting an overlay, you can visualize COVID or community data with the natural breaks binning, box map binning schemas, hotspot analysis, and any other tools that are available within the Atlas.
+
+    <br />
+
+    </Grid>
+
+</Grid>
+
+<Grid container spacing={8}>
+    <Grid item xs={12} md={6}>
+        ![xx](/img/learn/Overview101/overview.png)
+    </Grid>
+  </Grid>
+
+
+<Grid container spacing={8}>
+
+    <Grid item xs={12} md={5}>
+
+        <br />
+
+    - The **Main Map** is shown at the center of the screen and takes up the majority of the view. A Map Legend can be found at the bottom of the screen, and the Map Control panel allowing you to zoom in, out, and more is at the left side. 
+            <br />
+    - At the far left side of the screen, you will see the **Map Navigation** panel. *Data Sources & Map Variables* is selected as the default, presented as a left sidebar.
+            <br />
+    - At the top of the map, you’ll find the **Time Slider & Calendar** panel, used to select time.
+
+        <br />
+
+    </Grid>
+
+        <Grid item xs={12} md={5}>
+
+        <br />
+    - At the right side of the screen, you’ll see the **Line Chart**) floating panel, which you can move. This shows a graph of cases over time, with multiple options for viewing in-depth. 
+            <br />
+    - Once you click on the map, a scrollable right sidebar appears. This **Community Data** panel provides more contextual information of the county clicked on within the main map.
+            <br />
+    - At the top of the screen, you’ll find the main **Site Navigation** panel. 
+
+        <br />
+
+    </Grid>
+
+
+</Grid>
+
+<hr />
+
+            <br />
+### Main Map
+            <br />
+<Grid container spacing={8}>
+
+    <Grid item xs={12} md={10}>
+
+
+
+    The thematic map (also known as a “choropleth” map) shown as the default on the Atlas presents county-level data on COVID-19 cases for the country.  On the bottom of the map, you will find a **Map Legend**, which provides a guide to interpret the map colors. See the legend displaying *Confirmed Count per 100K Population* with the color scale in the example above. Values with 0 or missing data will be shown in light gray. In the example screenshot above, Florida is grayed out because there was no data available for the state for the specific selection made. 
+
+            <br />
+
+    At the bottom left of the map, you’ll find your **Map Controls**:
+
+            <br />
+
+    - <Icon symbol="summary" />  Select a rectangular area. Data in the **Line Chart** and **Community Data** panels will be re-aggregated to show the area average.
+
+    - <Icon symbol="summary" />  This icon re-zooms the map to your current location. *Note:* Location services will need to be enabled on your device for this functionality to work.
+
+    - <Icon symbol="summary" />  The plus or minus icons will allow you to Zoom in and out of the map.
+
+    - <Icon symbol="summary" />  Use the North compass arrow to reposition your map so that North is facing up on your device screen.
+
+    - <Icon symbol="summary" />  This sharing icon will allow you to share the current view of the map and selections as a URL. The link is automatically copied to your clipboard.
+
+
+            <br />
+
+    At the top right side of the map, you will find an option to **Search By Location**. Enter an address, county, city, or any place in the U.S. and hit return to re-zoom the map to your area of interest.
+
+    </Grid>
+
+</Grid>
+
