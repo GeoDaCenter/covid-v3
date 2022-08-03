@@ -10,9 +10,12 @@ const Container = styled.div`
     background:${colors.teal}22;
     padding:1em;
     margin:1em 0;
+    align-items:center;
+    p {
+        margin:0;
+    }
     @media(max-width:600px){
         flex-direction:column;
-        align-items:center;
         justify-content:center;
         text-align:center; 
     }

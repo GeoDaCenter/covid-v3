@@ -28,6 +28,7 @@ const IconContainer = styled(Grid)`
         .cls-1 {
             stroke: black;
             stroke-width: 6px;
+            fill:none;
         }
     }
 `
