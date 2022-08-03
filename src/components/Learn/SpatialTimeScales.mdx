@@ -9,13 +9,15 @@ export const config = {
     description: 'Learn about the different spatial and time visualization features on the Atlas',
 }
 
+
 # Scale
 
+You can select different spatial scales (ex. county or state) and temporal scales (ex. daily, weekly, or cumulative COVID-19 cases) in the US Covid Atlas. Selecting different scales will provide different views of the pandemic. We encourage you to explore!
 
-## Spatial Scales
+### Spatial Scales
+<br />
 
-
-LOCATION:  **<Icon symbol="calendar" />  LEFT SIDEBAR**: Data & Variables
+LOCATION:  **<Icon symbol="settings" />  LEFT SIDEBAR**: Data & Variables
 <Grid container spacing={8}>
     <Grid item xs={12} md={6}>
     The Atlas allows you to explore data at a county or state-specific level for each variable.  To change the spatial scale of your variable of interest, use the Map Variables Panel to select the data source and variable that you would like to map, click on Geography, and choose between State or County.
@@ -33,11 +35,19 @@ LOCATION:  **<Icon symbol="calendar" />  LEFT SIDEBAR**: Data & Variables
 
 <hr />
 
-## Temporal (Time) Scales
+### Temporal (Time) Scales
+<br />
 
-LOCATION:  **<Icon symbol="calendar" />  LEFT SIDEBAR**: Data & Variables
+LOCATION:  **<Icon symbol="settings" />  LEFT SIDEBAR**: Data & Variables
 
-The Atlas offers the option to explore data across various time scales, otherwise known as temporal scales, for each variable. To adjust the scale of data displayed on the Atlas, use the map variables panel (left sidebar) to select the data source/variable that you would like to map and click on the Date Range drop-down menu. Choose between presenting cumulative, 7-day average, or daily new data. Selecting “Custom Range” allows you to incorporate data from a specific window of time that is selected using the Calendar and Time Slider. To learn more about the available temporal scales, see the table below. 
+<Grid container spacing={8}>
+
+    <Grid item xs={12} md={6}>
+    The Atlas offers the option to explore data across various time scales, otherwise known as temporal scales, for each variable. To adjust the scale of data displayed on the Atlas, use the map variables panel (left sidebar) to select the data source/variable that you would like to map and click on the Date Range drop-down menu. Choose between presenting cumulative, 7-day average, or daily new data. Selecting “Custom Range” allows you to incorporate data from a specific window of time that is selected using the Calendar and Time Slider. To learn more about the available temporal scales, see the table below. 
+
+    </Grid>
+
+</Grid>
 
 
 Temporal Scales Available on the US Covid Atlas
@@ -61,5 +71,7 @@ Use the Time Slider and Calendar to choose a custom date range; i.e. the last mo
 <HintBox>
     Maps can miscommunicate underlying trends if health data are not appropriately normalized or classified, or communicated at the appropriate temporal or spatial scale (ex. daily versus 7-day average; county versus state level). Spatial literacy skills are crucial to avoid developing maps prone to misinterpretation, as well as avoid misinterpreting maps of Pandemic public health data.
 </HintBox>
+
+
 
 
