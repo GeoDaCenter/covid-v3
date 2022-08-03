@@ -12,7 +12,8 @@ import useCurrentDateIndices from "../../hooks/useCurrentDateIndices";
 import Ticks from "./Ticks";
 import DatePicker from "react-date-picker";
 import {
-  StyledSlider
+  StyledSlider,
+  Icon
 } from '../../components'
 
 const SliderContainer = styled(Grid)`
@@ -37,9 +38,14 @@ const PlayPauseButton = styled(Button)`
   padding: 0;
   margin: 0;
   width: 100%;
+  width:50px;
+  height:50px;
   &.MuiButton-root {
     min-width: auto;
     max-width: 40px;
+    span {
+      width: 100%;
+    }
   }
   svg {
     fill: white;
@@ -367,27 +373,7 @@ function DateSlider() {
       />
       <Grid item xs={1} md={1} lg={1} xl={1}>
         <PlayPauseButton id="playPause" onClick={() => handlePlayPause()}>
-          {!isTicking ? (
-            <svg x="0px" y="0px" viewBox="0 0 100 100">
-              <path d="M78.627,47.203L24.873,16.167c-1.082-0.625-2.227-0.625-3.311,0C20.478,16.793,20,17.948,20,19.199V81.27  c0,1.25,0.478,2.406,1.561,3.031c0.542,0.313,1.051,0.469,1.656,0.469c0.604,0,1.161-0.156,1.703-0.469l53.731-31.035  c1.083-0.625,1.738-1.781,1.738-3.031C80.389,48.984,79.71,47.829,78.627,47.203z"></path>
-            </svg>
-          ) : (
-            <svg x="0px" y="0px" viewBox="0 0 100 100">
-              <g transform="translate(50 50) scale(0.69 0.69) rotate(0) translate(-50 -50)">
-                <g>
-                  <path
-                    d="M22.4,0.6c3.4,0,6.8,0,10.3,0c6.5,0,11.8,5.3,11.8,11.8c0,25,0,50.1,0,75.2c0,6.5-5.3,11.8-11.8,11.8
-                                c-3.4,0-6.8,0-10.3,0c-6.5,0-11.8-5.3-11.8-11.8c0-25.1,0-50.2,0-75.2C10.6,5.9,15.9,0.6,22.4,0.6z M22.4,6.5c3.4,0,6.8,0,10.3,0
-                                c3.2,0,5.9,2.6,5.9,5.9c0,25,0,50.1,0,75.2c0,3.2-2.7,5.9-5.9,5.9c-3.4,0-6.8,0-10.3,0c-3.2,0-5.9-2.7-5.9-5.9
-                                c0-25.1,0-50.2,0-75.2C16.5,9.1,19.2,6.5,22.4,6.5z M67.3,6.5c3.4,0,6.8,0,10.2,0s6,2.6,6,5.9c0,25,0,50.1,0,75.2
-                                c0,3.2-2.7,5.9-6,5.9s-6.7,0-10.2,0c-3.3,0-5.9-2.7-5.9-5.9c0-25.1,0-50.2,0-75.2C61.4,9.1,64,6.5,67.3,6.5z M67.3,0.6
-                                c3.4,0,6.8,0,10.2,0c6.5,0,11.8,5.3,11.8,11.8c0,25,0,50.1,0,75.2c0,6.5-5.3,11.8-11.8,11.8c-3.3,0-6.7,0-10.2,0
-                                c-6.5,0-11.8-5.3-11.8-11.8c0-25.1,0-50.2,0-75.2C55.5,5.9,60.8,0.6,67.3,0.6z"
-                  />
-                </g>
-              </g>
-            </svg>
-          )}
+          <Icon symbol={isTicking ? "pause" : "play"} />
         </PlayPauseButton>
       </Grid>
       <DateContainer
