@@ -8,7 +8,7 @@ import * as HotspotMaps from './HotspotMaps.mdx'
 import * as SharingDataFindings from './SharingDataFindings.mdx'
 import * as ThematicMaps from './ThematicMaps.mdx'
 import * as Stylesheet from './Stylesheet.mdx'
-
+import * as SpatialTimeScales from './SpatialTimeScales.mdx'
 const pages = {
     [AddCustomData.config.slug]: AddCustomData,
     [ChangeOverTime.config.slug]: ChangeOverTime,
@@ -20,6 +20,8 @@ const pages = {
     [SharingDataFindings.config.slug]: SharingDataFindings,
     [ThematicMaps.config.slug]: ThematicMaps,
     [Stylesheet.config.slug]: Stylesheet,
+    [SpatialTimeScales.config.slug]: SpatialTimeScales,
+
 }
 
 export default pages
