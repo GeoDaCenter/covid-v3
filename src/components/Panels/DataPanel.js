@@ -251,7 +251,11 @@ export default function DataPanel({
       {!selectionKeys.length && (
         <ReportWrapper>
           <ReportContainer expanded={true}>
-            <p>Click an area for more detailed data.</p>
+            <p>
+              <b>Data Details</b>
+              <br/>
+              Click an area for more detailed data.
+            </p>
           </ReportContainer>
         </ReportWrapper>
       )}

@@ -12,6 +12,9 @@ const GradientBox = styled.div`
     color: white;
     padding: 1em;
     position:relative;
+    a {
+        color: ${({ noBg }) => noBg ? 'initial' : 'white'};
+    }
 `
 
 const ShareLink = styled.a`
@@ -41,7 +44,11 @@ const ShareNotificationText = styled.p`
     position: absolute;
     top:2em;
     right:0;
-    color:green;
+    padding:.5em;
+    max-width:25ch;
+    color: ${({ light }) => light ? colors.teal : colors.white};
+    background: ${({ light }) => light ? colors.white : colors.teal};
+    
 `
 const ShareDummyInput = styled.input`
     position: fixed;
@@ -81,7 +88,7 @@ const ShareButton = ({
 
     return <>
         <StyledShareButton onClick={handleShare} light={light}>Share</StyledShareButton>
-        {shared && <ShareNotificationText>Link copied to clipboard!</ShareNotificationText>}
+        {shared && <ShareNotificationText light={light}>Link copied to clipboard!</ShareNotificationText>}
         <ShareDummyInput type="text" value="" id="share-url" readOnly />
     </>
 }

@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useStoriesContext } from '../../contexts/StoriesContext';
 import colors from '../../config/colors';
 import { StoryContainer } from '../../components/Stories/StoryContainer';
+import { useDispatch } from 'react-redux';
+import { setMapParams } from '../../actions';
 
 const StoryViewerPanel = styled.div`
     height:fit-content;
-    min-width:500px;
     max-width: 30vw;
     min-height: 50vh;
     max-height: fit-content;
@@ -23,6 +24,15 @@ export const StoryViewerPane = () => {
         selectedStory,
         setSelectedStory
     } = useStoriesContext()
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(setMapParams({overlay: 'stories'}));
+        return () => {
+            dispatch(setMapParams({overlay: ''}))
+        }
+    },[]);
+
     return (
         <StoryViewerPanel>
             {!!selectedStory?.id ? (<StoryContainer
@@ -30,7 +40,11 @@ export const StoryViewerPane = () => {
                 relatedStories={relatedStories}
                 relatedStoriesCallback={(story) => setSelectedStory(story)}
             />) : (
-                <h2 style={{color:'white', margin: '1em'}}>Click a story on the map to get started!</h2>
+                <p style={{color:'white', margin: '1em'}}>
+                    <b>Stories</b>
+                    <br/>
+                    Click a story on the map to get started.
+                </p>
             )}
         </StoryViewerPanel>
     )
