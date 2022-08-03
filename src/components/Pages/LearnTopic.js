@@ -56,6 +56,11 @@ const LearnPage = styled.div`
   p {
     margin-bottom: 1rem;
   }
+  .cls-1 {
+    stroke: black;
+    stroke-width: 6px;
+    fill:none;
+  }
 `;
 
 export default function Learn({
