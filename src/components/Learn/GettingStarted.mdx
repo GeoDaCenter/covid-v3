@@ -102,15 +102,15 @@ export const config = {
     At the bottom left of the map, you’ll find your **Map Controls**:
 
 
-    - <Icon symbol="selectRect" />  Select a rectangular area. Data in the *Line Chart* and *Community Data* panels will be re-aggregated to show the area average.
+    <Icon symbol="selectRect" />  Select a rectangular area with this control. Data in the *Line Chart* and *Community Data* panels will be re-aggregated to show the area average.
 
-    - <Icon symbol="locate" />  This icon re-zooms the map to your current location. *Note:* Location services will need to be enabled on your device for this functionality to work.
+    <Icon symbol="locate" />  This icon re-zooms the map to your current location. *Note:* Location services will need to be enabled on your device for this functionality to work.
 
-    - <Icon symbol="plus" /> <Icon symbol="minus" />  The plus or minus icons will allow you to Zoom in and out of the map.
+    <Icon symbol="plus" /> <Icon symbol="minus" />  The plus or minus icons will allow you to Zoom in and out of the map.
 
-    - <Icon symbol="compass" />  Use the North compass arrow to reposition your map so that North is facing up on your device screen.
+    <Icon symbol="compass" />  Use the North compass arrow to reposition your map so that North is facing up on your device screen.
 
-    - <Icon symbol="share" />  This sharing icon will allow you to share the current view of the map and selections as a URL. The link is automatically copied to your clipboard.
+    <Icon symbol="share" />  This sharing icon will allow you to share the current view of the map and selections as a URL. The link is automatically copied to your clipboard.
 
 
             <br />
@@ -125,25 +125,25 @@ export const config = {
 
 ### Map Navigation Panel
             <br />
-<Grid container spacing={8}>
+<Grid container spacing={8} justifyContent="center">
 
     <Grid item xs={12} md={10}>
 
-    The Map Navigation panel is a fixed panel on the left sidebar with multiple options that will assist in selecting data, variables, and more customized options. 
+    The *Map Navigation* panel is a fixed panel on the left sidebar with multiple options that will assist in selecting data, variables, and more customized options. 
 
-    The default selection is the first icon, Data Sources & Map Variables, where you can select your map variables, date range, data source, and other options.  You can turn this panel on or off by clicking this icon.
+    <Icon symbol="settings" /> The default selection is the first icon, **Data Sources & Map Variables**, where you can select your map variables, date range, data source, and other options.  You can turn this panel on or off by clicking this icon.
 
-    The next icon opens and closes the Community Data panel, which pops up as a scrollable right sidebar on the screen. It will always be to the right of the main map. If you click a county on the map, you will find additional information on COVID-19, community contextual data, and related health factors for that county in this panel.
+   <Icon symbol="share" />  The next icon opens and closes the **Community Data** panel, which pops up as a scrollable right sidebar on the screen. It will always be to the right of the main map. If you click a county on the map, you will find additional information on COVID-19, community contextual data, and related health factors for that county in this panel.
 
-    You can turn the Line Chart, which shows you an overview of the data over time,  feature on or off using this icon. The chart shows up on the right side of your screen as a default, and can be moved as a floating panel.
+    <Icon symbol="share" /> You can turn the **Line Chart**, which shows you an overview of the data over time,  feature on or off using this icon. The chart shows up on the right side of your screen as a default, and can be moved as a floating panel.
 
-     This Add Custom Data icon opens the Atlas Custom Data Loader. This feature helps you visualize and analyze your data by loading it in the Atlas web interface. Click on this icon to open and close the Data Loader. 
+    <Icon symbol="addData" /> This **Add Custom Data** icon opens the Atlas Custom Data Loader. This feature helps you visualize and analyze your data by loading it in the Atlas web interface. Click on this icon to open and close the Data Loader. 
 
-    Next, the Report Builder icon controls the Atlas Report Builder. With this tool, you can build a custom report to help you and your community understand the context of COVID-19 and social determinants of health. 
+    <Icon symbol="report" /> Next, the **Report Builder** icon controls the Atlas Report Builder. With this tool, you can build a custom report to help you and your community understand the context of COVID-19 and social determinants of health. 
 
-    The Stories icon opens the Atlas Stories data layer, featuring real stories from people about their pandemic experiences, tagged to their counties. You can contribute your own story and learn more about this project at stories.uscovidatlas.org. 
+    <Icon symbol="story" /> The **Stories** icon opens the Atlas Stories data layer, featuring real stories from people about their pandemic experiences, tagged to their counties. You can contribute your own story and learn more about this project at stories.uscovidatlas.org. 
 
-    The Information icon brings you to more information about the latest version of the US Covid Atlas, new features, interface tips, and tutorials where you can learn more about the myriad use cases for the Atlas. 
+    <Icon symbol="info" /> The **Information** icon brings you to more information about the latest version of the US Covid Atlas, new features, interface tips, and tutorials where you can learn more about the myriad use cases for the Atlas. 
 
     </Grid>
 
@@ -157,7 +157,7 @@ export const config = {
 
     <Grid item xs={12} md={10}>
 
-    On the top of the map, you’ll find the Time Slider & Calendar . This will allow you to explore the entire timeline of the pandemic. 
+    On the top of the map, you’ll find the *Time Slider & Calendar* . This will allow you to explore the entire timeline of the pandemic. 
 
     To view how data in this county has changed over time, you may want to move the Time Slider by dragging your cursor along the white line or pressing the play button , or by clicking on the date and Calendar Icon at the top to select a date. See Community Data Panel in Ch 3 for more info.
 
