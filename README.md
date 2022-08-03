@@ -108,15 +108,28 @@ Xun Li, Qinyun Lin, Marynia Kolak, Robert Martin, Stephanie Yang, Moksha Menghan
 ## Running the React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-<!-- 
-## Data Updates
 
-Data are updated in the `Docs` folder. If you are running the Atlas locally and seeing older data, please copy the contents of `Docs` to `Public`. -->
+## Required Environment Variables
 
+To access the Atlas Stories data, you must set the following environment variables in your `.env` file in the root of the repository:
+```
+REACT_APP_STORIES_PUBLIC_URL=https://link-to-cdn.net
+```
+
+## Quickstart
+
+1. Clone this repository
+2. Install node / npm, and install yarn with `npm i -g yarn`
+3. From the repository root, run `yarn` to install dependencies
+4. From the repository root, run `yarn fetch-data` to fetch the latest data
+5. From the repository root, run `yarn start` to start the app
 ## Available Scripts
 
 In the project directory, you can run:
 
+## `yarn fetch-data`
+
+Updates the data in the public data directory as required by the frontend application.
 ### `yarn start`
 
 Runs the app in the development mode.\
