@@ -63,6 +63,7 @@ const LearnPage = styled.div`
   }
   img {
     max-width:100%;
+    width:100%;
   }
 `;
 
