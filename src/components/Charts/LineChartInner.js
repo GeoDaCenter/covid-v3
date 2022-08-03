@@ -143,8 +143,8 @@ const CustomTooltip = ({ active, payload, background }) => {
               key={`tooltip-inner-text-${idx}`}
             >
               {data.name}:{" "}
-              {Number.isInteger(Math.floor(data.payload[data.dataKey]))
-                ? Math.floor(data.payload[data.dataKey]).toLocaleString("en")
+              {!isNaN(+data.payload[data.dataKey])
+                ? (Math.round(data.payload[data.dataKey]*10)/10).toLocaleString("en")
                 : data.payload[data.dataKey]}
             </p>
           ))}
@@ -228,6 +228,9 @@ function LineChartInner({
     geoid,
   });
 
+  // get first word of snake case, if relevant
+  const chartTitle = table.split('_')[0]
+
   const [activeLine, setActiveLine] = useState(false);
   const handleChange = (e) =>
     e?.activeTooltipIndex &&
@@ -236,7 +239,6 @@ function LineChartInner({
   const handleLegendLeave = () => setActiveLine(false);
   const { x1label, x2label, title } = LabelText[table];
   const memoizedInnerComponents = useMemo(() => {
-    console.log('rendering chart')
     if (maximums && chartData) {
       return <>
         {selectionKeys.length === 0 && (
@@ -411,7 +413,7 @@ function LineChartInner({
           </ChartTitle>
         ) : (
           <ChartTitle color={gridColor}>
-            <span>7-Day Average New Cases</span>
+            <span>{chartTitle} over time</span>
           </ChartTitle>
         )}
         <ChartLabel

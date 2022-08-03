@@ -8,6 +8,7 @@ export const ChartTitle = styled.h3`
   margin: 0;
   color: ${props => props.color || 'white'};
   width: 100%;
+  text-transform:capitalize;
   span {
     max-width: 20ch;
     display: block;
