@@ -53,6 +53,9 @@ const LearnPage = styled.div`
   th, td {
     padding:.25em .5em;
   }
+  p {
+    margin-bottom: 1rem;
+  }
 `;
 
 export default function Learn({
