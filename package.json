@@ -34,6 +34,8 @@
     "@mui/material": "^5.2.8",
     "@mui/styles": "^5.2.3",
     "@turf/bbox": "^6.5.0",
+    "@turf/boolean-point-in-polygon": "^6.5.0",
+    "@turf/random": "^6.5.0",
     "comlink": "^4.3.1",
     "d3-dsv": "2.0.0",
     "d3-scale": "^3.2.0",
