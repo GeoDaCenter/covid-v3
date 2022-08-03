@@ -41,9 +41,9 @@ const LearnPage = styled.div`
   }
 
   svg {
-    width: 1rem;
-    height: 1rem;
-    transform:translateY(3px);
+    width: 1.4rem;
+    height: 1.4rem;
+    transform:translateY(25%);
   }
 
   table, th, td {
