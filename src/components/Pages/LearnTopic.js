@@ -1,6 +1,6 @@
-import React from 'react';
-import { Helmet } from 'react-helmet';
-import styled from 'styled-components';
+import React from "react";
+import { Helmet } from "react-helmet";
+import styled from "styled-components";
 // import { NavLink } from 'react-router-dom';
 
 // import Grid from '@mui/material/Grid';
@@ -9,49 +9,55 @@ import styled from 'styled-components';
 // import MuiAccordionDetails from '@mui/material/AccordionDetails';
 // import Typography from '@mui/material/Typography';
 
-import { NavBar, Footer, ContentContainer } from '../../components';
-import colors from '../../config/colors';
-import MdxPages from '../Learn/MdxPages';
+import { NavBar, Footer, ContentContainer } from "../../components";
+import colors from "../../config/colors";
+import MdxPages from "../Learn/MdxPages";
 
 const LearnPage = styled.div`
   background: white;
+`;
+
+const StylesWrapper = styled.div`
   ol {
     list-style: none;
     counter-reset: item;
-    margin:.5rem 0 .5rem .5rem;
+    margin: 0.5rem 0 0.5rem 0.5rem;
   }
 
   ol li {
     position: relative;
     counter-increment: item;
-    padding:0 0 1rem .5rem;
+    padding: 0 0 1rem 0.5rem;
   }
-  
+
   ol li:before {
     position: absolute;
     content: counter(item);
     width: 1.75rem;
     height: 1.75rem;
-    left:-1.75rem;
-    top:0;
+    left: -1.75rem;
+    top: 0;
     background: ${colors.teal};
-    color:white;
+    color: white;
     text-align: center;
-    border-radius:50%;
+    border-radius: 50%;
   }
 
   svg {
     width: 1.6rem;
     height: 1.6rem;
-    transform:translateY(25%);
+    transform: translateY(25%);
   }
 
-  table, th, td {
+  table,
+  th,
+  td {
     border: 1px solid;
     border-collapse: collapse;
   }
-  th, td {
-    padding:.25em .5em;
+  th,
+  td {
+    padding: 0.25em 0.5em;
   }
   p {
     margin-bottom: 1rem;
@@ -59,42 +65,42 @@ const LearnPage = styled.div`
   .cls-1 {
     stroke: black;
     stroke-width: 6px;
-    fill:none;
+    fill: none;
   }
   img {
-    max-width:100%;
-    width:100%;
+    max-width: 100%;
+    width: 100%;
   }
 `;
 
-export default function Learn({
-    history, 
-    location, 
-    match
-}) {  
+export default function Learn({ history, location, match }) {
   const {
     params: { topic },
   } = match;
 
   const Content = MdxPages[topic]?.default;
   const config = MdxPages[topic]?.config;
-  
-  const {
-    description,
-    title,
-    slug,
-  } = config || {};
+
+  const { description, title, slug } = config || {};
 
   return (
     <LearnPage>
       <Helmet>
-        <title>{title || 'US Covid Atlas :: Learn'}</title>
-        <meta name="description" content={description || "Learn about the US Covid Atlas"} />
-        <link rel="canonincal" href={`https://uscovidatlas.com/learn/${slug}`} />
+        <title>{title || "US Covid Atlas :: Learn"}</title>
+        <meta
+          name="description"
+          content={description || "Learn about the US Covid Atlas"}
+        />
+        <link
+          rel="canonincal"
+          href={`https://uscovidatlas.com/learn/${slug}`}
+        />
       </Helmet>
       <NavBar light />
       <ContentContainer>
-        {Content ? <Content /> : 'No content found. Sorry!'}
+        <StylesWrapper>
+          {Content ? <Content /> : "No content found. Sorry!"}
+        </StylesWrapper>
       </ContentContainer>
       <Footer />
     </LearnPage>
