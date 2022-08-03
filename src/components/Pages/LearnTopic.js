@@ -61,6 +61,9 @@ const LearnPage = styled.div`
     stroke-width: 6px;
     fill:none;
   }
+  img {
+    max-width:100%;
+  }
 `;
 
 export default function Learn({
