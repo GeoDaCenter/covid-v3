@@ -1,7 +1,12 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import useSWR from 'swr';
-import { findCounty } from '../utils';
-
+import { findCounty, findIn } from '../utils';
+import bbox from '@turf/bbox';
+import {randomPosition} from '@turf/random';
+import booleanPointInPolygon from '@turf/boolean-point-in-polygon';
+import { useSelector } from 'react-redux';
+import { useGeoda } from '../contexts/Geoda';
+import useGetGeojson from './useGetGeojson';
 const doFilter = (story, filter) => {
     return filter.every(({ property, value, operation }) => {
         const storyValue = story[property];
@@ -52,19 +57,76 @@ const getCounts = (stories) => {
     return counts
 }
 
+function useCentroidRandomizer() {
+    const storedGeojson = useSelector(({data}) => data.storedGeojson);
+    const datasets = useSelector(({params}) => params.datasets);
+    const { geoda, geodaReady } = useGeoda();
+    const usafactsDataset = findIn(datasets, "file", 'county_usfacts.geojson');
+    const [geo] = useGetGeojson({
+        geoda,
+        geodaReady,
+        currDataset: usafactsDataset,
+        storedGeojson
+    });
+    const getPoint = (bounds, geog) => {
+        const xy = randomPosition(bounds);
+        const point = {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": xy
+            }
+        }
+
+        if (booleanPointInPolygon(point, geog)) {
+            return xy;
+        } else {
+            return getPoint(bounds, geog);
+        }
+    }
+    const getRandomPoint = (geoid) => {
+        if (geo?.data){
+            const geog = geo.data.features.find(f => f.properties.GEOID === geoid)
+            const bounds = bbox(geog.geometry);
+            const point = getPoint(bounds, geog);
+            console.log('POINT', point)
+            return point;
+        }
+    }
+    return {
+        ready: !!geo?.data,
+        getRandomPoint
+    }
+}
+
 export const useStories = ({
     selectedStory = {},
     filters = [],
     singleStoryId = ''
 }) => {
+
+    const {
+        ready: centroidReady,
+        getRandomPoint
+    } = useCentroidRandomizer();
+    const fetcher = centroidReady 
+    ? (url) => fetch(url)
+    .then(r => r.json())
+    .then(rows => rows.map(row =>
+        ({ ...row, ...findCounty(row.fips), centroid: getRandomPoint(row.fips) })
+        ))
+        .catch(err => console.log(err))
+        : () => [];
+        const fetchName = centroidReady 
+        ? `${process.env.REACT_APP_STORIES_PUBLIC_URL}/index.json` 
+        : 'null-data'
+
     const { data: allStories, error } = useSWR(
-        `${process.env.REACT_APP_STORIES_PUBLIC_URL}/index.json`,
-        (url) => fetch(url)
-            .then(r => r.json())
-            .then(rows => rows.map(row =>
-                ({ ...row, ...findCounty(row.fips) })
-            ))
+        fetchName,
+        fetcher        
     );
+    console.log(centroidReady, allStories)
+
     // based on filters, return relevant stories
     // filter schema is:
     // { 

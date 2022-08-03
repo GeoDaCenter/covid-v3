@@ -41,8 +41,8 @@ const LearnPage = styled.div`
   }
 
   svg {
-    width: 1.4rem;
-    height: 1.4rem;
+    width: 1.6rem;
+    height: 1.6rem;
     transform:translateY(25%);
   }
 

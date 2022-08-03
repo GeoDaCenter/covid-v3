@@ -33,7 +33,7 @@ export default class IconClusterLayer extends CompositeLayer {
     const rebuildIndex = changeFlags.dataChanged || props.sizeScale !== oldProps.sizeScale || props.activeId !== oldProps.activeId
 
     if (rebuildIndex) {
-      const index = new Supercluster({maxZoom: 16, radius: props.sizeScale * Math.sqrt(2)});
+      const index = new Supercluster({maxZoom: 16, minPoints: 10, radius: props.sizeScale * Math.sqrt(2)});
       index.load(
         props.data.map(d => ({
           geometry: {coordinates: props.getPosition(d)},
