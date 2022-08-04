@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
+import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+import styled from "styled-components";
 
-import Grid from '@mui/material/Grid';
+import Grid from "@mui/material/Grid";
 
 import {
   NavBar,
@@ -10,14 +10,15 @@ import {
   HeroMap,
   Footer,
   FastTrackInsights,
-  Gutter
-} from '../../components';
-import { MAPBOX_ACCESS_TOKEN } from '../../config';
-import colors from '../../config/colors';
+  Gutter,
+} from "../../components";
+import { MAPBOX_ACCESS_TOKEN } from "../../config";
+import colors from "../../config/colors";
+import { Button, Modal } from "@mui/material";
 
 const HomePage = styled.div`
   h1 {
-    font-family: 'Playfair Display', serif;
+    font-family: "Playfair Display", serif;
     font-size: 49px;
     font-weight: 300;
     text-align: left;
@@ -90,7 +91,7 @@ const Hero = styled.div`
   }
   z-index: 0;
   p {
-    font-family: 'Lato', sans-serif;
+    font-family: "Lato", sans-serif;
     font-size: 1.1rem;
     font-weight: 300;
     font-stretch: normal;
@@ -166,7 +167,7 @@ const Features = styled.div`
   width: 100%;
   margin: 60px auto 60px auto;
   h2 {
-    font-family: 'Playfair Display', serif;
+    font-family: "Playfair Display", serif;
     font-size: 28px;
     text-align: center;
     font-weight: normal;
@@ -183,7 +184,7 @@ const Features = styled.div`
 const Feature = styled(Grid)`
   text-align: center;
   h5 {
-    font-family: 'Playfair Display', serif;
+    font-family: "Playfair Display", serif;
     font-size: 19px;
     font-weight: normal;
     font-stretch: normal;
@@ -220,7 +221,7 @@ const BreakQuestion = styled.div`
   background-color: ${colors.skyblue};
   padding: 20px;
   h3 {
-    font-family: 'Playfair Display', serif;
+    font-family: "Playfair Display", serif;
     font-size: 28px;
     font-weight: normal;
     font-stretch: normal;
@@ -290,7 +291,7 @@ const Usage = styled.span`
 
 const CenteredGrid = styled(Grid)`
   display: flex;
-  align-centers: center;
+  align-content: center;
   padding-top: 4em;
 `;
 
@@ -320,13 +321,45 @@ const ExploreButton = styled(NavLink)`
   z-index: 50000;
 `;
 
+const ModalContent = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 80vw;
+  max-width: 600px;
+  background: ${colors.teal};
+  color: ${colors.white};
+`;
+
+const ModalContentInner = styled.div`
+  position: relative;
+  padding: 2em;
+  a {
+    color:white !important;
+    font-weight: bold;
+  }
+  h3 {
+    font-size:3rem;
+    font-family:'Playfair Display', serif;
+  }
+`;
+
+const CloseButton = styled(Button)`
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: ${colors.white};
+`
 function Home() {
   const [ctaActive, setCtaActive] = useState(false);
-  const handleGeocoder = (e) => {
-    let url = '';
+  const [storiesModal, setStoriesModal] = useState(true);
 
-    if (`${window.location.href}`.includes('index')) {
-      url += `${window.location.href}`.split('index')[0];
+  const handleGeocoder = (e) => {
+    let url = "";
+
+    if (`${window.location.href}`.includes("index")) {
+      url += `${window.location.href}`.split("index")[0];
     } else {
       url += window.location.href;
     }
@@ -334,7 +367,7 @@ function Home() {
     window.location.href = url;
   };
   useEffect(() => {
-    document.addEventListener('scroll', () => {
+    document.addEventListener("scroll", () => {
       if (window.pageYOffset > window.innerHeight && !ctaActive)
         setCtaActive(true);
       if (window.pageYOffset < window.innerHeight && ctaActive)
@@ -352,7 +385,7 @@ function Home() {
             <Grid container spacing={1}>
               <Grid item xs={12}>
                 <h1>
-                  Near Real-Time Exploration of the <NoBreak>COVID-19</NoBreak>{' '}
+                  Near Real-Time Exploration of the <NoBreak>COVID-19</NoBreak>{" "}
                   Pandemic
                 </h1>
               </Grid>
@@ -363,10 +396,10 @@ function Home() {
                 item
                 xs={12}
                 md={5}
-                style={{ display: 'flex', alignItems: 'center' }}
+                style={{ display: "flex", alignItems: "center" }}
               >
                 <p>
-                  The US COVID Atlas is a visualization tool led by a{' '}
+                  The US COVID Atlas is a visualization tool led by a{" "}
                   <br className="desktop-only" />
                   <b>University of Chicago research coalition.</b>
                   <br />
@@ -392,12 +425,12 @@ function Home() {
               <CenteredGrid item xs={12} md={5} id="HomeGeocoder">
                 <Geocoder
                   // id="HomeGeocoder"
-                  placeholder={'Find your county...'}
+                  placeholder={"Find your county..."}
                   API_KEY={MAPBOX_ACCESS_TOKEN}
                   onChange={handleGeocoder}
                   style={{
-                    border: '6px solid white',
-                    boxSizing: 'content-box',
+                    border: "6px solid white",
+                    boxSizing: "content-box",
                     borderRadius: 0,
                   }}
                 />
@@ -605,6 +638,43 @@ function Home() {
         <ExploreButton to="/map" id="floating-cta" active={ctaActive}>
           Explore the Atlas
         </ExploreButton>
+        <Modal open={storiesModal} onClose={() => setStoriesModal(false)}>
+          <ModalContent>
+            <ModalContentInner>
+              <h3>Atlas Stories have arrived!</h3>
+              <Gutter h={20} />
+              <p>
+                The COVID-19 pandemic highlighted community capacity for
+                resilience and inequitable impacts on diverse people and places.
+                Atlas Stories by the US Covid Atlas collects stories behind the statistics and data. We
+                seek perspectives that represent the diversity of experiences in
+                the United States, in order to build a more holistic archive of
+                the pandemic.
+              </p>
+              <Gutter h={20} />
+              <p>
+                Want to share your experience of the pandemic? &nbsp;
+                <a href="https://stories.uscovidatlas.org/">
+                  Check out the Atlas stories submission site.
+                </a>
+              </p>
+              <Gutter h={20} />
+              <p>
+                Interested in seeing others' stories?
+                See the <a href="/map?lat=38.454&lon=-92.534&z=4.4&src=county_nyt&var=Confirmed_Count_per_100K_Population&mthd=natural_breaks&date=922&range=7&ovr=stories&viz=2D&v=2">
+                  Stories Map
+                </a> or <a href="/archive">
+                  Interactive Archive
+                </a>.
+              </p>
+              <CloseButton
+                onClick={() => setStoriesModal(false)}
+                >
+                  &times;
+                </CloseButton>
+            </ModalContentInner>
+          </ModalContent>
+        </Modal>
       </HomePage>
     </>
   );

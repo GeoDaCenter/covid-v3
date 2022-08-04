@@ -9,6 +9,9 @@ import * as SharingDataFindings from './SharingDataFindings.mdx'
 import * as ThematicMaps from './ThematicMaps.mdx'
 import * as Stylesheet from './Stylesheet.mdx'
 import * as SpatialTimeScales from './SpatialTimeScales.mdx'
+import * as ReleaseNotes from './ReleaseNotes.mdx'
+import * as BugReport from './BugReport.mdx'
+
 const pages = {
     [AddCustomData.config.slug]: AddCustomData,
     [ChangeOverTime.config.slug]: ChangeOverTime,
@@ -21,7 +24,9 @@ const pages = {
     [ThematicMaps.config.slug]: ThematicMaps,
     [Stylesheet.config.slug]: Stylesheet,
     [SpatialTimeScales.config.slug]: SpatialTimeScales,
-
+    [ReleaseNotes.config.slug]: ReleaseNotes,
+    [BugReport.config.slug]: BugReport,
+    
 }
 
 export default pages
