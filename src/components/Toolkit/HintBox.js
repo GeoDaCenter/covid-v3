@@ -14,7 +14,20 @@ const Container = styled.div`
     p {
         margin:0;
     }
-    @media(max-width:600px){
+
+    span {
+        width:10em;
+        min-width:60px;
+        aspect-ratio: 1;
+        margin-top:0;
+        padding:0;
+        transform:translateY(-25%);
+    }
+    svg {
+        width: 100% !important;
+        height: 100% !important;
+    }
+    @media(max-width:1024px){
         flex-direction:column;
         justify-content:center;
         text-align:center; 
@@ -22,12 +35,7 @@ const Container = styled.div`
 `
 
 const IconContainer = styled.div`
-    width:6rem;
-    padding:0 1rem;
-    svg {
-        width:100% !important;
-        height:100% !important;
-    }
+    display: block;
 
 `
 
@@ -37,9 +45,7 @@ const HintBox = ({
 }) => {
     return (
         <Container>
-            <IconContainer>
-                <Icon symbol={icon} />
-            </IconContainer>
+            <Icon symbol={icon} />
             <p>{children}</p>
         </Container>
     );

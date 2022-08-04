@@ -11,17 +11,16 @@ import Select from "@mui/material/Select";
 
 // Config/component import
 import colors from "../config/colors";
-import { pages } from "../wiki";
 import { StyledDropDown } from "../components/Interface/StyledDropDown";
-
+import pages from './/Learn/MdxPages';
+import { MdxStylesWrapper } from "./Learn/MdxStylesWrapper";
+import { Button } from "@mui/material";
 //// Component Styling
 // Main container for component
 const InfoContainer = styled.div`
   background: ${colors.gray};
   color: ${colors.white};
   padding: 0;
-  overflow: hidden;
-  display: ${(props) => (props.active ? "initial" : "none")};
   border-radius: 4px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -29,6 +28,10 @@ const InfoContainer = styled.div`
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  display: ${(props) => (props.active ? "flex" : "none")};
+  flex-direction: row;
+  padding-top:3em;
+  max-height:100%;
   svg {
     width: 25px;
     height: 25px;
@@ -49,24 +52,22 @@ const InfoContainer = styled.div`
     overflow: hidden;
   }
   hr {
-    margin: 5px 0;
+    margin: 1em 0 2em 0;
   }
 `;
 
 // Left hand side list of available pages
 // On mobile, this is replaced by a select drop down
 const Drawer = styled.div`
-  position: absolute;
-  left: 10px;
-  top: 25px;
-  max-width: 120px;
-  @media (max-width: 1024px) {
-    width: 100%;
-  }
+  width:12em;
+  padding:0 .5em;
+  flex: 0 0 auto;
 `;
 
 // Buttons on left-hand side drawer
-const DrawerButton = styled.button`
+const DrawerButton = styled(Button)`
+  text-transform:capitalize;
+  line-height: 1;
   display: block;
   text-align: left;
   background: none;
@@ -75,6 +76,7 @@ const DrawerButton = styled.button`
   outline: none;
   line-height: 2;
   transition: 250ms;
+  padding:0;
   font-family: "Lato", sans-serif;
   opacity: ${(props) => (props.active ? 1 : 0.6)};
   &:hover {
@@ -85,56 +87,39 @@ const DrawerButton = styled.button`
   }
 `;
 
+const BodyContainerOuter = styled.div`
+`
+
 // Container for main content
 const BodyContainer = styled.div`
-  position: absolute;
-  left: 120px;
-  padding: 0 50px 50px 0;
+  height:100%;
+  max-height:100%;
   box-sizing: border-box;
-  top: 25px;
-  transform: translateX(25px);
-  overflow-y: scroll;
-  height: calc(100% - 25px);
-  width: calc(100% - 105px);
-  font-size: 115% !important;
-  line-height: 1.75 !important;
-  .social-container {
-    a {
-      img {
-        width: 30px;
-        height: 22.5px;
-        padding: 5px 10px 0px 0px;
-        transition: all 250ms ease 0s;
-        opacity: 0.7;
-        &:hover {
-          opacity: 1;
-        }
-      }
-    }
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    width: 10px;
   }
-  button.hoverButton {
-    background: none;
-    border: none;
-    font-size: 100% !important;
-    border-bottom: 1px solid ${colors.yellow};
-    outline: none;
-    color: ${colors.yellow};
-    padding: 0;
-    &:after {
-      content: " ⚼";
-    }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #2b2b2b;
   }
-  @media (max-width: 1024px) {
-    left: 0;
-    width: calc(100% + 15px);
-    height: calc(100% - 75);
-    top: 75px;
-    font-size: 100% !important;
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: url("${process.env.PUBLIC_URL}/icons/grip.png"), #999;
+    background-position: center center;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 50%, 100%;
+    transition: 125ms all;
   }
-  ul,
-  ul li {
-    margin: revert;
-    padding: revert;
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: url("${process.env.PUBLIC_URL}/icons/grip.png"), #f9f9f9;
+    background-position: center center;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 50%, 100%;
   }
 `;
 
@@ -205,67 +190,27 @@ const tutorialInfo = [
 
 // Infobox component
 const InfoBox = () => {
-  // Redux -- just panel state open/closed
   const panelOpen = useSelector(({ ui }) => ui.panelState.tutorial);
-
-  // Selected Article (local state)
-  const [currArticle, setCurrArticle] = useState("welcome");
-
-  // Handle selection based on article name
-  const handleSelect = (e) => setCurrArticle(e.target.value);
-
+  const [currentArticle, setCurrentArticle] = useState('release-notes');
+  const Content = pages[currentArticle]?.default;
   return (
     <InfoContainer active={panelOpen}>
-      {/* List of available articles :: On click sets article */}
       <Drawer>
-        {Object.keys(pages).map((page) =>
-          pages[page]["pageName"] !== null ? (
-            <DrawerButton
-              onClick={() => setCurrArticle(page)}
-              active={currArticle === page}
-            >
-              {pages[page]["pageName"]}
-            </DrawerButton>
-          ) : (
-            ""
-          )
-        )}
+        <DrawerButton onClick={() => setCurrentArticle("release-notes")}>Release Notes</DrawerButton>
+        <DrawerButton onClick={() => setCurrentArticle("bug-report")}>Bug Report</DrawerButton>
+        <hr/>
+        <p>Tutorials</p>
+        {Object.keys(pages).filter(f => ['release-notes', 'stylesheet', 'bug-report'].includes(f) === false).map((slug, i) => (
+          <DrawerButton onClick={() => setCurrentArticle(slug)}>{slug.replace(/-/g, ' ')}</DrawerButton>
+        ))}
       </Drawer>
-      <PagesDropDown id="selectPage">
-        {/* Mobile only - select instead of drawer */}
-        <Select
-          value={currArticle}
-          id="numerator-select"
-          onChange={handleSelect}
-        >
-          {Object.keys(pages).map((page) =>
-            pages[page]["pageName"] !== null ? (
-              <MenuItem value={page} key={page}>
-                {pages[page]["pageName"]}
-              </MenuItem>
-            ) : (
-              <MenuItem value={page} key={page} style={{ display: "none" }}>
-                {pages[page]["pageName"]}
-              </MenuItem>
-            )
-          )}
-        </Select>
-      </PagesDropDown>
-      <BodyContainer>
-        {pages[currArticle]["content"]}
-        {currArticle === "getting-started" &&
-          tutorialInfo.map((tutorial) => (
-            <TutorialButton onClick={() => setCurrArticle(tutorial.link)}>
-              <h3>{tutorial.title}</h3>
-              <p>{tutorial.subtitle}</p>
-            </TutorialButton>
-          ))}
-        {currArticle.includes("tutorial") && (
-          <TutorialButton onClick={() => setCurrArticle("getting-started")}>
-            Return to Tutorials
-          </TutorialButton>
-        )}
-      </BodyContainer>
+      <BodyContainerOuter>
+        <BodyContainer>
+          <MdxStylesWrapper>
+            {!!Content && <Content />}
+          </MdxStylesWrapper>
+        </BodyContainer>
+      </BodyContainerOuter>
     </InfoContainer>
   );
 };
