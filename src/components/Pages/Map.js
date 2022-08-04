@@ -41,6 +41,8 @@ import colors from "../../config/colors";
 
 import useMapData from "../../hooks/useMapData";
 import { StoryViewerPane } from "../Panels/StoryViewerPane";
+import { Alert, Button, Snackbar } from "@mui/material";
+import { Box } from "@mui/system";
 
 // Main function, App. This function does 2 things:
 // 1: App manages the majority of the side effects when the state changes.
@@ -92,8 +94,8 @@ const MapPlaneContainer = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
-  @media  (max-width: 768px) {
-    display:block;
+  @media (max-width: 768px) {
+    display: block;
   }
 `;
 
@@ -122,6 +124,48 @@ const MapApp = styled.div`
       display: none;
     }
   }
+`;
+
+const AlertBox = styled(Box)`
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  flex-direction: column;
+  p {
+    max-width: 50ch;
+    margin: 1em 0;
+  }
+  button,
+  a {
+    background: none;
+    outline: none;
+    color: ${colors.teal};
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 0.25em 0.5em;
+    border: none;
+    cursor: pointer;
+  }
+  button {
+    background: ${colors.lightgray}55;
+    border: 1px solid ${colors.gray};
+  }
+  button:focus {
+    border: 1px solid ${colors.teal};
+  }
+  a {
+  }
+`;
+
+const CloseButton = styled(Button)`
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: none;
+  outline: none;
+  padding:0 0.5em;
+  min-width: initial;
 `;
 
 export default function Map() {
@@ -211,7 +255,10 @@ const getDefaultDimensions = () => ({
     window.innerWidth <= 1024
       ? window.innerWidth * 0.8
       : window.innerWidth * 0.25,
-  defaultHeight: window.innerWidth <= 1024 ? window.innerHeight * 0.4 : window.innerHeight * .2,
+  defaultHeight:
+    window.innerWidth <= 1024
+      ? window.innerHeight * 0.4
+      : window.innerHeight * 0.2,
   defaultHeightManual:
     window.innerWidth <= 1024
       ? window.innerHeight * 0.7
@@ -256,45 +303,58 @@ const MapContainerInner = () => {
     isLoading,
     ,
     ,
-    isBackgroundLoading
+    isBackgroundLoading,
   ] = useMapData({
     dataParams,
     mapParams,
     currentData,
   });
-  
-  return <>    
-    <Preloader loading={isLoading || isBackgroundLoading} quiet={isBackgroundLoading} message={isBackgroundLoading ? 'Loading additional data...' : 'Loading'}/>
-    <MapSection
-      currentMapGeography={currentMapGeography}
-      currentMapData={currentMapData}
-      currentMapID={currentMapID}
-      currentHeightScale={currentHeightScale}
-      cartogramData={cartogramData}
-      cartogramCenter={cartogramCenter}
-      cartogramDataSnapshot={cartogramDataSnapshot}
-      isLoading={isLoading}
-      mapParams={mapParams}
-      currentData={currentData}
-      currIdCol={currIdCol}
-    />
-    <Legend
-      variableName={variableName}
-      colorScale={mapParams.colorScale}
-      bins={currentBins}
-      fixedScale={fixedScale}
-      resource={mapParams.resource}
-      note={dataNote}
-      shouldSeparateZero={dataParams.separateZero && mapParams.mapType === 'natural_breaks'}
-    />
-  </>
-}
+
+  return (
+    <>
+      <Preloader
+        loading={isLoading || isBackgroundLoading}
+        quiet={isBackgroundLoading}
+        message={isBackgroundLoading ? "Loading additional data..." : "Loading"}
+      />
+      <MapSection
+        currentMapGeography={currentMapGeography}
+        currentMapData={currentMapData}
+        currentMapID={currentMapID}
+        currentHeightScale={currentHeightScale}
+        cartogramData={cartogramData}
+        cartogramCenter={cartogramCenter}
+        cartogramDataSnapshot={cartogramDataSnapshot}
+        isLoading={isLoading}
+        mapParams={mapParams}
+        currentData={currentData}
+        currIdCol={currIdCol}
+      />
+      <Legend
+        variableName={variableName}
+        colorScale={mapParams.colorScale}
+        bins={currentBins}
+        fixedScale={fixedScale}
+        resource={mapParams.resource}
+        note={dataNote}
+        shouldSeparateZero={
+          dataParams.separateZero && mapParams.mapType === "natural_breaks"
+        }
+      />
+    </>
+  );
+};
 const MapPageContainer = () => {
+  const dispatch = useDispatch();
   const panelState = useSelector(({ ui }) => ui.panelState);
-  const showTopPanel = useSelector(({params}) => params.dataParams.nType !== "characteristic");
+  const showTopPanel = useSelector(
+    ({ params }) => params.dataParams.nType !== "characteristic"
+  );
   const [defaultDimensions, setDefaultDimensions] = useState(
     getDefaultDimensions()
   );
+  const [storiesSnackbar, setStoriesSnackbar] = useState(true);
+  const handleOpenStories = () => {};
   // default width handlers on resize
   useEffect(() => {
     typeof window &&
@@ -305,6 +365,38 @@ const MapPageContainer = () => {
 
   return (
     <MapContainer>
+      <Snackbar
+        open={storiesSnackbar}
+        autoHideDuration={10000}
+        onClose={() => setStoriesSnackbar(false)}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert severity="info" sx={{ width: "100%", textAlign: "center" }}>
+          <AlertBox>
+            <h3>Atlas Stories have arrived!</h3>
+            <div>
+              <p>
+                Atlas Stories collects stories behind the statistics and data
+                from the diverse perspectives and experiences in the United
+                States.
+              </p>
+            </div>
+            <div>
+              <button onClick={handleOpenStories}>See Stories</button>
+              <a
+                href="https://stories.uscovidatlas.org/"
+                target="blank"
+                rel="noopener noreferrer"
+              >
+                Share your experience
+              </a>
+            </div>
+            <CloseButton variant="text" onClick={() => setStoriesSnackbar(false)}>
+              &times;
+            </CloseButton>
+          </AlertBox>
+        </Alert>
+      </Snackbar>
       {false && (
         <div id="loadingIcon">
           <img
@@ -322,9 +414,7 @@ const MapPageContainer = () => {
           {panelState.lineChart && (
             <LineChart defaultDimensions={defaultDimensions} />
           )}
-          {panelState.storiesPane && (
-            <StoryViewerPane />
-          )}
+          {panelState.storiesPane && <StoryViewerPane />}
           {panelState.scatterChart && <Scatterchart />}
           <DataPanel />
         </RightPaneContainer>
