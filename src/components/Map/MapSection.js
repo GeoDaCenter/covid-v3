@@ -491,7 +491,11 @@ function MapSection({
       if (!dotDensityData.length) {
         getDotDensityData().then(dotDensityData => dispatch({ type: 'LOAD_DOT_DENSITY_DATA', payload: dotDensityData }));
       }
-
+    }
+    if (mapParams.overlay === 'stories'){
+      dispatch(setPanelState({ storiesPane: true }));
+    } else {
+      dispatch(setPanelState({ storiesPane : false }));
     }
     parseMapboxLayers(MAP_STYLE.layers, mapParams, mapRef);
   }, [mapParams.overlay, mapParams.mapType, mapParams.vizType]);

@@ -641,7 +641,7 @@ function Home() {
         <Modal open={storiesModal} onClose={() => setStoriesModal(false)}>
           <ModalContent>
             <ModalContentInner>
-              <h3>Atlas Stories have arrived!</h3>
+              <h3>Atlas Stories is live!</h3>
               <Gutter h={20} />
               <p>
                 The COVID-19 pandemic highlighted community capacity for

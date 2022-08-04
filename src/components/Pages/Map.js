@@ -12,7 +12,7 @@ import { findIn, getDateLists } from "../../utils"; //getVarId
 // first row: data storage
 // second row: data and metadata handling
 // third row: map and variable parameters
-import { setDates, setNotification, setPanelState } from "../../actions";
+import { setDates, setMapParams, setNotification, setPanelState } from "../../actions";
 import {
   MapSection,
   NavBar,
@@ -166,6 +166,7 @@ const CloseButton = styled(Button)`
   outline: none;
   padding:0 0.5em;
   min-width: initial;
+
 `;
 
 export default function Map() {
@@ -354,7 +355,11 @@ const MapPageContainer = () => {
     getDefaultDimensions()
   );
   const [storiesSnackbar, setStoriesSnackbar] = useState(true);
-  const handleOpenStories = () => {};
+  const handleOpenStories = () => {
+    dispatch(setPanelState({ storiesPane: true, lineChart: false }));
+    dispatch(setMapParams({ overlay: 'stories'}))
+    setStoriesSnackbar(false);
+  };
   // default width handlers on resize
   useEffect(() => {
     typeof window &&
@@ -373,7 +378,7 @@ const MapPageContainer = () => {
       >
         <Alert severity="info" sx={{ width: "100%", textAlign: "center" }}>
           <AlertBox>
-            <h3>Atlas Stories have arrived!</h3>
+            <h3>Atlas Stories is live!</h3>
             <div>
               <p>
                 Atlas Stories collects stories behind the statistics and data
