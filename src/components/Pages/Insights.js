@@ -127,74 +127,74 @@ const products = [
 
 const research = [
   {
-      'title': 'Assessing Structural Barriers & Racial Disparities of COVID-19 Mortality With Spatial Analysis',
-      'description': <p>
-          <i>Qinyun Lin, Susan Paykin, Dylan Halpern, Aresha Martinez-Cardoso, and Marynia Kolak</i>
-          <br /><br />
-          <b>Question</b>  How do the associations between structural factors and COVID-19 mortality help explain the disproportionate outcomes experienced by different racial and ethnic groups?
-          <br/>
-          <b>Findings</b>  In this cross-sectional study of 3142 counties in 50 US states and the District of Columbia, the associations between different measures of social determinants of health and COVID-19 mortality varied across racial and ethnic groups (Black or African American, Hispanic or Latinx, and non-Hispanic White populations) and different community types (rural, suburban, and urban areas).
-          <br/>
-          <b>Meaning</b>  Findings from this study suggest the need for future research that addresses health inequity and guides policies and programs by further exploring the different dimensions and regional patterns of social determinants of health.
-          <br /><br/>
-      </p>,
-      'thumbnail': `${process.env.PUBLIC_URL}/research/structuralBarriers.jpg`,
-      'alt': 'Four maps highlighting the number of days each county spent in the most severe 20% of COVID-19 mortality.',
-      'link': 'http://jamanetwork.com/journals/jamanetworkopen/fullarticle/10.1001/jamanetworkopen.2022.0984',
-      'researchBrief': 'https://uscovidatlas.org/research-briefs/structural-barriers-covid.pdf'
+    'title': 'Assessing Structural Barriers & Racial Disparities of COVID-19 Mortality With Spatial Analysis',
+    'description': <p>
+      <i>Qinyun Lin, Susan Paykin, Dylan Halpern, Aresha Martinez-Cardoso, and Marynia Kolak</i>
+      <br /><br />
+      <b>Question</b>  How do the associations between structural factors and COVID-19 mortality help explain the disproportionate outcomes experienced by different racial and ethnic groups?
+      <br />
+      <b>Findings</b>  In this cross-sectional study of 3142 counties in 50 US states and the District of Columbia, the associations between different measures of social determinants of health and COVID-19 mortality varied across racial and ethnic groups (Black or African American, Hispanic or Latinx, and non-Hispanic White populations) and different community types (rural, suburban, and urban areas).
+      <br />
+      <b>Meaning</b>  Findings from this study suggest the need for future research that addresses health inequity and guides policies and programs by further exploring the different dimensions and regional patterns of social determinants of health.
+      <br /><br />
+    </p>,
+    'thumbnail': `${process.env.PUBLIC_URL}/research/structuralBarriers.jpg`,
+    'alt': 'Four maps highlighting the number of days each county spent in the most severe 20% of COVID-19 mortality.',
+    'link': 'http://jamanetwork.com/journals/jamanetworkopen/fullarticle/10.1001/jamanetworkopen.2022.0984',
+    'researchBrief': 'https://uscovidatlas.org/research-briefs/structural-barriers-covid.pdf'
   },
   {
-      'title': 'Dimensions of uncertainty: a spatiotemporal review of five COVID-19 datasets',
-      'description': <p>
-          <i>Dylan Halpern, Qinyun Lin, Ryan Wang, Stephanie Yang, Steve Goldstein, and Marynia Kolak</i>
-          <br /><br />
-          COVID-19 surveillance across the United States is essential to tracking and mitigating the pandemic,
-          but data representing cases and deaths may be impacted by attribute, spatial, and temporal uncertainties.
-          COVID-19 case and death data are essential to understanding the pandemic and serve as key inputs for prediction
-          models that inform policy-decisions; consistent information across datasets is critical to ensuring coherent
-          findings. We implement an exploratory data analytic approach to characterize, synthesize, and visualize
-          spatial-temporal dimensions of uncertainty across commonly used datasets for case and death metrics
-          (Johns Hopkins University, the New York Times, USAFacts, and 1Point3Acres). We scrutinize data consistency
-          to assess where and when disagreements occur, potentially indicating underlying uncertainty. We observe
-          differences in cumulative case and death rates to highlight discrepancies and identify spatial patterns.
-          Data are assessed using pairwise agreement (Cohen’s kappa) and agreement across all datasets (Fleiss’ kappa)
-          to summarize changes over time. Findings suggest highest agreements between CDC, JHU, and NYT datasets.
-          We find nine discrete type-components of information uncertainty for COVID-19 datasets reflecting various
-          complex processes. Understanding processes and indicators of uncertainty in COVID-19 data reporting is
-          especially relevant to public health professionals and policymakers to accurately understand and communicate
-          information about the pandemic.
-          <br /><br />
-      </p>,
-      'thumbnail': `${process.env.PUBLIC_URL}/research/dimensionsOfUncertainty.png`,
-      'alt': 'A matrix of cumulative case differences, calculated as the sum of daily 7-day rolling averages of new cases from 3/15/2020 to 4/15/2021. The color bins for these maps are fixed across the maps and approximate quintile breaks in either diverging direction.',
-      'link': 'https://www.tandfonline.com/doi/full/10.1080/15230406.2021.1975311',
+    'title': 'Dimensions of uncertainty: a spatiotemporal review of five COVID-19 datasets',
+    'description': <p>
+      <i>Dylan Halpern, Qinyun Lin, Ryan Wang, Stephanie Yang, Steve Goldstein, and Marynia Kolak</i>
+      <br /><br />
+      COVID-19 surveillance across the United States is essential to tracking and mitigating the pandemic,
+      but data representing cases and deaths may be impacted by attribute, spatial, and temporal uncertainties.
+      COVID-19 case and death data are essential to understanding the pandemic and serve as key inputs for prediction
+      models that inform policy-decisions; consistent information across datasets is critical to ensuring coherent
+      findings. We implement an exploratory data analytic approach to characterize, synthesize, and visualize
+      spatial-temporal dimensions of uncertainty across commonly used datasets for case and death metrics
+      (Johns Hopkins University, the New York Times, USAFacts, and 1Point3Acres). We scrutinize data consistency
+      to assess where and when disagreements occur, potentially indicating underlying uncertainty. We observe
+      differences in cumulative case and death rates to highlight discrepancies and identify spatial patterns.
+      Data are assessed using pairwise agreement (Cohen’s kappa) and agreement across all datasets (Fleiss’ kappa)
+      to summarize changes over time. Findings suggest highest agreements between CDC, JHU, and NYT datasets.
+      We find nine discrete type-components of information uncertainty for COVID-19 datasets reflecting various
+      complex processes. Understanding processes and indicators of uncertainty in COVID-19 data reporting is
+      especially relevant to public health professionals and policymakers to accurately understand and communicate
+      information about the pandemic.
+      <br /><br />
+    </p>,
+    'thumbnail': `${process.env.PUBLIC_URL}/research/dimensionsOfUncertainty.png`,
+    'alt': 'A matrix of cumulative case differences, calculated as the sum of daily 7-day rolling averages of new cases from 3/15/2020 to 4/15/2021. The color bins for these maps are fixed across the maps and approximate quintile breaks in either diverging direction.',
+    'link': 'https://www.tandfonline.com/doi/full/10.1080/15230406.2021.1975311',
   },
   {
-      'title': 'The US COVID Atlas: A dynamic cyberinfrastructure surveillance system for interactive exploration of the pandemic',
-      'description': <p>
-          <i>Marynia Kolak, Xun Li, Qinyun Lin, Ryan Wang, Moksha Menghaney, Stephanie Yang, Vidal Anguiano Jr</i>
-          <br /><br />
-          Distributed spatial infrastructures leveraging cloud computing technologies can tackle issues of disparate data sources
-          and address the need for data-driven knowledge discovery and more sophisticated spatial analysis central to the
-          COVID-19 pandemic. We implement a new, open source
-          spatial middleware component (libgeoda) and system design
-          to scale development quickly to effectively meet the need
-          for surveilling county-level metrics in a rapidly changing
-          pandemic landscape. We incorporate, wrangle, and analyze
-          multiple data streams from volunteered and crowdsourced
-          environments to leverage multiple data perspectives. We
-          integrate explorative spatial data analysis (ESDA) and statistical hotspot standards to detect infectious disease clusters
-          in real time, building on decades of research in GIScience
-          and spatial statistics. We scale the computational infrastructure to provide equitable access to data and insights
-          across the entire USA, demanding a basic but high-quality
-          standard of ESDA techniques. Finally, we engage a research
-          coalition and incorporate principles of user-centered design to ground the direction and design of Atlas application
-          development.
-          <br /><br />
-      </p>,
-      'thumbnail': `${process.env.PUBLIC_URL}/research/transaction_gis.jpg`,
-      'alt': 'A diagram of the US Covid Atlas web systems, which uses the C++ library "libgeoda" in WebAssembly (WASM) to integrate spatial statistics, weights, clustering, and regression into the javascript "jsgeoda" package.',
-      'link': 'https://onlinelibrary.wiley.com/doi/10.1111/tgis.12786',
+    'title': 'The US COVID Atlas: A dynamic cyberinfrastructure surveillance system for interactive exploration of the pandemic',
+    'description': <p>
+      <i>Marynia Kolak, Xun Li, Qinyun Lin, Ryan Wang, Moksha Menghaney, Stephanie Yang, Vidal Anguiano Jr</i>
+      <br /><br />
+      Distributed spatial infrastructures leveraging cloud computing technologies can tackle issues of disparate data sources
+      and address the need for data-driven knowledge discovery and more sophisticated spatial analysis central to the
+      COVID-19 pandemic. We implement a new, open source
+      spatial middleware component (libgeoda) and system design
+      to scale development quickly to effectively meet the need
+      for surveilling county-level metrics in a rapidly changing
+      pandemic landscape. We incorporate, wrangle, and analyze
+      multiple data streams from volunteered and crowdsourced
+      environments to leverage multiple data perspectives. We
+      integrate explorative spatial data analysis (ESDA) and statistical hotspot standards to detect infectious disease clusters
+      in real time, building on decades of research in GIScience
+      and spatial statistics. We scale the computational infrastructure to provide equitable access to data and insights
+      across the entire USA, demanding a basic but high-quality
+      standard of ESDA techniques. Finally, we engage a research
+      coalition and incorporate principles of user-centered design to ground the direction and design of Atlas application
+      development.
+      <br /><br />
+    </p>,
+    'thumbnail': `${process.env.PUBLIC_URL}/research/transaction_gis.jpg`,
+    'alt': 'A diagram of the US Covid Atlas web systems, which uses the C++ library "libgeoda" in WebAssembly (WASM) to integrate spatial statistics, weights, clustering, and regression into the javascript "jsgeoda" package.',
+    'link': 'https://onlinelibrary.wiley.com/doi/10.1111/tgis.12786',
   }
 ]
 
@@ -259,11 +259,11 @@ export default function Insights() {
             Viz
           </Tab>
           <Tab
-            {...a11yProps(3)} 
-            active={tabValue === 3} 
+            {...a11yProps(3)}
+            active={tabValue === 3}
             onClick={() => setTabValue(3)}
-            >
-              Media
+          >
+            Media
           </Tab>
         </TabBar>
         <TabPanel display={tabValue === 0}>
@@ -329,8 +329,13 @@ export default function Insights() {
                 </a>
                 {entry.description}
                 <a href={entry.link} target="_blank" rel="noopeener noreferrer">
-                  Read more
+                  Read the full article
                 </a>
+                {!!entry.researchBrief && <>
+                  <Gutter h={10} />
+                  <a href={entry.researchBrief} target="_blank" rel="noopener noreferrer">
+                    Read the research brief
+                  </a></>}
               </Grid>
             </ProductCard>
           ))}
@@ -363,14 +368,14 @@ export default function Insights() {
           ))}
         </TabPanel>
         <TabPanel display={tabValue === 3}>
-        <Gutter h={20} />
-            <p>
-                Atlas research, insights, and data have been featured in leading national and local media outlets, including NPR, The Washington Post, Scientific American, and The Root.
-                Find featured press coverage, op-eds, and interviews below. 
-            </p>
-            <hr />
-            <Gutter h={20} />
-            <MediaAccordian />
+          <Gutter h={20} />
+          <p>
+            Atlas research, insights, and data have been featured in leading national and local media outlets, including NPR, The Washington Post, Scientific American, and The Root.
+            Find featured press coverage, op-eds, and interviews below.
+          </p>
+          <hr />
+          <Gutter h={20} />
+          <MediaAccordian />
         </TabPanel>
       </ContentContainer>
       <Footer />
