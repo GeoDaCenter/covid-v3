@@ -533,13 +533,13 @@ function VariablePanel() {
     >
       {panelState.variables && (
         <ControlsContainer>
-        <Grid xs={12} md={12} lg={6}>
+        <Grid item xs={12} md={12} lg={6}>
           <h2>
             Data Sources &amp;
             <br /> Map Variables
           </h2>
         </Grid>
-          <Grid xs={12} md={12} lg={6}>
+          <Grid item xs={12} md={12} lg={6}>
             <Button 
               variant="contained" 
               sx={storiesButtonStyles}

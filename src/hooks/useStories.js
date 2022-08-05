@@ -89,7 +89,6 @@ function useCentroidRandomizer() {
             const geog = geo.data.features.find(f => f.properties.GEOID === geoid)
             const bounds = bbox(geog.geometry);
             const point = getPoint(bounds, geog);
-            console.log('POINT', point)
             return point;
         }
     }
@@ -125,7 +124,6 @@ export const useStories = ({
         fetchName,
         fetcher        
     );
-    console.log(centroidReady, allStories)
 
     // based on filters, return relevant stories
     // filter schema is:
