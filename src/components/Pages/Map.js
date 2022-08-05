@@ -387,14 +387,14 @@ const MapPageContainer = () => {
               </p>
             </div>
             <div>
-              <button onClick={handleOpenStories}>See Stories</button>
               <a
                 href="https://stories.uscovidatlas.org/"
                 target="blank"
                 rel="noopener noreferrer"
               >
-                Share your experience
+                Share your Experience
               </a>
+              <button onClick={handleOpenStories}>See Stories</button>
             </div>
             <CloseButton variant="text" onClick={() => setStoriesSnackbar(false)}>
               &times;

@@ -230,7 +230,10 @@ const ListSubheader = styled(MenuItem)`
 const storiesButtonStyles = {
   background: colors.teal,
   textTransform: 'none',
-  color: colors.white
+  color: colors.white,
+  width: 'calc(100% - 1em)',
+  fontWeight:'bold',
+  fontSize:'16px'
 }
 
 const AcsRaceButton = styled.button`
@@ -512,6 +515,16 @@ function VariablePanel() {
   const handleSwitch = () =>
     dispatch(setMapParams({ binMode: binMode === "dynamic" ? "" : "dynamic" }));
 
+  const handleToggleStories = () => {
+    if (panelState.storiesPane){
+      dispatch(setPanelState({ storiesPane: false, lineChart: true }));
+      dispatch(setMapParams({overlay: ''}));
+    } else {
+      dispatch(setPanelState({ storiesPane: true, lineChart: false }));
+      dispatch(setMapParams({overlay: 'stories'}));
+    }
+  }
+  
   const availableData = currentPreset.geography
     ? allDatasets.filter(
         (dataset) =>
@@ -543,16 +556,15 @@ function VariablePanel() {
             <Button 
               variant="contained" 
               sx={storiesButtonStyles}
-              onClick={() => {
-                dispatch(setPanelState({ storiesPane: true, lineChart: false }));
-                dispatch(
-                  setMapParams({
-                    overlay: 'stories'
-                  })
-                );
-              }}
+              onClick={handleToggleStories}
               >
-                <b>New:</b>&nbsp;See Atlas Stories
+                <Switch
+                  checked={panelState.storiesPane}
+                  onChange={handleToggleStories}
+                  name="stories mode switch"
+                  label="Atlas Stories"
+                />
+                Atlas Stories
             </Button>
           </Grid>
           <Gutter h={20} />
