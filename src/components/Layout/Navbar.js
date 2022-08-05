@@ -357,7 +357,7 @@ const pageDropDowns = {
     {
       header: 'Submit',
       desc: 'Share your story of the pandemic and uplift the real experiences behind the data.',
-      link: '/insights#research',
+      link: 'https://stories.uscovidatlas.org/',
     },
     {
       header: 'Explore Map',
