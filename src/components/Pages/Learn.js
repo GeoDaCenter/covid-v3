@@ -28,7 +28,12 @@ const LearnPage = styled(ContentContainer)`
     text-align: center;
     max-width: 60ch;
   }
+  a {
+    text-decoration: underline;
+    font-weight: 300;
+  }
 `;
+
 
 const ButtonsContainer = styled(Box)`
   display: flex;
@@ -61,7 +66,6 @@ const CTALink = styled.a`
   }
 
 `
-
 const FullHeightContainer = styled.div`
   min-height: 100vh;
   width: 100%;
@@ -179,6 +183,16 @@ const RoleIcon = styled.div`
     stroke: ${({ color }) => color};
   }
 `;
+
+const RoleTutorialList = styled.ul`
+  list-style:none;
+  li {
+    margin-bottom:.75rem;
+    a {font-weight: bold;}
+  }
+`
+
+const RolePressList = styled.ul``
 
 const TutorialsAndDemos = [
   {
@@ -632,24 +646,24 @@ export default function Learn() {
                   <Typography element="p">
                     Get started with these relevant tutorials:
                   </Typography>
-                  <ul>
+                  <RoleTutorialList>
                     {topics.map(({ text, link }) => (
                       <li key={text}>
                         <a href={link}>{text}</a>
                       </li>
                     ))}
-                  </ul>
+                  </RoleTutorialList>
                   <Gutter h={"4em"} />
-                  <Typography element="p">
+                  <Typography element="p" sx={{fontWeight: 'bolder'}}>
                     {useCasesTitle}
                   </Typography>
-                  <ul>
+                  <RolePressList>
                     {useCases.map(({ text, link }) => (
                       <li key={text}>
                         <a href={link}>{text}</a>
                       </li>
                     ))}
-                  </ul>
+                  </RolePressList>
                   
                   <Typography variant="h4" element="h4">
                     {quote.text}
