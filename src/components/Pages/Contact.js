@@ -230,7 +230,7 @@ export default function Contact() {
           />
         </a>
         <a
-          href="https://github.com/GeoDaCenter/covid"
+          href="https://github.com/GeoDaCenter/covid-v3"
           target="_blank"
           rel="noopener noreferrer"
           className="social-icon"
