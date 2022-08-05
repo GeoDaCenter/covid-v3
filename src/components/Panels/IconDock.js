@@ -25,9 +25,12 @@ const DockContainer = styled.div`
     border:none;
     width:100%;
     height:50px;
+    /* padding: 10px 14px; */
     padding: 14px 14px 14px 10px;
-    cursor:pointer;
+    cursor:pointer;    
     border-left:4px solid rgba(0,0,0,0);
+    /* border-bottom:2px solid ${colors.gray};
+    border-top:2px solid ${colors.gray}; */
     transition: 125ms all;
     svg {
       fill:white;
@@ -43,6 +46,7 @@ const DockContainer = styled.div`
     }
     &.active {
       border-color:${colors.yellow};
+      /* background-color:${colors.yellow}44; */
     }
     span.mobileText {
       display:none;
