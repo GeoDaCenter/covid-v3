@@ -729,7 +729,7 @@ function Home() {
           open={videoModalInner}
           onClose={() => setVideoModalInner(false)}
           title="Intro: US Covid Atlas and Atlas Stories"
-          videoUrl="https://www.youtube.com/embed/uaB-PacriyA"
+          videoUrl="https://www.youtube.com/embed/pjswdUvwbFE"
         />
       </HomePage>
     </>
