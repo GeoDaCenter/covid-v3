@@ -335,17 +335,22 @@ const pageDropDowns = {
     {
       header: 'Research',
       desc: 'Peer-reviewed academic research related to efforts to better understand COVID-19 and the tools we use.',
-      link: '/insights#research',
+      link: '/insights#research'
     },
     {
       header: 'Blog',
       desc: "Snapshots and short-form articles of what we're seeing and how we're working.",
-      link: '/insights#blog',
+      link: '/insights#blog'
     },
     {
-      header: 'Data Viz',
+      header: 'Stories',
       desc: 'Data visualizations that highlight the challenges, reality, and complexity of COVID-19.',
-      link: '/insights#viz',
+      link: '/insights#stories'
+    },
+    {
+      header: 'Press',
+      desc: 'Media and press coverage of our research, insights, and data.',
+      link: '/insights#press'
     },
   ],
   STORIES: [

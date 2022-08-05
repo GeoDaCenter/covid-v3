@@ -4,6 +4,7 @@ import Grid from '@mui/material/Grid';
 
 import { ContentContainer, Gutter, NavBar, Footer } from '../../components';
 import colors from '../../config/colors';
+import MediaAccordian from '../Layout/MediaAccordion';
 
 const InsightsPage = styled.div`
   background: white;
@@ -170,6 +171,8 @@ function a11yProps(index) {
   };
 }
 
+const availableTabs = ['#blog', '#research', '#viz', '#press']
+
 export default function Insights() {
   const [rssFeed, setRssFeed] = useState({
     feed: {},
@@ -178,15 +181,11 @@ export default function Insights() {
 
   const [tabValue, setTabValue] = useState(
     window.location.hash.length
-      ? ['#blog', '#research', '#viz'].indexOf(window.location.hash)
+      ? availableTabs.indexOf(window.location.hash)
       : 0,
   );
 
-  const handleHashChange = () => {
-    setTabValue(
-      ['#blog', '#research', '#viz'].indexOf(window.location.hash),
-    );
-  };
+  const handleHashChange = () => setTabValue(availableTabs.indexOf(window.location.hash));
 
   useEffect(() => {
     fetch(
@@ -224,6 +223,13 @@ export default function Insights() {
             onClick={() => setTabValue(2)}
           >
             Viz
+          </Tab>
+          <Tab
+            {...a11yProps(3)} 
+            active={tabValue === 3} 
+            onClick={() => setTabValue(3)}
+            >
+              Press
           </Tab>
         </TabBar>
         <TabPanel display={tabValue === 0}>
@@ -321,6 +327,16 @@ export default function Insights() {
               </Grid>
             </ProductCard>
           ))}
+        </TabPanel>
+        <TabPanel display={tabValue === 3}>
+        <Gutter h={20} />
+            <p>
+                Atlas research, insights, and data have been featured in leading national and local media outlets, including NPR, The Washington Post, Scientific American, and The Root.
+                Find featured press coverage, op-eds, and interviews below. 
+            </p>
+            <hr />
+            <Gutter h={20} />
+            <MediaAccordian />
         </TabPanel>
       </ContentContainer>
       <Footer />
