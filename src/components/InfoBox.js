@@ -96,6 +96,7 @@ const BodyContainer = styled.div`
   max-height:100%;
   box-sizing: border-box;
   overflow-y: auto;
+  padding:1em 1em 1em 2em;
   ::-webkit-scrollbar {
     width: 10px;
   }
@@ -120,6 +121,9 @@ const BodyContainer = styled.div`
     background-position: center center;
     background-repeat: no-repeat, no-repeat;
     background-size: 50%, 100%;
+  }
+  img {
+    padding: 1em;
   }
 `;
 

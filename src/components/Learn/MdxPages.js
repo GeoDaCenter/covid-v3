@@ -1,5 +1,4 @@
 import * as AddCustomData from './AddCustomData.mdx'
-import * as ChangeOverTime from './ChangeOverTime.mdx'
 import * as CommunityContexts from './CommunityContexts.mdx'
 import * as CommunityReports from './CommunityReports.mdx'
 import * as EmergingTrends from './EmergingTrends.mdx'
@@ -14,7 +13,6 @@ import * as BugReport from './BugReport.mdx'
 
 const pages = {
     [AddCustomData.config.slug]: AddCustomData,
-    [ChangeOverTime.config.slug]: ChangeOverTime,
     [CommunityContexts.config.slug]: CommunityContexts,
     [CommunityReports.config.slug]: CommunityReports,
     [EmergingTrends.config.slug]: EmergingTrends,
