@@ -345,7 +345,7 @@ const pageDropDowns = {
     {
       header: 'Viz',
       desc: 'Data visualizations that highlight the challenges, reality, and complexity of COVID-19.',
-      link: '/insights#stories'
+      link: '/insights#viz'
     },
     {
       header: 'Media',
