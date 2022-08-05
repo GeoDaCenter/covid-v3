@@ -542,7 +542,8 @@ export default function Faq() {
           </Accordion>
         ))}
         <Gutter h={40} />
-        <h2>LEARNING COMMUNITY</h2>
+        
+        {/* <h2>LEARNING COMMUNITY</h2>
         <hr />
         <p>
           The{' '}
@@ -565,7 +566,8 @@ export default function Faq() {
           to interact. It is moderated by coalition members. Ask questions,
           provide feedback, and help make the Atlas Coalition stronger!
         </p>
-        <Gutter h={40} />
+        <Gutter h={40} /> */}
+        
       </ContentContainer>
       <Footer />
     </FaqPage>
