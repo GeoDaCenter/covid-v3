@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import { Button, Modal, Box } from "@mui/material";
 import colors from "../../config/colors";
@@ -47,7 +47,6 @@ export const VideoModal = ({
     title,
     videoUrl,
 }) => {
-    
     return  <Modal
         open={open}
         onClose={onClose}
@@ -73,4 +72,38 @@ export const VideoModal = ({
             </VideoModalInner>
         </VideoModalBox>
     </Modal>
+}
+
+export const SelfContainedVideoModal = ({
+    buttonText="Watch Video",
+    title="Tutorial video",
+    videoUrl
+}) => {
+    const [open, setOpen] = useState(false);
+    const toggleOpen = () => setOpen(open => !open);
+    return <>
+        <Button onClick={toggleOpen}
+            sx={{
+                textTransform: "none",
+                fontWeight: "bold",
+                background: colors.yellow,
+                fontSize: '24px',
+                margin: '.5em 0',
+                padding: '0.25em 0.5em',
+                color: 'black',
+                '&:hover': {
+                    background: colors.orange,
+                }
+            }}
+            >
+            <span style={{fontSize:32, lineHeight:0, marginRight: 6}}>&#9656;</span> {buttonText}
+        </Button>
+        <VideoModal
+            open={open}
+            onClose={toggleOpen}
+            title={title}
+            videoUrl={videoUrl}
+        />
+    </>
+
 }
