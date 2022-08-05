@@ -15,6 +15,7 @@ import {
 import { MAPBOX_ACCESS_TOKEN } from "../../config";
 import colors from "../../config/colors";
 import { Button, Modal } from "@mui/material";
+import { VideoModal } from "../Interface/VideoModal";
 
 const HomePage = styled.div`
   h1 {
@@ -335,13 +336,21 @@ const ModalContent = styled.div`
 const ModalContentInner = styled.div`
   position: relative;
   padding: 2em;
+  text-align: center;
   a {
-    color:white !important;
+    color: white !important;
     font-weight: bold;
   }
   h3 {
-    font-size:3rem;
-    font-family:'Playfair Display', serif;
+    font-size: 3rem;
+    font-family: "Playfair Display", serif;
+  }
+  button {
+    margin: .5em auto 0 auto;
+    display: block;
+  }
+  p {
+    font-size: 16px;
   }
 `;
 
@@ -350,10 +359,11 @@ const CloseButton = styled(Button)`
   top: 0;
   right: 0;
   color: ${colors.white};
-`
+`;
 function Home() {
   const [ctaActive, setCtaActive] = useState(false);
   const [storiesModal, setStoriesModal] = useState(true);
+  const [videoModalInner, setVideoModalInner] = useState(false);
 
   const handleGeocoder = (e) => {
     let url = "";
@@ -642,39 +652,55 @@ function Home() {
           <ModalContent>
             <ModalContentInner>
               <h3>Atlas Stories is live!</h3>
+              <Button 
+                onClick={() => setVideoModalInner(true)}
+                variant="contained"
+                sx={{
+                  textTransform: "none",
+                  fontWeight: "bold",
+                  background: colors.orange,
+                  fontSize: '24px',
+                  margin: 0,
+                  padding: '0.25em 0.5em' 
+                }}
+                >
+                <span style={{fontSize:32, lineHeight:0, marginRight: 6}}>&#9656;</span> Learn more about Atlas Stories
+              </Button>
               <Gutter h={20} />
               <p>
                 The COVID-19 pandemic highlighted community capacity for
                 resilience and inequitable impacts on diverse people and places.
-                Atlas Stories by the US Covid Atlas collects stories behind the statistics and data. We
-                seek perspectives that represent the diversity of experiences in
-                the United States, in order to build a more holistic archive of
-                the pandemic.
+                Atlas Stories by the US Covid Atlas collects stories behind the
+                statistics and data. We seek perspectives that represent the
+                diversity of experiences in the United States, in order to build
+                a more holistic archive of the pandemic.
               </p>
               <Gutter h={20} />
               <p>
-                Want to share your experience of the pandemic? &nbsp;
                 <a href="https://stories.uscovidatlas.org/">
                   Check out the Atlas stories submission site.
                 </a>
               </p>
               <Gutter h={20} />
               <p>
-                Interested in seeing others' stories?
-                See the <a href="/map?lat=38.454&lon=-92.534&z=4.4&src=county_nyt&var=Confirmed_Count_per_100K_Population&mthd=natural_breaks&date=922&range=7&ovr=stories&viz=2D&v=2">
+                See the{" "}
+                <a href="/map?lat=38.454&lon=-92.534&z=4.4&src=county_nyt&var=Confirmed_Count_per_100K_Population&mthd=natural_breaks&date=922&range=7&ovr=stories&viz=2D&v=2">
                   Stories Map
-                </a> or <a href="/archive">
-                  Interactive Archive
-                </a>.
+                </a>{" "}
+                or <a href="/archive">Interactive Archive</a>.
               </p>
-              <CloseButton
-                onClick={() => setStoriesModal(false)}
-                >
-                  &times;
-                </CloseButton>
+              <CloseButton onClick={() => setStoriesModal(false)}>
+                &times;
+              </CloseButton>
             </ModalContentInner>
           </ModalContent>
         </Modal>
+        <VideoModal
+          open={videoModalInner}
+          onClose={() => setVideoModalInner(false)}
+          title="Intro: US Covid Atlas and Atlas Stories"
+          videoUrl="https://www.youtube.com/embed/uaB-PacriyA"
+        />
       </HomePage>
     </>
   );
