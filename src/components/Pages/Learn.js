@@ -207,9 +207,9 @@ const TutorialsAndDemos = [
     slug: "community-contexts",
   },
   {
-    title: "Emerging Trends",
+    title: "Trends over  time",
     description: "Explore how trends emerge and evolve over time",
-    slug: "identify-emerging-trends",
+    slug: "trends-over-time",
   },
   {
     title: "Sharing Data & Findings",
@@ -277,7 +277,7 @@ const RolesContent = [
       },
       {
         text: "Exploring Changes Over Time",
-        link: "/learn/identify-emerging-trends",
+        link: "/learn/trends-over-time",
       },
       {
         text: "Sharing Data and Findings",
@@ -412,7 +412,7 @@ const RolesContent = [
       },
       {
         text: "Identifying Trends Over Time",
-        link: "/learn/identify-emerging-trends",
+        link: "/learn/trends-over-time",
       },
       {
         text: "Sharing Data and Fidings",
@@ -453,7 +453,7 @@ const RolesContent = [
     topics: [
       {
         text: "Identifying Trends Over Time",
-        link: "/learn/identify-emerging-trends",
+        link: "/learn/trends-over-time",
       },
       {
         text: "Understanding Community Contexts",
