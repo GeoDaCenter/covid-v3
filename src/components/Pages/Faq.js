@@ -486,9 +486,10 @@ export default function Faq() {
     <FaqPage>
       <NavBar light />
       <ContentContainer>
-        <h1>Help</h1>
+        <h1>FAQs</h1>
         <hr />
-        <ButtonContainer container spacing={2}>
+        
+        {/* <ButtonContainer container spacing={2}>
           <Grid item xs={12} md={6}>
             <TutorialButton onClick={() => goTo('choropleth')}>
               <h3>Choropleth Maps</h3>
@@ -519,8 +520,9 @@ export default function Faq() {
             </TutorialButton>
           </Grid>
         </ButtonContainer>
-        <Gutter h={40} />
-        <h2>FREQUENTLY ASKED QUESTIONS</h2>
+        <Gutter h={40} /> */}
+
+        <h2>FREQUENTLY ASKED QUESTIONS, AND THEIR ANSWERS.</h2>
         <hr />
         {faqQuestions.map((question, index) => (
           <Accordion
