@@ -1,9 +1,84 @@
+import HintBox from '../Toolkit/HintBox';
+import Icon from '../Interface/Icon';
+import Grid from '@mui/material/Grid';
+
+
 export const config = {
     slug: 'sharing-data',
     title: 'Sharing Data and Findings :: US Covid Atlas Learn',
     description: 'Learn how to download data and embed and share maps directly',
 }
 
-# Sharing Data and Findings
 
-Text here
+# Sharing Data & Enhancing Findings
+
+---
+
+### Downloading Data
+**LOCATION: TOP MAIN MENU: Data > Download**
+
+Use the Data Download tool to download bulk CSV files of the data available on the US Covid Atlas. 
+
+
+1. Navigate to the **Data Download** tool at: [www.uscovidatlas.org/download](www.uscovidatlas.org/download) 
+
+2. <Grid container>
+    <Grid item xs={12} md={8}>
+        **Use the checkboxes** to select your datasets of interest. You may choose the full dataset 
+        (i.e. all Cases Data), select a dataset by County and/or State, and/or select by Data Source 
+        (i.e. Cases Data - County - New York Times and Cases Data - County - USA Facts). 
+        See the screenshot below for the complete available data archive.
+    </Grid>
+    <Grid item xs={12} md={4}>
+        <img src="/img/learn/sharing/download.png" alt="" style={{maxWidth:300}}/>
+    </Grid>
+    </Grid>
+3. Press the **“Download Data” blue button** to begin your download. <img src="/img/learn/sharing/download-button.png" alt="" style={{maxWidth:300, display:'block', margin: '0 auto'}}/>
+4. Your device should begin downloading a ZIP archive of your selected CSV files and as well as data documentation.  \
+5. Unzip the folder to view its contents. You should see 4 items: **data** folder; **docs** folder; **LICENSE.txt** file; and a **readme.md** file.
+<img src="/img/learn/sharing/download-files.png" alt="" style={{maxWidth:600, display:'block', margin: '0 auto'}}/>
+
+<br/>
+* The **data** folder contains the CSVs of your selected datasets. 
+* The **docs** folder contains the documentation for all Atlas datasets
+* **LICENSE.txt** contains details on the GNU General Public License (GPL 3), a free copyleft license for our open source software and data on the Atlas. 
+* **readme.md** contains a brief description of the ZIP archive contents. 
+
+<HintBox>
+     If you are downloading the full data archive available on the Atlas, note that the file will be over 70MB and  may be slow to load.
+</HintBox>
+
+Access the Data Download Tool at [www.uscovidatlas.org/download](www.uscovidatlas.org/download).
+<img src="/img/learn/sharing/download-full.png" alt="" style={{maxWidth:600, display:'block', margin: '0 auto'}}/>
+
+---
+
+## Sharing Maps & Findings
+
+
+### Embed a Map View
+
+In a few short steps, you can integrate a map view of the Atlas into your own website to share through embedded content. 
+
+<img src="/img/learn/sharing/embed-helper.png" alt="" style={{maxWidth:600, display:'block', margin: '0 auto'}}/>
+
+Generate the map you'd like to embed with the variables of interest, visualization of county/state level COVID data, and specific community indicators and resources
+
+
+1. Copy the URL link of your generated map by clicking the **<Icon symbol="share" /> Share Link Icon** on the bottom left of the map
+2. Navigate to the [COVID Atlas Embed Helper](https://observablehq.com/@nofurtherinformation/covid-atlas-embed-helper)
+3. Copy and paste your unique map view URL link under **_Link to embed_**
+4. (Optional) To change the size of the embedded view, adjust **_Window Height_**
+5. Check the **_Preview_** to confirm that you are satisfied with the size and quality of the embedded Atlas map view
+6. Copy and paste the **_iframe element_** located below the Atlas preview to embed the Atlas on your website. 
+
+---
+
+### Take a Screenshot
+
+Screenshotting is an easy way to save and share map insights from the Atlas. 
+
+1. Use the guides in previous chapters of this resource guide to explore and choose your variables of interest, map and visualize county/state level COVID data, and use menu options to view specific community indicators and resources using the Atlas
+2. Adjust the View window by zooming in and out on your area or insight of interest 
+3. Screenshot the window according to your device’s settings. Visit [take-a-screenshot.org](https://www.take-a-screenshot.org/windows.html) for a guide to taking a screenshot on a Windows, Mac, Linux, or Chrome device. 
+

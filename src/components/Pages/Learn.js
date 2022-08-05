@@ -209,7 +209,7 @@ const TutorialsAndDemos = [
   {
     title: "Emerging Trends",
     description: "Explore how trends emerge and evolve over time",
-    slug: "emerging-trends",
+    slug: "identify-emerging-trends",
   },
   {
     title: "Sharing Data & Findings",
@@ -219,7 +219,7 @@ const TutorialsAndDemos = [
   {
     title: "Community Reports",
     description: "Create custom community data reports in an easy-to-share format",
-    slug: "community-reports",
+    slug: "create-a-report",
   },
   {
     title: "Add Custom Data",
@@ -277,7 +277,7 @@ const RolesContent = [
       },
       {
         text: "Exploring Changes Over Time",
-        link: "/learn/emerging-trends",
+        link: "/learn/identify-emerging-trends",
       },
       {
         text: "Sharing Data and Findings",
@@ -328,7 +328,7 @@ const RolesContent = [
       },
       {
         text: "Customizable Community Reports",
-        link: "/learn/community-reports",
+        link: "/learn/create-a-report",
       },
     ],
     useCasesTitle: "How has the Atlas been used in policy contexts?",
@@ -412,7 +412,7 @@ const RolesContent = [
       },
       {
         text: "Identifying Trends Over Time",
-        link: "/learn/emerging-trends",
+        link: "/learn/identify-emerging-trends",
       },
       {
         text: "Sharing Data and Fidings",
@@ -453,7 +453,7 @@ const RolesContent = [
     topics: [
       {
         text: "Identifying Trends Over Time",
-        link: "/learn/emerging-trends",
+        link: "/learn/identify-emerging-trends",
       },
       {
         text: "Understanding Community Contexts",
