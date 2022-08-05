@@ -27,8 +27,7 @@ export default function Downloader() {
         <hr />
         <p>
           <code>
-            Li, Xun, Lin, Qinyun, and Kolak, Marynia. The U.S. COVID-19 Atlas,
-            2020. https://www.uscovidatlas.org
+          Marynia Kolak, Qinyun Lin, Dylan Halpern, Susan Paykin, Aresha Martinez-Cardoso, and Xun Li. The US Covid Atlas, 2022. Center for Spatial Data Science at University of Chicago. https://www.uscovidatlas.org.
           </code>
           <br />
           <br />
