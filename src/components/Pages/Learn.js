@@ -282,8 +282,8 @@ const RolesContent = [
     image: "/img/learn/public-health.jpeg",
     imageAlt: "",
     description:
-    <span> <b>Public health professionals need access to reliable data easily accessible data.</b> The US Covid Atlas can help fill in the gaps. The Atlas lets you explore trends over time to understand and inform public health decisions. Grab screenshots of maps, share a unique link to a specific county map view, or embed an Atlas map view on your website to bolster public outreach and communications. </span>
-      ,
+      <span> <b>Public health professionals need access to reliable data easily accessible data.</b> The US Covid Atlas can help fill in the gaps. The Atlas lets you explore trends over time to understand and inform public health decisions. Grab screenshots of maps, share a unique link to a specific county map view, or embed an Atlas map view on your website to bolster public outreach and communications. </span>
+    ,
     topics: [
       {
         text: "Creating Thematic Maps",
@@ -314,15 +314,15 @@ const RolesContent = [
       },
     ],
     quote: {
-      text: 
-      <span>Want to be featured here? <a href="/contact">Let us know</a> how you use the Atlas.</span>,
+      text:
+        <span>Want to be featured here? <a href="/contact">Let us know</a> how you use the Atlas.</span>,
       author: "",
     },
     background: "#e79b45",
     icon: "health",
     iconText: "Public Health",
   },
-  
+
   {
     ref: "policy",
     title: "Policy",
@@ -330,7 +330,7 @@ const RolesContent = [
     imageAlt: "",
     description:
       <span><b>Policy relies on data-driven evidence.</b> Policymakers and staff can explore the impacts of events in their communities using Atlas data and tools. Create a customizable Community Report to communicate data and findings in an easy-to-share online or printable format. Present data tables, maps, and line charts to communicate with stakeholders. Analyze the impact of policy responses over time with temporal exploration.
-        </span>,
+      </span>,
     topics: [
       {
         text: "Creating Thematic Maps",
@@ -497,7 +497,7 @@ const RolesContent = [
     icon: "media",
     iconText: "Media",
   },
-  
+
 ];
 
 export default function Learn() {
@@ -536,10 +536,8 @@ export default function Learn() {
             A Guide to the Atlas
           </Typography>
           <Typography variant="h2" element="h2">
-            The Atlas helps you access current, validated county-level data and
-            spatial analysis to better understand the spread in communities and
-            to bolster planning efforts. Scroll to access tutorials, explore
-            uses by role, and more.
+            A free and open source data visualization platform, the US Covid Atlas connects COVID-19 data and community indicators to better understand the impact of the pandemic, from its start through today. 
+            Scroll to explore tutorials, video demos, examples of how the Atlas is used in different fields, and more.
           </Typography>
           <ButtonsContainer>
             <CTAButton
@@ -549,7 +547,7 @@ export default function Learn() {
             >
               Explore tutorials
             </CTAButton>
-            
+
             <CTALink
               download
               href={`${process.env.PUBLIC_URL}/toolkit/Atlas Resource Guide.pdf`}
@@ -591,12 +589,12 @@ export default function Learn() {
           </Typography>
           <RoleContainer>
             {Roles.map(({ title, sectionId, icon, iconColor }) => (
-                <RoleButton onClick={() => handleScroll(sectionId)} ley={sectionId}>
-                  <RoleIcon color={iconColor}>
-                    <Icon symbol={icon} style={{ width: "4rem" }} />
-                  </RoleIcon>
-                  {title}
-                </RoleButton>
+              <RoleButton onClick={() => handleScroll(sectionId)} ley={sectionId}>
+                <RoleIcon color={iconColor}>
+                  <Icon symbol={icon} style={{ width: "4rem" }} />
+                </RoleIcon>
+                {title}
+              </RoleButton>
             ))}
           </RoleContainer>
         </FullHeightContent>
@@ -654,7 +652,7 @@ export default function Learn() {
                     ))}
                   </RoleTutorialList>
                   <Gutter h={"4em"} />
-                  <Typography element="p" sx={{fontWeight: 'bolder'}}>
+                  <Typography element="p" sx={{ fontWeight: 'bolder' }}>
                     {useCasesTitle}
                   </Typography>
                   <RolePressList>
@@ -664,7 +662,7 @@ export default function Learn() {
                       </li>
                     ))}
                   </RolePressList>
-                  
+
                   <Typography variant="h4" element="h4">
                     {quote.text}
                   </Typography>
