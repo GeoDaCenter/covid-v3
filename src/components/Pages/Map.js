@@ -387,14 +387,17 @@ const MapPageContainer = () => {
               </p>
             </div>
             <div>
-              <a
-                href="https://stories.uscovidatlas.org/"
-                target="blank"
-                rel="noopener noreferrer"
+              <Button
+                onClick={() => window.location.href = "https://stories.uscovidatlas.org/"}
+                variant="contained"
+                sx={{
+                  background: `${colors.yellow} !important`,
+                  textTransform: 'none'
+                }}
               >
-                Share your Experience
-              </a>
-              <button onClick={handleOpenStories}>See Stories</button>
+                Submit a Story
+              </Button>
+              {/* <button onClick={handleOpenStories}>See Stories</button> */}
             </div>
             <CloseButton variant="text" onClick={() => setStoriesSnackbar(false)}>
               &times;

@@ -652,6 +652,30 @@ function Home() {
           <ModalContent>
             <ModalContentInner>
               <h3>Atlas Stories is live!</h3>
+              <Gutter h={20} />
+              {/* <Button 
+                onClick={() => setVideoModalInner(true)}
+                variant="contained"
+                sx={{
+                  textTransform: "none",
+                  fontWeight: "bold",
+                  background: colors.yellow,
+                  fontSize: '24px',
+                  margin: 0,
+                  padding: '0.25em 0.5em' 
+                }}
+                >
+                <span style={{fontSize:32, lineHeight:0, marginRight: 6}}>&#9656;</span> Share Your Pandemic Experience
+              </Button>
+              <Gutter h={20} /> */}
+              <p>
+                Atlas Stories by the US Covid Atlas collects stories behind the
+                statistics and data. We seek perspectives that represent the
+                diversity of experiences in the United States, in order to build
+                a more holistic archive of the pandemic.
+              </p>
+              <Gutter h={20} />
+              <div style={{display:'flex'}}>
               <Button 
                 onClick={() => setVideoModalInner(true)}
                 variant="contained"
@@ -661,24 +685,30 @@ function Home() {
                   background: colors.orange,
                   fontSize: '24px',
                   margin: 0,
-                  padding: '0.25em 0.5em' 
+                  padding: '0.25em 0.5em',
                 }}
                 >
-                <span style={{fontSize:32, lineHeight:0, marginRight: 6}}>&#9656;</span> Learn more about Atlas Stories
+                <span style={{fontSize:32, lineHeight:0, marginRight: 6}}>&#9656;</span> Learn more
               </Button>
-              <Gutter h={20} />
-              <p>
-                The COVID-19 pandemic highlighted community capacity for
-                resilience and inequitable impacts on diverse people and places.
-                Atlas Stories by the US Covid Atlas collects stories behind the
-                statistics and data. We seek perspectives that represent the
-                diversity of experiences in the United States, in order to build
-                a more holistic archive of the pandemic.
-              </p>
-              <Gutter h={20} />
+              <Button 
+                onClick={() => window.location.href = "https://stories.uscovidatlas.org/"}
+                variant="contained"
+                sx={{
+                  textTransform: "none",
+                  fontWeight: "bold",
+                  background: colors.yellow,
+                  fontSize: '24px',
+                  margin: 0,
+                  padding: '0.25em 0.5em',
+                }}
+                >
+                  Submit a Story
+              </Button>
+              </div>
+              {/* <Gutter h={20} />
               <p>
                 <a href="https://stories.uscovidatlas.org/">
-                  Check out the Atlas stories submission site.
+                  Share Your Pandemic Experience
                 </a>
               </p>
               <Gutter h={20} />
@@ -688,7 +718,7 @@ function Home() {
                   Stories Map
                 </a>{" "}
                 or <a href="/archive">Interactive Archive</a>.
-              </p>
+              </p> */}
               <CloseButton onClick={() => setStoriesModal(false)}>
                 &times;
               </CloseButton>
