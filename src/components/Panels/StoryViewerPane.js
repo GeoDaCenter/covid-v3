@@ -4,7 +4,8 @@ import { useStoriesContext } from '../../contexts/StoriesContext';
 import colors from '../../config/colors';
 import { StoryContainer } from '../../components/Stories/StoryContainer';
 import { useDispatch } from 'react-redux';
-import { setMapParams } from '../../actions';
+import { setMapParams, setPanelState } from '../../actions';
+import { Button } from '@mui/material';
 
 const StoryViewerPanel = styled.div`
     height:fit-content;
@@ -16,6 +17,18 @@ const StoryViewerPanel = styled.div`
     overflow-x:hidden;
     background:${colors.gray};
     box-sizing:border-box;
+    position: relative;
+`
+
+const CloseButton = styled(Button)`
+    position:absolute;
+    top:2.5em;
+    right:-.125em;
+    min-height:0;
+    color:white;
+    /* font-weight:bold; */
+    text-transform:none;
+    /* font-size:1.5rem; */
 `
 
 export const StoryViewerPane = () => {
@@ -25,24 +38,36 @@ export const StoryViewerPane = () => {
         setSelectedStory
     } = useStoriesContext()
     const dispatch = useDispatch();
+    const handleClose = () => {
+        // dispatch(setPanelState({storiesPane: false}))
+        setSelectedStory({})
+    }
 
     useEffect(() => {
-        dispatch(setMapParams({overlay: 'stories'}));
+        dispatch(setMapParams({ overlay: 'stories' }));
         return () => {
-            dispatch(setMapParams({overlay: ''}))
+            dispatch(setMapParams({ overlay: '' }))
         }
-    },[]);
+    }, []);
 
     return (
         <StoryViewerPanel>
-            {!!selectedStory?.id ? (<StoryContainer
-                story={selectedStory}
-                relatedStories={relatedStories}
-                relatedStoriesCallback={(story) => setSelectedStory(story)}
-            />) : (
-                <p style={{color:'white', margin: '1em'}}>
+            {!!selectedStory?.id ? (<>
+                <StoryContainer
+                    story={selectedStory}
+                    relatedStories={relatedStories}
+                    relatedStoriesCallback={(story) => setSelectedStory(story)}
+                />
+                <CloseButton
+                    variant="text"
+                    onClick={handleClose}
+                >
+                    Close
+                </CloseButton>
+            </>) : (
+                <p style={{ color: 'white', margin: '1em' }}>
                     <b>Stories</b>
-                    <br/>
+                    <br />
                     Click a story on the map to get started.
                 </p>
             )}

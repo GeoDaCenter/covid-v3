@@ -15,6 +15,9 @@ const GradientBox = styled.div`
     a {
         color: ${({ noBg }) => noBg ? 'initial' : 'white'};
     }
+    h3 {
+        padding-right:1.5em;
+    }
 `
 
 const ShareLink = styled.a`
