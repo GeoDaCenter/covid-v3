@@ -207,7 +207,7 @@ const TutorialsAndDemos = [
     slug: "community-contexts",
   },
   {
-    title: "Trends over  time",
+    title: "Trends Over  time",
     description: "Explore how trends emerge and evolve over time",
     slug: "trends-over-time",
   },
