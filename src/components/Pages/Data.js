@@ -42,9 +42,7 @@ function Data() {
         <hr />
         <SectionTitle>Confirmed COVID Cases and Deaths</SectionTitle>
         <p>
-          Because there is no one single validated source for county-level COVID
-          cases and deaths for real-time analysis, we incorporate multiple
-          datasets from multiple projects to allow for comparisons.
+          We incorporate multiple datasets from multiple sources to allow for comparisons and opportunites to address uncertainty in the data.
         </p>
         <Gutter h={10} />
         <BlockIndent>
