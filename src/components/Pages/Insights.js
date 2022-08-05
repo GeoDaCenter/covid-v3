@@ -171,7 +171,7 @@ function a11yProps(index) {
   };
 }
 
-const availableTabs = ['#blog', '#research', '#viz', '#press']
+const availableTabs = ['#blog', '#research', '#viz', '#media']
 
 export default function Insights() {
   const [rssFeed, setRssFeed] = useState({
@@ -229,7 +229,7 @@ export default function Insights() {
             active={tabValue === 3} 
             onClick={() => setTabValue(3)}
             >
-              Press
+              Media
           </Tab>
         </TabBar>
         <TabPanel display={tabValue === 0}>

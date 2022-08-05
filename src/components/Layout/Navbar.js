@@ -343,14 +343,14 @@ const pageDropDowns = {
       link: '/insights#blog'
     },
     {
-      header: 'Stories',
+      header: 'Viz',
       desc: 'Data visualizations that highlight the challenges, reality, and complexity of COVID-19.',
       link: '/insights#stories'
     },
     {
-      header: 'Press',
+      header: 'Media',
       desc: 'Media and press coverage of our research, insights, and data.',
-      link: '/insights#press'
+      link: '/insights#media'
     },
   ],
   STORIES: [
