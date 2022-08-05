@@ -536,7 +536,7 @@ export default function Learn() {
             A Guide to the Atlas
           </Typography>
           <Typography variant="h2" element="h2">
-            A free and open source data visualization platform, the US Covid Atlas connects COVID-19 data and community indicators to better understand the impact of the pandemic, from its start through today. 
+            The US Covid Atlas is a free and open source data visualization platform connecting COVID-19 data and community indicators to better understand the impact of the pandemic, from its start through today. 
             Scroll to explore tutorials, video demos, examples of how the Atlas is used in different fields, and more.
           </Typography>
           <ButtonsContainer>
