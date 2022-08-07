@@ -40,6 +40,7 @@ export default function useGetTooltipContent({
             ...data
         }
     },[JSON.stringify(data), geoid, currIndex, currentData])
+    
     if (currentData.includes('customdata')){
         return {
             ...tooltipContent,

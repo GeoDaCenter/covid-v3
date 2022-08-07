@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { ErrorBoundary } from "react-error-boundary";
 import { HoverDiv } from "../../components";
 import useGetTooltipContent from "../../hooks/useGetTooltipContent";
-import { hasProps } from "../../utils";
+import { formatNumber, hasProps } from "../../utils";
 import styled from "styled-components";
 // This component handles and formats the map tooltip info.
 // The props passed to this component should contain an object of the hovered object (from deck, info.object by default)
@@ -68,15 +68,16 @@ const ChoroplethTooltip = ({ tooltipContent }) => {
 
       {"testing_wk_pos" in tooltipContent && (
         <>
-          7-Day Average Positivity Rate:
-          {Math.round(tooltipContent?.testing_wk_pos * 10000) / 100 || 0}
+          <br/>
+          7-Day Average Positivity Rate:&nbsp;
+          {formatNumber(tooltipContent?.testing_wk_pos * 100)}
           %<br />
         </>
       )}
       {"testing_tcap" in tooltipContent && (
         <>
-          7-Day Average Tests Performed:
-          {tooltipContent.testing_tcap?.toLocaleString("en") || 0} per 100k
+          7-Day Average Tests Performed:&nbsp;
+          {formatNumber(tooltipContent?.testing_tcap)} per 100k
           <br />
         </>
       )}
