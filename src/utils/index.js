@@ -19,6 +19,7 @@ import {
 import { findClosestValue, findDateIncrement, findDateDecrement } from "./findClosestValue";
 import { findNextIndex, findPreviousIndex } from "./findNextIndex";
 import { findSecondaryMonth } from './findSecondaryMonth'
+import formatNumber from "./formatNumber";
 // import { generateMapData } from './generateMapData';
 import { generateReport } from "./generateReport";
 import geojsonArrayBuffer from "./geojsonArrayBuffer";
@@ -84,6 +85,7 @@ export {
   findNextIndex,
   findPreviousIndex,
   findSecondaryMonth,
+  formatNumber,
   getDateIndices,
   geojsonArrayBuffer,
   // generateMapData,
