@@ -86,7 +86,8 @@ const splitPbfs = (fileList) => {
     );
     // generate rows
     const month = "latest"
-    const range = [indexRanges[0][0]-14, indexRanges[0][1]]
+    const lastIndex = indexRanges.length-1
+    const range = [indexRanges[lastIndex][1]-14, indexRanges[lastIndex][1]]
     const monthData = new Schema.Rows();
     const rowData = row.map((data) => {
       const entry = new Schema.Entry();
