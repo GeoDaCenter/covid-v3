@@ -60,8 +60,8 @@ export default function LineChartOuter({ defaultDimensions }) {
   return isPoppedOut ? (
     <Draggable
       z={9}
-      defaultX={defaultDimensions.defaultX - 200}
-      defaultY={defaultDimensions.defaultY}
+      defaultX={window.innerWidth - defaultDimensions.defaultWidthLong}
+      defaultY={50}
       title="lineChart"
       allowCollapse={false}
       content={
