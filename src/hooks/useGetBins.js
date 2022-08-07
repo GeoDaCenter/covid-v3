@@ -37,7 +37,7 @@ export default function useGetBins({
                 binnedParams.geodaReady === geodaReady &&
                 binnedParams.dataParams === JSON.stringify(dataParams)
             ) {
-                console.log("same params");
+                // console.log("same params");
                 return;
             }
 

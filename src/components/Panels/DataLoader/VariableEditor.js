@@ -82,7 +82,6 @@ export const VariableEditor = ({
   handleClose,
   idx,
 }) => {
-  console.log(fileName)
   const [variableInfo, setVariableInfo] = useState(
     idx !== false
       ? variables[idx]
