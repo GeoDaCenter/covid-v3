@@ -323,10 +323,13 @@ export default function ReportBuilder() {
     >
       <Box sx={style}>
         <ModalInner>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography id="modal-modal-title" variant="h2" component="h1">
             Atlas Report Builder
           </Typography>
-          <StepperComponent
+          <Typography id="modal-modal-title" variant="h4" component="h2">
+            This feature is coming soon. Please check back later!
+          </Typography>
+          {/* <StepperComponent
             steps={steps}
             activeStep={activeStep}
             setActiveStep={setActiveStep}
@@ -362,7 +365,7 @@ export default function ReportBuilder() {
               reportName={previousReport || templateName}
               activeStep={activeStep}
             />
-          )}
+          )} */}
         </ModalInner>
         <CloseButton onClick={handleClose} title="Close Report Builder">×</CloseButton>
       </Box>
