@@ -167,7 +167,7 @@ function IconDock(){
     {
       symbol: 'summary',
       id: 'summary-button',
-      ariaLabel: 'Data Details',
+      ariaLabel: 'Community Data',
       activeState: panelState.info,
       onClick: () => dispatch({ type: 'TOGGLE_PANEL', payload: 'info' }),
     },
@@ -216,7 +216,7 @@ function IconDock(){
     {
       symbol: 'info',
       id: 'info-button',
-      ariaLabel: 'Tutorial and Info',
+      ariaLabel: 'Information',
       activeState: panelState.tutorial,
       onClick: () => dispatch({ type: 'TOGGLE_PANEL', payload: 'tutorial' }),
     },
