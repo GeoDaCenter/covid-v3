@@ -28,10 +28,6 @@ const LearnPage = styled(ContentContainer)`
     text-align: center;
     max-width: 60ch;
   }
-  a {
-    text-decoration: underline;
-    font-weight: 300;
-  }
 `;
 
 
@@ -151,6 +147,11 @@ const UseCaseText = styled(Grid)`
   }
   h4 {
     font-family: "Playfair Display", serif;
+  }
+  
+  a {
+    text-decoration: underline;
+    font-weight: 300;
   }
 `;
 
