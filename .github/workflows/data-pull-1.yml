@@ -1,4 +1,4 @@
-name: Daily Data Pull 0.1.0
+name: Daily Data Pull 0.1.0a
 
 on:
   schedule:
@@ -18,8 +18,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           
+      - name: install yarn
+        run: npm i yarn
+
       - name: install node packages
-        run: npm install
+        run: yarn
 
       - name: get data
         run: node build-scripts/fetchLatestData
