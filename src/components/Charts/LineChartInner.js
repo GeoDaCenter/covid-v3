@@ -387,7 +387,7 @@ function LineChartInner({
     maximums,
     selectionKeys,
     chartData,
-    docked,
+  docked,
     table,
     logChart,
     showSummarized,
@@ -396,6 +396,16 @@ function LineChartInner({
     colorScheme,
     geoid
   })])
+
+  // REFERENCE AREA COORDS
+  const x1 = (chartData[currIndex - currRange]?.date || '2020-01-21')
+  const areaX1 = x1 < '2020-01-20'
+    ? '2020-01-20'
+    : x1
+    
+  const x2 = (chartData[currIndex]?.date || chartData[chartData.length-1]?.date)
+  const areaX2 = x2
+
   if (maximums && chartData) {
     return (
       <ChartContainer id="lineChart">
@@ -509,8 +519,8 @@ function LineChartInner({
             />
             <ReferenceArea
               yAxisId="right"
-              x1={chartData[currIndex - currRange]?.date || 0}
-              x2={chartData[currIndex]?.date || 0}
+              x1={areaX1}
+              x2={areaX2}
               fill="white"
               fillOpacity={0.15}
               isAnimationActive={false}
