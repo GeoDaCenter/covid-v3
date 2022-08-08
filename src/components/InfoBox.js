@@ -30,8 +30,9 @@ const InfoContainer = styled.div`
   user-select: none;
   display: ${(props) => (props.active ? "flex" : "none")};
   flex-direction: row;
-  padding-top:3em;
+  padding-top:2.5em;
   max-height:100%;
+  height:100%;
   svg {
     width: 25px;
     height: 25px;
@@ -54,14 +55,42 @@ const InfoContainer = styled.div`
   hr {
     margin: 1em 0 2em 0;
   }
+  /* Fixes for inner MDX styles */
+  ol, ul {
+    margin-inline-start: 2em;
+  }
+  ol li:before {
+    background: none;
+  }
+  .cls-1 {
+    stroke: white;
+  }
+  /* Fixes for contact form */
+  form {
+    color:white;
+    border:1px solid white;
+    .MuiInputLabel-root {
+      color:white;
+    }
+    fieldset {
+      border-color:white;
+    }
+  }
 `;
 
 // Left hand side list of available pages
 // On mobile, this is replaced by a select drop down
 const Drawer = styled.div`
   width:12em;
-  padding:0 .5em;
+  padding:.5em .5em 0 .5em;
   flex: 0 0 auto;
+  border-right:2px solid ${colors.darkgray};
+  border-top:2px solid ${colors.darkgray};
+  height:100%;
+  flex: 0 0 auto;
+  hr {
+    border-top:2px solid ${colors.darkgray};
+  }
 `;
 
 // Buttons on left-hand side drawer
@@ -85,9 +114,13 @@ const DrawerButton = styled(Button)`
   @media (max-width: 1024px) {
     display: none;
   }
+  &:active {
+    color:white;
+  }
 `;
 
 const BodyContainerOuter = styled.div`
+  flex:1;
 `
 
 // Container for main content
@@ -97,6 +130,7 @@ const BodyContainer = styled.div`
   box-sizing: border-box;
   overflow-y: auto;
   padding:1em 1em 1em 2em;
+  border-top:2px solid ${colors.darkgray};
   ::-webkit-scrollbar {
     width: 10px;
   }
@@ -200,12 +234,12 @@ const InfoBox = () => {
   return (
     <InfoContainer active={panelOpen}>
       <Drawer>
-        <DrawerButton onClick={() => setCurrentArticle("release-notes")}>Release Notes</DrawerButton>
-        <DrawerButton onClick={() => setCurrentArticle("bug-report")}>Bug Report</DrawerButton>
+        <DrawerButton active={currentArticle === "release-notes"} onClick={() => setCurrentArticle("release-notes")}>Release Notes</DrawerButton>
+        <DrawerButton active={currentArticle === "bug-report"} onClick={() => setCurrentArticle("bug-report")}>Bug Report</DrawerButton>
         <hr/>
         <p>Tutorials</p>
         {Object.keys(pages).filter(f => ['release-notes', 'stylesheet', 'bug-report'].includes(f) === false).map((slug, i) => (
-          <DrawerButton onClick={() => setCurrentArticle(slug)}>{slug.replace(/-/g, ' ')}</DrawerButton>
+          <DrawerButton active={currentArticle === slug} onClick={() => setCurrentArticle(slug)}>{slug.replace(/-/g, ' ')}</DrawerButton>
         ))}
       </Drawer>
       <BodyContainerOuter>
