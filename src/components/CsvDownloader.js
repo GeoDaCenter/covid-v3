@@ -393,10 +393,11 @@ const CsvDownloader = () => {
     var docsFolder = zip.folder('docs');
     data.forEach((d) => dataFolder.file(d.name, d.data));
     docs.forEach((d) => docsFolder.file(d.name, d.data));
-    import('file-saver').then((fileSaver) => {
+    import('file-saver').then((module) => {
+      const {saveAs} = module.default;
       zip.generateAsync({ type: 'blob' }).then(function (content) {
         // see FileSaver.js
-        fileSaver.saveAs(
+        saveAs(
           content,
           `us_covid_atlas_data_${new Date().toISOString().slice(0, 10)}.zip`,
         );
