@@ -1,17 +1,28 @@
-name: Daily Data Pull 0.0.10e
+name: Daily Data Pull 0.1.0
 
 on:
-  # schedule:
-    # - cron: '0 */8 * * *' # runs at midnight, 8am, and 4pm UTC
+  schedule:
+    - cron: '0 */8 * * *' # runs at midnight, 8am, and 4pm UTC
   workflow_dispatch:
 
 jobs:
-  update-data:
+  update-data-2:
     runs-on: ubuntu-latest
     steps:
-
       - name: checkout repo content
         uses: actions/checkout@v2
+        
+      # NODE
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          
+      - name: install node packages
+        run: npm install
+
+      - name: get data
+        run: node build-scripts/fetchLatestData
 
       - name: setup python
         uses: actions/setup-python@v2
@@ -58,6 +69,9 @@ jobs:
           G_CLIENT_EMAIL: ${{secrets.GOOGLE_G_CLIENT_EMAIL}}
           G_ID: ${{secrets.GOOGLE_G_ID}}
           G_CERT_URL: ${{secrets.GOOGLE_G_CERT_URL}}
+          
+      - name: timestamp last-updated
+        run: python data-scripts/timestamp/last-updated.py
       
       - name: commit files
         run: |
