@@ -166,6 +166,7 @@ const CustomTooltip = ({ data }) => {
     <TooltipInnerDiv>
       {Object.entries(data)
         .filter(e => e[0] !== 'custom')
+        .slice(0,15)
         .map((entry) => (
           <>
             <b>{entry[0]}:</b>{" "}
