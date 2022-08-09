@@ -1,28 +1,24 @@
 state_name,number of county,percentage
-Alaska,29,10.34
-Arizona,15,73.33
-Colorado,64,15.62
-Iowa,99,34.34
-Idaho,44,2.27
-Illinois,102,3.92
-Indiana,92,15.22
-Kansas,105,30.48
-Kentucky,120,2.5
-Maine,16,6.25
-Michigan,83,92.77
-Minnesota,87,91.95
-Missouri,115,8.7
-Montana,56,10.71
-North Dakota,53,62.26
-Nebraska,93,9.68
-New Hampshire,10,90.0
-New Mexico,33,45.45
-New York,62,61.29
-Ohio,88,43.18
-Pennsylvania,67,67.16
-South Dakota,66,24.24
-Utah,29,6.9
-Vermont,14,28.57
-Wisconsin,72,83.33
-West Virginia,55,9.09
-Wyoming,23,4.35
+Alabama,67,13.43
+Arkansas,75,14.67
+Arizona,15,60.0
+California,58,1.72
+Florida,67,91.04
+Georgia,159,1.89
+Kansas,105,24.76
+Kentucky,120,20.0
+Louisiana,64,34.38
+Michigan,83,2.41
+Montana,56,7.14
+North Carolina,100,69.0
+North Dakota,53,9.43
+New Jersey,21,52.38
+New Mexico,33,27.27
+New York,62,1.61
+Ohio,88,53.41
+Oklahoma,77,76.62
+Texas,254,12.6
+Virginia,133,18.05
+Washington,39,2.56
+West Virginia,55,56.36
+Wyoming,23,17.39
