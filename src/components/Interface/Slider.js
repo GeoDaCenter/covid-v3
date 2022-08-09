@@ -372,7 +372,7 @@ function DateSlider() {
         currDatesAvailable={currDatesAvailable}
       />
       <Grid item xs={1} md={1} lg={1} xl={1}>
-        <PlayPauseButton id="playPause" onClick={() => handlePlayPause()}>
+        <PlayPauseButton id="playPause" onClick={() => handlePlayPause()} aria-label={isTicking ? "Pause Animation" : "Play Animation"}>
           <Icon symbol={isTicking ? "pause" : "play"} />
         </PlayPauseButton>
       </Grid>
@@ -405,7 +405,7 @@ function DateSlider() {
                 onChange={handleChange}
                 getAriaValueText={valuetext}
                 valueLabelFormat={valuetext}
-                aria-labelledby="aria-valuetext"
+                aria-label="Map date slider"
                 min={0}
                 max={allDates.length}
                 step={1}
@@ -418,7 +418,7 @@ function DateSlider() {
                 onChange={handleRangeChange}
                 getAriaValueText={valuetext}
                 valueLabelFormat={valuetext}
-                aria-labelledby="aria-valuetext"
+                aria-label="Map custom date range slider"
                 min={0}
                 max={allDates.length}
                 step={1}

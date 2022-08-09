@@ -228,7 +228,7 @@ function IconDock(){
           <button
             id={id}
             key={`${id}-icon-dock`}
-            ariaLabel={ariaLabel}
+            aria-label={ariaLabel}
             onClick={onClick}
             className={`${hoveredIcon === id && 'hovered '}${activeState && ' active'}`}
             onMouseEnter={() => setHoveredIcon(id)}
@@ -240,11 +240,11 @@ function IconDock(){
         ))}
       </DockContainer>
       <DockLabels className={hoveredIcon ? 'active' : ''}>
-        {buttons.map(({ symbol, id, ariaLabel, onClick }) => (
+        {buttons.map(({ symbol, id, ariaLabel, onClick }, i) => (
             <button
-              id={id}
+              id={`${id}-${i}`}
               key={`${id}-icon-dock-label`}
-              ariaLabel={ariaLabel}
+              aria-label={ariaLabel}
               onClick={onClick}
               className={hoveredIcon === id ? 'hovered' : ''}
               onMouseEnter={() => setHoveredIcon(id)}

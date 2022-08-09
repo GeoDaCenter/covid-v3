@@ -17,7 +17,7 @@ const TooltipContainer = styled.button`
   display: inline-grid;
 `;
 
-const Tooltip = (props) => {
+const Tooltip = ({id}) => {
   const dispatch = useDispatch();
 
   const handleMouseOver = (event) => {
@@ -30,10 +30,13 @@ const Tooltip = (props) => {
 
   return (
     <TooltipContainer
-      id={props.id}
-      key={props.id}
+      id={id}
+      key={id}
       onMouseEnter={handleMouseOver}
       onMouseLeave={handleMouseLeave}
+      onFocus={handleMouseOver}
+      onBlur={handleMouseLeave}
+      aria-label="Open tooltip"
     />
   );
 };

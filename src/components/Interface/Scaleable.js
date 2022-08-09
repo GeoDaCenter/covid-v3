@@ -76,11 +76,12 @@ const Scaleable = (props) => {
     >
       {props.content}
       <ResizeButton
-        id="resize"
+        // id="resize"
         notScaleable={props.notScaleable}
         onMouseDown={handleDown}
         onTouchStart={handleTouch}
         style={{ zIndex: 10 }}
+        aria-label="Resize Panel"
       >
         <Icon symbol="resize" />      
       </ResizeButton>

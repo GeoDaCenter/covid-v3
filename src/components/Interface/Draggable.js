@@ -136,10 +136,11 @@ const Draggable = ({
     >
       {content}
       <DragButton
-        id="resize"
+        // id="resize"
         onMouseDown={handleDown}
         onTouchStart={handleTouch}
         style={{ zIndex: 10 }}
+        aria-label="Drag Panel"
       >
         <Icon symbol="drag" />
       </DragButton>

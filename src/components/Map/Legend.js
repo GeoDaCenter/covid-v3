@@ -173,12 +173,13 @@ export const LegendInner = ({
     <BinBars firstBinZero={shouldSeparateZero}>
       {shouldSeparateZero && (
         <button
-        onMouseEnter={() => handleHover(ZERO_COLOR)}
-        onMouseLeave={() => handleHover(null)}
-        onFocus={() => handleHover(ZERO_COLOR)}
-        onBlur={() => handleHover(null)}
-        className={`bin color ${colorFilter === ZERO_COLOR && "active"}`}
-        key={`${ZERO_COLOR[0]}${ZERO_COLOR[1]}`}
+          onMouseEnter={() => handleHover(ZERO_COLOR)}
+          onMouseLeave={() => handleHover(null)}
+          onFocus={() => handleHover(ZERO_COLOR)}
+          onBlur={() => handleHover(null)}
+          className={`bin color ${colorFilter === ZERO_COLOR && "active"}`}
+          key={`${ZERO_COLOR[0]}${ZERO_COLOR[1]}`}
+          aria-label="Filter map to show only 0 values"
       >
         <span
           style={{
@@ -187,7 +188,7 @@ export const LegendInner = ({
         ></span>
       </button>
       )}
-      {colorScale.map((color) => (
+      {colorScale.map((color, i) => (
         <button
           onMouseEnter={() => handleHover(color)}
           onMouseLeave={() => handleHover(null)}
@@ -195,6 +196,7 @@ export const LegendInner = ({
           onBlur={() => handleHover(null)}
           className={`bin color ${colorFilter === color && "active"}`}
           key={`${color[0]}${color[1]}`}
+          aria-label={`Filter map to show only values in bin number ${i}`}
         >
           <span
             style={{

@@ -79,7 +79,7 @@ const defaultViewport = paramsDict.hasOwnProperty("lat")
       ],
     });
 
-const MapContainer = styled.div``;
+const MapContainer = styled.main``;
 
 const MapOuterContainer = styled.div`
   position: relative;
