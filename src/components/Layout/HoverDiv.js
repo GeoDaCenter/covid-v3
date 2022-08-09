@@ -16,4 +16,7 @@ export const HoverDiv = styled.div`
   }
   max-width: 300px;
   line-height: 1.25;
-`;
+  @media (max-width: 600px) {
+    max-width:20ch !important;
+  }
+    `;

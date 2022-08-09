@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from 'styled-components';
 import { Icon } from '..';
 import colors from '../../config/colors';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const DockContainerOuter = styled.div`
   position:relative;
@@ -32,6 +33,11 @@ const DockContainer = styled.div`
     /* border-bottom:2px solid ${colors.gray};
     border-top:2px solid ${colors.gray}; */
     transition: 125ms all;
+    @media (max-width: 600px){
+      border-top:4px solid rgba(0,0,0,0);
+      border-left: initial;
+      height:auto;
+    }
     svg {
       fill:white;
       stroke:white;
@@ -47,6 +53,9 @@ const DockContainer = styled.div`
     &.active {
       border-color:${colors.yellow};
       /* background-color:${colors.yellow}44; */
+      @media (max-width:600px) {
+        border-color:${colors.yellow};
+      }
     }
     span.mobileText {
       display:none;
@@ -97,15 +106,15 @@ const DockContainer = styled.div`
       background-size: 50%, 100%;
     }
     button {
-      height:50px;
       width:auto;
       text-align:center;
-      padding:10px 20px 0 20px;
+      padding:.75em;
       svg {
-        width:20px;
+        width:1rem;
       }
       span.mobileText {
         display:block;
+        font-size:.625rem;
       }
     }
   }
@@ -152,85 +161,83 @@ const DockLabels = styled.div`
 
 `
 
+const buttons = [
+  {
+    symbol: 'settings',
+    id: 'settings-button',
+    ariaLabel: 'Data & Variables',
+    panelName: 'variables',
+  },
+  {
+    symbol: 'summary',
+    id: 'summary-button',
+    ariaLabel: 'Community Data',
+    panelName: 'info',
+  },
+  {
+    symbol: 'lineChart',
+    id: 'lineChart-button',
+    ariaLabel: 'Line Chart',
+    panelName: 'lineChart',
+  },
+  // {
+  //   symbol: 'scatterChart',
+  //   id: 'scatterPlot-button',
+  //   ariaLabel: 'Scatterplot Chart',
+  //   panelName: 'scatterChart',
+  // },
+  {
+    symbol:'addData',
+    id: 'add-data-button',
+    ariaLabel: 'Add Custom Data',
+    panelName: 'dataLoader',
+  },
+  {
+    symbol: 'report',
+    id: 'report-button',
+    ariaLabel: 'Report Builder',
+    panelName: 'reportBuilder',
+  },
+  {
+    symbol: 'story',
+    id: 'stories-button',
+    ariaLabel: 'Stories',
+    panelName: 'storiesPane',
+  },
+  // {
+  //   symbol: 'sliders',
+  //   id: 'user-preferences-button',
+  //   ariaLabel: 'User Preferences',
+  //   panelName: 'preferences',
+  // },
+  {
+    symbol: 'info',
+    id: 'info-button',
+    ariaLabel: 'Information',
+    panelName: 'tutorial',
+  },
+];
+
 function IconDock(){
   const dispatch = useDispatch();
   const [hoveredIcon, setHoveredIcon] = useState(null);
   const panelState = useSelector(({ui}) => ui.panelState);
-  const buttons = [
-    {
-      symbol: 'settings',
-      id: 'settings-button',
-      ariaLabel: 'Data & Variables',
-      activeState: panelState.variables,
-      onClick: () => dispatch({ type: 'TOGGLE_PANEL', payload: 'variables' }),
-    },
-    {
-      symbol: 'summary',
-      id: 'summary-button',
-      ariaLabel: 'Community Data',
-      activeState: panelState.info,
-      onClick: () => dispatch({ type: 'TOGGLE_PANEL', payload: 'info' }),
-    },
-    {
-      symbol: 'lineChart',
-      id: 'lineChart-button',
-      ariaLabel: 'Line Chart',
-      activeState: panelState.lineChart,
-      onClick: () => dispatch({ type: 'TOGGLE_PANEL', payload: 'lineChart' }),
-    },
-    // {
-    //   symbol: 'scatterChart',
-    //   id: 'scatterPlot-button',
-    //   ariaLabel: 'Scatterplot Chart',
-    //   activeState: panelState.scatterChart,
-    //   onClick: () => dispatch({ type: 'TOGGLE_PANEL', payload: 'scatterChart' }),
-    // },
-    {
-      symbol:'addData',
-      id: 'add-data-button',
-      ariaLabel: 'Add Custom Data',
-      activeState: panelState.dataLoader,
-      onClick: () => dispatch({ type: 'TOGGLE_PANEL', payload: 'dataLoader' }),
-    },
-    {
-      symbol: 'report',
-      id: 'report-button',
-      ariaLabel: 'Report Builder',
-      activeState: panelState.builder,
-      onClick: () => dispatch({ type: 'TOGGLE_PANEL', payload: 'reportBuilder' }),
-    },
-    {
-      symbol: 'story',
-      id: 'stories-button',
-      ariaLabel: 'Stories',
-      activeState: panelState.storiesPane,
-      onClick: () => dispatch({ type: 'TOGGLE_PANEL', payload: 'storiesPane' }),
-    },
-    // {
-    //   symbol: 'sliders',
-    //   id: 'user-preferences-button',
-    //   ariaLabel: 'User Preferences',
-    //   activeState: panelState.preferences,
-    //   onClick: () => dispatch({ type: 'TOGGLE_PANEL', payload: 'preferences' }),
-    // },
-    {
-      symbol: 'info',
-      id: 'info-button',
-      ariaLabel: 'Information',
-      activeState: panelState.tutorial,
-      onClick: () => dispatch({ type: 'TOGGLE_PANEL', payload: 'tutorial' }),
-    },
-  ];
+  const isMobile = useMediaQuery('(max-width:600px)');
+  const handleToggle = (panel) => {
+    const action = isMobile ? 'MOBILE_TOGGLE_PANEL' : 'TOGGLE_PANEL';
+    dispatch({ type: action, payload: panel })
+  }
+
   return (
     <DockContainerOuter>
       <DockContainer>
-        {buttons.map(({ symbol, id, ariaLabel, onClick, activeState }) => (
+        {buttons.map(({ symbol, id, ariaLabel, panelName }) => (
           <button
             id={id}
             key={`${id}-icon-dock`}
             ariaLabel={ariaLabel}
-            onClick={onClick}
-            className={`${hoveredIcon === id && 'hovered '}${activeState && ' active'}`}
+            onClick={() => handleToggle(panelName)}
+            className={`${hoveredIcon === id && 'hovered '}${panelState[panelName] && ' active'}`}
             onMouseEnter={() => setHoveredIcon(id)}
             onMouseLeave={() => setHoveredIcon(null)}
           >

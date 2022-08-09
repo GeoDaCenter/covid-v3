@@ -340,6 +340,12 @@ var reducer = (state = INITIAL_STATE, action) => {
         dataParams,
       };
     }
+    case "CLEAR_SELECTION": {
+      return {
+        ...state,
+        selectionKeys: []
+      }
+    }
     case "UPDATE_SELECTION": {
       let selectionKeys = [...state.selectionKeys];
       if (action.payload.type === "update") {

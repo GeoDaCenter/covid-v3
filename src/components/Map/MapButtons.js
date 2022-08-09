@@ -62,7 +62,8 @@ const MapButtonContainer = styled.div`
   /* z-index: 10; */
   transition: 250ms all;
   @media (max-width: 768px) {
-    bottom: 100px;
+    bottom: 150px;
+    left:0;
   }
   @media (max-width: 400px) {
     transform: scale(0.75) translate(20%, 20%);

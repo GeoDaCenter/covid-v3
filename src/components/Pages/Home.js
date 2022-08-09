@@ -124,7 +124,7 @@ const Hero = styled.div`
     margin: 0;
     border-radius: 0.3rem;
     text-decoration: none;
-    height: 50px;
+    height: auto;
     @media (max-width: 960px) {
       max-width: 50%;
       margin: 0 auto;

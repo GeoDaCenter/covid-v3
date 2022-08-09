@@ -44,6 +44,7 @@ import { useViewport, useSetViewport } from "../../contexts/Viewport";
 import * as Schemas from "../../schemas";
 import { useStoriesContext } from "../../contexts/StoriesContext";
 import IconClusterLayer from "../../CustomLayers/icon-cluster-layer";
+import { useMediaQuery } from "@mui/material";
 
 const MAP_STYLES = {
   light: MAP_STYLE_LIGHT,
@@ -323,6 +324,7 @@ function MapSection({
   const shouldPanMap = useSelector(({ ui }) => ui.shouldPanMap);
   const panelState = useSelector(({ ui }) => ui.panelState);
   const uiLeftPadding = useSelector(({ ui }) => ui.panelState.variables ? ui.variableMenuWidth : 0);
+  const isMobile = useMediaQuery("(max-width: 600px)");
 
   const isPoint = currentMapGeography?.features
     ? currentMapGeography.features[0].geometry.type === "Point"
@@ -624,7 +626,7 @@ function MapSection({
     if (e.rightButton) return;
     const objectID = +info.object?.properties[currIdCol];
     if (!objectID) return;
-    dispatch(setPanelState({ info: true }))
+    !isMobile && dispatch(setPanelState({ info: true }))
     if (multipleSelect) {
       try {
         if (highlightGeog.indexOf(objectID) === -1) {

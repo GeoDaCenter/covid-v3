@@ -36,7 +36,8 @@ const TopDrawer = styled.div`
     max-width: 100%;
     left: 0;
     transform: none;
-    top:10em;
+    top:6em;
+    border-top: 2px solid ${colors.darkgray};
   }
   @media (max-width: 750px) and (orientation: landscape) {
     // bottom all the way down for landscape phone

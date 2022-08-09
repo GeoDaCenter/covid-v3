@@ -67,7 +67,7 @@ const MapAttribution = styled(MapTitle)`
   width:auto;
   font-size:0.65rem;
 `
-const NoInteraction = ({ children }) => (
+const NoInteractionGate = ({ children }) => (
   <div style={{ pointerEvents: "none !important", width: "100%", height: "100%" }}>
     {children}
   </div>
@@ -171,9 +171,10 @@ function ReportMap({
     national: nationalViewport
   }[scale];
 
+  console.log(currentMapData, mapParams)
   const mapInner = useMemo(
     () => (
-      <NoInteraction>
+      <NoInteractionGate>
         <MapSection
           currentMapGeography={currentMapGeography}
           currentMapData={currentMapData}
@@ -188,7 +189,7 @@ function ReportMap({
           hoverGeoid={geoid}
           highlightGeoids={[geoid]}
         />
-      </NoInteraction>
+      </NoInteractionGate>
     ),
     [JSON.stringify(neighborsViewport), currentMapID]
   );

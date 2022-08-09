@@ -1,3 +1,4 @@
+import { useMediaQuery } from "@mui/material";
 import React, { useState } from "react";
 import styled from "styled-components";
 
@@ -21,6 +22,15 @@ const ChartContainer = styled.span`
   width: 100%;
   height: 100%;
   z-index: 0;
+  @media (max-width: 600px) {
+    position:fixed;
+    z-index: 50000;
+    top:10em;
+    left:0;
+    width:100%;
+    height:calc(100% - 10em);
+    background:${colors.gray};
+  }
 `;
 
 const PopOutContainer = styled.div`
@@ -42,6 +52,9 @@ const DockPopButton = styled.button`
   svg g {
     fill: ${colors.yellow};
   }
+  @media (max-width:600px){
+    display:none;
+  }
 `;
 
 export default function LineChartOuter({ defaultDimensions }) {
@@ -51,12 +64,94 @@ export default function LineChartOuter({ defaultDimensions }) {
   const [showSummarized, setShowSummarized] = useState(true);
   const [populationNormalized, setPopulationNormalized] = useState(false);
   const [shouldShowVariants, setShouldShowVariants] = useState(false);
+  const isMobile = useMediaQuery("(max-width: 600px)");
 
   const handleSwitch = () => setLogChart((prev) => !prev);
   const handlePopSwitch = () => setPopulationNormalized((prev) => !prev);
   const handleSummarizedSwitch = () => setShowSummarized((prev) => !prev);
   const handleShouldShowVariants = () => setShouldShowVariants((prev) => !prev);
 
+  const ChartContent = 
+  <ChartContainer>
+    <ControlPopover
+      bottom
+      left
+      controlElements={[
+        {
+          type: "header",
+          content: "Line Chart Controls",
+        },
+        {
+          type: "helperText",
+          content: "Select the data to display on the chart.",
+        },
+        {
+          type: "select",
+          content: {
+            label: "Line Chart Variable",
+            items: [
+              {
+                text: "Cases",
+                value: "cases",
+              },
+              {
+                text: "Deaths",
+                value: "deaths",
+              },
+              {
+                text: "Fully Vaccinated Persons",
+                value: "vaccines_fully_vaccinated",
+              },
+              // {
+              //   text: "Weekly Positivity",
+              //   value: "testing_wk_pos",
+              // },
+            ],
+          },
+          action: (e) => setTable(e.target.value),
+          value: table,
+        },
+        {
+          type: "switch",
+          content: "Logarithmic Scale",
+          action: handleSwitch,
+          value: logChart,
+        },
+        {
+          type: "switch",
+          content: "Population Normalization",
+          action: handlePopSwitch,
+          value: populationNormalized,
+        },
+        {
+          type: "switch",
+          content: "Show Summary Line",
+          action: handleSummarizedSwitch,
+          value: showSummarized,
+        },
+        {
+          type: "switch",
+          content: "Variant Designations",
+          action: handleShouldShowVariants,
+          value: shouldShowVariants,
+        },
+      ]}
+    />
+    <LineChartInner
+      resetDock={() => setIsPoppedOut(false)}
+      {...{
+        table,
+        logChart,
+        showSummarized,
+        populationNormalized,
+        shouldShowVariants,
+      }}
+    />
+  </ChartContainer>
+
+  if (isMobile) {
+    return ChartContent
+  }
   return isPoppedOut ? (
     <Draggable
       z={9}
@@ -66,84 +161,7 @@ export default function LineChartOuter({ defaultDimensions }) {
       allowCollapse={false}
       content={
         <Scaleable
-          content={
-            <ChartContainer>
-              <ControlPopover
-                bottom
-                left
-                controlElements={[
-                  {
-                    type: "header",
-                    content: "Line Chart Controls",
-                  },
-                  {
-                    type: "helperText",
-                    content: "Select the data to display on the chart.",
-                  },
-                  {
-                    type: "select",
-                    content: {
-                      label: "Line Chart Variable",
-                      items: [
-                        {
-                          text: "Cases",
-                          value: "cases",
-                        },
-                        {
-                          text: "Deaths",
-                          value: "deaths",
-                        },
-                        {
-                          text: "Fully Vaccinated Persons",
-                          value: "vaccines_fully_vaccinated",
-                        },
-                        // {
-                        //   text: "Weekly Positivity",
-                        //   value: "testing_wk_pos",
-                        // },
-                      ],
-                    },
-                    action: (e) => setTable(e.target.value),
-                    value: table,
-                  },
-                  {
-                    type: "switch",
-                    content: "Logarithmic Scale",
-                    action: handleSwitch,
-                    value: logChart,
-                  },
-                  {
-                    type: "switch",
-                    content: "Population Normalization",
-                    action: handlePopSwitch,
-                    value: populationNormalized,
-                  },
-                  {
-                    type: "switch",
-                    content: "Show Summary Line",
-                    action: handleSummarizedSwitch,
-                    value: showSummarized,
-                  },
-                  {
-                    type: "switch",
-                    content: "Variant Designations",
-                    action: handleShouldShowVariants,
-                    value: shouldShowVariants,
-                  },
-                ]}
-              />
-              <LineChartInner
-                resetDock={() => setIsPoppedOut(false)}
-                {...{
-                  table,
-                  logChart,
-                  showSummarized,
-                  populationNormalized,
-                  shouldShowVariants,
-                }}
-              />
-            </ChartContainer>
-          }
+          content={ChartContent}
           title="lineChart"
           defaultWidth={defaultDimensions.defaultWidthLong}
           defaultHeight={defaultDimensions.defaultHeight}

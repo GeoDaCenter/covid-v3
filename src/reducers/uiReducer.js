@@ -90,6 +90,22 @@ export default function Reducer(state = INITIAL_STATE, action) {
           ...action.payload.params,
         },
       };
+    case "MOBILE_TOGGLE_PANEL": {
+      let allPanelsOff = Object.keys(state.panelState).reduce(
+        (prev, panel) => ({
+          ...prev,
+          [panel]: false,
+        }),
+        {}
+      );
+      return {
+        ...state,
+        panelState: {
+          ...allPanelsOff,
+          [action.payload]: !state.panelState[action.payload],
+        },
+      };
+    }
     case "TOGGLE_PANEL": {
       return {
         ...state,

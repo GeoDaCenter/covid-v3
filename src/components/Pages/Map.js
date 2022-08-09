@@ -12,7 +12,12 @@ import { findIn, getDateLists } from "../../utils"; //getVarId
 // first row: data storage
 // second row: data and metadata handling
 // third row: map and variable parameters
-import { setDates, setMapParams, setNotification, setPanelState } from "../../actions";
+import {
+  setDates,
+  setMapParams,
+  setNotification,
+  setPanelState,
+} from "../../actions";
 import {
   MapSection,
   NavBar,
@@ -164,9 +169,8 @@ const CloseButton = styled(Button)`
   background: none;
   border: none;
   outline: none;
-  padding:0 0.5em;
+  padding: 0 0.5em;
   min-width: initial;
-
 `;
 
 export default function Map() {
@@ -357,7 +361,7 @@ const MapPageContainer = () => {
   const [storiesSnackbar, setStoriesSnackbar] = useState(true);
   const handleOpenStories = () => {
     dispatch(setPanelState({ storiesPane: true, lineChart: false }));
-    dispatch(setMapParams({ overlay: 'stories'}))
+    dispatch(setMapParams({ overlay: "stories" }));
     setStoriesSnackbar(false);
   };
   // default width handlers on resize
@@ -388,18 +392,23 @@ const MapPageContainer = () => {
             </div>
             <div>
               <Button
-                onClick={() => window.location.href = "https://stories.uscovidatlas.org/"}
+                onClick={() =>
+                  (window.location.href = "https://stories.uscovidatlas.org/")
+                }
                 variant="contained"
                 sx={{
                   background: `${colors.yellow} !important`,
-                  textTransform: 'none'
+                  textTransform: "none",
                 }}
               >
                 Submit a Story
               </Button>
               {/* <button onClick={handleOpenStories}>See Stories</button> */}
             </div>
-            <CloseButton variant="text" onClick={() => setStoriesSnackbar(false)}>
+            <CloseButton
+              variant="text"
+              onClick={() => setStoriesSnackbar(false)}
+            >
               &times;
             </CloseButton>
           </AlertBox>
@@ -435,21 +444,13 @@ const MapPageContainer = () => {
       <Popover />
       <NotificationBox />
       {panelState.tutorial && (
-        <Draggable
-          z={10}
+        <InfoBox
           defaultX={defaultDimensions.defaultXManual}
           defaultY={defaultDimensions.defaultYManual}
-          title="tutorial"
-          content={
-            <Scaleable
-              content={<InfoBox />}
-              title="tutorial"
-              defaultWidth={defaultDimensions.defaultWidthManual}
-              defaultHeight={defaultDimensions.defaultHeightManual}
-              minHeight={defaultDimensions.minHeight}
-              minWidth={defaultDimensions.minWidth}
-            />
-          }
+          defaultWidth={defaultDimensions.defaultWidthManual}
+          defaultHeight={defaultDimensions.defaultHeightManual}
+          minHeight={defaultDimensions.minHeight}
+          minWidth={defaultDimensions.minWidth}
         />
       )}
       <MapTooltipContent />

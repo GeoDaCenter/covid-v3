@@ -18,6 +18,17 @@ const StoryViewerPanel = styled.div`
     background:${colors.gray};
     box-sizing:border-box;
     position: relative;
+    @media (max-width: 600px) {
+        position:fixed;
+        bottom:0;
+        left:0;
+        width:100vw;
+        height: 40vh;
+        min-height:initial;
+        max-width: initial;
+        z-index:50000;
+        
+    }
 `
 
 const CloseButton = styled(Button)`
@@ -51,7 +62,7 @@ export const StoryViewerPane = () => {
     }, []);
 
     return (
-        <StoryViewerPanel>
+        <StoryViewerPanel id="story-viewer-panel">
             {!!selectedStory?.id ? (<>
                 <StoryContainer
                     story={selectedStory}

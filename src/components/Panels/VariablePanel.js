@@ -67,6 +67,9 @@ const VariablePanelContainer = styled.div`
   @media (max-width: 600px) {
     width: 100%;
     display: ${(props) => (props.otherPanels ? "none" : "initial")};
+    position: fixed;
+    overflow-y: auto;
+    padding-bottom: 20vh;
   }
 
   &.hidden {
@@ -89,15 +92,13 @@ const NoteContainer = styled.div`
     color: ${colors.yellow};
     -webkit-text-decoration: none;
     text-decoration: none;
-    }
   }
-}
-p.note {
-  font-family: 'Lato', sans-serif;
-  font-weight:300;
-  font-size:90%;
-  max-width:42ch;
-}
+  p.note {
+    font-family: 'Lato', sans-serif;
+    font-weight:300;
+    font-size:90%;
+    max-width:42ch;
+  }
 
 div.poweredByGeoda {
     color:white;
@@ -229,12 +230,12 @@ const ListSubheader = styled(MenuItem)`
 
 const storiesButtonStyles = {
   background: colors.teal,
-  textTransform: 'none',
+  textTransform: "none",
   color: colors.white,
-  width: 'calc(100% - 1em)',
-  fontWeight:'bold',
-  fontSize:'16px'
-}
+  width: "calc(100% - 1em)",
+  fontWeight: "bold",
+  fontSize: "16px",
+};
 
 const AcsRaceButton = styled.button`
   background: ${(props) =>
@@ -465,20 +466,20 @@ function VariablePanel() {
       type: "CHANGE_VARIABLE",
       payload: e.target.value,
     });
-    const handleGeography = (e) =>
-      dispatch({
-        type: "CHANGE_GEOGRAPHY",
-        payload: e.target.value,
-      });
-      const handleVizType = (e) =>
-        dispatch({
-          type: "SET_MAP_PARAMS",
-          payload: {
-            params: {
-              vizType: e.target.value
-            }
-          },
-        });
+  const handleGeography = (e) =>
+    dispatch({
+      type: "CHANGE_GEOGRAPHY",
+      payload: e.target.value,
+    });
+  const handleVizType = (e) =>
+    dispatch({
+      type: "SET_MAP_PARAMS",
+      payload: {
+        params: {
+          vizType: e.target.value,
+        },
+      },
+    });
 
   const handleDataset = (e) => {
     dispatch(setCurrentData(e.target.value));
@@ -516,15 +517,15 @@ function VariablePanel() {
     dispatch(setMapParams({ binMode: binMode === "dynamic" ? "" : "dynamic" }));
 
   const handleToggleStories = () => {
-    if (panelState.storiesPane){
+    if (panelState.storiesPane) {
       dispatch(setPanelState({ storiesPane: false, lineChart: true }));
-      dispatch(setMapParams({overlay: ''}));
+      dispatch(setMapParams({ overlay: "" }));
     } else {
       dispatch(setPanelState({ storiesPane: true, lineChart: false }));
-      dispatch(setMapParams({overlay: 'stories'}));
+      dispatch(setMapParams({ overlay: "stories" }));
     }
-  }
-  
+  };
+
   const availableData = currentPreset.geography
     ? allDatasets.filter(
         (dataset) =>
@@ -546,25 +547,25 @@ function VariablePanel() {
     >
       {panelState.variables && (
         <ControlsContainer>
-        <Grid item xs={12} md={12} lg={6}>
-          <h2>
-            Data Sources &amp;
-            <br /> Map Variables
-          </h2>
-        </Grid>
           <Grid item xs={12} md={12} lg={6}>
-            <Button 
-              variant="contained" 
+            <h2>
+              Data Sources &amp;
+              <br /> Map Variables
+            </h2>
+          </Grid>
+          <Grid item xs={12} md={12} lg={6}>
+            <Button
+              variant="contained"
               sx={storiesButtonStyles}
               onClick={handleToggleStories}
-              >
-                <Switch
-                  checked={panelState.storiesPane}
-                  onChange={handleToggleStories}
-                  name="stories mode switch"
-                  label="Atlas Stories"
-                />
-                Atlas Stories
+            >
+              <Switch
+                checked={panelState.storiesPane}
+                onChange={handleToggleStories}
+                name="stories mode switch"
+                label="Atlas Stories"
+              />
+              Atlas Stories
             </Button>
           </Grid>
           <Gutter h={20} />
@@ -666,7 +667,7 @@ function VariablePanel() {
                 </MenuItem>
               </Select>
             </StyledDropDown>
-            <br/>
+            <br />
             <BinsContainer
               id="binModeSwitch"
               disabled={
@@ -760,9 +761,11 @@ function VariablePanel() {
               <br />
             </RadioGroup>
           </StyledDropDown>
-          <Gutter h={15} />          
-          <StyledDropDown style={{minWidth:'100%'}}>
-            <InputLabel htmlFor="viz-type-select">Visualization Type</InputLabel>
+          <Gutter h={15} />
+          <StyledDropDown style={{ minWidth: "100%" }}>
+            <InputLabel htmlFor="viz-type-select">
+              Visualization Type
+            </InputLabel>
             <Select
               id="viz-type-select"
               value={vizType}
@@ -894,7 +897,7 @@ function VariablePanel() {
           )}
           <Gutter h={20} />
           <TwoUp id="overlaysResources">
-            <StyledDropDown style={{minWidth:'100%'}}>
+            <StyledDropDown style={{ minWidth: "100%" }}>
               <InputLabel htmlFor="overlay-select">Overlay</InputLabel>
               <Select
                 id="overlay-select"
@@ -932,7 +935,7 @@ function VariablePanel() {
               </Select>
             </StyledDropDown>
             <Gutter h={20} />
-            <StyledDropDown style={{minWidth:'100%'}}>
+            <StyledDropDown style={{ minWidth: "100%" }}>
               <InputLabel htmlFor="resource-select">Resource</InputLabel>
               <Select
                 id="resource-select"
@@ -973,12 +976,12 @@ function VariablePanel() {
           </p>
           <hr></hr> */}
           <p className="note">
-            Data is updated with freshest available data at 3pm CST daily,
-            at minimum. In case of data discrepancy, local health departments
-            are considered most accurate as per CDC recommendations. 
-            More information on <a href="data">data</a>,{" "}
-            <a href="methods">methods</a>, and <a href="FAQ">FAQ</a>{" "}
-            at main site.
+            Data is updated with freshest available data at 3pm CST daily, at
+            minimum. In case of data discrepancy, local health departments are
+            considered most accurate as per CDC recommendations. More
+            information on <a href="data">data</a>,{" "}
+            <a href="methods">methods</a>, and <a href="FAQ">FAQ</a> at main
+            site.
           </p>
           <div className="poweredByGeoda">
             <a
