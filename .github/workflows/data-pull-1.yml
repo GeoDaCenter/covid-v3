@@ -1,4 +1,4 @@
-name: Daily Data Pull 0.1.0b
+name: Daily Data Pull 0.1.0c
 
 on:
   schedule:
@@ -12,7 +12,7 @@ jobs:
       - name: checkout repo content
         uses: actions/checkout@v2
         
-      # NODE
+      # NODE SETUP
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
@@ -24,9 +24,11 @@ jobs:
       - name: install node packages
         run: yarn
 
+      # FETCH BASE DATA
       - name: get data
         run: node build-scripts/fetchLatestData
 
+      # PYTHON SETUP
       - name: setup python
         uses: actions/setup-python@v2
         with:
@@ -37,6 +39,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r data-scripts/requirements.txt
       
+      # PYTHON SCRIPTS
       - name: cdc vaccination data
         run: python data-scripts/cdc/getCdcVaccinationData.py
 
@@ -87,4 +90,4 @@ jobs:
         uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: master
+          branch: main
