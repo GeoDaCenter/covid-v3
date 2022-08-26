@@ -70,7 +70,7 @@ export const TableReport = ({
     secondOrderNeighbors,
     national: null
   }[geogToInclude];
-
+  console.log('tablereport', topic)
   const variableNames = topic === "COVID"
     ? metrics.map(metric => CovidVarMapping[metric]).flat()
     : metrics

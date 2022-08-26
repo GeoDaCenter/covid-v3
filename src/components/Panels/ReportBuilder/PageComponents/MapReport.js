@@ -134,17 +134,20 @@ function ReportMap({
   const [
     currentMapGeography,
     currentMapData,
+    { cartogramData, cartogramCenter, cartogramDataSnapshot },
     currentMapID,
     currentBins,
     currentHeightScale,
     isLoading,
     geojsonData,
     currIndex,
+    isBackgroundLoading,
   ] = useMapData({
     dataParams,
     mapParams,
     currentData,
   });
+  
   const [
     countyViewport,
     neighborsViewport,
@@ -171,7 +174,6 @@ function ReportMap({
     national: nationalViewport
   }[scale];
 
-  console.log(currentMapData, mapParams)
   const mapInner = useMemo(
     () => (
       <NoInteractionGate>

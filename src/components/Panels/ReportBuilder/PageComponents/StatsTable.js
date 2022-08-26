@@ -90,6 +90,7 @@ const SdohStatsTable = ({ geoid, metrics, includedColumns, ids, dateIndex }) => 
     neighborIds: ids,
     dateIndex
   });
+  console.log(data, columns, dataReady)
   const filteredData = data.filter((d) => metrics.includes(d.variable));
   const innerTable = useMemo(
     () => <StatsTableInner data={filteredData} columns={columns} />,
@@ -99,6 +100,7 @@ const SdohStatsTable = ({ geoid, metrics, includedColumns, ids, dateIndex }) => 
 };
 
 export default function StatsTable({ geoid = 17031, topic = "COVID", metrics=[], includedColumns, ids=[], dateIndex }) {
+  console.log('topic', topic)
   switch (topic) {
     case "SDOH":
       return <SdohStatsTable {...{metrics, geoid, includedColumns, ids, dateIndex}} />;
