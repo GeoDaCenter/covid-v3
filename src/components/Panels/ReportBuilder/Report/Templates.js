@@ -14,7 +14,7 @@ export const templates = {
       {
         type: "map",
         w: 2,
-        h: 4,
+        h: 3,
         x:2,
         y:0,
         variable: "Confirmed Count per 100K Population"
@@ -22,14 +22,14 @@ export const templates = {
       {
         type: "textReport",
         w: 2,
-        h: 3,
+        h: 2,
         x:0,
         y:1
       },
       {
         type: "lineChart",
         w: 2,
-        h: 3,        
+        h: 2,        
         x:0, 
         y:4,
         table: "cases"
@@ -37,7 +37,7 @@ export const templates = {
       {
         type: "lineChart",
         w: 2,
-        h: 3,
+        h: 2,
         x:2,
         y:4,
         table: "deaths"
@@ -46,7 +46,7 @@ export const templates = {
         type: "table",
         topic: "COVID",
         w: 2,
-        h: 3,
+        h: 2,
         x:0,
         y:7,
         metrics: ["Cases", "Deaths", "Vaccination", "Testing"],
@@ -64,7 +64,7 @@ export const templates = {
           "Severe Housing Problems",
         ],
         w: 2,
-        h: 3,
+        h: 2,
         x:2,
         y:7,
       },

@@ -17,15 +17,14 @@ const mapping = {
 
 export default function ReportComponentMapping({ itemId, pageIdx, reportName }) {
   const dispatch = useDispatch();
-  const meta = useSelector(({ report }) => report.reports[reportName] && report.reports[reportName].meta)
-  const itemProps = useSelector(({ report }) => report.reports[reportName] && report.reports[reportName].items && report.reports[reportName].items[itemId])
+  const meta = useSelector(({ report }) => report.reports?.[reportName]?.meta)
+  const itemProps = useSelector(({ report }) => report.reports?.[reportName]?.items?.[itemId])
 
   const handleChange = (props) => dispatch({
     type: "CHANGE_REPORT_ITEM",
     payload: {
       reportName,
-      pageIdx,
-      itemId: itemProps.key,
+      itemId,
       props,
     }
   });
@@ -35,7 +34,7 @@ export default function ReportComponentMapping({ itemId, pageIdx, reportName }) 
     payload: {
       reportName,
       pageIdx,
-      itemId: itemProps.key,
+      itemId
     }
   });
 
@@ -43,8 +42,7 @@ export default function ReportComponentMapping({ itemId, pageIdx, reportName }) 
     type: "TOGGLE_REPORT_ITEM",
     payload: {
       reportName,
-      pageIdx,
-      itemId: itemProps.key,
+      itemId, 
       prop,
     }
   });

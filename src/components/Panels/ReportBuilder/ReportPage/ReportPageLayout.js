@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import styled from "styled-components";
 import colors from "../../../../config/colors";
 
@@ -16,8 +17,9 @@ export const LayoutPageContainer = styled.div`
     overflow-y: visible;
     page-break-after: always;
   }
-  transform:scale(${props => (props.pageWidth||0)/1280});
+  transform:scale(${({pageWidth, zoomMultiplier}) => (zoomMultiplier||1)*(pageWidth||0)/1100});
   transform-origin: 0 0;
+  transition:250ms transform;
   .react-grid-item > .react-resizable-handle {
     width:1em;
     height:1em;
@@ -42,19 +44,22 @@ export const LayoutPageContainer = styled.div`
   }
 `;
 
-export const AddItemButton = styled.button`
-  background: ${colors.lightgray};
-  height: 2em;
-  border: 1px solid black;
+export const AddItemButton = styled(Button)`
+  background: ${colors.yellow};
+  position: absolute;
+  right: 1em;
+  bottom: 1em;
+  height: 4em;
+  width: 4em;
   padding: .25em .5em;
   color: black;
   font-size:1rem;
-  display: block;
-  margin:0 auto;
+  border-radius:50%;
+  box-shadow: 0 0 5px 2px ${colors.darkgray};
   cursor: pointer;
   svg {
-    width:.75rem;
-    height:.75rem;
+    width:2rem;
+    height:2rem;
   }
 `;
 

@@ -33,9 +33,12 @@ const ResponsiveGridLayout = WidthProvider(Responsive);
 //   },
 // };
 
+const MAX_ROWS = 7;
+
 export default function ReportPage({
   pageIdx,
   pageWidth,
+  zoomMultiplier,
   reportName,
   onMount
 }) {
@@ -61,9 +64,17 @@ export default function ReportPage({
         item,
       },
     });
-    
+  const canAddItem = !layout.find(item => 
+    (item.y + item.h === 9) && (item.x + item.w === 4)
+  )
+  
   return (
-    <LayoutPageContainer ref={pageRef} {...{ pageWidth }}>
+    <LayoutPageContainer 
+      ref={pageRef}
+      pageWidth={pageWidth}
+      zoomMultiplier={zoomMultiplier}
+
+      >
       {isSettled && <ResponsiveGridLayout
         className="layout"
         layouts={{
@@ -86,7 +97,7 @@ export default function ReportPage({
         isResizable
         resizeHandles={['se']}
       >
-        {layout.map(({ i }) => (
+        {layout.map(({i}) => (
           <div key={i}>
 
             <ReportComponentMapping
@@ -99,9 +110,6 @@ export default function ReportPage({
 
       </ResponsiveGridLayout>}
 
-      <AddItemButton onClick={toggleOpenAddItem}>
-        <Icon symbol="plus" /> Add to this page
-      </AddItemButton>
       <DateWaterMark />
       <AtlasWaterMark />
       <Attribution />
@@ -112,6 +120,9 @@ export default function ReportPage({
         pageIdx={pageIdx}
         open={openAddItem}
       />
+      {canAddItem && <AddItemButton onClick={toggleOpenAddItem}>
+        <Icon symbol="plus" />
+      </AddItemButton>}
     </LayoutPageContainer>
   );
 }

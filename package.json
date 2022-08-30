@@ -81,7 +81,7 @@
     "fetch-data": "node build-scripts/fetchLatestData && node build-scripts/buildTimeseries && node build-scripts/generateConfig && node build-scripts/parseColumns",
     "pre-build": "node build-scripts/fetchLatestData && node build-scripts/buildTimeseries && node build-scripts/generateConfig && node build-scripts/parseColumns",
     "build-sw": "node ./src/sw-build.js",
-    "netlify-build": "npm run pre-build && npm run build && cd build && cat _redirects",
+    "netlify-build": "yarn pre-build && yarn build",
     "build": "craco build",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "test": "craco test",

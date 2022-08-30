@@ -1,5 +1,7 @@
 import useGetQuantileStatistics from "../../hooks/useGetQuantileStatistics";
 import { formatNumber } from "../../utils";
+import styled from "styled-components";
+import colors from "../../config/colors";
 
 const Th = ({ children, ...props }) => <th {...props}>{children}</th>;
 const Td = ({ children, ...props }) => <td {...props}>{children}</td>;
@@ -13,8 +15,26 @@ const TableEntry = ({ type, items, cellProps, rowProps }) => {
         </tr>
     );
 };
+const StyledTable = styled.table`
+    width: 100%;
+    border-collapse: collapse;
+    tr:nth-child(even) {
+        background: rgba(0,0,0,0.05);
+    }
+    th {
+        text-align: left;
+        white-space: nowrap;
+    }
+    td, th {
+        padding: .25em;
+        border-left: 1px dashed ${colors.gray}33;
+    }
+    tr td:nth-of-type(1), tr th:nth-of-type(1) {
+        border-left: none;
+    }
+`
 
-export const Table = ({ children, ...props }) => <table {...props}><tbody>{children}</tbody></table>;
+export const Table = ({ children, ...props }) => <StyledTable {...props}><tbody>{children}</tbody></StyledTable>;
 export const TableHeader = (props) => <TableEntry type="header" {...props} />;
 export const TableRow = (props) => <TableEntry type="body" {...props} />;
 

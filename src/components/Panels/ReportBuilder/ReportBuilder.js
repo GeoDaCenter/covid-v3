@@ -12,6 +12,8 @@ import StepperComponent from "./InterfaceComponents/Stepper";
 import TemplateSelector from "./TemplateSelector";
 // import {ControlElementMapping} from "../../../components";
 import Report from "./Report/Report";
+import { Button } from "@mui/material";
+import { MetaButton, MetaButtonsContainer } from "./Report/MetaButtons";
 
 const style = {
   position: "absolute",
@@ -93,10 +95,37 @@ export default function ReportBuilder() {
   const [templateName, setTemplateName] = useState("Template Name");
   const [previousReport, setPreviousReport] = useState(false);
   const [hasChangedName, setHasChangedName] = useState(false);
+  const [zoomMultiplier, setZoomMultiplier] = useState(1);
+  
   const handleRenameTemplate = (e) => {
     setTemplateName(e.target.value);
     setHasChangedName(true);
   };
+  
+  const handleZoom = (action) => {
+    switch (action) {
+      case "zoomIn":
+        setZoomMultiplier((prev) => prev + 0.1);
+        break;
+      case "zoomOut":
+        setZoomMultiplier((prev) => prev - 0.1);
+        break;
+      case "reset":
+        setZoomMultiplier(1);
+        break;
+      default:
+        break;
+    }
+  }
+  
+  const handleAddPage = () =>
+    dispatch({
+      type: "ADD_REPORT_PAGE",
+      payload: {
+        reportName: previousReport || templateName
+      },
+    });
+
   useEffect(() => {
     if (!hasChangedName) {
       setTemplateName(
@@ -361,10 +390,23 @@ export default function ReportBuilder() {
             </>
           )}
           {activeStep >= 2 && (
+            <>
             <Report
               reportName={previousReport || templateName}
               activeStep={activeStep}
-            />
+              zoomMultiplier={zoomMultiplier}
+              />
+              
+      <MetaButtonsContainer>
+        <MetaButton onClick={handleAddPage}>Add New Page</MetaButton>
+        <MetaButton variant="outlined" sx={{mx: 1, px: 0}} onClick={() => handleZoom("zoomIn")}>Zoom In</MetaButton>
+        <MetaButton variant="outlined" sx={{mx: 1, px: 0}} onClick={() => handleZoom("zoomOut")}>Zoom Out</MetaButton>
+        <MetaButton variant="outlined" sx={{mx: 1, px: 0}} onClick={() => handleZoom("reset")}>Reset Zoom</MetaButton>
+        {/* <MetaButton reset={true} onClick={handleResetPages}>
+          Reset Template
+        </MetaButton> */}
+      </MetaButtonsContainer>
+              </>
           )}
         </ModalInner>
         <CloseButton onClick={handleClose} title="Close Report Builder">×</CloseButton>

@@ -56,7 +56,7 @@ export const TableReport = ({
   height = 3,
   topic = "COVID",
   metrics = [],
-  includedColumns = [{header:'Metric',accessor:"variable", },{header:'',accessor:"geoidData", },{header:'',accessor:"stateQ50", },{header:'National Median',accessor:"q50"}],
+  includedColumns = [{header:'Metric',accessor:"variable", },{header:'County',accessor:"geoidData", },{header:'State Median',accessor:"stateQ50", },{header:'National Median',accessor:"q50"}],
   neighbors,
   secondOrderNeighbors,
   geogToInclude = "county",
@@ -70,7 +70,6 @@ export const TableReport = ({
     secondOrderNeighbors,
     national: null
   }[geogToInclude];
-  console.log('tablereport', topic)
   const variableNames = topic === "COVID"
     ? metrics.map(metric => CovidVarMapping[metric]).flat()
     : metrics
@@ -83,11 +82,11 @@ export const TableReport = ({
   
   return (
     <PanelItemContainer>
-      <h4>
+      <h3>
         {topic.includes("COVID")
           ? "7-Day Average Summary Statistics"
           : "Community Health Context"}
-      </h4>
+      </h3>
       <MetricsTable {...{ metrics: variableNames, includedColumns, geoid, neighborIds, dateIndex, name }} />
       <ControlPopover
         top="0"

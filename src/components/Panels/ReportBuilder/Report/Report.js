@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReportPage from "../ReportPage/ReportPage";
 import {
@@ -7,39 +7,13 @@ import {
   PrintButton,
 } from "./LayoutContainer";
 import { MetaButtonsContainer, MetaButton } from "./MetaButtons";
-// import useGetNeighbors from "../../../../hooks/useGetNeighbors";
-// import { templates } from "./Templates";
-export default function Report({ reportName = "", activeStep }) {
+export default function Report({ reportName = "", activeStep, zoomMultiplier = 1 }) {
   const dispatch = useDispatch();
-  // const report = useSelector(({report}) => report.reports[reportName])
-  const pages = useSelector(({report}) => report.reports[reportName] && report.reports[reportName].layout && new Array(report.reports[reportName].layout.length).fill(null))
-  // const geoid = useSelector(({report}) => report.reports[reportName] && report.reports[reportName].meta?.geoid)
+  const pages = useSelector(({ report }) => report.reports[reportName] && report.reports[reportName].layout && new Array(report.reports[reportName].layout.length).fill(null))
   const gridContext = useRef({});
   const pagesRef = useRef({});
   const containerRef = useRef(null)
-  // const currentData = "county_usfacts.geojson";
   const pageWidth = containerRef?.current?.clientWidth;
-
-  // const [neighbors, secondOrderNeighbors, stateNeighbors] = useGetNeighbors({
-  //   geoid,
-  //   currentData,
-  //   updateTrigger: JSON.stringify(reportName)
-  // });
-
-  const handleAddPage = () =>
-    dispatch({
-      type: "ADD_REPORT_PAGE",
-      payload: reportName,
-    });
-
-  // const handleUpdateMeta = () =>
-  //   dispatch({
-  //     type: "UPDATE_REPORT_META",
-  //     payload: {
-  //       reportName,
-  //       props: {neighbors, secondOrderNeighbors, stateNeighbors}
-  //     }
-  //   });
 
   const handleGridContext = (grid, pageIdx) => {
     gridContext.current = {
@@ -77,11 +51,11 @@ export default function Report({ reportName = "", activeStep }) {
           try {
             if (fileType === "JPG") {
               exportComponentAsJPEG(pageRef, {
-                fileName: `${reportName}-page-${idx+1}.jpg`,
+                fileName: `${reportName}-page-${idx + 1}.jpg`,
               });
             } else if (fileType === "PDF") {
               exportComponentAsPDF(pageRef, {
-                fileName: `${reportName}-page-${idx+1}.pdf`,
+                fileName: `${reportName}-page-${idx + 1}.pdf`,
               });
             }
           } catch {
@@ -129,33 +103,9 @@ export default function Report({ reportName = "", activeStep }) {
         <ReportPage
           onMount={handleRef}
           key={`report-page-${reportName}-${pageIdx}`}
-          {...{handleGridContext, handleGridUpdate, pageIdx, reportName, pageWidth}}
+          {...{ handleGridContext, handleGridUpdate, pageIdx, reportName, pageWidth, zoomMultiplier }}
         />
       ))}
-      <MetaButtonsContainer>
-        <MetaButton onClick={handleAddPage}>Add New Page</MetaButton>
-        {/* <MetaButton reset={true} onClick={handleResetPages}>
-          Reset Template
-        </MetaButton> */}
-      </MetaButtonsContainer>
     </LayoutContainer>
   );
 }
-
-
-  // const handleResetPages = () => dispatch({
-  //   type: "RESET_REPORT",
-  //   payload: {
-  //     reportName
-  //   },
-  // });
-
-  // const handleAddItem = (pageIdx, item) =>
-  //   dispatch({
-  //     type: "ADD_REPORT_ITEM",
-  //     payload: {
-  //       reportName,
-  //       pageIdx,
-  //       item,
-  //     },
-  //   });

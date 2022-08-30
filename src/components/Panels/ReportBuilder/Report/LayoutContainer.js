@@ -2,9 +2,10 @@ import styled from "styled-components";
 import colors from "../../../../config/colors";
 
 export const LayoutContainer = styled.div`
-  overflow-y: scroll;
+  overflow-y: auto;
   max-height: 80vh;
   margin-top: 1em;
+  position: relative;
   ::-webkit-scrollbar {
     width: 10px;
   }

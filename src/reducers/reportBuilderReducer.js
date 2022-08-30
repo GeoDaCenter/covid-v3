@@ -93,112 +93,114 @@ export default function Reducer(state = INITIAL_STATE, action) {
     // }
     case "CHANGE_REPORT_ITEM": {
       const { reportName, itemId, props } = action.payload;
-
-      let items = state.reports[reportName].items;
-
-      items[itemId] = {
-        ...items[itemId],
+      let report = state.reports[reportName];
+      if (!report || !report?.items?.[itemId]) return state;
+      report.items[itemId] = {
+        ...report.items[itemId],
         ...props,
+      }
+
+      return {
+        reports: {
+          ...state.reports,
+          [reportName]: report
+        }
       };
-      
+    }
+    case "ADD_REPORT_ITEM": {
+      const { reportName, pageIdx, item } = action.payload;
+      let report = state.reports[reportName];
+      if (!report || !report?.items) return state;
+      const keys = [...Object.keys(report.items)].reverse();
+      const stringifiedKeys = keys.join(' ')
+      const key = generateTypeKey(stringifiedKeys, item.type)
+      report.items[key] = {
+        ...item,
+        key
+      }
+      const w = item.w || 1
+      const x = report.layout[pageIdx].reduce(
+        (prev, curr) => prev > curr.x + curr.w ? prev : curr.x + curr.w, 0
+      ) 
+      const h = item.h || 1
+      const y = report.layout[pageIdx].reduce(
+        (prev, curr) => prev >  curr.y + curr.h ? prev : curr.y + curr.h, 0
+      ) 
+      report.layout[pageIdx].push({
+        w,
+        h,
+        x,
+        y,
+        i: key
+      })
+      return {
+        reports: {
+          ...state.reports,
+          [reportName]: report
+        }
+      };
+    }
+    case "DELETE_REPORT_ITEM": {
+      const { reportName, pageIdx, itemId } = action.payload;
+      let report = state.reports[reportName];
+      if (!report) return state;
+      // remove from layout
+      report.layout[pageIdx] = report.layout[pageIdx].filter(item => item.i !== itemId);
+      // remove from dict
+      delete report.items[itemId];
+
+      return {
+        reports: {
+          ...state.reports,
+          [reportName]: report
+        }
+      };
+    }
+    case "TOGGLE_REPORT_ITEM": {
+      const { reportName, itemId, prop } = action.payload;
+      let report = state.reports[reportName];
+      if (!report || !report?.items?.[itemId]) return state;
+      report.items[itemId][prop] = !report.items[itemId][prop];
+
+      return {
+        reports: {
+          ...state.reports,
+          [reportName]: report
+        }
+      };
+    }
+    case "REORDER_REPORT_ITEMS": {
+      const { reportName, pageIdx, itemsMin, currItemsOrder } = action.payload;
+      let report = state.reports[reportName];
+      if (!report || !report?.items?.[itemId]) return state;
+      let spec = state.reports[reportName].spec;
+      spec[pageIdx] = currItemsOrder.map(
+        (idx) => spec[pageIdx][idx - itemsMin]
+      );
       const reports = {
         ...state.reports,
         [reportName]: {
           ...state.reports[reportName],
-          items
+          spec,
         },
       };
-
       return {
         reports
+      }
+    }
+    case "ADD_REPORT_PAGE": {
+      const { reportName } = action.payload;
+      let report = state.reports[reportName];
+      if (!report || !report?.layout) return state;
+      report.layout.push([])
+
+      return {
+        reports: {
+          ...state.reports,
+          [reportName]: report
+        }
       };
     }
-    // case "ADD_REPORT_ITEM": {
-    //   const { reportName, pageIdx, item } = action.payload;
-    //   let spec = state.reports[reportName].spec;
-    //   spec[pageIdx] = [...spec[pageIdx], item];
-
-    //   const reports = {
-    //     ...state.reports,
-    //     [reportName]: {
-    //       ...state.reports[reportName],
-    //       spec: spec
-    //     },
-    //   };
-
-    //   return {
-    //     reports
-    //   };
-    // }
-    // case "DELETE_REPORT_ITEM": {
-    //   const { reportName, pageIdx, itemIdx } = action.payload;
-    //   let spec = state.reports[reportName].spec;
-    //   spec[pageIdx] = [
-    //     ...spec[pageIdx].slice(0, itemIdx),
-    //     ...spec[pageIdx].slice(itemIdx + 1),
-    //   ];
-
-    //   const reports = {
-    //     ...state.reports,
-    //     [reportName]: {
-    //       ...state.reports[reportName],
-    //       spec
-    //     },
-    //   };
-
-    //   return {
-    //     reports
-    //   };
-    // }
-    // case "TOGGLE_REPORT_ITEM": {
-    //   const { reportName, pageIdx, itemIdx, prop } = action.payload;
-    //   let spec = state.reports[reportName].spec;
-    //   spec[pageIdx][itemIdx][prop] = !spec[pageIdx][itemIdx][prop];
-    //   const reports = {
-    //     ...state.reports,
-    //     [reportName]: {
-    //       ...state.reports[reportName],
-    //       spec
-    //     },
-    //   };
-
-    //   return {
-    //     reports
-    //   };
-    // }
-    // case "REORDER_REPORT_ITEMS": {
-    //   const { reportName, pageIdx, itemsMin, currItemsOrder } = action.payload;
-    //   let spec = state.reports[reportName].spec;
-    //   spec[pageIdx] = currItemsOrder.map(
-    //     (idx) => spec[pageIdx][idx - itemsMin]
-    //   );
-    //   const reports = {
-    //     ...state.reports,
-    //     [reportName]: {
-    //       ...state.reports[reportName],
-    //       spec,
-    //     },
-    //   };
-    //   return {
-    //     reports
-    //   }
-    // }
-    // case "ADD_REPORT_PAGE": {
-    //   const reportName = action.payload;
-    //   const reports = {
-    //     ...state.reports,
-    //     [reportName]: {
-    //       ...state.reports[reportName],
-    //       spec: [
-    //         ...state.reports[reportName].spec,
-    //         []
-    //       ]
-    //     },
-    //   };
-    //   return {
-    //     reports
-    //   }
-    // }
     // case "DELETE_REPORT": {
     //   let reports = { ...state.reports };
     //   delete reports[action.payload];

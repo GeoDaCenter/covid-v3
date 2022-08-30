@@ -9,11 +9,13 @@ const TemplateButton = styled.button`
   color: ${colors.white};
   border: 1px solid ${colors.white};
   padding: 0 1em 2em 1em;
-  max-width: 7vw;
-  margin: 1em auto;
-  display: block;
+  max-width: min(10em, 100%);
+  margin: 1em;
+  display: inline-block;
   cursor: pointer;
   transition: 250ms all;
+  flex:0 0 auto;
+  box-sizing:border-box;
   svg {
     transition: 250ms all;
     fill: ${colors.white};
@@ -31,8 +33,10 @@ const TemplateButton = styled.button`
   }
   @media (max-width: 900px) {
     width: 100%;
-    max-width: 100vw;
+    max-width: 100%;
     max-height: 20vh;
+    margin:.5em 0;
+    
     svg {
       /* height:100%; */
       max-width: 10vw;
@@ -43,27 +47,41 @@ const TemplateButton = styled.button`
   }
 `;
 
+const TemplatesContainer = styled.div`
+  display: flex;
+  align-content:center;
+  flex-wrap: wrap;
+  flex-direction:row;
+
+
+`
+
 const CustomizerCointainer = styled.div`
+  flex:1 1 auto;
+  padding: 0;
   h3 {
     display:block;
-    margin:1.5em 0 .5em 0;
+    margin:.5em 0 .5em 0;
   }
 `
 const InputContainer = styled.div`
-  display:block;
+  display:flex;
+  flex-direction:column;
+  margin-bottom:1em;
 `
 
 function TemplateCustomzier({ template = {} }) {
   if (!template?.customization || !template.customization.length) return null;
-  return template.customization.map(({label, input}, index) => {
+  return <CustomizerCointainer>
+  {template.customization.map(({label, input}, index) => {
     const InnerElement = ControlElementMapping[input.type];
-    return <CustomizerCointainer key={`${index}-${input.type}`}>
+    return <InputContainer key={`${index}-${input.type}`}>
     <h3>{label}</h3>
-    <InputContainer>
       <InnerElement {...input} />
     </InputContainer>
+  })}
   </CustomizerCointainer>
-  })
+
 }
 
 export default function TemplateSelector({
@@ -81,9 +99,8 @@ export default function TemplateSelector({
     ? templates
     : templates.filter((t) => t.label === selectedTemplate);
   return (
-    <Grid container spacing={2} justify="center" alignContent="center" alignItems={showTemplateCustomizer ? 'flex-start' : "center" }>
+    <TemplatesContainer>
       {templatesToShow.map(({ icon, label }, idx) => (
-        <Grid item xs={12} md={3} key={"template-button" + idx}>
           <TemplateButton
             onClick={() => {
               setSelectedTemplate(label)
@@ -94,10 +111,9 @@ export default function TemplateSelector({
             {icon ? <Icon symbol={icon} /> : <Gutter h={25} />}
             {label}
           </TemplateButton>
-        </Grid>
       ))}
       
-      {!!previousReports?.length && !showTemplateCustomizer && <Grid item xs={12} md={3}>
+      {!!previousReports?.length && !showTemplateCustomizer && 
         <Selector 
           content={{items: previousReports.map(f=>({label:f, value:f})), label: "Previous Reports"}}
           value={previousReport}
@@ -107,16 +123,14 @@ export default function TemplateSelector({
           }}
           acitve={previousReport !== false}
         />
-        </Grid>}
+        }
         {!!previousReport && !!showTemplateCustomizer && 
         <Grid item xs={12} md={12}>
           <h3>Click next to keep working on your report {previousReport}</h3>
           </Grid>}
       {showTemplateCustomizer && (
-        <Grid item xs={12} md={9}>
           <TemplateCustomzier template={templatesToShow[0]} />
-        </Grid>
       )}
-    </Grid>
+    </TemplatesContainer>
   );
 }

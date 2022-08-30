@@ -23,26 +23,31 @@ const SliderContainer = styled(Grid)`
   width: 100%;
   user-select: none;
 `;
-const DateContainer = styled(Grid)`
+const SliderRow = styled.div`
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
+  gap: .5em;
+  width: 100%;
+  padding-right:.5em;
   p {
-    font-size: 0.75rem;
-    text-align: center;
+    flex-grow: 0;
   }
-`;
+  `
+
 
 const PlayPauseButton = styled(Button)`
   background: none;
+  flex-grow:0;
   padding: 0;
-  margin: 0;
+  margin: 0 0 -.5em 0;
   width: 100%;
-  width:50px;
-  height:50px;
+  width:3em;
+  height:3em;
   &.MuiButton-root {
     min-width: auto;
-    max-width: 40px;
+    max-width: 100%;
     span {
       width: 100%;
     }
@@ -54,8 +59,8 @@ const PlayPauseButton = styled(Button)`
 
 const SliderAndTicksContainer = styled.div`
   position: relative;
-  margin: 0 1em;
-  transform: translateY(3px);
+  flex-grow: 1;
+  margin:0 1.5em 5px 1em;
 `;
 
 const SliderAndTicksInner = styled.div``;
@@ -371,22 +376,11 @@ function DateSlider() {
         handleRangeChange={handleRangeChange}
         currDatesAvailable={currDatesAvailable}
       />
-      <Grid item xs={1} md={1} lg={1} xl={1}>
-        <PlayPauseButton id="playPause" onClick={() => handlePlayPause()}>
+      <SliderRow>
+        <PlayPauseButton id="playPause" onClick={handlePlayPause}>
           <Icon symbol={isTicking ? "pause" : "play"} />
         </PlayPauseButton>
-      </Grid>
-      <DateContainer
-        item
-        xs={1}
-        md={1}
-        lg={1}
-        xl={1}
-        style={{ textAlign: "right" }}
-      >
         <p>{valuetext(allDates, 0)}</p>
-      </DateContainer>
-      <Grid item xs={9} md={9}>
         <SliderAndTicksContainer>
           <SliderAndTicksInner>
             <Ticks
@@ -426,30 +420,24 @@ function DateSlider() {
             )}
           </SliderAndTicksInner>
         </SliderAndTicksContainer>
-      </Grid>
-      <DateContainer item xs={1} md={1} style={{ textAlign: "left" }}>
         <p>{valuetext(allDates, findLastDate(currDatesAvailable))}</p>
-      </DateContainer>
-      {!!isTicking && (
-        <SpeedSlider>
-          <p>Animation Speed</p>
-          <StyledSlider
-            value={1000 - timing}
-            onChange={(e, newValue) => setTiming(1000 - newValue)}
-            getAriaValueText={speedtext}
-            valueLabelFormat={speedtext}
-            aria-labelledby="aria-valuetext"
-            min={25}
-            max={975}
-            step={25}
-          />
-        </SpeedSlider>
-      )}
-    </SliderContainer>
-  );
-  // } else {
-  //   return null
-  // }
+        {!!isTicking && (
+          <SpeedSlider>
+            <p>Animation Speed</p>
+            <StyledSlider
+              value={1000 - timing}
+              onChange={(e, newValue) => setTiming(1000 - newValue)}
+              getAriaValueText={speedtext}
+              valueLabelFormat={speedtext}
+              aria-labelledby="aria-valuetext"
+              min={25}
+              max={975}
+              step={25}
+            />
+          </SpeedSlider>
+        )}
+      </SliderRow>
+    </SliderContainer>)
 }
 
 export default React.memo(DateSlider);
