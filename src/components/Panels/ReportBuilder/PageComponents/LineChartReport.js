@@ -91,7 +91,7 @@ export const LineChartReport = ({
               items: tableOptions,
             },
             action: (e) =>
-              handleChange(pageIdx, contentIdx, {
+              handleChange({
                 table: e.target.value,
               }),
             value: table,
@@ -99,19 +99,19 @@ export const LineChartReport = ({
           {
             type: "switch",
             content: "Logarithmic Scale",
-            action: () => handleToggle(pageIdx, contentIdx, "logChart"),
+            action: () => handleToggle("logChart"),
             value: logChart,
           },
           {
             type: "switch",
             content: "Normalize to 100K Population",
-            action: () => handleToggle(pageIdx, contentIdx, "populationNormalized"),
+            action: () => handleToggle("populationNormalized"),
             value: populationNormalized,
           },
           {
             type: "switch",
             content: "Show Variant Designation Dates",
-            action: () => handleToggle(pageIdx, contentIdx, "shouldShowVariants"),
+            action: () => handleToggle("shouldShowVariants"),
             value: shouldShowVariants,
           },
           {
@@ -121,28 +121,28 @@ export const LineChartReport = ({
               items: countyList,
             },
             action: (e) =>
-              handleChange(pageIdx, contentIdx, { geoid: e.target.value }),
+              handleChange({ geoid: e.target.value }),
             value: geoid,
           },
-          {
-            ...widthOptions,
-            action: (e) =>
-              handleChange(pageIdx, contentIdx, { width: e.target.value }),
-            value: width,
-          },
-          {
-            ...heightOptions,
-            action: (e) =>
-              handleChange(pageIdx, contentIdx, { height: e.target.value }),
-            value: height,
-          },
+          // {
+          //   ...widthOptions,
+          //   action: (e) =>
+          //     handleChange({ W: e.target.value }),
+          //   value: width,
+          // },
+          // {
+          //   ...heightOptions,
+          //   action: (e) =>
+          //     handleChange({ height: e.target.value }),
+          //   value: height,
+          // },
         ]}
       />
       <GrabTarget iconColor={colors.strongOrange} className="hover-buttons" />
       <DeleteBlock
         iconColor={colors.strongOrange}
         className="hover-buttons"
-        onClick={() => handleRemove(pageIdx, contentIdx)}
+        onClick={handleRemove}
       />
     </PanelItemContainer>
   );

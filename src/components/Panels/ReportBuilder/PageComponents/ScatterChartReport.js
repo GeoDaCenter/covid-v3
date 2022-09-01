@@ -71,7 +71,7 @@ export const ScatterChartReport = ({
               items: ScatterPlotVars,
             },
             action: (e) =>
-              handleChange(pageIdx, contentIdx, { xAxisVar: e.target.value }),
+              handleChange({ xAxisVar: e.target.value }),
             value: xAxisVar,
           },
           {
@@ -81,7 +81,7 @@ export const ScatterChartReport = ({
               items: ScatterPlotVars,
             },
             action: (e) =>
-              handleChange(pageIdx, contentIdx, { yAxisVar: e.target.value }),
+              handleChange({ yAxisVar: e.target.value }),
             value: yAxisVar,
           },
           {
@@ -91,21 +91,21 @@ export const ScatterChartReport = ({
               items: RadiusRange,
             },
             action: (e) =>
-              handleChange(pageIdx, contentIdx, { radius: e.target.value }),
+              handleChange({ radius: e.target.value }),
             value: radius,
           },          
-          {
-            ...widthOptions,
-            action: (e) =>
-              handleChange(pageIdx, contentIdx, { width: e.target.value }),
-            value: width,
-          },
-          {
-            ...heightOptions,
-            action: (e) =>
-              handleChange(pageIdx, contentIdx, { height: e.target.value }),
-            value: height,
-          },
+          // {
+          //   ...widthOptions,
+          //   action: (e) =>
+          //     handleChange(pageIdx, contentIdx, { width: e.target.value }),
+          //   value: width,
+          // },
+          // {
+          //   ...heightOptions,
+          //   action: (e) =>
+          //     handleChange(pageIdx, contentIdx, { height: e.target.value }),
+          //   value: height,
+          // },
         ]}
       />
       <GrabTarget iconColor={colors.strongOrange} className="hover-buttons" />

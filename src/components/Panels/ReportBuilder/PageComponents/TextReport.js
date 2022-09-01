@@ -43,21 +43,21 @@ export const TextReport = ({
             items: countyNames,
           },
           action: (e) =>
-            handleChange(pageIdx, contentIdx, { geoid: e.target.value }),
+            handleChange({ geoid: e.target.value }),
           value: geoid,
         },
-        {
-          ...widthOptions,
-          action: (e) =>
-            handleChange(pageIdx, contentIdx, { width: e.target.value }),
-          value: width,
-        },
-        {
-          ...heightOptions,
-          action: (e) =>
-            handleChange(pageIdx, contentIdx, { height: e.target.value }),
-          value: height,
-        },
+        // {
+        //   ...widthOptions,
+        //   action: (e) =>
+        //     handleChange({ width: e.target.value }),
+        //   value: width,
+        // },
+        // {
+        //   ...heightOptions,
+        //   action: (e) =>
+        //     handleChange({ height: e.target.value }),
+        //   value: height,
+        // },
       ]}
     />
     <GrabTarget iconColor={colors.strongOrange} className="hover-buttons" />

@@ -48,18 +48,18 @@ export const TextContainerReport = ({
             type: "helperText",
             content: "Select the data to display on the chart.",
           },
-          {
-            ...widthOptions,
-            action: (e) =>
-              handleChange(pageIdx, contentIdx, { width: e.target.value }),
-            value: width,
-          },
-          {
-            ...heightOptions,
-            action: (e) =>
-              handleChange(pageIdx, contentIdx, { height: e.target.value }),
-            value: height,
-          },
+          // {
+          //   ...widthOptions,
+          //   action: (e) =>
+          //     handleChange({ width: e.target.value }),
+          //   value: width,
+          // },
+          // {
+          //   ...heightOptions,
+          //   action: (e) =>
+          //     handleChange({ height: e.target.value }),
+          //   value: height,
+          // },
         ]}
       />
       <GrabTarget iconColor={colors.strongOrange} className="hover-buttons" />
