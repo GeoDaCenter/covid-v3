@@ -30,6 +30,7 @@
     "@loaders.gl/core": "^3.0.12",
     "@mdx-js/loader": "^2.1.2",
     "@mdx-js/mdx": "^2.1.2",
+    "@mui/icons-material": "^5.10.3",
     "@mui/lab": "^5.0.0-alpha.65",
     "@mui/material": "^5.2.8",
     "@mui/styles": "^5.2.3",

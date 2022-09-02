@@ -17,7 +17,7 @@ export const LayoutPageContainer = styled.div`
     overflow-y: visible;
     page-break-after: always;
   }
-  transform:scale(${({pageWidth, zoomMultiplier}) => (zoomMultiplier||1)*(pageWidth||0)/1100});
+  transform:scale(${({pageWidth, zoomMultiplier}) => (zoomMultiplier||1)*(pageWidth||0)/1055});
   transform-origin: 0 0;
   transition:250ms transform;
   .react-grid-item > .react-resizable-handle {

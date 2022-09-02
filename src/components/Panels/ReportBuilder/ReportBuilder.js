@@ -352,7 +352,7 @@ export default function ReportBuilder() {
     >
       <Box sx={style}>
         <ModalInner>
-          <Typography id="modal-modal-title" variant="h2" component="h1">
+          <Typography id="modal-modal-title" variant="h4" component="h4">
             Atlas Report Builder
           </Typography>
           {/* <Typography id="modal-modal-title" variant="h4" component="h2">

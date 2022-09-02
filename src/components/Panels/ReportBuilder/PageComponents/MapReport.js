@@ -19,6 +19,7 @@ import { findIn } from "../../../../utils";
 import colors from "../../../../config/colors";
 import countyNames from "../../../../meta/countyNames";
 import { colorScales } from "../../../../config/scales";
+import { defaultData } from "../../../../config/defaults";
 
 const defaultMapParams = {
   mapType: "natural_breaks",
@@ -128,7 +129,7 @@ function ReportMap({
   const { width: mapWidth, height: mapHeight } =
     mapContainerRef?.current?.getBoundingClientRect() || {};
 
-  const currentData = "county_usfacts.geojson";
+  const currentData = defaultData
   const mapIdCol = "GEOID";
 
   const [
@@ -165,6 +166,7 @@ function ReportMap({
     mapWidth,
     mapHeight,
   });
+  console.log(countyViewport, neighborsViewport, secondOrderNeighborsViewport, stateViewport, nationalViewport)
 
   const currViewport = {
     county: countyViewport,
@@ -208,7 +210,7 @@ function ReportMap({
         />
       </MapTitle>
       <MapAttribution>
-        Source: USA Facts via US Covid Atlas :: Date: {dates[currIndex]}
+        Source: New York Times via US Covid Atlas :: Date: {dates[currIndex]}
       </MapAttribution>
       {mapInner}
       <ControlPopover
