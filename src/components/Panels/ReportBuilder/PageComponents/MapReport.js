@@ -1,6 +1,7 @@
 import React, { useRef, useMemo } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import CircularProgress from '@mui/material/CircularProgress';
 import useMapData from "../../../../hooks/useMapData";
 import useGetReportViewport from "../../../../hooks/useGetReportViewport";
 import {
@@ -20,6 +21,7 @@ import colors from "../../../../config/colors";
 import countyNames from "../../../../meta/countyNames";
 import { colorScales } from "../../../../config/scales";
 import { defaultData } from "../../../../config/defaults";
+import { Box } from "@mui/material";
 
 const defaultMapParams = {
   mapType: "natural_breaks",
@@ -100,10 +102,10 @@ function ReportMap({
   // height,
   date,
   dateIndex,
-  reportName='',
-  variable="Percent Fully Vaccinated",
-  mapType="natural_breaks",
-  scale="county",
+  reportName = '',
+  variable = "Percent Fully Vaccinated",
+  mapType = "natural_breaks",
+  scale = "county",
 }) {
   const dates = useSelector(({ params }) => params.dates);
   const variableTree = useSelector(({ params }) => params.variableTree);
@@ -112,7 +114,7 @@ function ReportMap({
   const variableList = Object.keys(variableTree)
     .filter((f) => !f.includes("HEADER"))
     .map((f) => ({ label: f, value: f }));
-    
+
   const dataParams = {
     ...(findIn(variables, "variableName", variable) || {}),
     nIndex: dateIndex,
@@ -148,7 +150,7 @@ function ReportMap({
     mapParams,
     currentData,
   });
-  
+
   const [
     countyViewport,
     neighborsViewport,
@@ -166,7 +168,6 @@ function ReportMap({
     mapWidth,
     mapHeight,
   });
-  console.log(countyViewport, neighborsViewport, secondOrderNeighborsViewport, stateViewport, nationalViewport)
 
   const currViewport = {
     county: countyViewport,
@@ -177,42 +178,53 @@ function ReportMap({
   }[scale];
 
   const mapInner = useMemo(
-    () => (
-      <NoInteractionGate>
-        <MapSection
-          currentMapGeography={currentMapGeography}
-          currentMapData={currentMapData}
-          currentMapID={currentMapID}
-          currentHeightScale={currentHeightScale}
-          isLoading={isLoading}
-          mapParams={mapParams}
-          currentData={currentData}
-          currIdCol={mapIdCol}
-          theme={"light"}
-          manualViewport={currViewport}
-          hoverGeoid={geoid}
-          highlightGeoids={[geoid]}
-        />
-      </NoInteractionGate>
-    ),
-    [JSON.stringify(neighborsViewport), currentMapID]
+    () => {
+      if (isLoading || isBackgroundLoading) {
+        return null
+      } else {
+
+        return <NoInteractionGate>
+          <MapSection
+            currentMapGeography={currentMapGeography}
+            currentMapData={currentMapData}
+            currentMapID={currentMapID}
+            currentHeightScale={currentHeightScale}
+            isLoading={isLoading}
+            mapParams={mapParams}
+            currentData={currentData}
+            currIdCol={mapIdCol}
+            theme={"light"}
+            manualViewport={currViewport}
+            hoverGeoid={geoid}
+            highlightGeoids={[geoid]}
+          />
+        </NoInteractionGate>
+      }
+    },
+    [isLoading, isBackgroundLoading, JSON.stringify(currViewport), currentMapID]
   );
+
   return (
-    <PanelItemContainer
-      ref={mapContainerRef}
-    >
-      <MapTitle>
-        <h4>{dataParams.variableName}</h4>
-        <LegendInner
-          colorScale={mapParams.colorScale}
-          currentBins={currentBins?.bins || []}
-          fixedScale={dataParams.fixedScale}
-        />
-      </MapTitle>
-      <MapAttribution>
-        Source: New York Times via US Covid Atlas :: Date: {dates[currIndex]}
-      </MapAttribution>
-      {mapInner}
+    <PanelItemContainer ref={mapContainerRef}>
+      {!!(isLoading || isBackgroundLoading) ? (
+        <Box sx={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', width: '3em', height: '3em' }}>
+          <CircularProgress />
+        </Box>
+      ) : (<>
+        <MapTitle>
+          <h4>{dataParams.variableName}</h4>
+          <LegendInner
+            colorScale={mapParams.colorScale}
+            currentBins={currentBins?.bins || []}
+            fixedScale={dataParams.fixedScale}
+          />
+        </MapTitle>
+        <MapAttribution>
+          Source: New York Times via US Covid Atlas :: Date: {dates[currIndex]}
+        </MapAttribution>
+        {mapInner}
+      </>
+      )}
       <ControlPopover
         top="0"
         left="0"
@@ -253,10 +265,10 @@ function ReportMap({
               items: [{
                 label: "Natural Breaks",
                 value: "natural_breaks",
-              },{
+              }, {
                 label: "Box Map",
                 value: "hinge15_breaks",
-              },{
+              }, {
                 label: "Hotspot",
                 value: "lisa",
               }],
