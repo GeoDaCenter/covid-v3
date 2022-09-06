@@ -7,9 +7,16 @@ import {
   PrintButton,
 } from "./LayoutContainer";
 import { MetaButtonsContainer, MetaButton } from "./MetaButtons";
+
+import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import { Alert } from "@mui/material";
+
 export default function Report({ reportName = "", activeStep, zoomMultiplier = 1 }) {
   const dispatch = useDispatch();
-  const pages = useSelector(({ report }) => report.reports[reportName] && report.reports[reportName].layout && new Array(report.reports[reportName].layout.length).fill(null))
+  const currPage = useSelector(({ report }) => report.pageIdx);
   const gridContext = useRef({});
   const pagesRef = useRef({});
   const containerRef = useRef(null)
@@ -99,13 +106,59 @@ export default function Report({ reportName = "", activeStep, zoomMultiplier = 1
           </PrintButton> */}
         </PrintContainer>
       )}
-      {!!pages && pages.map((_, pageIdx) => (
-        <ReportPage
-          onMount={handleRef}
-          key={`report-page-${reportName}-${pageIdx}`}
-          {...{ handleGridContext, handleGridUpdate, pageIdx, reportName, pageWidth, zoomMultiplier }}
-        />
-      ))}
+      <ReportPage
+        onMount={handleRef}
+        key={`report-page-${reportName}-${currPage}`}
+        pageIdx={currPage}
+        {...{ handleGridContext, handleGridUpdate, reportName, pageWidth, zoomMultiplier }}
+      />
+      <ErrorToast />
     </LayoutContainer>
   );
+}
+
+function ErrorToast() {
+  const dispatch = useDispatch();
+  const error = useSelector(({ report }) => report.error);
+  const {
+    type,
+    reportName,
+    pageIdx
+  } = error || {};
+
+  const handleClose = () => {
+    dispatch({
+      type: "CLEAR_ERROR"
+    })
+  }
+
+  const handleAddPage = () =>
+    dispatch({
+      type: "ADD_REPORT_PAGE",
+      payload: {
+        reportName
+      },
+    });
+
+  if (!error) return null;
+  const messages = {
+    "Invalid layout": `Page ${pageIdx + 1} is full! Resize, remove items, or add a new page.`
+  }
+  const text = messages[type]
+
+  return (
+    <Snackbar
+      open={true}
+      autoHideDuration={6000}
+      onClose={handleClose}
+    >
+      <Alert onClose={handleClose} severity="warning" sx={{ width: '100%' }}
+        action={
+          <Button color="inherit" size="small" onClick={handleAddPage}>
+            Add Page
+          </Button>}>
+        {text}
+      </Alert>
+    </Snackbar>
+  )
 }

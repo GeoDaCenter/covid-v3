@@ -1,4 +1,5 @@
 const INITIAL_STATE ={
-    reports: {}
+    reports: {},
+    pageIdx: 0
   }
   export default INITIAL_STATE;

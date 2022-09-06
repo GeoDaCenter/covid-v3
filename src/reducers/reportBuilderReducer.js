@@ -8,7 +8,7 @@ function generateTypeKey(
   if (!(stringifiedKeys.includes(type))) {
     return `${type}-0`
   } else {
-    let i=1;
+    let i = 1;
     do {
       const tempName = `${type}-${i}`
       if (!(stringifiedKeys.includes(tempName))) {
@@ -41,16 +41,16 @@ function generateReportLayout(spec) {
         key
       }
       layout[i].push({
-        w: w||1,
-        h: h||1,
-        x: x||0,
-        y: y||0,
+        w: w || 1,
+        h: h || 1,
+        x: x || 0,
+        y: y || 0,
         i: key
       })
 
     }
   }
-  
+
   return {
     items,
     layout
@@ -63,18 +63,19 @@ export default function Reducer(state = INITIAL_STATE, action) {
     case "ADD_NEW_REPORT": {
       const { reportName, spec, meta } = action.payload;
       const { items, layout } = generateReportLayout(spec)
-      
+
       const reports = {
         ...state.reports,
         [reportName]: {
           meta,
-          items, 
+          items,
           layout,
           defaults: action.payload
         },
       }
       return {
-        reports
+        reports,
+        pageIdx: 0
       }
     }
     // case "RESET_REPORT": {
@@ -99,17 +100,49 @@ export default function Reducer(state = INITIAL_STATE, action) {
         ...report.items[itemId],
         ...props,
       }
-
       return {
+        ...state,
         reports: {
           ...state.reports,
-          [reportName]: report
+          [reportName]: report,
         }
-      };
+      }
+    }
+    case "UPDATE_REPORT_LAYOUT": {
+      const { reportName, pageIdx, layout } = action.payload;
+      let report = state.reports[reportName];
+      if (!report || !report?.layout?.[pageIdx]) return state;
+      const isInvalidLayout = layout.find(
+        (item) => item.y + item.h >= 9
+      );
+      if (!!isInvalidLayout) {
+        return {
+          ...state,
+          reports: {
+            ...state.reports,
+          },
+          error: {
+            type: "Invalid layout",
+            pageIdx,
+            reportName
+          }
+        }
+      } else {
+        report.layout[pageIdx] = layout;
+        return {
+          ...state,
+          reports: {
+            ...state.reports,
+            [reportName]: report
+          }
+        }
+      }
     }
     case "ADD_REPORT_ITEM": {
       const { reportName, pageIdx, item } = action.payload;
-      let report = state.reports[reportName];
+      let report = {
+        ...state.reports[reportName]
+      };
       if (!report || !report?.items) return state;
       const keys = [...Object.keys(report.items)].reverse();
       const stringifiedKeys = keys.join(' ')
@@ -121,11 +154,11 @@ export default function Reducer(state = INITIAL_STATE, action) {
       const w = item.w || 1
       const x = report.layout[pageIdx].reduce(
         (prev, curr) => prev > curr.x + curr.w ? prev : curr.x + curr.w, 0
-      ) 
+      ) % 4
       const h = item.h || 1
       const y = report.layout[pageIdx].reduce(
-        (prev, curr) => prev >  curr.y + curr.h ? prev : curr.y + curr.h, 0
-      ) 
+        (prev, curr) => prev > curr.y + curr.h ? prev : curr.y + curr.h, 0
+      )
       report.layout[pageIdx].push({
         w,
         h,
@@ -133,7 +166,10 @@ export default function Reducer(state = INITIAL_STATE, action) {
         y,
         i: key
       })
+      console.log('ADDED TO REPORT', report, state)
       return {
+        // ...state,
+        pageIdx,
         reports: {
           ...state.reports,
           [reportName]: report
@@ -150,6 +186,7 @@ export default function Reducer(state = INITIAL_STATE, action) {
       delete report.items[itemId];
 
       return {
+        ...state,
         reports: {
           ...state.reports,
           [reportName]: report
@@ -163,6 +200,7 @@ export default function Reducer(state = INITIAL_STATE, action) {
       report.items[itemId][prop] = !report.items[itemId][prop];
 
       return {
+        ...state,
         reports: {
           ...state.reports,
           [reportName]: report
@@ -185,6 +223,7 @@ export default function Reducer(state = INITIAL_STATE, action) {
         },
       };
       return {
+        ...state,
         reports
       }
     }
@@ -198,8 +237,24 @@ export default function Reducer(state = INITIAL_STATE, action) {
         reports: {
           ...state.reports,
           [reportName]: report
-        }
+        },
+        pageIdx: report.layout.length - 1
       };
+    }
+    case "CLEAR_ERROR": {
+      return {
+        ...state,
+        error: null,
+        reports: {
+          ...state.reports
+        }
+      }
+    }
+    case "SET_PAGE_IDX": {
+      return {
+        ...state,
+        pageIdx: action.payload
+      }
     }
     // case "DELETE_REPORT": {
     //   let reports = { ...state.reports };

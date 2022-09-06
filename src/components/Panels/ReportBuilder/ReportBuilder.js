@@ -1,19 +1,14 @@
 import { useEffect, useState, useMemo } from "react";
 import Box from "@mui/material/Box";
-// import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import colors from "../../../config/colors";
 import countyList from "../../../meta/countyNames";
-
 import StepperComponent from "./InterfaceComponents/Stepper";
 import TemplateSelector from "./TemplateSelector";
-// import {ControlElementMapping} from "../../../components";
-import Report from "./Report/Report";
-import { Button } from "@mui/material";
-import { MetaButton, MetaButtonsContainer } from "./Report/MetaButtons";
+import { ReportEditor } from "./ReportPage/ReportEditor";
 
 const style = {
   position: "absolute",
@@ -83,6 +78,8 @@ export default function ReportBuilder() {
     ],
     [dates.length]
   );
+  const report = useSelector(({ report }) => report);
+  
   const handleClose = () =>
     dispatch({ type: "TOGGLE_PANEL", payload: "reportBuilder" });
   const [activeStep, setActiveStep] = useState(0);
@@ -94,43 +91,18 @@ export default function ReportBuilder() {
   });
   const [templateName, setTemplateName] = useState("Template Name");
   const [previousReport, setPreviousReport] = useState(false);
+  const reportName = previousReport || templateName
   const [hasChangedName, setHasChangedName] = useState(false);
-  const [zoomMultiplier, setZoomMultiplier] = useState(1);
-  
+
   const handleRenameTemplate = (e) => {
     setTemplateName(e.target.value);
     setHasChangedName(true);
   };
-  
-  const handleZoom = (action) => {
-    switch (action) {
-      case "zoomIn":
-        setZoomMultiplier((prev) => prev + 0.1);
-        break;
-      case "zoomOut":
-        setZoomMultiplier((prev) => prev - 0.1);
-        break;
-      case "reset":
-        setZoomMultiplier(1);
-        break;
-      default:
-        break;
-    }
-  }
-  
-  const handleAddPage = () =>
-    dispatch({
-      type: "ADD_REPORT_PAGE",
-      payload: {
-        reportName: previousReport || templateName
-      },
-    });
 
   useEffect(() => {
     if (!hasChangedName) {
       setTemplateName(
-        `${selectedTemplate} - ${selectedCounty?.label || ""} - ${
-          selectedDate?.label || ""
+        `${selectedTemplate} - ${selectedCounty?.label || ""} - ${selectedDate?.label || ""
         }`
       );
     }
@@ -390,23 +362,7 @@ export default function ReportBuilder() {
             </>
           )}
           {activeStep >= 2 && (
-            <>
-            <Report
-              reportName={previousReport || templateName}
-              activeStep={activeStep}
-              zoomMultiplier={zoomMultiplier}
-              />
-              
-      <MetaButtonsContainer>
-        <MetaButton onClick={handleAddPage}>Add New Page</MetaButton>
-        <MetaButton variant="outlined" sx={{mx: 1, px: 0}} onClick={() => handleZoom("zoomIn")}>Zoom In</MetaButton>
-        <MetaButton variant="outlined" sx={{mx: 1, px: 0}} onClick={() => handleZoom("zoomOut")}>Zoom Out</MetaButton>
-        <MetaButton variant="outlined" sx={{mx: 1, px: 0}} onClick={() => handleZoom("reset")}>Reset Zoom</MetaButton>
-        {/* <MetaButton reset={true} onClick={handleResetPages}>
-          Reset Template
-        </MetaButton> */}
-      </MetaButtonsContainer>
-              </>
+            <ReportEditor reportName={reportName} activeStep={activeStep} />
           )}
         </ModalInner>
         <CloseButton onClick={handleClose} title="Close Report Builder">×</CloseButton>
