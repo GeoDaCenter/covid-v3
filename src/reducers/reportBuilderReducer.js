@@ -19,7 +19,6 @@ function generateTypeKey(stringifiedKeys, type) {
 
 function generateReportLayout(spec) {
   const template = templates[spec];
-  console.log(template);
   let items = {};
   let layout = template.map((_) => []);
   for (let i = 0; i < layout.length; i++) {
@@ -43,7 +42,6 @@ function generateReportLayout(spec) {
     }
   }
 
-  console.log(items, layout);
   return {
     items,
     layout,
@@ -54,10 +52,7 @@ export default function Reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case "ADD_NEW_REPORT": {
       const { reportName, spec, meta } = action.payload;
-      // console.log(action)
-      // return state;
       const { items, layout } = generateReportLayout(spec);
-      // console.log(items, layout)
 
       const reports = {
         ...state.reports,
@@ -108,7 +103,6 @@ export default function Reducer(state = INITIAL_STATE, action) {
       let report = state.reports[reportName];
       if (!report || !report?.layout?.[pageIdx]) return state;
       const isInvalidLayout = layout.find((item) => item.y + item.h >= 70);
-      console.log(layout)
       const error = isInvalidLayout
         ? {
             type: "Invalid layout",
@@ -117,6 +111,9 @@ export default function Reducer(state = INITIAL_STATE, action) {
           }
         : null;
       report.layout[pageIdx] = layout;
+      console.log(cleanLayout({
+        [reportName]: report
+      }))
       return {
         ...state,
         error,
@@ -137,7 +134,6 @@ export default function Reducer(state = INITIAL_STATE, action) {
         ...item,
         key,
       };
-      console.log("GENERATED KEY", key);
       const w = item.w || 1;
       const x = report.layout[pageIdx].reduce(
         (prev, curr) => (prev > curr.x + curr.w ? prev : curr.x + curr.w),
@@ -148,7 +144,6 @@ export default function Reducer(state = INITIAL_STATE, action) {
         (prev, curr) => (prev > curr.y + curr.h ? prev : curr.y + curr.h),
         0
       );
-      console.table({ w, h, x, y });
       report.layout[pageIdx].push({
         w,
         h,
@@ -156,7 +151,6 @@ export default function Reducer(state = INITIAL_STATE, action) {
         y,
         i: key,
       });
-      console.log("ADDED TO REPORT", report, state);
       return {
         pageIdx,
         reports: {
@@ -257,4 +251,23 @@ export default function Reducer(state = INITIAL_STATE, action) {
     default:
       return state;
   }
+}
+
+function cleanLayout(spec){
+  const removeProps = ['moved','static','i','key']
+  const {layout, items} = spec[Object.keys(spec)[0]];
+  let template = []
+  for (const page of layout){
+    let pageItems = []
+    for (const item of page){
+      let tempItem = {
+        ...items[item.i],
+        ...item,
+      }
+      removeProps.forEach(prop => delete tempItem[prop])
+      pageItems.push(tempItem)
+    }
+    template.push(pageItems)
+  }
+  return template
 }
