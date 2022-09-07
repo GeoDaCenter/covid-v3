@@ -13,39 +13,7 @@ import {
 import colors from "../../../../config/colors";
 import countyNames from "../../../../meta/countyNames";
 // import { matchAndReplaceInlineVars } from "../../../../utils";
-
-const CommunityContextMetrics = [
-  "Uninsured Percent",
-  "Over 65 Years Percent",
-  "Life Expectancy",
-  "Percent Essential Workers",
-  "Self-rated Health",
-  "Adult Obesity",
-  "Diabetes Prevalence",
-  "Adult Smoking",
-  "Excessive Drinking",
-  "Drug Overdose Deaths",
-  "Children in Poverty",
-  "Income Inequality",
-  "Median Household Income",
-  "Food Insecurity",
-  "Unemployment",
-  "Preventable Hospital Stays",
-  "Residential Segregation (Black - White)",
-  "Severe Housing Problems",
-].map((f) => ({ value: f, label: f }));
-
-const CovidMetrics = ["Cases", "Deaths", "Vaccination", "Testing"].map((f) => ({
-  value: f,
-  label: f,
-}));
-const CovidVarMapping = {
-  "Cases":["Confirmed Count per 100K Population", "Confirmed Count"],
-  "Deaths":["Death Count per 100K Population", "Death Count"],
-  "Vaccination":["Percent Fully Vaccinated", "Percent Received At Least One Dose"],
-  "Testing":["7 Day Testing Positivity Rate Percent", "7 Day Tests Performed per 100K Population"]
-}
-
+import { ALL_COLUMNS, DEFAULT_COLUMNS, DEFAULT_METRICS, COLUMN_MAPPINGS, CommunityContextMetrics, CovidMetrics, CovidVarMapping} from "./constants";
 export const TableReport = ({
   geoid = null,
   pageIdx = 0,
@@ -56,30 +24,25 @@ export const TableReport = ({
   height = 3,
   topic = "COVID",
   metrics = [],
-  includedColumns = [{header:'Metric',accessor:"variable", },{header:'County',accessor:"geoidData", },{header:'State Median',accessor:"stateQ50", },{header:'National Median',accessor:"q50"}],
+  includedColumns = DEFAULT_COLUMNS,
   neighbors,
   secondOrderNeighbors,
   geogToInclude = "county",
   dateIndex,
   name,
-  metaDict={}
+  metaDict = {},
 }) => {
   const neighborIds = {
     county: geoid,
     neighbors,
     secondOrderNeighbors,
-    national: null
+    national: null,
   }[geogToInclude];
-  const variableNames = topic === "COVID"
-    ? metrics.map(metric => CovidVarMapping[metric]).flat()
-    : metrics
-
-
-  // const parsedIncludedColumns = includedColumns.map(({accessor, header}) => ({
-  //   accessor,
-  //   header: matchAndReplaceInlineVars(header, metaDict)
-  // }))
-  
+  const variableNames =
+    topic === "COVID"
+      ? metrics.map((metric) => CovidVarMapping[metric]).flat()
+      : metrics;
+  const parsedColumns = includedColumns.map((f) => COLUMN_MAPPINGS[f]);
   return (
     <PanelItemContainer>
       <h3>
@@ -87,7 +50,16 @@ export const TableReport = ({
           ? "7-Day Average Summary Statistics"
           : "Community Health Context"}
       </h3>
-      <MetricsTable {...{ metrics: variableNames, includedColumns, geoid, neighborIds, dateIndex, name }} />
+      <MetricsTable
+        includedColumns={parsedColumns}
+        {...{
+          metrics: variableNames,
+          geoid,
+          neighborIds,
+          dateIndex,
+          name,
+        }}
+      />
       <ControlPopover
         top="0"
         left="0"
@@ -100,17 +72,39 @@ export const TableReport = ({
           },
           {
             type: "helperText",
-            content: "Select the data to display on the chart.",
+            content: "Select the data to display on the table.",
+          },
+
+          {
+            type: "comboBox",
+            content: {
+              label: "Search County",
+              items: countyNames,
+            },
+            action: ({ value }) => handleChange({ geoid: value }),
+            value: geoid,
           },
           {
             type: "select",
             content: {
-              label: "Change County",
-              items: countyNames,
+              label: "Change Topic",
+              items: [
+                {
+                  label: "COVID",
+                  value: "COVID",
+                },
+                {
+                  label: "Community Health Context",
+                  value: "SDOH",
+                },
+              ],
             },
             action: (e) =>
-              handleChange({ geoid: e.target.value }),
-            value: geoid,
+              handleChange({
+                topic: e.target.value,
+                metrics: DEFAULT_METRICS[e.target.value],
+              }),
+            value: topic,
           },
           {
             type: "selectMulti",
@@ -118,9 +112,17 @@ export const TableReport = ({
               label: "Add or Remove Metrics",
               items: topic === "COVID" ? CovidMetrics : CommunityContextMetrics,
             },
-            action: (e) =>
-              handleChange({ metrics: e.target.value }),
+            action: (e) => handleChange({ metrics: e.target.value }),
             value: metrics,
+          },
+          {
+            type: "selectMulti",
+            content: {
+              label: "Add or Remove Statistics",
+              items: ALL_COLUMNS,
+            },
+            action: (e) => handleChange({ includedColumns: e.target.value }),
+            value: includedColumns,
           },
           // {
           //   ...widthOptions,

@@ -48,15 +48,16 @@ const MetricsRow = ({ metric, geoid, neighborIds, includedColumns, dateIndex, da
         dateIndex,
     });
     const dataReady = Object.keys(data).length;
-    const items = dataReady ? includedColumns.map(column => data[column]) : []
+    console.log(data, includedColumns)
+    const items = dataReady ? includedColumns.map(column => data[column.accessor]) : []
     return dataReady ? <TableRow {...{ items, ...props }} /> : null
 }
 
 export const MetricsTable = ({ tableProps={}, rowProps={}, metrics=[], includedColumns=[], ...props }) => {
-    const headers = includedColumns.map(f=>f.header);
-    const accessors = includedColumns.map(f=>f.accessor);
+    // const headers = includedColumns.map(f=>f.header);
+    // const accessors = includedColumns.map(f=>f.accessor);
     return <Table {...{tableProps}}>
-        <TableHeader items={headers} {...{rowProps}} />
-        {metrics.map((metric,idx) => <MetricsRow key={`${metric}-table-row-${idx}`} {...{ metric, includedColumns: accessors, rowProps, ...props }} />)}
+        <TableHeader items={includedColumns.map(f => f.header)} {...{rowProps}} />
+        {metrics.map((metric,idx) => <MetricsRow key={`${metric}-table-row-${idx}`} {...{ metric, includedColumns, rowProps, ...props }} />)}
     </Table>
 };

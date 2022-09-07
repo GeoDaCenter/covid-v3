@@ -1,4 +1,4 @@
-import { DEFAULT_METRICS } from "../PageComponents/TableReport";
+import { DEFAULT_METRICS } from "../PageComponents/constants";
 
 export const templates = {
   "My County's Stats": [[{"w":4,"h":3,"x":0,"y":0,"type":"text","content":{"preset":"7day"}},{"w":4,"h":15,"x":4,"y":0,"type":"map","variable":"Confirmed Count per 100K Population"},{"w":4,"h":12,"x":0,"y":3,"type":"textReport"},{"w":4,"h":12,"x":0,"y":15,"type":"lineChart","table":"cases"},{"w":4,"h":12,"x":4,"y":15,"type":"lineChart","table":"deaths"},{"w":4,"h":15,"x":0,"y":27,"type":"table","topic":"COVID","metrics":["Cases","Deaths","Vaccination","Testing"]},{"w":4,"h":14,"x":4,"y":27,"type":"table","topic":"SDOH","metrics":["Uninsured Percent","Over 65 Years Percent","Life Expectancy","Percent Essential Workers","Adult Obesity","Preventable Hospital Stays","Severe Housing Problems"]}]],

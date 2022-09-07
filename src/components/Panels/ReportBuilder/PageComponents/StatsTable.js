@@ -3,6 +3,7 @@ import useGetCovidStatistics from "../../../../hooks/useGetCovidStatistics";
 import useGetSdohStatistics from "../../../../hooks/useGetSdohStatistics";
 import { useTable } from "react-table";
 import styled from "styled-components";
+import { CovidVarMapping } from "./constants";
 
 const TableContainer = styled.div``;
 
@@ -60,12 +61,6 @@ const StatsTableInner = ({ data, columns }) => {
     </TableContainer>
   );
 };
-const CovidVarMapping = {
-  "Cases":["Confirmed Count per 100K Population", "Confirmed Count"],
-  "Deaths":["Death Count per 100K Population", "Death Count"],
-  "Vaccination":["Percent Fully Vaccinated", "Percent Received At Least One Dose"],
-  "Testing":["7 Day Testing Positivity Rate Percent", "7 Day Tests Performed per 100K Population"]
-}
 
 const CovidStatsTable = ({ geoid, metrics, includedColumns, ids, dateIndex }) => {
   const [data, columns, dataReady] = useGetCovidStatistics({
