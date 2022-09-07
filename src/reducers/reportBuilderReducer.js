@@ -1,68 +1,63 @@
 import INITIAL_STATE from "../constants/reportBuilderState";
 import { templates } from "../components/Panels/ReportBuilder/Report/Templates";
+import { nanoid } from "nanoid";
 
-function generateTypeKey(
-  stringifiedKeys,
-  type
-) {
-  if (!(stringifiedKeys.includes(type))) {
-    return `${type}-0`
+function generateTypeKey(stringifiedKeys, type) {
+  if (!stringifiedKeys.includes(type)) {
+    return `${type}-0`;
   } else {
     let i = 1;
     do {
-      const tempName = `${type}-${i}`
-      if (!(stringifiedKeys.includes(tempName))) {
-        return tempName
+      const tempName = `${type}-${i}`;
+      if (!stringifiedKeys.includes(tempName)) {
+        return tempName;
       }
-    } while (i < 1000) //artibtrary cut off to prevent infinite loops
+    } while (i < 1000); //artibtrary cut off to prevent infinite loops
   }
-  return null
+  return null;
 }
 
 function generateReportLayout(spec) {
-  const template = templates[spec]
+  const template = templates[spec];
+  console.log(template);
   let items = {};
-  let layout = template.map(_ => []);
+  let layout = template.map((_) => []);
   for (let i = 0; i < layout.length; i++) {
     for (let j = 0; j < template[i].length; j++) {
       const keys = [...Object.keys(items)].reverse();
-      const stringifiedKeys = keys.join(' ')
+      const stringifiedKeys = keys.join(" ");
       const currItem = template[i][j];
-      const {
-        type,
-        w,
-        h,
-        x,
-        y
-      } = currItem
-      const key = generateTypeKey(stringifiedKeys, type)
+      const { type, w, h, x, y } = currItem;
+      const key = nanoid();
       items[key] = {
         ...currItem,
-        key
-      }
+        key,
+      };
       layout[i].push({
         w: w || 1,
         h: h || 1,
         x: x || 0,
         y: y || 0,
-        i: key
-      })
-
+        i: key,
+      });
     }
   }
 
+  console.log(items, layout);
   return {
     items,
-    layout
-  }
+    layout,
+  };
 }
-
 
 export default function Reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case "ADD_NEW_REPORT": {
       const { reportName, spec, meta } = action.payload;
-      const { items, layout } = generateReportLayout(spec)
+      // console.log(action)
+      // return state;
+      const { items, layout } = generateReportLayout(spec);
+      // console.log(items, layout)
 
       const reports = {
         ...state.reports,
@@ -70,13 +65,13 @@ export default function Reducer(state = INITIAL_STATE, action) {
           meta,
           items,
           layout,
-          defaults: action.payload
+          defaults: action.payload,
         },
-      }
+      };
       return {
         reports,
-        pageIdx: 0
-      }
+        pageIdx: 0,
+      };
     }
     // case "RESET_REPORT": {
     //   const { reportName } = action.payload;
@@ -99,81 +94,75 @@ export default function Reducer(state = INITIAL_STATE, action) {
       report.items[itemId] = {
         ...report.items[itemId],
         ...props,
-      }
+      };
       return {
         ...state,
         reports: {
           ...state.reports,
           [reportName]: report,
-        }
-      }
+        },
+      };
     }
     case "UPDATE_REPORT_LAYOUT": {
       const { reportName, pageIdx, layout } = action.payload;
       let report = state.reports[reportName];
       if (!report || !report?.layout?.[pageIdx]) return state;
-      const isInvalidLayout = layout.find(
-        (item) => item.y + item.h >= 9
-      );
-      if (!!isInvalidLayout) {
-        return {
-          ...state,
-          reports: {
-            ...state.reports,
-          },
-          error: {
+      const isInvalidLayout = layout.find((item) => item.y + item.h >= 70);
+      console.log(layout)
+      const error = isInvalidLayout
+        ? {
             type: "Invalid layout",
             pageIdx,
-            reportName
+            reportName,
           }
-        }
-      } else {
-        report.layout[pageIdx] = layout;
-        return {
-          ...state,
-          reports: {
-            ...state.reports,
-            [reportName]: report
-          }
-        }
-      }
+        : null;
+      report.layout[pageIdx] = layout;
+      return {
+        ...state,
+        error,
+        reports: {
+          ...state.reports,
+          [reportName]: report,
+        },
+      };
     }
     case "ADD_REPORT_ITEM": {
       const { reportName, pageIdx, item } = action.payload;
       let report = {
-        ...state.reports[reportName]
+        ...state.reports[reportName],
       };
       if (!report || !report?.items) return state;
-      const keys = [...Object.keys(report.items)].reverse();
-      const stringifiedKeys = keys.join(' ')
-      const key = generateTypeKey(stringifiedKeys, item.type)
+      const key = nanoid();
       report.items[key] = {
         ...item,
-        key
-      }
-      const w = item.w || 1
+        key,
+      };
+      console.log("GENERATED KEY", key);
+      const w = item.w || 1;
       const x = report.layout[pageIdx].reduce(
-        (prev, curr) => prev > curr.x + curr.w ? prev : curr.x + curr.w, 0
-      ) % 4
-      const h = item.h || 1
+        (prev, curr) => (prev > curr.x + curr.w ? prev : curr.x + curr.w),
+        0
+      );
+      const h = item.h || 1;
       const y = report.layout[pageIdx].reduce(
-        (prev, curr) => prev > curr.y + curr.h ? prev : curr.y + curr.h, 0
-      )
+        (prev, curr) => (prev > curr.y + curr.h ? prev : curr.y + curr.h),
+        0
+      );
+      console.table({ w, h, x, y });
       report.layout[pageIdx].push({
         w,
         h,
         x,
         y,
-        i: key
-      })
-      console.log('ADDED TO REPORT', report, state)
+        i: key,
+      });
+      console.log("ADDED TO REPORT", report, state);
       return {
-        // ...state,
         pageIdx,
         reports: {
           ...state.reports,
-          [reportName]: report
-        }
+          [reportName]: report,
+        },
       };
     }
     case "DELETE_REPORT_ITEM": {
@@ -181,7 +170,9 @@ export default function Reducer(state = INITIAL_STATE, action) {
       let report = state.reports[reportName];
       if (!report) return state;
       // remove from layout
-      report.layout[pageIdx] = report.layout[pageIdx].filter(item => item.i !== itemId);
+      report.layout[pageIdx] = report.layout[pageIdx].filter(
+        (item) => item.i !== itemId
+      );
       // remove from dict
       delete report.items[itemId];
 
@@ -189,8 +180,8 @@ export default function Reducer(state = INITIAL_STATE, action) {
         ...state,
         reports: {
           ...state.reports,
-          [reportName]: report
-        }
+          [reportName]: report,
+        },
       };
     }
     case "TOGGLE_REPORT_ITEM": {
@@ -203,8 +194,8 @@ export default function Reducer(state = INITIAL_STATE, action) {
         ...state,
         reports: {
           ...state.reports,
-          [reportName]: report
-        }
+          [reportName]: report,
+        },
       };
     }
     case "REORDER_REPORT_ITEMS": {
@@ -224,21 +215,21 @@ export default function Reducer(state = INITIAL_STATE, action) {
       };
       return {
         ...state,
-        reports
-      }
+        reports,
+      };
     }
     case "ADD_REPORT_PAGE": {
       const { reportName } = action.payload;
       let report = state.reports[reportName];
       if (!report || !report?.layout) return state;
-      report.layout.push([])
+      report.layout.push([]);
 
       return {
         reports: {
           ...state.reports,
-          [reportName]: report
+          [reportName]: report,
         },
-        pageIdx: report.layout.length - 1
+        pageIdx: report.layout.length - 1,
       };
     }
     case "CLEAR_ERROR": {
@@ -246,15 +237,15 @@ export default function Reducer(state = INITIAL_STATE, action) {
         ...state,
         error: null,
         reports: {
-          ...state.reports
-        }
-      }
+          ...state.reports,
+        },
+      };
     }
     case "SET_PAGE_IDX": {
       return {
         ...state,
-        pageIdx: action.payload
-      }
+        pageIdx: action.payload,
+      };
     }
     // case "DELETE_REPORT": {
     //   let reports = { ...state.reports };

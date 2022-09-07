@@ -1,116 +1,58 @@
 export const templates = {
-  "My County's Stats": [
-    [
-      {
-        type: "text",
-        w: 2,
-        h: 1,
-        x:0,
-        y:0,
-        content: {
-          preset: "7day",
-        },
-      },
-      {
-        type: "map",
-        w: 2,
-        h: 3,
-        x:2,
-        y:0,
-        variable: "Confirmed Count per 100K Population"
-      },
-      {
-        type: "textReport",
-        w: 2,
-        h: 2,
-        x:0,
-        y:1
-      },
-      {
-        type: "lineChart",
-        w: 2,
-        h: 2,        
-        x:0, 
-        y:4,
-        table: "cases"
-      },
-      {
-        type: "lineChart",
-        w: 2,
-        h: 2,
-        x:2,
-        y:4,
-        table: "deaths"
-      },
-      {
-        type: "table",
-        topic: "COVID",
-        w: 2,
-        h: 2,
-        x:0,
-        y:7,
-        metrics: ["Cases", "Deaths", "Vaccination", "Testing"],
-      },
-      {
-        type: "table",
-        topic: "SDOH",
-        metrics: [
-          "Uninsured Percent",
-          "Over 65 Years Percent",
-          "Life Expectancy",
-          "Percent Essential Workers",
-          "Adult Obesity",
-          "Preventable Hospital Stays",
-          "Severe Housing Problems",
-        ],
-        w: 2,
-        h: 2,
-        x:2,
-        y:7,
-      },
-    ],
-  ],
+  "My County's Stats": [[{"w":4,"h":3,"x":0,"y":0,"type":"text","content":{"preset":"7day"}},{"w":4,"h":15,"x":4,"y":0,"type":"map","variable":"Confirmed Count per 100K Population"},{"w":4,"h":12,"x":0,"y":3,"type":"textReport"},{"w":4,"h":12,"x":0,"y":15,"type":"lineChart","table":"cases"},{"w":4,"h":12,"x":4,"y":15,"type":"lineChart","table":"deaths"},{"w":4,"h":15,"x":0,"y":27,"type":"table","topic":"COVID","metrics":["Cases","Deaths","Vaccination","Testing"]},{"w":4,"h":14,"x":4,"y":27,"type":"table","topic":"SDOH","metrics":["Uninsured Percent","Over 65 Years Percent","Life Expectancy","Percent Essential Workers","Adult Obesity","Preventable Hospital Stays","Severe Housing Problems"]}]],
   "A National Snapshot": [
     [
       {
         type: "text",
-        w: 4,
-        h: 1,
+        w: 8,
+        h: 5,
+        x: 0,
+        y: 0,
         content: "National Overview"
       },
       {
         type: "map",
-        w: 2,
-        h: 5,
+        w: 4,
+        h: 30,
+        x: 0,
+        y: 5,
         variable: "Confirmed Count per 100K Population",
         scale: "national"
       },
       {
         type: "map",
-        w: 2,
-        h: 5,
+        w: 4,
+        h: 30,
+        x: 4,
+        y: 5,
         variable: "Death Count per 100K Population",
         scale: "national"
       },
       {
         type: "map",
-        w: 2,
-        h: 5,
+        w: 4,
+        h: 20,
+        x: 0,
+        y: 5,
         variable: "Percent Fully Vaccinated",
         scale: "national"
       },
       {
         type: "map",
-        w: 2,
-        h: 5,
+        w: 4,
+        h: 20,
+        x: 4,
+        y: 5,
         variable: "7 Day Testing Positivity Rate Percent",
         scale: "national"
       },
       {
         type: "table",
         topic: "COVID-NATIONAL",
-        w: 4,
-        h: 4,
+        w: 8,
+        h: 25,
+        x: 0,
+        y: 45,
         metrics: ["Cases", "Deaths", "Vaccination", "Testing"],
         includedColumns: ["variable","nationalSummary", "q50", "q25", "q75", "min", "max"],
         geogToInclude: 'national'

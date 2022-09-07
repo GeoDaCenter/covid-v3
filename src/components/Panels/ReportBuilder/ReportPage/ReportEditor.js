@@ -15,6 +15,7 @@ export const ReportEditor = ({ reportName, activeStep }) => {
   );
   const pageLength = layouts?.length;
   const layout = layouts?.[currPage];
+  console.log(layout)
 
   const [zoomMultiplier, setZoomMultiplier] = useState(1);
   const handleZoom = (action) => {
@@ -36,6 +37,7 @@ export const ReportEditor = ({ reportName, activeStep }) => {
     if (item.type === "page") {
       handleAddPage();
     } else {
+      console.log("add item", item, reportName, currPage);
       dispatch({
         type: "ADD_REPORT_ITEM",
         payload: {
@@ -62,7 +64,7 @@ export const ReportEditor = ({ reportName, activeStep }) => {
   };
 
   const canAddItem = !layout?.find(
-    (item) => item.y + item.h >= 7 && item.x + item.w >= 4
+    (item) => item.y + item.h >= 70 && item.x + item.w >= 80
   );
 
   return (
@@ -91,6 +93,7 @@ export const ReportEditor = ({ reportName, activeStep }) => {
                 <MetaButton
                   variant="text"
                   aria-label="Zoom in report page"
+                  title="Zoom in report page"
                   onClick={() => handleZoom("zoomIn")}
                 >
                   <ZoomInMap />
@@ -98,6 +101,7 @@ export const ReportEditor = ({ reportName, activeStep }) => {
                 <MetaButton
                   variant="text"
                   aria-label="Zoom out report page"
+                  title="Zoom out report page"
                   onClick={() => handleZoom("zoomOut")}
                 >
                   <ZoomOutMap />
@@ -105,6 +109,7 @@ export const ReportEditor = ({ reportName, activeStep }) => {
                 <MetaButton
                   variant="text"
                   aria-label="Reset zoom"
+                  title="Reset zoom"
                   onClick={() => handleZoom("reset")}
                 >
                   <CropFree />

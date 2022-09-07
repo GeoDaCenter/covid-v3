@@ -9,6 +9,7 @@ import {
   Attribution,
 } from "./ReportPageLayout";
 import { useSelector } from "react-redux";
+import { NoInteractionGate } from "../PageComponents/MapReport";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -32,8 +33,8 @@ export default function ReportPage({
     setIsSettled(true);
   }, [pageIdx]);
 
-  if (!layout){
-    return null
+  if (!layout) {
+    return null;
   }
 
   const handleLayoutChange = (layout) => {
@@ -44,7 +45,7 @@ export default function ReportPage({
         pageIdx,
         layout,
       },
-    })
+    });
   };
 
   return (
@@ -66,8 +67,8 @@ export default function ReportPage({
             }}
             layout={layout}
             breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-            cols={{ lg: 4, md: 4, sm: 4, xs: 4, xxs: 4 }}
-            rowHeight={160}
+            cols={{ lg: 8, md: 8, sm: 8, xs: 8, xxs: 8 }}
+            rowHeight={16}
             draggableHandle={".content-header"}
             autoSize={true}
             onLayoutChange={handleLayoutChange}
@@ -88,10 +89,11 @@ export default function ReportPage({
             ))}
           </ResponsiveGridLayout>
         )}
-
-        <DateWaterMark />
-        <AtlasWaterMark />
-        <Attribution />
+        <NoInteractionGate>
+          <DateWaterMark />
+          <AtlasWaterMark />
+          <Attribution />
+        </NoInteractionGate>
       </LayoutPageContainer>
     </div>
   );
