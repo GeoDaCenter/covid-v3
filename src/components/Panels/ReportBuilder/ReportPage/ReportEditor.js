@@ -5,6 +5,7 @@ import { MetaButton, StyledPagination } from "../Report/MetaButtons";
 import Stack from "@mui/material/Stack";
 import { AddItemsSpeeedDial } from "../InterfaceComponents/AddItemsSpeedDial";
 import { ZoomInMap, ZoomOutMap, CropFree } from "@mui/icons-material";
+import { ButtonContainer } from "../Report/LayoutContainer";
 
 export const ReportEditor = ({ reportName, activeStep }) => {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ export const ReportEditor = ({ reportName, activeStep }) => {
   );
   const pageLength = layouts?.length;
   const layout = layouts?.[currPage];
-  console.log(layout)
+  console.log(layout);
 
   const [zoomMultiplier, setZoomMultiplier] = useState(1);
   const handleZoom = (action) => {
@@ -69,14 +70,14 @@ export const ReportEditor = ({ reportName, activeStep }) => {
 
   return (
     <>
-      <Stack>
+      <Stack sx={{ maxHeight: "100%" }}>
         <Report
           reportName={reportName}
           activeStep={activeStep}
           zoomMultiplier={zoomMultiplier}
         />
 
-        <div>
+        <ButtonContainer>
           <Stack
             spacing={2}
             width="100%"
@@ -84,37 +85,35 @@ export const ReportEditor = ({ reportName, activeStep }) => {
             justifyContent="space-between"
             direction="row"
             sx={{
-                mt: 2
+              mt: 2,
             }}
           >
-            <Stack spacing={2}>
+            <Stack direction="row" spacing={2} alignItems="center">
               <p>Page Zoom</p>
-              <Stack direction="row" spacing={2}>
-                <MetaButton
-                  variant="text"
-                  aria-label="Zoom in report page"
-                  title="Zoom in report page"
-                  onClick={() => handleZoom("zoomIn")}
-                >
-                  <ZoomInMap />
-                </MetaButton>
-                <MetaButton
-                  variant="text"
-                  aria-label="Zoom out report page"
-                  title="Zoom out report page"
-                  onClick={() => handleZoom("zoomOut")}
-                >
-                  <ZoomOutMap />
-                </MetaButton>
-                <MetaButton
-                  variant="text"
-                  aria-label="Reset zoom"
-                  title="Reset zoom"
-                  onClick={() => handleZoom("reset")}
-                >
-                  <CropFree />
-                </MetaButton>
-              </Stack>
+              <MetaButton
+                variant="text"
+                aria-label="Zoom in report page"
+                title="Zoom in report page"
+                onClick={() => handleZoom("zoomIn")}
+              >
+                <ZoomInMap />
+              </MetaButton>
+              <MetaButton
+                variant="text"
+                aria-label="Zoom out report page"
+                title="Zoom out report page"
+                onClick={() => handleZoom("zoomOut")}
+              >
+                <ZoomOutMap />
+              </MetaButton>
+              <MetaButton
+                variant="text"
+                aria-label="Reset zoom"
+                title="Reset zoom"
+                onClick={() => handleZoom("reset")}
+              >
+                <CropFree />
+              </MetaButton>
             </Stack>
             <Stack alignItems="center" sx={{ mt: 2 }}>
               <StyledPagination
@@ -125,14 +124,14 @@ export const ReportEditor = ({ reportName, activeStep }) => {
                 onChange={handleChangePage}
               />
             </Stack>
-            <Stack justifyContent="flex-end" sx={{maxHeight: 20}}>
+            <Stack justifyContent="flex-end" sx={{ maxHeight: 20 }}>
               <AddItemsSpeeedDial
                 canAddItem={canAddItem}
                 handleAddItem={handleAddItem}
               />
             </Stack>
           </Stack>
-        </div>
+        </ButtonContainer>
       </Stack>
     </>
   );

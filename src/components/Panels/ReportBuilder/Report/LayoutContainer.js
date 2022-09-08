@@ -1,11 +1,20 @@
 import styled from "styled-components";
 import colors from "../../../../config/colors";
-
+export const ButtonContainer = styled.div`
+  padding-bottom:1em;
+`
 export const LayoutContainer = styled.div`
   overflow-y: auto;
   max-height: 80vh;
-  margin-top: 1em;
+  /* margin-top: 1em; */
   position: relative;
+  /* flex-basis: 80%;
+  @media (max-width: 1440px) {
+    flex-basis: 66%;
+  }
+  @media (max-width: 1024px) {
+    flex-basis: 50%;
+  } */
   ::-webkit-scrollbar {
     width: 10px;
   }

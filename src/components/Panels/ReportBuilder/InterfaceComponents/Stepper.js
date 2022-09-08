@@ -12,6 +12,12 @@ const ButtonContainer = styled.div`
     width:100%;
 `
 
+const StyledStepper = styled(Stepper)`
+ span {
+  color: lightgray;
+ }
+`
+
 export default function StepperComponent({
   steps = [],
   activeStep = 0,
@@ -24,8 +30,8 @@ export default function StepperComponent({
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
 
   return (
-    <Box sx={{ width: "100%", paddingTop:'1em' }}>
-      <Stepper activeStep={activeStep}>
+    <Box sx={{ width: "100%", paddingRight:'2em'}}>
+      <StyledStepper activeStep={activeStep}>
         {steps.map((label) => {
           return (
             <Step key={label}>
@@ -33,7 +39,7 @@ export default function StepperComponent({
             </Step>
           );
         })}
-      </Stepper>
+      </StyledStepper>
       <ButtonContainer>
         <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
           <Button

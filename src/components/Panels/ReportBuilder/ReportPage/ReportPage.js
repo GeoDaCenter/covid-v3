@@ -89,7 +89,7 @@ export default function ReportPage({
             ))}
           </ResponsiveGridLayout>
         )}
-        <NoInteractionGate>
+        <NoInteractionGate style={{height:'auto'}}>
           <DateWaterMark />
           <AtlasWaterMark />
           <Attribution />

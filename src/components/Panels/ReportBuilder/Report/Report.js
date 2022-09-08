@@ -73,7 +73,7 @@ export default function Report({ reportName = "", activeStep, zoomMultiplier = 1
     );
   };
   return (
-    <LayoutContainer ref={containerRef}>
+    <LayoutContainer ref={containerRef}>  
       {activeStep === 3 && (
         <PrintContainer>
           <h2>Nice work!</h2>

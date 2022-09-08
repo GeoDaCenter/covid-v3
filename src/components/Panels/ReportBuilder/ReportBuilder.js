@@ -9,6 +9,7 @@ import countyList from "../../../meta/countyNames";
 import StepperComponent from "./InterfaceComponents/Stepper";
 import TemplateSelector from "./TemplateSelector";
 import { ReportEditor } from "./ReportPage/ReportEditor";
+import { Stack } from "@mui/system";
 
 const style = {
   position: "absolute",
@@ -23,6 +24,7 @@ const style = {
     lg: "80vw",
     xl: "80vw",
   },
+  height: "100%",
   bgcolor: colors.gray,
   border: "1px solid #000",
   fontFamily: "'Lato', sans-serif",
@@ -46,6 +48,8 @@ const ModalInner = styled.div`
   min-height: 40vh;
   overflow: hidden;
   transition: 250ms all;
+  display: flex;
+  flex-direction: column;
 `;
 
 const CloseButton = styled.button`
@@ -53,17 +57,17 @@ const CloseButton = styled.button`
   top: 0;
   right: 0;
   padding: 0.5em;
-  background:none;
-  color:white;
-  border:none;
-  font-size:1.5rem;
-  cursor:pointer;
+  background: none;
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
 `;
 
 const steps = [
   "Choose a template",
   "Select your community",
-  "Customize your report",
+  "Customize",
   "Save or Print",
 ];
 
@@ -74,12 +78,14 @@ export default function ReportBuilder() {
   const dateInputs = useMemo(
     () => [
       { value: null, label: "Latest Available Data" },
-      ...(dates ? dates.map((f, idx) => ({ label: f, value: idx })).reverse() : []),
+      ...(dates
+        ? dates.map((f, idx) => ({ label: f, value: idx })).reverse()
+        : []),
     ],
     [dates.length]
   );
   const report = useSelector(({ report }) => report);
-  
+
   const handleClose = () =>
     dispatch({ type: "TOGGLE_PANEL", payload: "reportBuilder" });
   const [activeStep, setActiveStep] = useState(0);
@@ -91,7 +97,7 @@ export default function ReportBuilder() {
   });
   const [templateName, setTemplateName] = useState("Template Name");
   const [previousReport, setPreviousReport] = useState(false);
-  const reportName = previousReport || templateName
+  const reportName = previousReport || templateName;
   const [hasChangedName, setHasChangedName] = useState(false);
 
   const handleRenameTemplate = (e) => {
@@ -102,7 +108,8 @@ export default function ReportBuilder() {
   useEffect(() => {
     if (!hasChangedName) {
       setTemplateName(
-        `${selectedTemplate} - ${selectedCounty?.label || ""} - ${selectedDate?.label || ""
+        `${selectedTemplate} - ${selectedCounty?.label || ""} - ${
+          selectedDate?.label || ""
         }`
       );
     }
@@ -305,11 +312,13 @@ export default function ReportBuilder() {
           spec: selectedTemplate,
           meta: {
             county: selectedCounty?.label,
-            state: selectedCounty?.label && selectedCounty.label.split(',').slice(-1)[0],
+            state:
+              selectedCounty?.label &&
+              selectedCounty.label.split(",").slice(-1)[0],
             geoid: selectedCounty?.value,
             date: selectedDate?.label,
             dateIndex: selectedDate?.value,
-          }
+          },
         },
       });
     }
@@ -324,18 +333,21 @@ export default function ReportBuilder() {
     >
       <Box sx={style}>
         <ModalInner>
-          <Typography id="modal-modal-title" variant="h4" component="h4">
-            Atlas Report Builder
-          </Typography>
+          <Stack direction="row" spacing={2} alignItems="top" borderBottom={"1px solid white"} position="relative" paddingBottom="40px" >
+            <Typography id="modal-modal-title" fontWeight="bold" flexShrink={'0'}>
+              Report Builder
+            </Typography>
+
+            <StepperComponent
+              steps={steps}
+              activeStep={activeStep}
+              setActiveStep={setActiveStep}
+              canProgress={canProgress}
+            />
+          </Stack>
           {/* <Typography id="modal-modal-title" variant="h4" component="h2">
             This feature is coming soon. Please check back later!
           </Typography> */}
-          <StepperComponent
-            steps={steps}
-            activeStep={activeStep}
-            setActiveStep={setActiveStep}
-            canProgress={canProgress}
-          />
           {(activeStep === 0 || activeStep === 1) && (
             <>
               {activeStep === 0 ? (
@@ -365,7 +377,9 @@ export default function ReportBuilder() {
             <ReportEditor reportName={reportName} activeStep={activeStep} />
           )}
         </ModalInner>
-        <CloseButton onClick={handleClose} title="Close Report Builder">×</CloseButton>
+        <CloseButton onClick={handleClose} title="Close Report Builder">
+          ×
+        </CloseButton>
       </Box>
     </Modal>
   );

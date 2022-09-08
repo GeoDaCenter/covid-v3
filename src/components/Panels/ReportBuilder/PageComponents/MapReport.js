@@ -70,8 +70,8 @@ const MapAttribution = styled(MapTitle)`
   width:auto;
   font-size:0.65rem;
 `
-export const NoInteractionGate = ({ children }) => (
-  <div style={{ pointerEvents: "none !important", userSelect: 'none !importabnt', width: "100%", height: "100%" }}>
+export const NoInteractionGate = ({ children, style }) => (
+  <div style={{ pointerEvents: "none !important", userSelect: 'none !importabnt', width: "100%", height: "100%", ...style}}>
     {children}
   </div>
 );
