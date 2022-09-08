@@ -8,18 +8,22 @@ import {
 } from "./LayoutContainer";
 import { MetaButtonsContainer, MetaButton } from "./MetaButtons";
 
-import Button from '@mui/material/Button';
-import Snackbar from '@mui/material/Snackbar';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
+import Button from "@mui/material/Button";
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 import { Alert } from "@mui/material";
 
-export default function Report({ reportName = "", activeStep, zoomMultiplier = 1 }) {
+export default function Report({
+  reportName = "",
+  activeStep,
+  zoomMultiplier = 1,
+}) {
   const dispatch = useDispatch();
   const currPage = useSelector(({ report }) => report.pageIdx);
   const gridContext = useRef({});
   const pagesRef = useRef({});
-  const containerRef = useRef(null)
+  const containerRef = useRef(null);
   const pageWidth = containerRef?.current?.clientWidth;
 
   const handleGridContext = (grid, pageIdx) => {
@@ -52,28 +56,42 @@ export default function Report({ reportName = "", activeStep, zoomMultiplier = 1
   };
 
   const handlePrint = (fileType) => {
-    import("react-component-export-image").then(
-      ({ exportComponentAsJPEG, exportComponentAsPDF }) => {
+    import("html-to-image").then((htmlToImage) => {
+      const { toSvg, toJpeg } = htmlToImage;
+      import("downloadjs").then((downloadjs) => {
+        const download = downloadjs.default;
         Object.values(pagesRef.current).forEach((pageRef, idx) => {
           try {
             if (fileType === "JPG") {
-              exportComponentAsJPEG(pageRef, {
+              toJpeg(pageRef.current, {
                 fileName: `${reportName}-page-${idx + 1}.jpg`,
+              }).then((data) => {
+                download(
+                  data,
+                  `${reportName}-page-${idx + 1}.jpg`,
+                  "image/jpeg"
+                );
               });
             } else if (fileType === "PDF") {
-              exportComponentAsPDF(pageRef, {
-                fileName: `${reportName}-page-${idx + 1}.pdf`,
+              toSvg(pageRef.current, {
+                fileName: `${reportName}-page-${idx + 1}.svg`,
+              }).then((data) => {
+                download(
+                  data,
+                  `${reportName}-page-${idx + 1}.svg`,
+                  "image/svg+xml"
+                );
               });
             }
           } catch {
             console.log("error");
           }
         });
-      }
-    );
+      });
+    });
   };
   return (
-    <LayoutContainer ref={containerRef}>  
+    <LayoutContainer ref={containerRef}>
       {activeStep === 3 && (
         <PrintContainer>
           <h2>Nice work!</h2>
@@ -83,9 +101,9 @@ export default function Report({ reportName = "", activeStep, zoomMultiplier = 1
             Reports' drop down to see up-to-date data.
           </h4>
           <p>
-            Currently, you may export your report pages as JPGs.
-            We plan to add an export feature as a single PDF. To leave the
-            report builder, click 'finish' below.
+            Currently, you may export your report pages as JPGs. We plan to add
+            an export feature as a single PDF. To leave the report builder,
+            click 'finish' below.
           </p>
           <p>
             This new feature is an experimental feature, and we'd love to hear
@@ -101,6 +119,9 @@ export default function Report({ reportName = "", activeStep, zoomMultiplier = 1
           <PrintButton onClick={() => handlePrint("JPG")}>
             Export JPGs
           </PrintButton>
+          <PrintButton onClick={() => handlePrint("PDF")}>
+            Export PDF
+          </PrintButton>
           {/* <PrintButton onClick={() => handlePrint("PDF")}>
             Export PDF
           </PrintButton> */}
@@ -110,7 +131,13 @@ export default function Report({ reportName = "", activeStep, zoomMultiplier = 1
         onMount={handleRef}
         key={`report-page-${reportName}-${currPage}`}
         pageIdx={currPage}
-        {...{ handleGridContext, handleGridUpdate, reportName, pageWidth, zoomMultiplier }}
+        {...{
+          handleGridContext,
+          handleGridUpdate,
+          reportName,
+          pageWidth,
+          zoomMultiplier,
+        }}
       />
       <ErrorToast />
     </LayoutContainer>
@@ -120,45 +147,44 @@ export default function Report({ reportName = "", activeStep, zoomMultiplier = 1
 function ErrorToast() {
   const dispatch = useDispatch();
   const error = useSelector(({ report }) => report.error);
-  const {
-    type,
-    reportName,
-    pageIdx
-  } = error || {};
+  const { type, reportName, pageIdx } = error || {};
 
   const handleClose = () => {
     dispatch({
-      type: "CLEAR_ERROR"
-    })
-  }
+      type: "CLEAR_ERROR",
+    });
+  };
 
   const handleAddPage = () =>
     dispatch({
       type: "ADD_REPORT_PAGE",
       payload: {
-        reportName
+        reportName,
       },
     });
 
   if (!error) return null;
   const messages = {
-    "Invalid layout": `Page ${pageIdx + 1} is full! Resize, remove items, or add a new page.`
-  }
-  const text = messages[type]
+    "Invalid layout": `Page ${
+      pageIdx + 1
+    } is full! Resize, remove items, or add a new page.`,
+  };
+  const text = messages[type];
 
   return (
-    <Snackbar
-      open={true}
-      autoHideDuration={6000}
-      onClose={handleClose}
-    >
-      <Alert onClose={handleClose} severity="warning" sx={{ width: '100%' }}
+    <Snackbar open={true} autoHideDuration={6000} onClose={handleClose}>
+      <Alert
+        onClose={handleClose}
+        severity="warning"
+        sx={{ width: "100%" }}
         action={
           <Button color="inherit" size="small" onClick={handleAddPage}>
             Add Page
-          </Button>}>
+          </Button>
+        }
+      >
         {text}
       </Alert>
     </Snackbar>
-  )
+  );
 }

@@ -40,7 +40,9 @@
     "comlink": "^4.3.1",
     "d3-dsv": "2.0.0",
     "d3-scale": "^3.2.0",
+    "downloadjs": "^1.4.7",
     "file-saver": "^2.0.5",
+    "html-to-image": "^1.10.8",
     "html2canvas": "^1.4.1",
     "jszip": "^3.6.0",
     "lodash.merge": "^4.6.2",
@@ -126,9 +128,11 @@
     "babel-preset-react": "^6.24.1",
     "dayjs": "^1.10.6",
     "google-protobuf": "^3.19.3",
+    "is-plain-obj": "^4.1.0",
     "prettier": "2.5.1",
     "react-app-rewired": "^2.1.8",
     "source-map-explorer": "^2.5.2",
+    "util": "^0.12.4",
     "workbox-build": "^6.1.5"
   }
 }

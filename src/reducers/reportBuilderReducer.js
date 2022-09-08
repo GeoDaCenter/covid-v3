@@ -111,9 +111,9 @@ export default function Reducer(state = INITIAL_STATE, action) {
           }
         : null;
       report.layout[pageIdx] = layout;
-      console.log(cleanLayout({
-        [reportName]: report
-      }))
+      // console.log(cleanLayout({
+      //   [reportName]: report
+      // }))
       return {
         ...state,
         error,

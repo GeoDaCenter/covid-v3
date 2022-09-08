@@ -48,7 +48,6 @@ const MetricsRow = ({ metric, geoid, neighborIds, includedColumns, dateIndex, da
         dateIndex,
     });
     const dataReady = Object.keys(data).length;
-    console.log(data, includedColumns)
     const items = dataReady ? includedColumns.map(column => data[column.accessor]) : []
     return dataReady ? <TableRow {...{ items, ...props }} /> : null
 }
