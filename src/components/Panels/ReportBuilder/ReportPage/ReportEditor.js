@@ -7,16 +7,17 @@ import { AddItemsSpeeedDial } from "../InterfaceComponents/AddItemsSpeedDial";
 import { ZoomInMap, ZoomOutMap, CropFree } from "@mui/icons-material";
 import { ButtonContainer } from "../Report/LayoutContainer";
 
-export const ReportEditor = ({ reportName, activeStep }) => {
+export const ReportEditor = ({ activeStep }) => {
   const dispatch = useDispatch();
 
   const currPage = useSelector(({ report }) => report.pageIdx);
+  const reportName = useSelector(({ report }) => report.currentReport);
+
   const layouts = useSelector(
     ({ report }) => report.reports?.[reportName]?.layout
   );
   const pageLength = layouts?.length;
   const layout = layouts?.[currPage];
-  console.log(layout);
 
   const [zoomMultiplier, setZoomMultiplier] = useState(1);
   const handleZoom = (action) => {

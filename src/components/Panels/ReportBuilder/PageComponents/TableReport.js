@@ -13,7 +13,16 @@ import {
 import colors from "../../../../config/colors";
 import countyNames from "../../../../meta/countyNames";
 // import { matchAndReplaceInlineVars } from "../../../../utils";
-import { ALL_COLUMNS, DEFAULT_COLUMNS, DEFAULT_METRICS, COLUMN_MAPPINGS, CommunityContextMetrics, CovidMetrics, CovidVarMapping} from "./constants";
+import {
+  ALL_COLUMNS,
+  DEFAULT_COLUMNS,
+  DEFAULT_METRICS,
+  COLUMN_MAPPINGS,
+  CommunityContextMetrics,
+  CovidMetrics,
+  CovidVarMapping,
+} from "./constants";
+import { useLayoutEffect } from "react";
 export const TableReport = ({
   geoid = null,
   pageIdx = 0,
@@ -31,6 +40,7 @@ export const TableReport = ({
   dateIndex,
   name,
   metaDict = {},
+  loadedCallback = () => {},
 }) => {
   const neighborIds = {
     county: geoid,
@@ -43,6 +53,11 @@ export const TableReport = ({
       ? metrics.map((metric) => CovidVarMapping[metric]).flat()
       : metrics;
   const parsedColumns = includedColumns.map((f) => COLUMN_MAPPINGS[f]);
+
+  useLayoutEffect(() => {
+    loadedCallback(true);
+  }, []);
+
   return (
     <PanelItemContainer>
       <h3>

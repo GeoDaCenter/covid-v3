@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReportPage from "../ReportPage/ReportPage";
 import {
@@ -6,13 +6,7 @@ import {
   PrintContainer,
   PrintButton,
 } from "./LayoutContainer";
-import { MetaButtonsContainer, MetaButton } from "./MetaButtons";
-
-import Button from "@mui/material/Button";
-import Snackbar from "@mui/material/Snackbar";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
-import { Alert } from "@mui/material";
+import { Alert, Button, Snackbar } from "@mui/material";
 
 export default function Report({
   reportName = "",
@@ -26,12 +20,22 @@ export default function Report({
   const containerRef = useRef(null);
   const pageWidth = containerRef?.current?.clientWidth;
 
+  const handleItemLoad = (id, isLoaded) => {
+    dispatch({
+      type: "SET_ITEM_LOADED",
+      payload: {
+        id,
+        isLoaded,
+      }
+    })
+  }
+
   const handleGridContext = (grid, pageIdx) => {
     gridContext.current = {
       ...gridContext.current,
       [pageIdx]: grid,
     };
-  };
+  }; 
 
   const handleGridUpdate = (pageIdx) => {
     const currItems = gridContext?.current[pageIdx]?._items;
@@ -54,7 +58,7 @@ export default function Report({
       [idx]: ref,
     };
   };
-
+  
   const handlePrint = (fileType) => {
     import("html-to-image").then((htmlToImage) => {
       const { toSvg, toJpeg } = htmlToImage;
@@ -137,6 +141,7 @@ export default function Report({
           reportName,
           pageWidth,
           zoomMultiplier,
+          handleItemLoad
         }}
       />
       <ErrorToast />

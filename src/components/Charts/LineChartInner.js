@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { setVariableParams } from "../../actions";
@@ -205,6 +205,7 @@ function LineChartInner({
   shouldShowVariants = false,
   colorScheme = "dark",
   geoid = [],
+  loadedCallback = () => { },
 }) {
   const { highlightColor, mediumColor, gridColor, backgroundColor } =
     colorSchemes[colorScheme];
@@ -227,6 +228,10 @@ function LineChartInner({
     table,
     geoid,
   });
+
+  useEffect(() => {
+    loadedCallback(!!(maximums && chartData))
+  }, [!!(maximums && chartData)]);
 
   // get first word of snake case, if relevant
   const chartTitle = table.split('_')[0]

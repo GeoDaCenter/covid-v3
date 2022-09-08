@@ -6,31 +6,29 @@ import Button from "@mui/material/Button";
 import styled from "styled-components";
 
 const ButtonContainer = styled.div`
-    position:absolute;
-    bottom:0;
-    left:0;
-    width:100%;
-`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+`;
 
 const StyledStepper = styled(Stepper)`
- span {
-  color: lightgray;
- }
-`
+  span {
+    color: lightgray;
+  }
+`;
 
 export default function StepperComponent({
   steps = [],
   activeStep = 0,
-  setActiveStep = () => {},
-  canProgress = false
+  handleStep = () => {},
+  canProgress = false,
 }) {
-  const handleNext = () =>
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  const handleBack = () =>
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-
+  const handleNext = () => handleStep(activeStep + 1);
+  const handleBack = () => handleStep(activeStep - 1);
+  
   return (
-    <Box sx={{ width: "100%", paddingRight:'2em'}}>
+    <Box sx={{ width: "100%", paddingRight: "2em" }}>
       <StyledStepper activeStep={activeStep}>
         {steps.map((label) => {
           return (

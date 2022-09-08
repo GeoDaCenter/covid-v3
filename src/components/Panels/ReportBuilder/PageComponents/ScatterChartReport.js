@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useLayoutEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import useGetScatterData from "../../../../hooks/useGetScatterData";
 import { ControlPopover, ScatterChartInner } from "../../../../components";
@@ -8,11 +8,13 @@ import {
   DeleteBlock,
   widthOptions,
   heightOptions,
-  CenteredChartTitle
+  CenteredChartTitle,
 } from "./PageComponentsLayout";
 import colors from "../../../../config/colors";
 
-const RadiusRange = Array(10).fill(0).map((_,idx) => ({value: idx+1, label: `${idx+1}`}));
+const RadiusRange = Array(10)
+  .fill(0)
+  .map((_, idx) => ({ value: idx + 1, label: `${idx + 1}` }));
 
 export const ScatterChartReport = ({
   geoid = null,
@@ -26,14 +28,27 @@ export const ScatterChartReport = ({
   xAxisVar,
   yAxisVar,
   radius = 4,
+  loadedCallback = () => {},
 }) => {
-  const variables = useSelector(({params}) => params.variables);
-  const ScatterPlotVars = useMemo(() => variables.map(({variableName}) => ({label:variableName, value:variableName})), [variables.length])
+  const variables = useSelector(({ params }) => params.variables);
+  const ScatterPlotVars = useMemo(
+    () =>
+      variables.map(({ variableName }) => ({
+        label: variableName,
+        value: variableName,
+      })),
+    [variables.length]
+  );
 
   const { scatterData, timestamp } = useGetScatterData({
     xAxisVar,
     yAxisVar,
   });
+
+  useLayoutEffect(() => {
+    loadedCallback(timestamp !== null);
+  }, [timestamp]);
+
   const scatterChart = useMemo(
     () =>
       timestamp !== null ? (
@@ -47,7 +62,9 @@ export const ScatterChartReport = ({
   return (
     <PanelItemContainer>
       <CenteredChartTitle>
-        <h3>{xAxisVar} (x) vs {yAxisVar} (y)</h3>
+        <h3>
+          {xAxisVar} (x) vs {yAxisVar} (y)
+        </h3>
       </CenteredChartTitle>
       {scatterChart}
       <ControlPopover
@@ -70,8 +87,7 @@ export const ScatterChartReport = ({
               label: "Change X Variable",
               items: ScatterPlotVars,
             },
-            action: (e) =>
-              handleChange({ xAxisVar: e.target.value }),
+            action: (e) => handleChange({ xAxisVar: e.target.value }),
             value: xAxisVar,
           },
           {
@@ -80,8 +96,7 @@ export const ScatterChartReport = ({
               label: "Change Y Variable",
               items: ScatterPlotVars,
             },
-            action: (e) =>
-              handleChange({ yAxisVar: e.target.value }),
+            action: (e) => handleChange({ yAxisVar: e.target.value }),
             value: yAxisVar,
           },
           {
@@ -90,10 +105,9 @@ export const ScatterChartReport = ({
               label: "Change Dot Radius",
               items: RadiusRange,
             },
-            action: (e) =>
-              handleChange({ radius: e.target.value }),
+            action: (e) => handleChange({ radius: e.target.value }),
             value: radius,
-          },          
+          },
           // {
           //   ...widthOptions,
           //   action: (e) =>

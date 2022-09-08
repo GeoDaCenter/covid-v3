@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useLayoutEffect, useMemo } from "react";
 import useGetCovidStatistics from "../../../../hooks/useGetCovidStatistics";
 import useGetSdohStatistics from "../../../../hooks/useGetSdohStatistics";
 import { useTable } from "react-table";
@@ -62,14 +62,26 @@ const StatsTableInner = ({ data, columns }) => {
   );
 };
 
-const CovidStatsTable = ({ geoid, metrics, includedColumns, ids, dateIndex }) => {
+const CovidStatsTable = ({
+  geoid,
+  metrics,
+  includedColumns,
+  ids,
+  dateIndex,
+  loadedCallback = () => {},
+}) => {
   const [data, columns, dataReady] = useGetCovidStatistics({
     geoid,
     includedColumns,
     neighborIds: ids,
-    dateIndex
+    dateIndex,
   });
-  const currVariables = metrics.map(metric => CovidVarMapping[metric]).flat()
+
+  useLayoutEffect(() => {
+    loadedCallback(dataReady);
+  }, [dataReady]);
+
+  const currVariables = metrics.map((metric) => CovidVarMapping[metric]).flat();
   const filteredData = data.filter((d) => currVariables.includes(d.variable));
   const innerTable = useMemo(
     () => <StatsTableInner data={filteredData} columns={columns} />,
@@ -78,14 +90,20 @@ const CovidStatsTable = ({ geoid, metrics, includedColumns, ids, dateIndex }) =>
   return innerTable;
 };
 
-const SdohStatsTable = ({ geoid, metrics, includedColumns, ids, dateIndex }) => {
+const SdohStatsTable = ({
+  geoid,
+  metrics,
+  includedColumns,
+  ids,
+  dateIndex,
+}) => {
   const [data, columns, dataReady] = useGetSdohStatistics({
     geoid,
     includedColumns,
     neighborIds: ids,
-    dateIndex
+    dateIndex,
   });
-  console.log(data, columns, dataReady)
+  console.log(data, columns, dataReady);
   const filteredData = data.filter((d) => metrics.includes(d.variable));
   const innerTable = useMemo(
     () => <StatsTableInner data={filteredData} columns={columns} />,
@@ -94,12 +112,27 @@ const SdohStatsTable = ({ geoid, metrics, includedColumns, ids, dateIndex }) => 
   return innerTable;
 };
 
-export default function StatsTable({ geoid = 17031, topic = "COVID", metrics=[], includedColumns, ids=[], dateIndex }) {
-  console.log('topic', topic)
+export default function StatsTable({
+  geoid = 17031,
+  topic = "COVID",
+  metrics = [],
+  includedColumns,
+  ids = [],
+  dateIndex,
+}) {
+  console.log("topic", topic);
   switch (topic) {
     case "SDOH":
-      return <SdohStatsTable {...{metrics, geoid, includedColumns, ids, dateIndex}} />;
+      return (
+        <SdohStatsTable
+          {...{ metrics, geoid, includedColumns, ids, dateIndex }}
+        />
+      );
     default:
-      return <CovidStatsTable {...{metrics, geoid, includedColumns, ids, dateIndex}} />;
+      return (
+        <CovidStatsTable
+          {...{ metrics, geoid, includedColumns, ids, dateIndex }}
+        />
+      );
   }
 }

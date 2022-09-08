@@ -2,52 +2,6 @@ import INITIAL_STATE from "../constants/reportBuilderState";
 import { templates } from "../components/Panels/ReportBuilder/Report/Templates";
 import { nanoid } from "nanoid";
 
-function generateTypeKey(stringifiedKeys, type) {
-  if (!stringifiedKeys.includes(type)) {
-    return `${type}-0`;
-  } else {
-    let i = 1;
-    do {
-      const tempName = `${type}-${i}`;
-      if (!stringifiedKeys.includes(tempName)) {
-        return tempName;
-      }
-    } while (i < 1000); //artibtrary cut off to prevent infinite loops
-  }
-  return null;
-}
-
-function generateReportLayout(spec) {
-  const template = templates[spec];
-  let items = {};
-  let layout = template.map((_) => []);
-  for (let i = 0; i < layout.length; i++) {
-    for (let j = 0; j < template[i].length; j++) {
-      const keys = [...Object.keys(items)].reverse();
-      const stringifiedKeys = keys.join(" ");
-      const currItem = template[i][j];
-      const { type, w, h, x, y } = currItem;
-      const key = nanoid();
-      items[key] = {
-        ...currItem,
-        key,
-      };
-      layout[i].push({
-        w: w || 1,
-        h: h || 1,
-        x: x || 0,
-        y: y || 0,
-        i: key,
-      });
-    }
-  }
-
-  return {
-    items,
-    layout,
-  };
-}
-
 export default function Reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case "ADD_NEW_REPORT": {
@@ -64,8 +18,10 @@ export default function Reducer(state = INITIAL_STATE, action) {
         },
       };
       return {
+        ...state,
         reports,
         pageIdx: 0,
+        currentReport: reportName,
       };
     }
     // case "RESET_REPORT": {
@@ -82,6 +38,13 @@ export default function Reducer(state = INITIAL_STATE, action) {
     //     reports
     //   };
     // }
+    case "SET_CURRENT_REPORT": {
+      const currentReport = action.payload;
+      return {
+        ...state,
+        currentReport
+      };
+    }
     case "CHANGE_REPORT_ITEM": {
       const { reportName, itemId, props } = action.payload;
       let report = state.reports[reportName];
@@ -152,7 +115,7 @@ export default function Reducer(state = INITIAL_STATE, action) {
         i: key,
       });
       return {
-        pageIdx,
+        ...state,
         reports: {
           ...state.reports,
           [reportName]: report,
@@ -195,7 +158,7 @@ export default function Reducer(state = INITIAL_STATE, action) {
     case "REORDER_REPORT_ITEMS": {
       const { reportName, pageIdx, itemsMin, currItemsOrder } = action.payload;
       let report = state.reports[reportName];
-      if (!report || !report?.items?.[itemId]) return state;
+      if (!report || !report?.items) return state;
       let spec = state.reports[reportName].spec;
       spec[pageIdx] = currItemsOrder.map(
         (idx) => spec[pageIdx][idx - itemsMin]
@@ -219,6 +182,7 @@ export default function Reducer(state = INITIAL_STATE, action) {
       report.layout.push([]);
 
       return {
+        ...state,
         reports: {
           ...state.reports,
           [reportName]: report,
@@ -248,26 +212,90 @@ export default function Reducer(state = INITIAL_STATE, action) {
     //     reports
     //   }
     // }
+    case "SET_ITEM_LOADED": {
+      const {id, isLoaded} = action.payload;
+      let items = {
+        ...state,
+        [id]: isLoaded
+      }
+      const {reports, pageIdx, currentReport} = state;
+      const pageIsLoaded = reports[currentReport]?.layout?.[pageIdx]?.every(
+        (item) => items[item.i]
+      )
+      return {
+        ...state,
+        loadState: {
+          items,
+          isLoaded: pageIsLoaded
+        }
+      }
+    }
     default:
       return state;
   }
 }
 
-function cleanLayout(spec){
-  const removeProps = ['moved','static','i','key']
-  const {layout, items} = spec[Object.keys(spec)[0]];
-  let template = []
-  for (const page of layout){
-    let pageItems = []
-    for (const item of page){
-      let tempItem = {
-        ...items[item.i],
-        ...item,
-      }
-      removeProps.forEach(prop => delete tempItem[prop])
-      pageItems.push(tempItem)
+function generateReportLayout(spec) {
+  const template = templates[spec];
+  let items = {};
+  let layout = template.map((_) => []);
+  for (let i = 0; i < layout.length; i++) {
+    for (let j = 0; j < template[i].length; j++) {
+      // const keys = [...Object.keys(items)].reverse();
+      // const stringifiedKeys = keys.join(" ");
+      const currItem = template[i][j];
+      const { w, h, x, y } = currItem; //type
+      const key = nanoid();
+      items[key] = {
+        ...currItem,
+        key,
+      };
+      layout[i].push({
+        w: w || 10,
+        h: h || 10,
+        x: x || 0,
+        y: y || 0,
+        i: key,
+      });
     }
-    template.push(pageItems)
   }
-  return template
+
+  return {
+    items,
+    layout,
+  };
 }
+
+// function cleanLayout(spec){
+//   const removeProps = ['moved','static','i','key']
+//   const {layout, items} = spec[Object.keys(spec)[0]];
+//   let template = []
+//   for (const page of layout){
+//     let pageItems = []
+//     for (const item of page){
+//       let tempItem = {
+//         ...items[item.i],
+//         ...item,
+//       }
+//       removeProps.forEach(prop => delete tempItem[prop])
+//       pageItems.push(tempItem)
+//     }
+//     template.push(pageItems)
+//   }
+//   return template
+// }
+
+// function generateTypeKey(stringifiedKeys, type) {
+//   if (!stringifiedKeys.includes(type)) {
+//     return `${type}-0`;
+//   } else {
+//     let i = 1;
+//     do {
+//       const tempName = `${type}-${i}`;
+//       if (!stringifiedKeys.includes(tempName)) {
+//         return tempName;
+//       }
+//     } while (i < 1000); //artibtrary cut off to prevent infinite loops
+//   }
+//   return null;
+// }

@@ -1,7 +1,4 @@
 import { useEffect, useState, useMemo } from "react";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import colors from "../../../config/colors";
@@ -9,7 +6,7 @@ import countyList from "../../../meta/countyNames";
 import StepperComponent from "./InterfaceComponents/Stepper";
 import TemplateSelector from "./TemplateSelector";
 import { ReportEditor } from "./ReportPage/ReportEditor";
-import { Stack } from "@mui/system";
+import { Stack, Box, Typography, Modal } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -38,7 +35,6 @@ const style = {
     xl: 4,
   },
 };
-
 const ModalInner = styled.div`
   width: 100%;
   height: 100%;
@@ -74,6 +70,11 @@ const steps = [
 export default function ReportBuilder() {
   const dispatch = useDispatch();
   const open = useSelector(({ ui }) => ui.panelState.reportBuilder);
+  const handleClose = () => {
+    dispatch({ type: "TOGGLE_PANEL", payload: "reportBuilder" });
+  } 
+  // trigger update to parent context for dnd / resizing
+  useSelector(({ report }) => report);
   const dates = useSelector(({ params }) => params.dates);
   const dateInputs = useMemo(
     () => [
@@ -84,10 +85,8 @@ export default function ReportBuilder() {
     ],
     [dates.length]
   );
-  const report = useSelector(({ report }) => report);
 
-  const handleClose = () =>
-    dispatch({ type: "TOGGLE_PANEL", payload: "reportBuilder" });
+  // builder temp state
   const [activeStep, setActiveStep] = useState(0);
   const [selectedTemplate, setSelectedTemplate] = useState(null);
   const [selectedCounty, setSelectCounty] = useState(null);
@@ -96,23 +95,15 @@ export default function ReportBuilder() {
     label: "Latest Available Data",
   });
   const [templateName, setTemplateName] = useState("Template Name");
-  const [previousReport, setPreviousReport] = useState(false);
-  const reportName = previousReport || templateName;
-  const [hasChangedName, setHasChangedName] = useState(false);
-
   const handleRenameTemplate = (e) => {
     setTemplateName(e.target.value);
-    setHasChangedName(true);
   };
-
   useEffect(() => {
-    if (!hasChangedName) {
-      setTemplateName(
-        `${selectedTemplate} - ${selectedCounty?.label || ""} - ${
-          selectedDate?.label || ""
-        }`
-      );
-    }
+    setTemplateName(
+      `${selectedTemplate} - ${selectedCounty?.label || ""} - ${
+        selectedDate?.label || ""
+      }`
+    );
   }, [selectedCounty, selectedDate, selectedTemplate]);
 
   const canProgress =
@@ -121,7 +112,6 @@ export default function ReportBuilder() {
     ["A National Snapshot", "Something Else (Blank Report)"].includes(
       selectedTemplate
     ) ||
-    previousReport ||
     activeStep === 2 ||
     activeStep === 3;
 
@@ -303,8 +293,8 @@ export default function ReportBuilder() {
     },
   ];
 
-  useEffect(() => {
-    if (activeStep === 2) {
+  const handleStep = (step) => {
+    if (step === 2) {
       dispatch({
         type: "ADD_NEW_REPORT",
         payload: {
@@ -321,8 +311,11 @@ export default function ReportBuilder() {
           },
         },
       });
-    }
-  }, [activeStep]);
+      setActiveStep(step)
+    } else {
+      setActiveStep(step);
+    };
+  }
 
   return (
     <Modal
@@ -341,7 +334,7 @@ export default function ReportBuilder() {
             <StepperComponent
               steps={steps}
               activeStep={activeStep}
-              setActiveStep={setActiveStep}
+              handleStep={handleStep}
               canProgress={canProgress}
             />
           </Stack>
@@ -368,13 +361,12 @@ export default function ReportBuilder() {
                 setSelectedTemplate={setSelectedTemplate}
                 templates={templates}
                 showTemplateCustomizer={activeStep === 1}
-                previousReport={previousReport}
-                setPreviousReport={setPreviousReport}
+                setActiveStep={setActiveStep}
               />
             </>
           )}
           {activeStep >= 2 && (
-            <ReportEditor reportName={reportName} activeStep={activeStep} />
+            <ReportEditor activeStep={activeStep} />
           )}
         </ModalInner>
         <CloseButton onClick={handleClose} title="Close Report Builder">

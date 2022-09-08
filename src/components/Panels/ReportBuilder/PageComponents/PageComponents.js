@@ -15,7 +15,7 @@ const mapping = {
   map: MapReport
 };
 
-export default function ReportComponentMapping({ itemId, pageIdx, reportName }) {
+export default function ReportComponentMapping({ handleItemLoad=()=>{}, itemId, pageIdx, reportName }) {
   const dispatch = useDispatch();
   const meta = useSelector(({ report }) => report.reports?.[reportName]?.meta)
   const itemProps = useSelector(({ report }) => report.reports?.[reportName]?.items?.[itemId])
@@ -47,11 +47,15 @@ export default function ReportComponentMapping({ itemId, pageIdx, reportName }) 
     }
   });
 
+  const loadedCallback = (isLoaded) => {
+    handleItemLoad(itemId, isLoaded);
+  }
+
   if (!itemProps) return null;
 
   const { type } = itemProps;
   const InnerEl = mapping[type];
 
   if (!InnerEl) return null;
-  return <InnerEl {...{ ...meta, ...itemProps, itemId, reportName, handleRemove, handleToggle, handleChange }} />
+  return <InnerEl {...{ ...meta, ...itemProps, itemId, reportName, handleRemove, handleToggle, handleChange, loadedCallback }} />
 }

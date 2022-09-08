@@ -1,4 +1,4 @@
-import React, { useRef, useMemo } from "react";
+import React, { useRef, useMemo, useLayoutEffect } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import CircularProgress from '@mui/material/CircularProgress';
@@ -93,19 +93,15 @@ function ReportMap({
   geoid = 17031,
   pageIdx = 0,
   itemId = '',
-  // variable = "Percent Fully Vaccinated",
-  // mapType = "natural_breaks",
-  // scale = "county",
   handleChange,
   handleRemove,
-  // width,
-  // height,
   date,
   dateIndex,
   reportName = '',
   variable = "Percent Fully Vaccinated",
   mapType = "natural_breaks",
   scale = "county",
+  loadedCallback = () => {},
 }) {
   const dates = useSelector(({ params }) => params.dates);
   const variableTree = useSelector(({ params }) => params.variableTree);
@@ -150,6 +146,10 @@ function ReportMap({
     mapParams,
     currentData,
   });
+
+  useLayoutEffect(() => {
+    loadedCallback(!isLoading);
+  }, [isLoading]);
 
   const [
     countyViewport,

@@ -44,7 +44,8 @@ export const LineChartReport = ({
   populationNormalized,
   shouldShowVariants,
   neighbors, secondOrderNeighbors,
-  linesToShow="county"
+  linesToShow="county",
+  loadedCallback=()=>{},
 }) => {
   const ids = {
     county: geoid,
@@ -67,7 +68,7 @@ export const LineChartReport = ({
           showSummarized,
           populationNormalized,
           shouldShowVariants,
-          
+          loadedCallback
         }}
       />
       <ControlPopover

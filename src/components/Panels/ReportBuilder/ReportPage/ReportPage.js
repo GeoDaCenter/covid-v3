@@ -19,6 +19,7 @@ export default function ReportPage({
   zoomMultiplier,
   reportName,
   onMount,
+  handleItemLoad,
 }) {
   const dispatch = useDispatch();
   const [isSettled, setIsSettled] = useState(false);
@@ -83,13 +84,14 @@ export default function ReportPage({
                 <ReportComponentMapping
                   key={i}
                   itemId={i}
+                  handleItemLoad={handleItemLoad}
                   {...{ pageIdx, reportName }}
                 />
               </div>
             ))}
           </ResponsiveGridLayout>
         )}
-        <NoInteractionGate style={{height:'auto'}}>
+        <NoInteractionGate style={{ height: "auto" }}>
           <DateWaterMark />
           <AtlasWaterMark />
           <Attribution />
