@@ -7,9 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 // Import helper libraries
 import styled from "styled-components";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
+// import FormControl from "@mui/material/FormControl";
 import useGetSidebarData from "../../hooks/useGetSidebarData";
 
 // Import config and sub-components
@@ -208,25 +206,25 @@ const ReportSection = styled.span`
   margin: 0;
 `;
 
-// Toggle styling for condensed and expanded drop down
-const ExpandSelect = styled(FormControl)`
-  outline: none;
-  border: none;
-  position: absolute !important;
-  right: 25px;
-  top: 15px;
-  div.MuiInputBase-root:before {
-    display: none !important;
-  }
-  div.MuiInputBase-root:after {
-    display: none !important;
-  }
-  svg {
-    path {
-      fill: white;
-    }
-  }
-`;
+// // Toggle styling for condensed and expanded drop down
+// const ExpandSelect = styled(FormControl)`
+//   outline: none;
+//   border: none;
+//   position: absolute !important;
+//   right: 25px;
+//   top: 15px;
+//   div.MuiInputBase-root:before {
+//     display: none !important;
+//   }
+//   div.MuiInputBase-root:after {
+//     display: none !important;
+//   }
+//   svg {
+//     path {
+//       fill: white;
+//     }
+//   }
+// `;
 
 // DataPanel Function Component
 export default function DataPanel({
@@ -237,7 +235,7 @@ export default function DataPanel({
   const panelOpen = manualOpen || panelState.info;
   const reduxSelectionKeys = useSelector(({ params }) => params.selectionKeys);
   const selectionKeys = manualSelectionKeys || reduxSelectionKeys;
-  const [expanded, setExpanded] = useState(true);
+  const [expanded] = useState(true);
   const sidebarData = useGetSidebarData({
     selectionKeys,
     panelOpen,

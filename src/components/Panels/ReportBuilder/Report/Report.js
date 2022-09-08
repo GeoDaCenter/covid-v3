@@ -5,10 +5,9 @@ import {
   LayoutContainer,
   PrintModalStyle,
 } from "./LayoutContainer";
-import { Alert, Box, Button, Stack, Modal, Snackbar, Typography } from "@mui/material";
+import { Alert, Box, Button, Stack, Modal, Snackbar, Typography, LinearProgress } from "@mui/material";
 import { usePrintReport } from "../../../../hooks/usePrintReport";
-import { LinearProgress } from '@mui/material/LinearProgress';
-import { cleanLayout } from "../../../../utils/cleanReport";
+// import { cleanLayout } from "../../../../utils/cleanReport";
 export default function Report({
   reportName = "",
   activeStep,

@@ -61,10 +61,10 @@ export const VariableTextField = styled(TextField)`
   }
 `;
 
-const VariableLabel = styled.p`
-  color: white;
-  margin-bottom: 0;
-`;
+// const VariableLabel = styled.p`
+//   color: white;
+//   margin-bottom: 0;
+// `;
 
 const ColorBar = ({ colors }) => (
   <ColorBarContainer>

@@ -5,13 +5,8 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
-// MUI import
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-
 // Config/component import
 import colors from "../config/colors";
-import { StyledDropDown } from "../components/Interface/StyledDropDown";
 import pages from ".//Learn/MdxPages";
 import { MdxStylesWrapper } from "./Learn/MdxStylesWrapper";
 import { Button, useMediaQuery } from "@mui/material";
@@ -175,70 +170,70 @@ const BodyContainer = styled.div`
   }
 `;
 
-// Yellow highlighted button to show interface element when going through tutorial
-const TutorialButton = styled.button`
-  background: none;
-  outline: none;
-  box-sizing: border-box;
-  border: 1px solid white;
-  cursor: pointer;
-  text-align: left;
-  padding: 5px;
-  width: calc(50% - 10px);
-  margin: 5px;
-  display: inline-block;
-  color: ${colors.white};
-  font-family: "Lato", sans-serif;
-  padding: 10px;
-  transition: 250ms all;
-  &:hover {
-    background: ${colors.yellow};
-    color: ${colors.gray};
-  }
-  h3,
-  p {
-    padding: 0;
-    margin: 0;
-  }
-`;
+// // Yellow highlighted button to show interface element when going through tutorial
+// const TutorialButton = styled.button`
+//   background: none;
+//   outline: none;
+//   box-sizing: border-box;
+//   border: 1px solid white;
+//   cursor: pointer;
+//   text-align: left;
+//   padding: 5px;
+//   width: calc(50% - 10px);
+//   margin: 5px;
+//   display: inline-block;
+//   color: ${colors.white};
+//   font-family: "Lato", sans-serif;
+//   padding: 10px;
+//   transition: 250ms all;
+//   &:hover {
+//     background: ${colors.yellow};
+//     color: ${colors.gray};
+//   }
+//   h3,
+//   p {
+//     padding: 0;
+//     margin: 0;
+//   }
+// `;
 
-// Mobile only: drop down to select article instead of list of pages
-const PagesDropDown = styled(StyledDropDown)`
-  position: absolute;
-  top: 0;
-  visibility: hidden;
-  left: 50%;
-  transform: translateX(-50%);
-  @media (max-width: 1024px) {
-    visibility: visible;
-  }
-`;
+// // Mobile only: drop down to select article instead of list of pages
+// const PagesDropDown = styled(StyledDropDown)`
+//   position: absolute;
+//   top: 0;
+//   visibility: hidden;
+//   left: 50%;
+//   transform: translateX(-50%);
+//   @media (max-width: 1024px) {
+//     visibility: visible;
+//   }
+// `;
 // End styles
 
-// Tutorials
-const tutorialInfo = [
-  {
-    title: "Choropleth Maps",
-    subtitle:
-      "Explore counts and percentages of cases, deaths, hosipital beds, and testing data.",
-    link: "choropleth-tutorial",
-  },
-  {
-    title: "Hotspots",
-    subtitle: "Find groups of counties and states affected by the virus.",
-    link: "hotspot-tutorial",
-  },
-  {
-    title: "Emerging Trends",
-    subtitle: "Locate areas that will soon be significantly affected by COVID.",
-    link: "emerging-tutorial",
-  },
-  {
-    title: "Change Over Time",
-    subtitle: "See the history of the virus by county and state.",
-    link: "change-tutorial",
-  },
-];
+// // Tutorials
+// const tutorialInfo = [
+//   {
+//     title: "Choropleth Maps",
+//     subtitle:
+//       "Explore counts and percentages of cases, deaths, hosipital beds, and testing data.",
+//     link: "choropleth-tutorial",
+//   },
+//   {
+//     title: "Hotspots",
+//     subtitle: "Find groups of counties and states affected by the virus.",
+//     link: "hotspot-tutorial",
+//   },
+//   {
+//     title: "Emerging Trends",
+//     subtitle: "Locate areas that will soon be significantly affected by COVID.",
+//     link: "emerging-tutorial",
+//   },
+//   {
+//     title: "Change Over Time",
+//     subtitle: "See the history of the virus by county and state.",
+//     link: "change-tutorial",
+//   },
+// ];
 
 // Infobox component
 const InfoBox = ({

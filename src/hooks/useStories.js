@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import useSWR from 'swr';
 import { findCounty, findIn } from '../utils';
 import bbox from '@turf/bbox';

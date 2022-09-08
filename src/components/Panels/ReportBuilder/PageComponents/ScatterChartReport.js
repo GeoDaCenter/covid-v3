@@ -6,8 +6,6 @@ import {
   PanelItemContainer,
   GrabTarget,
   DeleteBlock,
-  widthOptions,
-  heightOptions,
   CenteredChartTitle,
 } from "./PageComponentsLayout";
 import colors from "../../../../config/colors";

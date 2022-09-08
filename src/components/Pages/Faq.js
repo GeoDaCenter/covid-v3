@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
-import Grid from '@mui/material/Grid';
+// import Grid from '@mui/material/Grid';
 import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
@@ -15,24 +15,24 @@ const FaqPage = styled.div`
   background: white;
 `;
 
-const ButtonContainer = styled(Grid)``;
+// const ButtonContainer = styled(Grid)``;
 
-const TutorialButton = styled.button`
-  width: 100%;
-  border: 1px solid ${colors.lightgray};
-  text-align: left;
-  padding: 10px 20px;
-  background: white;
-  transition: 250ms all;
-  cursor: pointer;
-  &:hover {
-    box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
-      0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
-  }
-  p {
-    padding: 10px 0;
-  }
-`;
+// const TutorialButton = styled.button`
+//   width: 100%;
+//   border: 1px solid ${colors.lightgray};
+//   text-align: left;
+//   padding: 10px 20px;
+//   background: white;
+//   transition: 250ms all;
+//   cursor: pointer;
+//   &:hover {
+//     box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
+//       0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+//   }
+//   p {
+//     padding: 10px 0;
+//   }
+// `;
 
 const Accordion = styled(MuiAccordion)`
   &.MuiPaper-elevation1 {
@@ -481,7 +481,7 @@ export default function Faq() {
     setExpanded(newExpanded ? panel : false);
   };
 
-  const goTo = (page) => (window.location.href = page);
+  // const goTo = (page) => (window.location.href = page);
   return (
     <FaqPage>
       <NavBar light />

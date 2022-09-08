@@ -8,7 +8,7 @@ import {
   ContentContainer,
   Gutter,
   Icon,
-  HintBox,
+  // HintBox,
 } from "../../components";
 import colors from "../../config/colors";
 // import colors from '../../config/colors';

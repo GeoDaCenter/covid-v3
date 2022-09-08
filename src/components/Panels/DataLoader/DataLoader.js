@@ -15,7 +15,7 @@ import styled from "styled-components";
 import { Gutter } from "../..";
 import colors from "../../../config/colors";
 
-import { VariableEditor, VariableTextField } from "./VariableEditor";
+import { VariableEditor } from "./VariableEditor";
 import { Steps, StepButtons } from "./Steps";
 import { FileUploader } from "./FileUploader";
 import { validateGeojson } from "./utils";
@@ -339,7 +339,7 @@ export default function DataLoader() {
                     placeholder="eg https://raw.githubusercontent.com/..."
                   />
                   <label>
-                    * must be <a style={{color:'white'}} href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS" target="_blank">Cross-Origin Accessible</a>
+                    * must be <a style={{color:'white'}} href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS" target="_blank" rel="noreferrer">Cross-Origin Accessible</a>
                   </label>
                   </>
                 )}

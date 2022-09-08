@@ -1,4 +1,3 @@
-import { experimentalStyled } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import colors from '../../config/colors';

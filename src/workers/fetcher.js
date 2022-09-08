@@ -5,9 +5,7 @@ import { getParseCsvPromise, parsePbfData } from "../utils";
 import { expose } from 'comlink'
 
 class Fetcher {
-    constructor() { 
-
-    }
+    // constructor() { }
     fetchFile(fileInfo, dateLists) {
         const { name, filetype, timespan, date } = fileInfo;
         if (!name || !filetype) return () => [];

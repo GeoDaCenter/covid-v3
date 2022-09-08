@@ -14,7 +14,7 @@ import { findIn, getDateLists } from "../../utils"; //getVarId
 // third row: map and variable parameters
 import {
   setDates,
-  setMapParams,
+  // setMapParams,
   setNotification,
   setPanelState,
 } from "../../actions";
@@ -27,8 +27,8 @@ import {
   Preloader,
   DataPanel,
   LineChart,
-  Scaleable,
-  Draggable,
+  // Scaleable,
+  // Draggable,
   InfoBox,
   NotificationBox,
   Popover,
@@ -350,7 +350,7 @@ const MapContainerInner = () => {
   );
 };
 const MapPageContainer = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const panelState = useSelector(({ ui }) => ui.panelState);
   const showTopPanel = useSelector(
     ({ params }) => params.dataParams.nType !== "characteristic"
@@ -359,11 +359,11 @@ const MapPageContainer = () => {
     getDefaultDimensions()
   );
   const [storiesSnackbar, setStoriesSnackbar] = useState(true);
-  const handleOpenStories = () => {
-    dispatch(setPanelState({ storiesPane: true, lineChart: false }));
-    dispatch(setMapParams({ overlay: "stories" }));
-    setStoriesSnackbar(false);
-  };
+  // const handleOpenStories = () => {
+  //   dispatch(setPanelState({ storiesPane: true, lineChart: false }));
+  //   dispatch(setMapParams({ overlay: "stories" }));
+  //   setStoriesSnackbar(false);
+  // };
   // default width handlers on resize
   useEffect(() => {
     typeof window &&

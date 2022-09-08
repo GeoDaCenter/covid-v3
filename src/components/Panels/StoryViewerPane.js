@@ -4,7 +4,7 @@ import { useStoriesContext } from '../../contexts/StoriesContext';
 import colors from '../../config/colors';
 import { StoryContainer } from '../../components/Stories/StoryContainer';
 import { useDispatch } from 'react-redux';
-import { setMapParams, setPanelState } from '../../actions';
+import { setMapParams } from '../../actions';
 import { Button } from '@mui/material';
 
 const StoryViewerPanel = styled.div`

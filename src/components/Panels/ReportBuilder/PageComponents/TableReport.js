@@ -3,8 +3,6 @@ import {
   PanelItemContainer,
   GrabTarget,
   DeleteBlock,
-  widthOptions,
-  heightOptions,
 } from "./PageComponentsLayout";
 // import {
 //   onlyUniqueArray,

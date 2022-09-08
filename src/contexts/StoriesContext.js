@@ -1,5 +1,5 @@
-import { createContext, useState, useRef, useEffect, useContext } from 'react';
-import { useDispatch } from 'react-redux';
+import { createContext, useState, useContext } from 'react';
+// import { useDispatch } from 'react-redux';
 import { useStories } from '../hooks/useStories';
 
 export const StoriesContext = createContext({
@@ -12,7 +12,7 @@ export const StoriesContext = createContext({
 export const StoriesProvider = ({ children }) => {
   // story state
   const [selectedStory, setSelectedStory] = useState({});
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   // fetching stories from index
   const {
     stories,

@@ -34,10 +34,9 @@ const Container = styled.div`
     }
 `
 
-const IconContainer = styled.div`
-    display: block;
-
-`
+// const IconContainer = styled.div`
+//     display: block;
+// `
 
 const HintBox = ({
     children,
