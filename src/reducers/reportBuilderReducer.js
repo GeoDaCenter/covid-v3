@@ -21,7 +21,7 @@ export default function Reducer(state = INITIAL_STATE, action) {
         ...state,
         reports,
         pageIdx: 0,
-        currentReport: reportName,
+        currentReport: reportName
       };
     }
     // case "RESET_REPORT": {
@@ -40,9 +40,17 @@ export default function Reducer(state = INITIAL_STATE, action) {
     // }
     case "SET_CURRENT_REPORT": {
       const currentReport = action.payload;
+      const {reports} = state;
+      const pageIsEmpty = reports[currentReport]?.layout?.[0]?.length === 0;
+
       return {
         ...state,
-        currentReport
+        currentReport,
+        pageIdx: 0,
+        loadState: {
+          items: {},
+          isLoaded: pageIsEmpty
+        }
       };
     }
     case "CHANGE_REPORT_ITEM": {
@@ -58,7 +66,7 @@ export default function Reducer(state = INITIAL_STATE, action) {
         reports: {
           ...state.reports,
           [reportName]: report,
-        },
+        }
       };
     }
     case "UPDATE_REPORT_LAYOUT": {
@@ -83,7 +91,7 @@ export default function Reducer(state = INITIAL_STATE, action) {
         reports: {
           ...state.reports,
           [reportName]: report,
-        },
+        }
       };
     }
     case "ADD_REPORT_ITEM": {
@@ -119,7 +127,7 @@ export default function Reducer(state = INITIAL_STATE, action) {
         reports: {
           ...state.reports,
           [reportName]: report,
-        },
+        }
       };
     }
     case "DELETE_REPORT_ITEM": {
@@ -196,13 +204,22 @@ export default function Reducer(state = INITIAL_STATE, action) {
         error: null,
         reports: {
           ...state.reports,
-        },
+        }
       };
     }
     case "SET_PAGE_IDX": {
+      // if no items, default to loaded state, otherwise child components will update state
+      const {reports, currentReport} = state;
+      const pageIdx = action.payload
+      const pageIsEmpty = reports[currentReport]?.layout?.[pageIdx]?.length === 0;
+
       return {
         ...state,
-        pageIdx: action.payload,
+        loadState: {
+          items: {},
+          isLoaded: pageIsEmpty
+        },
+        pageIdx
       };
     }
     // case "DELETE_REPORT": {
@@ -215,7 +232,7 @@ export default function Reducer(state = INITIAL_STATE, action) {
     case "SET_ITEM_LOADED": {
       const {id, isLoaded} = action.payload;
       let items = {
-        ...state,
+        ...state.loadState.items,
         [id]: isLoaded
       }
       const {reports, pageIdx, currentReport} = state;

@@ -10,8 +10,39 @@ import {
 } from "./ReportPageLayout";
 import { useSelector } from "react-redux";
 import { NoInteractionGate } from "../PageComponents/MapReport";
+import { Box, CircularProgress } from "@mui/material";
+import styled from "styled-components";
+import LinearProgress from '@mui/material/LinearProgress';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
+
+const OuterContainer = styled.div`
+  position: relative;
+  pointer-events: ${({loading}) => loading ? 'none' : 'auto'};
+`
+
+const Loader = () => (
+  <div
+    style={{
+      position: "absolute",
+      width:'100%',
+      height:'100%',
+      top:0,
+      left:0,
+      background: 'rgba(255,255,255,0.9)',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      backdropFilter: 'blur(10px)',
+      zIndex:1000
+    }}
+    >
+      <Box sx={{maxWidth: '100px'}}>
+        <LinearProgress />
+        <p>Loading...</p>
+      </Box>
+    </div>
+)
 
 export default function ReportPage({
   pageIdx,
@@ -27,6 +58,7 @@ export default function ReportPage({
   const layout = useSelector(
     ({ report }) => report.reports?.[reportName]?.layout?.[pageIdx]
   );
+  const pageIsLoaded = useSelector(({report}) => report.loadState.isLoaded);
   const pageRef = useRef(null);
 
   useEffect(() => {
@@ -50,12 +82,13 @@ export default function ReportPage({
   };
 
   return (
-    <div style={{ position: "relative" }}>
+    <OuterContainer loading={!pageIsLoaded}>
       <LayoutPageContainer
         ref={pageRef}
         pageWidth={pageWidth}
         zoomMultiplier={zoomMultiplier}
       >
+        {!pageIsLoaded && <Loader />}
         {isSettled && (
           <ResponsiveGridLayout
             className="layout"
@@ -97,6 +130,6 @@ export default function ReportPage({
           <Attribution />
         </NoInteractionGate>
       </LayoutPageContainer>
-    </div>
+    </OuterContainer>
   );
 }

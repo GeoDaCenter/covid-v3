@@ -148,7 +148,9 @@ function ReportMap({
   });
 
   useLayoutEffect(() => {
-    loadedCallback(!isLoading);
+    setTimeout(() => {
+      loadedCallback(!isLoading);
+    }, 1000);
   }, [isLoading]);
 
   const [
