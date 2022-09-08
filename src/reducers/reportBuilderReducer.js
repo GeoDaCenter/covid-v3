@@ -293,25 +293,6 @@ function generateReportLayout(spec) {
   };
 }
 
-// function cleanLayout(spec){
-//   const removeProps = ['moved','static','i','key']
-//   const {layout, items} = spec[Object.keys(spec)[0]];
-//   let template = []
-//   for (const page of layout){
-//     let pageItems = []
-//     for (const item of page){
-//       let tempItem = {
-//         ...items[item.i],
-//         ...item,
-//       }
-//       removeProps.forEach(prop => delete tempItem[prop])
-//       pageItems.push(tempItem)
-//     }
-//     template.push(pageItems)
-//   }
-//   return template
-// }
-
 // function generateTypeKey(stringifiedKeys, type) {
 //   if (!stringifiedKeys.includes(type)) {
 //     return `${type}-0`;

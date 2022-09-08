@@ -3,13 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import ReportPage from "../ReportPage/ReportPage";
 import {
   LayoutContainer,
-  PrintButton,
   PrintModalStyle,
 } from "./LayoutContainer";
 import { Alert, Box, Button, Stack, Modal, Snackbar, Typography } from "@mui/material";
 import { usePrintReport } from "../../../../hooks/usePrintReport";
-import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgress';
-
+import { LinearProgress } from '@mui/material/LinearProgress';
+import { cleanLayout } from "../../../../utils/cleanReport";
 export default function Report({
   reportName = "",
   activeStep,
@@ -105,6 +104,12 @@ function PrintModal({
       type: 'TOGGLE_PANEL', payload: 'reportBuilder'
     })
   }
+  // const report = useSelector(
+  //   ({ report }) => report.reports?.[report.currentReport]);
+
+  // const exportReport = () => {
+  //   cleanLayout(report, true).then(r=>console.log(r))
+  // }
 
 
   return (
@@ -136,6 +141,12 @@ function PrintModal({
               onClick={() => handlePrint("JPG")}>
               Export Report as Images
             </Button>
+            {/* <Button
+              variant="contained"
+              onClick={exportReport}>
+              Share Report
+            </Button> */}
+            
           </Stack>
           <hr />
           <Stack gap={2} alignItems="center" sx={{ py: 2 }}>
@@ -159,7 +170,7 @@ function PrintModal({
 
 function LinearProgressWithLabel({ progress, text }) {
   return (
-    <Stack direction="column" gap={2} width="100%" justifyContent="center">
+    <Stack direction="column" gap={2} width="100%">
         <LinearProgress variant="determinate" value={progress} />
         <Typography variant="body2">{text}</Typography>
     </Stack>
