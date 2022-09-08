@@ -6,5 +6,7 @@ const INITIAL_STATE ={
       items: {},
       isLoaded: false
     },
+    printStatus: false,
+    printFileType: undefined
   }
   export default INITIAL_STATE;

@@ -9,16 +9,16 @@ export const LayoutPageContainer = styled.div`
   border: 1px solid black;
   width: 80em;
   height:100em;
-  margin: 0.25em auto;
+  margin: ${({isPrinting}) => isPrinting ? 'none' : '0.25em auto'};
   position: relative;
   color: black;
-  padding: ${pagePadding}em;  
+  padding: ${pagePadding}em;
   @media print {
     overflow-y: visible;
     page-break-after: always;
   }
-  transform:scale(${({pageWidth, zoomMultiplier}) => (zoomMultiplier||1)*(pageWidth||0)/1100});
-  transform-origin: 50% 0;
+  transform:scale(${({isPrinting, pageWidth, zoomMultiplier}) => isPrinting ? '1' : (zoomMultiplier||1)*(pageWidth||0)/1100});
+  transform-origin: ${({isPrinting}) => isPrinting ? '0 0' : '50% 0'};
   transition:250ms transform;
   .react-grid-item > .react-resizable-handle {
     width:1em;
@@ -41,6 +41,9 @@ export const LayoutPageContainer = styled.div`
     .react-resizable-handle {
       display:none;
     }
+  }
+  .hover-buttons, .react-resizable-handle {
+    display: ${({isPrinting}) => isPrinting ? 'none !important' : 'initial'};
   }
 `;
 

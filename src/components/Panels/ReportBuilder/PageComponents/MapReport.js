@@ -71,7 +71,7 @@ const MapAttribution = styled(MapTitle)`
   font-size:0.65rem;
 `
 export const NoInteractionGate = ({ children, style }) => (
-  <div style={{ pointerEvents: "none !important", userSelect: 'none !importabnt', width: "100%", height: "100%", ...style}}>
+  <div style={{ pointerEvents: "none !important", userSelect: 'none !importabnt', width: "100%", height: "100%", ...style }}>
     {children}
   </div>
 );
@@ -101,9 +101,10 @@ function ReportMap({
   variable = "Percent Fully Vaccinated",
   mapType = "natural_breaks",
   scale = "county",
-  loadedCallback = () => {},
+  loadedCallback = () => { },
 }) {
   const dates = useSelector(({ params }) => params.dates);
+  const isPrinting = useSelector(({ report }) => report.printStatus);
   const variableTree = useSelector(({ params }) => params.variableTree);
   const variables = useSelector(({ params }) => params.variables);
 
@@ -133,7 +134,7 @@ function ReportMap({
   const [
     currentMapGeography,
     currentMapData,
-    { cartogramData, cartogramCenter, cartogramDataSnapshot },
+    ,// { cartogramData, cartogramCenter, cartogramDataSnapshot },
     currentMapID,
     currentBins,
     currentHeightScale,
@@ -148,9 +149,13 @@ function ReportMap({
   });
 
   useLayoutEffect(() => {
-    setTimeout(() => {
+    if (isPrinting) {
+      setTimeout(() => {
+        loadedCallback(!isLoading);
+      }, 5000);
+    } else {
       loadedCallback(!isLoading);
-    }, 1000);
+    }
   }, [isLoading]);
 
   const [

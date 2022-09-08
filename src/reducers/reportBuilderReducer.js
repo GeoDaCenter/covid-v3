@@ -247,6 +247,16 @@ export default function Reducer(state = INITIAL_STATE, action) {
         }
       }
     }
+    case "SET_PRINTING_STATUS":{
+      const {fileType, status} = action.payload;
+      return {
+        ...state,
+        pageIdx: status ? -1 : 0,
+        loadState: INITIAL_STATE.loadState,
+        printStatus: status,
+        printFileType: fileType
+      }
+    }
     default:
       return state;
   }

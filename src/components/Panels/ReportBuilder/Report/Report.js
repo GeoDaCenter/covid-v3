@@ -3,20 +3,22 @@ import { useDispatch, useSelector } from "react-redux";
 import ReportPage from "../ReportPage/ReportPage";
 import {
   LayoutContainer,
-  PrintContainer,
   PrintButton,
+  PrintModalStyle,
 } from "./LayoutContainer";
-import { Alert, Button, Snackbar } from "@mui/material";
+import { Alert, Box, Button, Stack, Modal, Snackbar, Typography } from "@mui/material";
+import { usePrintReport } from "../../../../hooks/usePrintReport";
+import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgress';
 
 export default function Report({
   reportName = "",
   activeStep,
   zoomMultiplier = 1,
+  handleStep = () => { },
 }) {
   const dispatch = useDispatch();
   const currPage = useSelector(({ report }) => report.pageIdx);
   const gridContext = useRef({});
-  const pagesRef = useRef({});
   const containerRef = useRef(null);
   const pageWidth = containerRef?.current?.clientWidth;
 
@@ -35,7 +37,7 @@ export default function Report({
       ...gridContext.current,
       [pageIdx]: grid,
     };
-  }; 
+  };
 
   const handleGridUpdate = (pageIdx) => {
     const currItems = gridContext?.current[pageIdx]?._items;
@@ -52,85 +54,15 @@ export default function Report({
     });
   };
 
-  const handleRef = (ref, idx) => {
-    pagesRef.current = {
-      ...pagesRef.current,
-      [idx]: ref,
-    };
-  };
-  
-  const handlePrint = (fileType) => {
-    import("html-to-image").then((htmlToImage) => {
-      const { toSvg, toJpeg } = htmlToImage;
-      import("downloadjs").then((downloadjs) => {
-        const download = downloadjs.default;
-        Object.values(pagesRef.current).forEach((pageRef, idx) => {
-          try {
-            if (fileType === "JPG") {
-              toJpeg(pageRef.current, {
-                fileName: `${reportName}-page-${idx + 1}.jpg`,
-              }).then((data) => {
-                download(
-                  data,
-                  `${reportName}-page-${idx + 1}.jpg`,
-                  "image/jpeg"
-                );
-              });
-            } else if (fileType === "PDF") {
-              toSvg(pageRef.current, {
-                fileName: `${reportName}-page-${idx + 1}.svg`,
-              }).then((data) => {
-                download(
-                  data,
-                  `${reportName}-page-${idx + 1}.svg`,
-                  "image/svg+xml"
-                );
-              });
-            }
-          } catch {
-            console.log("error");
-          }
-        });
-      });
-    });
-  };
+  const {
+    handlePrint,
+    handleRef
+  } = usePrintReport({
+    handleStep
+  })
+
   return (
     <LayoutContainer ref={containerRef}>
-      {activeStep === 3 && (
-        <PrintContainer>
-          <h2>Nice work!</h2>
-          <h4>
-            Your report has been saved. On your current device, come back to
-            this page any time and select your report name from the 'Previous
-            Reports' drop down to see up-to-date data.
-          </h4>
-          <p>
-            Currently, you may export your report pages as JPGs. We plan to add
-            an export feature as a single PDF. To leave the report builder,
-            click 'finish' below.
-          </p>
-          <p>
-            This new feature is an experimental feature, and we'd love to hear
-            your feedback. Send us a message on our{" "}
-            <a
-              href={`${process.env.PUBLIC_URL}/contact`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              contact page.
-            </a>
-          </p>
-          <PrintButton onClick={() => handlePrint("JPG")}>
-            Export JPGs
-          </PrintButton>
-          <PrintButton onClick={() => handlePrint("PDF")}>
-            Export PDF
-          </PrintButton>
-          {/* <PrintButton onClick={() => handlePrint("PDF")}>
-            Export PDF
-          </PrintButton> */}
-        </PrintContainer>
-      )}
       <ReportPage
         onMount={handleRef}
         key={`report-page-${reportName}-${currPage}`}
@@ -145,7 +77,92 @@ export default function Report({
         }}
       />
       <ErrorToast />
+      <PrintModal {...{ handleStep, activeStep, handlePrint }} />
     </LayoutContainer>
+  );
+}
+
+function PrintModal({
+  handleStep,
+  activeStep,
+  handlePrint
+}) {
+  const dispatch = useDispatch();
+  const pageIdx = useSelector(({ report }) => report.pageIdx);
+  const isPrinting = useSelector(({ report }) => report.printStatus);
+  const pageLength = useSelector(
+    ({ report }) => report.reports?.[report.currentReport]?.layout?.length
+  );
+
+  const currPage = pageIdx === -1 ? pageIdx + 2 : pageIdx + 1;
+  const progress = (currPage / pageLength)*100
+  const handleCloseModal = () => {
+    handleStep(activeStep - 1);
+  }
+
+  const handleCloseReport = () => {
+    dispatch({
+      type: 'TOGGLE_PANEL', payload: 'reportBuilder'
+    })
+  }
+
+
+  return (
+    <Modal
+      open={activeStep === 3}
+      onClose={handleCloseModal}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <Box sx={PrintModalStyle}>
+        {isPrinting ? <>
+          <LinearProgressWithLabel progress={progress} text={`Exporting ${currPage} of ${pageLength}`} />
+          <Typography>
+            <i>Please wait...</i>
+          </Typography>
+        </> : <><Typography>
+          <i>Your report has been saved on this device.
+            <br /><br />
+            Click below to export your report as a PDF document or as images.</i>
+        </Typography>
+          <Stack gap={2} alignItems="center" sx={{ py: 2 }}>
+            <Button
+              variant="contained"
+              onClick={() => handlePrint("PDF")}>
+              Export Report as PDF
+            </Button>
+            <Button
+              variant="contained"
+              onClick={() => handlePrint("JPG")}>
+              Export Report as Images
+            </Button>
+          </Stack>
+          <hr />
+          <Stack gap={2} alignItems="center" sx={{ py: 2 }}>
+
+            <Typography>
+              <i>Click below to keep editing your report or close the report builder.</i>
+            </Typography>
+            <Button
+              onClick={handleCloseModal} variant="outlined">
+              Return to Report Builder
+            </Button>
+            <Button
+              onClick={handleCloseReport} variant="outlined">
+              Return to the Atlas
+            </Button>
+          </Stack></>}
+      </Box>
+    </Modal>)
+}
+
+
+function LinearProgressWithLabel({ progress, text }) {
+  return (
+    <Stack direction="column" gap={2} width="100%" justifyContent="center">
+        <LinearProgress variant="determinate" value={progress} />
+        <Typography variant="body2">{text}</Typography>
+    </Stack>
   );
 }
 
@@ -170,9 +187,8 @@ function ErrorToast() {
 
   if (!error) return null;
   const messages = {
-    "Invalid layout": `Page ${
-      pageIdx + 1
-    } is full! Resize, remove items, or add a new page.`,
+    "Invalid layout": `Page ${pageIdx + 1
+      } is full! Resize, remove items, or add a new page.`,
   };
   const text = messages[type];
 

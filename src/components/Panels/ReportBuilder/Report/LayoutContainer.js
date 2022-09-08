@@ -79,3 +79,16 @@ export const PrintButton = styled.button`
     background: ${colors.orange};
   }
 `;
+
+export const PrintModalStyle = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: colors.darkgray,
+  color: colors.white,
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};

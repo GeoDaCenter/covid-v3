@@ -7,7 +7,7 @@ import { AddItemsSpeeedDial } from "../InterfaceComponents/AddItemsSpeedDial";
 import { ZoomInMap, ZoomOutMap, CropFree } from "@mui/icons-material";
 import { ButtonContainer } from "../Report/LayoutContainer";
 
-export const ReportEditor = ({ activeStep }) => {
+export const ReportEditor = ({ activeStep, handleStep }) => {
   const dispatch = useDispatch();
 
   const currPage = useSelector(({ report }) => report.pageIdx);
@@ -39,7 +39,6 @@ export const ReportEditor = ({ activeStep }) => {
     if (item.type === "page") {
       handleAddPage();
     } else {
-      console.log("add item", item, reportName, currPage);
       dispatch({
         type: "ADD_REPORT_ITEM",
         payload: {
@@ -76,6 +75,7 @@ export const ReportEditor = ({ activeStep }) => {
           reportName={reportName}
           activeStep={activeStep}
           zoomMultiplier={zoomMultiplier}
+          handleStep={handleStep}
         />
 
         <ButtonContainer>

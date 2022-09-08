@@ -88,6 +88,9 @@ export default function ReportBuilder() {
 
   // builder temp state
   const [activeStep, setActiveStep] = useState(0);
+  useEffect(() => {
+    setActiveStep(0)
+  },[open])
   const [selectedTemplate, setSelectedTemplate] = useState(null);
   const [selectedCounty, setSelectCounty] = useState(null);
   const [selectedDate, setSelectedDate] = useState({
@@ -294,7 +297,9 @@ export default function ReportBuilder() {
   ];
 
   const handleStep = (step) => {
-    if (step === 2) {
+    if (activeStep === 2 && step === 1) {
+      setActiveStep(0);
+    } else if (activeStep < 2 && step === 2) {
       dispatch({
         type: "ADD_NEW_REPORT",
         payload: {
@@ -366,7 +371,7 @@ export default function ReportBuilder() {
             </>
           )}
           {activeStep >= 2 && (
-            <ReportEditor activeStep={activeStep} />
+            <ReportEditor activeStep={activeStep} handleStep={handleStep}/>
           )}
         </ModalInner>
         <CloseButton onClick={handleClose} title="Close Report Builder">
