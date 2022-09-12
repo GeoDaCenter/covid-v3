@@ -145,16 +145,13 @@ export const heightOptions = {
 };
 
 export const GrabTargetDiv = styled.button`
-  position: absolute;
-  left: ${(props) => props.left};
-  top: ${(props) => props.top};
-  width: 2rem;
-  height: 2rem;
+  width: 4rem;
+  height: 4rem;
   padding: 0;
   opacity: 0.5;
   background: none;
   border: none;
-  cursor: grabbing;
+  cursor: grab;
   z-index:500;
   span svg g path,
   span svg,
@@ -173,8 +170,6 @@ export const DeleteBlockDiv = styled(GrabTargetDiv)`
 
 export const GrabTarget = ({ iconColor, className }) => (
   <GrabTargetDiv
-    left="2em"
-    top="0px"
     className={`content-header ${className}`}
     iconColor={iconColor}
     title="Move this content"

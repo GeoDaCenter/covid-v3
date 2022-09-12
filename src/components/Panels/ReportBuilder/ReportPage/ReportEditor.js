@@ -116,7 +116,11 @@ export const ReportEditor = ({ activeStep, handleStep }) => {
                 <CropFree />
               </MetaButton>
             </Stack>
-            <Stack alignItems="center" sx={{ mt: 2 }}>
+            <Stack alignItems="center" sx={{
+              mt: 2,
+              justifySelf: "center",
+              marginRight: "-15%"
+            }}>
               <StyledPagination
                 variant="outlined"
                 shape="rounded"

@@ -7,6 +7,7 @@ import {
 } from "./PageComponentsLayout";
 import colors from "../../../../config/colors";
 import { useSelector } from "react-redux";
+import { HoverButtonsContainer } from "../InterfaceComponents/HoverButtonsContainer";
 
 const TextComponentMapping = {
   "7day": ({ name }) => <h2>7-Day Average Report: {name}</h2>,
@@ -42,10 +43,11 @@ export const TextContainerReport = ({
     <PanelItemContainer>
       <InnerComponent name={name} />
       <h3>Data as of {currDate}</h3>
+        <HoverButtonsContainer>
       <ControlPopover
-        top="0"
-        left="0"
         className="hover-buttons"
+        inline
+        size={4}
         iconColor={colors.strongOrange}
         controlElements={[
           {
@@ -76,6 +78,7 @@ export const TextContainerReport = ({
         className="hover-buttons"
         onClick={() => handleRemove(pageIdx, contentIdx)}
       />
+      </HoverButtonsContainer>
     </PanelItemContainer>
   );
 };

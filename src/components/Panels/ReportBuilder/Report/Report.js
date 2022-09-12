@@ -7,7 +7,7 @@ import {
 } from "./LayoutContainer";
 import { Alert, Box, Button, Stack, Modal, Snackbar, Typography, LinearProgress } from "@mui/material";
 import { usePrintReport } from "../../../../hooks/usePrintReport";
-// import { cleanLayout } from "../../../../utils/cleanReport";
+import { cleanLayout } from "../../../../utils/cleanReport";
 export default function Report({
   reportName = "",
   activeStep,
@@ -103,12 +103,10 @@ function PrintModal({
       type: 'TOGGLE_PANEL', payload: 'reportBuilder'
     })
   }
-  // const report = useSelector(
-  //   ({ report }) => report.reports?.[report.currentReport]);
-
-  // const exportReport = () => {
-  //   cleanLayout(report, true).then(r=>console.log(r))
-  // }
+  const report = useSelector(
+    ({ report }) => report.reports?.[report.currentReport]);
+  cleanLayout(report).then(r => console.log(r))
+  
 
 
   return (
@@ -129,17 +127,38 @@ function PrintModal({
             <br /><br />
             Click below to export your report as a PDF document or as images.</i>
         </Typography>
-          <Stack gap={2} alignItems="center" sx={{ py: 2 }}>
+          <Stack gap={4} alignItems="center" sx={{ py: 4 }}>
+            
+          <Stack direction="row" gap={1} justifyContent="left">
+            <Typography>
+              Export Document
+            </Typography>
             <Button
               variant="contained"
               onClick={() => handlePrint("PDF")}>
-              Export Report as PDF
+              PDF
             </Button>
+                </Stack>
+            <Stack direction="row" gap={1}>
+            <Typography>
+              Export Images
+            </Typography>
             <Button
               variant="contained"
               onClick={() => handlePrint("JPG")}>
-              Export Report as Images
+              JPG
             </Button>
+            <Button
+              variant="contained"
+              onClick={() => handlePrint("PNG")}>
+              PNG
+            </Button>
+            <Button
+              variant="contained"
+              onClick={() => handlePrint("SVG")}>
+              SVG
+            </Button>
+                </Stack>
             {/* <Button
               variant="contained"
               onClick={exportReport}>

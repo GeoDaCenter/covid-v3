@@ -21,6 +21,8 @@ import {
   CovidVarMapping,
 } from "./constants";
 import { useLayoutEffect } from "react";
+import { HoverButtonsContainer } from "../InterfaceComponents/HoverButtonsContainer";
+import useGetNeighbors from "../../../../hooks/useGetNeighbors";
 export const TableReport = ({
   geoid = null,
   pageIdx = 0,
@@ -32,20 +34,12 @@ export const TableReport = ({
   topic = "COVID",
   metrics = [],
   includedColumns = DEFAULT_COLUMNS,
-  neighbors,
-  secondOrderNeighbors,
   geogToInclude = "county",
   dateIndex,
   name,
   metaDict = {},
-  loadedCallback = () => {},
+  loadedCallback = () => { },
 }) => {
-  const neighborIds = {
-    county: geoid,
-    neighbors,
-    secondOrderNeighbors,
-    national: null,
-  }[geogToInclude];
   const variableNames =
     topic === "COVID"
       ? metrics.map((metric) => CovidVarMapping[metric]).flat()
@@ -55,6 +49,17 @@ export const TableReport = ({
   useLayoutEffect(() => {
     loadedCallback(true);
   }, []);
+
+  const [
+    neighbors,
+    secondOrderNeighbors,
+    state
+  ] = useGetNeighbors({
+    geoid,
+    currentData: "county_usfacts.geojson"
+  })
+
+  const neighborIds = [geoid]
 
   return (
     <PanelItemContainer>
@@ -73,91 +78,118 @@ export const TableReport = ({
           name,
         }}
       />
-      <ControlPopover
-        top="0"
-        left="0"
-        className="hover-buttons"
-        iconColor={colors.strongOrange}
-        controlElements={[
-          {
-            type: "header",
-            content: "Controls for Table Report Block",
-          },
-          {
-            type: "helperText",
-            content: "Select the data to display on the table.",
-          },
+      <HoverButtonsContainer>
+        <ControlPopover
+          top="0"
+          left="0"
+          size={4}
+          className="hover-buttons"
+          iconColor={colors.strongOrange}
+          inline
+          controlElements={[
+            {
+              type: "header",
+              content: "Controls for Table Report Block",
+            },
+            {
+              type: "helperText",
+              content: "Select the data to display on the table.",
+            },
 
-          {
-            type: "comboBox",
-            content: {
-              label: "Search County",
-              items: countyNames,
+            {
+              type: "comboBox",
+              content: {
+                label: "Search County",
+                items: countyNames,
+              },
+              action: ({ value }) => handleChange({ geoid: value }),
+              value: geoid,
             },
-            action: ({ value }) => handleChange({ geoid: value }),
-            value: geoid,
-          },
-          {
-            type: "select",
-            content: {
-              label: "Change Topic",
-              items: [
-                {
-                  label: "COVID",
-                  value: "COVID",
-                },
-                {
-                  label: "Community Health Context",
-                  value: "SDOH",
-                },
-              ],
+            {
+              type: "select",
+              content: {
+                label: "Change Topic",
+                items: [
+                  {
+                    label: "COVID",
+                    value: "COVID",
+                  },
+                  {
+                    label: "Community Health Context",
+                    value: "SDOH",
+                  },
+                ],
+              },
+              action: (e) =>
+                handleChange({
+                  topic: e.target.value,
+                  metrics: DEFAULT_METRICS[e.target.value],
+                }),
+              value: topic,
             },
-            action: (e) =>
-              handleChange({
-                topic: e.target.value,
-                metrics: DEFAULT_METRICS[e.target.value],
-              }),
-            value: topic,
-          },
-          {
-            type: "selectMulti",
-            content: {
-              label: "Add or Remove Metrics",
-              items: topic === "COVID" ? CovidMetrics : CommunityContextMetrics,
+            {
+              type: "selectMulti",
+              content: {
+                label: "Add or Remove Metrics",
+                items: topic === "COVID" ? CovidMetrics : CommunityContextMetrics,
+              },
+              action: (e) => handleChange({ metrics: e.target.value }),
+              value: metrics,
             },
-            action: (e) => handleChange({ metrics: e.target.value }),
-            value: metrics,
-          },
-          {
-            type: "selectMulti",
-            content: {
-              label: "Add or Remove Statistics",
-              items: ALL_COLUMNS,
+            {
+              type: "selectNestMulti",
+              // content: {
+              //   label: "Add or Remove Statistics",
+              //   items: ALL_COLUMNS,
+              // },
+              action: (e) => console.log(e),// handleChange({ includedColumns: e.target.value }),
+              content: {
+                label: "stuff",
+                items: [
+                  {
+                    label: "test",
+                    value: "test",
+                    subItems: [
+                      {
+                        label: "subtest",
+                        value: "subtest",
+                      },
+                      {
+                        label: "subtest2",
+                        value: "subtest2",
+                      },
+                      {
+                        label: "subtest3",
+                        value: "subtest3",
+                      },
+                    ]
+                  }
+                ]//includedColumns,
+              },
+              value: includedColumns,
             },
-            action: (e) => handleChange({ includedColumns: e.target.value }),
-            value: includedColumns,
-          },
-          // {
-          //   ...widthOptions,
-          //   action: (e) =>
-          //     handleChange({ width: e.target.value }),
-          //   value: width,
-          // },
-          // {
-          //   ...heightOptions,
-          //   action: (e) =>
-          //     handleChange({ height: e.target.value }),
-          //   value: height,
-          // },
-        ]}
-      />
-      <GrabTarget iconColor={colors.strongOrange} className="hover-buttons" />
+            // {
+            //   ...widthOptions,
+            //   action: (e) =>
+            //     handleChange({ width: e.target.value }),
+            //   value: width,
+            // },
+            // {
+            //   ...heightOptions,
+            //   action: (e) =>
+            //     handleChange({ height: e.target.value }),
+            //   value: height,
+            // },
+          ]}
+        />
+        <GrabTarget iconColor={colors.strongOrange} className="hover-buttons" />
 
-      <DeleteBlock
-        iconColor={colors.strongOrange}
-        className="hover-buttons"
-        onClick={() => handleRemove(pageIdx, contentIdx)}
-      />
+        <DeleteBlock
+          iconColor={colors.strongOrange}
+          className="hover-buttons"
+          onClick={() => handleRemove(pageIdx, contentIdx)}
+        />
+      </HoverButtonsContainer>
     </PanelItemContainer>
   );
 };

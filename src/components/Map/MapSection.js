@@ -316,6 +316,7 @@ function MapSection({
   hoverGeoid = null,
   highlightGeoids = [],
   theme = "dark",
+  onLoad=()=>{},
 }) {
   const noData = Object.keys(currentMapData).length === 0;
   const isReport = !!manualViewport;
@@ -1136,6 +1137,12 @@ function MapSection({
       );
     }
   }, []);
+  
+  useEffect(() => {
+    if (glContext){
+      onLoad()
+    }
+  },[])
 
   return (
     <MapContainerOuter {...{ noData, isReport }}>
@@ -1179,6 +1186,7 @@ function MapSection({
             preventStyleDiffing={true}
             mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN}
             onLoad={() => {
+              onLoad()
               onMapLoad();
               dispatch(setMapLoaded(true));
             }}

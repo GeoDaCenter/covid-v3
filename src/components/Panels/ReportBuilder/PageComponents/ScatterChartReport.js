@@ -9,6 +9,7 @@ import {
   CenteredChartTitle,
 } from "./PageComponentsLayout";
 import colors from "../../../../config/colors";
+import { HoverButtonsContainer } from "../InterfaceComponents/HoverButtonsContainer";
 
 const RadiusRange = Array(10)
   .fill(0)
@@ -26,7 +27,7 @@ export const ScatterChartReport = ({
   xAxisVar,
   yAxisVar,
   radius = 4,
-  loadedCallback = () => {},
+  loadedCallback = () => { },
 }) => {
   const variables = useSelector(({ params }) => params.variables);
   const ScatterPlotVars = useMemo(
@@ -65,67 +66,70 @@ export const ScatterChartReport = ({
         </h3>
       </CenteredChartTitle>
       {scatterChart}
-      <ControlPopover
-        className="hover-buttons"
-        top="0"
-        left="0"
-        iconColor={colors.strongOrange}
-        controlElements={[
-          {
-            type: "header",
-            content: "Controls for Scatter Chart Block",
-          },
-          {
-            type: "helperText",
-            content: "Select the data to display on the chart.",
-          },
-          {
-            type: "select",
-            content: {
-              label: "Change X Variable",
-              items: ScatterPlotVars,
+      <HoverButtonsContainer>
+        <ControlPopover
+          className="hover-buttons"
+          inline
+          size={4}
+          iconColor={colors.strongOrange}
+          controlElements={[
+            {
+              type: "header",
+              content: "Controls for Scatter Chart Block",
             },
-            action: (e) => handleChange({ xAxisVar: e.target.value }),
-            value: xAxisVar,
-          },
-          {
-            type: "select",
-            content: {
-              label: "Change Y Variable",
-              items: ScatterPlotVars,
+            {
+              type: "helperText",
+              content: "Select the data to display on the chart.",
             },
-            action: (e) => handleChange({ yAxisVar: e.target.value }),
-            value: yAxisVar,
-          },
-          {
-            type: "select",
-            content: {
-              label: "Change Dot Radius",
-              items: RadiusRange,
+            {
+              type: "select",
+              content: {
+                label: "Change X Variable",
+                items: ScatterPlotVars,
+              },
+              action: (e) => handleChange({ xAxisVar: e.target.value }),
+              value: xAxisVar,
             },
-            action: (e) => handleChange({ radius: e.target.value }),
-            value: radius,
-          },
-          // {
-          //   ...widthOptions,
-          //   action: (e) =>
-          //     handleChange(pageIdx, contentIdx, { width: e.target.value }),
-          //   value: width,
-          // },
-          // {
-          //   ...heightOptions,
-          //   action: (e) =>
-          //     handleChange(pageIdx, contentIdx, { height: e.target.value }),
-          //   value: height,
-          // },
-        ]}
-      />
-      <GrabTarget iconColor={colors.strongOrange} className="hover-buttons" />
-      <DeleteBlock
-        iconColor={colors.strongOrange}
-        className="hover-buttons"
-        onClick={() => handleRemove(pageIdx, contentIdx)}
-      />
+            {
+              type: "select",
+              content: {
+                label: "Change Y Variable",
+                items: ScatterPlotVars,
+              },
+              action: (e) => handleChange({ yAxisVar: e.target.value }),
+              value: yAxisVar,
+            },
+            {
+              type: "select",
+              content: {
+                label: "Change Dot Radius",
+                items: RadiusRange,
+              },
+              action: (e) => handleChange({ radius: e.target.value }),
+              value: radius,
+            },
+            // {
+            //   ...widthOptions,
+            //   action: (e) =>
+            //     handleChange(pageIdx, contentIdx, { width: e.target.value }),
+            //   value: width,
+            // },
+            // {
+            //   ...heightOptions,
+            //   action: (e) =>
+            //     handleChange(pageIdx, contentIdx, { height: e.target.value }),
+            //   value: height,
+            // },
+          ]}
+        />
+        <GrabTarget iconColor={colors.strongOrange} className="hover-buttons" />
+        <DeleteBlock
+          iconColor={colors.strongOrange}
+          className="hover-buttons"
+          onClick={() => handleRemove(pageIdx, contentIdx)}
+        />
+      </HoverButtonsContainer>
     </PanelItemContainer>
   );
 };
+

@@ -46,9 +46,22 @@ export const templates = {
             "h": 11,
             "label": "COVID Summary Table",
             "topic": "COVID",
-            "metrics": DEFAULT_METRICS.COVID,
+            "metrics": [
+                "Cases",
+                "Deaths",
+                "Vaccination",
+                "Testing"
+            ],
             "x": 0,
-            "y": 28
+            "y": 28,
+            "includedColumns": [
+                "Metric",
+                "National Median",
+                "National Min",
+                "National Max",
+                "National 25 %ile",
+                "National 75 %ile"
+            ]
         }
     ],
     [
@@ -83,136 +96,10 @@ export const templates = {
             "x": 0,
             "y": 29
         }
-    ],
-    []
+    ]
 ],
   "My Region's Snapshot": [
-    [
-      {
-        type: "text",
-        w: 4,
-        h: .5,
-        content: "Regional Snapshot"
-      },
-      {
-        type: "map",
-        w: 2,
-        h: 5,
-        variable: "Confirmed Count per 100K Population",
-        scale: "region"
-      },
-      {
-        type: "map",
-        w: 2,
-        h: 5,
-        variable: "Death Count per 100K Population",
-        scale: "region"
-      },
-      {
-        type: "map",
-        w: 2,
-        h: 5,
-        variable: "Percent Fully Vaccinated",
-        scale: "region"
-      },
-      {
-        type: "map",
-        w: 2,
-        h: 5,
-        variable: "7 Day Testing Positivity Rate Percent",
-        scale: "region"
-      },
-      {
-        type: "table",
-        topic: "COVID-REGIONAL",
-        w: 4,
-        h: 5,
-        metrics: ["Cases", "Deaths", "Vaccination", "Testing"],
-        includedColumns: ["variable","geoidData","stateQ50","q50","regionQ50","regionSummary","regionMax","regionMin"],
-        geogToInclude: "secondOrderNeighbors"
-        
-      },
-    ],
-    [
-      {
-        type: "text",
-        w: 4,
-        h: 1,
-        content: "Regional Trends and Historic Data"
-      },
-      {
-        type: "lineChart",
-        w: 2,
-        h: 6,
-        table: "cases",
-        linesToShow: "secondOrderNeighbors",
-        populationNormalized: true
-      },
-      {
-        type: "lineChart",
-        w: 2,
-        h: 6,
-        table: "deaths",
-        linesToShow: "secondOrderNeighbors",
-        populationNormalized: true
-      },
-      {
-        type: "lineChart",
-        w: 2,
-        h: 6,
-        table: "vaccines_fully_vaccinated",
-        linesToShow: "secondOrderNeighbors",
-        populationNormalized: true
-      },
-      {
-        type: "lineChart",
-        w: 2,
-        h: 6,
-        table: "testing_wk_pos",
-        linesToShow: "secondOrderNeighbors",
-        populationNormalized: true
-      },
-    ],
-    [
-      {
-        type: "text",
-        w: 4,
-        h: 1,
-        content: "Hotspots"
-      },
-      {
-        type: "map",
-        w: 2,
-        h: 5,
-        variable: "Confirmed Count per 100K Population",
-        scale: "region",
-        mapType: "lisa"
-      },
-      {
-        type: "map",
-        w: 2,
-        h: 5,
-        variable: "Death Count per 100K Population",
-        scale: "region",
-        mapType: "lisa"
-      },
-      {
-        type: "map",
-        w: 2,
-        h: 5,
-        variable: "Percent Fully Vaccinated",
-        scale: "region",
-        mapType: "hinge15_breaks"
-      },
-      {
-        type: "map",
-        w: 2,
-        h: 5,
-        variable: "7 Day Testing Positivity Rate Percent",
-        scale: "region",
-        mapType: "lisa"
-      }
-    ],
+    [ ]
   ],
   "My Neighboring County's Stats": [
     [

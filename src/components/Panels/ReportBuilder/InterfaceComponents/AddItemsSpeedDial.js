@@ -82,7 +82,7 @@ export const AddItemsSpeeedDial = ({ handleAddItem, canAddItem }) => {
       ariaLabel="SpeedDial controlled open example"
       icon={<SpeedDialIcon />}
     //   sx={{ position: "absolute", right: "2em", bottom: "4em" }}
-      direction={"up"}
+      direction={"left"}
     >
       {actions.map((action) => (
         <SpeedDialAction
@@ -93,7 +93,7 @@ export const AddItemsSpeeedDial = ({ handleAddItem, canAddItem }) => {
           key={action.name}
           icon={action.icon}
           tooltipTitle={action.name}
-          tooltipOpen
+          // tooltipOpen
           onClick={() => handleAddItem(action.item)}
         />
       ))}

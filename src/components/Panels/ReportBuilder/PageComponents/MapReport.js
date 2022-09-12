@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, useLayoutEffect } from "react";
+import React, { useRef, useMemo } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import CircularProgress from '@mui/material/CircularProgress';
@@ -22,7 +22,7 @@ import countyNames from "../../../../meta/countyNames";
 import { colorScales } from "../../../../config/scales";
 import { defaultData } from "../../../../config/defaults";
 import { Box } from "@mui/material";
-
+import { HoverButtonsContainer } from "../InterfaceComponents/HoverButtonsContainer";
 const defaultMapParams = {
   mapType: "natural_breaks",
   bins: {
@@ -148,15 +148,13 @@ function ReportMap({
     currentData,
   });
 
-  useLayoutEffect(() => {
-    if (isPrinting) {
-      setTimeout(() => {
-        loadedCallback(!isLoading);
-      }, 5000);
-    } else {
+  const onLoad = isPrinting ? () => {
+    setTimeout(() => {
       loadedCallback(!isLoading);
-    }
-  }, [isLoading]);
+    }, 2500)
+  } : () => {
+    loadedCallback(!isLoading);
+  }
 
   const [
     countyViewport,
@@ -204,6 +202,7 @@ function ReportMap({
             manualViewport={currViewport}
             hoverGeoid={geoid}
             highlightGeoids={[geoid]}
+            onLoad={onLoad}
           />
         </NoInteractionGate>
       }
@@ -232,96 +231,98 @@ function ReportMap({
         {mapInner}
       </>
       )}
-      <ControlPopover
-        top="0"
-        left="0"
-        className="hover-buttons"
-        iconColor={colors.strongOrange}
-        controlElements={[
-          {
-            type: "header",
-            content: "Controls for Text Report Block",
-          },
-          {
-            type: "helperText",
-            content: "Select the data to display on the chart.",
-          },
-          {
-            type: "comboBox",
-            content: {
-              label: "Search County",
-              items: countyNames,
+      <HoverButtonsContainer>
+        <ControlPopover
+          className="hover-buttons"
+          inline
+          size={4}
+          iconColor={colors.strongOrange}
+          controlElements={[
+            {
+              type: "header",
+              content: "Controls for Text Report Block",
             },
-            action: ({ value }) =>
-              handleChange({ geoid: value }),
-            value: geoid,
-          },
-          {
-            type: "select",
-            content: {
-              label: "Change Variable",
-              items: variableList,
+            {
+              type: "helperText",
+              content: "Select the data to display on the chart.",
             },
-            action: (e) =>
-              handleChange({ variable: e.target.value }),
-          },
-          {
-            type: "select",
-            content: {
-              label: "Change Map Type",
-              items: [{
-                label: "Natural Breaks",
-                value: "natural_breaks",
-              }, {
-                label: "Box Map",
-                value: "hinge15_breaks",
-              }, {
-                label: "Hotspot",
-                value: "lisa",
-              }],
+            {
+              type: "comboBox",
+              content: {
+                label: "Search County",
+                items: countyNames,
+              },
+              action: ({ value }) =>
+                handleChange({ geoid: value }),
+              value: geoid,
             },
-            action: (e) =>
-              handleChange({ mapType: e.target.value }),
-          },
-          {
-            type: "select",
-            content: {
-              label: "Change View Scale",
-              items: [
-                {
-                  value: "county",
-                  label: "County",
-                },
-                {
-                  value: "neighbors",
-                  label: "Neighboring Counties",
-                },
-                {
-                  value: "region",
-                  label: "Region",
-                },
-                {
-                  value: "state",
-                  label: "State",
-                },
-                {
-                  value: "national",
-                  label: "National (Lower 48)",
-                },
-              ],
+            {
+              type: "select",
+              content: {
+                label: "Change Variable",
+                items: variableList,
+              },
+              action: (e) =>
+                handleChange({ variable: e.target.value }),
             },
-            action: (e) =>
-              handleChange({ scale: e.target.value }),
-          }
-        ]}
-      />
-      <GrabTarget iconColor={colors.strongOrange} className="hover-buttons" />
+            {
+              type: "select",
+              content: {
+                label: "Change Map Type",
+                items: [{
+                  label: "Natural Breaks",
+                  value: "natural_breaks",
+                }, {
+                  label: "Box Map",
+                  value: "hinge15_breaks",
+                }, {
+                  label: "Hotspot",
+                  value: "lisa",
+                }],
+              },
+              action: (e) =>
+                handleChange({ mapType: e.target.value }),
+            },
+            {
+              type: "select",
+              content: {
+                label: "Change View Scale",
+                items: [
+                  {
+                    value: "county",
+                    label: "County",
+                  },
+                  {
+                    value: "neighbors",
+                    label: "Neighboring Counties",
+                  },
+                  {
+                    value: "region",
+                    label: "Region",
+                  },
+                  {
+                    value: "state",
+                    label: "State",
+                  },
+                  {
+                    value: "national",
+                    label: "National (Lower 48)",
+                  },
+                ],
+              },
+              action: (e) =>
+                handleChange({ scale: e.target.value }),
+            }
+          ]}
+        />
+        <GrabTarget iconColor={colors.strongOrange} className="hover-buttons" />
 
-      <DeleteBlock
-        iconColor={colors.strongOrange}
-        className="hover-buttons"
-        onClick={() => handleRemove(pageIdx, itemId)}
-      />
+        <DeleteBlock
+          iconColor={colors.strongOrange}
+          className="hover-buttons"
+          onClick={() => handleRemove(pageIdx, itemId)}
+        />
+      </HoverButtonsContainer>
     </PanelItemContainer>
   );
 }

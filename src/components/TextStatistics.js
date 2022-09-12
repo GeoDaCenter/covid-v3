@@ -1,5 +1,6 @@
 import useGetQuantileStatistics from "../hooks/useGetQuantileStatistics";
 import styled from "styled-components";
+import { formatNumber } from "../utils";
 
 const TextReportContainer = styled.span`
   ul {
@@ -146,10 +147,10 @@ export const TextStatistics = ({ geoid = null, format = "bullet", dateIndex = fa
             <p>Vaccinations</p>
             <ul>
               <li>
-                {vaccinationStats.geoidData.toFixed(2)}% of people are vaccinated ({">"}{Math.round(vaccinationStats.geoidQ * 1000) / 10}% of counties)
+                {formatNumber(vaccinationStats.geoidData)}% of people are vaccinated ({">"}{Math.round(vaccinationStats.geoidQ * 1000) / 10}% of counties)
               </li>
               <li>
-                {vaccination1DoseStats.geoidData.toFixed(2)}% of people have at least 1 dose ({">"}{Math.round(vaccination1DoseStats.geoidQ * 1000) / 10}% of counties)
+                {formatNumber(vaccination1DoseStats.geoidData)}% of people have at least 1 dose ({">"}{Math.round(vaccination1DoseStats.geoidQ * 1000) / 10}% of counties)
               </li>
             </ul>
           </>
@@ -159,10 +160,10 @@ export const TextStatistics = ({ geoid = null, format = "bullet", dateIndex = fa
             <p>Testing</p>
             <ul>
               <li>
-                {testingPositivityStats.geoidData.toFixed(2)}% of COVID tests were positive ({">"}{Math.round(testingPositivityStats.geoidQ * 1000) / 10}% of counties)
+                {formatNumber(testingPositivityStats.geoidData)}% of COVID tests were positive ({">"}{Math.round(testingPositivityStats.geoidQ * 1000) / 10}% of counties)
               </li>
               <li>
-                {testingVolumeStats.geoidData.toFixed(2)} tests were repoted per 100k people ({">"}{Math.round(testingVolumeStats.geoidQ * 1000) / 10}% of counties)
+                {formatNumber(testingVolumeStats.geoidData)} tests were reported per 100k people ({">"}{Math.round(testingVolumeStats.geoidQ * 1000) / 10}% of counties)
               </li>
             </ul>
           </>

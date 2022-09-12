@@ -94,13 +94,13 @@ const MapOuterContainer = styled.div`
 `;
 
 const MapPlaneContainer = styled.div`
-  display: flex;
+  display: ${({noRender}) => (noRender ? "none" : "flex")};
   flex-direction: row;
   width: 100%;
   height: 100%;
   position: relative;
   @media (max-width: 768px) {
-    display: block;
+  display: ${({noRender}) => (noRender ? "none" : "block")};
   }
 `;
 
@@ -423,7 +423,7 @@ const MapPageContainer = () => {
           />
         </div>
       )}
-      <MapPlaneContainer>
+      <MapPlaneContainer noRender={panelState.reportBuilder}>
         <IconDock />
         <VariablePanel />
         <MapContainerInner />

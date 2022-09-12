@@ -64,12 +64,22 @@ export const COLUMN_MAPPINGS = {
   "National 75 %ile": { header: "National 75 %ile", accessor: "q75" },
   "National Min": { header: "National Min", accessor: "min" },
   "National Max": { header: "National Max", accessor: "max" },
+  "Region Median": {header: "Region Median", accessor: "regionQ50"},
+  "Region 25 %ile": {header: "Region 25 %ile", accesor: "regionQ25"},
+  "Region 75 %ile": {header: "Region 75 %ile", accesor: "regionQ75"},
+  "Region Min": {header: "Region Min", accesor: "regionMin"},
+  "Region Max": {header: "Region Max", accesor: "regionMax"},
 };
 
 export const ALL_COLUMNS = [
   { label: "Metric Name", value: "Metric" },
   { label: "County Value", value: "County" },
   { label: "County Percentile", value: "County Percentile" },
+  { label: "Region Median", value: "Region Median" },
+  { label: "Region 25 %ile", value: "Region 25 %ile" },
+  { label: "Region 75 %ile", value: "Region 75 %ile" },
+  { label: "Region Minimum", value: "Region Min" },
+  { label: "Region Maximum", value: "Region Max" },
   { label: "State Median", value: "State Median" },
   { label: "State 25 %ile", value: "State 25 %ile" },
   { label: "State 75 %ile", value: "State 75 %ile" },

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import download from "downloadjs";
-import { toJpeg } from "html-to-image";
+import { toJpeg, toPng, toSvg } from "html-to-image";
 
 export function usePrintReport() {
     const isPrinting = useSelector(({ report }) => report.printStatus);
@@ -59,6 +59,7 @@ export function usePrintReport() {
         }
     };
 
+
     const handleSavePdf = async () => {
         const jspdf = await import('jspdf')
         const jsPDF = jspdf.jsPDF
@@ -67,7 +68,7 @@ export function usePrintReport() {
             unit: "in"
         })
         pageData.forEach((page, i) => {
-            doc.addImage(page, 'JPEG', 0, 0, 8.5, 11, null, 'NONE')
+            doc.addImage(page, 0, 0, 8.5, 11)
             i < pageLength -1 && doc.addPage()
         });
         doc.save(`${currentReport}.pdf`);
@@ -87,13 +88,28 @@ export function usePrintReport() {
     const printPage = async () => {
         switch (printFileType) {
             case "PDF": {
-                const jpg = await toJpeg(currentPageRef.current)
-                handleAddPageData(jpg)
+                const png = await toPng(currentPageRef.current, {pixelRatio: 2})
+                handleAddPageData(png)
                 break
             }
             case "JPG": {
-                const jpg = await toJpeg(currentPageRef.current)
+                const jpg = await toJpeg(currentPageRef.current, {pixelRatio: 2})
                 return await download(jpg, `${currentReport}-page-${pageIdx + 1}.jpg`, "image/jpeg");
+            }
+            case "PNG": {
+                const png = await toPng(currentPageRef.current, {pixelRatio: 2})
+                return await download(png, `${currentReport}-page-${pageIdx + 1}.png`, "image/png");
+            }
+            case "SVG":{ 
+                const svg = await toSvg(currentPageRef.current, {fontEmbedCSS: false, skipFonts: true})
+                // doing this the ol' fashioned way due to issues with SVG encoding :)
+                let link = document.createElement("a");
+                document.body.appendChild(link);
+                link.setAttribute("href", svg);
+                link.setAttribute("download", `${currentReport}-page-${pageIdx + 1}.svg`);
+                link.click();
+                link.remove();
+                return;
             }
             default:
                 break;
@@ -116,6 +132,10 @@ export function usePrintReport() {
             })
         }
     }, [shouldPrintPdf, pageData.length])
+
+    useEffect(() => {
+        handleStopPrint()
+    }, [currentReport])
 
     return {
         handlePrint,

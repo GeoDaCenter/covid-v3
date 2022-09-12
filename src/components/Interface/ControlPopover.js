@@ -1,24 +1,27 @@
 import { useState } from "react";
-import InputLabel from "@mui/material/InputLabel";
-import Popover from "@mui/material/Popover";
-import MenuItem from "@mui/material/MenuItem";
-import Switch from "@mui/material/Switch";
-import Select from "@mui/material/Select";
-import TextField from "@mui/material/TextField";
-import Checkbox from "@mui/material/Checkbox";
 import styled from "styled-components";
 import { ComboBox, Icon, StyledDropDown, StyledSlider } from "../../components";
 import colors from "../../config/colors";
-import {  } from "../../components";
+import { } from "../../components";
+import {
+  Stack, Typography, InputLabel,
+  Popover,
+  MenuItem,
+  Switch,
+  Select,
+  TextField,
+  Checkbox, 
+  Box
+} from "@mui/material";
 
 const PopoverContainer = styled.div`
-  position: absolute;
+  position: ${({ inline }) => inline ? 'block' : 'absolute'};
   left: ${(props) => props.left !== undefined ? typeof props.left === 'string' ? props.left : 0 : 'initial'};
   bottom: ${(props) => props.bottom !== undefined ? typeof props.bottom === 'string' ? props.bottom : 0 : 'initial'};
   right: ${(props) => props.right !== undefined ? typeof props.right === 'string' ? props.right : 0 : 'initial'};
   top: ${(props) => props.top !== undefined ? typeof props.top === 'string' ? props.top : 0 : 'initial'};
-  width: 2rem;
-  height: 2rem;
+  width: ${({ size }) => size}rem;
+  height: ${({ size }) => size}rem;
   z-index:500;
   overflow-y:visible;
   button {
@@ -45,6 +48,8 @@ const PopoverContainer = styled.div`
 `;
 
 const PopoverContent = styled.div`
+  display: flex;
+  flex-direction:column;
   background: ${colors.gray};
   border:1px solid ${colors.yellow};
   color: ${colors.white};
@@ -63,8 +68,8 @@ const PopoverContent = styled.div`
 const H3 = ({ content }) => <h3>{content}</h3>;
 const P = ({ content }) => <p>{content}</p>;
 const Label = ({ content }) => <label>{content}</label>;
-const SelectControl = ({ content, value, action, active=false }, rest) => (
-  <StyledDropDown style={{marginTop: '1.5em', width: '100%'}} active={active}>
+const SelectControl = ({ content, value, action, active = false }, rest) => (
+  <StyledDropDown style={{ marginTop: '1.5em', width: '100%' }} active={active}>
     <InputLabel htmlFor="variableSelect">{content.label}</InputLabel>
     <Select
       MenuProps={{ id: "variableMenu" }}
@@ -74,7 +79,7 @@ const SelectControl = ({ content, value, action, active=false }, rest) => (
     >
       {content.items.map((item, index) => (
         <MenuItem key={index} value={item.value}>
-          {item.text||item.label}
+          {item.text || item.label}
         </MenuItem>
       ))}
     </Select>
@@ -82,7 +87,7 @@ const SelectControl = ({ content, value, action, active=false }, rest) => (
 );
 
 const SelectMultiControl = ({ content, value, action }, rest) => (
-  <StyledDropDown style={{marginTop: '1.5em', width: '100%', maxWidth:'400px'}}>
+  <StyledDropDown style={{ marginTop: '1.5em', width: '100%', maxWidth: '400px' }}>
     <InputLabel htmlFor="variableSelect">{content.label}</InputLabel>
     <Select
       MenuProps={{ id: "variableMenu" }}
@@ -95,22 +100,53 @@ const SelectMultiControl = ({ content, value, action }, rest) => (
       {content.items.map((item, index) => (
         <MenuItem key={index} value={item.value}>
           <Checkbox checked={value.indexOf(item.value) > -1} />
-          {item.text||item.label}
+          {item.text || item.label}
         </MenuItem>
       ))}
     </Select>
   </StyledDropDown>
 );
 
-const ComboBoxControl = ({ content, value, action }, rest) => (
-    <ComboBox
+const SelectNestedMultiControl = ({ content, value, action }, rest) => (
+  <StyledDropDown style={{ marginTop: '1.5em', width: '100%', maxWidth: '400px' }}>
+    <InputLabel htmlFor="variableSelect">{content.label}</InputLabel>
+    <Select
       MenuProps={{ id: "variableMenu" }}
+      multiple
       value={value}
-      setValue={action}
-      options={content.items}
-      label={content.label}
+      onChange={action}
+      renderValue={(selected) => selected.join(', ')}
       {...rest}
-    />
+    >
+      {content.items.map((item, index) => (
+          <Stack key={index} direction="column">
+            <Typography>
+              {item.text || item.label}
+            </Typography>
+            <Stack direction="row">
+              {item.subItems.map((subItem, subIndex) => (
+                <MenuItem key={subIndex} value={subItem.value}>
+                  <Checkbox onClick={() => action(subItem.value)} key={subIndex} checked={value.indexOf(subItem.value) > -1} />
+                  {subItem.text || subItem.label}
+                </MenuItem>
+              ))}
+            </Stack>
+          </Stack>
+      ))}
+    </Select>
+  </StyledDropDown>
+);
+
+
+const ComboBoxControl = ({ content, value, action }, rest) => (
+  <ComboBox
+    MenuProps={{ id: "variableMenu" }}
+    value={value}
+    setValue={action}
+    options={content.items}
+    label={content.label}
+    {...rest}
+  />
 );
 
 const StyledSwitch = styled.div`
@@ -156,7 +192,7 @@ const StyledSliderContainer = styled.div`
 const SliderControl = ({ content, value, action }) => <StyledSliderContainer>
   <label>{content.label}</label>
   <StyledSlider
-    {...{value, ...content}}
+    {...{ value, ...content }}
     onChange={action}
   />
 </StyledSliderContainer>
@@ -183,10 +219,10 @@ const CloseButton = styled.button`
   cursor:pointer;
 `;
 
-const TextInputControl = ({ content, value, action }) => 
-  <StyledTextField fullWidth id="standard-basic" variant="standard" 
-  value={value}
-  onChange={action}/>
+const TextInputControl = ({ content, value, action }) =>
+  <StyledTextField fullWidth id="standard-basic" variant="standard"
+    value={value}
+    onChange={action} />
 
 export const ControlElementMapping = {
   header: H3,
@@ -197,12 +233,13 @@ export const ControlElementMapping = {
   slider: SliderControl,
   comboBox: ComboBoxControl,
   textInput: TextInputControl,
-  selectMulti: SelectMultiControl
+  selectMulti: SelectMultiControl,
+  selectNestMulti: SelectNestedMultiControl
   // geocoder: Geocoder,
   // size: Size,
 };
 
-export default function ControlsPopover({ controlElements = [], top, bottom, left, right, iconColor, className }) {
+export default function ControlsPopover({ size = 2, inline = false, controlElements = [], top, bottom, left, right, iconColor, className }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -216,7 +253,7 @@ export default function ControlsPopover({ controlElements = [], top, bottom, lef
   const id = !!anchorEl ? "simple-popover" : undefined;
 
   return (
-    <PopoverContainer className={className} top={top} bottom={bottom} left={left} right={right} color={iconColor||colors.yellow}>
+    <PopoverContainer size={size} inline={inline} className={className} top={top} bottom={bottom} left={left} right={right} color={iconColor || colors.yellow}>
       <button aria-describedby={id} variant="contained" onClick={handleClick} title="Open Settings">
         <Icon symbol="settings" />
       </button>
@@ -248,8 +285,8 @@ export default function ControlsPopover({ controlElements = [], top, bottom, lef
             }
           })}
         </PopoverContent>
-      {!!anchorEl && <CloseButton onClick={handleClose} title="Close Panel">×</CloseButton>}
-      </Popover>      
+        {!!anchorEl && <CloseButton onClick={handleClose} title="Close Panel">×</CloseButton>}
+      </Popover>
     </PopoverContainer>
   );
 }

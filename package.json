@@ -42,6 +42,7 @@
     "d3-scale": "^3.2.0",
     "downloadjs": "^1.4.7",
     "file-saver": "^2.0.5",
+    "fontkit": "^2.0.2",
     "html-to-image": "^1.10.8",
     "html2canvas": "^1.4.1",
     "jszip": "^3.6.0",
