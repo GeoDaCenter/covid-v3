@@ -88,7 +88,7 @@ export default function Contact() {
           <br />
           <br />
           For a list of all contributors to the Atlas, please visit our{' '}
-          <a href="/about#team">about</a> page.
+          <a href="/about#team">About</a> page.
         </p>
         <Gutter h={40} />
         {/* <h2>LEARNING COMMUNITY</h2>
