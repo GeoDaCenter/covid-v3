@@ -22,7 +22,7 @@ export default function useGetQuantileStatistics({
     });
     
     useEffect(() => {
-        if (data.length) {
+        if (data.length && geojsonData?.order) {
             let tempResults = {
                 geoidProperties,
                 variable
@@ -66,7 +66,7 @@ export default function useGetQuantileStatistics({
             setStats(tempResults)
         }
 
-    },[data.length, geoid, dataset, variable, getStateStats, JSON.stringify(geoidProperties), JSON.stringify({neighborGroups})]);
+    },[data.length, geoid, dataset, variable, getStateStats, JSON.stringify(geoidProperties), JSON.stringify(geojsonData?.order), JSON.stringify({neighborGroups})]);
     
     return stats
 }

@@ -167,11 +167,10 @@ export default function useGetLineChartData({ table = "cases", geoid = [] }) {
     (t) => t.table === table
   )?.name;
 
-  const currentGeojson =
-    storedGeojson[currentData] && storedGeojson[currentData].properties;
+  const currentGeojson = storedGeojson?.[currentData]?.properties;
   const getName = ["County"].includes(currDataset.geography)
-    ? (key) => currentGeojson[key].NAME + ", " + currentGeojson[key].state_abbr
-    : (key) => currentGeojson[key].NAME;
+    ? (key) => currentGeojson?.[key]?.NAME + ", " + currentGeojson?.[key]?.state_abbr
+    : (key) => currentGeojson?.[key]?.NAME;
   const selectionNames = selectionKeys.map(getName);
   const totalPopulation =
     currentGeojson &&

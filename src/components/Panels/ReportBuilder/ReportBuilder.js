@@ -7,6 +7,15 @@ import StepperComponent from "./InterfaceComponents/Stepper";
 import TemplateSelector from "./TemplateSelector";
 import { ReportEditor } from "./ReportPage/ReportEditor";
 import { Stack, Box, Typography, Modal } from "@mui/material";
+import { ViewportProvider } from "../../../contexts/Viewport";
+
+const defaultViewport = {
+  latitude: 37.7577,
+  longitude: -122.4376,
+  zoom: 8,
+  bearing: 0,
+  pitch: 0,
+}
 
 const style = {
   position: "absolute",
@@ -67,12 +76,14 @@ const steps = [
   "Save or Print",
 ];
 
-export default function ReportBuilder() {
+export default function ReportBuilder({
+  isPage = false
+}) {
   const dispatch = useDispatch();
-  const open = useSelector(({ ui }) => ui.panelState.reportBuilder);
+  const open = useSelector(({ ui }) => isPage ? true : ui.panelState.reportBuilder);
   const handleClose = () => {
     dispatch({ type: "TOGGLE_PANEL", payload: "reportBuilder" });
-  } 
+  }
   // trigger update to parent context for dnd / resizing
   useSelector(({ report }) => report);
   const dates = useSelector(({ params }) => params.dates);
@@ -90,7 +101,7 @@ export default function ReportBuilder() {
   const [activeStep, setActiveStep] = useState(0);
   useEffect(() => {
     setActiveStep(0)
-  },[open])
+  }, [open])
   const [selectedTemplate, setSelectedTemplate] = useState(null);
   const [selectedCounty, setSelectCounty] = useState(null);
   const [selectedDate, setSelectedDate] = useState({
@@ -103,8 +114,7 @@ export default function ReportBuilder() {
   };
   useEffect(() => {
     setTemplateName(
-      `${selectedTemplate} - ${selectedCounty?.label || ""} - ${
-        selectedDate?.label || ""
+      `${selectedTemplate} - ${selectedCounty?.label || ""} - ${selectedDate?.label || ""
       }`
     );
   }, [selectedCounty, selectedDate, selectedTemplate]);
@@ -321,63 +331,71 @@ export default function ReportBuilder() {
       setActiveStep(step);
     };
   }
+  const innerContent = <ModalInner>
+    <Stack direction="row" spacing={2} alignItems="top" borderBottom={"1px solid white"} position="relative" paddingBottom="40px" >
+      <Typography id="modal-modal-title" fontWeight="bold" flexShrink={'0'}>
+        Report Builder
+      </Typography>
 
-  return (
-    <Modal
-      open={open}
-      onClose={handleClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
-      <Box sx={style}>
-        <ModalInner>
-          <Stack direction="row" spacing={2} alignItems="top" borderBottom={"1px solid white"} position="relative" paddingBottom="40px" >
-            <Typography id="modal-modal-title" fontWeight="bold" flexShrink={'0'}>
-              Report Builder
-            </Typography>
+      <StepperComponent
+        steps={steps}
+        activeStep={activeStep}
+        handleStep={handleStep}
+        canProgress={canProgress}
+      />
+    </Stack>
+    {/* <Typography id="modal-modal-title" variant="h4" component="h2">
+    This feature is coming soon. Please check back later!
+  </Typography> */}
+    {(activeStep === 0 || activeStep === 1) && (
+      <>
+        {activeStep === 0 ? (
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Use this tool to build a report to help you and your community
+            understand the context of COVID and determinants of health.
+            <br />
+            <br />
+            To get started, which template best fits your needs?
+          </Typography>
+        ) : (
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Customize your template:
+          </Typography>
+        )}
+        <TemplateSelector
+          selectedTemplate={selectedTemplate}
+          setSelectedTemplate={setSelectedTemplate}
+          templates={templates}
+          showTemplateCustomizer={activeStep === 1}
+          setActiveStep={setActiveStep}
+        />
+      </>
+    )}
+    {activeStep >= 2 && (
 
-            <StepperComponent
-              steps={steps}
-              activeStep={activeStep}
-              handleStep={handleStep}
-              canProgress={canProgress}
-            />
-          </Stack>
-          {/* <Typography id="modal-modal-title" variant="h4" component="h2">
-            This feature is coming soon. Please check back later!
-          </Typography> */}
-          {(activeStep === 0 || activeStep === 1) && (
-            <>
-              {activeStep === 0 ? (
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  Use this tool to build a report to help you and your community
-                  understand the context of COVID and determinants of health.
-                  <br />
-                  <br />
-                  To get started, which template best fits your needs?
-                </Typography>
-              ) : (
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  Customize your template:
-                </Typography>
-              )}
-              <TemplateSelector
-                selectedTemplate={selectedTemplate}
-                setSelectedTemplate={setSelectedTemplate}
-                templates={templates}
-                showTemplateCustomizer={activeStep === 1}
-                setActiveStep={setActiveStep}
-              />
-            </>
-          )}
-          {activeStep >= 2 && (
-            <ReportEditor activeStep={activeStep} handleStep={handleStep}/>
-          )}
-        </ModalInner>
-        <CloseButton onClick={handleClose} title="Close Report Builder">
-          ×
-        </CloseButton>
-      </Box>
-    </Modal>
-  );
+      <ViewportProvider defaultViewport={defaultViewport}>
+        <ReportEditor activeStep={activeStep} handleStep={handleStep} />
+      </ViewportProvider>
+    )}
+  </ModalInner>
+
+  if (isPage) {
+    return <div>{innerContent}</div>
+  } else {
+    return (
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          {innerContent}
+          <CloseButton onClick={handleClose} title="Close Report Builder">
+            ×
+          </CloseButton>
+        </Box>
+      </Modal>
+    );
+  }
 }

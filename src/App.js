@@ -34,6 +34,7 @@ const Methodology = React.lazy(() => import("./components/Pages/Methodology"));
 const PrivacyPolicy = React.lazy(() =>
   import("./components/Pages/PrivacyPolicy")
 );
+const Report = React.lazy(() => import("./components/Pages/Report"));
 const Story = React.lazy(() => import("./components/Pages/Story"));
 const Time = React.lazy(() => import("./components/Pages/Time"));
 const Trends = React.lazy(() => import("./components/Pages/Trends"));
@@ -149,6 +150,7 @@ export default function App() {
                 <Route path="/michigan-masks.html" component={MichiganMasks} />
                 <Route path="/methods" component={Methodology} />
                 <Route path="/methods.html" component={Methodology} />
+                <Route path="/report" component={Report} />
                 <Route path="/time" component={Time} />
                 <Route path="/time.html" component={Time} />
                 <Route path="/choropleth" component={Choropleth} />
