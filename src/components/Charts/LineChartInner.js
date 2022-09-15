@@ -230,7 +230,7 @@ function LineChartInner({
   });
 
   useEffect(() => {
-    loadedCallback(!!(maximums && chartData))
+    setTimeout(() => loadedCallback(!!(maximums && chartData)), 500)
   }, [!!(maximums && chartData)]);
 
   // get first word of snake case, if relevant
