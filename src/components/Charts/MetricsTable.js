@@ -38,23 +38,22 @@ export const Table = ({ children, ...props }) => <StyledTable {...props}><tbody>
 export const TableHeader = (props) => <TableEntry type="header" {...props} />;
 export const TableRow = (props) => <TableEntry type="body" {...props} />;
 
-const MetricsRow = ({ metric, geoid, neighborIds, includedColumns, dateIndex, dataset, getStateStats, ...props }) => {
+const MetricsRow = ({ metric, geoid, neighborGroups, includedColumns, dateIndex, dataset, getStateStats, ...props }) => {
     const data = useGetQuantileStatistics({
         variable: metric,
         dataset,
         geoid,
         getStateStats,
-        neighborIds,
+        neighborGroups,
         dateIndex,
     });
     const dataReady = Object.keys(data).length;
     const items = dataReady ? includedColumns.map(column => data[column.accessor]) : []
+    // if (dataReady) debugger;
     return dataReady ? <TableRow {...{ items, ...props }} /> : null
 }
 
 export const MetricsTable = ({ tableProps={}, rowProps={}, metrics=[], includedColumns=[], ...props }) => {
-    // const headers = includedColumns.map(f=>f.header);
-    // const accessors = includedColumns.map(f=>f.accessor);
     return <Table {...{tableProps}}>
         <TableHeader items={includedColumns.map(f => f.header)} {...{rowProps}} />
         {metrics.map((metric,idx) => <MetricsRow key={`${metric}-table-row-${idx}`} {...{ metric, includedColumns, rowProps, ...props }} />)}

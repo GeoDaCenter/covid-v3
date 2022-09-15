@@ -54,47 +54,162 @@ export const COLUMN_MAPPINGS = {
   Metric: { header: "Metric", accessor: "variable" },
   County: { header: "County", accessor: "geoidData" },
   "County Percentile": { header: "County Percentile", accessor: "geoidQ" },
-  "State Median": { header: "State Median", accessor: "stateQ50" },
-  "State 25 %ile": { header: "State 25 %ile", accessor: "stateQ25" },
-  "State 75 %ile": { header: "State 75 %ile", accessor: "stateQ75" },
-  "State Min": { header: "State Min", accessor: "stateMin" },
-  "State Max": { header: "State Max", accessor: "stateMax" },
-  "National Median": { header: "National Median", accessor: "q50" },
-  "National 25 %ile": { header: "National 25 %ile", accessor: "q25" },
-  "National 75 %ile": { header: "National 75 %ile", accessor: "q75" },
-  "National Min": { header: "National Min", accessor: "min" },
-  "National Max": { header: "National Max", accessor: "max" },
-  "Region Median": {header: "Region Median", accessor: "regionQ50"},
-  "Region 25 %ile": {header: "Region 25 %ile", accesor: "regionQ25"},
-  "Region 75 %ile": {header: "Region 75 %ile", accesor: "regionQ75"},
-  "Region Min": {header: "Region Min", accesor: "regionMin"},
-  "Region Max": {header: "Region Max", accesor: "regionMax"},
+  "stateQ50": { header: "State Median", accessor: "stateQ50" },
+  "stateQ25": { header: "State 25 %ile", accessor: "stateQ25" },
+  "stateQ75": { header: "State 75 %ile", accessor: "stateQ75" },
+  "stateMin": { header: "State Min", accessor: "stateMin" },
+  "stateMax": { header: "State Max", accessor: "stateMax" },
+  "nationQ50": { header: "National Median", accessor: "q50" },
+  "nationQ25": { header: "National 25 %ile", accessor: "q25" },
+  "nationQ75": { header: "National 75 %ile", accessor: "q75" },
+  "nationMin": { header: "National Min", accessor: "min" },
+  "nationMax": { header: "National Max", accessor: "max" },
+  "regionQ50": {header: "Region Median", accessor: "regionQ50"},
+  "regionQ25": {header: "Region 25 %ile", accessor: "regionQ25"},
+  "regionQ75": {header: "Region 75 %ile", accessor: "regionQ75"},
+  "regionMin": {header: "Region Min", accessor: "regionMin"},
+  "regionMax": {header: "Region Max", accessor: "regionMax"},
+  "neighborQ50": {header: "Neighbor Median", accessor: "neighborQ50"},
+  "neighborQ25": {header: "Neighbor 25 %ile", accessor: "neighborQ25"},
+  "neighborQ75": {header: "Neighbor 75 %ile", accessor: "neighborQ75"},
+  "neighborMin": {header: "Neighbor Min", accessor: "neighborMin"},
+  "neighborMax": {header: "Neighbor Max", accessor: "neighborMax"},
 };
 
-export const ALL_COLUMNS = [
-  { label: "Metric Name", value: "Metric" },
-  { label: "County Value", value: "County" },
-  { label: "County Percentile", value: "County Percentile" },
-  { label: "Region Median", value: "Region Median" },
-  { label: "Region 25 %ile", value: "Region 25 %ile" },
-  { label: "Region 75 %ile", value: "Region 75 %ile" },
-  { label: "Region Minimum", value: "Region Min" },
-  { label: "Region Maximum", value: "Region Max" },
-  { label: "State Median", value: "State Median" },
-  { label: "State 25 %ile", value: "State 25 %ile" },
-  { label: "State 75 %ile", value: "State 75 %ile" },
-  { label: "State Minimum", value: "State Min" },
-  { label: "State Maximum", value: "State Max" },
-  { label: "National Median", value: "National Median" },
-  { label: "National 25 %ile", value: "National 25 %ile" },
-  { label: "National 75 %ile", value: "National 75 %ile" },
-  { label: "National Minimum", value: "National Min" },
-  { label: "National Maximum", value: "National Max" },
+export const ALL_STAT_AGGREGATIONS = [
+  {
+    label: "Metric Name",
+    value: "Metric",
+    subItems: [
+      {
+        label: "Show Metric Name",
+        value: "Metric",
+      }
+    ]
+  },
+  {
+    label: "County",
+    value: "County",
+    subItems: [
+      {
+        label: "County Value",
+        value: "County",
+      },
+      {
+        label: "County Percentile",
+        value: "County Percentile",
+      }
+    ]
+  },
+  {
+    label: "Neighboring Counties",
+    value: "Neighboring Counties",
+    subItems: [
+      {
+        label: "Min",
+        value: "neighborMin"
+      },
+      {
+        label: "25 %ile",
+        value: "neighborQ25"
+      },
+      {
+        label: "Median",
+        value: "neighborQ50"
+      },
+      {
+        label: "75 %ile",
+        value: "neighborQ75"
+      },
+      {
+        label: "Max",
+        value: "neighborMax"
+      }
+    ]
+  },
+  {
+    label: "Region",
+    value: "Region",
+    subItems: [
+      {
+        label: "Min",
+        value: "regionMin"
+      },
+      {
+        label: "25 %ile",
+        value: "regionQ25"
+      },
+      {
+        label: "Median",
+        value: "regionQ50"
+      },
+      {
+        label: "75 %ile",
+        value: "regionQ75"
+      },
+      {
+        label: "Max",
+        value: "regionMax"
+      }
+    ]
+  },
+  {
+    label: "State",
+    value: "State",
+    subItems: [
+      {
+        label: "Min",
+        value: "stateMin"
+      },
+      {
+        label: "25 %ile",
+        value: "stateQ25"
+      },
+      {
+        label: "Median",
+        value: "stateQ50"
+      },
+      {
+        label: "75 %ile",
+        value: "stateQ75"
+      },
+      {
+        label: "Max",
+        value: "stateMax"
+      }
+    ]
+  },
+  {
+    label: "National",
+    value: "National",
+    subItems: [
+      {
+        label: "Min",
+        value: "nationMin"
+      },
+      {
+        label: "25 %ile",
+        value: "nationQ25"
+      },
+      {
+        label: "Median",
+        value: "nationQ50"
+      },
+      {
+        label: "75 %ile",
+        value: "nationQ75"
+      },
+      {
+        label: "Max",
+        value: "nationMax"
+      }
+    ]
+  }
 ];
 
 export const DEFAULT_COLUMNS = [
   "Metric",
   "County",
-  "State Median",
-  "National Median",
+  "stateQ50",
+  "nationQ50",
 ];

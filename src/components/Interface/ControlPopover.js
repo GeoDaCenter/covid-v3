@@ -11,7 +11,6 @@ import {
   Select,
   TextField,
   Checkbox, 
-  Box
 } from "@mui/material";
 
 const PopoverContainer = styled.div`
@@ -119,14 +118,14 @@ const SelectNestedMultiControl = ({ content, value, action }, rest) => (
       {...rest}
     >
       {content.items.map((item, index) => (
-          <Stack key={index} direction="column">
-            <Typography>
+          <Stack key={index} direction="column" alignItems="center" sx={{padding:'.5em 1em 0 1em', borderBottom:'1px solid white'}}>
+            <Typography fontWeight="bold">
               {item.text || item.label}
             </Typography>
             <Stack direction="row">
               {item.subItems.map((subItem, subIndex) => (
-                <MenuItem key={subIndex} value={subItem.value}>
-                  <Checkbox onClick={() => action(subItem.value)} key={subIndex} checked={value.indexOf(subItem.value) > -1} />
+                <MenuItem key={subIndex} value={subItem.value} onClick={() => action(subItem.value)}>
+                  <Checkbox key={subIndex} checked={value.indexOf(subItem.value) > -1} />
                   {subItem.text || subItem.label}
                 </MenuItem>
               ))}

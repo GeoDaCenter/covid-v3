@@ -15,44 +15,52 @@ const TextReportContainer = styled.span`
   }
 
 `;
-export const TextStatistics = ({ geoid = null, format = "bullet", dateIndex = false}) => {
+export const TextStatistics = ({ geoid = null, format = "bullet", dateIndex = false }) => {
   const cases100kStats = useGetQuantileStatistics({
     variable: "Confirmed Count per 100K Population",
-    geoid,dateIndex
+    geoid,
+    dateIndex
   });
   const casesStats = useGetQuantileStatistics({
     variable: "Confirmed Count",
-    geoid,dateIndex
+    geoid,
+    dateIndex
   });
 
   const deaths100kStats = useGetQuantileStatistics({
     variable: "Death Count per 100K Population",
-    geoid,dateIndex
+    geoid, 
+    dateIndex
   });
 
   const deathsStats = useGetQuantileStatistics({
     variable: "Death Count",
-    geoid,dateIndex
+    geoid, 
+    dateIndex
   });
 
   const vaccinationStats = useGetQuantileStatistics({
     variable: "Percent Fully Vaccinated",
-    geoid,dateIndex
+    geoid, 
+    dateIndex
   });
 
   const vaccination1DoseStats = useGetQuantileStatistics({
     variable: "Percent Received At Least One Dose",
-    geoid,dateIndex
+    geoid, 
+    dateIndex
   });
 
   const testingPositivityStats = useGetQuantileStatistics({
     variable: "7 Day Testing Positivity Rate Percent",
-    geoid,dateIndex
+    geoid, 
+    dateIndex
   });
 
   const testingVolumeStats = useGetQuantileStatistics({
     variable: "7 Day Tests Performed per 100K Population",
-    geoid,dateIndex
+    geoid, 
+    dateIndex
   });
 
   const name =
@@ -116,7 +124,7 @@ export const TextStatistics = ({ geoid = null, format = "bullet", dateIndex = fa
             <ul>
               <li>
                 The case rate is {cases100kStats.geoidData.toFixed(2)} per 100k people in {name}.
-                <br/>
+                <br />
                 This case rate is higher than{" "}
                 {Math.round(cases100kStats.geoidQ * 100)}% of all counties
               </li>
@@ -136,7 +144,7 @@ export const TextStatistics = ({ geoid = null, format = "bullet", dateIndex = fa
                 {deaths100kStats.geoidData.toFixed(2)} per 100k people ({">"}{Math.round(deaths100kStats.geoidQ * 1000) / 10}% of counties)
               </li>
               <li>
-              The daily number of deaths is{" "}
+                The daily number of deaths is{" "}
                 {deathsStats.geoidData.toFixed(2)} ({">"}{Math.round(deathsStats.geoidQ * 1000) / 10}% of counties)
               </li>
             </ul>

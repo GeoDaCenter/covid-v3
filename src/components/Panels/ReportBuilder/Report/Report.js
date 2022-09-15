@@ -7,7 +7,7 @@ import {
 } from "./LayoutContainer";
 import { Alert, Box, Button, Stack, Modal, Snackbar, Typography, LinearProgress } from "@mui/material";
 import { usePrintReport } from "../../../../hooks/usePrintReport";
-import { cleanLayout } from "../../../../utils/cleanReport";
+// import { cleanLayout } from "../../../../utils/cleanReport";
 export default function Report({
   reportName = "",
   activeStep,
@@ -103,9 +103,9 @@ function PrintModal({
       type: 'TOGGLE_PANEL', payload: 'reportBuilder'
     })
   }
-  const report = useSelector(
-    ({ report }) => report.reports?.[report.currentReport]);
-  cleanLayout(report).then(r => console.log(r))
+  // const report = useSelector(
+  //   ({ report }) => report.reports?.[report.currentReport]);
+  // cleanLayout(report).then(r => console.log(r))
   
 
 

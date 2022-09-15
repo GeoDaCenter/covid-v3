@@ -12,13 +12,13 @@ import colors from "../../../../config/colors";
 import countyNames from "../../../../meta/countyNames";
 // import { matchAndReplaceInlineVars } from "../../../../utils";
 import {
-  ALL_COLUMNS,
   DEFAULT_COLUMNS,
   DEFAULT_METRICS,
   COLUMN_MAPPINGS,
   CommunityContextMetrics,
   CovidMetrics,
   CovidVarMapping,
+  ALL_STAT_AGGREGATIONS,
 } from "./constants";
 import { useLayoutEffect } from "react";
 import { HoverButtonsContainer } from "../InterfaceComponents/HoverButtonsContainer";
@@ -40,12 +40,13 @@ export const TableReport = ({
   metaDict = {},
   loadedCallback = () => { },
 }) => {
+
   const variableNames =
     topic === "COVID"
       ? metrics.map((metric) => CovidVarMapping[metric]).flat()
       : metrics;
-  const parsedColumns = includedColumns.map((f) => COLUMN_MAPPINGS[f]);
-
+  const parsedColumns = includedColumns.map((f) => COLUMN_MAPPINGS[f])
+  
   useLayoutEffect(() => {
     loadedCallback(true);
   }, []);
@@ -59,7 +60,20 @@ export const TableReport = ({
     currentData: "county_usfacts.geojson"
   })
 
-  const neighborIds = [geoid]
+  const neighborGroups = [
+    {
+      prefix: 'neighbor',
+      ids: neighbors,
+    },
+    {
+      prefix: 'region',
+      ids: secondOrderNeighbors,
+    },
+    {
+      prefix: 'state',
+      ids: state,
+    }
+  ]
 
   return (
     <PanelItemContainer>
@@ -73,7 +87,7 @@ export const TableReport = ({
         {...{
           metrics: variableNames,
           geoid,
-          neighborIds,
+          neighborGroups,
           dateIndex,
           name,
         }}
@@ -142,29 +156,14 @@ export const TableReport = ({
               //   label: "Add or Remove Statistics",
               //   items: ALL_COLUMNS,
               // },
-              action: (e) => console.log(e),// handleChange({ includedColumns: e.target.value }),
+              action: (column) => handleChange({
+                includedColumns: includedColumns.includes(column) 
+                  ? includedColumns.filter(f => f !== column) 
+                  : [...includedColumns, column] 
+                }),
               content: {
-                label: "stuff",
-                items: [
-                  {
-                    label: "test",
-                    value: "test",
-                    subItems: [
-                      {
-                        label: "subtest",
-                        value: "subtest",
-                      },
-                      {
-                        label: "subtest2",
-                        value: "subtest2",
-                      },
-                      {
-                        label: "subtest3",
-                        value: "subtest3",
-                      },
-                    ]
-                  }
-                ]//includedColumns,
+                label: "Select Statistics",
+                items: ALL_STAT_AGGREGATIONS
               },
               value: includedColumns,
             },

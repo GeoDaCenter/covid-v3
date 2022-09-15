@@ -111,11 +111,11 @@ const rangeIncrement = (maximum) => {
   }
   return returnArray;
 };
-
-const dateRange = getDateRange({
+const startAndEndDates = {
   startDate: new Date("02/01/2020"),
   endDate: new Date(),
-});
+}
+const dateRange = getDateRange(startAndEndDates);
 
 const CustomTooltip = ({ active, payload, background }) => {
   try {
@@ -410,7 +410,7 @@ function LineChartInner({
     
   const x2 = (chartData[currIndex]?.date || chartData[chartData.length-1]?.date)
   const areaX2 = x2
-
+  
   if (maximums && chartData) {
     return (
       <ChartContainer id="lineChart">
@@ -454,20 +454,25 @@ function LineChartInner({
             }}
             onClick={isTimeseries ? handleChange : null}
           >
-            <XAxis
-          dataKey="date"
-          ticks={dateRange}
-          minTickGap={-50}
-          tick={
-            <CustomTick
-              style={{
-                fill: gridColor,
-                fontSize: "10px",
-                fontFamily: "Lato",
-                fontWeight: 600,
-                transform: "translateY(10px)",
-              }}
-              labelFormatter={dateFormatter}
+          <XAxis
+            dataKey="date"
+            ticks={dateRange}
+            minTickGap={-50}
+            domain={[
+              0,20
+              // startAndEndDates.startDate.toISOString().slice(0,10),
+              // startAndEndDates.endDate.toISOString().slice(0,10),
+            ]}
+            tick={
+              <CustomTick
+                style={{
+                  fill: gridColor,
+                  fontSize: "10px",
+                  fontFamily: "Lato",
+                  fontWeight: 600,
+                  transform: "translateY(10px)",
+                }}
+                labelFormatter={dateFormatter}
             />
           }
         />

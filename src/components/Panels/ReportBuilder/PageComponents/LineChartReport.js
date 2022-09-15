@@ -9,6 +9,7 @@ import colors from "../../../../config/colors";
 import countyList from "../../../../meta/countyNames";
 import { NoInteractionGate } from "./MapReport";
 import { HoverButtonsContainer } from "../InterfaceComponents/HoverButtonsContainer";
+import useGetNeighbors from "../../../../hooks/useGetNeighbors";
 
 const tableOptions = [
   {
@@ -23,10 +24,10 @@ const tableOptions = [
     text: "Fully Vaccinated Persons",
     value: "vaccines_fully_vaccinated",
   },
-  {
-    text: "Weekly Positivity",
-    value: "testing_wk_pos",
-  },
+  // {
+  //   text: "Weekly Positivity",
+  //   value: "testing_wk_pos",
+  // },
 ]
 
 export const LineChartReport = ({
@@ -43,10 +44,20 @@ export const LineChartReport = ({
   showSummarized,
   populationNormalized,
   shouldShowVariants,
-  neighbors, secondOrderNeighbors,
+  // neighbors, secondOrderNeighbors,
   linesToShow = "county",
   loadedCallback = () => { },
 }) => {
+  
+  const [
+    neighbors,
+    secondOrderNeighbors,
+    // state
+  ] = useGetNeighbors({
+    geoid,
+    currentData: "county_usfacts.geojson"
+  })
+
   const ids = {
     county: geoid,
     neighbors,
@@ -93,7 +104,7 @@ export const LineChartReport = ({
                 label: "Change Table",
                 items: tableOptions,
               },
-              action: (e) =>
+              action: (e) => 
                 handleChange({
                   table: e.target.value,
                 }),
@@ -123,10 +134,34 @@ export const LineChartReport = ({
                 label: "Change County",
                 items: countyList,
               },
-              action: (e) =>
-                handleChange({ geoid: e.target.value }),
+              action: (e) => handleChange({ geoid: e.value }),
               value: geoid,
             },
+            
+            {
+              type: "select",
+              content: {
+                label: "Show neighboring counties?",
+                items: [
+                  {
+                    text: "Selected County Only",
+                    value: "county",
+                  },
+                  {
+                    text: "Selected County and Neighbors",
+                    value: "neighbors",
+                  },
+                  {
+                    text: "Selected County and Region",
+                    value: "secondOrderNeighbors",
+                  }
+                ],
+              },
+              action: (e) =>
+                handleChange({ linesToShow: e.target.value }),
+              value: linesToShow,
+            },
+            
             // {
             //   ...widthOptions,
             //   action: (e) =>

@@ -114,5 +114,5 @@ export const AtlasWaterMark = () => (
 );
 
 export const Attribution = () => <AttributionDiv>
-  <h5>uscovidatlas.org &#8193; @uscovidatlas</h5>
+  <h5>uscovidatlas.org &#8193; @covid_atlas</h5>
   </AttributionDiv>
