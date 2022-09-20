@@ -16,8 +16,21 @@ const TooltipContainer = styled.button`
   transform: translateY(4px);
   display: inline-grid;
 `;
-
-const Tooltip = (props) => {
+/**
+ * A tooltip component that displays a tooltip when hovered over.
+ * @component
+ * @category Components
+ * 
+ * @param {Object} props
+ * @param {string} id Id of the tooltip content, referenced from `tooltipInfo` in src/config/index.js
+ * 
+ * @example 
+ * function ExampleComponent() {
+ *  return (
+ *   <Tooltip id="exampleTooltip" />
+ * )
+ */
+const Tooltip = ({id}) => {
   const dispatch = useDispatch();
 
   const handleMouseOver = (event) => {
@@ -30,8 +43,8 @@ const Tooltip = (props) => {
 
   return (
     <TooltipContainer
-      id={props.id}
-      key={props.id}
+      id={id}
+      key={id}
       onMouseEnter={handleMouseOver}
       onMouseLeave={handleMouseLeave}
     />

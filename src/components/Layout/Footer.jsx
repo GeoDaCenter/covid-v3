@@ -141,12 +141,22 @@ const SignupForm = styled.div`
     visibility: hidden;
   }
 `;
-
-const Footer = (props) => {
+/**
+ * Footer component, nothing fancy here.
+ * 
+ * @component
+ * @category Components/layout
+ * 
+ * @param {boolean} signUp - if true, show the signup form 
+ * @returns {JSX.Element} - Footer component
+ */
+const Footer = ({
+  signUp
+}) => {
   return (
     <FooterContainer>
       <FooterContent>
-        {props.signUp && (
+        {signUp && (
           <SignupForm>
             <h1 className="signup">Sign up for the Newsletter</h1>
             <h2>
@@ -165,7 +175,7 @@ const Footer = (props) => {
           </SignupForm>
         )}
 
-        {props.signUp && <hr className="footerHr" />}
+        {signUp && <hr className="footerHr" />}
         <LinkLists container spacing={1}>
           <Grid item xs={6} md={3}>
             <span>

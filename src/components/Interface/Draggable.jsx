@@ -1,4 +1,3 @@
-// This components (often wrapping Scaleable()) houses a move-able panel
 
 // Import libraries
 import React, { useState, useEffect } from 'react';
@@ -65,13 +64,36 @@ const CollapseButton = styled.button`
   }
 `;
 
+/**
+ * A wrapper component that allows the children to be dragged around the screen
+ * Often composed with Scaleable
+ * 
+ * @component
+ * @category Components
+ * 
+ * @param {Object} props
+ * @param {React.ReactNode} props.children - The content of the panel
+ * @param {String} props.title - The id of the panel in the store
+ * @param {Boolean} props.allowCollapse - Whether the panel can be collapsed or not
+ * @param {number} props.z - zindex of the panel, when multiple panels are open
+ * @param {number} props.defaultX - default x position of the panel
+ * @param {number} props.defaultY - default y position of the panel
+ * 
+ * @example 
+ * function MyComponent() {
+ *  return (
+ *   <Draggable title="myPanel" allowCollapse={true} defaultX={100} defaultY={100}>
+ *    <div>My panel content</div>
+ *  </Draggable>
+ * )
+ */
 const Draggable = ({
   title='',
   defaultX=0,
   defaultY=0,
   allowCollapse=true,
   z,
-  content
+  children,
 }) => {
   // Redux Dispatch and selector
   const dispatch = useDispatch();
@@ -135,7 +157,7 @@ const Draggable = ({
       className={open ? '' : 'collapsed'}
       isDragging={isDragging}
     >
-      {content}
+      {children}
       <DragButton
         id="resize"
         onMouseDown={handleDown}

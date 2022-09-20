@@ -40,6 +40,7 @@ export const TableReport = ({
   metaDict = {},
   loadedCallback = () => { },
 }) => {
+  console.log(metrics)
 
   const variableNames =
     topic === "COVID"

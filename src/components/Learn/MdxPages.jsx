@@ -11,6 +11,10 @@ import * as SpatialTimeScales from './SpatialTimeScales.mdx'
 import * as ReleaseNotes from './ReleaseNotes.mdx'
 import * as BugReport from './BugReport.mdx'
 
+/**
+ * @category LayoutContent
+ * @constant {MdxPages}
+ */
 const pages = {
     [AddCustomData.config.slug]: AddCustomData,
     [CommunityContexts.config.slug]: CommunityContexts,
@@ -28,3 +32,20 @@ const pages = {
 }
 
 export default pages
+
+/**
+ * @typedef {Object} PageConfig
+ * @property {string} slug - the page slug (used in the URL)
+ * @property {string} title - the page title (head/meta)
+ * @property {string} description - the page description (head/meta)
+ * 
+ */
+
+/**
+ * @typedef {Object} MdxPage
+ * @property {PageConfig} config - the page config
+ * @property {React.Component} default - the page component
+ */
+/**
+ * @typedef {Object.<string, MdxPage>} MdxPages
+ */

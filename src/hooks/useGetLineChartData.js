@@ -2,7 +2,20 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { findIn, findAllDefaults } from "../utils";
 import dataDateRanges from "../config/dataDateRanges";
-
+/**
+ * Async function for fetch relevant data
+ * 
+ * See useGetLineChartData comments for schemas
+ * @param {Object} props 
+ * @param {string} props.currentGeojson Current map data
+ * @param {string} props.currentTimeseriesDataset Current timeseries data
+ * @param {number[]} props.selectionKeys List of ID keys (optional)
+ * @param {number} props.totalPopulation Total population for normalization
+ * 
+ * 
+ * @returns {TimeSeriesData} Chart data, maximums, and relevant metadata, as below
+ * 
+ */
 async function fetchTimeSeries({
   currentGeojson,
   currentTimeseriesDataset,
@@ -134,7 +147,25 @@ async function fetchTimeSeries({
   };
 }
 
-export default function useGetLineChartData({ table = "cases", geoid = [] }) {
+/**
+ * 
+ * Hook to get line chart data given a particular variable and GEOID or GEOIDS
+ * By default, this will provide national data. 
+ * If keys are provided, properties for the total of all keys will be provided
+ * as keySum, keyDaily...
+ * And properties for will be provided for each key as {key}Sum, {key}Daily,
+ * eg. "01001Sum", "01001Daily"
+ * 
+ * @category Hooks
+ * @subcategory Data
+ * 
+ * @param {Object} props
+ * @param {string} props.table - 'cases' | 'deaths' | 'vaccination' The table to fetch data from
+ * @param {string[]} props.geoid The county or state GEOID to fetch data for
+ * 
+ * @returns {LineChartData} Chart data, maximums, and relevant metadata
+ */
+function useGetLineChartData({ table = "cases", geoid = [] }) {
   const [data, setData] = useState({
     maximums: {},
     chartData: [],
@@ -195,7 +226,7 @@ export default function useGetLineChartData({ table = "cases", geoid = [] }) {
       ? dataDateRanges[currentTimeseriesDataset].lastIndexOf(1)
       : dataParams.nIndex
     : false
-
+    
   return {
     ...data,
     isTimeseries: dataParams.nType.includes("time"),
@@ -206,3 +237,73 @@ export default function useGetLineChartData({ table = "cases", geoid = [] }) {
     currentData
   };
 }
+
+export default useGetLineChartData;
+
+
+
+/**
+ * @typedef {ChartDataEntry[]} ChartDataSchema
+ * 
+ * Series long format timeseries data, 
+ * suitable for use in d3/recharts viz.
+ * 
+ */
+
+/**
+ * @typedef {Object} ChartDataEntry
+ * 
+ * Single entry of long format timeseries data, 
+ * suitable for use in d3/recharts viz.
+ * 
+ * @property {number} date - Date for this row of data
+ * @property {number} sum - Total sum of the variable for this date
+ * @property {number} sum100k - Total sum of the variable for this date, per 100k people
+ * @property {number} daily - Daily sum of the variable for this date
+ * @property {number} daily100k - Daily sum of the variable for this date, per 100k people
+ * @property {number} weekly - Weekly sum of the variable for this date
+ * @property {number} weekly100k - Weekly sum of the variable for this date, per 100k people
+ * ...
+ */
+
+/**
+ * @typedef {Object} MaximumsDataSchema
+ * 
+ * Summary data of maximum values for each property in ChartdataSchema, in addition to 
+ * properties including keyDaily, keyWeekly... for individual GEOIDs and idDaily, idWeekly... for the sum of GEOIDs
+ * 
+ * @property {number} sum - Highest value
+ * @property {number} sum100k - Total sum of the variable for this date, per 100k people
+ * @property {number} daily - Daily sum of the variable for this date
+ * @property {number} daily100k - Daily sum of the variable for this date, per 100k people
+ * @property {number} weekly - Weekly sum of the variable for this date
+ * @property {number} weekly100k - Weekly sum of the variable for this date, per 100k people
+ * ...
+ * 
+ */
+
+/**
+ * 
+ * @typedef {Object} LineChartData
+ * 
+ * Return shape of useGetLineChartdata
+ * 
+ * @property {Object[]} chartData - See ChartDataSchema
+ * @property {Object} maximums - See MaximumsDataSchema
+ * @property {string} currentData - Current map data
+ * @property {number} currIndex - Current date index
+ * @property {number} currRange - Current date range
+ * @property {number[]} selectionKeys - List of selected GEOID ids / key
+ * @property {string[]} selectionNames - List of selected geography names
+ * 
+ */
+
+/**
+ * 
+ * @typedef {Object} TimeSeriesData 
+ * 
+ * Return shape of fetchTimeSeries
+ * 
+ * @property {Object[]} chartData - See ChartDataSchema
+ * @property {Object} maximums - See MaximumsDataSchema
+ */

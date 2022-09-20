@@ -297,17 +297,17 @@ const InfoBox = ({
       title="tutorial"
       defaultX={defaultX}
       defaultY={defaultY}
-      content={
-        <Scaleable
-          content={InfoboxContent}
-          title="tutorial"
-          defaultWidth={defaultWidth}
-          defaultHeight={defaultHeight}
-          minHeight={minHeight}
-          minWidth={minWidth}
-        />
-      }
-    />
+    >
+      <Scaleable
+        title="tutorial"
+        defaultWidth={defaultWidth}
+        defaultHeight={defaultHeight}
+        minHeight={minHeight}
+        minWidth={minWidth}
+      >
+        {InfoboxContent}
+      </Scaleable>
+    </Draggable>
   );
 };
 

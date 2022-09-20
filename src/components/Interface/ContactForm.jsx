@@ -86,7 +86,16 @@ const SuccessMessage = styled.div`
     cursor: pointer;
   }
 `;
-
+/**
+ * Self-contained contact form. No props needed.
+ * Uses env varaible `process.env.REACT_APP_EMAIL_FORM_URL` to send form data
+ * via google sheets / script
+ *  
+ * See https://hawksey.info/blog/2014/07/google-sheets-as-a-database-insert-with-apps-script-using-postget-methods-with-ajax-example/
+ * 
+ * @component
+ * 
+ */
 export default function ContactForm() {
     const url = `${process.env.REACT_APP_EMAIL_FORM_URL}`;
 

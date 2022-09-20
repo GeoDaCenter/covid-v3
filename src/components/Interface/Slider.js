@@ -1,20 +1,17 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import Grid from "@mui/material/Grid";
-import Slider from "@mui/material/Slider";
-import Button from "@mui/material/Button";
-import styled from "styled-components";
-import { setVariableParams } from "../../actions";
-import useTickUpdate from "../../hooks/useTickUpdate";
-import colors from "../../config/colors";
-import { debounce, findClosestValue } from "../../utils";
-import useCurrentDateIndices from "../../hooks/useCurrentDateIndices";
-import Ticks from "./Ticks";
-import DatePicker from "react-date-picker";
-import {
-  StyledSlider,
-  Icon
-} from '../../components'
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import Grid from '@mui/material/Grid'
+import Slider from '@mui/material/Slider'
+import Button from '@mui/material/Button'
+import styled from 'styled-components'
+import { setVariableParams } from '../../actions'
+import useTickUpdate from '../../hooks/useTickUpdate'
+import colors from '../../config/colors'
+import { debounce, findClosestValue } from '../../utils'
+import useCurrentDateIndices from '../../hooks/useCurrentDateIndices'
+import Ticks from './Ticks'
+import DatePicker from 'react-date-picker'
+import { StyledSlider, Icon } from '../../components'
 
 const SliderContainer = styled(Grid)`
   color: white;
@@ -22,29 +19,28 @@ const SliderContainer = styled(Grid)`
   padding: 0 0.5em 0.5em 0.5em;
   width: 100%;
   user-select: none;
-`;
+`
 const SliderRow = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  gap: .5em;
+  gap: 0.5em;
   width: 100%;
-  padding-right:.5em;
+  padding-right: 0.5em;
   p {
     flex-grow: 0;
   }
-  `
-
+`
 
 const PlayPauseButton = styled(Button)`
   background: none;
-  flex-grow:0;
+  flex-grow: 0;
   padding: 0;
-  margin: 0 0 -.5em 0;
+  margin: 0 0 -0.5em 0;
   width: 100%;
-  width:3em;
-  height:3em;
+  width: 3em;
+  height: 3em;
   &.MuiButton-root {
     min-width: auto;
     max-width: 100%;
@@ -55,24 +51,22 @@ const PlayPauseButton = styled(Button)`
   svg {
     fill: white;
   }
-`;
+`
 
 const SliderAndTicksContainer = styled.div`
   position: relative;
   flex-grow: 1;
-  margin:0 1.5em 5px 1em;
-`;
+  margin: 0 1.5em 5px 1em;
+`
 
-const SliderAndTicksInner = styled.div``;
-
-
+const SliderAndTicksInner = styled.div``
 
 const SpeedSlider = styled.div`
   position: absolute;
-  padding: 1em 2em 0 1em!important;
+  padding: 1em 2em 0 1em !important;
   width: 15%;
-  min-width:100px;
-  max-width:150px;
+  min-width: 100px;
+  max-width: 150px;
   background: ${colors.gray};
   left: 0;
   top: calc(100% + 0.25em);
@@ -87,9 +81,9 @@ const SpeedSlider = styled.div`
     display: initial !important;
   }
   span.MuiSlider-thumbColorPrimary {
-    transform:translateY(-7px) !important;
+    transform: translateY(-7px) !important;
   }
-`;
+`
 
 const RangeSlider = styled(Slider)`
   box-sizing: border-box;
@@ -130,7 +124,7 @@ const RangeSlider = styled(Slider)`
   span.muislider-thumb.muislider-active:hover {
     box-shadow: 0px 0px 10px rgba(200, 200, 200, 0.5);
   }
-`;
+`
 
 const DateSelectorContainer = styled(Grid)`
   display: flex;
@@ -169,7 +163,7 @@ const DateSelectorContainer = styled(Grid)`
     color: white;
     font-size: 1rem;
     font-weight: bold;
-    font-family: "Lato", sans-serif;
+    font-family: 'Lato', sans-serif;
   }
   .react-date-picker__clear-button {
     display: none;
@@ -204,65 +198,65 @@ const DateSelectorContainer = styled(Grid)`
     padding: 4px 1em 0 1em;
     font-size: 1rem;
   }
-`;
+`
 
 const valuetext = (dates, value) => {
-  const fullDate = dates[value]?.split("-");
+  const fullDate = dates[value]?.split('-')
 
-  return fullDate && `${parseInt(fullDate[1])}/${fullDate[0]?.slice(2)}`;
-};
+  return fullDate && `${parseInt(fullDate[1])}/${fullDate[0]?.slice(2)}`
+}
 
-const speedtext = (value) => `Animation Tick Rate: ${value} milliseconds`;
+const speedtext = (value) => `Animation Tick Rate: ${value} milliseconds`
 
 function DateTitle({
   dates = [],
   currDatesAvailable = [],
   currIndex = 7,
   currRange = 7,
-  rangeType = "",
-  handleChange = () => { },
-  handleRangeChange = () => { },
+  rangeType = '',
+  handleChange = () => {},
+  handleRangeChange = () => {},
 }) {
   if (!dates || !dates.length) {
-    return null;
+    return null
   }
 
-  const currDate = new Date(dates[currIndex + 1] || "2020-01-01");
+  const currDate = new Date(dates[currIndex + 1] || '2020-01-01')
   const currStartDate = new Date(
-    dates[currIndex - currRange + 1] || "2020-01-01"
-  );
-  const firstDateIdx = currDatesAvailable.indexOf(1);
-  const lastDateIdx = [...currDatesAvailable].reverse().indexOf(1);
-  const minDate = new Date(dates[firstDateIdx] || "2020-01-01");
-  const maxDate = new Date(dates.slice(-lastDateIdx)[0] || "");
+    dates[currIndex - currRange + 1] || '2020-01-01'
+  )
+  const firstDateIdx = currDatesAvailable.indexOf(1)
+  const lastDateIdx = [...currDatesAvailable].reverse().indexOf(1)
+  const minDate = new Date(dates[firstDateIdx] || '2020-01-01')
+  const maxDate = new Date(dates.slice(-lastDateIdx)[0] || '')
 
   const onChange =
-    rangeType === "custom"
+    rangeType === 'custom'
       ? (date, position) => {
-        try {
-          const dateString = JSON.stringify(date).slice(1, 11);
-          const dateIdx = dates.indexOf(dateString);
-          if (position === "start") {
-            handleRangeChange(null, [dateIdx, currIndex]);
-          } else {
-            handleRangeChange(null, [currIndex - currRange, dateIdx]);
+          try {
+            const dateString = JSON.stringify(date).slice(1, 11)
+            const dateIdx = dates.indexOf(dateString)
+            if (position === 'start') {
+              handleRangeChange(null, [dateIdx, currIndex])
+            } else {
+              handleRangeChange(null, [currIndex - currRange, dateIdx])
+            }
+          } catch (error) {
+            console.log(error)
           }
-        } catch (error) {
-          console.log(error);
         }
-      }
       : (date) => {
-        try {
-          const dateString = JSON.stringify(date).slice(1, 11);
-          const dateIdx = dates.indexOf(dateString);
-          handleChange(null, dateIdx);
-        } catch (error) {
-          console.log(error);
+          try {
+            const dateString = JSON.stringify(date).slice(1, 11)
+            const dateIdx = dates.indexOf(dateString)
+            handleChange(null, dateIdx)
+          } catch (error) {
+            console.log(error)
+          }
         }
-      };
   return (
     <DateSelectorContainer item xs={12}>
-      {rangeType === "custom" && (
+      {rangeType === 'custom' && (
         <DatePicker
           calendarAriaLabel="Toggle calendar"
           clearAriaLabel="Clear value"
@@ -277,7 +271,7 @@ function DateTitle({
         />
       )}
 
-      {rangeType === "custom" && <p>to</p>}
+      {rangeType === 'custom' && <p>to</p>}
       <DatePicker
         calendarAriaLabel="Toggle calendar"
         clearAriaLabel="Clear value"
@@ -295,18 +289,18 @@ function DateTitle({
         {(dates && dates.length && currIndex !== undefined) ? formatDate(dates[currIndex]) : ""}
       </DateH3> */}
     </DateSelectorContainer>
-  );
+  )
 }
 
 const findLastDate = (array) => {
   for (let i = array.length - 1; i >= 0; i--) {
     if (array[i] === 1) {
-      return i;
+      return i
     }
   }
-};
+}
 function DateSlider() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const [
     currIndex,
     currDates,
@@ -314,15 +308,15 @@ function DateSlider() {
     allDates,
     currRange,
     rangeType,
-  ] = useCurrentDateIndices();
+  ] = useCurrentDateIndices()
   const [isTicking, setIsTicking, timing, setTiming] = useTickUpdate({
     currDatesAvailable,
-  });
+  })
 
   const handleChange = debounce((_, newValue) => {
     // eslint-disable-line
     if (currDatesAvailable[newValue]) {
-      dispatch(setVariableParams({ nIndex: newValue }));
+      dispatch(setVariableParams({ nIndex: newValue }))
     } else {
       dispatch(
         setVariableParams({
@@ -332,15 +326,15 @@ function DateSlider() {
             newValue < currIndex
           ),
         })
-      );
+      )
     }
-  }, 5);
+  }, 5)
 
   const handleRangeChange = debounce((_, newValue) => {
-    const newIndex = Math.max(newValue[0], newValue[1]);
-    const newRange = newIndex - Math.min(newValue[0], newValue[1]); // eslint-disable-line
+    const newIndex = Math.max(newValue[0], newValue[1])
+    const newRange = newIndex - Math.min(newValue[0], newValue[1]) // eslint-disable-line
     if (currDatesAvailable[newIndex]) {
-      dispatch(setVariableParams({ nIndex: newIndex, nRange: newRange }));
+      dispatch(setVariableParams({ nIndex: newIndex, nRange: newRange }))
     } else {
       dispatch(
         setVariableParams({
@@ -351,20 +345,20 @@ function DateSlider() {
           ),
           nRange: newRange,
         })
-      );
+      )
     }
-  }, 25);
+  }, 25)
 
   const handlePlayPause = () => {
     if (!isTicking) {
-      setIsTicking(true);
+      setIsTicking(true)
     } else {
-      setIsTicking(false);
+      setIsTicking(false)
     }
-  };
+  }
 
-  const shouldShowLineSlider = rangeType !== "custom";
-  const shouldShowRangeSlider = rangeType === "custom";
+  const shouldShowLineSlider = rangeType !== 'custom'
+  const shouldShowRangeSlider = rangeType === 'custom'
   return (
     <SliderContainer container spacing={0}>
       <DateTitle
@@ -378,7 +372,7 @@ function DateSlider() {
       />
       <SliderRow>
         <PlayPauseButton id="playPause" onClick={handlePlayPause}>
-          <Icon symbol={isTicking ? "pause" : "play"} />
+          <Icon symbol={isTicking ? 'pause' : 'play'} />
         </PlayPauseButton>
         <p>{valuetext(allDates, 0)}</p>
         <SliderAndTicksContainer>
@@ -437,7 +431,8 @@ function DateSlider() {
           </SpeedSlider>
         )}
       </SliderRow>
-    </SliderContainer>)
+    </SliderContainer>
+  )
 }
 
-export default React.memo(DateSlider);
+export default React.memo(DateSlider)

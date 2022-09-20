@@ -5,7 +5,7 @@ import ChartLabel from './Charts/ChartLabel';
 import { ChartTitle } from './Charts/ChartTitle';
 import ComboBox from './Interface/ComboBox';
 import {ContentContainer} from './Layout/ContentContainer';
-import ContextMenu from './Interface/ContextMenu';
+// import ContextMenu from './Interface/_ContextMenu';
 import ControlPopover, { ControlElementMapping } from './Interface/ControlPopover';
 import CsvDownloader from './CsvDownloader';
 import DataDetails from './DataDetails';
@@ -40,11 +40,9 @@ import NotificationBox from './Layout/NotificationBox';
 import VariablePanel from './Panels/VariablePanel';
 import Popover from './Interface/TooltipPopper';
 import Preloader from './Interface/Preloader';
-import PrintLayout from './Layout/PrintLayout';
 import ReportBuilder from './Panels/ReportBuilder/ReportBuilder';
 import Scaleable from './Interface/Scaleable';
 import Scatterchart, { ScatterChartInner } from './Charts/Scatterchart';
-import StaticNavbar from './Layout/StaticNavbar';
 import { StyledSlider } from './Interface/StyledSlider';
 import Ticks from './Interface/Ticks';
 import Tooltip from './Interface/Tooltip';
@@ -54,8 +52,6 @@ import ShareButton from './Map/ShareButton';
 import { SummaryStatistics } from './SummaryStatistics';
 import { TextStatistics } from './TextStatistics';
 import { StyledDropDown, StyledDropDownNoLabel } from './Interface/StyledDropDown';
-import { SwitchContainer } from './Interface/SwitchContainer';
-
 // pages
 import About from './Pages/About';
 import Api from './Pages/Api';
@@ -82,7 +78,7 @@ export {
   ChartTitle,
   ComboBox,
   ContentContainer,
-  ContextMenu,
+  // ContextMenu,
   ControlElementMapping,
   ControlPopover,
   CsvDownloader,
@@ -114,9 +110,7 @@ export {
   VariablePanel,
   Popover,
   Preloader,
-  PrintLayout,
   Scaleable,
-  StaticNavbar,
   StyledSlider,
   SummaryStatistics,
   TextStatistics, 
@@ -133,7 +127,6 @@ export {
   ScatterChartInner,
   StyledDropDown,
   StyledDropDownNoLabel,
-  SwitchContainer,
   About,
   Api,
   CodeOfConduct,

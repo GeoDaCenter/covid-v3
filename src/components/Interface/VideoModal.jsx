@@ -40,7 +40,32 @@ const CloseButton = styled(Button)`
 	background: ${colors.darkgray};
 	outline:none;
 `
-
+/**
+ * 
+ * @component
+ * @category Components
+ * @subcategory Interface
+ * 
+ * @param {Object} props 
+ * @param {boolean} props.open - Whether the modal is open or not
+ * @param {function} props.onClose - Function to close the modal
+ * @param {string} props.title - Title of the modal
+ * @param {string} props.videoUrl - Youtube video embed URL
+ * 
+ * @returns {JSX.Element}
+ * @example
+ * function myComponent() {
+ *  const [open, setOpen] = useState(false);
+ *  return (
+        <VideoModal
+            open={open}
+            onClose={() => setOpen(false)}
+            title="Intro Video"
+            videoUrl="https://www.youtube.com/embed/pjswdUvwbFE"
+        />
+    )
+  }
+ */
 export const VideoModal = ({
     open,
     onClose,

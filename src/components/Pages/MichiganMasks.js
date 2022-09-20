@@ -11,7 +11,7 @@ import MapboxGLMap from 'react-map-gl';
 import MAP_STYLE from '../../config/style.json';
 import { MAPBOX_ACCESS_TOKEN } from '../../config';
 
-import { ContentContainer, Gutter, StaticNavbar, Footer } from '../../components';
+import { ContentContainer, Gutter, NavBar, Footer } from '../../components';
 
 const view = new MapView({ repeat: true });
 const MichiganPage = styled.div`
@@ -249,7 +249,7 @@ export default function MichiganMasks() {
 
   return (
     <MichiganPage>
-      <StaticNavbar />
+      <NavBar light />
       <ContentContainer>
         <h1>What are mask rules in Michigan schools?</h1>
         <h2>

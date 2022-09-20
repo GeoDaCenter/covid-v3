@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import colors from '../../config/colors';
 
+// default styles for the content page container
 export const ContentContainer = styled.div`
   width: 100%;
   max-width: 1140px;

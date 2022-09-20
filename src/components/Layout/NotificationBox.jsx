@@ -59,6 +59,16 @@ const CloseNotification = styled.button`
   color: white;
 `;
 
+/**
+ * Notification box for manual notes. Currently used to notify of situations where red on hotspot is good, not bad.
+ * Usese UI state for managing notification text
+ * 
+ * TODO: Deprecate in favor of Mui snackbar / toast
+ * 
+ * @component
+ * @category Components/Layout
+ * 
+ */
 const NotificationBox = () => {
   const dispatch = useDispatch();
   const notification = useSelector(({ui}) => ui.notification);
