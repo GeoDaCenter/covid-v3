@@ -85,8 +85,9 @@ const Draggable = ({
   // Listener and touch listeners for moving
   // On touch/mouseup, the listeners remove themselves
   const listener = (e) => {
-    setX((prevWidth) => prevWidth + e.movementX);
-    setY((prevHeight) => prevHeight + e.movementY);
+    const divider = e?.view?.devicePixelRatio || 1;
+    setX((prevWidth) => prevWidth + (e.movementX/divider));
+    setY((prevHeight) => prevHeight + (e.movementY/divider));
   };
 
   const touchListener = (e) => {

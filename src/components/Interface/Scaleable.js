@@ -25,8 +25,9 @@ const Scaleable = (props) => {
   const [currXYPos, setCurrXYPos] = useState(false);
 
   const listener = (e) => {
-    setWidth((prevWidth) => prevWidth + e.movementX);
-    setHeight((prevHeight) => prevHeight + e.movementY);
+    const divider = e?.view?.devicePixelRatio || 1;
+    setWidth((prevWidth) => prevWidth + (e.movementX/divider));
+    setHeight((prevHeight) => prevHeight + (e.movementY/divider));
   };
 
   const touchListener = (e) => {
