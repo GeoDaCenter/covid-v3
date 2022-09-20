@@ -1,4 +1,10 @@
 import styled from "styled-components";
+/**
+ * Component H3 element for charts
+ * @component
+ * @example
+ * <ChartTitle>My cool chart</ChartTitle>
+ */
 export const ChartTitle = styled.h3`
   text-align: center;
   font-family: "Lato", sans-serif;

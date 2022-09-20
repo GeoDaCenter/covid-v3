@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { setVariableParams } from "../../actions";
@@ -17,8 +17,12 @@ import {
 import { ChartTitle, ChartLabel, Icon } from "../../components";
 import colors from "../../config/colors";
 import useGetLineChartData from "../../hooks/useGetLineChartData";
+import { useSize } from "../../hooks/useSize";
 
 const ChartContainer = styled.span`
+display:block;
+width:100%;
+height:100%;
   span {
     color: white;
   }
@@ -57,50 +61,29 @@ const monthNames = [
 
 const numberFormatter = (val) =>
   val > 1000000 ? `${val / 1000000}M` : val > 1000 ? `${val / 1000}K` : val;
+
 const dateFormatter = (val) => {
   let tempDate = (new Date(val).getMonth() + 1) % 12;
   return tempDate === 0 ? val.slice(0, 4) : monthNames[tempDate];
 };
 
-const CustomTick = (props) => (
-  <text {...props}>{props.labelFormatter(props.payload.value)}</text>
-);
+const CustomTick = (props) => {
+  return <text {...props}>{props.labelFormatter(props.payload.value)}</text>;
+};
 
-const getDateRange = ({ startDate, endDate }) => {
+const getDateRange = ({ startDate, endDate }, monthIncrement = 1) => {
   let dateArray = [];
-
-  let years = [];
-
-  if (startDate.getUTCFullYear() === endDate.getUTCFullYear()) {
-    years = [endDate.getUTCFullYear()];
-  } else {
-    for (
-      let i = startDate.getUTCFullYear();
-      i <= endDate.getUTCFullYear();
-      i++
-    ) {
-      years.push(i);
-    }
+  let currentDate = new Date(startDate);
+  while (currentDate <= new Date(endDate)) {
+    dateArray.push(new Date(currentDate));
+    currentDate.setMonth(currentDate.getMonth() + monthIncrement);
   }
+  return dateArray.map((date) => date.toISOString().slice(0, 10));
+};
 
-  for (let i = 0; i < years.length; i++) {
-    let yearStr = "" + years[i];
-    let n;
-
-    if (years[i] === 2020) {
-      n = 2;
-    } else {
-      n = 1;
-    }
-
-    let dateString = `${yearStr}-${n < 10 ? 0 : ""}${n}-01`;
-    while (n < 13) {
-      dateString = `${yearStr}-${n < 10 ? 0 : ""}${n}-01`;
-      dateArray.push(dateString);
-      n++;
-    }
-  }
-  return dateArray;
+const startAndEndDates = {
+  startDate: new Date("02/01/2020"),
+  endDate: new Date(),
 };
 
 const rangeIncrement = (maximum) => {
@@ -111,11 +94,19 @@ const rangeIncrement = (maximum) => {
   }
   return returnArray;
 };
-const startAndEndDates = {
-  startDate: new Date("02/01/2020"),
-  endDate: new Date(),
+
+const getXAxisMonths = (width) => {
+  if (width > 800) {
+    return ['01','02','03','04','05','06','07','08','09','10','11','12'];
+  }
+  if (width > 600) {
+    return ['01','04','07','10'];
+  }
+  if (width > 450) {
+    return ['01','07'];
+  }
+  return ['01'];
 }
-const dateRange = getDateRange(startAndEndDates);
 
 const CustomTooltip = ({ active, payload, background }) => {
   try {
@@ -130,7 +121,12 @@ const CustomTooltip = ({ active, payload, background }) => {
               "0px 5px 5px -3px rgba(0,0,0,0.2), 0px 8px 10px 1px rgba(0,0,0,0.14), 0px 3px 14px 2px rgba(0,0,0,0.12)",
           }}
         >
-          <p style={{ color: background === "#000000" ? "white" : "black", padding: "5px 0 0 0" }}>
+          <p
+            style={{
+              color: background === "#000000" ? "white" : "black",
+              padding: "5px 0 0 0",
+            }}
+          >
             {payload[0].payload.date}
           </p>
           {payload.map((data, idx) => (
@@ -144,7 +140,9 @@ const CustomTooltip = ({ active, payload, background }) => {
             >
               {data.name}:{" "}
               {!isNaN(+data.payload[data.dataKey])
-                ? (Math.round(data.payload[data.dataKey]*10)/10).toLocaleString("en")
+                ? (
+                    Math.round(data.payload[data.dataKey] * 10) / 10
+                  ).toLocaleString("en")
                 : data.payload[data.dataKey]}
             </p>
           ))}
@@ -186,17 +184,23 @@ const colorSchemes = {
     mediumColor: colors.darkgray,
     gridColor: colors.black,
     backgroundColor: colors.white,
+    solidColor: colors.black,
   },
   dark: {
     highlightColor: colors.yellow,
     mediumColor: colors.lightgray,
     gridColor: `${colors.white}88`,
     backgroundColor: colors.black,
+    solidColor: colors.white,
   },
 };
 
+/**
+ * Component that returns the inner guts of the chart, for easy memoization
+ * @component
+ */
 function LineChartInner({
-  resetDock = () => { },
+  resetDock = () => {},
   docked = false,
   table = "cases",
   logChart = false,
@@ -205,16 +209,38 @@ function LineChartInner({
   shouldShowVariants = false,
   colorScheme = "dark",
   geoid = [],
-  loadedCallback = () => { },
+  loadedCallback = () => {},
 }) {
-  const { highlightColor, mediumColor, gridColor, backgroundColor } =
-    colorSchemes[colorScheme];
+  // For light and dark color schemes
+  const {
+    highlightColor,
+    mediumColor,
+    gridColor,
+    backgroundColor,
+    solidColor,
+  } = colorSchemes[colorScheme];
+
   const qualtitiveScale = {
     light: colors.qualtitiveScaleLight,
     dark: colors.qualtitiveScaleDark,
   }[colorScheme];
 
   const dispatch = useDispatch();
+  const handleChange = (e) => {
+    if(e?.activeTooltipIndex) {
+      dispatch(setVariableParams({ nIndex: e.activeTooltipIndex }));
+    }
+  }
+  // width listener
+  const ChartRef = useRef(null);
+  const {width} = useSize(ChartRef)
+
+  const xAxisMonths = getXAxisMonths(width)
+  const dateRange = getDateRange(startAndEndDates)
+  const filteredTickMonths = dateRange.filter(f => xAxisMonths.includes(f.slice(-5,-3)))
+
+
+  // line chart data 
   const {
     // currentData,
     currIndex,
@@ -229,191 +255,191 @@ function LineChartInner({
     geoid,
   });
 
+  // Print layout hack
+  // reporting back loaded state add 500ms delay to allow render time
   useEffect(() => {
-    setTimeout(() => loadedCallback(!!(maximums && chartData)), 500)
+    setTimeout(() => loadedCallback(!!(maximums && chartData)), 500);
   }, [!!(maximums && chartData)]);
 
   // get first word of snake case, if relevant
-  const chartTitle = table.split('_')[0]
+  const chartTitle = table.split("_")[0];
 
   const [activeLine, setActiveLine] = useState(false);
-  const handleChange = (e) =>
-    e?.activeTooltipIndex &&
-    dispatch(setVariableParams({ nIndex: e.activeTooltipIndex }));
   const handleLegendHover = (o) => setActiveLine(+o.dataKey.split("Weekly")[0]);
   const handleLegendLeave = () => setActiveLine(false);
   const { x1label, x2label, title } = LabelText[table];
   const memoizedInnerComponents = useMemo(() => {
     if (maximums && chartData) {
-      return <>
-        {selectionKeys.length === 0 && (
-          <Line
-            type="monotone"
-            yAxisId="right"
-            dataKey={`sum${populationNormalized ? "100k" : ""}`}
-            name={x1label}
-            stroke={mediumColor}
-            dot={false}
-            isAnimationActive={false}
-          />
-        )}
-        {selectionKeys.length === 1 && (
-          selectionKeys.map((geoid, idx) => (
+      return (
+        <>
+          {selectionKeys.length === 0 && (
             <Line
               type="monotone"
               yAxisId="right"
-              dataKey={`${geoid}Sum${populationNormalized ? "100k" : ""}`}
-              name={selectionNames[idx] + " Cumulative"}
-              stroke={
-                selectionKeys.length === 1
-                  ? mediumColor
-                  : selectionKeys.length > qualtitiveScale.length
-                    ? mediumColor
-                    : qualtitiveScale[idx]
-              }
-              // strokeDasharray={"2,2"}
+              dataKey={`sum${populationNormalized ? "100k" : ""}`}
+              name={x1label}
+              stroke={mediumColor}
               dot={false}
               isAnimationActive={false}
-              key={`line-${idx}`}
             />
-          ))
-        )}
-        {selectionKeys.length === 0 && (
-          <Line
-            type="monotone"
-            yAxisId="left"
-            dataKey={`weekly${populationNormalized ? "100k" : ""}`}
-            name={x2label}
-            stroke={highlightColor}
-            dot={false}
-            isAnimationActive={false}
-          />
-        )}
-        {selectionKeys.length > 0 && (
-          selectionKeys.map((geoid, idx) => (
+          )}
+          {selectionKeys.length === 1 &&
+            selectionKeys.map((geoid, idx) => (
+              <Line
+                type="monotone"
+                yAxisId="right"
+                dataKey={`${geoid}Sum${populationNormalized ? "100k" : ""}`}
+                name={selectionNames[idx] + " Cumulative"}
+                stroke={
+                  selectionKeys.length === 1
+                    ? mediumColor
+                    : selectionKeys.length > qualtitiveScale.length
+                    ? mediumColor
+                    : qualtitiveScale[idx]
+                }
+                // strokeDasharray={"2,2"}
+                dot={false}
+                isAnimationActive={false}
+                key={`line-${idx}`}
+              />
+            ))}
+          {selectionKeys.length === 0 && (
             <Line
               type="monotone"
               yAxisId="left"
-              key={`line-weekly-${geoid}`}
-              dataKey={`${geoid}Weekly${populationNormalized ? "100k" : ""
-                }`}
-              name={selectionNames[idx] + " 7-Day Ave"}
-              stroke={
-                selectionKeys.length === 1
-                  ? highlightColor
-                  : selectionKeys.length > qualtitiveScale.length
-                    ? highlightColor
-                    : qualtitiveScale[idx]
-              }
+              dataKey={`weekly${populationNormalized ? "100k" : ""}`}
+              name={x2label}
+              stroke={highlightColor}
               dot={false}
               isAnimationActive={false}
-              strokeOpacity={activeLine === geoid ? 1 : 0.7}
-              strokeWidth={activeLine === geoid ? 3 : 1}
             />
-          ))
-        )}
-        {selectionKeys.length > 1 && showSummarized && (
-          <Line
-            type="monotone"
-            yAxisId="right"
-            dataKey="keySum"
-            name="Total For Selection"
-            stroke={mediumColor}
-            strokeWidth={3}
-            dot={false}
-            isAnimationActive={false}
-          />
-        )}
-        {selectionKeys.length < qualtitiveScale.length && (
-          <Legend
-            onMouseEnter={handleLegendHover}
-            onMouseLeave={handleLegendLeave}
-            margin={{ top: 40, left: 0, right: 0, bottom: 50 }}
-            iconType="plainline"
-          />
-        )}
-        {shouldShowVariants && (
-          <>
-            <ReferenceLine
-              x="2020-12-18"
-              yAxisId="left"
-              stroke="gray"
-              strokeWidth={0.5}
-              label={{
-                value: "Alpha, Beta",
-                angle: 90,
-                position: "left",
-                fill: "gray",
-              }}
+          )}
+          {selectionKeys.length > 0 &&
+            selectionKeys.map((geoid, idx) => (
+              <Line
+                type="monotone"
+                yAxisId="left"
+                key={`line-weekly-${geoid}`}
+                dataKey={`${geoid}Weekly${populationNormalized ? "100k" : ""}`}
+                name={selectionNames[idx] + " 7-Day Ave"}
+                stroke={
+                  selectionKeys.length === 1
+                    ? highlightColor
+                    : selectionKeys.length > qualtitiveScale.length
+                    ? highlightColor
+                    : qualtitiveScale[idx]
+                }
+                dot={false}
+                isAnimationActive={false}
+                strokeOpacity={activeLine === geoid ? 1 : 0.7}
+                strokeWidth={activeLine === geoid ? 3 : 1}
+              />
+            ))}
+          {selectionKeys.length > 1 && showSummarized && (
+            <Line
+              type="monotone"
+              yAxisId="right"
+              dataKey="keySum"
+              name="Total For Selection"
+              stroke={mediumColor}
+              strokeWidth={3}
+              dot={false}
+              isAnimationActive={false}
             />
-            <ReferenceLine
-              x="2021-01-11"
-              yAxisId="left"
-              stroke="gray"
-              strokeWidth={0.5}
-              label={{
-                value: "Gamma",
-                angle: 90,
-                position: "left",
-                fill: "gray",
-              }}
+          )}
+          {selectionKeys.length < qualtitiveScale.length && (
+            <Legend
+              onMouseEnter={handleLegendHover}
+              onMouseLeave={handleLegendLeave}
+              margin={{ top: 40, left: 0, right: 0, bottom: 50 }}
+              iconType="plainline"
             />
-            <ReferenceLine
-              x="2021-05-11"
-              yAxisId="left"
-              stroke="gray"
-              strokeWidth={0.5}
-              label={{
-                value: "Delta",
-                angle: 90,
-                position: "left",
-                fill: "gray",
-              }}
-            />
-            <ReferenceLine
-              x="2021-11-26"
-              yAxisId="left"
-              stroke="gray"
-              strokeWidth={0.5}
-              label={{
-                value: "Omicron",
-                angle: 90,
-                position: "left",
-                fill: "gray",
-              }}
-            />
-          </>
-        )}
-      </>
+          )}
+          {shouldShowVariants && (
+            <>
+              <ReferenceLine
+                x="2020-12-18"
+                yAxisId="left"
+                stroke="gray"
+                strokeWidth={0.5}
+                label={{
+                  value: "Alpha, Beta",
+                  angle: 90,
+                  position: "left",
+                  fill: "gray",
+                }}
+              />
+              <ReferenceLine
+                x="2021-01-11"
+                yAxisId="left"
+                stroke="gray"
+                strokeWidth={0.5}
+                label={{
+                  value: "Gamma",
+                  angle: 90,
+                  position: "left",
+                  fill: "gray",
+                }}
+              />
+              <ReferenceLine
+                x="2021-05-11"
+                yAxisId="left"
+                stroke="gray"
+                strokeWidth={0.5}
+                label={{
+                  value: "Delta",
+                  angle: 90,
+                  position: "left",
+                  fill: "gray",
+                }}
+              />
+              <ReferenceLine
+                x="2021-11-26"
+                yAxisId="left"
+                stroke="gray"
+                strokeWidth={0.5}
+                label={{
+                  value: "Omicron",
+                  angle: 90,
+                  position: "left",
+                  fill: "gray",
+                }}
+              />
+            </>
+          )}
+        </>
+      );
     } else {
-      return null
+      return null;
     }
-  }, [JSON.stringify({
-    maximums,
-    selectionKeys,
-    chartData,
-  docked,
-    table,
-    logChart,
-    showSummarized,
-    populationNormalized,
-    shouldShowVariants,
-    colorScheme,
-    geoid
-  })])
+  }, [
+    JSON.stringify({
+      maximums,
+      selectionKeys,
+      chartData,
+      docked,
+      table,
+      logChart,
+      showSummarized,
+      populationNormalized,
+      shouldShowVariants,
+      colorScheme,
+      geoid,
+    }),
+  ]);
 
   // REFERENCE AREA COORDS
-  const x1 = (chartData[currIndex - currRange]?.date || '2020-01-21')
-  const areaX1 = x1 < '2020-01-20'
-    ? '2020-01-20'
-    : x1
-    
-  const x2 = (chartData[currIndex]?.date || chartData[chartData.length-1]?.date)
-  const areaX2 = x2
-  
+  const x1 = chartData[currIndex - currRange]?.date || "2020-01-21";
+  const areaX1 = x1 < "2020-01-20" ? "2020-01-20" : x1;
+
+  const x2 =
+    chartData[currIndex]?.date || chartData[chartData.length - 1]?.date;
+  const areaX2 = x2;
+
+
   if (maximums && chartData) {
     return (
-      <ChartContainer id="lineChart">
+      <ChartContainer ref={ChartRef} id="lineChart">
         {!docked && (
           <DockPopButton onClick={resetDock} title="Dock Line Chart Panel">
             <Icon symbol="popOut" />
@@ -437,10 +463,7 @@ function LineChartInner({
         >
           {x2label}
         </ChartLabel>
-        <ChartLabel
-          color={mediumColor}
-          right={-35}
-        >
+        <ChartLabel color={mediumColor} right={-35}>
           {x1label}
         </ChartLabel>
         <ResponsiveContainer width="100%" height="100%">
@@ -454,67 +477,72 @@ function LineChartInner({
             }}
             onClick={isTimeseries ? handleChange : null}
           >
-          <XAxis
-            dataKey="date"
-            ticks={dateRange}
-            minTickGap={-50}
-            domain={[
-              0,20
-              // startAndEndDates.startDate.toISOString().slice(0,10),
-              // startAndEndDates.endDate.toISOString().slice(0,10),
-            ]}
-            tick={
-              <CustomTick
-                style={{
-                  fill: gridColor,
-                  fontSize: "10px",
-                  fontFamily: "Lato",
-                  fontWeight: 600,
-                  transform: "translateY(10px)",
-                }}
-                labelFormatter={dateFormatter}
+            <XAxis
+              dataKey="date"
+              ticks={filteredTickMonths}
+              minTickGap={-50}
+              domain={[
+                startAndEndDates.startDate.toISOString().slice(0, 10),
+                startAndEndDates.endDate.toISOString().slice(0, 10),
+              ]}
+              tick={(props) => (
+                <CustomTick
+                  {...props}
+                  style={{
+                    fill:
+                      props.payload.value.slice(-5, -3) === "01"
+                        ? solidColor
+                        : gridColor,
+                    fontSize: "10px",
+                    fontFamily: "Lato",
+                    fontWeight: 600,
+                    transform: "translateY(10px)",
+                  }}
+                  labelFormatter={dateFormatter}
+                />
+              )}
             />
-          }
-        />
-        <YAxis
-          yAxisId="right"
-          orientation="right"
-          type="number"
-          scale={logChart ? "log" : "linear"}
-          domain={[0.01, "dataMax"]}
-          allowDataOverflow
-          ticks={rangeIncrement({ maximum: maximums.count })}
-          tick={
-            <CustomTick
-              style={{
-                fill: mediumColor,
-                fontSize: "10px",
-                fontFamily: "Lato",
-                fontWeight: 600,
-              }}
-              labelFormatter={numberFormatter}
+            <YAxis
+              yAxisId="right"
+              orientation="right"
+              type="number"
+              scale={logChart ? "log" : "linear"}
+              domain={[0.01, "dataMax"]}
+              allowDataOverflow
+              ticks={rangeIncrement({ maximum: maximums.count })}
+              tick={
+                <CustomTick
+                  style={{
+                    fill: mediumColor,
+                    fontSize: "10px",
+                    fontFamily: "Lato",
+                    fontWeight: 600,
+                    transform: "translateY(px)",
+                  }}
+                  labelFormatter={numberFormatter}
+                />
+              }
             />
-          }
-        />
-        <YAxis
-          yAxisId="left"
-          orientation="left"
-          scale={logChart ? "log" : "linear"}
-          domain={[0.01, "dataMax"]}
-          allowDataOverflow
-          ticks={rangeIncrement({ maximum: maximums.sum })}
-          tick={
-            <CustomTick
-              style={{
-                fill: highlightColor,
-                fontSize: "10px",
-                fontFamily: "Lato",
-                fontWeight: 600,
-              }}
-              labelFormatter={numberFormatter}
+            <YAxis
+              yAxisId="left"
+              orientation="left"
+              scale={logChart ? "log" : "linear"}
+              domain={[0.01, "dataMax"]}
+              allowDataOverflow
+              ticks={rangeIncrement({ maximum: maximums.sum })}
+              tick={
+                <CustomTick
+                  style={{
+                    fill: highlightColor,
+                    fontSize: "10px",
+                    fontFamily: "Lato",
+                    fontWeight: 600,
+                    transform: "translateY(2px)",
+                  }}
+                  labelFormatter={numberFormatter}
+                />
+              }
             />
-          }
-        />
             {memoizedInnerComponents}
             <Tooltip
               content={({ active, payload }) => (
@@ -544,4 +572,4 @@ function LineChartInner({
   }
 }
 
-export default LineChartInner
+export default LineChartInner;

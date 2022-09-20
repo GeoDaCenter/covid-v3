@@ -48,6 +48,7 @@ import useMapData from "../../hooks/useMapData";
 import { StoryViewerPane } from "../Panels/StoryViewerPane";
 import { Alert, Button, Snackbar } from "@mui/material";
 import { Box } from "@mui/system";
+import { getDefaultDimensions } from "../../utils/getDefaultDimensions";
 
 // Main function, App. This function does 2 things:
 // 1: App manages the majority of the side effects when the state changes.
@@ -238,52 +239,6 @@ export default function Map() {
   );
 }
 
-// geoda is the WebGeoda proxy class. Generally, having a non-serializable
-// data in the state is poor for performance, but the App component state only
-// contains geoda.
-const getDefaultDimensions = () => ({
-  defaultX:
-    window.innerWidth <= 1024
-      ? window.innerWidth * 0.1
-      : window.innerWidth <= 1400
-      ? window.innerWidth - 400
-      : window.innerWidth - 500,
-  defaultXLong:
-    window.innerWidth <= 1024
-      ? window.innerWidth * 0.1
-      : window.innerWidth <= 1400
-      ? window.innerWidth - 450
-      : window.innerWidth - 550,
-  defaultY: window.innerWidth <= 1024 ? window.innerHeight * 0.25 : 75,
-  defaultWidth: window.innerWidth <= 1024 ? window.innerWidth * 0.8 : 300,
-  defaultWidthLong:
-    window.innerWidth <= 1024
-      ? window.innerWidth * 0.8
-      : window.innerWidth * 0.25,
-  defaultHeight:
-    window.innerWidth <= 1024
-      ? window.innerHeight * 0.4
-      : window.innerHeight * 0.2,
-  defaultHeightManual:
-    window.innerWidth <= 1024
-      ? window.innerHeight * 0.7
-      : window.innerHeight * 0.5,
-  defaultWidthManual:
-    window.innerWidth <= 1024
-      ? window.innerWidth * 0.5
-      : window.innerWidth * 0.35,
-  defaultXManual:
-    window.innerWidth <= 1024
-      ? window.innerWidth * 0.25
-      : window.innerWidth * 0.25,
-  defaultYManual:
-    window.innerWidth <= 1024
-      ? window.innerHeight * 0.15
-      : window.innerHeight * 0.325,
-  minHeight: window.innerWidth <= 1024 ? window.innerHeight * 0.5 : 200,
-  minWidth: window.innerWidth <= 1024 ? window.innerWidth * 0.5 : 200,
-});
-
 const MapContainerInner = () => {
   // These selectors access different pieces of the store. While App mainly
   // dispatches to the store, we need checks to make sure side effects
@@ -314,7 +269,6 @@ const MapContainerInner = () => {
     mapParams,
     currentData,
   });
-
   return (
     <>
       <Preloader

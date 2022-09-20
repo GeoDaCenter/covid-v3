@@ -1,7 +1,6 @@
-import { useMediaQuery } from "@mui/material";
 import React, { useState } from "react";
 import styled from "styled-components";
-
+import { useMediaQuery } from "@mui/material";
 import {
   ControlPopover,
   Draggable,
@@ -9,16 +8,17 @@ import {
   Icon,
   LineChartInner
 } from "../../components";
-
 import colors from "../../config/colors";
+import { getDefaultDimensions } from "../../utils/getDefaultDimensions";
 
-const ChartContainer = styled.span`
+const ChartContainerOuter = styled.div`
   span {
     color: white;
   }
   user-select: none;
   /* flex: 1 0 auto; */
   position: absolute;
+  display:block;
   width: 100%;
   height: 100%;
   z-index: 0;
@@ -57,7 +57,15 @@ const DockPopButton = styled.button`
   }
 `;
 
-export default function LineChartOuter({ defaultDimensions }) {
+/**
+ * Component to wrap chat and provide controls
+ * @component
+ * @example
+ * <LineChart defaultDimensions={{defaultDimensions}} />
+ * 
+ * See src/utils/getDefaultDimensions.js for defaultDimensions
+ */
+export default function LineChartOuter({ defaultDimensions=getDefaultDimensions() }) {
   const [isPoppedOut, setIsPoppedOut] = useState(true);
   const [table, setTable] = useState("cases");
   const [logChart, setLogChart] = useState(false);
@@ -71,83 +79,83 @@ export default function LineChartOuter({ defaultDimensions }) {
   const handleSummarizedSwitch = () => setShowSummarized((prev) => !prev);
   const handleShouldShowVariants = () => setShouldShowVariants((prev) => !prev);
 
-  const ChartContent = 
-  <ChartContainer>
-    <ControlPopover
-      bottom
-      left
-      controlElements={[
-        {
-          type: "header",
-          content: "Line Chart Controls",
-        },
-        {
-          type: "helperText",
-          content: "Select the data to display on the chart.",
-        },
-        {
-          type: "select",
-          content: {
-            label: "Line Chart Variable",
-            items: [
-              {
-                text: "Cases",
-                value: "cases",
-              },
-              {
-                text: "Deaths",
-                value: "deaths",
-              },
-              {
-                text: "Fully Vaccinated Persons",
-                value: "vaccines_fully_vaccinated",
-              },
-              // {
-              //   text: "Weekly Positivity",
-              //   value: "testing_wk_pos",
-              // },
-            ],
+  const ChartContent =
+    <ChartContainerOuter>
+      <ControlPopover
+        bottom
+        left
+        controlElements={[
+          {
+            type: "header",
+            content: "Line Chart Controls",
           },
-          action: (e) => setTable(e.target.value),
-          value: table,
-        },
-        {
-          type: "switch",
-          content: "Logarithmic Scale",
-          action: handleSwitch,
-          value: logChart,
-        },
-        {
-          type: "switch",
-          content: "Population Normalization",
-          action: handlePopSwitch,
-          value: populationNormalized,
-        },
-        {
-          type: "switch",
-          content: "Show Summary Line",
-          action: handleSummarizedSwitch,
-          value: showSummarized,
-        },
-        {
-          type: "switch",
-          content: "Variant Designations",
-          action: handleShouldShowVariants,
-          value: shouldShowVariants,
-        },
-      ]}
-    />
-    <LineChartInner
-      resetDock={() => setIsPoppedOut(false)}
-      {...{
-        table,
-        logChart,
-        showSummarized,
-        populationNormalized,
-        shouldShowVariants,
-      }}
-    />
-  </ChartContainer>
+          {
+            type: "helperText",
+            content: "Select the data to display on the chart.",
+          },
+          {
+            type: "select",
+            content: {
+              label: "Line Chart Variable",
+              items: [
+                {
+                  text: "Cases",
+                  value: "cases",
+                },
+                {
+                  text: "Deaths",
+                  value: "deaths",
+                },
+                {
+                  text: "Fully Vaccinated Persons",
+                  value: "vaccines_fully_vaccinated",
+                },
+                // {
+                //   text: "Weekly Positivity",
+                //   value: "testing_wk_pos",
+                // },
+              ],
+            },
+            action: (e) => setTable(e.target.value),
+            value: table,
+          },
+          {
+            type: "switch",
+            content: "Logarithmic Scale",
+            action: handleSwitch,
+            value: logChart,
+          },
+          {
+            type: "switch",
+            content: "Population Normalization",
+            action: handlePopSwitch,
+            value: populationNormalized,
+          },
+          {
+            type: "switch",
+            content: "Show Summary Line",
+            action: handleSummarizedSwitch,
+            value: showSummarized,
+          },
+          {
+            type: "switch",
+            content: "Variant Designations",
+            action: handleShouldShowVariants,
+            value: shouldShowVariants,
+          },
+        ]}
+      />
+      <LineChartInner
+        resetDock={() => setIsPoppedOut(false)}
+        {...{
+          table,
+          logChart,
+          showSummarized,
+          populationNormalized,
+          shouldShowVariants,
+        }}
+      />
+    </ChartContainerOuter>
 
   if (isMobile) {
     return ChartContent
@@ -159,17 +167,17 @@ export default function LineChartOuter({ defaultDimensions }) {
       defaultY={50}
       title="lineChart"
       allowCollapse={false}
-      content={
-        <Scaleable
-          content={ChartContent}
-          title="lineChart"
-          defaultWidth={defaultDimensions.defaultWidthLong}
-          defaultHeight={defaultDimensions.defaultHeight}
-          minHeight={defaultDimensions.minHeight}
-          minWidth={defaultDimensions.minWidth}
-        />
-      }
-    />
+    >
+      <Scaleable
+        title="lineChart"
+        defaultWidth={defaultDimensions.defaultWidthLong}
+        defaultHeight={defaultDimensions.defaultHeight}
+        minHeight={defaultDimensions.minHeight}
+        minWidth={defaultDimensions.minWidth}
+      >
+        {ChartContent}
+      </Scaleable>
+    </Draggable>
   ) : (
     <PopOutContainer
       style={{
