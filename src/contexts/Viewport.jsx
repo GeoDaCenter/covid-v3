@@ -55,7 +55,7 @@ export const useViewport = () => {
  * A hook that returns the current viewport. Separated from `useViewport` to
  * avoid unnecessary re-renders.
  *
- * @category Hooks
+ * @category Contexts
  */
 export const useSetViewport = () => {
   const ctx = useContext(SetViewportContext)

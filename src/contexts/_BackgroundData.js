@@ -1,3 +1,8 @@
+
+// ############# DEPRECATED #############
+// SEE src/reducers/dataReducer and src/constants/dataInitialState
+
+
 // import React, { useState, useContext } from 'react';
 
 // const BackgroundContext = React.createContext();

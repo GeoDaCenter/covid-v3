@@ -8,6 +8,24 @@ export const StoriesContext = createContext({
   setSelectedStory: () => { },
 });
 
+/**
+ * Wrapper component for the stories context.
+ *
+ * @category Contexts
+ * @example
+ *   function MyApp() {
+ *     return (
+ *       <StoriesProvider>
+ *         <MyChildComponent />
+ *       </StoriesProvider>
+ *     )
+ *   }
+ *
+ * @param {Object} props
+ * @param {React.ReactNode} props.children - Child components
+ * @param {Viewport} props.defaultViewport - Initial viewport
+ * @returns {React.Component} - ViewportContext.Provider
+ */
 export const StoriesProvider = ({ children }) => {
   // story state
   const [selectedStory, setSelectedStory] = useState({});
@@ -26,6 +44,12 @@ export const StoriesProvider = ({ children }) => {
   );
 };
 
+/**
+ * A hook that returns the current viewport. Separated from `useSetViewport` to
+ * avoid unnecessary re-renders.
+ *
+ * @category Contexts
+ */
 export const useStoriesContext = () => {
   const ctx = useContext(StoriesContext);
   if (!ctx) throw Error('Not wrapped in <StoriesProvider />.');

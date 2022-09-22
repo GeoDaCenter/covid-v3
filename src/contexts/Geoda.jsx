@@ -46,7 +46,7 @@ export const GeodaProvider = ({ children }) => {
  * functions are async. For jsgeoda api, see
  * https://www.npmjs.com/package/jsgeoda
  *
- * @category Hooks
+ * @category Contexts
  * @example
  *   const { geoda } = useGeoda();
  *   const analyze = async () => {
