@@ -94,6 +94,7 @@ const SuccessMessage = styled.div`
  * See https://hawksey.info/blog/2014/07/google-sheets-as-a-database-insert-with-apps-script-using-postget-methods-with-ajax-example/
  * 
  * @component
+ * @category Components/Layout
  * 
  */
 export default function ContactForm() {

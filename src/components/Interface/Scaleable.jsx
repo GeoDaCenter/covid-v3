@@ -23,7 +23,7 @@ const ResizeButton = styled.button`
  * A wrapper component that allows the children to be resized Children should be
  * responsive to the parent size. Often composed with Draggable
  *
- * @category Components
+ * @category Components/Interface
  * @example
  *   function MyComponent() {
  *   return (

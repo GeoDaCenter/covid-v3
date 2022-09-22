@@ -43,7 +43,7 @@ const CloseButton = styled(Button)`
 /**
  * 
  * @component
- * @category Components
+ * @category Components/Interface
  * @subcategory Interface
  * 
  * @param {Object} props 

@@ -1,3 +1,8 @@
+
+// ############# DEPRECATED #############
+// SEE src/reducers/dataReducer and src/constants/dataInitialState
+
+
 // import React, { useReducer, useContext } from "react";
 // const DataContext = React.createContext();
 

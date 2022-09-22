@@ -145,7 +145,7 @@ const SignupForm = styled.div`
  * Footer component, nothing fancy here.
  * 
  * @component
- * @category Components/layout
+ * @category Components/Layout
  * 
  * @param {boolean} signUp - if true, show the signup form 
  * @returns {JSX.Element} - Footer component

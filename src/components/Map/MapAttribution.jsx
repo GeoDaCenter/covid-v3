@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import colors from "../../config/colors";
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import colors from '../../config/colors'
 
-const MapAttributionContainer = styled.div``;
+const MapAttributionContainer = styled.div``
 const MapAttributionText = styled.span`
   position: absolute;
   width: auto;
-  max-width:90vw;
+  max-width: 90vw;
   left: 3em;
   bottom: 1.25em;
   text-align: left;
@@ -15,12 +15,12 @@ const MapAttributionText = styled.span`
   display: inline-block;
   padding: 0.125em 0.25em;
   border-radius: 0.25em;
-  display: ${(props) => (props.expanded ? "block" : "none")};
+  display: ${(props) => (props.expanded ? 'block' : 'none')};
   a {
     margin-right: 0.5em;
     color: blue;
   }
-`;
+`
 const MapAttributionButton = styled.button`
   width: 29px;
   height: 29px;
@@ -36,22 +36,28 @@ const MapAttributionButton = styled.button`
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   font-weight: bold;
-`;
+`
 
+/**
+ * Map Attribution Component. Variation on mapbox default attribution
+ *
+ * @category Components/Map
+ * @component
+ */
 export default function MapAttribution() {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false)
 
   const listener = (e) => {
     if (
-      e.target.id !== "map-attribution-button" &&
-      e.target.id !== "map-attribution-list"
+      e.target.id !== 'map-attribution-button' &&
+      e.target.id !== 'map-attribution-list'
     ) {
-      setIsExpanded(false);
-      window.removeEventListener("click", listener);
+      setIsExpanded(false)
+      window.removeEventListener('click', listener)
     }
-  };
+  }
 
-  const handleCloseListener = () => window.addEventListener("click", listener);
+  const handleCloseListener = () => window.addEventListener('click', listener)
 
   return (
     <MapAttributionContainer>
@@ -61,14 +67,14 @@ export default function MapAttribution() {
         role="list"
         id="map-attribution-list"
       >
-        Basemap data &nbsp; 
+        Basemap data &nbsp;
         <a
           href="https://www.mapbox.com/about/maps/"
           target="_blank"
           title="Mapbox"
           aria-label="Mapbox"
           role="listitem"
-          rel="noreferrer" 
+          rel="noreferrer"
         >
           © Mapbox
         </a>
@@ -78,7 +84,7 @@ export default function MapAttribution() {
           title="OpenStreetMap"
           aria-label="OpenStreetMap"
           role="listitem"
-          rel="noreferrer" 
+          rel="noreferrer"
         >
           © OpenStreetMap
         </a>
@@ -89,7 +95,7 @@ export default function MapAttribution() {
           title="Map feedback"
           aria-label="Map feedback"
           role="listitem"
-          rel="noreferrer" 
+          rel="noreferrer"
         >
           Improve this map
         </a>
@@ -97,12 +103,12 @@ export default function MapAttribution() {
       <MapAttributionButton
         id="map-attribution-button"
         onClick={() => {
-          setIsExpanded((prev) => !prev);
-          handleCloseListener();
+          setIsExpanded((prev) => !prev)
+          handleCloseListener()
         }}
       >
         i
       </MapAttributionButton>
     </MapAttributionContainer>
-  );
+  )
 }

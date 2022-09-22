@@ -21,7 +21,7 @@ const TickCanvas = styled.canvas`
  * individual tick for non-contiguous dates The tick container will conform to
  * parent width
  *
- * @category Components
+ * @category Components/Interface
  * @example
  *   function ExampleComponent() {
  *     return <Ticks available={[1, 0, 1, 1, 0, 1]} fullLength={6} />

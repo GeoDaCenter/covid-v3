@@ -1,16 +1,13 @@
 // general imports, state
-import React from 'react';
-import { useSelector } from 'react-redux';
-import styled from 'styled-components';
-import { FlyToInterpolator } from '@deck.gl/core';
+import React from 'react'
+import { useSelector } from 'react-redux'
+import styled from 'styled-components'
+import { FlyToInterpolator } from '@deck.gl/core'
 
-import { useViewport, useSetViewport } from '../../contexts/Viewport';
-import {
-  ShareButton,
-  MapAttribution
-} from '../../components';
-import colors from '../../config/colors';
-import * as SVG from '../../config/svg';
+import { useViewport, useSetViewport } from '../../contexts/Viewport'
+import { ShareButton, MapAttribution } from '..'
+import colors from '../../config/colors'
+import * as SVG from '../../config/svg'
 
 const NavInlineButtonGroup = styled.div`
   margin-bottom: 10px;
@@ -19,7 +16,7 @@ const NavInlineButtonGroup = styled.div`
   -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
-`;
+`
 
 export const NavInlineButton = styled.button`
   width: 29px;
@@ -42,7 +39,7 @@ export const NavInlineButton = styled.button`
     box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     position: absolute;
-    transform: translate(.5em, -25%);
+    transform: translate(0.5em, -25%);
     padding: 5px;
     width: 150px;
     pointer-events: none;
@@ -53,7 +50,7 @@ export const NavInlineButton = styled.button`
     transition: 250ms all;
     transform: ${(props) => (props.tilted ? 'rotate(30deg)' : 'none')};
   }
-`;
+`
 
 const MapButtonContainer = styled.div`
   position: absolute;
@@ -63,27 +60,47 @@ const MapButtonContainer = styled.div`
   transition: 250ms all;
   @media (max-width: 768px) {
     bottom: 150px;
-    left:0;
+    left: 0;
   }
   @media (max-width: 400px) {
     transform: scale(0.75) translate(20%, 20%);
   }
-`;
+`
 
 const ShareURL = styled.input`
   position: fixed;
   left: 110%;
-`;
+`
 
+/**
+ * Mapbuttons to control view, tilt, sharing, and selection. Requires viewport
+ * and setviewport context
+ *
+ * @example
+ * () => {
+ *   const [isSelecting, setIsSelecting] = useState(false)
+ *   return (
+ *   <MapButtons
+ *     isSelecting={isSelecting}
+ *     setIsSelecting={setIsSelecting}
+ *   )
+ * }
+ * @component
+ * @category Components/Map
+ * @param {Object} props
+ * @param {boolean} props.boxSelect - Whether or not box select is active
+ * @param {function} props.setBoxSelect - Function to set box select (val:
+ *   boolean) => void
+ */
 function MapButtons({ boxSelect, setBoxSelect }) {
   // const selectionKeys = useSelector(({params}) => params.selectionKeys);
-  const panelState = useSelector(({ui}) => ui.panelState);
-  const viewport = useViewport();
-  const setViewport = useSetViewport();
+  const panelState = useSelector(({ ui }) => ui.panelState)
+  const viewport = useViewport()
+  const setViewport = useSetViewport()
 
   const handleSelectionBoxStart = () => {
-    setBoxSelect(true);
-  };
+    setBoxSelect(true)
+  }
 
   const handleGeolocate = async () => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -93,9 +110,9 @@ function MapButtons({ boxSelect, setBoxSelect }) {
         zoom: 7,
         transitionDuration: 1000,
         transitionInterpolator: new FlyToInterpolator(),
-      });
-    });
-  };
+      })
+    })
+  }
 
   const handleZoom = (zoom) => {
     setViewport((viewState) => {
@@ -104,9 +121,9 @@ function MapButtons({ boxSelect, setBoxSelect }) {
         zoom: viewState.zoom + zoom,
         transitionDuration: 250,
         transitionInterpolator: new FlyToInterpolator(),
-      };
-    });
-  };
+      }
+    })
+  }
 
   const resetTilt = () => {
     setViewport((viewState) => {
@@ -116,9 +133,9 @@ function MapButtons({ boxSelect, setBoxSelect }) {
         pitch: 0,
         transitionDuration: 250,
         transitionInterpolator: new FlyToInterpolator(),
-      };
-    });
-  };
+      }
+    })
+  }
 
   return (
     <MapButtonContainer infoPanel={panelState.info}>
@@ -170,11 +187,11 @@ function MapButtons({ boxSelect, setBoxSelect }) {
         <ShareButton />
       </NavInlineButtonGroup>
       <NavInlineButtonGroup>
-          <MapAttribution />
+        <MapAttribution />
       </NavInlineButtonGroup>
       <ShareURL type="text" value="" id="share-url" readOnly />
     </MapButtonContainer>
-  );
+  )
 }
 
-export default React.memo(MapButtons);
+export default React.memo(MapButtons)

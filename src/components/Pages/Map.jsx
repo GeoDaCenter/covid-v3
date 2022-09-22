@@ -392,7 +392,6 @@ const MapPageContainer = () => {
         {!!showTopPanel && <TopPanel />}
       </MapPlaneContainer>
 
-      {/* <PrintLayout /> */}
       <ReportBuilder />
       <DataLoader />
       <Popover />

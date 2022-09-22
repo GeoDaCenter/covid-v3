@@ -138,6 +138,7 @@
     "babel-preset-react": "^6.24.1",
     "better-docs": "^2.7.2",
     "buffer": "^6.0.3",
+    "clean-jsdoc-theme": "^4.1.8",
     "dayjs": "^1.10.6",
     "google-protobuf": "^3.19.3",
     "is-plain-obj": "^4.1.0",

@@ -19,7 +19,7 @@ const TooltipContainer = styled.button`
 /**
  * A tooltip component that displays a tooltip when hovered over.
  * @component
- * @category Components
+ * @category Components/Interface
  * 
  * @param {Object} props
  * @param {string} id Id of the tooltip content, referenced from `tooltipInfo` in src/config/index.js

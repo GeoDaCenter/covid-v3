@@ -3,7 +3,7 @@ import styled from 'styled-components';
  * Helper component for vertical spacing
  * 
  * @component
- * @category Components/layout
+ * @category Components/Layout
  * @param {number} h - The size of the gutter in px
  * @returns {React.Component}
  */

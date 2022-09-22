@@ -198,6 +198,7 @@ const colorSchemes = {
 /**
  * Component that returns the inner guts of the chart, for easy memoization
  * @component
+ * 
  */
 function LineChartInner({
   resetDock = () => {},

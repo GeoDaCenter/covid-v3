@@ -21,11 +21,13 @@ const PreloaderContainer = styled.div`
 /**
  * Animated preloader
  *
+ * @category Components/Interface
  * @param {Object} props
  * @param {Boolean} props.loading - If true, the preloader will be displayed
  * @param {String} props.message - Text to display
  * @param {Boolean} props.quiet - If true, the preloader will be smaller and
  *   less obtrusive
+ * @component
  */
 const Preloader = ({ loading = false, message = 'Loading', quiet = false }) => {
   return (

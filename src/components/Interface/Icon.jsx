@@ -4,7 +4,7 @@ import * as SVG from '../../config/svg.js'
 /**
  * An icon helper component
  *
- * @category Components
+ * @category Components/Interface
  * @example
  *   function MyComponent() {
  *     return (

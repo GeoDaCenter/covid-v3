@@ -1,80 +1,80 @@
-import React, { useMemo } from "react";
-import { useSelector } from "react-redux";
-import { ErrorBoundary } from "react-error-boundary";
-import { HoverDiv } from "../../components";
-import useGetTooltipContent from "../../hooks/useGetTooltipContent";
-import { formatNumber, hasProps } from "../../utils";
-import styled from "styled-components";
+import React, { useMemo } from 'react'
+import { useSelector } from 'react-redux'
+import { ErrorBoundary } from 'react-error-boundary'
+import { HoverDiv } from '..'
+import useGetTooltipContent from '../../hooks/useGetTooltipContent'
+import { formatNumber, hasProps } from '../../utils'
+import styled from 'styled-components'
 // This component handles and formats the map tooltip info.
 // The props passed to this component should contain an object of the hovered object (from deck, info.object by default)
 
 const TooltipInnerDiv = styled.div`
-  padding:.5em;
+  padding: 0.5em;
 `
 
 const ChoroplethTooltip = ({ tooltipContent }) => {
   return (
     <TooltipInnerDiv>
-      {"name" in tooltipContent && (
+      {'name' in tooltipContent && (
         <>
           <h3>{tooltipContent.name}</h3>
           <hr />
         </>
       )}
       {hasProps(tooltipContent, [
-        "population",
-        "vaccines_fully_vaccinated",
+        'population',
+        'vaccines_fully_vaccinated',
       ]) && (
-          <>
-            Fully Vaccinated:{" "}
-            {Math.round(
-              (tooltipContent.vaccines_fully_vaccinated /
-                tooltipContent.population) *
-              1000
-            ) / 10}
-            %<br />
-          </>
-        )}
-      {hasProps(tooltipContent, ["population", "vaccines_one_dose"]) && (
         <>
-          {" "}
-          At least one dose:{" "}
+          Fully Vaccinated:{' '}
+          {Math.round(
+            (tooltipContent.vaccines_fully_vaccinated /
+              tooltipContent.population) *
+              1000
+          ) / 10}
+          %<br />
+        </>
+      )}
+      {hasProps(tooltipContent, ['population', 'vaccines_one_dose']) && (
+        <>
+          {' '}
+          At least one dose:{' '}
           {Math.round(
             (tooltipContent.vaccines_one_dose / tooltipContent.population) *
-            1000
+              1000
           ) / 10}
           %<br />
           <br />
         </>
       )}
-      {hasProps(tooltipContent, ["cases", "daily_cases"]) && (
+      {hasProps(tooltipContent, ['cases', 'daily_cases']) && (
         <>
-          Cases: {(tooltipContent.cases || 0).toLocaleString("en") || 0}
+          Cases: {(tooltipContent.cases || 0).toLocaleString('en') || 0}
           <br />
-          Daily New Cases:{" "}
-          {(tooltipContent.daily_cases || 0).toLocaleString("en") || 0}
+          Daily New Cases:{' '}
+          {(tooltipContent.daily_cases || 0).toLocaleString('en') || 0}
           <br />
         </>
       )}
-      {hasProps(tooltipContent, ["deaths", "daily_deaths"]) && (
+      {hasProps(tooltipContent, ['deaths', 'daily_deaths']) && (
         <>
-          Deaths: {(tooltipContent.deaths || 0).toLocaleString("en") || 0}
+          Deaths: {(tooltipContent.deaths || 0).toLocaleString('en') || 0}
           <br />
-          Daily New Deaths:{" "}
-          {(tooltipContent.daily_deaths || 0).toLocaleString("en") || 0}
+          Daily New Deaths:{' '}
+          {(tooltipContent.daily_deaths || 0).toLocaleString('en') || 0}
           <br />
         </>
       )}
 
-      {"testing_wk_pos" in tooltipContent && (
+      {'testing_wk_pos' in tooltipContent && (
         <>
-          <br/>
+          <br />
           7-Day Average Positivity Rate:&nbsp;
           {formatNumber(tooltipContent?.testing_wk_pos * 100)}
           %<br />
         </>
       )}
-      {"testing_tcap" in tooltipContent && (
+      {'testing_tcap' in tooltipContent && (
         <>
           7-Day Average Tests Performed:&nbsp;
           {formatNumber(tooltipContent?.testing_tcap)} per 100k
@@ -82,14 +82,14 @@ const ChoroplethTooltip = ({ tooltipContent }) => {
         </>
       )}
     </TooltipInnerDiv>
-  );
-};
+  )
+}
 const HospitalTooltip = ({ data }) => {
   return (
     <TooltipInnerDiv>
-      <h3>{data["Name"]}</h3>
+      <h3>{data['Name']}</h3>
       <hr />
-      {data["Hospital Type"]}
+      {data['Hospital Type']}
       <br />
       {data.Address} <br />
       {data.Address_2 && `${data.Address_2}${(<br />)}`}
@@ -98,8 +98,8 @@ const HospitalTooltip = ({ data }) => {
       {data.Zipcode}
       <br />
     </TooltipInnerDiv>
-  );
-};
+  )
+}
 const VaccinationSiteTooltip = ({ data }) => {
   return (
     <TooltipInnerDiv>
@@ -139,8 +139,8 @@ const VaccinationSiteTooltip = ({ data }) => {
         </>
       )}
     </TooltipInnerDiv>
-  );
-};
+  )
+}
 
 const FQHCTooltip = ({ data }) => {
   return (
@@ -153,87 +153,102 @@ const FQHCTooltip = ({ data }) => {
       {data.phone}
       <br />
       <br />
-      {data.testing_status === "Yes"
-        ? "This location offers COVID-19 testing."
-        : "Currently, this location does not offer COVID-19 testing."}
+      {data.testing_status === 'Yes'
+        ? 'This location offers COVID-19 testing.'
+        : 'Currently, this location does not offer COVID-19 testing.'}
       <br />
     </TooltipInnerDiv>
-  );
-};
+  )
+}
 const CustomTooltip = ({ data }) => {
   if (!data) return null
   return (
     <TooltipInnerDiv>
       {Object.entries(data)
-        .filter(e => e[0] !== 'custom')
-        .slice(0,15)
+        .filter((e) => e[0] !== 'custom')
+        .slice(0, 15)
         .map((entry) => (
           <>
-            <b>{entry[0]}:</b>{" "}
-            {typeof entry[1] !== "object" ? entry[1] : JSON.stringify(entry[1])}
+            <b>{entry[0]}:</b>{' '}
+            {typeof entry[1] !== 'object' ? entry[1] : JSON.stringify(entry[1])}
             <br />
           </>
         ))}
     </TooltipInnerDiv>
-  );
-};
+  )
+}
 
 const TooltipEngine = ({ data, tooltipContent, custom }) => {
   if (data && custom) {
-    return <CustomTooltip data={data} />;
+    return <CustomTooltip data={data} />
   } else if (!data && custom) {
     return null
   }
 
-  if (data && "Hospital Type" in data) {
-    return <HospitalTooltip data={data} />;
+  if (data && 'Hospital Type' in data) {
+    return <HospitalTooltip data={data} />
   }
 
-  if (data && "testing_status" in data) {
-    return <FQHCTooltip data={data} />;
+  if (data && 'testing_status' in data) {
+    return <FQHCTooltip data={data} />
   }
 
-  if (data && "type" in data) {
-    return <VaccinationSiteTooltip data={data} />;
+  if (data && 'type' in data) {
+    return <VaccinationSiteTooltip data={data} />
   }
 
-
-  if ("name" in tooltipContent) {
-    return <ChoroplethTooltip tooltipContent={tooltipContent} />;
+  if ('name' in tooltipContent) {
+    return <ChoroplethTooltip tooltipContent={tooltipContent} />
   }
 
-  return null;
-};
-
+  return null
+}
+/**
+ * Stateful component for map tooltip content. Does not rely on parent props to
+ * a optimize re-renders
+ */
 export default function MapTooltipContent() {
-  const { x, y, data, geoid } = useSelector(({ ui }) => ui.tooltipInfo) || {};
-  const tooltipContent = useGetTooltipContent({ data, geoid });
-  const currentData = useSelector(({ params }) => params.currentData);
+  const { x, y, data, geoid } = useSelector(({ ui }) => ui.tooltipInfo) || {}
+  const tooltipContent = useGetTooltipContent({ data, geoid })
+  const currentData = useSelector(({ params }) => params.currentData)
   const tooltipText = useMemo(
-    () => <TooltipEngine tooltipContent={tooltipContent} data={data} custom={currentData.includes('customdata')} />,
+    () => (
+      <TooltipEngine
+        tooltipContent={tooltipContent}
+        data={data}
+        custom={currentData.includes('customdata')}
+      />
+    ),
     [JSON.stringify({ tooltipContent, data })]
-  );
-  if (!tooltipContent || !Object.keys(tooltipContent).length || typeof window === "undefined") return null;
+  )
+  if (
+    !tooltipContent ||
+    !Object.keys(tooltipContent).length ||
+    typeof window === 'undefined'
+  )
+    return null
 
-  const horizontalProp = window && window.innerWidth - x < 200
-    ? { right: `calc(100% - ${x}px)` }
-    : { left: x }
-  const verticalProp = window && window.innerHeight - y < 200
-    ? { bottom: `calc(100% - ${y}px)` }
-    : { top: y }
+  const horizontalProp =
+    window && window.innerWidth - x < 200
+      ? { right: `calc(100% - ${x}px)` }
+      : { left: x }
+  const verticalProp =
+    window && window.innerHeight - y < 200
+      ? { bottom: `calc(100% - ${y}px)` }
+      : { top: y }
 
   return (
     <ErrorBoundary>
       <HoverDiv
         style={{
-          position: "fixed",
-          pointerEvents: "none",
+          position: 'fixed',
+          pointerEvents: 'none',
           ...verticalProp,
-          ...horizontalProp
+          ...horizontalProp,
         }}
       >
         {tooltipText}
       </HoverDiv>
     </ErrorBoundary>
-  );
+  )
 }

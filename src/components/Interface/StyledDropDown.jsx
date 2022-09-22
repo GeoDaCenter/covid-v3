@@ -6,7 +6,7 @@ import colors from "../../config/colors";
  * Styled drop down / select component
  *
  * @component
- * @category Components
+ * @category HelperComponents
  * 
  * @param {Object} props
  * @param {boolean} props.active Active state and colors (yellow), else passive (white)
@@ -94,7 +94,7 @@ export const StyledDropDown = styled(FormControl)`
  * Variation on StyleDropDown, omitting labels
  *
  * @component
- * @category Components
+ * @category HelperComponents
  * 
  * @param {Object} props
  * @param {boolean} props.active Active state and colors (yellow), else passive (white)

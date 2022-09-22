@@ -50,6 +50,25 @@ const CoreMemberBio = ({ member, columns }) => (
  * Grid of team members for use on about page
  *
  * @category Components/Layout
+ * @example
+ *   function myComponent() {
+ *     const members = [
+ *       {
+ *         name: 'Jane Doe',
+ *         title: 'CEO',
+ *         bio: 'Jane is the CEO of this company',
+ *         img: 'jane-doe.jpg',
+ *       },
+ *       {
+ *         name: 'John Doe',
+ *         title: 'COO',
+ *         bio: 'John is the COO of this company',
+ *         img: 'john-doe.jpg',
+ *       },
+ *     ]
+ *     return <MemberGrid members={members} columns={2} />
+ *   }
+ *
  * @param {Object} props
  * @param {Member[]} props.members - Array of members
  * @param {number} props.columns - Number of columns in grid

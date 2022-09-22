@@ -1,5 +1,4 @@
 import { createContext, useState, useContext } from 'react';
-// import { useDispatch } from 'react-redux';
 import { useStories } from '../hooks/useStories';
 
 export const StoriesContext = createContext({
@@ -12,7 +11,6 @@ export const StoriesContext = createContext({
 export const StoriesProvider = ({ children }) => {
   // story state
   const [selectedStory, setSelectedStory] = useState({});
-  // const dispatch = useDispatch();
   // fetching stories from index
   const {
     stories,
@@ -21,10 +19,6 @@ export const StoriesProvider = ({ children }) => {
     selectedStory
   });
   
-  // useEffect(() => {
-  //   dispatch({ type: 'SET_PANELS', payload: { params: { storiesPane: true } } })
-  // }, [selectedStory?.id])
-
   return (
     <StoriesContext.Provider value={{ stories, relatedStories, setSelectedStory, selectedStory }}>
       {children}
@@ -32,7 +26,6 @@ export const StoriesProvider = ({ children }) => {
   );
 };
 
-/** Update the viewport from anywhere */
 export const useStoriesContext = () => {
   const ctx = useContext(StoriesContext);
   if (!ctx) throw Error('Not wrapped in <StoriesProvider />.');

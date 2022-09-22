@@ -1,12 +1,12 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
-import styled from 'styled-components';
-import Popper from '@mui/material/Popper';
+import styled from 'styled-components'
+import Popper from '@mui/material/Popper'
 
-import { tooltipInfo } from '../../config';
-import { setAnchorEl } from '../../actions';
-import colors from '../../config/colors';
+import { tooltipInfo } from '../../config'
+import { setAnchorEl } from '../../actions'
+import colors from '../../config/colors'
 
 const TooltipContentDiv = styled(Popper)`
   z-index: 10000;
@@ -30,22 +30,31 @@ const TooltipContentDiv = styled(Popper)`
       text-decoration: none;
     }
   }
-`;
-
+`
+/**
+ * Standalone stateful component that renders the content of the tooltip found
+ * in src/Components/Interface/Tooltip.js Does not rely on parent props to
+ * optimize re-renders.
+ *
+ * Can be called anywhere in the app.
+ *
+ * @category Components/Interface
+ * @component
+ */
 const Popover = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const anchorEl = useSelector(({ui}) => ui.anchorEl);
-  const open = Boolean(anchorEl);
-  const id = open ? 'simple-popper' : undefined;
+  const anchorEl = useSelector(({ ui }) => ui.anchorEl)
+  const open = Boolean(anchorEl)
+  const id = open ? 'simple-popper' : undefined
 
   const handleMouseOver = (event) => {
-    dispatch(setAnchorEl(anchorEl));
-  };
+    dispatch(setAnchorEl(anchorEl))
+  }
 
   const handleMouseLeave = () => {
-    dispatch(setAnchorEl(null));
-  };
+    dispatch(setAnchorEl(null))
+  }
 
   return (
     <TooltipContentDiv
@@ -69,7 +78,7 @@ const Popover = () => {
         {anchorEl && tooltipInfo[anchorEl.id]}
       </div>
     </TooltipContentDiv>
-  );
-};
+  )
+}
 
-export default Popover;
+export default Popover

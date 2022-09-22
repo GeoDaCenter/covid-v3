@@ -11,7 +11,7 @@ import { debounce, findClosestValue } from '../../utils'
 import useCurrentDateIndices from '../../hooks/useCurrentDateIndices'
 import Ticks from './Ticks'
 import DatePicker from 'react-date-picker'
-import { StyledSlider, Icon } from '../../components'
+import { StyledSlider, Icon } from '..'
 
 const SliderContainer = styled(Grid)`
   color: white;
@@ -299,6 +299,14 @@ const findLastDate = (array) => {
     }
   }
 }
+/**
+ * Standalone stateful component for displaying a slider with a single date or
+ * date range. Also controls animation and playback (managed in
+ * src/Hooks/useTickUpdate)
+ *
+ * @category Components/Interface
+ * @component
+ */
 function DateSlider() {
   const dispatch = useDispatch()
   const [
@@ -309,6 +317,7 @@ function DateSlider() {
     currRange,
     rangeType,
   ] = useCurrentDateIndices()
+
   const [isTicking, setIsTicking, timing, setTiming] = useTickUpdate({
     currDatesAvailable,
   })

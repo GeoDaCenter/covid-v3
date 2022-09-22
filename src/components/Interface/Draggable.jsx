@@ -69,7 +69,7 @@ const CollapseButton = styled.button`
  * Often composed with Scaleable
  * 
  * @component
- * @category Components
+ * @category Components/Interface
  * 
  * @param {Object} props
  * @param {React.ReactNode} props.children - The content of the panel
