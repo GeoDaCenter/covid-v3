@@ -124,6 +124,7 @@ export const useStories = ({
         fetchName,
         fetcher        
     );
+    console.log(allStories)
 
     // based on filters, return relevant stories
     // filter schema is:
@@ -162,7 +163,7 @@ export const useStories = ({
             counts,
             stories
         }
-    }, [JSON.stringify(filters), allStories?.length])
+    }, [JSON.stringify({allStories,filters})])
 
     const activeStory = useMemo(() => {
         if (!allStories?.length){
@@ -172,7 +173,7 @@ export const useStories = ({
             return allStories.find(story => story.id === singleStoryId)
         }
         return selectedStory
-    }, [allStories?.length, JSON.stringify({singleStoryId, selectedStory})])
+    }, [JSON.stringify({singleStoryId, allStories, selectedStory})])
     
     // filter for any related stories to display
     // match criteria include county, theme, and tags
@@ -205,7 +206,7 @@ export const useStories = ({
                 matchCriteria
             }
         }).filter(story => story).sort((a, b) => b.matchCriteria - a.matchCriteria)
-    }, [JSON.stringify(activeStory), allStories?.length]);
+    }, [JSON.stringify({activeStory, allStories})]);
 
     return {
         stories,
