@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import useSWR from 'swr';
 import { findCounty, findIn } from '../utils';
 import bbox from '@turf/bbox';
@@ -108,23 +108,37 @@ export const useStories = ({
         ready: centroidReady,
         getRandomPoint
     } = useCentroidRandomizer();
-    const fetcher = centroidReady 
-    ? (url) => fetch(url)
-    .then(r => r.json())
-    .then(rows => rows.map(row =>
-        ({ ...row, ...findCounty(row.fips), centroid: getRandomPoint(row.fips) })
-        ))
-        .catch(err => console.log(err))
-        : () => [];
-        const fetchName = centroidReady 
-        ? `${process.env.REACT_APP_STORIES_PUBLIC_URL}/index.json` 
-        : 'null-data'
 
-    const { data: allStories, error } = useSWR(
-        fetchName,
-        fetcher        
-    );
-    console.log(allStories)
+    // const fetcher = centroidReady 
+    // ? (url) => fetch(url)
+    // .then(r => r.json())
+    // .then(rows => rows.map(row =>
+    //     ({ ...row, ...findCounty(row.fips), centroid: getRandomPoint(row.fips) })
+    //     ))
+    //     .catch(err => console.log(err))
+    //     : () => [];
+    // const fetchName = centroidReady 
+    //     ? `${process.env.REACT_APP_STORIES_PUBLIC_URL}/index.json` 
+    //     : 'null-data'
+
+    // const { data: allStories, error } = useSWR(
+    //     fetchName,
+    //     fetcher        
+    // );
+
+    const [allStories, setAllStories] = useState([]);
+    const [error, setError] = useState(null);
+    useEffect(() => {
+        if (centroidReady) {
+            fetch(`${process.env.REACT_APP_STORIES_PUBLIC_URL}/index.json`)
+            .then(r => r.json())
+            .then(rows => rows.map(row =>
+                ({ ...row, ...findCounty(row.fips), centroid: getRandomPoint(row.fips) })
+                ))
+            .then(setAllStories)
+            .catch(setError)
+        }
+    }, [centroidReady])
 
     // based on filters, return relevant stories
     // filter schema is:

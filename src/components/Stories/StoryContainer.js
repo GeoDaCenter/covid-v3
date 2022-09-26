@@ -54,9 +54,13 @@ const ShareNotificationText = styled.p`
     
 `
 const ShareDummyInput = styled.input`
-    position: fixed;
-    left: 110%;
-    top: 110%; 
+    position: absolute;
+    width:0;
+    height:0;
+    left: 0;
+    top: 0; 
+    opacity:0;
+    pointer-events: none;
 `
 
 const ShareButton = ({
@@ -64,7 +68,7 @@ const ShareButton = ({
     story,
     title
 }) => {
-    const url = `${process.env.PUBLIC_URL}/story/${story.id}`
+    const url = `https://uscovidatlas.org/story/${story.id}`
 
     const [shared, setShared] = React.useState(false)
     const handleShare = async (params) => {
