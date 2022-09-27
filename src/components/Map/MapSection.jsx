@@ -18,14 +18,6 @@ import { MapboxLayer } from '@deck.gl/mapbox'
 
 // component, action, util, and config import
 import { Geocoder, MapButtons } from '..'
-import {
-    setMapLoaded,
-    openContextMenu,
-    setNotification,
-    setTooltipInfo,
-    updateSelectionKeys,
-    setPanelState,
-} from '../../actions'
 import { getCSV, parseMapboxLayers, shallowCompare } from '../../utils'
 import { MAPBOX_ACCESS_TOKEN } from '../../config'
 import colors from '../../config/colors'
@@ -48,11 +40,14 @@ import {
     MapContainerOuter,
     MAP_STYLES,
 } from './MapStyles'
-import { paramsSelectors } from '../../stores/paramsStore'
-import { dataSelectors } from '../../stores/dataStore'
+import { paramsSelectors, paramsActions } from '../../stores/paramsStore'
+import { dataSelectors, dataActions } from '../../stores/dataStore'
 const { selectDotDensityData } = dataSelectors
 const { selectPanelState, selectColorFilter, selectVariableMenuWidth } =
     paramsSelectors
+const { openContextMenu, setMapLoaded, setNotification, setTooltipInfo, updateSelection, updateSelectionKeys, setPanelState } = paramsActions
+const { setDotDensityData } = dataActions
+
 /**
  * Map section component - this is the main map component that renders the map
  * and all of the layers. The bulk of the code handles the map interactions,
@@ -370,10 +365,7 @@ function MapSection({
         if (mapParams.vizType === 'dotDensity') {
             if (!dotDensityData.length) {
                 getDotDensityData().then((dotDensityData) =>
-                    dispatch({
-                        type: 'LOAD_DOT_DENSITY_DATA',
-                        payload: dotDensityData,
-                    })
+                    dispatch(setDotDensityData(dotDensityData))
                 )
             }
         }
@@ -500,7 +492,7 @@ function MapSection({
                 if (highlightGeog.indexOf(objectID) === -1) {
                     let GeoidList = [...highlightGeog, objectID]
                     setHighlightGeog(GeoidList)
-                    dispatch(updateSelectionKeys(objectID, 'append'))
+                    dispatch(updateSelection({geoid:objectID, type:'append'}))
                     window.localStorage.setItem('SHARED_GEOID', GeoidList)
                     window.localStorage.setItem(
                         'SHARED_VIEW',
@@ -511,7 +503,7 @@ function MapSection({
                         let tempArray = [...highlightGeog]
                         tempArray.splice(tempArray.indexOf(objectID), 1)
                         setHighlightGeog(tempArray)
-                        dispatch(updateSelectionKeys(objectID, 'remove'))
+                        dispatch(updateSelection({geoid:objectID, type:'remove'}))
                         window.localStorage.setItem('SHARED_GEOID', tempArray)
                         window.localStorage.setItem(
                             'SHARED_VIEW',
@@ -523,7 +515,7 @@ function MapSection({
         } else {
             try {
                 setHighlightGeog([objectID])
-                dispatch(updateSelectionKeys(objectID, 'update'))
+                dispatch(updateSelection({geoid:objectID, type:'update'}))
                 window.localStorage.setItem('SHARED_GEOID', objectID)
                 window.localStorage.setItem(
                     'SHARED_VIEW',
@@ -932,7 +924,7 @@ function MapSection({
                     GeoidList.push(objectID)
                 }
 
-                dispatch(updateSelectionKeys(GeoidList, 'bulk-append'))
+                dispatch(updateSelection({geoid:GeoidList, type:'bulk-append'}))
                 setHighlightGeog(GeoidList)
 
                 window.localStorage.setItem('SHARED_GEOID', GeoidList)

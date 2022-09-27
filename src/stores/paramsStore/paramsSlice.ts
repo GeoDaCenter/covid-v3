@@ -68,11 +68,11 @@ export const paramsSlice = createSlice({
         },
         setPanelState(
             state,
-            action: PayloadAction<{ params: { [panel: string]: boolean } }>
+            action: PayloadAction<{[panel: keyof ParamsUiState["panelState"]]: boolean }>
         ) {
             state.panelState = {
                 ...state.panelState,
-                ...action.payload.params,
+                ...action.payload,
             }
         },
         toggleMobilePanel: (state, action: PayloadAction<string>) => {

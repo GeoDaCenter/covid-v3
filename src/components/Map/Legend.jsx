@@ -4,8 +4,10 @@ import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { BinsList, Gutter, Tooltip, Icon } from '..'
 import colors from '../../config/colors'
-import { paramsSelectors } from '../../stores/paramsStore'
+import { paramsSelectors, paramsActions } from '../../stores/paramsStore'
 const { selectColorFilter } = paramsSelectors
+const { setColorFilter } = paramsActions
+
 const BottomPanel = styled.div`
   position: fixed;
   bottom: 0;
@@ -276,10 +278,9 @@ const Legend = ({
   const dispatch = useDispatch()
   const colorFilter = useSelector(selectColorFilter)
   const handleHover = (color) => {
-    dispatch({
-      type: 'SET_COLOR_FILTER',
+    dispatch(setColorFilter({
       payload: color,
-    })
+    }))
   }
   const { bins: currentBins } = bins
 

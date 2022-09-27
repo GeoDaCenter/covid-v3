@@ -6,8 +6,9 @@ import styled from 'styled-components';
 // Import config and actions
 import colors from '../../config/colors';
 import {Icon} from '../../components';
-import { paramsSelectors } from '../../stores/paramsStore';
+import { paramsSelectors, paramsActions } from '../../stores/paramsStore';
 const { selectSinglePanelState } = paramsSelectors;
+const { togglePanel } = paramsActions;
 // Styles - Container
 const DragContainer = styled.div`
   position: fixed;
@@ -142,7 +143,7 @@ const Draggable = ({
   // End Listeners
 
   // Hide Panel
-  const handleCollapse = () =>  dispatch({ type: 'TOGGLE_PANEL', payload: title })
+  const handleCollapse = () =>  dispatch(togglePanel(title))
 
   // Props change when window changes, updates local state here
   useEffect(() => {
