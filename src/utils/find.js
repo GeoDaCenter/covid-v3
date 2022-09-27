@@ -75,3 +75,30 @@ export const findTableOrDefault = (currDataset, tables, tableName) => {
 
 export const findTableOrDefaultId = (currDataset, tables, tableName) =>
   findTableOrDefault(currDataset, tables, tableName).id;
+
+export const findDefaultOrCurrent = (
+  tables,
+  datasets,
+  variableParams,
+  datasetName
+) => {
+  if (variableParams.customData) {
+    return variableParams.customData;
+  }
+  const relevantTables = tables.filter(
+    (f) => f.table === variableParams.numerator
+  );
+  const availableGeographies = relevantTables.map((f) => f.geography);
+  const availableDatasets = datasets.filter(
+    (f) => datasetName === f.name && availableGeographies.includes(f.geography)
+  );
+
+  if (availableDatasets.length) {
+    return availableDatasets[0].file;
+  }
+  const anyDataset = datasets.filter((f) =>
+    availableGeographies.includes(f.geography)
+  );
+  
+  return anyDataset[0].file;
+};

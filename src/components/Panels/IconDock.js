@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { Icon } from '..';
 import colors from '../../config/colors';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { paramsSelectors } from '../../stores/paramsStore';
+const { selectPanelState } = paramsSelectors;
 
 const DockContainerOuter = styled.div`
   position:relative;
@@ -221,7 +223,7 @@ const buttons = [
 function IconDock(){
   const dispatch = useDispatch();
   const [hoveredIcon, setHoveredIcon] = useState(null);
-  const panelState = useSelector(({ui}) => ui.panelState);
+  const panelState = useSelector(selectPanelState);
   const isMobile = useMediaQuery('(max-width:600px)');
   const handleToggle = (panel) => {
     const action = isMobile ? 'MOBILE_TOGGLE_PANEL' : 'TOGGLE_PANEL';
@@ -251,7 +253,7 @@ function IconDock(){
             <button
               id={id}
               key={`${id}-icon-dock-label`}
-              ariaLabel={ariaLabel}
+              aria-label={ariaLabel}
               onClick={onClick}
               className={hoveredIcon === id ? 'hovered' : ''}
               onMouseEnter={() => setHoveredIcon(id)}

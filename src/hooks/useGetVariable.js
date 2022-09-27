@@ -10,6 +10,10 @@ import {
   onlyUniqueArray,
 } from "../utils";
 import useGetTable from "./useGetTable";
+import { paramsSelectors } from '../stores/paramsStore';
+import { dataSelectors } from '../stores/dataStore'
+const { selectGeojson } = dataSelectors;
+const { selectCurrentData, selectDataParams, selectDatasets, selectTables, selectVariables } = paramsSelectors;
 const dateLists = getDateLists();
 
 export default function useGetVariable({
@@ -22,13 +26,13 @@ export default function useGetVariable({
     ({ data }) => data.canLoadInBackground
   );
   // pieces of redux state
-  const stateDataset = useSelector(({ params }) => params.currentData);
+  const stateDataset = useSelector(selectCurrentData);
   const currentData = dataset || stateDataset;
-  const geojsonData = useSelector(({ data }) => data.storedGeojson[currentData]);
-  const dataParams = useSelector(({ params }) => params.dataParams);
-  const datasets = useSelector(({ params }) => params.datasets);
-  const tables = useSelector(({ params }) => params.tables);
-  const variables = useSelector(({ params }) => params.variables);
+  const geojsonData = useSelector(selectGeojson(currentData));
+  const dataParams = useSelector(selectDataParams);
+  const datasets = useSelector(selectDatasets);
+  const tables = useSelector(selectTables);
+  const variables = useSelector(selectVariables);
   // current state data params
 
   const params = findIn(variables, "variableName", variable);

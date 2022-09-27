@@ -10,7 +10,8 @@ import {
 } from "./PageComponentsLayout";
 import colors from "../../../../config/colors";
 import { HoverButtonsContainer } from "../InterfaceComponents/HoverButtonsContainer";
-
+import { paramsSelectors } from "../../../../stores/paramsStore";
+const {selectVariables} = paramsSelectors;
 const RadiusRange = Array(10)
   .fill(0)
   .map((_, idx) => ({ value: idx + 1, label: `${idx + 1}` }));
@@ -29,7 +30,7 @@ export const ScatterChartReport = ({
   radius = 4,
   loadedCallback = () => { },
 }) => {
-  const variables = useSelector(({ params }) => params.variables);
+  const variables = useSelector(selectVariables);
   const ScatterPlotVars = useMemo(
     () =>
       variables.map(({ variableName }) => ({

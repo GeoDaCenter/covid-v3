@@ -21,6 +21,8 @@ import { FileUploader } from "./FileUploader";
 import { validateGeojson } from "./utils";
 import { FormButton } from "./FormButton";
 import { TextField, Typography } from "@mui/material";
+import { paramsSelectors } from "../../../stores/paramsStore";
+const {selectSinglePanelState} = paramsSelectors;
 
 const ModalInner = styled.div``;
 
@@ -116,7 +118,7 @@ const steps = ["Load your GeoJSON", "Configure your Variables"];
 
 export default function DataLoader() {
   const dispatch = useDispatch();
-  const open = useSelector(({ ui }) => ui.panelState.dataLoader);
+  const open = useSelector(selectSinglePanelState('dataLoader'));
   const handleClose = () =>
     dispatch({ type: "TOGGLE_PANEL", payload: "dataLoader" });
 

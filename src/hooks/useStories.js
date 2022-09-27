@@ -7,6 +7,11 @@ import booleanPointInPolygon from '@turf/boolean-point-in-polygon';
 import { useSelector } from 'react-redux';
 import { useGeoda } from '../contexts/Geoda';
 import useGetGeojson from './useGetGeojson';
+import { paramsSelectors } from '../stores/paramsStore';
+import { dataSelectors } from '../stores/dataStore'
+const { selectStoredGeojson } = dataSelectors;
+const { selectDatasets } = paramsSelectors;
+
 const doFilter = (story, filter) => {
     return filter.every(({ property, value, operation }) => {
         const storyValue = story[property];
@@ -58,8 +63,8 @@ const getCounts = (stories) => {
 }
 
 function useCentroidRandomizer() {
-    const storedGeojson = useSelector(({data}) => data.storedGeojson);
-    const datasets = useSelector(({params}) => params.datasets);
+    const storedGeojson = useSelector(selectStoredGeojson);
+    const datasets = useSelector(selectDatasets);
     const { geoda, geodaReady } = useGeoda();
     const usafactsDataset = findIn(datasets, "file", 'county_usfacts.geojson');
     const [geo] = useGetGeojson({

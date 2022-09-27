@@ -1,28 +1,22 @@
-import React, { useState, useMemo } from "react";
-import { useSelector } from "react-redux";
-
+import React, { useState, useMemo } from 'react'
+import { useSelector } from 'react-redux'
 import {
-  // LineChart,
-  // Line,
   XAxis,
   YAxis,
   ZAxis,
-  // ReferenceArea,
   Tooltip,
   Label,
   ResponsiveContainer,
-  // Legend,
   ScatterChart,
   CartesianGrid,
   Scatter,
-} from "recharts";
-
-// import Switch from "@mui/material/Switch";
-
-import styled from "styled-components";
-import { ChartTitle, ControlPopover } from "../../components";
-import colors from "../../config/colors";
-import useGetScatterData from "../../hooks/useGetScatterData";
+} from 'recharts'
+import styled from 'styled-components'
+import { ChartTitle, ControlPopover } from '../../components'
+import colors from '../../config/colors'
+import useGetScatterData from '../../hooks/useGetScatterData'
+import { paramsSelectors } from '../../stores/paramsStore'
+const { selectVariables } = paramsSelectors
 
 const ScatterChartContainer = styled.div`
   position: relative;
@@ -31,7 +25,7 @@ const ScatterChartContainer = styled.div`
   max-height: 20vh;
   height: 400px;
   background: ${colors.gray};
-`;
+`
 
 const colorSchemes = {
   light: {
@@ -44,10 +38,16 @@ const colorSchemes = {
     mediumColor: colors.lightgray,
     gridColor: `${colors.white}88`,
   },
-};
+}
 
-export function ScatterChartInner({ scatterData, xAxisVar, yAxisVar, theme, radius=2 }) {
-  const { highlightColor, mediumColor, gridColor } = colorSchemes[theme];
+export function ScatterChartInner({
+  scatterData,
+  xAxisVar,
+  yAxisVar,
+  theme,
+  radius = 2,
+}) {
+  const { highlightColor, mediumColor, gridColor } = colorSchemes[theme]
   return (
     <ResponsiveContainer width="100%" height="100%">
       <ScatterChart
@@ -64,9 +64,9 @@ export function ScatterChartInner({ scatterData, xAxisVar, yAxisVar, theme, radi
             value={xAxisVar}
             position="insideLeft"
             style={{
-              transform: "translateY(20px)",
+              transform: 'translateY(20px)',
               fill: mediumColor,
-              fontFamily: "Lato",
+              fontFamily: 'Lato',
               fontWeight: 600,
             }}
           />
@@ -77,7 +77,7 @@ export function ScatterChartInner({ scatterData, xAxisVar, yAxisVar, theme, radi
             position="outside"
             style={{
               fill: mediumColor,
-              fontFamily: "Lato",
+              fontFamily: 'Lato',
               fontWeight: 600,
             }}
             angle={-90}
@@ -86,7 +86,7 @@ export function ScatterChartInner({ scatterData, xAxisVar, yAxisVar, theme, radi
         <ZAxis type="number" dataKey="" range={[radius, radius]} />
 
         <Tooltip
-          cursor={{ strokeDasharray: "3 3" }}
+          cursor={{ strokeDasharray: '3 3' }}
           isAnimationActive={false}
         />
         <Scatter
@@ -97,25 +97,23 @@ export function ScatterChartInner({ scatterData, xAxisVar, yAxisVar, theme, radi
         />
       </ScatterChart>
     </ResponsiveContainer>
-  );
+  )
 }
 
-export default function ScatterChartComponent({
-  props=null
-}) {
+export default function ScatterChartComponent({ props = null }) {
   // const dispatch = useDispatch();
-  const [xAxisVar, setXAxisVar] = useState("Percent Fully Vaccinated");
-  const [yAxisVar, setYAxisVar] = useState("Death Count per 100K Population");
-  const variables = useSelector(({params}) => params.variables);
+  const [xAxisVar, setXAxisVar] = useState('Percent Fully Vaccinated')
+  const [yAxisVar, setYAxisVar] = useState('Death Count per 100K Population')
+  const variables = useSelector(selectVariables())
   const { scatterData, timestamp } = useGetScatterData({
     xAxisVar,
     yAxisVar,
-  });
-  
+  })
+
   const variableItems = variables.map(({ variableName }) => ({
     text: variableName,
     value: variableName,
-  }));
+  }))
   const scatterChart = useMemo(
     () =>
       timestamp !== null ? (
@@ -125,32 +123,32 @@ export default function ScatterChartComponent({
         />
       ) : null,
     [timestamp]
-  );
+  )
   return (
     <ScatterChartContainer>
       <ControlPopover
         controlElements={[
           {
-            type: "header",
-            content: "Scatterplot Controls",
+            type: 'header',
+            content: 'Scatterplot Controls',
           },
           {
-            type: "helperText",
-            content: "Select the data to display on the chart.",
+            type: 'helperText',
+            content: 'Select the data to display on the chart.',
           },
           {
-            type: "select",
+            type: 'select',
             content: {
-              label: "XAxis Variable",
+              label: 'XAxis Variable',
               items: variableItems,
             },
             action: (e) => setXAxisVar(e.target.value),
             value: xAxisVar,
           },
           {
-            type: "select",
+            type: 'select',
             content: {
-              label: "YXAxis Variable",
+              label: 'YXAxis Variable',
               items: variableItems,
             },
             action: (e) => setYAxisVar(e.target.value),
@@ -161,5 +159,5 @@ export default function ScatterChartComponent({
       <ChartTitle>Scatterplot</ChartTitle>
       {scatterChart}
     </ScatterChartContainer>
-  );
+  )
 }

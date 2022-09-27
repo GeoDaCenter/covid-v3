@@ -7,7 +7,8 @@ import {
 } from "./LayoutContainer";
 import { Alert, Box, Button, Stack, Modal, Snackbar, Typography, LinearProgress } from "@mui/material";
 import { usePrintReport } from "../../../../hooks/usePrintReport";
-// import { cleanLayout } from "../../../../utils/cleanReport";
+import { reportSelectors } from '../../../../stores/reportStore';
+const { selectCurrentPage, selectPrintStatus, selectReportError } = reportSelectors;
 export default function Report({
   reportName = "",
   activeStep,
@@ -15,7 +16,7 @@ export default function Report({
   handleStep = () => { },
 }) {
   const dispatch = useDispatch();
-  const currPage = useSelector(({ report }) => report.pageIdx);
+  const currPage = useSelector(selectCurrentPage);
   const gridContext = useRef({});
   const containerRef = useRef(null);
   const pageWidth = containerRef?.current?.clientWidth;
@@ -86,8 +87,8 @@ function PrintModal({
   handlePrint
 }) {
   const dispatch = useDispatch();
-  const pageIdx = useSelector(({ report }) => report.pageIdx);
-  const isPrinting = useSelector(({ report }) => report.printStatus);
+  const pageIdx = useSelector(selectCurrentPage);
+  const isPrinting = useSelector(selectPrintStatus);
   const pageLength = useSelector(
     ({ report }) => report.reports?.[report.currentReport]?.layout?.length
   );
@@ -197,7 +198,7 @@ function LinearProgressWithLabel({ progress, text }) {
 
 function ErrorToast() {
   const dispatch = useDispatch();
-  const error = useSelector(({ report }) => report.error);
+  const error = useSelector(selectReportError);
   const { type, reportName, pageIdx } = error || {};
 
   const handleClose = () => {

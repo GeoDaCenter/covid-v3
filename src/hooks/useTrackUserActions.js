@@ -1,13 +1,13 @@
-import { useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
-import ReactGA from 'react-ga';
-
-ReactGA.initialize('UA-72724100-4');
-ReactGA.pageview(window.location.pathname + window.location.search);
+import { useEffect, useRef } from 'react'
+import { useSelector } from 'react-redux'
+import ReactGA from 'react-ga'
+import { paramsSelectors } from '../stores/paramsStore'
+const { selectDatasets } = paramsSelectors
+ReactGA.initialize('UA-72724100-4')
+ReactGA.pageview(window.location.pathname + window.location.search)
 
 export default function useTrackUserActions() {
   // What dataset is being viewed?
-  // const currentData = useSelector(({params}) => params.currentData);
   // // What variable is being selected?
   // const variableName = useSelector((state) => state.dataParams.variableName);
   // // What overlay layer is being used?
@@ -21,20 +21,19 @@ export default function useTrackUserActions() {
   // // What counties or states are being selected?
   // const selectionKeys = useSelector(state => state.selectionKeys);
   // What are the default datasets?
-  const datasets = useSelector(({params}) => params.datasets);
-  const baseDatasetNum = useRef(datasets.length);
+  const datasets = useSelector(selectDatasets)
+  const baseDatasetNum = useRef(datasets.length)
 
   useEffect(() => {
-    const customDatasetsLoaded =
-      datasets.length - baseDatasetNum.current;
+    const customDatasetsLoaded = datasets.length - baseDatasetNum.current
     if (customDatasetsLoaded > 0) {
       ReactGA.event({
         category: 'Custom Data',
         action: 'Loaded Datasets',
         value: customDatasetsLoaded,
-      });
+      })
     }
-  }, [datasets.length]);
+  }, [datasets.length])
 
   // const [hasLogged, setHasLogged] = useState({
   //     'currentData': [],

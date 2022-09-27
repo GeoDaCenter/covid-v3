@@ -3,11 +3,11 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-
 // Import config and actions
 import colors from '../../config/colors';
 import {Icon} from '../../components';
-
+import { paramsSelectors } from '../../stores/paramsStore';
+const { selectSinglePanelState } = paramsSelectors;
 // Styles - Container
 const DragContainer = styled.div`
   position: fixed;
@@ -97,7 +97,7 @@ const Draggable = ({
 }) => {
   // Redux Dispatch and selector
   const dispatch = useDispatch();
-  const open = useSelector(({ui}) => ui.panelState[title]);
+  const open = useSelector(selectSinglePanelState(title));
 
   // Local state, dragging
   const [X, setX] = useState(defaultX);

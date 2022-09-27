@@ -8,6 +8,8 @@ import { useViewport, useSetViewport } from '../../contexts/Viewport'
 import { ShareButton, MapAttribution } from '..'
 import colors from '../../config/colors'
 import * as SVG from '../../config/svg'
+import { paramsSelectors } from '../../stores/paramsStore'
+const { selectPanelState } = paramsSelectors
 
 const NavInlineButtonGroup = styled.div`
   margin-bottom: 10px;
@@ -76,25 +78,25 @@ const ShareURL = styled.input`
  * Mapbuttons to control view, tilt, sharing, and selection. Requires viewport
  * and setviewport context
  *
+ * @category Components/Map
  * @example
- * () => {
+ *   () => {
  *   const [isSelecting, setIsSelecting] = useState(false)
  *   return (
  *   <MapButtons
- *     isSelecting={isSelecting}
- *     setIsSelecting={setIsSelecting}
+ *   isSelecting={isSelecting}
+ *   setIsSelecting={setIsSelecting}
  *   )
- * }
- * @component
- * @category Components/Map
+ *   }
+ *
  * @param {Object} props
  * @param {boolean} props.boxSelect - Whether or not box select is active
  * @param {function} props.setBoxSelect - Function to set box select (val:
  *   boolean) => void
+ * @component
  */
 function MapButtons({ boxSelect, setBoxSelect }) {
-  // const selectionKeys = useSelector(({params}) => params.selectionKeys);
-  const panelState = useSelector(({ ui }) => ui.panelState)
+  const panelState = useSelector(selectPanelState)
   const viewport = useViewport()
   const setViewport = useSetViewport()
 

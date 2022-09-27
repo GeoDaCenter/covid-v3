@@ -5,6 +5,8 @@ import { TableReport } from "./TableReport";
 import { ScatterChartReport } from "./ScatterChartReport";
 import MapReport from "./MapReport";
 import { useDispatch, useSelector } from "react-redux";
+import { reportSelectors } from "../../../../stores/reportStore";
+const { selectReportMeta, selectItem } = reportSelectors;
 
 const mapping = {
   textReport: TextReport,
@@ -17,8 +19,8 @@ const mapping = {
 
 export default function ReportComponentMapping({ handleItemLoad=()=>{}, itemId, pageIdx, reportName }) {
   const dispatch = useDispatch();
-  const meta = useSelector(({ report }) => report.reports?.[reportName]?.meta)
-  const itemProps = useSelector(({ report }) => report.reports?.[reportName]?.items?.[itemId])
+  const meta = useSelector(selectReportMeta(reportName))
+  const itemProps = useSelector(selectItem(reportName, itemId))
 
   const handleChange = (props) => dispatch({
     type: "CHANGE_REPORT_ITEM",

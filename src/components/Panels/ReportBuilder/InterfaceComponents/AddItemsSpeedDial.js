@@ -79,7 +79,7 @@ export const AddItemsSpeeedDial = ({ handleAddItem, canAddItem }) => {
   ];
   return (
     <StyledSpeedDial
-      ariaLabel="SpeedDial controlled open example"
+      aria-label="SpeedDial controlled open example"
       icon={<SpeedDialIcon />}
     //   sx={{ position: "absolute", right: "2em", bottom: "4em" }}
       direction={"left"}

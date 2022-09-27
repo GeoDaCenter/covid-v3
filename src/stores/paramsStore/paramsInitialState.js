@@ -1,17 +1,17 @@
 import {
   variableTree,
   urlParamsTree,
-} from "../config/index";
+} from "../../config/index";
 
 import {
   defaultData,
-} from "../config/defaults";
+} from "../../config/defaults";
 
-import variables from "../config/variables";
-import tables from "../config/tables";
-import datasets from "../config/datasets";
+import variables from "../../config/variables";
+import tables from "../../config/tables";
+import datasets from "../../config/datasets";
 
-import { findIn, findTableOrDefault } from "../utils";
+import { findIn, findTableOrDefault } from "../../utils";
 // read in URL params
 let paramsDict = {};
 for (const [key, value] of new URLSearchParams(window.location.search)) {
@@ -32,16 +32,13 @@ const currentData = paramsDict.hasOwnProperty("src")
 const currDataset = findIn(datasets, "file", currentData);
 
 const INITIAL_STATE = {
+  // parameters for app
   // Default data state
   currentData,
   currentTable: {
     numerator: findTableOrDefault(currDataset, tables, "cases"),
     denominator: "properties",
   },
-  currentZVariable: null,
-  currentMethod: paramsDict.hasOwnProperty("mthd")
-    ? paramsDict.mthd
-    : "natural_breaks",
   // defaults
   datasets,
   dates: [],
@@ -128,7 +125,38 @@ const INITIAL_STATE = {
   },  
   selectionKeys: [],
   selectionNames: [],
-};
+  // UI
+  anchorEl: null,
+  isPlaying: false,
+  mapLoaded: false,
+  notification: {
+    info: null,
+    location: "",
+  },
+  panelState: {
+    variables: true,
+    info: false,
+    tutorial: false,
+    lineChart: true,
+    context: false,
+    contextPos: { x: null, y: null },
+    dataLoader: false,
+    scatterChart: false,
+    reportBuilder: false,
+    storiesPane: false
+  },
+  tooltipInfo: {
+    x: 0,
+    y: 0,
+    data: null,
+    geoid: null
+  },
+  shouldUpdate: true,
+  isLoading: true,
+  mapScreenshotData: {},
+  shouldPanMap: false,
+  colorFilter: false,
+  variableMenuWidth: 0
+}
 
-
-export default INITIAL_STATE
+export default INITIAL_STATE;

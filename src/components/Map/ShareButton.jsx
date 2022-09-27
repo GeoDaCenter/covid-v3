@@ -4,16 +4,17 @@ import { NavInlineButton } from './MapButtons'
 import { useViewport } from '../../contexts/Viewport'
 import { share } from '../../config/svg'
 import { getURLParams } from '../../utils'
-
+import { paramsSelectors } from '../../stores/paramsStore'
+const {selectCurrentData, selectMapParams, selectDataParams} = paramsSelectors
 /**
  * Standalone share button for use in map controls. Uses Web Navigator ShareAPI
  * with input form fallback.
  */
 export default function ShareButton() {
   const viewport = useViewport()
-  const currentData = useSelector(({ params }) => params.currentData)
-  const mapParams = useSelector(({ params }) => params.mapParams)
-  const dataParams = useSelector(({ params }) => params.dataParams)
+  const currentData = useSelector(selectCurrentData)
+  const mapParams = useSelector(selectMapParams)
+  const dataParams = useSelector(selectDataParams)
 
   const [shared, setShared] = useState(false)
 

@@ -1,6 +1,8 @@
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetcher } from "../utils";
+import { dataSelectors } from '../../stores/dataStore'
+const { selectDatasets } = dataSelectors;
 
 export default function useGetTable({
   filesToFetch = [],
@@ -8,9 +10,8 @@ export default function useGetTable({
   dateLists = {},
 }) {
   const dispatch = useDispatch();
-  const accessedData = useSelector(({ data }) =>
-    filesToFetch.map((fileSchema) => data.storedData[fileSchema.name])
-  );
+  const datasetNames = filesToFetch.map((fileSchema) => fileSchema.name);
+  const accessedData = useSelector(selectDatasets(datasetNames));
 
   useEffect(() => {
     console.log("loading files...");

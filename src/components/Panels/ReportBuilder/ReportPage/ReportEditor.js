@@ -6,12 +6,14 @@ import Stack from "@mui/material/Stack";
 import { AddItemsSpeeedDial } from "../InterfaceComponents/AddItemsSpeedDial";
 import { ZoomInMap, ZoomOutMap, CropFree } from "@mui/icons-material";
 import { ButtonContainer } from "../Report/LayoutContainer";
+import { reportSelectors } from '../../../../stores/reportStore'
+const { selectCurrentPage, selectCurrentReport } = reportSelectors;
 
 export const ReportEditor = ({ activeStep, handleStep }) => {
   const dispatch = useDispatch();
 
-  const currPage = useSelector(({ report }) => report.pageIdx);
-  const reportName = useSelector(({ report }) => report.currentReport);
+  const currPage = useSelector(selectCurrentPage);
+  const reportName = useSelector(selectCurrentReport);
 
   const layouts = useSelector(
     ({ report }) => report.reports?.[reportName]?.layout

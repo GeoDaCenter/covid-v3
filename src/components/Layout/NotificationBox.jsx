@@ -4,6 +4,8 @@ import styled from 'styled-components';
 
 import { setNotification } from '../../actions';
 import colors from '../../config/colors';
+import { paramsSelectors } from '../../stores/paramsStore';
+const { selectNotification } = paramsSelectors;
 
 const Notification = styled.div`
   width: 300px;
@@ -71,7 +73,7 @@ const CloseNotification = styled.button`
  */
 const NotificationBox = () => {
   const dispatch = useDispatch();
-  const notification = useSelector(({ui}) => ui.notification);
+  const notification = useSelector(selectNotification);
 
   return (
     notification.info && (

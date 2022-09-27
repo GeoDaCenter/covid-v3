@@ -3,7 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { useGeoda } from "../contexts/Geoda";
 import useGetGeojson from "./useGetGeojson";
 import { findIn, onlyUniqueArray } from "../utils";
-
+import { paramsSelectors } from "../stores/paramsStore";
+import { dataSelectors } from '../stores/dataStore'
+const { selectStoredGeojson } = dataSelectors;
+const { selectDatasets } = paramsSelectors;
 const getWeights = async (weights, mapId, geoda) => {
   if (weights && "Queen" in weights) {
     return {
@@ -36,8 +39,8 @@ const getNeighbors = async (weights, geoda, idx) => {
 export default function useGetNeighbors({ geoid = null, currentData, updateTrigger = null }) {
   const dispatch = useDispatch();
   const { geoda, geodaReady } = useGeoda();
-  const storedGeojson = useSelector(({data}) => data.storedGeojson);  
-  const datasets = useSelector(({params}) => params.datasets);
+  const storedGeojson = useSelector(selectStoredGeojson);  
+  const datasets = useSelector(selectDatasets);
   const currDataset = findIn(datasets, "file", currentData);
   const [geojsonData] = useGetGeojson({
     geoda,

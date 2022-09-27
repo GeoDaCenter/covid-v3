@@ -8,7 +8,8 @@ import {
 import colors from "../../../../config/colors";
 import { useSelector } from "react-redux";
 import { HoverButtonsContainer } from "../InterfaceComponents/HoverButtonsContainer";
-
+import { paramsSelectors } from "../../../../stores/paramsStore";
+const {selectDates} = paramsSelectors;
 const TextComponentMapping = {
   "7day": ({ name }) => <h2>7-Day Average Report: {name}</h2>,
   regional: ({ name }) => <h2>Regional Snapshot: {name}</h2>,
@@ -28,9 +29,9 @@ export const TextContainerReport = ({
   dateIndex,
   loadedCallback = () => {},
 }) => {
-  const currDate = useSelector(({ params }) =>
-    dateIndex === null ? params.dates.slice(-1)[0] : params.dates[dateIndex]
-  );
+  const dates = useSelector(selectDates);
+  const currDate = dateIndex === null ? dates.slice(-1)[0] : dates[dateIndex]
+
   const InnerComponent =
     typeof content === "string"
       ? () => <h2>{content}</h2>

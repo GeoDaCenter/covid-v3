@@ -5,6 +5,8 @@ import { HoverDiv } from '..'
 import useGetTooltipContent from '../../hooks/useGetTooltipContent'
 import { formatNumber, hasProps } from '../../utils'
 import styled from 'styled-components'
+import { paramsSelectors } from '../../stores/paramsStore'
+const {selectTooltipInfo, selectCurrentData} = paramsSelectors
 // This component handles and formats the map tooltip info.
 // The props passed to this component should contain an object of the hovered object (from deck, info.object by default)
 
@@ -208,9 +210,9 @@ const TooltipEngine = ({ data, tooltipContent, custom }) => {
  * a optimize re-renders
  */
 export default function MapTooltipContent() {
-  const { x, y, data, geoid } = useSelector(({ ui }) => ui.tooltipInfo) || {}
+  const { x, y, data, geoid } = useSelector(selectTooltipInfo) || {}
   const tooltipContent = useGetTooltipContent({ data, geoid })
-  const currentData = useSelector(({ params }) => params.currentData)
+  const currentData = useSelector(selectCurrentData)
   const tooltipText = useMemo(
     () => (
       <TooltipEngine

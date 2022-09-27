@@ -8,6 +8,10 @@ import TemplateSelector from "./TemplateSelector";
 import { ReportEditor } from "./ReportPage/ReportEditor";
 import { Stack, Box, Typography, Modal } from "@mui/material";
 import { ViewportProvider } from "../../../contexts/Viewport";
+import { paramsSelectors } from "../../../stores/paramsStore";
+import { reportSelectors } from '../../../stores/reportStore';
+const { selectAllReports } = reportSelectors;
+const { selectSinglePanelState, selectDates } = paramsSelectors;
 
 const defaultViewport = {
   latitude: 37.7577,
@@ -80,13 +84,14 @@ export default function ReportBuilder({
   isPage = false
 }) {
   const dispatch = useDispatch();
-  const open = useSelector(({ ui }) => isPage ? true : ui.panelState.reportBuilder);
+  const reportBuilderOpen = useSelector(selectSinglePanelState("reportBuilder"));
+  const open = isPage || reportBuilderOpen
   const handleClose = () => {
     dispatch({ type: "TOGGLE_PANEL", payload: "reportBuilder" });
   }
   // trigger update to parent context for dnd / resizing
-  useSelector(({ report }) => report);
-  const dates = useSelector(({ params }) => params.dates);
+  useSelector(selectAllReports);
+  const dates = useSelector(selectDates);
   const dateInputs = useMemo(
     () => [
       { value: null, label: "Latest Available Data" },

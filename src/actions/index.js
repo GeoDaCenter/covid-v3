@@ -248,14 +248,14 @@ export const setVariableParams = (params) => {
   };
 };
 
-export const setParametersAndData = (params) => {
-  return {
-    type: 'SET_VARIABLE_PARAMS_AND_DATASET',
-    payload: {
-      params,
-    },
-  };
-};
+// export const setParametersAndData = (params) => {
+//   return {
+//     type: 'SET_VARIABLE_PARAMS_AND_DATASET',
+//     payload: {
+//       params,
+//     },
+//   };
+// };
 
 // change the Z axis variable for bi-variate 3D views
 export const variableChangeZ = (variable, params) => {
@@ -367,15 +367,15 @@ export const setNotification = (info, location) => {
   };
 };
 
-export const setUrlParams = (urlParams, presets) => {
-  return {
-    type: 'SET_URL_PARAMS',
-    payload: {
-      urlParams,
-      presets,
-    },
-  };
-};
+// export const setUrlParams = (urlParams, presets) => {
+//   return {
+//     type: 'SET_URL_PARAMS',
+//     payload: {
+//       urlParams,
+//       presets,
+//     },
+//   };
+// };
 
 export const openContextMenu = (params) => {
   return {
@@ -431,14 +431,14 @@ export const setDotDensityBgOpacity = (opacity) => {
   };
 };
 
-export const startPlaying = (index) => {
-  return {
-    type: 'SET_START_PLAYING',
-    payload: {
-      index,
-    },
-  };
-};
+// export const startPlaying = (index) => {
+//   return {
+//     type: 'SET_START_PLAYING',
+//     payload: {
+//       index,
+//     },
+//   };
+// };
 
 export const stopPlaying = () => {
   return {

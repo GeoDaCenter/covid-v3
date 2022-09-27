@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useGeoda } from '../contexts/Geoda';
 import { useDispatch, useSelector } from 'react-redux';
+import { dataSelectors } from '../stores/dataStore'
+const { selectStoredGeojson } = dataSelectors;
 
 const getLisa = async (currentGeojson, geoda, dataForLisa) => {
     const weights =
@@ -25,7 +27,7 @@ export default function useLisaMap({
 }) {
     const { geoda, geodaReady } = useGeoda();
     const dispatch = useDispatch();
-    const storedGeojson = useSelector(({ data }) => data.storedGeojson);
+    const storedGeojson = useSelector(selectStoredGeojson);
     const [data, setData] = useState({
         lisaData: [],
         lisaVarId: '',

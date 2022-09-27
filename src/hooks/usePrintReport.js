@@ -2,16 +2,16 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import download from "downloadjs";
 import { toJpeg, toPng, toSvg } from "html-to-image";
+import { reportSelectors } from "../stores/reportStore";
+const { selectPrintStatus, selectCurrentPage, selectIsLoaded, selectCurrentReport, selectPrintFileType, selectcurrentReportLength } = reportSelectors;
 
 export function usePrintReport() {
-    const isPrinting = useSelector(({ report }) => report.printStatus);
-    const printFileType = useSelector(({ report }) => report.printFileType);
-    const currentReport = useSelector(({ report }) => report.currentReport);
-    const pageLength = useSelector(
-        ({ report }) => report.reports?.[report.currentReport]?.layout?.length
-    );
-    const pageIdx = useSelector(({ report }) => report.pageIdx);
-    const pageIsLoaded = useSelector(({ report }) => report.loadState.isLoaded);
+    const isPrinting = useSelector(selectPrintStatus);
+    const printFileType = useSelector(selectPrintFileType);
+    const currentReport = useSelector(selectCurrentReport);
+    const pageLength = useSelector(selectcurrentReportLength);
+    const pageIdx = useSelector(selectCurrentPage);
+    const pageIsLoaded = useSelector(selectIsLoaded);
 
     const currentPageRef = useRef(null);
     const [pageData, setPageData] = useState([]);
@@ -49,7 +49,7 @@ export function usePrintReport() {
         })
     };
     const handleStopPrint = () => {
-        if(isPrinting){
+        if (isPrinting) {
             dispatch({
                 type: "SET_PRINTING_STATUS",
                 payload: {
@@ -69,7 +69,7 @@ export function usePrintReport() {
         })
         pageData.forEach((page, i) => {
             doc.addImage(page, 0, 0, 8.5, 11)
-            i < pageLength -1 && doc.addPage()
+            i < pageLength - 1 && doc.addPage()
         });
         doc.save(`${currentReport}.pdf`);
     }
@@ -88,20 +88,20 @@ export function usePrintReport() {
     const printPage = async () => {
         switch (printFileType) {
             case "PDF": {
-                const png = await toPng(currentPageRef.current, {pixelRatio: 2})
+                const png = await toPng(currentPageRef.current, { pixelRatio: 2 })
                 handleAddPageData(png)
                 break
             }
             case "JPG": {
-                const jpg = await toJpeg(currentPageRef.current, {pixelRatio: 2})
+                const jpg = await toJpeg(currentPageRef.current, { pixelRatio: 2 })
                 return await download(jpg, `${currentReport}-page-${pageIdx + 1}.jpg`, "image/jpeg");
             }
             case "PNG": {
-                const png = await toPng(currentPageRef.current, {pixelRatio: 2})
+                const png = await toPng(currentPageRef.current, { pixelRatio: 2 })
                 return await download(png, `${currentReport}-page-${pageIdx + 1}.png`, "image/png");
             }
-            case "SVG":{ 
-                const svg = await toSvg(currentPageRef.current, {fontEmbedCSS: false, skipFonts: true})
+            case "SVG": {
+                const svg = await toSvg(currentPageRef.current, { fontEmbedCSS: false, skipFonts: true })
                 // doing this the ol' fashioned way due to issues with SVG encoding :)
                 let link = document.createElement("a");
                 document.body.appendChild(link);

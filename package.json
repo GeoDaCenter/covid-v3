@@ -35,6 +35,7 @@
     "@mui/material": "^5.2.8",
     "@mui/styles": "^5.2.3",
     "@react-hook/resize-observer": "^1.2.6",
+    "@reduxjs/toolkit": "^1.8.5",
     "@turf/bbox": "^6.5.0",
     "@turf/boolean-point-in-polygon": "^6.5.0",
     "@turf/random": "^6.5.0",

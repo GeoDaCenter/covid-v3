@@ -2,6 +2,10 @@ import { useSelector } from "react-redux";
 import useGetVariable from "./useGetVariable";
 import { quantile, quantileRank } from 'simple-statistics'
 import { useEffect, useState } from "react";
+import { paramsSelectors } from "../stores/paramsStore";
+import { dataSelectors } from '../stores/dataStore'
+const { selectGeojson } = dataSelectors;
+const { selectCurrentData } = paramsSelectors;
 
 export default function useGetQuantileStatistics({
     variable="Confirmed Count per 100K Population",
@@ -13,8 +17,8 @@ export default function useGetQuantileStatistics({
 }){
     const [stats, setStats] = useState({});
     // pieces of redux state
-    const currentData = useSelector(({params}) => params.currentData);
-    const geojsonData = useSelector(({ data }) => data.storedGeojson[dataset||currentData]);
+    const currentData = useSelector(selectCurrentData);
+    const geojsonData = useSelector(selectGeojson(dataset||currentData));
     const geoidProperties = geojsonData?.properties && geojsonData.properties[geoid];
     const data = useGetVariable({
         variable,

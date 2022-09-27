@@ -23,6 +23,11 @@ import { colorScales } from "../../../../config/scales";
 import { defaultData } from "../../../../config/defaults";
 import { Box } from "@mui/material";
 import { HoverButtonsContainer } from "../InterfaceComponents/HoverButtonsContainer";
+import { paramsSelectors } from "../../../../stores/paramsStore";
+import { reportSelectors } from '../../../../stores/reportStore'
+const { selectPrintStatus } = reportSelectors;
+const { selectDates, selectVariableTree, selectVariables } = paramsSelectors;
+
 const defaultMapParams = {
   mapType: "natural_breaks",
   bins: {
@@ -103,10 +108,10 @@ function ReportMap({
   scale = "county",
   loadedCallback = () => { },
 }) {
-  const dates = useSelector(({ params }) => params.dates);
-  const isPrinting = useSelector(({ report }) => report.printStatus);
-  const variableTree = useSelector(({ params }) => params.variableTree);
-  const variables = useSelector(({ params }) => params.variables);
+  const dates = useSelector(selectDates);
+  const isPrinting = useSelector(selectPrintStatus);
+  const variableTree = useSelector(selectVariableTree);
+  const variables = useSelector(selectVariables);
 
   const variableList = Object.keys(variableTree)
     .filter((f) => !f.includes("HEADER"))

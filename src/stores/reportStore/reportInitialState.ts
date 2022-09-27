@@ -1,4 +1,4 @@
-const INITIAL_STATE ={
+const INITIAL_STATE = {
     reports: {},
     pageIdx: 0,
     currentReport: null,
@@ -7,6 +7,7 @@ const INITIAL_STATE ={
       isLoaded: false
     },
     printStatus: false,
-    printFileType: undefined
+    printFileType: undefined,
+    error: null
   }
   export default INITIAL_STATE;

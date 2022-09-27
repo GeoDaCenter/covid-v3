@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import Icon from './Icon'
 import styled from 'styled-components'
+import { paramsSelectors } from '../../stores/paramsStore'
+const { selectSinglePanelState } = paramsSelectors
 
 const ResizeButton = styled.button`
   position: absolute;
@@ -91,7 +93,7 @@ const Scaleable = ({
     window.addEventListener('touchend', removeTouchListener)
   }
 
-  const open = useSelector(({ ui }) => ui.panelState[title])
+  const open = useSelector(selectSinglePanelState(title))
 
   useEffect(() => {
     setWidth(defaultWidth)

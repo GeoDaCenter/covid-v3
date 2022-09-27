@@ -16,7 +16,8 @@ import TwoWeekChart from "../Charts/TwoWeekLineChart";
 import colors from "../../config/colors";
 import { TextStatistics } from "../../components";
 import { Button } from "@mui/material";
-
+import { paramsSelectors } from "../../stores/paramsStore";
+const { selectPanelState, selectSelectionKeys, selectDates } = paramsSelectors;
 //// Styled components CSS
 // Main container for entire panel
 const DataPanelContainer = styled.div`
@@ -231,16 +232,16 @@ export default function DataPanel({
   manualSelectionKeys = false,
   manualOpen = false,
 }) {
-  const panelState = useSelector(({ ui }) => ui.panelState);
+  const panelState = useSelector(selectPanelState);
   const panelOpen = manualOpen || panelState.info;
-  const reduxSelectionKeys = useSelector(({ params }) => params.selectionKeys);
+  const reduxSelectionKeys = useSelector(selectSelectionKeys);
   const selectionKeys = manualSelectionKeys || reduxSelectionKeys;
   const [expanded] = useState(true);
   const sidebarData = useGetSidebarData({
     selectionKeys,
     panelOpen,
   });
-  const dates = useSelector(({ params }) => params.dates);
+  const dates = useSelector(selectDates);
   const dispatch = useDispatch();
   const handleClearSelection = () => dispatch({ type: "CLEAR_SELECTION" });
   // Set expanded or contracted view
@@ -665,7 +666,7 @@ export default function DataPanel({
                   {" "}
                   {
                     ["", "Low", "Medium", "High"][
-                      Math.round(sidebarData.severity_index)
+                    Math.round(sidebarData.severity_index)
                     ]
                   }
                 </h3>

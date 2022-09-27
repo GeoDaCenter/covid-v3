@@ -13,7 +13,10 @@ import useGetTable from "./useGetTable";
 import useGetGeojson from "./useGetGeojson";
 import useBackgroundLoadData from "./useBackgroundLoadData";
 import dataDateRanges from "../config/dataDateRanges";
-
+import { paramsSelectors } from "../stores/paramsStore";
+import { dataSelectors } from '../stores/dataStore'
+const { selectStoredGeojson, selectCanLoadInBackground } = dataSelectors;
+const { selectDatasets, selectTables } = paramsSelectors;
 const dateLists = getDateLists();
 
 // fetch params spec
@@ -33,13 +36,10 @@ export default function useLoadData({
   // pieces of redux state
   const dispatch = useDispatch();
   const { geoda, geodaReady } = useGeoda();
-  const storedGeojson = useSelector(({data}) => data.storedGeojson);
-  const canLoadInBackground = useSelector(({data}) => data.canLoadInBackground);
-  const datasets = useSelector(({params}) => params.datasets);
-  const tables = useSelector(({params}) => params.tables);
-  // const dataParams = useSelector(({params}) => params.dataParams);
-  // const currentData = useSelector(({params}) => params.currentData);
-  // const dynamicBinning = useSelector(({params}) => params.mapParams.binMode === "dynamic");
+  const storedGeojson = useSelector(selectStoredGeojson);
+  const canLoadInBackground = useSelector(selectCanLoadInBackground);
+  const datasets = useSelector(selectDatasets);
+  const tables = useSelector(selectTables);
   const firstLoad = useRef(true)
 
   // current state data params

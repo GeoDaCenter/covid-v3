@@ -13,6 +13,8 @@ import { NoInteractionGate } from "../PageComponents/MapReport";
 import { Box } from "@mui/material";
 import styled from "styled-components";
 import LinearProgress from "@mui/material/LinearProgress";
+import { reportSelectors } from "../../../../stores/reportStore";
+const { selectPrintStatus, selectIsLoaded } = reportSelectors;
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -56,8 +58,8 @@ export default function ReportPage({
   const layout = useSelector(
     ({ report }) => report.reports?.[reportName]?.layout?.[pageIdx]
   );
-  const isPrinting = useSelector(({ report }) => report.printStatus);
-  const pageIsLoaded = useSelector(({ report }) => report.loadState.isLoaded);
+  const isPrinting = useSelector(selectPrintStatus);
+  const pageIsLoaded = useSelector(selectIsLoaded);
   const pageRef = useRef(null);
 
   useEffect(() => {

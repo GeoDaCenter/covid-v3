@@ -31,7 +31,8 @@ import colors from "../../config/colors";
 import { findIn } from "../../utils";
 import { fixedScales, colorScales } from "../../config/scales";
 import { Button, Grid } from "@mui/material";
-
+import { paramsSelectors } from "../../stores/paramsStore";
+const {selectPartialMapParam, selectCurrentData, selectPanelState, selectPartialDataParam, selectDatasets, selectVariableTree, selectUrlParamsTree} = paramsSelectors;
 /** STYLES */
 const VariablePanelContainer = styled.div`
   /* position:absolute;
@@ -308,7 +309,7 @@ const DotDensityControlSection = ({ isCustom = false }) => {
   const dispatch = useDispatch();
   const handleDotDensitySlider = (e, newValue) =>
     dispatch(setDotDensityBgOpacity(newValue));
-  const { dotDensityParams } = useSelector(({ params }) => params.mapParams);
+  const dotDensityParams = useSelector(selectPartialMapParam('dotDensityParams'));
   return (
     <DotDensityControls>
       <p className="help-text">1 Dot = 500 People</p>
@@ -358,30 +359,24 @@ const DotDensityControlSection = ({ isCustom = false }) => {
 function VariablePanel() {
   const dispatch = useDispatch();
   const variablePanelRef = useRef(null);
-  const currentData = useSelector(({ params }) => params.currentData);
+  const currentData = useSelector(selectCurrentData);
+  const binMode = useSelector(selectPartialMapParam('binMode'));
+  const mapType = useSelector(selectPartialMapParam('mapType'));
+  const vizType = useSelector(selectPartialMapParam('vizType'));
+  const overlay = useSelector(selectPartialMapParam('overlay'));
+  const resource = useSelector(selectPartialMapParam('resource'));
+  const panelState = useSelector(selectPanelState);
+  const numerator = useSelector(selectPartialDataParam('numerator'));
+  const variableName = useSelector(selectPartialDataParam('variableName'));
+  const nType = useSelector(selectPartialDataParam('nType'));
+  const nRange = useSelector(selectPartialDataParam('nRange'));
+  const dType = useSelector(selectPartialDataParam('dType'));
+  const rangeType = useSelector(selectPartialDataParam('rangeType'));
 
-  const binMode = useSelector(({ params }) => params.mapParams.binMode);
-  const mapType = useSelector(({ params }) => params.mapParams.mapType);
-  const vizType = useSelector(({ params }) => params.mapParams.vizType);
-
-  const overlay = useSelector(({ params }) => params.mapParams.overlay);
-  const resource = useSelector(({ params }) => params.mapParams.resource);
-
-  const panelState = useSelector(({ ui }) => ui.panelState);
-
-  const numerator = useSelector(({ params }) => params.dataParams.numerator);
-  const variableName = useSelector(
-    ({ params }) => params.dataParams.variableName
-  );
-  const nType = useSelector(({ params }) => params.dataParams.nType);
-  const nRange = useSelector(({ params }) => params.dataParams.nRange);
-  const dType = useSelector(({ params }) => params.dataParams.dType);
-  const rangeType = useSelector(({ params }) => params.dataParams.rangeType);
-
-  const datasets = useSelector(({ params }) => params.datasets);
+  const datasets = useSelector(selectDatasets);
   const currentPreset = findIn(datasets, "file", currentData);
-  const variableTree = useSelector(({ params }) => params.variableTree);
-  const urlParamsTree = useSelector(({ params }) => params.urlParamsTree);
+  const variableTree = useSelector(selectVariableTree);
+  const urlParamsTree = useSelector(selectUrlParamsTree);
   const allGeographies = Object.values(variableTree)
     .flatMap((o) => Object.keys(o))
     .filter(onlyUnique);

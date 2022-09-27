@@ -7,6 +7,8 @@ import Popper from '@mui/material/Popper'
 import { tooltipInfo } from '../../config'
 import { setAnchorEl } from '../../actions'
 import colors from '../../config/colors'
+import { paramsSelectors } from '../../stores/paramsStore'
+const { selectAnchorEl } = paramsSelectors
 
 const TooltipContentDiv = styled(Popper)`
   z-index: 10000;
@@ -44,7 +46,7 @@ const TooltipContentDiv = styled(Popper)`
 const Popover = () => {
   const dispatch = useDispatch()
 
-  const anchorEl = useSelector(({ ui }) => ui.anchorEl)
+  const anchorEl = useSelector(selectAnchorEl)
   const open = Boolean(anchorEl)
   const id = open ? 'simple-popper' : undefined
 

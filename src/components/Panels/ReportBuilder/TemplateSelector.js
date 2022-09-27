@@ -2,7 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { ControlElementMapping, Gutter, Icon } from "../../../components";
 import colors from "../../../config/colors";
-
+import { reportSelectors } from '../../../stores/reportStore'
+const { selectReportNames } = reportSelectors;
 const Selector = ControlElementMapping["select"];
 
 const TemplateButton = styled.button`
@@ -100,7 +101,7 @@ export default function TemplateSelector({
       payload: name,
     });
   };
-  const reports = useSelector(({ report }) => Object.keys(report.reports));
+  const reports = useSelector(selectReportNames);
 
   const templatesToShow = !showTemplateCustomizer
     ? templates

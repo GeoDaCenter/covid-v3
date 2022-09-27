@@ -4,10 +4,10 @@ import { indexGeoProps, getIdOrder } from "../utils";
 const orderInts = (a, b) => a - b;
 const onlyUnique = (value, index, self) => self.indexOf(value) === index;
 
-function reconcileData(payload, storedData){  
+function reconcileData(payload, storedData) {
   const { name, newData, timespan, error } = payload;
   const isStaticData = newData && !!newData.columns & !newData.dateIndices;
-  const dataError = 
+  const dataError =
     (newData?.dateIndices && !newData.dateIndices.length) ||
     (newData &&
       newData.dateIndices &&
@@ -38,16 +38,16 @@ function reconcileData(payload, storedData){
       dateIndices
     } = newData;
     if (!data || !dateIndices) return;
-    
+
     const geoids = Object.keys(data)
     if (Object.keys(storedData[name].data).length === 0) {
-      for (let i=0; i<geoids.length;i++){
+      for (let i = 0; i < geoids.length; i++) {
         storedData[name].data[geoids[i]] = {}
       }
     }
-    for (let i=0; i<geoids.length;i++){
-      for (let j=0;j<dateIndices.length;j++){
-        storedData[name].data[geoids[i]][dateIndices[j]] = data[geoids[i]][j]; 
+    for (let i = 0; i < geoids.length; i++) {
+      for (let j = 0; j < dateIndices.length; j++) {
+        storedData[name].data[geoids[i]][dateIndices[j]] = data[geoids[i]][j];
       }
     }
     storedData[name].loaded.push(timespan);
@@ -112,7 +112,7 @@ export default function reducer(state = INITIAL_STATE, action) {
         },
       };
     }
-    case "LOAD_GEOJSON":{
+    case "LOAD_GEOJSON": {
       const [fileName, geojson] = Object.entries(action.payload)[0]
       const properties = indexGeoProps(geojson.data, geojson.joinCol);
       const order = getIdOrder(geojson?.data?.features || [], geojson.joinCol);
@@ -143,7 +143,7 @@ export default function reducer(state = INITIAL_STATE, action) {
         isTicking: action.payload
       }
     }
-    case "SET_CAN_LOAD_IN_BACKGROUND":{
+    case "SET_CAN_LOAD_IN_BACKGROUND": {
       return {
         ...state,
         canLoadInBackground: action.payload && !state.isTicking,

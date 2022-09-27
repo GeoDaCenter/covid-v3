@@ -12,6 +12,8 @@ import { MdxStylesWrapper } from "./Learn/MdxStylesWrapper";
 import { Button, useMediaQuery } from "@mui/material";
 import Draggable from "./Interface/Draggable";
 import Scaleable from "./Interface/Scaleable";
+import { paramsSelectors } from "../stores/paramsStore";
+const { selectSinglePanelState } = paramsSelectors;
 //// Component Styling
 // Main container for component
 const InfoContainer = styled.div`
@@ -244,7 +246,7 @@ const InfoBox = ({
   minHeight,
   minWidth,
 }) => {
-  const panelOpen = useSelector(({ ui }) => ui.panelState.tutorial);
+  const panelOpen = useSelector(selectSinglePanelState('tutorial'));
   const [currentArticle, setCurrentArticle] = useState("release-notes");
   const Content = pages[currentArticle]?.default;
   const isMobile = useMediaQuery("(max-width: 600px)");
