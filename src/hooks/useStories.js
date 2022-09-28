@@ -8,8 +8,6 @@ import { useSelector } from 'react-redux';
 import { useGeoda } from '../contexts/Geoda';
 import useGetGeojson from './useGetGeojson';
 import { paramsSelectors } from '../stores/paramsStore';
-import { dataSelectors } from '../stores/dataStore'
-const { selectStoredGeojson } = dataSelectors;
 const { selectDatasets } = paramsSelectors;
 
 const doFilter = (story, filter) => {

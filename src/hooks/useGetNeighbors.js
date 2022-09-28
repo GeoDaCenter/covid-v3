@@ -4,10 +4,10 @@ import { useGeoda } from "../contexts/Geoda";
 import useGetGeojson from "./useGetGeojson";
 import { findIn, onlyUniqueArray } from "../utils";
 import { paramsSelectors } from "../stores/paramsStore";
-import { dataSelectors, dataActions } from '../stores/dataStore'
-const { selectStoredGeojson } = dataSelectors;
+import { dataActions } from '../stores/dataStore'
 const { selectDatasets } = paramsSelectors;
 const { addWeights } = dataActions;
+
 const getWeights = async (weights, mapId, geoda) => {
   if (weights && "Queen" in weights) {
     return {
