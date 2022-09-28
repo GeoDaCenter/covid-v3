@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { findIn, findAllDefaults, parseTooltipData } from '../utils';
 import { paramsSelectors } from '../stores/paramsStore';
 import { dataSelectors } from '../stores/dataStore'
-const { selectStoredGeojson, selectStoredData } = dataSelectors;
+const { selectGeojsonData, selectStoredData } = dataSelectors;
 const { selectCurrentData, selectDataParams, selectDatasets, selectTables } = paramsSelectors;
 export default function useGetTooltipContent({
     data=false,
@@ -23,17 +23,16 @@ export default function useGetTooltipContent({
         ...findAllDefaults(tables, currDataset.geography).map(dataspec => ({...dataspec}))
     ].filter((entry, index, self) => self.findIndex(f => f.table === entry.table) === index)
     
-    const storedGeojson = useSelector(selectStoredGeojson);
+    const geojsonData = useSelector(selectGeojsonData(currentData));
     const storedData = useSelector(selectStoredData);
 
     const tooltipContent = useMemo(() => {
         const tooltipData = parseTooltipData({
-            currentData,
             currDataset,
             currIndex,
             currTables,
             geoid,
-            storedGeojson,
+            properties: geojsonData?.properties,
             storedData
         })
 

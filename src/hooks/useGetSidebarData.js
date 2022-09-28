@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { findAllDefaults, findIn, generateReport } from '../utils';
 import { paramsSelectors } from '../stores/paramsStore';
 import { dataSelectors } from '../stores/dataStore'
-const { selectStoredData, selectStoredGeojson } = dataSelectors;
+const { selectStoredData, selectGeojsonData } = dataSelectors;
 const {selectCurrentData, selectDates, selectDataParams, selectDatasets, selectTables} = paramsSelectors;
 export default function useGetSidebarData({
     selectionKeys=[],
@@ -24,21 +24,20 @@ export default function useGetSidebarData({
         ...findAllDefaults(tables, currDataset.geography).map(dataspec => ({...dataspec}))
     ].filter((entry, index, self) => self.findIndex(f => f.table === entry.table) === index)
     
-    const storedGeojson = useSelector(selectStoredGeojson);
+    const geojsonData = useSelector(selectGeojsonData(currentData));
     const storedData = useSelector(selectStoredData);
     
     const sidebarData = useMemo(() => {
         if (!panelOpen || !selectionKeys.length) 
         return {};
         return generateReport({
-            currentData,
             currDataset,
             currIndex,
             dates,
             currTables,
             selectionKeys,
             storedData,
-            storedGeojson,
+            properties: geojsonData?.properties,
         })
     })   
 

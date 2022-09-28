@@ -54,8 +54,8 @@ export interface GeojsonDataset {
 export type DotDensityDatashape = [raceCode: number, x: number, y: number, GEOID: GEOID][]
 
 export interface DataState {
-    storedData: { [key: string]: Dataset }
-    storedGeojson: { [key: string]: GeojsonDataset }
+    storedData: { [key: string]: Partial<Dataset> }
+    storedGeojson: { [key: string]: Partial<GeojsonDataset> }
     // custom PBF schema for dot density
     // X and Y values are multiplied
     dotDensityData: DotDensityDatashape

@@ -2,7 +2,7 @@ import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { wrap } from "comlink";
 import { dataSelectors, dataActions } from '../stores/dataStore'
-const { selectStoredData } = dataSelectors;
+const { selectStoredDatasets } = dataSelectors;
 const { reconcileTable } = dataActions;
 
 const FetcherWorker =  wrap(new Worker(new URL('../workers/fetcher', import.meta.url)));
@@ -13,8 +13,8 @@ export default function useGetTable({
   dateLists = {},
 }) {
   const dispatch = useDispatch();  
-  const storedData = useSelector(selectStoredData);
-  const accessedData = filesToFetch.map((fileSchema) => storedData[fileSchema.name])
+  const fileSchemaNames = filesToFetch.map((fileSchema) => fileSchema.name)
+  const accessedData = useSelector(selectStoredDatasets(fileSchemaNames))
   
   useEffect(() => {    
     if (shouldFetch) {

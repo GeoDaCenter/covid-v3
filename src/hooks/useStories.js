@@ -63,7 +63,6 @@ const getCounts = (stories) => {
 }
 
 function useCentroidRandomizer() {
-    const storedGeojson = useSelector(selectStoredGeojson);
     const datasets = useSelector(selectDatasets);
     const { geoda, geodaReady } = useGeoda();
     const usafactsDataset = findIn(datasets, "file", 'county_usfacts.geojson');
@@ -71,7 +70,6 @@ function useCentroidRandomizer() {
         geoda,
         geodaReady,
         currDataset: usafactsDataset,
-        storedGeojson
     });
     const getPoint = (bounds, geog) => {
         const xy = randomPosition(bounds);

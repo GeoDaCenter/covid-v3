@@ -41,13 +41,14 @@ const persistedReducer = persistReducer(rootPersistConfig, rootReducer)
 
 const store = configureStore({
 	reducer: persistedReducer,
-	middleware: (getDefaultMiddleware) =>
+	middleware: (getDefaultMiddleware) => (
 		getDefaultMiddleware({
 			serializableCheck: {
 				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
 			}
 		})
-	// devTools: process.env.NODE_ENV !== 'production',
+	),
+	devTools: false //process.env.NODE_ENV !== 'production',
 })
 
 const persistor = persistStore(store)

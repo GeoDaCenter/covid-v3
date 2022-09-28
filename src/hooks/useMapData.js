@@ -80,7 +80,6 @@ export default function useMapData({
     dataParams,
     currentData
   });
-
   /**
    * currIndex is the reconcile index in case of null index, which defaults to most recent
    *  or an index outside of the current data range when changing datasets. 

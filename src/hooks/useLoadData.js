@@ -15,7 +15,7 @@ import useBackgroundLoadData from "./useBackgroundLoadData";
 import dataDateRanges from "../config/dataDateRanges";
 import { paramsSelectors, paramsActions } from "../stores/paramsStore";
 import { dataSelectors, dataActions } from '../stores/dataStore'
-const { selectStoredGeojson, selectCanLoadInBackground } = dataSelectors;
+const { selectCanLoadInBackground } = dataSelectors;
 const { selectDatasets, selectTables } = paramsSelectors;
 const { setDataParams } = paramsActions;
 const { setCanLoadInBackground } = dataActions;
@@ -39,7 +39,6 @@ export default function useLoadData({
   // pieces of redux state
   const dispatch = useDispatch();
   const { geoda, geodaReady } = useGeoda();
-  const storedGeojson = useSelector(selectStoredGeojson);
   const canLoadInBackground = useSelector(selectCanLoadInBackground);
   const datasets = useSelector(selectDatasets);
   const tables = useSelector(selectTables);
@@ -116,8 +115,16 @@ export default function useLoadData({
     geoda,
     geodaReady,
     currDataset,
-    storedGeojson
   });
+
+  console.log({
+    numeratorData,
+    numeratorDataReady,
+    denominatorData,
+    denominatorDataReady,
+    geojsonData,
+    geojsonDataReady
+  })
   
   const dateIndices = numeratorData ? numeratorData.dates : null;
 

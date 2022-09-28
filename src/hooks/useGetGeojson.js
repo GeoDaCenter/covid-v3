@@ -1,19 +1,20 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useMemo } from 'react'
-import { dataActions } from '../stores/dataStore'
+import { dataActions, dataSelectors } from '../stores/dataStore'
 const { loadGeojson } = dataActions
+const { selectGeojsonData } = dataSelectors
 
 export default function useGetGeojson({
     geoda = {},
     geodaReady = false,
     currDataset = {},
-    storedGeojson = {},
 }) {
+    const geoData = useSelector(selectGeojsonData(currDataset.file))
     const dispatch = useDispatch()
     useMemo(async () => {
         if (!geodaReady) return
-        if (storedGeojson[currDataset.file]) {
-            return storedGeojson[currDataset.file]
+        if (!!geoData?.weights) {
+            return geoData
         } else {
             const [mapId, data] = await geoda.loadGeoJSON(
                 `${process.env.PUBLIC_URL}/geojson/${currDataset.file}`,
@@ -38,13 +39,9 @@ export default function useGetGeojson({
             undefined, // error
         ]
     }
-
     return [
-        storedGeojson[currDataset.file], // data
-        storedGeojson[currDataset.file] &&
-            storedGeojson[currDataset.file].data &&
-            storedGeojson[currDataset.file].mapId &&
-            true, // data ready
+        geoData,
+        !!geoData?.data && !!geoData?.mapId && !!geoData?.weights, // dataReady
         undefined, // error
     ]
 }

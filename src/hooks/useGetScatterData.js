@@ -4,14 +4,14 @@ import { stitch } from '../utils'
 import useGetVariable from './useGetVariable'
 import { paramsSelectors } from '../stores/paramsStore'
 import { dataSelectors } from '../stores/dataStore'
-const { selectStoredGeojson } = dataSelectors;
+const { selectGeojsonData } = dataSelectors;
 const { selectCurrentData } = paramsSelectors
 
 export default function useGetScatterData({ xAxisVar, yAxisVar }) {
-  const storedGeojson = useSelector(selectStoredGeojson)
   // pieces of redux state
   const currentData = useSelector(selectCurrentData)
-  const geojsonData = storedGeojson[currentData]
+  const geojsonData = useSelector(selectGeojsonData(currentData))
+  
   const [data, setData] = useState({
     data: [],
     timestamp: null,

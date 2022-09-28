@@ -40,14 +40,12 @@ const getNeighbors = async (weights, geoda, idx) => {
 export default function useGetNeighbors({ geoid = null, currentData, updateTrigger = null }) {
   const dispatch = useDispatch();
   const { geoda, geodaReady } = useGeoda();
-  const storedGeojson = useSelector(selectStoredGeojson);  
   const datasets = useSelector(selectDatasets);
   const currDataset = findIn(datasets, "file", currentData);
   const [geojsonData] = useGetGeojson({
     geoda,
     geodaReady,
-    currDataset,
-    storedGeojson
+    currDataset
   });
   const {
     geoidOrder,

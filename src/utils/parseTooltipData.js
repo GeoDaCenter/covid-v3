@@ -1,16 +1,13 @@
 export const parseTooltipData = ({
-  currentData,
   currDataset,
   currIndex,
   currTables,
   geoid,
-  storedGeojson,
+  properties,
   storedData,
 }) => {
-  if (!currDataset || !storedGeojson[currentData] || !currTables) return {};
+  if (!currDataset || !properties || !currTables) return {};
   const { geography } = currDataset; // file, geography, join, name, tables
-  const properties = storedGeojson[currentData].properties;
-
   const locProperties = properties[geoid];
   // const pop = locProperties && locProperties.population;
   let tooltipData = {
