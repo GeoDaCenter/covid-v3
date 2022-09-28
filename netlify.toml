@@ -2,8 +2,8 @@
   directory = "functions/"
 
 [build.environment]
-  NODE_VERSION = "16.5.0"
-  AWS_LAMBDA_JS_RUNTIME = "16.5.0"
+  NODE_VERSION = "16.17.1"
+  AWS_LAMBDA_JS_RUNTIME = "16.17.1"
 
 [[headers]]
   for = "/csv/*"
