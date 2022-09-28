@@ -3,7 +3,7 @@ import { Dataset, DataState, DotDensityDatashape, WeightSpec } from './types'
 import {
     externalStoredGeojson,
     externalStoredData,
-//@ts-ignore
+    //@ts-ignore
 } from './nonReactiveDataStore'
 // @ts-ignore
 import { reconcileData, indexGeoProps, getIdOrder } from './utils'
@@ -109,6 +109,17 @@ export const dataSelectors = {
             ...(state.data?.storedData?.[id] || {}),
             data: externalStoredData[id]?.data,
         })),
+    selectStoredDatasetsDictionary: (ids: string[]) => (state: DataStateOuter) =>
+        ids.reduce(
+                (prev, id) => ({
+                    ...prev,
+                    [id]: {
+                        ...(state.data?.storedData?.[id] || {}),
+                        data: externalStoredData[id]?.data,
+                    },
+                }),
+                {}
+        ),
     selectStoredGeojson: (state: DataStateOuter) => ({
         weights: state.data.storedGeojson,
         data: externalStoredGeojson,

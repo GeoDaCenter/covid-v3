@@ -275,36 +275,33 @@ export const paramsSlice = createSlice({
                 type: 'remove' | 'update' | 'append' | 'bulk-append'
             }>
         ) => {
-            let selectionKeys = [...state.selectionKeys]
             switch (action.payload.type) {
                 case 'update': {
-                    state.selectionKeys = action.payload.geoid as number[]
+                    state.selectionKeys = [action.payload.geoid] as number[]
                     break
                 }
                 case 'append': {
                     const geoid = action.payload.geoid as number
-                    if (selectionKeys.indexOf(geoid) === -1) {
-                        selectionKeys.push(geoid)
+                    if (state.selectionKeys.indexOf(geoid) === -1) {
+                        state.selectionKeys.push(geoid)
                     }
-                    state.selectionKeys = selectionKeys
                     break
                 }
                 case 'bulk-append': {
                     const geoids = action.payload.geoid as number[]
                     geoids.forEach((geoid) => {
-                        if (selectionKeys.indexOf(geoid) === -1) {
-                            selectionKeys.push(geoid)
+                        if (state.selectionKeys.indexOf(geoid) === -1) {
+                            state.selectionKeys.push(geoid)
                         }
                     })
-                    state.selectionKeys = selectionKeys
                     break
                 }
                 case 'remove':
                     {
                         const geoid = action.payload.geoid as number
-                        const index = selectionKeys.indexOf(geoid)
+                        const index = state.selectionKeys.indexOf(geoid)
                         if (index !== -1) {
-                            selectionKeys.splice(index, 1)
+                            state.selectionKeys.splice(index, 1)
                         }
                     }
                     break

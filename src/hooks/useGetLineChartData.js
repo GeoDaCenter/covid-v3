@@ -4,7 +4,7 @@ import { findIn, findAllDefaults } from '../utils'
 import dataDateRanges from '../config/dataDateRanges'
 import { paramsSelectors } from '../stores/paramsStore'
 import { dataSelectors } from '../stores/dataStore'
-const { selectGeojson } = dataSelectors;
+const { selectGeojsonData } = dataSelectors;
 const {
   selectCurrentData,
   selectDatasets,
@@ -205,12 +205,14 @@ function useGetLineChartData({ table = 'cases', geoid = [] }) {
     (t) => t.table === table
   )?.name
 
-  const storedGeojson = useSelector(selectGeojson(currentData))
+  const storedGeojson = useSelector(selectGeojsonData(currentData))
   const currentGeojson = storedGeojson?.properties
+
   const getName = ['County'].includes(currDataset.geography)
     ? (key) =>
         currentGeojson?.[key]?.NAME + ', ' + currentGeojson?.[key]?.state_abbr
     : (key) => currentGeojson?.[key]?.NAME
+  
   const selectionNames = selectionKeys.map(getName)
   const totalPopulation =
     currentGeojson &&

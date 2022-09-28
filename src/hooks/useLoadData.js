@@ -116,15 +116,6 @@ export default function useLoadData({
     geodaReady,
     currDataset,
   });
-
-  console.log({
-    numeratorData,
-    numeratorDataReady,
-    denominatorData,
-    denominatorDataReady,
-    geojsonData,
-    geojsonDataReady
-  })
   
   const dateIndices = numeratorData ? numeratorData.dates : null;
 
