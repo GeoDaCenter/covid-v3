@@ -7,8 +7,12 @@ import {
 } from "./LayoutContainer";
 import { Alert, Box, Button, Stack, Modal, Snackbar, Typography, LinearProgress } from "@mui/material";
 import { usePrintReport } from "../../../../hooks/usePrintReport";
-import { reportSelectors } from '../../../../stores/reportStore';
+import { reportSelectors, reportActions } from '../../../../stores/reportStore';
+import { paramsActions } from "../../../../stores/paramsStore";
+const { togglePanel } = paramsActions;
+const { setItemLoaded, addReportPage, clearError } = reportActions;
 const { selectCurrentPage, selectPrintStatus, selectReportError } = reportSelectors;
+
 export default function Report({
   reportName = "",
   activeStep,
@@ -21,14 +25,12 @@ export default function Report({
   const containerRef = useRef(null);
   const pageWidth = containerRef?.current?.clientWidth;
 
-  const handleItemLoad = (id, isLoaded) => {
-    dispatch({
-      type: "SET_ITEM_LOADED",
-      payload: {
-        id,
+  const handleItemLoad = (itemId, isLoaded) => {
+    dispatch(setItemLoaded({
+        itemId,
         isLoaded,
-      }
-    })
+      })
+    )
   }
 
   const handleGridContext = (grid, pageIdx) => {
@@ -36,21 +38,6 @@ export default function Report({
       ...gridContext.current,
       [pageIdx]: grid,
     };
-  };
-
-  const handleGridUpdate = (pageIdx) => {
-    const currItems = gridContext?.current[pageIdx]?._items;
-    const currItemsOrder = currItems.map((item) => item._id);
-    const itemsMin = Math.min(...currItemsOrder);
-    dispatch({
-      type: "REORDER_REPORT_ITEMS",
-      payload: {
-        reportName,
-        pageIdx,
-        itemsMin,
-        currItemsOrder,
-      },
-    });
   };
 
   const {
@@ -68,7 +55,6 @@ export default function Report({
         pageIdx={currPage}
         {...{
           handleGridContext,
-          handleGridUpdate,
           reportName,
           pageWidth,
           zoomMultiplier,
@@ -99,16 +85,10 @@ function PrintModal({
     handleStep(activeStep - 1);
   }
 
-  const handleCloseReport = () => {
-    dispatch({
-      type: 'TOGGLE_PANEL', payload: 'reportBuilder'
-    })
-  }
+  const handleCloseReport = () => dispatch(togglePanel('reportBuilder'))
   // const report = useSelector(
   //   ({ report }) => report.reports?.[report.currentReport]);
   // cleanLayout(report).then(r => console.log(r))
-  
-
 
   return (
     <Modal
@@ -201,19 +181,8 @@ function ErrorToast() {
   const error = useSelector(selectReportError);
   const { type, reportName, pageIdx } = error || {};
 
-  const handleClose = () => {
-    dispatch({
-      type: "CLEAR_ERROR",
-    });
-  };
-
-  const handleAddPage = () =>
-    dispatch({
-      type: "ADD_REPORT_PAGE",
-      payload: {
-        reportName,
-      },
-    });
+  const handleClose = () => dispatch(clearError());
+  const handleAddPage = () => dispatch(addReportPage(reportName));
 
   if (!error) return null;
   const messages = {

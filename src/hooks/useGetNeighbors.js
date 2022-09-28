@@ -4,9 +4,10 @@ import { useGeoda } from "../contexts/Geoda";
 import useGetGeojson from "./useGetGeojson";
 import { findIn, onlyUniqueArray } from "../utils";
 import { paramsSelectors } from "../stores/paramsStore";
-import { dataSelectors } from '../stores/dataStore'
+import { dataSelectors, dataActions } from '../stores/dataStore'
 const { selectStoredGeojson } = dataSelectors;
 const { selectDatasets } = paramsSelectors;
+const { addWeights } = dataActions;
 const getWeights = async (weights, mapId, geoda) => {
   if (weights && "Queen" in weights) {
     return {
@@ -85,13 +86,11 @@ export default function useGetNeighbors({ geoid = null, currentData, updateTrigg
             }
           );
           if (shouldCacheWeights) {
-            dispatch({
-              type: "ADD_WEIGHTS",
-              payload: {
+            dispatch(addWeights({
                 id: currentData,
                 weights,
-              },
-            });
+              })
+            )
           }
         }
       );

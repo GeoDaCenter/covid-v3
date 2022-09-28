@@ -13,12 +13,6 @@ import { findIn, getDateLists } from '../../utils' //getVarId
 // second row: data and metadata handling
 // third row: map and variable parameters
 import {
-    setDates,
-    // setMapParams,
-    setNotification,
-    setPanelState,
-} from '../../actions'
-import {
     MapSection,
     NavBar,
     VariablePanel,
@@ -49,7 +43,7 @@ import { StoryViewerPane } from '../Panels/StoryViewerPane'
 import { Alert, Button, Snackbar } from '@mui/material'
 import { Box } from '@mui/system'
 import { getDefaultDimensions } from '../../utils/getDefaultDimensions'
-import { paramsSelectors } from '../../stores/paramsStore'
+import { paramsSelectors, paramsActions } from '../../stores/paramsStore'
 const {
     selectMapParams,
     selectDataParams,
@@ -58,6 +52,13 @@ const {
     selectPanelState,
     selectPartialDataParam,
 } = paramsSelectors
+const {
+    setDates,
+    setNotification,
+    setPanelState,
+    // setMapParams,
+} = paramsActions
+
 // Main function, App. This function does 2 things:
 // 1: App manages the majority of the side effects when the state changes.
 //    This takes the form of React's UseEffect hook, which listens
@@ -201,21 +202,21 @@ export default function Map() {
             // do nothing, most of the time
         } else if (paramsDict['v'] === '1') {
             dispatch(
-                setNotification(
-                    `
-          <h2>Welcome to the Atlas v2!</h2>
-          <p>
-          The share link you have entered is for an earlier release of the US Covid Atlas. 
-          Explore the new version here, or continue using your current share link by click below.
-          <a href="./vintage/map.html${window.location.search}" target="_blank" rel="noopener noreferrer" style="color:${colors.yellow}; text-align:center;">
-            <h3 style="text-align:center">
-              US Covid Atlas v1
-            </h3>  
-          </a>
-          </p>
-        `,
-                    'center'
-                )
+                setNotification({
+                    info: `
+                    <h2>Welcome to the Atlas v2!</h2>
+                    <p>
+                    The share link you have entered is for an earlier release of the US Covid Atlas. 
+                    Explore the new version here, or continue using your current share link by click below.
+                    <a href="./vintage/map.html${window.location.search}" target="_blank" rel="noopener noreferrer" style="color:${colors.yellow}; text-align:center;">
+                        <h3 style="text-align:center">
+                        US Covid Atlas v1
+                        </h3>  
+                    </a>
+                    </p>
+                    `,
+                    location:'center'
+        })
             )
         }
 

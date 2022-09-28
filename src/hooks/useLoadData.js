@@ -13,10 +13,13 @@ import useGetTable from "./useGetTable";
 import useGetGeojson from "./useGetGeojson";
 import useBackgroundLoadData from "./useBackgroundLoadData";
 import dataDateRanges from "../config/dataDateRanges";
-import { paramsSelectors } from "../stores/paramsStore";
-import { dataSelectors } from '../stores/dataStore'
+import { paramsSelectors, paramsActions } from "../stores/paramsStore";
+import { dataSelectors, dataActions } from '../stores/dataStore'
 const { selectStoredGeojson, selectCanLoadInBackground } = dataSelectors;
 const { selectDatasets, selectTables } = paramsSelectors;
+const { setDataParams } = paramsActions;
+const { setCanLoadInBackground } = dataActions;
+
 const dateLists = getDateLists();
 
 // fetch params spec
@@ -121,21 +124,15 @@ export default function useLoadData({
   // First load fix numerator index
   useEffect(() => {
     if (firstLoad.current && numeratorData?.dates && numeratorData.dates.slice(-1)[0]) {
-      dispatch({
-        type: "SET_DATA_PARAMS",
-        payload: {
-          nIndex: numeratorData.dates.slice(-1)[0],
-        },
-      });
+      dispatch(setDataParams({
+        nIndex: numeratorData.dates.slice(-1)[0]
+      }));
       firstLoad.current = false;
     }
   }, [numeratorData && (numeratorData?.dates && numeratorData.dates.slice(-1)[0])]);
 
   useEffect(() => {
-    dispatch({
-      type:'SET_CAN_LOAD_IN_BACKGROUND',
-      payload: !!numeratorDataReady && !!denominatorDataReady && !!geojsonDataReady
-    })
+    dispatch(setCanLoadInBackground(!!numeratorDataReady && !!denominatorDataReady && !!geojsonDataReady))
   }, [numeratorDataReady, denominatorDataReady, geojsonDataReady]);
   
   // const {// isBackgroundLoading: adjacentMonthLoading

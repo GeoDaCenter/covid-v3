@@ -4,6 +4,8 @@ import {
   findAllDefaults,
 } from '../utils';
 import { wrap } from "comlink";
+import { dataActions } from '../stores/dataStore';
+const { reconcileTables } = dataActions;
 const FetcherWorker =  wrap(new Worker(new URL('../workers/fetcher', import.meta.url)));
 
 export default function useBackgroundLoadData({
@@ -36,12 +38,7 @@ export default function useBackgroundLoadData({
       const getData = async () => FetcherWorker.fetchAndClean(filesToFetch, dateLists)
       setIsBackgroundLoading(true)
       getData().then(data => {
-        dispatch({
-          type:"RECONCILE_TABLES",
-          payload: {
-            data
-          }
-        })
+        dispatch(reconcileTables(data))
         setIsBackgroundLoading(false)
       })
     }

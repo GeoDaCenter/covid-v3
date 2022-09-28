@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import { Icon } from '..';
 import colors from '../../config/colors';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { paramsSelectors } from '../../stores/paramsStore';
+import { paramsSelectors, paramsActions } from '../../stores/paramsStore';
 const { selectPanelState } = paramsSelectors;
-
+const { togglePanel, toggleMobilePanel } = paramsActions;
 const DockContainerOuter = styled.div`
   position:relative;
 `
@@ -189,7 +189,7 @@ const buttons = [
   //   panelName: 'scatterChart',
   // },
   {
-    symbol:'addData',
+    symbol: 'addData',
     id: 'add-data-button',
     ariaLabel: 'Add Custom Data',
     panelName: 'dataLoader',
@@ -220,15 +220,14 @@ const buttons = [
   },
 ];
 
-function IconDock(){
+function IconDock() {
   const dispatch = useDispatch();
   const [hoveredIcon, setHoveredIcon] = useState(null);
   const panelState = useSelector(selectPanelState);
   const isMobile = useMediaQuery('(max-width:600px)');
-  const handleToggle = (panel) => {
-    const action = isMobile ? 'MOBILE_TOGGLE_PANEL' : 'TOGGLE_PANEL';
-    dispatch({ type: action, payload: panel })
-  }
+  const handleToggle = isMobile
+    ? (panel) => dispatch(toggleMobilePanel(panel))
+    : (panel) => dispatch(togglePanel(panel));
 
   return (
     <DockContainerOuter>
@@ -250,18 +249,18 @@ function IconDock(){
       </DockContainer>
       <DockLabels className={hoveredIcon ? 'active' : ''}>
         {buttons.map(({ symbol, id, ariaLabel, onClick }) => (
-            <button
-              id={id}
-              key={`${id}-icon-dock-label`}
-              aria-label={ariaLabel}
-              onClick={onClick}
-              className={hoveredIcon === id ? 'hovered' : ''}
-              onMouseEnter={() => setHoveredIcon(id)}
-              onMouseLeave={() => setHoveredIcon(null)}
-            >
-              {ariaLabel}
-            </button>
-          ))}
+          <button
+            id={id}
+            key={`${id}-icon-dock-label`}
+            aria-label={ariaLabel}
+            onClick={onClick}
+            className={hoveredIcon === id ? 'hovered' : ''}
+            onMouseEnter={() => setHoveredIcon(id)}
+            onMouseLeave={() => setHoveredIcon(null)}
+          >
+            {ariaLabel}
+          </button>
+        ))}
       </DockLabels>
     </DockContainerOuter>
   );

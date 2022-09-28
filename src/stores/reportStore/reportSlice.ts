@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { ReportItem, ReportState } from './types'
+import { MetaSpec, ReportItem, ReportState } from './types'
 // @ts-ignore
 import DEFAULTS from './reportInitialState'
 import { nanoid } from 'nanoid'
@@ -13,7 +13,7 @@ export const reportSlice = createSlice({
   reducers: {
     addNewReport(
       state,
-      action: PayloadAction<{ reportName: string; spec: string; meta: any }>
+      action: PayloadAction<{ reportName: string; spec: string; meta: MetaSpec }>
     ) {
       const { reportName, spec, meta } = action.payload
       const { items, layout } = generateReportLayout(spec)
@@ -46,7 +46,7 @@ export const reportSlice = createSlice({
         isLoaded: state.reports[currentReport]?.layout?.[0]?.length === 0,
       }
     },
-    changereportItem(
+    changeReportItem(
       state,
       action: PayloadAction<{ reportName: string; itemId: string; props: any }>
     ) {
@@ -161,8 +161,8 @@ export const reportSlice = createSlice({
     //     reports,
     //   }
     // },
-    addReportPage(state, action: PayloadAction<{ reportName: string }>) {
-      const { reportName } = action.payload
+    addReportPage(state, action: PayloadAction<string>) {
+      const reportName = action.payload
       if (!state.reports?.[reportName]?.layout) return
       state.reports?.[reportName]?.layout.push([])
       state.pageIdx = state.reports?.[reportName]?.layout.length - 1
@@ -170,7 +170,7 @@ export const reportSlice = createSlice({
     clearError(state) {
       state.error = null
     },
-    setPageIdx(state, action: PayloadAction<number>) {
+    setReportPage(state, action: PayloadAction<number>) {
       state.pageIdx = action.payload
       state.loadState = {
         items: {},

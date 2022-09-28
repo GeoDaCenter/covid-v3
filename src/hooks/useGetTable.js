@@ -1,8 +1,10 @@
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { wrap } from "comlink";
-import { dataSelectors } from '../stores/dataStore'
+import { dataSelectors, dataActions } from '../stores/dataStore'
 const { selectStoredData } = dataSelectors;
+const { reconcileTable } = dataActions;
+
 const FetcherWorker =  wrap(new Worker(new URL('../workers/fetcher', import.meta.url)));
 
 export default function useGetTable({
@@ -29,14 +31,11 @@ export default function useGetTable({
           .then((dataArray) => {
             if (dataArray.length) {
               dataArray.forEach(({ value: newData }, idx) => {
-                dispatch({
-                  type: "RECONCILE_TABLE",
-                  payload: {
+                dispatch(reconcileTable({
                     name: cleanedFilesToFetch[idx].name,
                     newData,
                     timespan: cleanedFilesToFetch[idx].timespan,
-                  },
-                });
+                  }))
               });
             }
           })

@@ -278,9 +278,7 @@ const Legend = ({
   const dispatch = useDispatch()
   const colorFilter = useSelector(selectColorFilter)
   const handleHover = (color) => {
-    dispatch(setColorFilter({
-      payload: color,
-    }))
+    dispatch(setColorFilter(color))
   }
   const { bins: currentBins } = bins
 

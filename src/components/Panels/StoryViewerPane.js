@@ -4,8 +4,13 @@ import { useStoriesContext } from '../../contexts/StoriesContext';
 import colors from '../../config/colors';
 import { StoryContainer } from '../../components/Stories/StoryContainer';
 import { useDispatch } from 'react-redux';
-import { setMapParams } from '../../actions';
 import { Button } from '@mui/material';
+import { paramsActions } from '../../stores/paramsStore';
+const { 
+    setMapParams, 
+    // setPanelState
+} = paramsActions;
+
 
 const StoryViewerPanel = styled.div`
     height:fit-content;

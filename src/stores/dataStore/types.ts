@@ -51,13 +51,14 @@ export interface GeojsonDataset {
     }
     weights: WeightSpec | {}
 }
+export type DotDensityDatashape = [raceCode: number, x: number, y: number, GEOID: GEOID][]
 
 export interface DataState {
     storedData: { [key: string]: Dataset }
     storedGeojson: { [key: string]: GeojsonDataset }
     // custom PBF schema for dot density
     // X and Y values are multiplied
-    dotDensityData: [raceCode: number, x: number, y: number, GEOID: GEOID][]
+    dotDensityData: DotDensityDatashape
     isTicking: boolean
     canLoadInBackground: boolean
 }

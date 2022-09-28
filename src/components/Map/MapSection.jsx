@@ -45,7 +45,15 @@ import { dataSelectors, dataActions } from '../../stores/dataStore'
 const { selectDotDensityData } = dataSelectors
 const { selectPanelState, selectColorFilter, selectVariableMenuWidth } =
     paramsSelectors
-const { openContextMenu, setMapLoaded, setNotification, setTooltipInfo, updateSelection, updateSelectionKeys, setPanelState } = paramsActions
+const {
+    // openContextMenu,
+    setMapLoaded,
+    setNotification,
+    setTooltipInfo,
+    updateSelection,
+    // updateSelectionKeys,
+    setPanelState,
+} = paramsActions
 const { setDotDensityData } = dataActions
 
 /**
@@ -281,14 +289,15 @@ function MapSection({
                     })
                 }
             })
-            window.addEventListener('contextmenu', (e) => {
-                dispatch(
-                    openContextMenu({
-                        x: e.pageX,
-                        y: e.pageY,
-                    })
-                )
-            })
+            // deprecated
+            // window.addEventListener('contextmenu', (e) => {
+            //     dispatch(
+            //         openContextMenu({
+            //             x: e.pageX,
+            //             y: e.pageY,
+            //         })
+            //     )
+            // })
         }
     }, [])
 
@@ -417,19 +426,19 @@ function MapSection({
                     }))
                 )
                 dispatch(
-                    setNotification(
-                        `
-                    <h2>COVID19 Vaccine Access</h2>
-                    <p>
-                        <br/>
-                        Federal Vaccination Sites only include White House/FEMA large vaccination centers and HRSA-supported clinics (FQHCs).
-                        <br/><br/>
-                        For a more complete listing of places to get the COVID19 vaccine please visit the <a href="https://vaccinefinder.org/search/" target="_blank" rel="noopener noreferrer">CDC VaccineFinder</a> or check your local jurisdiction.
-                    </a>
-                    </p>
-                `,
-                        'center'
-                    )
+                    setNotification({
+                        info: `
+                            <h2>COVID19 Vaccine Access</h2>
+                            <p>
+                                <br/>
+                                Federal Vaccination Sites only include White House/FEMA large vaccination centers and HRSA-supported clinics (FQHCs).
+                                <br/><br/>
+                                For a more complete listing of places to get the COVID19 vaccine please visit the <a href="https://vaccinefinder.org/search/" target="_blank" rel="noopener noreferrer">CDC VaccineFinder</a> or check your local jurisdiction.
+                            </a>
+                            </p>
+                        `,
+                        location: 'center',
+                    })
                 )
             }
         }
@@ -457,16 +466,16 @@ function MapSection({
     const handleMapHover = ({ x, y, object, layer }) => {
         if (object) {
             dispatch(
-                setTooltipInfo(
+                setTooltipInfo({
                     x,
                     y,
-                    object?.properties ? object.properties[currIdCol] : object,
-                    object?.properties || object
-                )
+                    id: object?.properties ? object.properties[currIdCol] : object,
+                    data: object?.properties || object
+                })
             )
         } else {
             hoverGeog && setHoverGeog(null)
-            dispatch(setTooltipInfo(x, y, null, null))
+            dispatch(setTooltipInfo({x, y, id: null, data: null}))
         }
 
         if (
@@ -492,7 +501,9 @@ function MapSection({
                 if (highlightGeog.indexOf(objectID) === -1) {
                     let GeoidList = [...highlightGeog, objectID]
                     setHighlightGeog(GeoidList)
-                    dispatch(updateSelection({geoid:objectID, type:'append'}))
+                    dispatch(
+                        updateSelection({ geoid: objectID, type: 'append' })
+                    )
                     window.localStorage.setItem('SHARED_GEOID', GeoidList)
                     window.localStorage.setItem(
                         'SHARED_VIEW',
@@ -503,7 +514,9 @@ function MapSection({
                         let tempArray = [...highlightGeog]
                         tempArray.splice(tempArray.indexOf(objectID), 1)
                         setHighlightGeog(tempArray)
-                        dispatch(updateSelection({geoid:objectID, type:'remove'}))
+                        dispatch(
+                            updateSelection({ geoid: objectID, type: 'remove' })
+                        )
                         window.localStorage.setItem('SHARED_GEOID', tempArray)
                         window.localStorage.setItem(
                             'SHARED_VIEW',
@@ -515,7 +528,7 @@ function MapSection({
         } else {
             try {
                 setHighlightGeog([objectID])
-                dispatch(updateSelection({geoid:objectID, type:'update'}))
+                dispatch(updateSelection({ geoid: objectID, type: 'update' }))
                 window.localStorage.setItem('SHARED_GEOID', objectID)
                 window.localStorage.setItem(
                     'SHARED_VIEW',
@@ -924,7 +937,9 @@ function MapSection({
                     GeoidList.push(objectID)
                 }
 
-                dispatch(updateSelection({geoid:GeoidList, type:'bulk-append'}))
+                dispatch(
+                    updateSelection({ geoid: GeoidList, type: 'bulk-append' })
+                )
                 setHighlightGeog(GeoidList)
 
                 window.localStorage.setItem('SHARED_GEOID', GeoidList)
@@ -975,7 +990,7 @@ function MapSection({
                 onKeyUp={handleKeyUp}
                 onMouseDown={(e) => {
                     boxSelect && handleBoxSelect(e)
-                    dispatch(setTooltipInfo(null, null, null, null))
+                    dispatch(setTooltipInfo({x:null, y:null, id: null, data: null}))
                 }}
                 id="mapContainer"
                 onMouseUp={(e) => boxSelect && handleBoxSelect(e)}

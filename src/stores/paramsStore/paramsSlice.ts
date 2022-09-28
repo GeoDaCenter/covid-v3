@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { ParamsUiState, VariableSpec } from './types'
+import { ParamsUiState, VariableSpec, MapParamsSpec } from './types'
 import {
     resolveName,
     findIn,
@@ -51,8 +51,8 @@ export const paramsSlice = createSlice({
         setStopPlaying: (state) => {
             state.isPlaying = false
         },
-        setMapLoaded(state, action: PayloadAction<{ mapLoaded: boolean }>) {
-            state.mapLoaded = action.payload.mapLoaded
+        setMapLoaded(state, action: PayloadAction<boolean>) {
+            state.mapLoaded = action.payload
         },
         setIsLoading(state) {
             state.isLoading = true
@@ -68,7 +68,9 @@ export const paramsSlice = createSlice({
         },
         setPanelState(
             state,
-            action: PayloadAction<{[panel: keyof ParamsUiState["panelState"]]: boolean }>
+            action: PayloadAction<{
+                [panel: keyof ParamsUiState['panelState']]: boolean
+            }>
         ) {
             state.panelState = {
                 ...state.panelState,
@@ -126,8 +128,8 @@ export const paramsSlice = createSlice({
                 state.selectionNames = []
             }
         },
-        setDates(state, action: PayloadAction<{ data: string[] }>) {
-            state.dates = action.payload.data
+        setDates(state, action: PayloadAction<string[]>) {
+            state.dates = action.payload
         },
         incrementDate(
             state,
@@ -256,6 +258,12 @@ export const paramsSlice = createSlice({
                 ...action.payload,
             }
         },
+        setMapParams(state, action: PayloadAction<Partial<MapParamsSpec>>) {
+            state.mapParams = {
+                ...state.mapParams,
+                ...action.payload,
+            }
+        },
         clearSelection(state) {
             state.selectionKeys = []
             state.selectionNames = []
@@ -291,13 +299,14 @@ export const paramsSlice = createSlice({
                     state.selectionKeys = selectionKeys
                     break
                 }
-                case 'remove': {
-                    const geoid = action.payload.geoid as number
-                    const index = selectionKeys.indexOf(geoid)
-                    if (index !== -1) {
-                        selectionKeys.splice(index, 1)
+                case 'remove':
+                    {
+                        const geoid = action.payload.geoid as number
+                        const index = selectionKeys.indexOf(geoid)
+                        if (index !== -1) {
+                            selectionKeys.splice(index, 1)
+                        }
                     }
-                }
                     break
                 default:
                     break
@@ -310,18 +319,13 @@ export const paramsSlice = createSlice({
             // @ts-ignore
             state.anchorEl = action.payload
         },
-        changeDocDensityMode: (state) => {
+        toggleDotDensityMode: (state) => {
             state.mapParams.dotDensityParams.colorCOVID =
                 !state.mapParams.dotDensityParams.colorCOVID
         },
-        toggleDotDensityRace: (
-            state,
-            action: PayloadAction<{ index: number }>
-        ) => {
-            state.mapParams.dotDensityParams.raceCodes[action.payload.index] =
-                !state.mapParams.dotDensityParams.raceCodes[
-                    action.payload.index
-                ]
+        toggleDotDensityRace: (state, action: PayloadAction<number>) => {
+            state.mapParams.dotDensityParams.raceCodes[action.payload] =
+                !state.mapParams.dotDensityParams.raceCodes[action.payload]
         },
         setdotDensityBackgroundOpacity: (
             state,

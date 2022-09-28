@@ -1,9 +1,9 @@
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetcher } from "../utils";
-import { dataSelectors } from '../../stores/dataStore'
-const { selectDatasets } = dataSelectors;
-
+import { dataSelectors, dataActions } from '../stores/dataStore'
+const { selectMultiDatasets } = dataSelectors;
+const { reconcileTable } = dataActions;
 export default function useGetTable({
   filesToFetch = [],
   shouldFetch = false,
@@ -11,7 +11,7 @@ export default function useGetTable({
 }) {
   const dispatch = useDispatch();
   const datasetNames = filesToFetch.map((fileSchema) => fileSchema.name);
-  const accessedData = useSelector(selectDatasets(datasetNames));
+  const accessedData = useSelector(selectMultiDatasets(datasetNames));
 
   useEffect(() => {
     console.log("loading files...");
@@ -28,14 +28,11 @@ export default function useGetTable({
           .then((dataArray) => {
             if (dataArray.length) {
               dataArray.forEach(({ value: newData }, idx) => {
-                dispatch({
-                  type: "RECONCILE_TABLE",
-                  payload: {
-                    name: filesToFetch[idx].name,
-                    newData,
-                    timespan: filesToFetch[idx].timespan,
-                  },
-                });
+                dispatch(reconcileTable({
+                  name: filesToFetch[idx].name,
+                  newData,
+                  timespan: filesToFetch[idx].timespan,
+                }))
               });
             }
           })

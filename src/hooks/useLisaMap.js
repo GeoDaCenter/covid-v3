@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useGeoda } from '../contexts/Geoda';
 import { useDispatch, useSelector } from 'react-redux';
-import { dataSelectors } from '../stores/dataStore'
+import { dataSelectors, dataActions } from '../stores/dataStore'
 const { selectStoredGeojson } = dataSelectors;
+const { addWeights } = dataActions;
 
 const getLisa = async (currentGeojson, geoda, dataForLisa) => {
     const weights =
@@ -47,13 +48,10 @@ export default function useLisaMap({
                         lisaVarId: varId,
                     });
                     if (shouldCacheWeights) {
-                        dispatch({
-                            type: "ADD_WEIGHTS",
-                            payload: {
-                                id: currentData,
-                                weights,
-                            },
-                        });
+                        dispatch(addWeights({
+                            id: currentData,
+                            weights,
+                        }))
                     }
                 }
             );

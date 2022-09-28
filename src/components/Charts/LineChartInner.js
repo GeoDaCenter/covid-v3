@@ -18,8 +18,7 @@ import colors from '../../config/colors'
 import useGetLineChartData from '../../hooks/useGetLineChartData'
 import { useSize } from '../../hooks/useSize'
 import { paramsActions } from '../../stores/paramsStore'
-
-const {setVariableParams} = paramsActions
+const { setDataParams } = paramsActions
 
 const ChartContainer = styled.span`
     display: block;
@@ -156,10 +155,10 @@ const CustomTooltip = ({ active, payload, background }) => {
                             {data.name}:{' '}
                             {!isNaN(+data.payload[data.dataKey])
                                 ? (
-                                      Math.round(
-                                          data.payload[data.dataKey] * 10
-                                      ) / 10
-                                  ).toLocaleString('en')
+                                    Math.round(
+                                        data.payload[data.dataKey] * 10
+                                    ) / 10
+                                ).toLocaleString('en')
                                 : data.payload[data.dataKey]}
                         </p>
                     ))}
@@ -218,7 +217,7 @@ const colorSchemes = {
  * @component
  */
 function LineChartInner({
-    resetDock = () => {},
+    resetDock = () => { },
     docked = false,
     table = 'cases',
     logChart = false,
@@ -227,7 +226,7 @@ function LineChartInner({
     shouldShowVariants = false,
     colorScheme = 'dark',
     geoid = [],
-    loadedCallback = () => {},
+    loadedCallback = () => { },
 }) {
     // For light and dark color schemes
     const {
@@ -246,7 +245,7 @@ function LineChartInner({
     const dispatch = useDispatch()
     const handleChange = (e) => {
         if (e?.activeTooltipIndex) {
-            dispatch(setVariableParams({ nIndex: e.activeTooltipIndex }))
+            dispatch(setDataParams({ nIndex: e.activeTooltipIndex }))
         }
     }
     // width listener
@@ -308,17 +307,16 @@ function LineChartInner({
                             <Line
                                 type="monotone"
                                 yAxisId="right"
-                                dataKey={`${geoid}Sum${
-                                    populationNormalized ? '100k' : ''
-                                }`}
+                                dataKey={`${geoid}Sum${populationNormalized ? '100k' : ''
+                                    }`}
                                 name={selectionNames[idx] + ' Cumulative'}
                                 stroke={
                                     selectionKeys.length === 1
                                         ? mediumColor
                                         : selectionKeys.length >
-                                          qualtitiveScale.length
-                                        ? mediumColor
-                                        : qualtitiveScale[idx]
+                                            qualtitiveScale.length
+                                            ? mediumColor
+                                            : qualtitiveScale[idx]
                                 }
                                 // strokeDasharray={"2,2"}
                                 dot={false}
@@ -330,9 +328,8 @@ function LineChartInner({
                         <Line
                             type="monotone"
                             yAxisId="left"
-                            dataKey={`weekly${
-                                populationNormalized ? '100k' : ''
-                            }`}
+                            dataKey={`weekly${populationNormalized ? '100k' : ''
+                                }`}
                             name={x2label}
                             stroke={highlightColor}
                             dot={false}
@@ -345,17 +342,16 @@ function LineChartInner({
                                 type="monotone"
                                 yAxisId="left"
                                 key={`line-weekly-${geoid}`}
-                                dataKey={`${geoid}Weekly${
-                                    populationNormalized ? '100k' : ''
-                                }`}
+                                dataKey={`${geoid}Weekly${populationNormalized ? '100k' : ''
+                                    }`}
                                 name={selectionNames[idx] + ' 7-Day Ave'}
                                 stroke={
                                     selectionKeys.length === 1
                                         ? highlightColor
                                         : selectionKeys.length >
-                                          qualtitiveScale.length
-                                        ? highlightColor
-                                        : qualtitiveScale[idx]
+                                            qualtitiveScale.length
+                                            ? highlightColor
+                                            : qualtitiveScale[idx]
                                 }
                                 dot={false}
                                 isAnimationActive={false}

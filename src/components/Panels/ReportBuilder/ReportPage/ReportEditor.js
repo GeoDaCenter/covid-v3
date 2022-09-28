@@ -6,9 +6,9 @@ import Stack from "@mui/material/Stack";
 import { AddItemsSpeeedDial } from "../InterfaceComponents/AddItemsSpeedDial";
 import { ZoomInMap, ZoomOutMap, CropFree } from "@mui/icons-material";
 import { ButtonContainer } from "../Report/LayoutContainer";
-import { reportSelectors } from '../../../../stores/reportStore'
+import { reportSelectors, reportActions } from '../../../../stores/reportStore'
 const { selectCurrentPage, selectCurrentReport } = reportSelectors;
-
+const { addReportPage, addReportItem, setReportPage } = reportActions;
 export const ReportEditor = ({ activeStep, handleStep }) => {
   const dispatch = useDispatch();
 
@@ -41,29 +41,17 @@ export const ReportEditor = ({ activeStep, handleStep }) => {
     if (item.type === "page") {
       handleAddPage();
     } else {
-      dispatch({
-        type: "ADD_REPORT_ITEM",
-        payload: {
+      dispatch(
+        addReportItem({
           reportName,
           pageIdx: currPage,
           item,
-        },
-      });
+        }))
     }
   };
-  const handleAddPage = () =>
-    dispatch({
-      type: "ADD_REPORT_PAGE",
-      payload: {
-        reportName,
-      },
-    });
-
-  const handleChangePage = (e, value) => {
-    dispatch({
-      type: "SET_PAGE_IDX",
-      payload: value - 1,
-    });
+  const handleAddPage = () => dispatch(addReportPage(reportName));
+  const handleChangePage = (_e, value) => {
+    dispatch(setReportPage(value - 1))
   };
 
   const canAddItem = !layout?.find(

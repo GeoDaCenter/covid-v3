@@ -53,7 +53,7 @@ interface VariableTree {
   }
 }
 
-interface MapParamsSpec {
+export interface MapParamsSpec {
   mapType: 'natural_breaks' | 'hinge15_breaks' | 'lisa' | string
   bins: {
     bins: number[]

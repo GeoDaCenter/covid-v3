@@ -16,8 +16,9 @@ import TwoWeekChart from "../Charts/TwoWeekLineChart";
 import colors from "../../config/colors";
 import { TextStatistics } from "../../components";
 import { Button } from "@mui/material";
-import { paramsSelectors } from "../../stores/paramsStore";
+import { paramsSelectors, paramsActions } from "../../stores/paramsStore";
 const { selectPanelState, selectSelectionKeys, selectDates } = paramsSelectors;
+const { clearSelection } = paramsActions;
 //// Styled components CSS
 // Main container for entire panel
 const DataPanelContainer = styled.div`
@@ -243,7 +244,7 @@ export default function DataPanel({
   });
   const dates = useSelector(selectDates);
   const dispatch = useDispatch();
-  const handleClearSelection = () => dispatch({ type: "CLEAR_SELECTION" });
+  const handleClearSelection = () => dispatch(clearSelection());
   // Set expanded or contracted view
   // const handleExpandContract = (event) => setExpanded(event.target.value);
   return (

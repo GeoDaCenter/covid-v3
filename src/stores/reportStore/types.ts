@@ -1,6 +1,9 @@
 export interface MetaSpec {
     date: string
     dateIndex: number | string
+    county: string
+    state: string
+    geoid: string | number
 }
 
 export interface ReportItem {

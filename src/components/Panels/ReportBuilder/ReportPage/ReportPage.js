@@ -13,9 +13,9 @@ import { NoInteractionGate } from "../PageComponents/MapReport";
 import { Box } from "@mui/material";
 import styled from "styled-components";
 import LinearProgress from "@mui/material/LinearProgress";
-import { reportSelectors } from "../../../../stores/reportStore";
+import { reportSelectors, reportActions } from "../../../../stores/reportStore";
 const { selectPrintStatus, selectIsLoaded } = reportSelectors;
-
+const { updateReportLayout } = reportActions;
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const OuterContainer = styled.div`
@@ -71,14 +71,12 @@ export default function ReportPage({
   }
 
   const handleLayoutChange = (layout) => {
-    dispatch({
-      type: "UPDATE_REPORT_LAYOUT",
-      payload: {
+    dispatch(updateReportLayout({
         reportName,
         pageIdx,
         layout,
-      },
-    });
+      })
+    );
   };
 
   return (

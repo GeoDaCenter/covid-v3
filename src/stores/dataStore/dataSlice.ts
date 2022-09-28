@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Dataset, DataState, WeightSpec } from './types'
+import { Dataset, DataState, DotDensityDatashape, WeightSpec } from './types'
 // @ts-ignore
 import { reconcileData, indexGeoProps, getIdOrder } from './utils'
 // @ts-ignore
@@ -10,7 +10,7 @@ export const dataSlice = createSlice({
   name: 'data',
   initialState,
   reducers: {
-    loadDotDensityData(state, action: PayloadAction<[number, number, number, number][]>){
+    loadDotDensityData(state, action: PayloadAction<Array<[number, number, number, number]>>){
         state.dotDensityData = action.payload
     },
     reconcileTable(state, action: PayloadAction<{data: {[key:string]: Dataset}}>){
@@ -19,7 +19,7 @@ export const dataSlice = createSlice({
         state.storedData
       );
     },
-    reconcileTables(state, action: PayloadAction<{data: {[key:string]: Dataset}}[]>){
+    reconcileTables(state, action: PayloadAction<Array<{data: {[key:string]: Dataset}}>>){
         action.payload.forEach((payload) => {
             reconcileData(
                 payload.data,
@@ -48,6 +48,9 @@ export const dataSlice = createSlice({
     },
     setCanLoadInBackground(state, action: PayloadAction<boolean>) {
         state.canLoadInBackground = action.payload && !state.isTicking
+    },
+    setDotDensityData: (state, action: PayloadAction<DotDensityDatashape>) => {
+        state.dotDensityData = action.payload
     }
   },
 })
@@ -65,7 +68,7 @@ export const dataSelectors = {
   selectStoredGeojson: (state: DataStateOuter) => state.data.storedGeojson,
   selectDateset: (id: string) => (state: DataStateOuter) => state.data.storedData[id],
   selectGeojson: (id: string) => (state: DataStateOuter) => state.data.storedGeojson[id],
-  selectMultiDatasets: (ids: string[]) => (state: DataStateOuter) => ids.map(id => state.data.storedData[id]),
+  selectMultiDatasets: (ids: Array<string>) => (state: DataStateOuter) => ids.map(id => state.data.storedData[id]),
   selectCanLoadInBackground: (state: DataStateOuter) => state.data.canLoadInBackground,
   selectIsTicking: (state: DataStateOuter) => state.data.isTicking,
 }

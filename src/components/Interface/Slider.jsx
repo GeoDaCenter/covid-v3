@@ -12,7 +12,7 @@ import Ticks from './Ticks'
 import DatePicker from 'react-date-picker'
 import { StyledSlider, Icon } from '..'
 import { paramsActions } from '../../stores/paramsStore'
-const { setVariableParams } = paramsActions
+const { setDataParams } = paramsActions
 const SliderContainer = styled(Grid)`
     color: white;
     box-sizing: border-box;
@@ -328,10 +328,10 @@ function DateSlider() {
     const handleChange = debounce((_, newValue) => {
         // eslint-disable-line
         if (currDatesAvailable[newValue]) {
-            dispatch(setVariableParams({ nIndex: newValue }))
+            dispatch(setDataParams({ nIndex: newValue }))
         } else {
             dispatch(
-                setVariableParams({
+                setDataParams({
                     nIndex: findClosestValue(
                         newValue,
                         currDatesAvailable,
@@ -346,10 +346,10 @@ function DateSlider() {
         const newIndex = Math.max(newValue[0], newValue[1])
         const newRange = newIndex - Math.min(newValue[0], newValue[1]) // eslint-disable-line
         if (currDatesAvailable[newIndex]) {
-            dispatch(setVariableParams({ nIndex: newIndex, nRange: newRange }))
+            dispatch(setDataParams({ nIndex: newIndex, nRange: newRange }))
         } else {
             dispatch(
-                setVariableParams({
+                setDataParams({
                     nIndex: findClosestValue(
                         newIndex,
                         currDatesAvailable,
