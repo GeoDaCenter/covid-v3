@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { findIn, findAllDefaults, parseTooltipData } from '../utils';
 import { paramsSelectors } from '../stores/paramsStore';
 import { dataSelectors } from '../stores/dataStore'
-const { selectGeojsonData, selectStoredData } = dataSelectors;
+const { selectGeojsonData, selectStoredDatasetsDictionary } = dataSelectors;
 const { selectCurrentData, selectDataParams, selectDatasets, selectTables } = paramsSelectors;
 export default function useGetTooltipContent({
     data=false,
@@ -18,13 +18,24 @@ export default function useGetTooltipContent({
     // current state data params
     const currIndex = dataParams.nIndex||dataParams.dIndex;
     const currDataset = findIn(datasets, 'file', currentData)
-    const currTables = [
-        ...Object.values(currDataset.tables).map(tableId => findIn(tables, 'id', tableId)),
-        ...findAllDefaults(tables, currDataset.geography).map(dataspec => ({...dataspec}))
-    ].filter((entry, index, self) => self.findIndex(f => f.table === entry.table) === index)
+    const {
+        currTables,
+        currTableNames
+    } = useMemo(() => {
+        const currTables = [
+            ...Object.values(currDataset.tables).map(tableId => findIn(tables, 'id', tableId)),
+            ...findAllDefaults(tables, currDataset.geography).map(dataspec => ({...dataspec}))
+        ].filter((entry, index, self) => self.findIndex(f => f.table === entry.table) === index)
+        const currTableNames = currTables.map(table => table.name);
+        return {
+            currTables,
+            currTableNames
+        }
+    },
+    [JSON.stringify({currDataset, tables})]);
     
     const geojsonData = useSelector(selectGeojsonData(currentData));
-    const storedData = useSelector(selectStoredData);
+    const storedData = useSelector(selectStoredDatasetsDictionary(currTableNames));
 
     const tooltipContent = useMemo(() => {
         const tooltipData = parseTooltipData({

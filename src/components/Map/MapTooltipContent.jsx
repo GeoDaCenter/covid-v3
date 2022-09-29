@@ -210,7 +210,8 @@ const TooltipEngine = ({ data, tooltipContent, custom }) => {
  * a optimize re-renders
  */
 export default function MapTooltipContent() {
-  const { x, y, data, geoid } = useSelector(selectTooltipInfo) || {}
+  const tooltipInfo = useSelector(selectTooltipInfo)
+  const { x, y, data, geoid } = tooltipInfo || {}
   const tooltipContent = useGetTooltipContent({ data, geoid })
   const currentData = useSelector(selectCurrentData)
   const tooltipText = useMemo(

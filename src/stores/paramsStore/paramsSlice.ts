@@ -31,21 +31,12 @@ export const paramsSlice = createSlice({
                 id: string
             }>
         ) => {
-            if (state.tooltipInfo.x && action.payload.data) {
-                let data = null
-                if (
-                    typeof action.payload.data !== 'number' ||
-                    typeof action.payload.data !== 'string'
-                ) {
-                    data = action.payload.data
-                }
-                state.tooltipInfo = {
-                    x: action.payload.x + 60 + state.variableMenuWidth,
-                    y: action.payload.y + 10 + 50,
-                    // @ts-ignore
-                    data: data,
-                    geoid: +action.payload.id,
-                }
+            state.tooltipInfo = {
+                x: action.payload.x + 60 + state.variableMenuWidth,
+                y: action.payload.y + 10 + 50,
+                // @ts-ignore
+                data: action.payload.data,
+                geoid: +action?.payload?.id,
             }
         },
         setStopPlaying: (state) => {
