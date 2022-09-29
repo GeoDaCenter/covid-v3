@@ -224,7 +224,7 @@ export const LayersByVizType = {
 }
 
 export const ResourceLayerMappings = {
-    "hospital": "hospital",
+    "hospitals": "hospitals",
     "clinic": "clinic",
     "vaccinationSites": "vaccinationSites",
 } 
@@ -247,5 +247,6 @@ export const getLayers = (layers, vizType, overlays, resources, currData) => {
     Object.entries(OverLayLayerMappings).forEach(([key, value]) => 
       overlays?.includes(key) && LayerArray.push(layers[value])
     )
+
     return LayerArray;
 }

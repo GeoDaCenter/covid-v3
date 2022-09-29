@@ -1,5 +1,5 @@
 // general imports, state
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 // deck GL and helper function import
@@ -983,6 +983,13 @@ function MapSection({
         }
     }, [])
 
+    const layers = getLayers(
+        FullLayers,
+        mapParams.vizType,
+        mapParams.overlay,
+        mapParams.resource,
+        currentData
+    )
     return (
         <MapContainerOuter {...{ noData, isReport }}>
             <MapContainer
@@ -999,13 +1006,7 @@ function MapSection({
             >
                 <IndicatorBox style={{ ...boxSelectDims }} />
                 <DeckGL
-                    layers={getLayers(
-                        FullLayers,
-                        mapParams.vizType,
-                        mapParams.overlay,
-                        mapParams.resource,
-                        currentData
-                    )}
+                    layers={layers}
                     ref={deckRef}
                     views={view}
                     viewState={viewport}
