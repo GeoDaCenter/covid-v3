@@ -55,3 +55,12 @@ export const useStoriesContext = () => {
   if (!ctx) throw Error('Not wrapped in <StoriesProvider />.');
   return ctx;
 };
+
+/**
+ * @typedef {Object} StoryMeta
+ * @property {string} title - Story title
+ * @property {string} theme - Story theme
+ * @property {string} county - Story county 
+ * @property {string[]} tags - Story tags
+ * @property {string} type - type of story (eg. written, video)
+ */

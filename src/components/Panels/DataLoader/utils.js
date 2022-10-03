@@ -1,3 +1,9 @@
+/**
+ * Rudimentary GeoJSON validation.
+ * 
+ * @param {GeoJSON.FeatureCollection} content 
+ * @returns {Array} [Error: string, isValid: boolean]
+ */
 export const validateGeojson = (content) => {
   if (!content) {
     return ["Please select a file.", false];

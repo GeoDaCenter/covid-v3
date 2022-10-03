@@ -16,6 +16,7 @@ export const ICON_MAPPING = {
   megaSite: { x: 256, y: 128, width: 128, height: 128 },
 }
 
+// story icon mappings
 export const STORY_ICON_MAPPING = {
   'marker-1': {
     x: 0,
@@ -202,7 +203,7 @@ const chunkArray = (data, chunk) => {
   }
   return tempArray
 }
-
+// fetcher for dot density data
 export const getDotDensityData = async () =>
   fetch(`${process.env.PUBLIC_URL}/pbf/dotDensityFlatGeoid.pbf`)
     .then((r) => r.arrayBuffer())
@@ -210,6 +211,7 @@ export const getDotDensityData = async () =>
     .then((pbf) => Schemas.Dot.read(pbf).val)
     .then((data) => chunkArray(data, 4))
 
+// mapping for main layers
 export const LayersByVizType = {
   cartogram: ['cartogram'],
   '2D': ['choropleth', 'choroplethHighlight', 'choroplethHover'],
@@ -223,16 +225,28 @@ export const LayersByVizType = {
   ],
 }
 
+// mapping for resource layers
 export const ResourceLayerMappings = {
     "hospitals": "hospitals",
     "clinic": "clinic",
     "vaccinationSites": "vaccinationSites",
 } 
 
+// mapping for overlay layers -- rest are in the mapbox style
 export const OverLayLayerMappings = {
     "stories": "stories"
 }
 
+/**
+ * @category Utils/Map
+ * @param {Object} layers List of available DeckGL layers keyed by name of layer
+ * @param {string} vizType String of the current viz type, 2D, 3D, cartogram, or dotDensity
+ * @param {string} overlays String of overlays to show
+ * @param {string} resources String of resources to show
+ * @param {string} currData Name of current geojson, used to check if should show Cartogram text
+ * With counties, the text is too much (3000 text labels)
+ * @returns {Object[]} A list of deckgl layers to render
+ */
 export const getLayers = (layers, vizType, overlays, resources, currData) => {
     let LayerArray = LayersByVizType[vizType].map(layerKey => layers[layerKey]);
     // special rules

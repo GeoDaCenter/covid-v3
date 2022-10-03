@@ -73,7 +73,7 @@ export default function LineChartOuter({ defaultDimensions=getDefaultDimensions(
   const [populationNormalized, setPopulationNormalized] = useState(false);
   const [shouldShowVariants, setShouldShowVariants] = useState(false);
   const isMobile = useMediaQuery("(max-width: 600px)");
-
+  console.log(table)
   const handleSwitch = () => setLogChart((prev) => !prev);
   const handlePopSwitch = () => setPopulationNormalized((prev) => !prev);
   const handleSummarizedSwitch = () => setShowSummarized((prev) => !prev);

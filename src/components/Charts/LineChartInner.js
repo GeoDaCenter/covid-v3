@@ -375,7 +375,7 @@ function LineChartInner({
                         <Legend
                             onMouseEnter={handleLegendHover}
                             onMouseLeave={handleLegendLeave}
-                            margin={{ top: 40, left: 0, right: 0, bottom: 50 }}
+                            margin={{ top: 40, left: 0, right: 0, bottom: 0 }}
                             iconType="plainline"
                         />
                     )}

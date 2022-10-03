@@ -12,7 +12,20 @@ import * as ReleaseNotes from './ReleaseNotes.mdx'
 import * as BugReport from './BugReport.mdx'
 
 /**
- * @category LayoutContent
+ * Page content for the "Learn"
+ *
+ * Below, the constant "pages" is a dictionary of page content. The key is the
+ * page's URL slug, and the value is the page's content, as an MDX component.
+ *
+ * @category LearnContent
+ * @example
+ *     import { ExamplePageComponent } from './ExamplePageComponent'
+ *     const pages = {
+ *         'example-page': ExamplePageComponent,
+ *     }
+ *
+ *     export default pages
+ *
  * @constant {MdxPages}
  */
 const pages = {
@@ -28,24 +41,20 @@ const pages = {
     [SpatialTimeScales.config.slug]: SpatialTimeScales,
     [ReleaseNotes.config.slug]: ReleaseNotes,
     [BugReport.config.slug]: BugReport,
-    
 }
 
 export default pages
 
 /**
  * @typedef {Object} PageConfig
- * @property {string} slug - the page slug (used in the URL)
- * @property {string} title - the page title (head/meta)
- * @property {string} description - the page description (head/meta)
- * 
+ * @property {string} slug - The page slug (used in the URL)
+ * @property {string} title - The page title (head/meta)
+ * @property {string} description - The page description (head/meta)
  */
 
 /**
  * @typedef {Object} MdxPage
- * @property {PageConfig} config - the page config
- * @property {React.Component} default - the page component
+ * @property {PageConfig} config - The page config
+ * @property {React.Component} default - The page component
  */
-/**
- * @typedef {Object.<string, MdxPage>} MdxPages
- */
+/** @typedef {Object<string, MdxPage>} MdxPages */

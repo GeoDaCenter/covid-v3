@@ -1,5 +1,5 @@
 // general imports, state
-import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 // deck GL and helper function import
@@ -990,6 +990,7 @@ function MapSection({
         mapParams.resource,
         currentData
     )
+
     return (
         <MapContainerOuter {...{ noData, isReport }}>
             <MapContainer
