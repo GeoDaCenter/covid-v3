@@ -8,7 +8,7 @@ import {
   Grid,
 } from '@mui/material';
 import colors from '../config/colors';
-import { Gutter } from '../components/';
+import { Gutter } from '.';
 import * as JSZip from 'jszip';
 
 const CsvDownloaderContainer = styled.div`
@@ -266,6 +266,12 @@ const readme = `# readme
     Please consult the data sources listed in the data documentation before using this data in commercial publications.
 `;
 
+/**
+ * Data downloader component for available datasets. Zips in browser.
+ * 
+ * @component
+ * @category Components/Layout 
+ */
 const CsvDownloader = () => {
   const [checkboxes, setCheckboxes] = useState({
     cases: false,

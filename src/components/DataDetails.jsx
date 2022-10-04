@@ -135,7 +135,13 @@ const dataList = [
   },
 ];
 
-const DataDetails = () => {
+/**
+ * Data documentation and details accordion 
+ * 
+ * @component
+ * @category Components/Layout 
+ */
+function DataDetails(){
   const [expanded, setExpanded] = useState('');
   const [dataDescriptions, setDataDescriptions] = useState([]);
 

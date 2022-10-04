@@ -1,11 +1,17 @@
 import React from 'react';
-import Plyr from "plyr-react";
 import {MarkdownViewer} from './MarkdownViewer';
-
-
-export const StoryPlayer = ({
+const Plyr = React.lazy(() => import("plyr-react"));
+/**
+ * Main story content renderer. Requires `process.env.REACT_APP_STORIES_PUBLIC_URL` of public CDN for stories.
+ * @param {Object} props 
+ * @param {StoryMeta} props.story Story content to render
+ * 
+ * @component
+ * @category Components/Stories
+ */
+function StoryPlayer({
     story
-}) => {
+}){
     if (!story?.type) {
         return null;
     }
@@ -61,5 +67,4 @@ export const StoryPlayer = ({
     }
 }
 
-
-
+export { StoryPlayer };

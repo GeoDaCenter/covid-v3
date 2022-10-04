@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button, Grid } from '@mui/material';
 import colors from '../../config/colors';
-import Icon from '../../components/Interface/Icon';
+import Icon from '../Interface/Icon';
 
 const RowTitle = styled.p`
   font-size: 1rem !important;
@@ -17,7 +17,16 @@ const IconContainer = styled.div`
   height:100%;
 `;
 
-export const StoryCard = ({ story, setActiveStory }) => {
+/**
+ * Presentation row / card for a story
+ * @param {Object} props
+ * @param {StoryMeta} props.story Story to display
+ * @param {function} props.setActiveStory Function to change active story (story: StoryMeta) => void
+ * 
+ * @component
+ * @category Components/Stories
+ */
+function StoryCard({ story, setActiveStory }) {
   const { theme, county, tags, type, title } = story;
 
   const entryTitle = title?.length ? title : `A ${type} story`;
@@ -52,3 +61,4 @@ export const StoryCard = ({ story, setActiveStory }) => {
     </Grid>
   );
 };
+ export { StoryCard };
