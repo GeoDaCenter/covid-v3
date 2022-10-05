@@ -8,6 +8,10 @@ export const GeodaContext = createContext({})
 /**
  * React context provider for accessing jsgeoda web worker. All functions are
  * async. For jsgeoda api, see https://www.npmjs.com/package/jsgeoda
+ * 
+ * @typedef {Object} GeodaContext
+ * @property {Object} geoda - jsgeoda instance
+ * @property {boolean} geodaReady - Reactive property if Geoda is ready
  *
  * @category Contexts
  * @example

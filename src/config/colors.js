@@ -1,3 +1,8 @@
+/**
+ * Configuration dictionary for colors
+ * @type {Object}
+ * @category Configuration
+ */
 const colors = {
     white: '#ffffff',
     black: '#000000',

@@ -12,6 +12,7 @@ const {
     selectcurrentReportLength,
 } = reportSelectors
 const { setCurrentPage, setPrintingState } = reportActions
+
 export function usePrintReport() {
     const isPrinting = useSelector(selectPrintStatus)
     const printFileType = useSelector(selectPrintFileType)

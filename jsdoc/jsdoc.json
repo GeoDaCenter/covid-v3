@@ -1,0 +1,45 @@
+{
+    "tags": {
+        "allowUnknownTags": true
+    },
+    "plugins": [
+        "plugins/markdown",
+        "jsdoc-mermaid",
+        "node_modules/better-docs/category"
+    ], 
+    "opts": {
+        "template": "node_modules/better-docs",
+        "encoding": "utf8",
+        "destination": "jsdocs/",
+        "readme": "readme.md"
+    },
+    "templates": {
+        "cleverLinks": true,
+        "monospaceLinks": true,
+        "search": true,
+        "default": {
+            "staticFiles": {
+              "include": [
+                  "./jsdoc"
+              ]
+            }
+        },
+        "better-docs": {
+            "logo": "./us-covid-atlas-cluster-logo.svg",
+            "title": "US Covid Atlas Docs",
+            "css": "./jsdocs-style.css",
+            "navLinks": [
+                {
+                    "label": "Github",
+                    "href": "https://github.com/geodacenter/covid-v3",
+                    "target": "_blank"
+                },
+                {
+                    "label": "US Covid Atlas",
+                    "href": "https://uscovidatlas.org/",
+                    "target": "_blank"
+                }
+            ]
+        }
+    }
+}

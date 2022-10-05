@@ -58,7 +58,14 @@ const getColor = (val, bins, colors) => {
   return colors[7];
 };
 
-export default function HeroMap() {
+/**
+ * Animated map for the main splash map
+ * @component
+ * @category Components/Layout
+ * 
+ * @returns {JSX.Element}
+ */
+function HeroMap() {
   const [geoData, setGeoData] = useState([]);
   const [dateList, setDateList] = useState([]);
   const [dataBins, setDataBins] = useState([]);
@@ -259,3 +266,5 @@ export default function HeroMap() {
     </MapContainer>
   );
 }
+
+export default HeroMap;

@@ -1,6 +1,6 @@
 /**
  * Rudimentary GeoJSON validation.
- * 
+ * @category Utils/Data
  * @param {GeoJSON.FeatureCollection} content 
  * @returns {Array} [Error: string, isValid: boolean]
  */

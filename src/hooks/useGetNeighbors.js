@@ -37,7 +37,17 @@ const getNeighbors = async (weights, geoda, idx) => {
   };
 };
 
-export default function useGetNeighbors({ geoid = null, currentData, updateTrigger = null }) {
+/**
+ * Jsgeoda helper hook to get neighbors and second order neighbors of a given geometry
+ * @category Hooks
+ * @param {Object} props
+ * @param {id} props.geoid Id of the geometry
+ * @param {string} props.currentData Name of the current dataset
+ * @param {any} props.updateTrigger Manual trigger to update the hook
+ * @returns IDs of all neighbors, second order neighbors, and state-level neighbors
+ * [neighbors: number[], secondOrderNeighbors: number[], stateNeighbors: number[]]
+ */
+function useGetNeighbors({ geoid = null, currentData, updateTrigger = null }) {
   const dispatch = useDispatch();
   const { geoda, geodaReady } = useGeoda();
   const datasets = useSelector(selectDatasets);
@@ -97,3 +107,5 @@ export default function useGetNeighbors({ geoid = null, currentData, updateTrigg
 
   return [neighbors.neighbors, neighbors.secondOrderNeighbors, neighbors.state];
 }
+
+export default useGetNeighbors;

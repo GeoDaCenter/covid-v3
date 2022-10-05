@@ -262,7 +262,7 @@ const AcsRaceButton = styled.button`
     border-radius: 0.5em;
     cursor: pointer;
 `
-/** END STYLES */
+// END STYLES
 
 const dotDensityAcsGroups = [
     {

@@ -1,4 +1,9 @@
-export const getDateLists = () => {
+/**
+ * Generates dates starting on 01/21/2020. 
+ * @category Utils/Data
+ * @returns {DateLists}
+ */
+const getDateLists = () => {
   const stripLeadingZero = (str) => (str[0] !== '0' ? str : str.slice(1));
   const isoToUsDate = (date) =>
     stripLeadingZero(date.slice(5, 7)) +
@@ -29,3 +34,16 @@ export const getDateLists = () => {
 
   return { isoDateList, usDateList };
 };
+
+export { getDateLists };
+
+/**
+ * @typedef {Object} DateLists
+ * @property {DateList} isoDateList 'YYYY-MM-DD
+ * @property {DateList} usDateList 'MM/DD/YYYY'
+ * 
+ */
+
+/**
+ * @typedef {string[]} DateList
+ */

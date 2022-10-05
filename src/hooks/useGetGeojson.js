@@ -4,11 +4,19 @@ import { dataActions, dataSelectors } from '../stores/dataStore'
 const { loadGeojson } = dataActions
 const { selectGeojsonData } = dataSelectors
 
-export default function useGetGeojson({
-    geoda = {},
-    geodaReady = false,
-    currDataset = {},
-}) {
+/**
+ * Fetcher hook to load geojson data through jsgeoda or return existing load
+ * data from the redux store
+ *
+ * @param {Object} props
+ * @param {Object} props.geoda Jsgeoda instance
+ * @param {boolean} props.geodaReady Flag to indicate if geoda is ready
+ * @param {string} props.currDataset Name of current geojson dataset
+ * @returns {Array | undefined} Positional return for easy renaming [Geojson:
+ *   GeojsonDataset, dataReady: boolean, error: string] See GeojsonDataset at
+ *   {@link src/stores/dataStore/type.ts}
+ */
+function useGetGeojson({ geoda = {}, geodaReady = false, currDataset = {} }) {
     const geoData = useSelector(selectGeojsonData(currDataset.file))
     const dispatch = useDispatch()
     useMemo(async () => {
@@ -45,3 +53,5 @@ export default function useGetGeojson({
         undefined, // error
     ]
 }
+
+export default useGetGeojson

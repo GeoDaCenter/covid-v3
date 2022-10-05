@@ -362,7 +362,7 @@ export const ControlElementMapping = {
  * A popover that contains a list of controls for a given component Can be
  * positioned in any corner
  *
- * @category Components
+ * @category Components/Interface
  * @example
  *     function MyComponent() {
  *         return (

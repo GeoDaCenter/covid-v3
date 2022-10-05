@@ -49,7 +49,7 @@ import Tooltip from './Interface/Tooltip';
 import TopPanel from './Panels/TopPanel';
 import Geocoder from './Map/Geocoder';
 import ShareButton from './Map/ShareButton';
-import { SummaryStatistics } from './SummaryStatistics';
+// import { SummaryStatistics } from './SummaryStatistics';
 import { TextStatistics } from './TextStatistics';
 import { StyledDropDown, StyledDropDownNoLabel } from './Interface/StyledDropDown';
 // pages
@@ -112,7 +112,7 @@ export {
   Preloader,
   Scaleable,
   StyledSlider,
-  SummaryStatistics,
+  // SummaryStatistics,
   TextStatistics, 
   Table,
   TableHeader,

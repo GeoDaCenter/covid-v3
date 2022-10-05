@@ -16,7 +16,8 @@ const {
  * Async function for fetch relevant data
  *
  * See useGetLineChartData comments for schemas
- *
+ * @category Utils/fetchers
+ * 
  * @param {Object} props
  * @param {string} props.currentGeojson Current map data
  * @param {string} props.currentTimeseriesDataset Current timeseries data

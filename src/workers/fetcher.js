@@ -3,10 +3,20 @@ import * as Schemas from '../schemas'
 import { getParseCsvPromise, parsePbfData } from '../utils'
 import { expose } from 'comlink'
 /**
+ * 
+ * @category Utils/fetchers
+ * 
  * @class
  * @classdesc File fetcher and parser, especially for Pbf custom schema.
  */
 class Fetcher {
+  /**
+   * Main method to fetch a single data file
+   * 
+   * @param {FileInfo} fileInfo 
+   * @param {Object} dateLists List of date values, typically {isoDateList: ['01-01-2021', '01-02-2021', ...]}
+   * @returns {Promise} Promise with data
+   */
   fetchFile(fileInfo, dateLists) {
     const { name, filetype, timespan, date } = fileInfo
     if (!name || !filetype) return () => []
@@ -26,6 +36,8 @@ class Fetcher {
 
   /**
    * Fetch a list of files and index available dates to provided dateLists.
+   * @param {Array} filesToFetch List of files to fetch
+   * @param {Object} dateLists Object with date lists
    */
   async fetch(filesToFetch = [], dateLists) {
     return filesToFetch && filesToFetch.length && !filesToFetch[0].noFile
@@ -36,7 +48,9 @@ class Fetcher {
   }
   /**
    * Fetch a list of files and index available dates to provided dateLists.
-   * Cleanes output before return
+   * Cleans output before return
+   * @param {Array} filesToFetch List of files to fetch
+   * @param {Object} dateLists Object with date lists
    */
   async fetchAndClean(filesToFetch = [], dateLists) {
     const dataArray = await this.fetch(filesToFetch, dateLists)
@@ -71,3 +85,13 @@ class Fetcher {
 }
 
 expose(new Fetcher())
+
+/**
+ * @typedef {Object} FileInfo
+ * @property {String} name Name of the file
+ * @property {String} filetype Filetype of the file
+ * @property {boolean} accumulate Whether to accumulate timeseries data or not
+ * @property {String} join Join ID column to use, if applicable
+ * @property {String} timespan Timespan of the file
+ * @property {String} date Date of the file
+ */

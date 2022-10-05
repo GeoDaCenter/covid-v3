@@ -99,7 +99,7 @@
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "docs": "jsdoc -c jsdoc.json -r ./src"
+    "docs": "jsdoc -c ./jsdoc/jsdoc.json -r ./src"
   },
   "eslintConfig": {
     "extends": [
@@ -130,6 +130,7 @@
     ]
   },
   "devDependencies": {
+    "@appku/jsdoc-template": "^1.1.7",
     "@craco/craco": "^6.4.5",
     "@loaders.gl/zip": "^3.1.4",
     "adm-zip": "^0.5.9",
@@ -142,8 +143,10 @@
     "clean-jsdoc-theme": "^4.1.8",
     "dayjs": "^1.10.6",
     "google-protobuf": "^3.19.3",
+    "ink-docstrap": "^1.3.2",
     "is-plain-obj": "^4.1.0",
     "jsdoc": "^3.6.11",
+    "jsdoc-mermaid": "^1.0.0",
     "prettier": "2.5.1",
     "prettier-plugin-jsdoc": "^0.4.2",
     "react-app-rewired": "^2.1.8",

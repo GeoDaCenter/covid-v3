@@ -7,7 +7,18 @@ import { dataSelectors } from '../stores/dataStore'
 const { selectGeojson } = dataSelectors;
 const { selectCurrentData } = paramsSelectors;
 
-export default function useGetQuantileStatistics({
+/**
+ * 
+ * @param {Object} props
+ * @param {string} props.variable Name of the variable to get quantile statistics
+ * @param {string} props.dataset Name of the desired dataset, defaults to current dataset in state
+ * @param {number} props.geoid Id of the geometry to get quantile statistics for
+ * @param {boolean} props.getStateStats If true, get quantile statistics for the state
+ * @param {number[]} props.neighborGroups Array of neighbor ids to include in stats
+ * @param {number} props.dateIndex Index of the date to get quantile statistics for
+ * @returns {Object} Object containing quantile statistics. See COLUMN_MAPPINGS in {@link /src/components/Panels/ReportBuilder/PageComponents} for example mappings
+ */
+function useGetQuantileStatistics({
     variable="Confirmed Count per 100K Population",
     dataset=null,
     geoid=null,
@@ -74,3 +85,6 @@ export default function useGetQuantileStatistics({
     
     return stats
 }
+
+
+export default useGetQuantileStatistics;
