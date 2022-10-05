@@ -7,7 +7,18 @@ const { selectPartialDataParam, selectPartialMapParam } = paramsSelectors
 const { setTicking, setCanLoadInBackground } = dataActions
 const { incrementDate } = paramsActions
 
-export default function useTickUpdate({ currDatesAvailable }) {
+/**
+ * A hook to update the date and map data when the tick is updated. Triggers off
+ * nIndex property in store
+ *
+ * @category Hooks
+ * @param {Object} props
+ * @param {number[]} props.currDatesAvailable Array of dates available
+ * @returns {Array} Positional data return [isTicking: boolean, setIsTicking:
+ *   (shouldTick: boolean) => void, tickTimer: number (timing), setTickTimer:
+ *   (timeDelay: number) => void]
+ */
+function useTickUpdate({ currDatesAvailable }) {
     const isTicking = useSelector(selectIsTicking)
     const dispatch = useDispatch()
     const setIsTicking = (isTicking) => dispatch(setTicking(isTicking))
@@ -58,3 +69,5 @@ export default function useTickUpdate({ currDatesAvailable }) {
 
     return [isTicking, setIsTicking, tickTimer, setTickTimer]
 }
+
+export default useTickUpdate

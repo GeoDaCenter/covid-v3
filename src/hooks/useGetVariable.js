@@ -16,9 +16,19 @@ const { selectGeojson } = dataSelectors;
 const { selectCurrentData, selectDataParams, selectDatasets, selectTables, selectVariables } = paramsSelectors;
 const dateLists = getDateLists();
 
-export default function useGetVariable({
+/**
+ * Hook to get a variable, returning a 1 dimensional array of values. Arguments use predefined variable names, dataset selection, and date index.
+ * 
+ * @category Hooks
+ * @param {Object} props 
+ * @param {string} props.variable - Name of the variable to get data for
+ * @param {string} props.dataset - Name of the geojson dataset to use when using a multi-dataset variable (cases and deaths)
+ * @param {number} props.dateIndex - Index of the date to use -- days since 01/21/2020 
+ * @returns {Array} - A 1 dimensional array of data for the variable, ordered by the geojson features
+ */
+function useGetVariable({
   variable,
-  priorityLoad = false,
+  // priorityLoad = false,
   dataset = false,
   dateIndex = false,
 }) {
@@ -118,3 +128,5 @@ export default function useGetVariable({
 
   return data;
 }
+
+export default useGetVariable;

@@ -21,26 +21,13 @@ import { findClosestValue, findDateIncrement, findDateDecrement } from "./findCl
 import { findNextIndex, findPreviousIndex } from "./findNextIndex";
 import { findSecondaryMonth } from './findSecondaryMonth'
 import formatNumber from "./formatNumber";
-// import { generateMapData } from './generateMapData';
 import { generateReport } from "./generateReport";
-import geojsonArrayBuffer from "./geojsonArrayBuffer";
-import getArrayCSV from "./getArrayCSV";
-import getCartogramValues from "./getCartogramValues";
-import getCartogramCenter from "./getCartogramCenter";
-import getColumns from "./getCols";
-// import getCurrentWuuid from './getCurrentWuuid.js';
 import getCSV from "./getCSV.js";
 import getDataForBins from "./getDataForBins.js";
-import getDataForCharts from "./getDataForCharts.js";
-import getDataForLisa from "./getDataForLisa.js";
 import { getDateLists } from "./getDateLists.js";
 import { getFetchParams } from "./getFetchParams";
 import getGeoidIndex from "./getGeoidIndex";
-import getGeoids from "./getGeoids";
-import getGzipData from "./getGzipData";
 import { getIdOrder } from "./getIdOrder";
-import getJson from "./getJson";
-import getJsonPure from "./getJsonPure";
 import { getClosestIndex, getLastIndex } from "./getDateIndices";
 import getLisaValues from "./getLisaValues";
 import { getParseCsvPromise, getParseCSV } from "./getParseCSV";
@@ -49,8 +36,6 @@ import getURLParams from "./getURLParams";
 import getVarId from "./getVarId";
 import { hasProps } from "./hasProps";
 import { indexGeoProps } from "./indexGeoProps";
-import loadGeojsonToGeoda from "./loadGeojsonToGeoda";
-import loadJson from "./loadJson";
 import { mapFn, mapFnNb, mapFnTesting, mapFnHinge } from "./mapFunction.js";
 import {
   matchVarRequests,
@@ -58,14 +43,32 @@ import {
   matchAndReplaceInlineVars,
 } from './matchAndReplaceInlineVars';
 import { onlyUniqueArray } from './onlyUniqueArray';
-import parseBinPairs from "./parseBinPairs";
 import parseMapboxLayers from "./parseMapboxLayers";
 import { parseTooltipData } from "./parseTooltipData";
-import { removeListItem } from "./removeListItem";
 import resolveName from "./resolveName";
 import shallowCompare from "./shallowCompare";
-import { shallowEqual } from "./shallowEqual";
 import { stitch } from "./stitch";
+
+// archived 
+// import { generateMapData } from './generateMapData';
+// import geojsonArrayBuffer from "./_geojsonArrayBuffer";
+// import getArrayCSV from "./_getArrayCSV";
+// import getCartogramValues from "./_getCartogramValues";
+// import getCartogramCenter from "./_getCartogramCenter";
+// import getColumns from "./archive/getCols";
+// import getCurrentWuuid from './getCurrentWuuid.js';
+// import getDataForCharts from "./archive/getDataForCharts.js";
+// import getDataForLisa from "./archive/getDataForLisa.js";
+// import getGeoids from "./archive/getGeoids";
+// import getGzipData from "./archive/getGzipData";
+// import getJson from "./archive/getJson";
+// import getJsonPure from "./archive/getJsonPure";
+// import loadGeojsonToGeoda from "./archive/loadGeojsonToGeoda";
+// import loadJson from "./archive/loadJson";
+// import parseBinPairs from "./archive/parseBinPairs";
+// import { removeListItem } from "./archive/removeListItem";
+// import { shallowEqual } from "./archive/shallowEqual";
+
 export {
   addSelectedChartData,
   colIndex,
@@ -89,25 +92,25 @@ export {
   findSecondaryMonth,
   formatNumber,
   getDateIndices,
-  geojsonArrayBuffer,
+  // geojsonArrayBuffer,
   // generateMapData,
   generateReport,
-  getArrayCSV,
-  getCartogramValues,
-  getCartogramCenter,
-  getColumns,
+  // getArrayCSV,
+  // getCartogramValues,
+  // getCartogramCenter,
+  // getColumns,
   // getCurrentWuuid,
   getCSV,
   getDataForBins,
-  getDataForCharts,
-  getDataForLisa,
+  // getDataForCharts,
+  // getDataForLisa,
   getDateLists,
   getFetchParams,
   getGeoidIndex,
-  getGeoids,
+  // getGeoids,
   getIdOrder,
-  getJson,
-  getJsonPure,
+  // getJson,
+  // getJsonPure,
   getClosestIndex,
   getLastIndex,
   getLisaValues,
@@ -116,11 +119,11 @@ export {
   getParsePbf,
   getURLParams,
   getVarId,
-  getGzipData,
+  // getGzipData,
   hasProps,
   indexGeoProps,
-  loadGeojsonToGeoda,
-  loadJson,
+  // loadGeojsonToGeoda,
+  // loadJson,
   mapFn,
   mapFnNb,
   mapFnTesting,
@@ -129,13 +132,13 @@ export {
   replaceInlineVars,
   matchAndReplaceInlineVars,
   onlyUniqueArray,
-  parseBinPairs,
+  // parseBinPairs,
   parseMapboxLayers,
   parsePbfData,
   parseTooltipData,
-  removeListItem,
+  // removeListItem,
   resolveName,
   shallowCompare,
-  shallowEqual,
+  // shallowEqual,
   stitch
 };

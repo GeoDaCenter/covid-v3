@@ -12,8 +12,19 @@ const {
     selectcurrentReportLength,
 } = reportSelectors
 const { setCurrentPage, setPrintingState } = reportActions
+/**
+ * @typedef {Object} PrintReportReturn
+ * @property {function} handlePrint - function to print current report async (filetype: 'JPG','PNG','PDF') => Promise<void>
+ * @property {function} handleRef - function to asign ref to current report page (ref: React.RefObject<HTMLDivElement>) => void
+ */
 
-export function usePrintReport() {
+/**
+ * Hook to print current report
+ * 
+ * @category Hooks
+ * @returns {PrintReportReturn}
+ */
+function usePrintReport() {
     const isPrinting = useSelector(selectPrintStatus)
     const printFileType = useSelector(selectPrintFileType)
     const currentReport = useSelector(selectCurrentReport)
@@ -164,3 +175,5 @@ export function usePrintReport() {
         handleRef,
     }
 }
+
+export { usePrintReport }
