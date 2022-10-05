@@ -11,7 +11,7 @@
         "template": "node_modules/better-docs",
         "encoding": "utf8",
         "destination": "jsdocs/",
-        "readme": "readme.md"
+        "readme": "README.md"
     },
     "templates": {
         "cleverLinks": true,
