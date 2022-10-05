@@ -12,7 +12,6 @@ const { selectCurrentData, selectDataParams, selectDatasets, selectTables } = pa
  * @param {Object} props
  * @param {string} props.geoid - GEOID to generate tooltip data for
  * @param {Object} props.data - Additional data directly from the selected feature. If GEOID is not provided, only this data will be used (eg. vaccination sites) 
- * @returns 
  */
 function useGetTooltipContent({
     data=false,
