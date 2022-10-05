@@ -99,7 +99,7 @@
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "docs": "jsdoc -c ./jsdoc/jsdoc.json -r ./src"
+    "docs": "jsdoc -c ./jsdoc/jsdoc.json -r ."
   },
   "eslintConfig": {
     "extends": [
