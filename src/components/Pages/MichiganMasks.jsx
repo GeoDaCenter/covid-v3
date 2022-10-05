@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import * as d3 from 'd3-dsv';
 
 import Grid from '@mui/material/Grid';
 import DeckGL from '@deck.gl/react';
@@ -12,6 +11,7 @@ import MAP_STYLE from '../../config/style.json';
 import { MAPBOX_ACCESS_TOKEN } from '../../config';
 
 import { ContentContainer, Gutter, NavBar, Footer } from '../../components';
+import { getCSV } from '../../utils';
 
 const view = new MapView({ repeat: true });
 const MichiganPage = styled.div`
@@ -127,9 +127,7 @@ export default function MichiganMasks() {
       fetch(`${process.env.PUBLIC_URL}/.netlify/functions/michiganQuery`).then(
         (r) => r.json(),
       ),
-      fetch(`${process.env.PUBLIC_URL}/csv/michigan-schools.csv`)
-        .then((r) => r.text())
-        .then((text) => d3.csvParse(text, d3.autoType)),
+      getCSV(`${process.env.PUBLIC_URL}/csv/michigan-schools.csv`)
     ]);
     let weeklyAverages = [];
     let filteredFeatures = [];

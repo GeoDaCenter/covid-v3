@@ -73,7 +73,7 @@ const getCounts = (stories) => {
  * Returns a utiliy function to generate a random point within a polygon
  *
  * @category Hooks
- * @returns {Object<{ ready: boolean; getRandomPoint: Function }>}
+ * @returns {Object<{ ready: boolean, getRandomPoint: Function }>} ready state and getRandomPoint function (geoid: number) => [lng, lat]
  */
 function useCentroidRandomizer() {
     const datasets = useSelector(selectDatasets)

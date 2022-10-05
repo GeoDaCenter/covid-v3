@@ -1,4 +1,4 @@
-import * as d3 from 'd3-dsv';
+import * as Papa from "papaparse";
 
 async function getCSV(url) {
   const tempData = await fetch(url)
@@ -6,9 +6,9 @@ async function getCSV(url) {
       return response.ok ? response.text() : Promise.reject(response.status);
     })
     .then((text) => {
-      let data = d3.csvParse(text, d3.autoType);
+      let data = Papa.parse(text, {header: true, dynamicTyping: true});
 
-      return data;
+      return data.data;
     });
 
   return tempData;
