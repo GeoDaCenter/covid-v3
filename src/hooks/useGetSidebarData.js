@@ -6,7 +6,16 @@ import { dataSelectors } from '../stores/dataStore'
 const { selectStoredDatasetsDictionary, selectGeojsonData } = dataSelectors;
 const {selectCurrentData, selectDates, selectDataParams, selectDatasets, selectTables} = paramsSelectors;
 
-export default function useGetSidebarData({
+/**
+ * Hook to generate report data. Return data is an object with numerous summary data points. Features are currently hard coded in {@link /src/utils/generateReport.js}
+ * 
+ * @category Hooks
+ * @param {Object} props
+ * @param {Array} props.selectionKeys - List of GEOIDs to generate report for
+ * @param {boolean} props.panelOpen - Flag for if the panel is open, and if should generate report 
+ * @returns {Object} See {@link /src/utils/generateReport.js}
+ */
+function useGetSidebarData({
     selectionKeys=[],
     panelOpen=false
 }){
@@ -43,3 +52,5 @@ export default function useGetSidebarData({
 
     return sidebarData
 }
+
+export default useGetSidebarData

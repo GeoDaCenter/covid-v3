@@ -5,7 +5,16 @@ import { paramsSelectors } from '../stores/paramsStore';
 import { dataSelectors } from '../stores/dataStore'
 const { selectGeojsonData, selectStoredDatasetsDictionary } = dataSelectors;
 const { selectCurrentData, selectDataParams, selectDatasets, selectTables } = paramsSelectors;
-export default function useGetTooltipContent({
+
+/**
+ * Hook to generate tooltip data. By default, gets data from all current tables relevant to the current geography.
+ * @category Hooks
+ * @param {Object} props
+ * @param {string} props.geoid - GEOID to generate tooltip data for
+ * @param {Object} props.data - Additional data directly from the selected feature. If GEOID is not provided, only this data will be used (eg. vaccination sites) 
+ * @returns 
+ */
+function useGetTooltipContent({
     data=false,
     geoid=null
 }){
@@ -63,3 +72,5 @@ export default function useGetTooltipContent({
     return tooltipContent
 
 }
+
+export default useGetTooltipContent

@@ -54,19 +54,19 @@ interface VariableTree {
 }
 
 export interface MapParamsSpec {
-  mapType: 'natural_breaks' | 'hinge15_breaks' | 'lisa' | string
-  bins: {
-    bins: number[]
-    breaks: number[]
-  }
-  binMode: 'dynamic' | '' | null
-  fixedScale: null | 'string'
-  nBins: number
-  vizType: '2D' | '3D' | 'dotDensity' | 'cartogram' | string
-  activeGeoid: string | '' | null
-  overlay: string
-  resource: string
-  colorScale: [number, number, number][] | [number, number, number, number][]
+mapType: 'natural_breaks' | 'hinge15_breaks' | 'lisa' | string
+bins: {
+  bins: number[]
+  breaks: number[]
+}
+binMode: 'dynamic' | '' | null
+fixedScale: null | 'string'
+nBins: number
+vizType: '2D' | '3D' | 'dotDensity' | 'cartogram' | string
+activeGeoid: string | '' | null
+overlay: string
+resource: string
+colorScale: [number, number, number][] | [number, number, number, number][]
   dotDensityParams: {
     raceCodes: {
       [key: number]: boolean

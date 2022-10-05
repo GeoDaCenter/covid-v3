@@ -10,6 +10,7 @@ const { selectCurrentData } = paramsSelectors
 /**
  * Hook to get scatterplot XY data
  * 
+ * @category Hooks
  * @param {Object} props
  * @param {string} props.xAxis - X-axis variable
  * @param {string} props.yAxis - Y-axis variable

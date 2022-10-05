@@ -1,6 +1,8 @@
 export type DateIndex = number
 export type GEOID = number
-export type DataRow = { [key: DateIndex]: number | string }
+export type DataRow =
+    | { [key: DateIndex]: number | string }
+    | { [Property: string]: number | string }
 export type YYYYMM = 'latest' | `202${number}-${number}${number}`
 
 export interface Dataset {
@@ -51,7 +53,12 @@ export interface GeojsonDataset {
     }
     weights: WeightSpec | {}
 }
-export type DotDensityDatashape = [raceCode: number, x: number, y: number, GEOID: GEOID][]
+export type DotDensityDatashape = [
+    raceCode: number,
+    x: number,
+    y: number,
+    GEOID: GEOID
+][]
 
 export interface DataState {
     storedData: { [key: string]: Partial<Dataset> }
