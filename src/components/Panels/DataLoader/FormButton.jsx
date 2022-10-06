@@ -24,7 +24,7 @@ import colors from '../../../config/colors'
  * @param {string} props.disabled CSS disabled hint, shows no cursor and grayed
  *   out opacity
  */
-export const FormButton = styled.button`
+const FormButton = styled.button`
     padding: 0.5em;
     border: 1px solid ${colors.white};
     background: ${(props) => (props.active ? colors.white : colors.gray)};
@@ -33,3 +33,5 @@ export const FormButton = styled.button`
     margin: 0.5em 0.5em 0.5em 0;
     opacity: ${(props) => (props.disabled ? 0.25 : 1)};
 `
+
+export { FormButton }

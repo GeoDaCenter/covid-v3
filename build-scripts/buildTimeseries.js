@@ -163,7 +163,8 @@ const excludeList = [
   'covid_tcap_cdc.pbf',
   'covid_wk_pos_cdc.pbf',
   'vaccination_fully_vaccinated_cdc_h.pbf',
-  'vaccination_one_or_more_doses_cdc_h.pbf'
+  'vaccination_one_or_more_doses_cdc_h.pbf',
+  'mask_mandate_cdc.pbf'
 ]
 
 const t0 = new Date();

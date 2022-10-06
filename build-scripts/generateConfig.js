@@ -170,6 +170,7 @@ const filesToParse = [
     'vaccination_one_or_more_doses_cdc_h',
     'vaccination_one_or_more_doses_cdc',
     'vaccination_one_or_more_doses_cdc_state',
+    'mask_mandate_cdc'
 
 ]
 

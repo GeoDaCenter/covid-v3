@@ -21,7 +21,7 @@
  * @param {function} props.onFileSelectError Callback function for error.
  *   ({error: "error message"}) => void
  */
-export const FileUploader = ({ onFileSelectSuccess, onFileSelectError }) => {
+function FileUploader({ onFileSelectSuccess, onFileSelectError }){
     const handleFileInput = (e) => {
         // handle validations
         const file = e.target.files[0]
@@ -40,3 +40,5 @@ export const FileUploader = ({ onFileSelectSuccess, onFileSelectError }) => {
         />
     )
 }
+
+export { FileUploader }

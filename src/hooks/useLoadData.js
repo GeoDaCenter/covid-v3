@@ -131,13 +131,12 @@ function useLoadData({ dataParams, currentData }) {
             timespan,
         })),
     ]
-
+    
     const [numeratorData, numeratorDataReady] = useGetTable({
         filesToFetch: numeratorParams,
         shouldFetch: true,
         dateLists,
     })
-
     const [denominatorData, denominatorDataReady] = useGetTable({
         filesToFetch: denominatorParams,
         shouldFetch: true,
@@ -148,6 +147,7 @@ function useLoadData({ dataParams, currentData }) {
         geodaReady,
         currDataset,
     })
+    console.log(numeratorData, denominatorData)
 
     const dateIndices = numeratorData ? numeratorData.dates : null
 

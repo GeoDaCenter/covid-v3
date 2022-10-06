@@ -91,7 +91,8 @@
   "scripts": {
     "start": "craco start",
     "dev": "craco start",
-    "fetch-data": "node build-scripts/fetchLatestData && node build-scripts/buildTimeseries && node build-scripts/generateConfig && node build-scripts/parseColumns",
+    "fetch-data": "node build-scripts/fetchLatestData",
+    "parse-data": "node build-scripts/buildTimeseries && node build-scripts/generateConfig && node build-scripts/parseColumns",
     "pre-build": "node build-scripts/fetchLatestData && node build-scripts/buildTimeseries && node build-scripts/generateConfig && node build-scripts/parseColumns",
     "build-sw": "node ./src/sw-build.js",
     "netlify-build": "yarn pre-build && yarn build",

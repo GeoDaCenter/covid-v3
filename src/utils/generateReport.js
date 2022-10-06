@@ -416,11 +416,11 @@ export const generateReport = ({
         "UnEmplyPrc",
         "weighted_average"
       );
-      report.UnInPrc = aggregateProperty(
+      report.UnInChldPrc = aggregateProperty(
         healthFactors.data,
         properties,
         selectionKeys,
-        "UnInPrc",
+        "UnInChldPrc",
         "weighted_average"
       );
       report.PrmPhysRt = aggregateProperty(

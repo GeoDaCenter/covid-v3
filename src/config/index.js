@@ -92,7 +92,7 @@ export const tooltipInfo = {
             work
         </p>
     ),
-    UnInPrc: <p>Percentage of people under age 65 without insurance</p>,
+    UnInChldPrc: <p>Percentage of people under age 18 without insurance</p>,
     PrmPhysRt: <p>Ratio of population to primary care physicians</p>,
     PrevHospRt: (
         <p>
@@ -347,6 +347,10 @@ export const variableTree = {
     },
     'Doses to be Administered per 100 People': {
         State: ['CDC'],
+    },
+    'HEADER:policy': {},
+    'Mask Mandate': {
+        County: ['CDC'],
     },
     // "HEADER:forecasting":{},
     // "Forecasting (5-Day Severity Index)":{

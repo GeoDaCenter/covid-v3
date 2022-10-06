@@ -273,7 +273,7 @@ function useMapData({ dataParams, currentData, mapParams }) {
 
     const sanitizedHeightScale =
         !isNaN(heightScale) && heightScale !== Infinity ? heightScale : 1
-
+    // console.log(colorAndValueData)
     return [
         geojsonData?.data, // geography
         colorAndValueData, // color and value data

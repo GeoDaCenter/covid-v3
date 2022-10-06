@@ -605,9 +605,9 @@ function DataPanel({
                                 <p>Unemployment</p>
                                 <Tooltip id="UnEmplyPrc" />
                                 <h3>{sidebarData.UnEmplyPrc}%</h3>
-                                <p>Uninsured</p>
-                                <Tooltip id="UnInPrc" />
-                                <h3>{sidebarData.UnInPrc}%</h3>
+                                <p>Uninsured Children</p>
+                                <Tooltip id="UnInChldPrc" />
+                                <h3>{sidebarData.UnInChldPrc}%</h3>
                                 <p>Primary care physicians</p>
                                 <Tooltip id="PrmPhysRt" />
                                 <h3>{sidebarData.PrmPhysRt}:1</h3>

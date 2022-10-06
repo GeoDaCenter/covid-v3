@@ -183,10 +183,15 @@ export const colorScales = {
         [217, 72, 1],
         [140, 45, 4],
     ],
+    maskMandates: [
+        [0,0,0,0],
+        [240,240,240],
+        [240,240,0]
+    ]
 }
 
 /**
- * Map bins and breaks {[Key: string]: { bins: strinp[], breaks?: number[]}}
+ * Map bins and breaks {[Key: string]: { bins: string[], breaks?: number[]}}
  *
  * @category Configuration
  * @type {Object}
@@ -223,4 +228,8 @@ export const fixedScales = {
         bins: ['N/A', 'Low', 'Medium', 'High'],
         breaks: [1, 2, 3, 4],
     },
+    maskMandates: {
+        bins: ['No Data', 'No', 'Yes'],
+        breaks: [-1, 0, 1],
+    }
 }
