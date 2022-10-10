@@ -1,7 +1,3 @@
-const clickIndex = (selector: string, index: number, delay: number=250) => {
-  cy.get(selector, {timeout: delay}).eq(index).click()
-  cy.get('#preloaderContainer', {timeout: 5000}).should('not.exist')
-}
 
 const assertNotLoading = () => {
   cy.get('#preloaderContainer', {timeout: 5000}).should('not.exist')
@@ -10,6 +6,11 @@ const assertNotLoading = () => {
 const resetMap = () => {
   cy.get('#variableSelect', {timeout: 500}).click()
   cy.get('#variableMenu ul li').eq(2).click()
+  assertNotLoading()
+}
+
+const clickIndex = (selector: string, index: number, delay: number=250) => {
+  cy.get(selector, {timeout: delay}).eq(index).click()
   assertNotLoading()
 }
 
