@@ -22,11 +22,9 @@ import { Button, Grid } from '@mui/material'
 import { paramsSelectors, paramsActions } from '../../stores/paramsStore'
 
 const {
-    setDataParams,
     setMapParams,
     setCurrentData,
     setPanelState,
-    // setParametersAndData,
     setMapType,
     toggleDotDensityMode,
     toggleDotDensityRace,
@@ -34,6 +32,7 @@ const {
     changeVariable,
     changeGeography,
     setDotDensityBgOpacity,
+    setDateRangeType,
 } = paramsActions
 const {
     selectPartialMapParam,
@@ -47,16 +46,9 @@ const {
 
 /** STYLES */
 const VariablePanelContainer = styled.div`
-    /* position:absolute;
-  left:50px;
-  top:0;
-  height:auto; */
     flex: 0.0001 1 auto;
     width: auto;
-    /* min-height:calc(100vh - 50px); */
-    /* width:min(25%, 350px); */
     background-color: ${colors.gray}fa;
-    /* box-shadow: 2px 0px 5px rgba(0,0,0,0.7); */
     padding: 0;
     box-sizing: border-box;
     font: 'Lato', sans-serif;
@@ -91,9 +83,6 @@ const VariablePanelContainer = styled.div`
     user-select: none;
 `
 const NoteContainer = styled.div`
-    /* position: absolute;
-  bottom:0;
-  left:0; */
     flex: 1 1 1;
     padding: 0.5em 0 0.5em 1.25em;
     box-sizing: border-box;
@@ -132,35 +121,6 @@ const NoteContainer = styled.div`
         }
     }
 `
-// const ButtonGroup = styled.div`
-//   button:first-of-type {
-//     border-radius: 0.5em 0 0 0.5em;
-//   }
-//   button:last-of-type {
-//     border-radius: 0 0.5em 0.5em 0;
-//   }
-// `;
-
-// const VizTypeButton = styled.button`
-//   background: ${(props) => (props.active ? colors.white : "none")};
-//   color: ${(props) => (props.active ? colors.darkgray : colors.white)};
-//   outline: none;
-//   border: 1px solid ${colors.white}77;
-//   padding: 0.25em 0.75em;
-//   margin: 0;
-//   font-family: "Lato", sans-serif;
-//   font-size: 0.875rem;
-//   cursor: ${(props) => (props.disabled ? "none" : "pointer")};
-//   pointer-events: ${(props) => (props.disabled ? "none" : "initial")};
-//   opacity: ${(props) => (props.disabled ? ".25" : "1")};
-//   transition: 250ms all;
-//   letter-spacing: 0.02857em;
-//   font-weight: 500;
-//   &:hover {
-//     background: ${colors.lightgray};
-//     color: ${colors.darkgray};
-//   }
-// `;
 
 const DotDensityControls = styled.div`
     border: 1px solid ${colors.white}77;
@@ -224,15 +184,6 @@ const ControlsContainer = styled.div`
         background-repeat: no-repeat, no-repeat;
         background-size: 50%, 100%;
     }
-
-    /* @media (max-height: 1325px) {
-    padding: 20px 20px 10vh 20px;
-  }
-
-  @media (max-width: 600px) {
-    width: 100%;
-    padding: 0 10px 25vh 10px;
-  } */
 `
 
 const ListSubheader = styled(MenuItem)`
@@ -298,22 +249,6 @@ const dotDensityAcsGroups = [
     },
 ]
 
-// const BYODButton = styled.button`
-//   background: none;
-//   color: ${colors.white};
-//   border: 1px solid white;
-//   cursor: pointer;
-//   padding: 0.25em 0.5em;
-//   margin: 0.25em 0;
-//   border-radius: 0.5em;
-//   text-transform: capitalize;
-//   font-size: 0.75rem;
-//   transition: 250ms all;
-//   &:hover {
-//     color: ${colors.yellow};
-//     border-color: ${colors.yellow};
-//   }
-// `;
 const onlyUnique = (value, index, self) => self.indexOf(value) === index
 
 const DotDensityControlSection = ({ isCustom = false }) => {
@@ -374,16 +309,20 @@ const DotDensityControlSection = ({ isCustom = false }) => {
 }
 
 /**
- * Self-contained component to manage paramsSlice and chance variable, data, etc.
- * 
- * TODO: This component *should* be refactored and cleaned up. It's a bit of a mess.
- * 
- * @component
+ * Self-contained component to manage paramsSlice and chance variable, data,
+ * etc.
+ *
+ * TODO: This component _should_ be refactored and cleaned up. It's a bit of a
+ * mess.
+ *
  * @category Components/Map
+ * @component
  */
 function VariablePanel() {
     const dispatch = useDispatch()
+
     const variablePanelRef = useRef(null)
+
     const currentData = useSelector(selectCurrentData)
     const binMode = useSelector(selectPartialMapParam('binMode'))
     const mapType = useSelector(selectPartialMapParam('mapType'))
@@ -391,17 +330,16 @@ function VariablePanel() {
     const overlay = useSelector(selectPartialMapParam('overlay'))
     const resource = useSelector(selectPartialMapParam('resource'))
     const panelState = useSelector(selectPanelState)
-    const numerator = useSelector(selectPartialDataParam('numerator'))
     const variableName = useSelector(selectPartialDataParam('variableName'))
     const nType = useSelector(selectPartialDataParam('nType'))
     const nRange = useSelector(selectPartialDataParam('nRange'))
-    const dType = useSelector(selectPartialDataParam('dType'))
     const rangeType = useSelector(selectPartialDataParam('rangeType'))
-
     const datasets = useSelector(selectDatasets)
-    const currentPreset = findIn(datasets, 'file', currentData)
     const variableTree = useSelector(selectVariableTree)
     const urlParamsTree = useSelector(selectUrlParamsTree)
+
+    // derived state
+    const currentPreset = findIn(datasets, 'file', currentData)
     const allGeographies = Object.values(variableTree)
         .flatMap((o) => Object.keys(o))
         .filter(onlyUnique)
@@ -411,6 +349,23 @@ function VariablePanel() {
         .filter(onlyUnique)
     const isCustom = !['State', 'County'].includes(currentPreset.geography)
 
+    const availableData = currentPreset.geography
+        ? allDatasets.filter(
+              (dataset) =>
+                  variableTree[variableName][currentPreset.geography].indexOf(
+                      dataset
+                  ) !== -1
+          )
+        : []
+    const dataName = availableData.includes(urlParamsTree[currentData].name)
+        ? urlParamsTree[currentData].name
+        : availableData[0]
+
+    const isTimeSeriesNonCumulative =
+        variableName.indexOf('Testing') !== -1 ||
+        variableName.indexOf('Workdays') !== -1
+
+    // manage width offset
     useLayoutEffect(() => {
         dispatch(setVariableMenuWidth(variablePanelRef.current.offsetWidth))
     }, [])
@@ -419,6 +374,7 @@ function VariablePanel() {
         dispatch(setVariableMenuWidth(variablePanelRef.current.offsetWidth))
     }, [panelState.variables])
 
+    // handlers
     const handleMapType = (_event, newValue) => dispatch(setMapType(newValue))
     const handleMapOverlay = (event) => {
         dispatch(
@@ -434,54 +390,12 @@ function VariablePanel() {
             })
         )
     }
-
-    // const handleVizTypeButton = (vizType) => dispatch(setMapParams({ vizType }));
-
     const handleVariable = (e) => dispatch(changeVariable(e.target.value))
     const handleGeography = (e) => dispatch(changeGeography(e.target.value))
     const handleVizType = (e) =>
         dispatch(setMapParams({ vizType: e.target.value }))
-
-    const handleDataset = (e) => {
-        dispatch(setCurrentData(e.target.value))
-    }
-
-    const handleRangeButton = (event) => {
-        let val = event.target.value
-
-        if (val === 'custom') {
-            // if swapping over to a custom range, which will use a 2-part slider to scrub the range
-            if (nType === 'time-series' && dType === 'time-series') {
-                dispatch(
-                    setDataParams({
-                        nRange: 30,
-                        dRange: 30,
-                        rangeType: 'custom',
-                    })
-                )
-            } else if (nType === 'time-series') {
-                dispatch(setDataParams({ nRange: 30, rangeType: 'custom' }))
-            } else if (dType === 'time-series') {
-                dispatch(setDataParams({ dRange: 30, rangeType: 'custom' }))
-            }
-        } else {
-            // use the new value -- null for cumulative, 1 for daily, 7 for weekly
-            if (nType === 'time-series' && dType === 'time-series') {
-                dispatch(
-                  setDataParams({
-                        nRange: val,
-                        dRange: val,
-                        rangeType: 'fixed',
-                    })
-                )
-            } else if (nType === 'time-series') {
-                dispatch(setDataParams({ nRange: val, rangeType: 'fixed' }))
-            } else if (dType === 'time-series') {
-                dispatch(setDataParams({ dRange: val, rangeType: 'fixed' }))
-            }
-        }
-    }
-
+    const handleDataset = (e) => dispatch(setCurrentData(e.target.value))
+    const handleRangeButton = (e) => dispatch(setDateRangeType(e.target.value))
     const handleSwitch = () =>
         dispatch(
             setMapParams({ binMode: binMode === 'dynamic' ? '' : 'dynamic' })
@@ -496,18 +410,6 @@ function VariablePanel() {
             dispatch(setMapParams({ overlay: 'stories' }))
         }
     }
-
-    const availableData = currentPreset.geography
-        ? allDatasets.filter(
-              (dataset) =>
-                  variableTree[variableName][currentPreset.geography].indexOf(
-                      dataset
-                  ) !== -1
-          )
-        : []
-    const dataName = availableData.includes(urlParamsTree[currentData].name)
-        ? urlParamsTree[currentData].name
-        : availableData[0]
 
     return (
         <VariablePanelContainer
@@ -585,8 +487,7 @@ function VariablePanel() {
                                 value={
                                     nRange === null ||
                                     rangeType === 'custom' ||
-                                    variableName.indexOf('Testing') !== -1 ||
-                                    variableName.indexOf('Workdays') !== -1
+                                    isTimeSeriesNonCumulative
                                         ? 'x'
                                         : nRange
                                 }
@@ -603,10 +504,9 @@ function VariablePanel() {
                                         <span>Custom Range</span>
                                     )}
                                     {nRange === null &&
-                                        variableName.indexOf('Testing') ===
-                                            -1 &&
-                                        variableName.indexOf('Workdays') ===
-                                            -1 && <span>Cumulative</span>}
+                                        !isTimeSeriesNonCumulative && (
+                                            <span>Cumulative</span>
+                                        )}
                                     {variableName.indexOf('Testing') !== -1 && (
                                         <span>7-Day Average</span>
                                     )}
@@ -616,44 +516,28 @@ function VariablePanel() {
                                 <MenuItem
                                     value={null}
                                     key={'cumulative'}
-                                    disabled={
-                                        variableName.indexOf('Testing') !==
-                                            -1 ||
-                                        variableName.indexOf('Workdays') !== -1
-                                    }
+                                    disabled={isTimeSeriesNonCumulative}
                                 >
                                     Cumulative
                                 </MenuItem>
                                 <MenuItem
                                     value={1}
                                     key={'daily'}
-                                    disabled={
-                                        variableName.indexOf('Testing') !==
-                                            -1 ||
-                                        variableName.indexOf('Workdays') !== -1
-                                    }
+                                    disabled={isTimeSeriesNonCumulative}
                                 >
                                     Daily New
                                 </MenuItem>
                                 <MenuItem
                                     value={7}
                                     key={'7-day-ave'}
-                                    disabled={
-                                        variableName.indexOf('Testing') !==
-                                            -1 ||
-                                        variableName.indexOf('Workdays') !== -1
-                                    }
+                                    disabled={isTimeSeriesNonCumulative}
                                 >
                                     7-Day Average
                                 </MenuItem>
                                 <MenuItem
                                     value={'custom'}
                                     key={'customRange'}
-                                    disabled={
-                                        variableName.indexOf('Testing') !==
-                                            -1 ||
-                                        variableName.indexOf('Workdays') !== -1
-                                    }
+                                    disabled={isTimeSeriesNonCumulative}
                                 >
                                     Custom Range
                                 </MenuItem>
@@ -663,9 +547,7 @@ function VariablePanel() {
                         <BinsContainer
                             id="binModeSwitch"
                             disabled={
-                                variableName.indexOf('Testing') !== -1 ||
-                                nType === 'characteristic' ||
-                                mapType === 'lisa'
+                                isTimeSeriesNonCumulative || mapType === 'lisa'
                             }
                         >
                             <Switch
@@ -790,115 +672,8 @@ function VariablePanel() {
                             <MenuItem value={'cartogram'} key={'cartogram'}>
                                 Cartogram
                             </MenuItem>
-                            {/* <MenuItem value={'mobility-county'} key={'mobility-county'}>Mobility Flows (County) WARNING BIG DATA</MenuItem> */}
                         </Select>
                     </StyledDropDown>
-                    {/* <ButtonGroup id="visualizationType">
-            <VizTypeButton
-              active={vizType === "2D"}
-              data-val="2D"
-              key="2D-btn"
-              onClick={() => handleVizTypeButton("2D")}
-            >
-              2D
-            </VizTypeButton>
-            <VizTypeButton
-              active={vizType === "3D"}
-              data-val="3D"
-              key="3D-btn"
-              onClick={() => handleVizTypeButton("3D")}
-              disabled={isCustom}
-            >
-              3D
-            </VizTypeButton>
-            <VizTypeButton
-              active={vizType === "dotDensity"}
-              data-val="dotDensity"
-              key="dotDensity-btn"
-              onClick={() => handleVizTypeButton("dotDensity")}
-            >
-              Dot Density
-            </VizTypeButton>
-            <VizTypeButton
-              active={vizType === "cartogram"}
-              data-val="cartogram"
-              key="cartogram-btn"
-              onClick={() => handleVizTypeButton("cartogram")}
-              disabled={isCustom}
-            >
-              Cartogram
-            </VizTypeButton>
-          </ButtonGroup> */}
-                    {/* {
-          mapParams.vizType === '3D' && 
-            <BinsContainer item xs={12} >
-                <Switch
-                    checked={bivariateZ}
-                    onChange={handleZSwitch}
-                    name="chart switch z chart switch"
-                />
-                <p>{bivariateZ ? 'Bivariate Z-Axis' : 'Single Variable Z-Axis'}<Tooltip id="BinModes"/></p>
-            </BinsContainer>
-        }
-        {
-          bivariateZ &&           
-            <StyledDropDown id="3d-variable-select" style={{minWidth: '125px'}}>
-              <InputLabel htmlFor="3d-numerator-select">Z-Axis Variable</InputLabel>
-              <Select 
-                value={currentZVariable} 
-                id="3d-numerator-select"
-                onChange={handleZVariable}
-              >
-                {
-                  !currentData.includes('cdc') && Object.keys(PresetVariables).map((variable) => {
-                    if (variable.split(':')[0]==="HEADER") {
-                      return <ListSubheader key={variable.split(':')[1]} disabled>{variable.split(':')[1]}</ListSubheader>
-                    } else {
-                      return <MenuItem value={variable} key={variable}>{variable}</MenuItem> 
-                    }
-                  })
-                }
-                
-                {
-                  currentData.includes('county') && Object.keys(CountyVariables).map((variable) => {
-                    if (variable.split(':')[0]==="HEADER") {
-                      return <ListSubheader key={variable.split(':')[1]} disabled>{variable.split(':')[1]}</ListSubheader>
-                    } else {
-                      return <MenuItem value={variable} key={variable}>{variable}</MenuItem> 
-                    }
-                  })
-                }
-                
-                {
-                  (currentData.includes("state")) && Object.keys(StateVariables).map((variable) => {
-                    if (variable.split(':')[0]==="HEADER") {
-                      return <ListSubheader key={variable.split(':')[1]} disabled>{variable.split(':')[1]}</ListSubheader>
-                    } else {
-                      return <MenuItem value={variable} key={variable}>{variable}</MenuItem> 
-                    }
-                  })
-                }
-                {
-                  currentData.includes("1p3a") && Object.keys(OneP3AVariables).map((variable) => {
-                    if (variable.split(':')[0]==="HEADER") {
-                      return <ListSubheader key={variable.split(':')[1]} disabled>{variable.split(':')[1]}</ListSubheader>
-                    } else {
-                      return <MenuItem value={variable} key={variable}>{variable}</MenuItem> 
-                    }
-                  })
-                }
-                {
-                  currentData.includes("cdc") && Object.keys(CDCVariables).map((variable) => {
-                    if (variable.split(':')[0]==="HEADER") {
-                      return <ListSubheader key={variable.split(':')[1]} disabled>{variable.split(':')[1]}</ListSubheader>
-                    } else {
-                      return <MenuItem value={variable} key={variable}>{variable}</MenuItem> 
-                    }
-                  })
-                }
-              </Select>
-            </StyledDropDown>
-        } */}
                     {vizType === 'dotDensity' && (
                         <DotDensityControlSection isCustom={isCustom} />
                     )}
@@ -1019,9 +794,6 @@ function VariablePanel() {
                     </div>
                 </NoteContainer>
             )}
-            {/* <button onClick={handleOpenClose} id="showHideLeft" className={panelState.variables ? 'active' : 'hidden'}>
-        <Icon symbol="settings" />
-      </button> */}
         </VariablePanelContainer>
     )
 }

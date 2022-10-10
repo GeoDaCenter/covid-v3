@@ -292,6 +292,30 @@ export const paramsSlice = createSlice({
                 state.mapParams.binMode = isHinge ? 'dynamic' : ''
             }
         },
+        setDateRangeType(state, action: PayloadAction<string | number>) {
+            const dateRangeType = action.payload
+            const { nType, dType } = state.dataParams
+
+            if (dateRangeType === 'custom') {
+                state.dataParams.rangeType = 'custom'
+                // if swapping over to a custom range, which will use a 2-part slider to scrub the range
+                if (nType === 'time-series') {
+                    state.dataParams.nRange = 30
+                }
+                if (dType === 'time-series') {
+                    state.dataParams.dRange = 30
+                }
+            } else {
+                // use the new value -- null for cumulative, 1 for daily, 7 for weekly
+                state.dataParams.rangeType = 'fixed'
+                if (nType === 'time-series') {
+                    state.dataParams.nRange = dateRangeType as number
+                }
+                if (dType === 'time-series') {
+                    state.dataParams.dRange = dateRangeType as number
+                }
+            }
+        },
         clearSelection(state) {
             state.selectionKeys = []
             state.selectionNames = []

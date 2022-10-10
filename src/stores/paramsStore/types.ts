@@ -42,7 +42,7 @@ export interface VariableSpec {
   separateZero: null | 1
   dataNote: null | string
   customData?: string
-  rangeType?: 'custom' | null
+  rangeType?: 'custom' | 'fixed' | null
 }
 
 interface VariableTree {
