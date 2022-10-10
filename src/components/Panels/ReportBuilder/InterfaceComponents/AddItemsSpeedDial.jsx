@@ -9,10 +9,6 @@ import styled from 'styled-components'
 
 const StyledSpeedDial = styled(SpeedDial)`
     .MuiSpeedDialAction-staticTooltipLabel {
-        /* top:100%;
-  transform:translateX(-.375em);
-  text-align: center;
-  bottom: unset; */
         color: black;
         white-space: nowrap;
     }
@@ -100,9 +96,10 @@ function AddItemsSpeeedDial({ handleAddItem, canAddItem }) {
             },
         },
     ]
+
     return (
         <StyledSpeedDial
-            aria-label="SpeedDial controlled open example"
+            ariaLabel="Add elements to this report page"
             icon={<SpeedDialIcon />}
             //   sx={{ position: "absolute", right: "2em", bottom: "4em" }}
             direction={'left'}
@@ -116,6 +113,7 @@ function AddItemsSpeeedDial({ handleAddItem, canAddItem }) {
                     key={action.name}
                     icon={action.icon}
                     tooltipTitle={action.name}
+                    ariaLabel={action.name}
                     // tooltipOpen
                     onClick={() => handleAddItem(action.item)}
                 />
