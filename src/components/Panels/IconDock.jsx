@@ -241,7 +241,7 @@ function IconDock() {
                     <button
                         id={id}
                         key={`${id}-icon-dock`}
-                        ariaLabel={ariaLabel}
+                        aria-label={ariaLabel}
                         onClick={() => handleToggle(panelName)}
                         className={`${hoveredIcon === id && 'hovered '}${
                             panelState[panelName] && ' active'

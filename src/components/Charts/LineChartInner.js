@@ -68,8 +68,8 @@ const dateFormatter = (val) => {
     return tempDate === 0 ? val.slice(0, 4) : monthNames[tempDate]
 }
 
-const CustomTick = (props) => {
-    return <text {...props}>{props.labelFormatter(props.payload.value)}</text>
+const CustomTick = ({labelFormatter, ...props}) => {
+    return <text {...props}>{labelFormatter(props.payload.value)}</text>
 }
 
 const getDateRange = ({ startDate, endDate }, monthIncrement = 1) => {

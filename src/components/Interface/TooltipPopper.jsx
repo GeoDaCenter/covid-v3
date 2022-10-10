@@ -65,15 +65,15 @@ const Popover = () => {
             open={open}
             anchorEl={anchorEl}
             disablePortal={false}
-            modifiers={{
-                flip: {
-                    enabled: true,
-                },
-                preventOverflow: {
-                    enabled: true,
-                    boundariesElement: 'window',
-                },
-            }}
+            // modifiers={{
+            //     flip: {
+            //         enabled: true,
+            //     },
+            //     preventOverflow: {
+            //         enabled: true,
+            //         boundariesElement: 'window',
+            //     },
+            // }}
             onMouseEnter={handleMouseOver}
             onMouseLeave={handleMouseLeave}
         >
