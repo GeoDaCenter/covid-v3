@@ -3,17 +3,21 @@ const clickIndex = (selector: string, index: number, delay: number=250) => {
   cy.get('#preloaderContainer', {timeout: 5000}).should('not.exist')
 }
 
+const assertNotLoading = () => {
+  cy.get('#preloaderContainer', {timeout: 5000}).should('not.exist')
+}
+
 const resetMap = () => {
   cy.get('#variableSelect', {timeout: 500}).click()
   cy.get('#variableMenu ul li').eq(2).click()
-  cy.get('#preloaderContainer', {timeout: 5000}).should('not.exist')
+  assertNotLoading()
 }
 
 const setCalendarDate = (year: string, month: string, day: string) => {
   cy.get('input[aria-label="Year"]', {timeout: 250}).type(year)
   cy.get('input[aria-label="Month"]', {timeout: 250}).type(month)
   cy.get('input[aria-label="Day"]', {timeout: 250}).type(day)
-  cy.get('#preloaderContainer', {timeout: 5000}).should('not.exist')
+  assertNotLoading()
 }
 
 const datesToTest = {
