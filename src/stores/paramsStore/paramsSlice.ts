@@ -12,7 +12,7 @@ import {
 // @ts-ignore
 import dataDateRanges from '../../config/dataDateRanges'
 // @ts-ignore
-import { colorScales } from '../../config/scales'
+import { fixedScales, colorScales } from '../../config/scales'
 // @ts-ignore
 import DEFAULTS from './paramsInitialState'
 const initialState = DEFAULTS as ParamsUiState
@@ -255,6 +255,43 @@ export const paramsSlice = createSlice({
                 ...action.payload,
             }
         },
+        setMapType(
+            state,
+            action: PayloadAction<'natural_breaks' | 'hinge15_breaks' | 'lisa'>
+        ) {
+            const mapType = action.payload
+            const isLisa = mapType === 'lisa'
+            const isHinge = mapType === 'hinge15_breaks'
+            const nBins = isHinge ? 6 : 8
+            const numerator = state.dataParams.numerator
+
+            if (isLisa) {
+                state.mapParams.mapType = mapType
+                state.mapParams.nBins = 4
+                state.mapParams.bins = fixedScales[mapType]
+                state.mapParams.colorScale = colorScales[mapType]
+                state.mapParams.binMode = ''
+                if (
+                    numerator === 'vaccines_one_dose' ||
+                    numerator === 'vaccines_fully_vaccinated'
+                ) {
+                    state.notification = {
+                        info: `<h2>Map Note</h2>
+                            <p>
+                                <br/>
+                                Red-colored areas represent a <b>high</b> share of the population that has been vaccinated. Blue-colored areas represent areas where vaccination rates remain <b>low</b>.                    </a>
+                            </p>
+                        `,
+                        location: 'bottom-right',
+                    }
+                }
+            } else {
+                state.mapParams.mapType = mapType
+                state.mapParams.nBins = nBins
+                state.mapParams.colorScale = colorScales[mapType]
+                state.mapParams.binMode = isHinge ? 'dynamic' : ''
+            }
+        },
         clearSelection(state) {
             state.selectionKeys = []
             state.selectionNames = []
@@ -385,10 +422,13 @@ export const paramsSlice = createSlice({
             state.dataParams = state.variables[0]
             state.mapParams = {
                 ...state.mapParams,
-                colorScale: colorScales[state.variables[0]?.colorScale||'natural_breaks'],
+                colorScale:
+                    colorScales[
+                        state.variables[0]?.colorScale || 'natural_breaks'
+                    ],
                 vizType: '2D',
                 binMode: '',
-                mapType: "natural_breaks"                
+                mapType: 'natural_breaks',
             }
             state.currentTable = {
                 numerator: 'properties',

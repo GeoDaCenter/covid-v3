@@ -18,7 +18,6 @@ import { BinsContainer, Gutter } from '..'
 import { StyledDropDown } from '..'
 import colors from '../../config/colors'
 import { findIn } from '../../utils'
-import { fixedScales, colorScales } from '../../config/scales'
 import { Button, Grid } from '@mui/material'
 import { paramsSelectors, paramsActions } from '../../stores/paramsStore'
 
@@ -28,7 +27,7 @@ const {
     setCurrentData,
     setPanelState,
     // setParametersAndData,
-    setNotification,
+    setMapType,
     toggleDotDensityMode,
     toggleDotDensityRace,
     setVariableMenuWidth,
@@ -420,45 +419,7 @@ function VariablePanel() {
         dispatch(setVariableMenuWidth(variablePanelRef.current.offsetWidth))
     }, [panelState.variables])
 
-    const handleMapType = (event, newValue) => {
-        let nBins = newValue === 'hinge15_breaks' ? 6 : 8
-        if (newValue === 'lisa') {
-            if (
-                numerator === 'vaccines_one_dose' ||
-                numerator === 'vaccines_fully_vaccinated'
-            ) {
-                dispatch(
-                    setNotification({
-                        info: `
-                    <h2>Map Note</h2>
-                    <p>
-                        <br/>
-                        Red-colored areas represent a <b>high</b> share of the population that has been vaccinated. Blue-colored areas represent areas where vaccination rates remain <b>low</b>.                    </a>
-                    </p>
-                `,
-                        location: 'bottom-right',
-                    })
-                )
-            }
-            dispatch(
-                setMapParams({
-                    mapType: newValue,
-                    nBins: 4,
-                    bins: fixedScales[newValue],
-                    colorScale: colorScales[newValue],
-                    binMode: 'natural_breaks',
-                })
-            )
-        } else {
-            dispatch(
-                setMapParams({
-                    nBins,
-                    mapType: newValue,
-                    binMode: newValue === 'hinge15_breaks' ? 'dynamic' : '',
-                })
-            )
-        }
-    }
+    const handleMapType = (_event, newValue) => dispatch(setMapType(newValue))
     const handleMapOverlay = (event) => {
         dispatch(
             setMapParams({
