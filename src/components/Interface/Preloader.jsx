@@ -30,6 +30,7 @@ const PreloaderContainer = styled.div`
  * @component
  */
 const Preloader = ({ loading = false, message = 'Loading', quiet = false }) => {
+  if (!loading) return null
   return (
     <PreloaderContainer
       style={{ display: !loading ? 'none' : 'initial' }}
