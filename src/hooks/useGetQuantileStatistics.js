@@ -4,7 +4,7 @@ import { quantile, quantileRank } from 'simple-statistics'
 import { useEffect, useState } from "react";
 import { paramsSelectors } from "../stores/paramsStore";
 import { dataSelectors } from '../stores/dataStore'
-const { selectGeojson } = dataSelectors;
+const { selectGeojsonData } = dataSelectors;
 const { selectCurrentData } = paramsSelectors;
 
 /**
@@ -29,12 +29,13 @@ function useGetQuantileStatistics({
     const [stats, setStats] = useState({});
     // pieces of redux state
     const currentData = useSelector(selectCurrentData);
-    const geojsonData = useSelector(selectGeojson(dataset||currentData));
+    const geojsonData = useSelector(selectGeojsonData(dataset||currentData));
     const geoidProperties = geojsonData?.properties && geojsonData.properties[geoid];
     const data = useGetVariable({
         variable,
         dateIndex
     });
+    console.log(dataset||currentData)
     
     useEffect(() => {
         if (data.length && geojsonData?.order) {
