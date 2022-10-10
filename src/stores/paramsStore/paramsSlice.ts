@@ -365,7 +365,7 @@ export const paramsSlice = createSlice({
                     newVariable.variableName,
                     variablesList
                 )
-                variablesList.push(currVariable)
+                variablesList.unshift(currVariable)
                 state.variables.unshift({
                     ...newVariable,
                     variableName: currVariable,
@@ -383,6 +383,13 @@ export const paramsSlice = createSlice({
             }
             state.currentData = dataName
             state.dataParams = state.variables[0]
+            state.mapParams = {
+                ...state.mapParams,
+                colorScale: colorScales[state.variables[0]?.colorScale||'natural_breaks'],
+                vizType: '2D',
+                binMode: '',
+                mapType: "natural_breaks"                
+            }
             state.currentTable = {
                 numerator: 'properties',
                 denominator: 'properties',
