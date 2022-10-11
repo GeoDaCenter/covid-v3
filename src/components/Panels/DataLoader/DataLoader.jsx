@@ -476,7 +476,7 @@ export default function DataLoader() {
                     <Gutter h={15} />
                 </ModalInner>
                 <CloseButton onClick={handleClose} title="Close Report Builder">
-                    ×
+                    &times;
                 </CloseButton>
             </Box>
         </Modal>

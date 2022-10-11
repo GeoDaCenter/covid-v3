@@ -96,7 +96,7 @@ function ReportBuilder({ isPage = false }) {
         selectSinglePanelState('reportBuilder')
     )
     const open = isPage || reportBuilderOpen
-    const handleClose = () => togglePanel('reportBuilder')
+    const handleClose = () => dispatch(togglePanel('reportBuilder'))
     // trigger update to parent context for dnd / resizing
     useSelector(selectAllReports)
     const dates = useSelector(selectDates)
@@ -424,7 +424,7 @@ function ReportBuilder({ isPage = false }) {
                         onClick={handleClose}
                         title="Close Report Builder"
                     >
-                        ×
+                        &times;
                     </CloseButton>
                 </Box>
             </Modal>
