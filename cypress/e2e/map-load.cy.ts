@@ -6,6 +6,7 @@ const assertNotLoading = () => {
 const resetMap = () => {
   cy.get('#variableSelect', {timeout: 500}).click()
   cy.get('#variableMenu ul li').eq(2).click()
+  cy.get('#mapType label').eq(0).click()
   assertNotLoading()
 }
 
@@ -57,20 +58,32 @@ describe('Initial Map Load', () => {
   //     index !== _list.length -1 && cy.get('#variableSelect').click()
   //   })
   // })
-  it('can change time', () => {
-      resetMap()
-      const {years, months, day} = datesToTest
-      years.forEach(year => {
-        months.forEach(month => {
-          day.forEach(day => {
-            setCalendarDate(year, month, day)
-          })
-        })
-      })
-  })
+
+  // it('can change time', () => {
+  //     resetMap()
+  //     const {years, months, day} = datesToTest
+  //     years.forEach(year => {
+  //       months.forEach(month => {
+  //         day.forEach(day => {
+  //           setCalendarDate(year, month, day)
+  //         })
+  //       })
+  //     })
+  // })
+
   it('can change map mode', () => {
     resetMap()
-    
+    cy.get('#mapType label').each((_el, index, _list) => {
+      clickIndex('#mapType label', index)
+    })    
+  })
+  it('can toggle panels', () => {
+    cy.get('#icon-dock button').each((el, index, _list) => {
+      clickIndex('#icon-dock button', index)
+      cy.get('body').trigger('keydown', { keyCode: 27});
+      cy.wait(250);
+      cy.get('body').trigger('keyup', { keyCode: 27});
+    })
   })
 
 })

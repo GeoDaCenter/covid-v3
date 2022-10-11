@@ -235,7 +235,7 @@ function IconDock() {
         : (panel) => dispatch(togglePanel(panel))
 
     return (
-        <DockContainerOuter>
+        <DockContainerOuter id="icon-dock">
             <DockContainer>
                 {buttons.map(({ symbol, id, ariaLabel, panelName }) => (
                     <button
