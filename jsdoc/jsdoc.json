@@ -1,8 +1,6 @@
 {
     "source":{
-        "include": [ "./src", "./build-scripts" ],
-        "includePattern": ".+\\.js(doc|x)?$",
-        "excludePattern": "(^|\\/|\\\\)_"
+        "include": [ "./src", "./build-scripts" ]
     },
     "recurseDepth": 10,
     "tags": {
