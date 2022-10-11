@@ -99,7 +99,7 @@
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "docs": "jsdoc -c ./jsdoc/jsdoc.json -r .",
+    "docs": "jsdoc -c ./jsdoc/jsdoc.json",
     "cypress": "yarn pre-build && yarn build && concurrently \"cypress open\" \"cd build && http-server --proxy http://localhost:8080?\""
   },
   "eslintConfig": {

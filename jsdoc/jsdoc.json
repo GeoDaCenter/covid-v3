@@ -1,4 +1,10 @@
 {
+    "source":{
+        "include": [ "./src", "./build-scripts" ],
+        "includePattern": ".+\\.js(doc|x)?$",
+        "excludePattern": "(^|\\/|\\\\)_"
+    },
+    "recurseDepth": 10,
     "tags": {
         "allowUnknownTags": true
     },
