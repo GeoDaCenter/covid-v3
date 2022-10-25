@@ -288,7 +288,8 @@ export const paramsSlice = createSlice({
             } else {
                 state.mapParams.mapType = mapType
                 state.mapParams.nBins = nBins
-                state.mapParams.colorScale = colorScales[state.dataParams.colorScale || mapType]
+                const colorScale = mapType === "natural_breaks" ? colorScales[state.dataParams.colorScale || mapType] : colorScales[mapType]
+                state.mapParams.colorScale = colorScale
                 state.mapParams.binMode = isHinge ? 'dynamic' : ''
             }
         },
