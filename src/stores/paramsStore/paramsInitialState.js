@@ -13,30 +13,32 @@ import datasets from "../../config/datasets";
 
 import { findIn, findTableOrDefault } from "../../utils";
 // read in URL params
-let paramsDict = {};
-for (const [key, value] of new URLSearchParams(window.location.search)) {
-  paramsDict[key] = value;
-}
-const currVariable = paramsDict.hasOwnProperty("var")
-  ? {
-      ...findIn(variables, "name", paramsDict.var.replace(/_/g, " ")),
-      [paramsDict.hasOwnProperty("date") && "nIndex"]: +paramsDict.date,
-      [paramsDict.hasOwnProperty("range") && "nRange"]:
-        paramsDict.range === "null" ? null : +paramsDict.range,
-    }
-  : {};
+// let paramsDict = {};
+// for (const [key, value] of new URLSearchParams(window.location.search)) {
+//   paramsDict[key] = value;
+// }
+// const currVariable = paramsDict.hasOwnProperty("var")
+//   ? {
+//       ...findIn(variables, "variableName", paramsDict.var.replace(/_/g, " ")),
+//       [paramsDict.hasOwnProperty("date") && "nIndex"]: +paramsDict.date,
+//       [paramsDict.hasOwnProperty("range") && "nRange"]:
+//         paramsDict.range === "null" ? null : +paramsDict.range,
+//     }
+//   : {};
 
-const currentData = paramsDict.hasOwnProperty("src")
-  ? `${paramsDict.src}.geojson`
-  : defaultData;
-const currDataset = findIn(datasets, "file", currentData);
+//   console.log('paramsDict', paramsDict, currVariable, variables)
+// const currentData = paramsDict.hasOwnProperty("src")
+//   ? `${paramsDict.src}.geojson`
+//   : defaultData;
+
+// const currDataset = findIn(datasets, "file", currentData);
 
 const INITIAL_STATE = {
   // parameters for app
   // Default data state
-  currentData,
+  currentData: defaultData,
   currentTable: {
-    numerator: findTableOrDefault(currDataset, tables, "cases"),
+    numerator: "cases",
     denominator: "properties",
   },
   // defaults
@@ -67,33 +69,22 @@ const INITIAL_STATE = {
     dataNote: null,
     zAxisParams: null,
     storedRange: null,
-    ...variables.find(variable => variable.variableName === "Confirmed Count per 100K Population"),
-    ...currVariable,
+    ...variables.find(variable => variable.variableName === "Confirmed Count per 100K Population")
   },
   storedRange: null,
   mapParams: {
-    mapType: paramsDict.hasOwnProperty("mthd")
-      ? paramsDict.mthd
-      : "natural_breaks",
+    mapType: "natural_breaks",
     bins: {
       bins: [],
       breaks: [],
     },
-    binMode:
-      paramsDict.hasOwnProperty("dBin") && paramsDict.dBin ? "dynamic" : "",
+    binMode: "",
     fixedScale: null,
-    nBins:
-      paramsDict.hasOwnProperty("mthd") &&
-      paramsDict.mthd.includes === "hinge15_breaks"
-        ? 6
-        : paramsDict.hasOwnProperty("mthd") &&
-          paramsDict.mthd.includes === "lisa"
-        ? 4
-        : 8,
-    vizType: paramsDict.hasOwnProperty("viz") ? paramsDict.viz : "2D",
+    nBins: 8,
+    vizType: "2D",
     activeGeoid: "",
-    overlay: paramsDict.hasOwnProperty("ovr") ? paramsDict.ovr : "",
-    resource: paramsDict.hasOwnProperty("res") ? paramsDict.res : "",
+    overlay: "",
+    resource: "",
     colorScale: [
       [255, 255, 204],
       [255, 237, 160],

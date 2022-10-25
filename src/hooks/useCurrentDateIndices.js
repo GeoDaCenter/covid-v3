@@ -37,7 +37,7 @@ function useCurrentDateIndices() {
             : nIndex || dIndex
     const currRange = nRange || dRange
     return [
-        currentIndex || 1,
+        currentIndex,
         currDates || [],
         currDatesAvailable || [],
         dates || [],

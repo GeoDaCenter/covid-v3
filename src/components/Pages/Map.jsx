@@ -44,6 +44,7 @@ import { Alert, Button, Snackbar } from '@mui/material'
 import { Box } from '@mui/system'
 import { getDefaultDimensions } from '../../utils/getDefaultDimensions'
 import { paramsSelectors, paramsActions } from '../../stores/paramsStore'
+import useUrlParamActions from '../../hooks/useUrlParamActions'
 const {
     selectMapParams,
     selectDataParams,
@@ -215,10 +216,11 @@ export default function Map() {
                     </a>
                     </p>
                     `,
-                    location:'center'
-        })
+                    location: 'center',
+                })
             )
         }
+        
 
         if (window.innerWidth <= 1024) {
             dispatch(
@@ -316,7 +318,7 @@ const MapContainerInner = () => {
     )
 }
 const MapPageContainer = () => {
-    // const dispatch = useDispatch();
+    useUrlParamActions();
     const panelState = useSelector(selectPanelState)
     const nType = useSelector(selectPartialDataParam('nType'))
     const showTopPanel = nType !== 'characteristic'

@@ -5,7 +5,7 @@ const ViewportContext = React.createContext()
 const SetViewportContext = React.createContext()
 
 const updateSharedView = throttle((viewport) => {
-  window.localStorage.setItem('SHARED_VIEW', JSON.stringify(viewport))
+    window.localStorage.setItem('SHARED_VIEW', JSON.stringify(viewport))
 }, 25)
 
 /**
@@ -13,13 +13,13 @@ const updateSharedView = throttle((viewport) => {
  *
  * @category Contexts
  * @example
- *   function MyApp() {
- *     return (
- *       <ViewportProvider>
- *         <MyChildComponent />
- *       </ViewportProvider>
- *     )
- *   }
+ *     function MyApp() {
+ *         return (
+ *             <ViewportProvider>
+ *                 <MyChildComponent />
+ *             </ViewportProvider>
+ *         )
+ *     }
  *
  * @param {Object} props
  * @param {React.ReactNode} props.children - Child components
@@ -27,16 +27,23 @@ const updateSharedView = throttle((viewport) => {
  * @returns {React.Component} - ViewportContext.Provider
  */
 export const ViewportProvider = ({ defaultViewport = {}, children }) => {
-  const [viewport, setViewport] = useState(defaultViewport)
-  document.hasFocus() && updateSharedView(viewport)
+    const [viewport, setViewport] = useState(defaultViewport)
+    const handleViewport = (view) => {
+        setViewport((prev) => ({
+            ...prev,
+            ...view,
+        }))
+    }
 
-  return (
-    <ViewportContext.Provider value={viewport}>
-      <SetViewportContext.Provider value={setViewport}>
-        {children}
-      </SetViewportContext.Provider>
-    </ViewportContext.Provider>
-  )
+    document.hasFocus() && updateSharedView(viewport)
+
+    return (
+        <ViewportContext.Provider value={viewport}>
+            <SetViewportContext.Provider value={handleViewport}>
+                {children}
+            </SetViewportContext.Provider>
+        </ViewportContext.Provider>
+    )
 }
 
 /**
@@ -46,9 +53,9 @@ export const ViewportProvider = ({ defaultViewport = {}, children }) => {
  * @category Hooks
  */
 export const useViewport = () => {
-  const ctx = useContext(ViewportContext)
-  if (!ctx) throw Error('Not wrapped in <ViewportProvider />.')
-  return ctx
+    const ctx = useContext(ViewportContext)
+    if (!ctx) throw Error('Not wrapped in <ViewportProvider />.')
+    return ctx
 }
 
 /**
@@ -58,9 +65,9 @@ export const useViewport = () => {
  * @category Contexts
  */
 export const useSetViewport = () => {
-  const ctx = useContext(SetViewportContext)
-  if (!ctx) throw Error('Not wrapped in <ViewportProvider />.')
-  return ctx
+    const ctx = useContext(SetViewportContext)
+    if (!ctx) throw Error('Not wrapped in <ViewportProvider />.')
+    return ctx
 }
 
 /**

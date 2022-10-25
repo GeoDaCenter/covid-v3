@@ -491,6 +491,7 @@ export const paramsSelectors = {
         (state: ParamsStateOuter) =>
             state.params.dataParams[param],
     selectMapParams: (state: ParamsStateOuter) => state.params.mapParams,
+    selectMapLoaded: (state: ParamsStateOuter) => state.params.mapLoaded,
     selectPartialMapParam:
         (param: keyof ParamsUiState['mapParams']) =>
         (state: ParamsStateOuter) =>
