@@ -11,8 +11,7 @@ const { selectPartialDataParam, selectCurrentTable, selectDates } =
  * positional information for easy renaming.
  *
  * @category Hooks
- * @returns {Array} Positional data
- * [ currentIndex: number, currDates: string[],
+ * @returns {Array} Positional data [ currentIndex: number, currDates: string[],
  *   currDatesAvailable: string[], dates:string[], currRange: number, rangeType:
  *   string ]
  */
@@ -31,11 +30,11 @@ function useCurrentDateIndices() {
 
     const currDatesAvailable =
         dataDateRanges[currentTable?.numerator?.name?.split('.')[0]]
-    const currentIndex =
-        (nIndex || dIndex) === null
+    const currentIndex = nIndex === null && dIndex === null
             ? currDatesAvailable?.slice(-1)[0] || dates.length - 1
             : nIndex || dIndex
     const currRange = nRange || dRange
+    
     return [
         currentIndex,
         currDates || [],
