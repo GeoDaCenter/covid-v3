@@ -1,4 +1,3 @@
-
 export const findDateIncrement = (index, availableDates) => {
     for (let i=index; i<availableDates.length; i++) {
         if (availableDates[i] === 1) {

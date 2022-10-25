@@ -125,7 +125,6 @@ const aggregate2WeekTimeSeries = (table, geoids, endIndex) => {
 // }
 
 export const generateReport = ({
-  currentData,
   currDataset,
   currIndex,
   currTables,
@@ -133,11 +132,10 @@ export const generateReport = ({
   // defaultTables,
   selectionKeys,
   storedData,
-  storedGeojson,
+  properties,
 }) => {
   let report = {};
   const { geography } = currDataset; //file, geography, join, name, tables
-  const properties = storedGeojson[currentData].properties;
   try {
     report.name =
       selectionKeys.length > 3

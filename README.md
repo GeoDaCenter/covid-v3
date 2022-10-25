@@ -6,7 +6,7 @@ The U.S. COVID-19 Atlas provides county-level visualizations and analytics to re
 
 The current Atlas is available here: [https://USCovidAtlas.org](https://USCovidAtlas.org). The Atlas is being updated everyday by midnight EST. We are working on releasing regular updates with more data, functions, and analysis.
 
-![screenshot](https://github.com/GeoDaCenter/covid/blob/master/public/img/screenshot.png)
+![screenshot](https://github.com/GeoDaCenter/covid/raw/master/public/img/screenshot.png)
 
 ## DATA
 
@@ -23,20 +23,22 @@ We also include information from the following datasets:
 + *American Community Survey*. We incorporate population data used to generate rates, and will add more information as needed in future iterations.
 + [*COVIDCareMap*](https://github.com/covidcaremap/covid19-healthsystemcapacity/tree/v0.2/data). Healthcare System Capacity includes Staffed beds, Staffed ICU beds, Licensed Beds by County. This data aggregates information about the healthcare system capacity with additions/edits allowed in real-time.. It sources data from the [Healthcare Cost Report Information System (HCRIS)](https://github.com/covidcaremap/covid19-healthsystemcapacity/tree/v0.2/data#healthcare-cost-report-information-system-hcris-data) and an open hospital facilities dataset by [Definitive Healthcare](https://github.com/covidcaremap/covid19-healthsystemcapacity/tree/v0.2/data#definitive-health-dh-data).
 + [County Health Rankings & Roadmaps](https://www.countyhealthrankings.org/explore-health-rankings/rankings-data-documentation): social, economic, and health indicators by County. 
-+ [Bin Yu Group](https://github.com/Yu-Group/covid19-severity-prediction): Predicted death counts and Severity index by County
 + [Native American Reservations](https://hifld-geoplatform.opendata.arcgis.com/datasets/54cb67feef5746e8ac7c4ab467c8ae64): boundary for Native American Reservations.
 + [Hypersegregated Cities](https://www.princeton.edu/news/2015/05/18/hypersegregated-cities-face-tough-road-change): boundary for historical and current hypersegregated cities. 
++ [Safegraph](https://docs.safegraph.com/docs/social-distancing-metrics): Data on mobility behavior over the course of the pandemic
 
-### Future Release
-We have multiple datasets planned for future inclusion in the atlas, including:
+Previously used  Datasets:
++ [Bin Yu Group](https://github.com/Yu-Group/covid19-severity-prediction): Predicted death counts and Severity index by County
+
+<!-- ### Future Release -->
+<!-- We have multiple datasets planned for future inclusion in the atlas, including: -->
 <!-- ADDED >
 <!-- + [Bin Yu Group](https://github.com/Yu-Group/covid19-severity-prediction): Hospital Severity Index forecasting by hospital location -->
 <!-- + [Data.gov](http://data.gov): Indian Reservation Boundaries -->
 <!-- + [NYTimes](https://github.com/nytimes/covid-19-data): Confirmed Cases and Deaths by County & State -->
-+ [DesCartes Lab](https://github.com/descarteslabs/DL-COVID-19): Mobility index by County
-+ [PlaceIQ, Couture et al](https://github.com/COVIDExposureIndices/COVIDExposureIndices): Limited Exposure Index by County 
-+ [Safegraph](https://docs.safegraph.com/docs/social-distancing-metrics): Data on mobility behavior over the course of the pandemic
-+ [HHS Hospital Data](https://healthdata.gov/dataset/covid-19-reported-patient-impact-and-hospital-capacity-facility): Facility Level data on hospital occupancy.
+<!-- + [DesCartes Lab](https://github.com/descarteslabs/DL-COVID-19): Mobility index by County -->
+<!-- + [PlaceIQ, Couture et al](https://github.com/COVIDExposureIndices/COVIDExposureIndices): Limited Exposure Index by County  -->
+<!-- + [HHS Hospital Data](https://healthdata.gov/dataset/covid-19-reported-patient-impact-and-hospital-capacity-facility): Facility Level data on hospital occupancy. -->
 
 ### Data Details
 #### USAFacts
@@ -68,6 +70,7 @@ The hotspot detection ( a Local Indicator of Spatial Autocorrelation) is powered
 + [Queen contiguity spatial weights creation](http://geodacenter.github.io/workbook/4a_contig_weights/lab4a.html#queen-contiguity)
 + [Local Moran statistics](http://geodacenter.github.io/workbook/6a_local_auto/lab6a.html#local-moran)
 + [Univariate Local Indicator of Spatial Autocorrelation (LISA)](http://geodacenter.github.io/workbook/6a_local_auto/lab6a.html)
++ [Dot Density Mapping](https://www.arcgis.com/home/item.html?id=978dac719e794236bf93c4ede7e80eaa)
 
 More information about the Geoda project can be found [here](https://geodacenter.github.io/).
 
@@ -111,10 +114,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Required Environment Variables
 
+### App
 To access the Atlas Stories data, you must set the following environment variables in your `.env` file in the root of the repository:
 ```
 REACT_APP_STORIES_PUBLIC_URL=https://link-to-cdn.net
+REACT_APP_EMAIL_FORM_URL=https://form-link.com
 ```
+
 
 ## Quickstart
 
@@ -137,6 +143,9 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
+
+### `yarn docs`
+Generates JSDoc site, output to the folder `jsdocs`. See `jsdoc` folder for configuration.
 
 ### `yarn test`
 

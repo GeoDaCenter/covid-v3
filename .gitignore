@@ -35,8 +35,8 @@ public/map/build
 *.pyc
 public/proto/node_modules/
 data-scripts/safegraph/fullData2021-03-05.csv
-yarn.lock
-yarn.lock
+# yarn.lock
+# yarn.lock
 .env
 data-scripts/docker/gbq-credentials.json
 
@@ -48,8 +48,9 @@ data-scripts/_1p3a/cases.csv
 
 # yarn stuff
 .yarn/cache/*
-yarn.lock
+# yarn.lock
 .yarn/*.gz
+package-lock.json
 
 # local data
 public/pbf/*
@@ -57,4 +58,6 @@ public/csv/*
 public/geojson/*
 public/timeseries/*
 
+# docs
 out
+jsdocs

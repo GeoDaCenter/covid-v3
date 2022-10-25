@@ -1,0 +1,17 @@
+.sidebar *, .side-nav * {
+    font-size: .75rem !important;
+    text-transform: none !important;
+}
+.sidebar h2, .side-nav h2 {
+    font-weight: bold;
+}
+.sidebar ul {
+    padding-inline-start: 0.5em;
+}
+
+.side-nav ul, .side-nav h3 {
+    display:none !important;
+}
+.side-nav ul:last-of-type, .side-nav h3:last-of-type {
+    display:block !important;
+}

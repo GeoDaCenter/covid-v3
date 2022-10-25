@@ -1,11 +1,15 @@
 import dataFn from './dataFunction';
 /**
- * @param  {Object} {numeratorData An object of data keyed to the current GEOID / numeric identifier for the numerator table
- * @param  {Object} denominatorData={}  An object of data keyed to the current GEOID / numeric identifier for the denominator table
- * @param  {Object} dataParams 
- * @param  {Boolean} fixedOrder=false
- * @param  {Boolean} dataReady=true
- * @param  {Number} binIndex=null
+ * Function to get data for bins or choropleth.
+ * 
+ * @category Utils/Data
+ * @param  {Object} numeratorData An object of data keyed to the current GEOID / numeric identifier for the numerator table
+ * @param  {Object} denominatorData An object of data keyed to the current GEOID / numeric identifier for the denominator table
+ * @param {Object} dataParams - Parameters for the data function, see
+ *   VariableSpec {@link src/stores/paramsStore/types.ts}
+ * @param  {Boolean} fixedOrder If true, follows the fixed order to align with jsgeoda's expected input
+ * @param  {Boolean} dataReady Flag to confirm if data is fully available
+ * @param  {Number} binIndex Date index to use for timeseries data, if applicable
  */
 const getDataForBins = ({
   numeratorData,
