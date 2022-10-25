@@ -190,7 +190,7 @@ function useStories({ selectedStory = {}, filters = [], singleStoryId = '' }) {
             counts,
             stories,
         }
-    }, [JSON.stringify(filters), allStories?.length])
+    }, [JSON.stringify({allStories,filters})])
 
     const activeStory = useMemo(() => {
         if (!allStories?.length) {

@@ -56,14 +56,14 @@ export default function Contact() {
         </a>
         <hr />
         <p>
-          Contact US COVID Atlas co-leads directly if you have any questions
-          about the Atlas or have media inquiries:
+          Contact us directly if you have any questions
+         or media inquiries:
           <br />
         </p>
         <ContactForm />
         <p>
-          For additional inquiries, contact the US COVID Atlas team: Marynia
-          Kolak (mkolak at uchicago.edu) or Qinyun Lin (qinyunlin at
+          For additional inquiries, contact the US Covid Atlas team co-leads: Marynia
+          Kolak (mkolak at illinois.edu) or Qinyun Lin (qinyunlin at
           uchicago.edu)
         </p>
         <Gutter h={40} />
@@ -88,7 +88,7 @@ export default function Contact() {
           <br />
           <br />
           For a list of all contributors to the Atlas, please visit our{' '}
-          <a href="/about#team">about</a> page.
+          <a href="/about#team">About</a> page.
         </p>
         <Gutter h={40} />
         {/* <h2>LEARNING COMMUNITY</h2>
