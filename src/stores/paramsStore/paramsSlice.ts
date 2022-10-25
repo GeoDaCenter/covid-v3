@@ -288,7 +288,7 @@ export const paramsSlice = createSlice({
             } else {
                 state.mapParams.mapType = mapType
                 state.mapParams.nBins = nBins
-                state.mapParams.colorScale = colorScales[mapType]
+                state.mapParams.colorScale = colorScales[state.dataParams.colorScale || mapType]
                 state.mapParams.binMode = isHinge ? 'dynamic' : ''
             }
         },
