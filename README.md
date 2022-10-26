@@ -107,12 +107,27 @@ If you have a question regarding a specific dataset, please contact the dataset 
 Please cite us using: 
 Xun Li, Qinyun Lin, Marynia Kolak, Robert Martin, Stephanie Yang, Moksha Menghaney, Ari Israel, Ryan Wang, Vidal Anguiano Jr., Erin Abbott, Dylan Halpern, Sihan-Mao. (2020, October 12). GeoDaCenter/covid: beta (Version beta). Zenodo. http://doi.org/10.5281/zenodo.4081869
 
+## Current Repos, Subdomains and branches of the Atlas
+
+Repositories
+- Main Repo: [geodacenter/covid-v3](https://github.com/geodacenter/covid-v3)
+- Archive Repo: [geodacenter/covid](https://github.com/geodacenter/covid)
+- Stories Repo (Private): [geodacenter/covid-stories](https://github.com/GeoDaCenter/covid-histories)
+
+URLs
+- Main: [https://uscovidatlas.org/](https://uscovidatlas.org/): Main site, built using `yarn build` or `yarn netlify-build` to include pre-build data fetching and parsing 
+- Dev: [https://dev.uscovidatlas.org/](https://dev.uscovidatlas.org/): Dev site, built using same command as above on the dev branch
+- Docs: [https://docs.uscovidatlas.org/](https://docs.uscovidatlas.org/): JSDocs site for the Atlas, generated from `yarn docs` 
+- Stories: [https://stories.uscovidatlas.org/](https://stories.uscovidatlas.org/): Stories site, a next.js site. See Stories repo for more info.
+
+There are various other branch deploys on the US Covid Atlas web hosting (netlify) that are not publicly listed.
 
 ## Running the React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Required Environment Variables
+- REACT_APP_STORIES_PUBLIC_URL (string): URL to the stories public folder
 
 ### App
 To access the Atlas Stories data, you must set the following environment variables in your `.env` file in the root of the repository:
