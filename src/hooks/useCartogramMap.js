@@ -48,9 +48,10 @@ function useCartogramMap({
             dataForCartogram.length &&
             mapId.length
         ) {
+            const cleanedData = dataForCartogram.map(f => f === null || f === undefined ? NaN : f)
             const getCartogramData = async () => {
                 let cartogramValues = await geoda
-                    .cartogram(mapId, dataForCartogram)
+                    .cartogram(mapId, cleanedData)
                     .then((data) => {
                         const cartogramData = []
                         let cartogramCenter = [0, 0]

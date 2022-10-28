@@ -31,7 +31,6 @@ function useCurrentDateIndices() {
     const currDatesAvailable =
         dataDateRanges[currentTable?.numerator?.name?.split('.')[0]]
 
-    console.log('currentTable', currentTable?.numerator?.name, dataDateRanges, currDatesAvailable)
     const currentIndex = nIndex === null && dIndex === null
             ? currDatesAvailable?.slice(-1)[0] || dates.length - 1
             : nIndex || dIndex

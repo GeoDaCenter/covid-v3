@@ -230,6 +230,6 @@ export const fixedScales = {
     },
     maskMandates: {
         bins: ['No Data', 'No', 'Yes'],
-        breaks: [-1.1, 0.1, 1.1],
+        breaks: [-1, 0, 1],
     }
 }

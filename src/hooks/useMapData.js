@@ -64,7 +64,6 @@ const generateJoinData = ({
     dataReady,
     shouldSeparateZero = false,
 }) => {
-    console.log(binData,bins)
     if (
         !dataReady ||
         (mapParams.mapType !== 'lisa' && !bins.breaks) ||
@@ -131,6 +130,7 @@ function useMapData({ dataParams, currentData, mapParams }) {
         dataParams,
         currentData,
     })
+
     /**
      * CurrIndex is the reconcile index in case of null index, which defaults to
      * most recent or an index outside of the current data range when changing
@@ -182,8 +182,6 @@ function useMapData({ dataParams, currentData, mapParams }) {
         dataReady,
         currentData,
     ])
-    // console.table(combinedParams)
-    // console.log(binData)
 
     // different than binData in that this can be a different date index
     // Meaning, bin on the most recent, then draw map on a different date

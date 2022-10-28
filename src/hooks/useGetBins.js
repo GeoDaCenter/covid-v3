@@ -115,8 +115,8 @@ export default function useGetBins({
             const filteredData = shouldSeparateZero
                 ? binData.filter((d) => d !== 0)
                 : binData
-
-            getAsyncBins(geoda, mapParams, filteredData).then((nb) => {
+            const cleanedData = filteredData.map(f => f === null || f === undefined ? NaN : f)
+            getAsyncBins(geoda, mapParams, cleanedData).then((nb) => {
                 setBins({
                     bins:
                         mapParams.mapType === 'natural_breaks'

@@ -79,7 +79,8 @@ function useLisaMap({
             geojsonData?.weights &&
             dataReady
         ) {
-            getLisa(geojsonData, geoda, dataForLisa).then(
+            const cleanedData = dataForLisa.map(f => f === null || f === undefined ? NaN : f)
+            getLisa(geojsonData, geoda, cleanedData).then(
                 ({ lisaValues, shouldCacheWeights, weights }) => {
                     setData({
                         lisaData: lisaValues.clusters,

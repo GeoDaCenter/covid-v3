@@ -104,30 +104,29 @@ const generateDefaults = async () => {
     return data
 }
 
-const generateLegacyDatasets = async () => {
-    const tables = await generateTables();
-    const datasets = await generateDatasets();
-    let returnObj = {};
-    datasets.forEach(d => {
-        let returnTables = {};
-        try {
-            console.log(Object.entries(d.tables))
-            returnTables = Object.entries(d.tables).map(entry=>({[entry[0]]: tables.find(t => t.Id === entry[1])})).reduce((prev, curr) => ({...prev, ...curr}))
-        } catch {}
+// const generateLegacyDatasets = async () => {
+//     const tables = await generateTables();
+//     const datasets = await generateDatasets();
+//     let returnObj = {};
+//     datasets.forEach(d => {
+//         let returnTables = {};
+//         try {
+//             returnTables = Object.entries(d.tables).map(entry=>({[entry[0]]: tables.find(t => t.Id === entry[1])})).reduce((prev, curr) => ({...prev, ...curr}))
+//         } catch {}
         
-        returnObj[d.file] = {
-            ...d,
-            geosjon: d.file,
-            tables: returnTables
-        }
-    })
-    fs.writeFileSync(path.join(basePath, 'legacyDatasets.js'),  `// this is a generated file, do not edit directly. See Google sheets to update variable config \n export default ${JSON.stringify(returnObj)}`)
-}
+//         returnObj[d.file] = {
+//             ...d,
+//             geosjon: d.file,
+//             tables: returnTables
+//         }
+//     })
+//     fs.writeFileSync(path.join(basePath, 'legacyDatasets.js'),  `// this is a generated file, do not edit directly. See Google sheets to update variable config \n export default ${JSON.stringify(returnObj)}`)
+// }
 
 console.log('Generating variables, tables, datasets, and defaults from CMS.')
-const variables = generateVariables();
-const tables = generateTables();
-const datasets = generateDatasets();
-const defaults = generateDefaults();
-const variableTree = generateVariableTree();
+const _variables = generateVariables();
+const _tables = generateTables();
+const _datasets = generateDatasets();
+const _defaults = generateDefaults();
+const _variableTree = generateVariableTree();
 console.log('Config generation complete.')

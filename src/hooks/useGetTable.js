@@ -24,7 +24,6 @@ function useGetTable({
   const dispatch = useDispatch();  
   const fileSchemaNames = filesToFetch.map((fileSchema) => fileSchema.name)
   const accessedData = useSelector(selectStoredDatasets(fileSchemaNames))
-  console.log('accessedData', accessedData, filesToFetch)
   
   useEffect(() => {    
     if (shouldFetch) {
