@@ -2,9 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
 const Papa = require('papaparse');
-require('dotenv').config();
 
-const isDev = process.env.CMS_MODE !== "dev" 
+const [_nodeV, _script, devFlag] = process.argv
+const isDev = devFlag === "--dev" 
 const baseUrl = isDev
     ? 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTVLk2BtmeEL6LF6vlDJBvgL_JVpvddfMCYjQPwgVtlzTanUlscDNBsRKiJBb3Vn7jumMJ_BEBkc4vi/pub?output=csv'
     : 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRyUBTrW-lacG9uzAcBZRAZAXD2gmKg2LPPvAxd-jS0-wBCnThTzjSAW1CqA2DHo8cnB9-pZGByJsk1/pub?output=csv'
@@ -32,6 +32,7 @@ const generateTables = async () => {
         header: true,
         dynamicTyping: true,
     }).data.filter(f => f.deprecated != 1)
+    console.log(data)
     fs.writeFileSync(path.join(basePath, 'tables.js'), `
     // this is a generated file, do not edit directly. See Google sheets to update variable config
     const tables = ${JSON.stringify(data)}; 
