@@ -64,6 +64,7 @@ const generateJoinData = ({
     dataReady,
     shouldSeparateZero = false,
 }) => {
+    console.log(binData,bins)
     if (
         !dataReady ||
         (mapParams.mapType !== 'lisa' && !bins.breaks) ||

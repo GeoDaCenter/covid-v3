@@ -1,8 +1,9 @@
-import { variableTree, urlParamsTree } from '../../config/index'
+import { urlParamsTree } from '../../config/index'
 
 import { defaultData } from '../../config/defaults'
 
 import variables from '../../config/variables'
+import variableTree from '../../config/variableTree'
 import tables from '../../config/tables'
 import datasets from '../../config/datasets'
 
