@@ -719,6 +719,27 @@ function VariablePanel() {
                                     US Congressional Districts{' '}
                                     <Tooltip id="USCongress" />
                                 </MenuItem>
+                                <MenuItem
+                                    value={'clicB'}
+                                    key={'clicB'}
+                                >
+                                    Black or African American CLICs
+                                    <Tooltip id="CLICs" />
+                                </MenuItem>
+                                <MenuItem
+                                    value={'clicH'}
+                                    key={'clicH'}
+                                >
+                                    Hispanic or Latinx CLICs
+                                    <Tooltip id="CLICs" />
+                                </MenuItem>
+                                <MenuItem
+                                    value={'clicW'}
+                                    key={'clicW'}
+                                >
+                                    White CLICs
+                                    <Tooltip id="CLICs" />
+                                </MenuItem>
                                 {/* <MenuItem value={'mobility-county'} key={'mobility-county'}>Mobility Flows (County) WARNING BIG DATA</MenuItem> */}
                             </Select>
                         </StyledDropDown>

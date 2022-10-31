@@ -39,9 +39,17 @@ const checkAdmin = (mapParams) => {
   ];
 };
 
+const shouldHideLabels = (mapParams) => (
+  mapParams.overlay.length && // if there is an overlay, hide labels
+  (!mapParams.overlay.includes('blackbelt') && // unless it's blackbelt
+   !mapParams.overlay.includes('stories') && // or stories
+   !mapParams.overlay.includes('clic') // or any CLIC (clicH, clicB, clicW)
+  )
+)
 const checkLabel = (mapParams) => {
-  if (mapParams.overlay.length && (!mapParams.overlay.includes('blackbelt') && !mapParams.overlay.includes('stories')))
+  if (shouldHideLabels(mapParams)){
     return [['setLayoutProperty', 'visibility', 'none']];
+  }
   return [['setLayoutProperty', 'visibility', 'visible']];
 };
 
