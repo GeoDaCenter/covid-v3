@@ -289,6 +289,12 @@ export const tooltipInfo = {
             disproportionately impact or hard to reach communities.
         </p>
     ),
+    CLICs: (
+        <p>
+            Concentrated Longitudinal-Impact Counties: Counties with a high concentration of a single racial and ethnic population and a high level of COVID-19 mortality rate. 
+            Read more at <a href="https://jamanetwork.com/journals/jamanetworkopen/article-abstract/2789619" target="_blank" rel="noopener noreferrer">JAMA Network Open</a>
+        </p>
+    )
 }
 
 /**
