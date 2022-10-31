@@ -98,6 +98,7 @@
     "pre-build-dev": "yarn fetch-data && yarn parse-config-dev",
     "build-sw": "node ./src/sw-build.js",
     "netlify-build": "yarn pre-build && yarn build",
+    "netlify-build-dev": "yarn pre-build-dev && yarn build",
     "build": "craco build",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "test": "craco test",
