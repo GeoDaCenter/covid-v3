@@ -91,6 +91,8 @@
   "scripts": {
     "start": "craco start",
     "dev": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "fetch-data": "node build-scripts/fetchLatestData && node build-scripts/buildTimeseries",
     "parse-config": "node build-scripts/generateConfig && node build-scripts/parseColumns",
     "parse-config-dev": "node build-scripts/generateConfig --dev && node build-scripts/parseColumns",
@@ -99,9 +101,7 @@
     "build-sw": "node ./src/sw-build.js",
     "netlify-build": "yarn pre-build && yarn build",
     "netlify-build-dev": "yarn pre-build-dev && yarn build",
-    "build": "craco build",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "test": "craco test",
     "eject": "react-scripts eject",
     "docs": "jsdoc -c ./jsdoc/jsdoc.json -r",
     "cypress": "yarn pre-build && yarn build && concurrently \"cypress open\" \"cd build && http-server --proxy http://localhost:8080?\""

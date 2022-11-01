@@ -284,13 +284,14 @@ export const tooltipInfo = {
         <p>
             Concentrated Longitudinal-Impact Counties: Counties with a high
             concentration of a single racial and ethnic population and a high
-            level of COVID-19 mortality rate. Read more at{' '}
+            level of COVID-19 mortality rate. These counties were calculated based on the first year of data from 1/28/2020 to 2/28/2021. 
+            Read more at{' '}
             <a
                 href="https://jamanetwork.com/journals/jamanetworkopen/article-abstract/2789619"
                 target="_blank"
                 rel="noopener noreferrer"
             >
-                JAMA Network Open
+                JAMA Network Open.
             </a>
         </p>
     ),
