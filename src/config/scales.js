@@ -184,9 +184,9 @@ export const colorScales = {
         [140, 45, 4],
     ],
     maskMandates: [
-        [247, 252, 253],
-        [255, 100, 100],
-        [255, 255, 0],
+        [240,240,240],
+        [253, 234, 69],
+        [0, 32, 81],
     ]
 }
 
@@ -229,7 +229,7 @@ export const fixedScales = {
         breaks: [1, 2, 3, 4],
     },
     maskMandates: {
-        bins: ['No Data', 'No', 'Yes'],
+        bins: ['No Data', 'No Mask Mandate', 'Active Mask Mandate'],
         breaks: [-1, 0, 1],
     }
 }

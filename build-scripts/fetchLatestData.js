@@ -9,7 +9,10 @@ const filesToUnpack = ["csv.zip", "pbf.zip", "geojson.zip"];
 const makeFolder = (folderName) => {
   try {
     fs.mkdirSync(path.join(__dirname, `../public/${folderName}`));
-  } catch { }
+  } catch(e) { 
+    // folder already exists
+    // console.log('error making folder', e)
+  }
 };
 
 const main = async () => {
@@ -20,6 +23,9 @@ const main = async () => {
       axios
         .get(BASE_URL + file, {
           responseType: "arraybuffer",
+          headers: {
+            'Cache-Control': 'no-cache',
+          }
         })
         .then((r) => r.data)
     )
