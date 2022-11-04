@@ -72,6 +72,7 @@ const generateVariableTree = async () => {
     
     data.forEach((entry) => {
         parsedData[entry.key] = {
+            Tooltip: entry.tooltip,
             County: entry.County?.split(',')||[],
             State: entry.County?.split(',')||[],
         }

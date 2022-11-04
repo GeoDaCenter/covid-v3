@@ -295,4 +295,19 @@ export const tooltipInfo = {
             </a>
         </p>
     ),
+    Uncertainty: (
+        <p>
+            A Fleiss' Kappa index of data agremeent between five major COVID-19 datasets. A higher value represents better agreement between different 
+            data sources and a lower value represents less agreement. Lower agreement is interepreted as higher uncertainty, a result of many different factors.
+
+            Read more in at{" "}
+            <a
+                href="https://www.tandfonline.com/doi/full/10.1080/15230406.2021.1975311"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Cartography and GIS.
+            </a>
+        </p>
+    )
 }

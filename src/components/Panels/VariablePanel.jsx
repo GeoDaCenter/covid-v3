@@ -468,6 +468,7 @@ function VariablePanel() {
                                             key={variable}
                                         >
                                             {variable}
+                                            {!!variableTree[variable]?.Tooltip && <Tooltip id={variableTree[variable].Tooltip} />}
                                         </MenuItem>
                                     )
                                 }
