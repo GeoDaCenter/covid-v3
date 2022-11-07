@@ -863,6 +863,27 @@ function MapSection({
             },
             onHover: handleMapHover,
         }),
+        clicB: new GeoJsonLayer({
+            id: 'clicB-layer',
+            data: `${process.env.PUBLIC_URL}/geojson/clic-b.geojson`,
+            pickable:false,
+            filled: true,
+            getFillColor: [0, 0, 0, 125]
+        }),
+        clicH: new GeoJsonLayer({
+            id: 'clicH-layer',
+            data: `${process.env.PUBLIC_URL}/geojson/clic-h.geojson`,
+            pickable:false,
+            filled: true,
+            getFillColor: [0, 0, 0, 125]
+        }),
+        clicW: new GeoJsonLayer({
+            id: 'clicW-layer',
+            data: `${process.env.PUBLIC_URL}/geojson/clic-w.geojson`,
+            pickable:false,
+            filled: true,
+            getFillColor: [0, 0, 0, 125]
+        }),
     }
 
     const listener = (e) => {

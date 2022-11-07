@@ -28,18 +28,11 @@ const updateSharedView = throttle((viewport) => {
  */
 export const ViewportProvider = ({ defaultViewport = {}, children }) => {
     const [viewport, setViewport] = useState(defaultViewport)
-    const handleViewport = (view) => {
-        setViewport((prev) => ({
-            ...prev,
-            ...view,
-        }))
-    }
-
     document.hasFocus() && updateSharedView(viewport)
 
     return (
         <ViewportContext.Provider value={viewport}>
-            <SetViewportContext.Provider value={handleViewport}>
+            <SetViewportContext.Provider value={setViewport}>
                 {children}
             </SetViewportContext.Provider>
         </ViewportContext.Provider>

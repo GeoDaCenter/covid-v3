@@ -209,7 +209,7 @@ function useStories({ selectedStory = {}, filters = [], singleStoryId = '' }) {
         if (!allStories) {
             return []
         }
-        if (!activeStory.id) {
+        if (!activeStory?.id) {
             return []
         }
         const tags = activeStory.tags

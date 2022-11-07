@@ -48,7 +48,7 @@ const store = configureStore({
 			}
 		})
 	),
-	devTools: false //process.env.NODE_ENV !== 'production',
+	devTools: true //process.env.NODE_ENV !== 'production',
 })
 
 const persistor = persistStore(store)

@@ -49,17 +49,17 @@ const getDataForBins = ({
         numeratorData[keys[i]], 
         denominatorData[keys[i]], 
         {...dataParams, nIndex, dIndex},
-        i === 0
-      ) || 0;
+      );
   }
 
   // 
   let conditionalCheck = () => false;
-  if (dataParams.numerator.indexOf('vaccin') !== -1)
+  if (dataParams.numerator.indexOf('vaccin') !== -1) {
     conditionalCheck = (val) => (val > 100 ? true : false);
-  for (let i = 0; i < rtn.length; i++) {
-    if (rtn[i] < 0 || conditionalCheck(rtn[i])) rtn[i] = 100;
-  }
+    for (let i = 0; i < rtn.length; i++) {
+      if (conditionalCheck(rtn[i])) rtn[i] = 100;
+    }
+  } 
   
   return rtn;
 };

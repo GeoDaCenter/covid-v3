@@ -234,7 +234,10 @@ export const ResourceLayerMappings = {
 
 // mapping for overlay layers -- rest are in the mapbox style
 export const OverLayLayerMappings = {
-    "stories": "stories"
+    "stories": "stories",
+    "clicH": "clicH",
+    "clicB": "clicB",
+    "clicW": "clicW"
 }
 
 /**
@@ -261,6 +264,6 @@ export const getLayers = (layers, vizType, overlays, resources, currData) => {
     Object.entries(OverLayLayerMappings).forEach(([key, value]) => 
       overlays?.includes(key) && LayerArray.push(layers[value])
     )
-
+    
     return LayerArray;
 }

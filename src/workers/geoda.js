@@ -69,7 +69,9 @@ class GeodaWorkerProxy {
         const id = this.readGeoJSON(ab);
         this.loadedDatasets[url] = id;
         return [id, geojsonData];
-      } catch {}
+      } catch(e){
+        console.log('Error loading dataset', e)
+      }
     }
     return [null, geojsonData]
   }
