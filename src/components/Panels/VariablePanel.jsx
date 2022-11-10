@@ -340,13 +340,25 @@ function VariablePanel() {
 
     // derived state
     const currentPreset = findIn(datasets, 'file', currentData)
+    const notTooltipText = (text) => text !== "Tooltip"
     const allGeographies = Object.values(variableTree)
         .flatMap((o) => Object.keys(o))
         .filter(onlyUnique)
-    const allDatasets = Object.values(variableTree)
+        .filter(notTooltipText)
+    const allDatasets = Object.entries(variableTree)
+        // ignore tooltip values
+        .map(([_, geographies]) => {
+            let dataObj = {}
+            Object.keys(geographies).forEach(key => {
+                if (key === "Tooltip") return 
+                dataObj[key] = geographies[key]
+            })
+            return dataObj
+        })
         .flatMap((o) => Object.values(o))
         .flatMap((o) => o)
         .filter(onlyUnique)
+        
     const isCustom = !['State', 'County'].includes(currentPreset.geography)
 
     const availableData = currentPreset.geography
