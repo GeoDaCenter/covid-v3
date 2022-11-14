@@ -1,4 +1,4 @@
-name: Cypress Tests 0.0.9
+name: Cypress Tests 0.0.10
 
 on: 
   workflow_dispatch:
@@ -24,4 +24,4 @@ jobs:
       - name: Run cypress test
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: yarn && yarn netlify-build && yarn cy:test
+          run: yarn & yarn netlify-build & yarn cy:test
