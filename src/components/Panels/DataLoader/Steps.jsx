@@ -78,6 +78,7 @@ export const StepButtons = ({ activeStep, setActiveStep, currentGeojson, steps }
       onClick={() => setActiveStep((prev) => prev - 1)}
       back
       disabled={activeStep === 0}
+      aria-label="back"
     >
       Back
     </StepperButton>
@@ -86,6 +87,7 @@ export const StepButtons = ({ activeStep, setActiveStep, currentGeojson, steps }
       disabled={
         activeStep === steps.length - 1 || currentGeojson.columns === undefined
       }
+      aria-label="next step"
     >
       Next
     </StepperButton>

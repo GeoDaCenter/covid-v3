@@ -442,6 +442,7 @@ export default function DataLoader() {
                                                         idx: false,
                                                     })
                                                 }
+                                                aria-label="Add a variable"
                                             >
                                                 Add a variable
                                             </button>
@@ -460,7 +461,7 @@ export default function DataLoader() {
                                 />
                             )}
                             {!!variables.length && (
-                                <FormButton onClick={handleLoadData}>
+                                <FormButton onClick={handleLoadData} aria-label="Load Data">
                                     Load Data
                                 </FormButton>
                             )}

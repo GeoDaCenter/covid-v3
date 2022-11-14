@@ -285,7 +285,7 @@ export const VariableEditor = ({
               /> */}
           {/* <Gutter h={15} /> */}
 
-          <FormButton onClick={handleSave}>Save Variable</FormButton>
+          <FormButton onClick={handleSave} aria-label="Save Variable">Save Variable</FormButton>
         </ModalInner>
       </Box>
     </Modal>
