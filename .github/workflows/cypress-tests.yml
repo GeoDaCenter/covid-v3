@@ -1,4 +1,4 @@
-name: Cypress Tests 0.0.1
+name: Cypress Tests 0.0.2
 
 on: 
   workflow_dispatch:
