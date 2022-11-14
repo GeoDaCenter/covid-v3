@@ -82,7 +82,7 @@ function useLoadData({ dataParams, currentData }) {
 
     const currIndex = isTimeSeries
         ? getClosestIndex(
-              dataParams.nIndex || dataParams.dIndex,
+              dataParams.nIndex,
               defaultNumeratorParams.name || ''
           ) || 30
         : null
