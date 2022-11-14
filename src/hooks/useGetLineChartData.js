@@ -48,8 +48,8 @@ async function fetchTimeSeries({
     const id = keysToFetch[i]
     const data =
       i === 0
-        ? timeseriesData[i].value
-        : timeseriesData[i].value[currentTimeseriesDataset]
+        ? timeseriesData[i]?.value
+        : timeseriesData[i]?.value?.[currentTimeseriesDataset]
     if (i === 0) {
       const pop = totalPopulation
       for (let j = 0; j < data.dates.length; j++) {
