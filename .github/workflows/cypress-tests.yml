@@ -14,5 +14,4 @@ jobs:
         uses: cypress-io/github-action@v4
         with:
           build: npm run netlify-build
-          start: npm run static-start
-          browser: chrome
+          start: npm run start
