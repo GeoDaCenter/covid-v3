@@ -14,4 +14,6 @@ jobs:
         uses: cypress-io/github-action@v4
         with:
           build: npm run netlify-build
-          start: npm run proxy-static
+          working-directory: ./build
+          wait-on: http://localhost:8080
+          browser: chrome
