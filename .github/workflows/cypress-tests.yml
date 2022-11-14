@@ -1,4 +1,4 @@
-name: Cypress Tests 0.0.6
+name: Cypress Tests 0.0.7
 
 on: 
   workflow_dispatch:
@@ -28,7 +28,7 @@ jobs:
         with:
           cmd: netlify-build
 
-      - name: Run test suite
-        uses: borales/actions-yarn@v3.0.0
+      - name: Run cypress test
+        uses: GabrielBB/xvfb-action@v1
         with:
-          cmd: cy:test
+          run: npm run cy:test
