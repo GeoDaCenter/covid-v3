@@ -226,7 +226,8 @@ function DateTitle({
     const lastDateIdx = [...currDatesAvailable].reverse().indexOf(1)
     const minDate = new Date(dates[firstDateIdx] || '2020-01-01')
     const maxDate = new Date(dates.slice(-lastDateIdx)[0] || '')
-    const currDate = currIndex === null ? maxDate : new Date(dates[currIndex+1] || '2020-01-01')
+    const currDate = new Date(dates[currIndex] || '2020-01-01')
+
     const onChange =
         rangeType === 'custom'
             ? (date, position) => {
