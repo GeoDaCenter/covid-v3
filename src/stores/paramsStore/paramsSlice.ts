@@ -188,6 +188,13 @@ export const paramsSlice = createSlice({
                       currVariableParams,
                       currDataset.name
                   )
+
+            // reset selection if changing data
+            if (currentData !== state.currentData) {
+                state.selectionKeys = []
+                state.selectionNames = []
+            }
+            
             // update variable to match target, if changed
             currDataset = findIn(state.datasets, 'file', currentData)
             // declare tables
