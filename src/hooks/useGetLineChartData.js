@@ -42,10 +42,7 @@ async function fetchTimeSeries({
       )
     )
   )
-  if (timeseriesData?.[0]?.value?.[currentTimeseriesDataset] === undefined) return {
-    maximums: {},
-    chartData: [],
-  }
+  
 
   let chartData = []
   for (let i = 0; i < keysToFetch.length; i++) {
@@ -53,7 +50,8 @@ async function fetchTimeSeries({
     const data =
       i === 0
         ? timeseriesData[i].value
-        : timeseriesData[i].value[currentTimeseriesDataset]
+        : timeseriesData[i].value?.[currentTimeseriesDataset]
+    if (i > 0 && data === undefined) continue 
     if (i === 0) {
       const pop = totalPopulation
       for (let j = 0; j < data.dates.length; j++) {
@@ -234,6 +232,7 @@ function useGetLineChartData({ table = 'cases', geoid = [] }) {
         selectionKeys,
         totalPopulation,
       }).then((data) => setData(data))
+      .catch(e => console.log(e))
     }
   }, [JSON.stringify(selectionKeys), totalPopulation, table])
 
