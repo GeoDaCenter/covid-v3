@@ -10,10 +10,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Cypress run
-        uses: cypress-io/github-action@v4
+      - uses: actions/setup-node@v3
         with:
-          build: npm run netlify-build
-          working-directory: ./build
-          wait-on: http://localhost:8080
-          browser: chrome
+          node-version: 16
+
+      - run: npm install
+      - run: npm run netlify-build
+      - run: npm run cy:test

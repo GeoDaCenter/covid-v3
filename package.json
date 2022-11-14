@@ -106,7 +106,8 @@
     "eject": "react-scripts eject",
     "docs": "jsdoc -c ./jsdoc/jsdoc.json -r",
     "proxy-static": "cd build && http-server --proxy http://localhost:8080?",
-    "cypress": "yarn pre-build && yarn build && concurrently \"cypress open\" \"cd build && http-server --proxy http://localhost:8080?\""
+    "cypress": "yarn pre-build && yarn build && concurrently \"cypress open\" \"cd build && http-server --proxy http://localhost:8080?\"",
+    "cy:test": "concurrently \"cypress run && kill-port 8080 \" \"cd build && http-server -s --proxy http://localhost:8080?\""
   },
   "eslintConfig": {
     "extends": [
@@ -157,6 +158,7 @@
     "is-plain-obj": "^4.1.0",
     "jsdoc": "^3.6.11",
     "jsdoc-mermaid": "^1.0.0",
+    "kill-port": "^2.0.1",
     "prettier": "2.5.1",
     "prettier-plugin-jsdoc": "^0.4.2",
     "react-app-rewired": "^2.1.8",
