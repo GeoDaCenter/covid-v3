@@ -90,6 +90,7 @@
   },
   "scripts": {
     "start": "craco start",
+    "static-start": "cd build && http-server",
     "dev": "craco start",
     "build": "craco build",
     "test": "craco test",
