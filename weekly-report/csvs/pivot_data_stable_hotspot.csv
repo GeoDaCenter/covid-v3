@@ -1,21 +1,17 @@
 state_name,number of county,percentage
-Arizona,15,53.33
-California,58,31.03
-Colorado,64,9.38
-Connecticut,8,87.5
-Florida,67,7.46
-Georgia,159,1.26
-Illinois,102,4.9
-Kentucky,120,0.83
-Massachusetts,14,64.29
-Michigan,83,10.84
-Missouri,115,46.96
-New Jersey,21,76.19
-New Mexico,33,12.12
-Nevada,17,5.88
-New York,62,16.13
-Ohio,88,5.68
+Arizona,15,33.33
+California,58,25.86
+Colorado,64,4.69
+Connecticut,8,100.0
+Massachusetts,14,28.57
+Michigan,83,8.43
+Mississippi,82,1.22
+North Carolina,100,13.0
+New Jersey,21,95.24
+New York,62,19.35
+Ohio,88,4.55
+Oklahoma,77,1.3
 Pennsylvania,67,11.94
-Rhode Island,5,20.0
-Utah,29,6.9
-Wisconsin,72,4.17
+Texas,254,12.2
+Washington,39,2.56
+Wisconsin,72,1.39
