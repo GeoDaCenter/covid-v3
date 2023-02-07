@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Grid from '@mui/material/Grid';
 import { MemberGrid, NavBar, Footer, ContentContainer } from '../../components';
 import { contributors } from '../../meta/contributors';
-import { coreTeam } from '../../meta/coreTeam';
+import { coreTeam, retiredTeam } from '../../meta/coreTeam';
 import colors from '../../config/colors';
 
 const phases = ['alpha', 'beta', 'v2', 'v3'];
@@ -312,7 +312,7 @@ export default function About() {
 
       <CoreTeamContainer>
         <CoreTeam>
-          <h2 ref={teamRef}>Atlas Team</h2>
+          <h2 ref={teamRef}>Atlas Core Team</h2>
           <p>
             The US COVID Atlas Project is a coalition of research partners and
             contributors that have been integral to developing and expanding the
@@ -322,6 +322,8 @@ export default function About() {
             since its first launch in March of 2020.
           </p>
           <MemberGrid members={coreTeam} columns={{ md: 4 }} />
+          <h2 ref={teamRef}>Past Core Contributors</h2>
+          <MemberGrid members={retiredTeam} columns={{ md: 4 }} />
         </CoreTeam>
       </CoreTeamContainer>
       <ContentContainer>
