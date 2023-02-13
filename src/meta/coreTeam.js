@@ -8,15 +8,6 @@ export const coreTeam = [
       'Health Geographer, GIScientist, Principal Investigator',
   },
   {
-    name: 'Qinyun Lin, PhD',
-    link: 'https://www.linkedin.com/in/qinyun-lin-b72763112',
-    img: 'qlin.jpg',
-    affiliation: '(CSDS)',
-    title:
-      'Postdoctoral Fellow specializing in causal inference, social network analysis & multi-level models, Co-Principal Investigator',
-  },
-  
-  {
     name: 'Aresha Martinez-Cardoso, PhD',
     link: 'https://pbhs.uchicago.edu/program/faculty/aresha-martinez-cardoso',
     img: 'aresha.jpg',
@@ -24,28 +15,36 @@ export const coreTeam = [
     title: 'Assistant Professor, Co-Principal Investigator',
   },
   {
-    name: 'Marynia Kolak, MS, MFA, PhD',
-    link: 'https://makosak.github.io/',
-    img: 'mk.jpg',
+    name: 'Qinyun Lin, PhD',
+    link: 'https://www.linkedin.com/in/qinyun-lin-b72763112',
+    img: 'qlin.jpg',
     affiliation: '(CSDS)',
     title:
-      'Health Geographer, GIScientist, Principal Investigator',
+      'Postdoctoral Fellow specializing in causal inference, social network analysis & multi-level models, Co-Principal Investigator',
   },
   {
-    name: 'Marynia Kolak, MS, MFA, PhD',
+    name: 'Mandela Gadri, MS, PhD Student',
     link: 'https://makosak.github.io/',
-    img: 'mk.jpg',
+    img: 'mgadri.jpg',
     affiliation: '(CSDS)',
     title:
-      'Health Geographer, GIScientist, Principal Investigator',
+      'Research Assistant',
   },
   {
-    name: 'Marynia Kolak, MS, MFA, PhD',
+    name: 'Sarvagnya Vijay',
     link: 'https://makosak.github.io/',
-    img: 'mk.jpg',
+    img: 'svijay.jpg',
     affiliation: '(CSDS)',
     title:
-      'Health Geographer, GIScientist, Principal Investigator',
+      'Software Developer, Undergraduate Research Assistant',
+  },
+  {
+    name: 'Emily Glenn',
+    link: 'https://makosak.github.io/',
+    img: 'eglenn.jpg',
+    affiliation: '(CSDS)',
+    title:
+      'Marketing Assistant, Undergraduate Research Assistant',
   },
 ];
 
