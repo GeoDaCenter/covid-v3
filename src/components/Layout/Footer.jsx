@@ -166,7 +166,7 @@ const Footer = ({
             </h2>
 
             <a
-              href="https://github.us10.list-manage.com/subscribe/post?u=5ed730d26727290870ec65153&id=74f209d5ed"
+              href="https://uscovidatlas.us21.list-manage.com/subscribe/post?u=82f536192f2f5d3558022d9d0&amp;id=c309850f2d&amp;f_id=00b9f6e1f0"
               target="_blank"
               rel="noopener noreferrer"
             >
