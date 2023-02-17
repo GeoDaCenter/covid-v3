@@ -31,7 +31,7 @@ export const parseTooltipData = ({
       const dataIndex = dates.includes(currIndex)
         ? currIndex
         : dates?.slice(-1)[0];
-
+      
       tooltipData[`${table}`] = data[geoid][dataIndex];
       if (table === "cases" || table === "deaths") {
         tooltipData[`daily_${table}`] =
@@ -40,5 +40,8 @@ export const parseTooltipData = ({
     }
   }
 
+  // TODO: commenting out vaccine data til its fixed
+  delete tooltipData["vaccines_one_dose"]
+  delete tooltipData["vaccines_fully_vaccinated"]
   return tooltipData;
 };
