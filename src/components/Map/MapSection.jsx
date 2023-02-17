@@ -465,6 +465,7 @@ function MapSection({
 
     const handleMapHover = ({ x, y, object, layer }) => {
         if (object) {
+    
             dispatch(
                 setTooltipInfo({
                     x,

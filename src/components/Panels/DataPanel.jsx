@@ -414,7 +414,7 @@ function DataPanel({
                             )}
                         {sidebarData.hasOwnProperty('fully_vaccinated') && (
                             <ReportSection>
-                                <h2>COVID Vaccination</h2>
+                                {/* <h2>COVID Vaccination</h2>
                                 {sidebarData.hasOwnProperty(
                                     'vaccine_index'
                                 ) && (
@@ -462,12 +462,12 @@ function DataPanel({
                                     {sidebarData?.fully_vaccinated?.toLocaleString(
                                         'en'
                                     )}
-                                </h3>
+                                </h3> */}
                             </ReportSection>
                         )}
                         {sidebarData.hasOwnProperty('one_dose') && (
                             <ReportSection>
-                                <p>
+                                {/* <p>
                                     % of Population
                                     <br className="bigOnly" /> Received At Least
                                     One Dose
@@ -509,12 +509,12 @@ function DataPanel({
                                                 .toLocaleString('en')}
                                         </h3>
                                     </>
-                                )}
+                                )} */}
                             </ReportSection>
                         )}
                         {sidebarData.hasOwnProperty('testing') && (
                             <ReportSection>
-                                <h2>Testing</h2>
+                                {/* <h2>Testing</h2>
                                 {sidebarData.hasOwnProperty(
                                     'testing_index'
                                 ) && (
@@ -564,7 +564,7 @@ function DataPanel({
                                 </p>
                                 <h3>
                                     {sidebarData.ccpt.toLocaleString('en')}%
-                                </h3>
+                                </h3> */}
                             </ReportSection>
                         )}
                         {sidebarData.hasOwnProperty('PovChldPrc') && (
