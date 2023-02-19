@@ -352,12 +352,10 @@ const MapPageContainer = () => {
                     sx={{ width: '100%', textAlign: 'center' }}
                 >
                     <AlertBox>
-                        <h3>Have you used the U.S. Covid Atlas?</h3>
+                        <h3>Want a $20 Amazon Gift Card?</h3>
                         <div>
                             <p>
-                                If you've used the U.S. Covid Atlas at any time since it's start in March 
-                                we'd love to hear from you. Whether you checked it out for a day, used it regularly
-                                or just checked it out today!
+                                If you've used the U.S. Covid Atlas, we'd love to hear from you.
 
                                 Complete the survey to receive a $20 Amazon gift card!
                             </p>
