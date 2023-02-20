@@ -364,7 +364,7 @@ const MapPageContainer = () => {
                             <Button
                                 onClick={() =>
                                     (window.location.href =
-                                        'go.illinois.edu/atlas-survey')
+                                        'https://go.illinois.edu/atlas-survey')
                                 }
                                 variant="contained"
                                 sx={{

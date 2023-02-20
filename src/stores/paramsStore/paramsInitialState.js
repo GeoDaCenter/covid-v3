@@ -15,7 +15,7 @@ const INITIAL_STATE = {
     // Default data state
     currentData: defaultData,
     currentTable: {
-        numerator: defaultNumeratorTable || 'cases',
+        numerator: defaultNumeratorTable || 'vaccines_fully_vaccinated',
         denominator: 'properties',
     },
     // defaults
@@ -28,10 +28,10 @@ const INITIAL_STATE = {
     urlParams: {},
     // params
     dataParams: {
-        variableName: 'Confirmed Count per 100K Population',
-        numerator: 'cases',
+        variableName: 'Percent Fully Vaccinated', //'Confirmed Count per 100K Population',
+        numerator: 'vaccines_fully_vaccinated',//cases',
         nType: 'time-series',
-        nRange: 7,
+        nRange: null,
         nProperty: null,
         nIndex: null,
         denominator: 'properties',
@@ -39,16 +39,16 @@ const INITIAL_STATE = {
         dProperty: 'population',
         dRange: null,
         dIndex: null,
-        scale: 100000,
-        scale3D: 1000,
+        scale: 100, // 100000 for confirmed cases/100k
+        scale3D: 500000, //1000 for confirmed cases / 100k
         fixedScale: null,
-        colorScale: null,
-        dataNote: null,
+        colorScale: 'YlGn8',
+        dataNote: 'Hawaii vaccination data are state only.',
         zAxisParams: null,
         storedRange: null,
         ...variables.find(
             (variable) =>
-                variable.variableName === 'Confirmed Count per 100K Population'
+                variable.variableName === 'Percent Fully Vaccinated'
         ),
     },
     storedRange: null,
@@ -66,14 +66,14 @@ const INITIAL_STATE = {
         overlay: '',
         resource: '',
         colorScale: [
-            [255, 255, 204],
-            [255, 237, 160],
-            [254, 217, 118],
-            [254, 178, 76],
-            [253, 141, 60],
-            [252, 78, 42],
-            [227, 26, 28],
-            [177, 0, 38],
+            [255, 255, 229],
+            [247, 252, 185],
+            [217, 240, 163],
+            [173, 221, 142],
+            [120, 198, 121],
+            [65, 171, 93],
+            [35, 132, 67],
+            [0, 90, 50],
         ],
         dotDensityParams: {
             raceCodes: {
