@@ -234,20 +234,22 @@ const Footer = ({
             </span>
           </Grid>
           <Grid item xs={12} md={5}>
-            <img
+            {/* <img
               src={`${process.env.PUBLIC_URL}/img/csds-university-wordmark-white.png`}
               width="100%;"
               alt="Center for Spatial Data Science logo"
-            />
+            /> */}
             <p className="copyright">
-              Brought to you by the Center for Spatial Data Science{' '}
+              {/* Brought to you by the Center for Spatial Data Science{' '}
               <a
                 href="https://spatial.uchicago.edu/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 @UChicago
-              </a>
+              </a> */}
+              The Atlas is led by the Health Regions &amp; Policies Lab at the University of Illinois at 
+              Urbana-Champaign and researchers at the University of Chicago
               . Powered by{' '}
               <a
                 href="https://geodacenter.github.io/"

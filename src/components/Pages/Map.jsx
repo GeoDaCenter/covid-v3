@@ -352,20 +352,19 @@ const MapPageContainer = () => {
                     sx={{ width: '100%', textAlign: 'center' }}
                 >
                     <AlertBox>
-                        <h3>Atlas Stories is live!</h3>
+                        <h3>Want a $20 Amazon Gift Card?</h3>
                         <div>
                             <p>
-                                Atlas Stories collects stories behind the
-                                statistics and data from the diverse
-                                perspectives and experiences in the United
-                                States.
+                                If you've used the U.S. Covid Atlas, we'd love to hear from you.
+
+                                Complete the survey to receive a $20 Amazon gift card!
                             </p>
                         </div>
                         <div>
                             <Button
                                 onClick={() =>
                                     (window.location.href =
-                                        'https://stories.uscovidatlas.org/')
+                                        'https://go.illinois.edu/atlas-survey')
                                 }
                                 variant="contained"
                                 sx={{
@@ -373,7 +372,7 @@ const MapPageContainer = () => {
                                     textTransform: 'none',
                                 }}
                             >
-                                Submit a Story
+                                Fill out the survey now!
                             </Button>
                             {/* <button onClick={handleOpenStories}>See Stories</button> */}
                         </div>
