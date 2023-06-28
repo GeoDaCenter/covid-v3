@@ -423,7 +423,7 @@ function FastTrackInsights() {
                     href={
                         activeButton === 0
                             ? 'map?src=county_nyt&var=Confirmed_Count_per_100K_Population&mthd=lisa&v=2'
-                            : activeButton === 1
+                            : activeButton === 3
                             ? 'map?src=cdc_h&var=Percent_Fully_Vaccinated&v=2'
                             : 'map?src=cdc&var=Percent_Essential_Workers&v=2'
                     }
