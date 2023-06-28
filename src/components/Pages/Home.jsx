@@ -395,7 +395,7 @@ function Home() {
             <Grid container spacing={1}>
               <Grid item xs={12}>
                 <h1>
-                  A Dynamic & Historic Exploration of the <NoBreak>COVID-19</NoBreak>{" "}
+                  A Historic Exploration of the <NoBreak>COVID-19</NoBreak>{" "}
                   Pandemic
                 </h1>
               </Grid>
@@ -465,7 +465,7 @@ function Home() {
 
             <Gutter h={20} />
           </Hero>
-          <FastTrackInsights />
+          {/* <FastTrackInsights /> */}
           <Features>
             <Grid container spacing={1}>
               <Grid item xs={12}>
@@ -478,7 +478,7 @@ function Home() {
                   loading="lazy"
                 />
                 <h5>
-                  Track regional hotspots <NoBreak>in real-time</NoBreak>
+                  Track regional hotspots using spatial statistics
                 </h5>
                 <p>
                   Statistical clusters of both confirmed and daily new COVID
@@ -525,7 +525,7 @@ function Home() {
           </Features>
           <BreakQuestion>
             <h3>
-              How was the Atlas used during the Pandemic?
+              How can the Atlas be used to explore the Pandemic?
             </h3>
             <Arrow />
           </BreakQuestion>
@@ -641,7 +641,7 @@ function Home() {
             </UseCases>
           </UseCasesContainer>
         </HomePageContent>
-        <Footer signUp={true} />
+        <Footer signUp={false} />
         <ExploreButton to="/map" id="floating-cta" active={ctaActive}>
           Explore the Atlas
         </ExploreButton>
