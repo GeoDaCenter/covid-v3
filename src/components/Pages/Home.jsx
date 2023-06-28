@@ -525,7 +525,7 @@ function Home() {
           </Features>
           <BreakQuestion>
             <h3>
-              How can the Atlas better equip you to respond to the pandemic?
+              How was the Atlas used during the Pandemic?
             </h3>
             <Arrow />
           </BreakQuestion>
