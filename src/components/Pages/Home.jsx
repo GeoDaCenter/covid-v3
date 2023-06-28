@@ -395,7 +395,7 @@ function Home() {
             <Grid container spacing={1}>
               <Grid item xs={12}>
                 <h1>
-                  Near Real-Time Exploration of the <NoBreak>COVID-19</NoBreak>{" "}
+                  A Dynamic & Historic Exploration of the <NoBreak>COVID-19</NoBreak>{" "}
                   Pandemic
                 </h1>
               </Grid>
