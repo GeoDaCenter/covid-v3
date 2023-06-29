@@ -191,7 +191,10 @@ const Footer = ({
                   <NavLink to="/methods">Methods</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/faq">Help + Faq</NavLink>
+                  <NavLink to="/learn">Learn Toolkit</NavLink>
+                </li>
+                <li>
+                  <NavLink to="https://stories.uscovidatlas.org/">Stories</NavLink>
                 </li>
               </ul>
             </span>
@@ -248,17 +251,15 @@ const Footer = ({
               >
                 @UChicago
               </a> */}
-              The Atlas is led by the Health Regions &amp; Policies Lab at the University of Illinois at 
-              Urbana-Champaign and researchers at the University of Chicago
-              . Powered by{' '}
+              The Atlas is led by the {' '}
               <a
-                href="https://geodacenter.github.io/"
+                href="http://healthyregions.org"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                GeoDa
+                Healthy Regions &amp; Policies Lab  
               </a>
-              . Funded in part by the{' '}
+               , at the University of Illinois at Urbana, and the University of Chicago. Funded in part by the{' '}
               <a
                 href="https://www.rwjf.org/"
                 target="_blank"
@@ -270,13 +271,24 @@ const Footer = ({
             </p>
             <br />
             <p className="copyright">
-              <a
+
+                Powered by               <a
                 href="http://netlify.com/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Powered by Netlify
+                Netlify
               </a>
+              .
+                Map driven by {' '}
+              <a
+                href="https://geodacenter.github.io/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GeoDa
+              </a>.
+
             </p>
           </Grid>
         </LinkLists>
