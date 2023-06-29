@@ -231,9 +231,9 @@ function FastTrackInsights() {
             <h2>Fast-track your COVID Insights</h2>
             <ButtonContainer>
                 <CTAButton
-                    className={activeButton === 0 ? 'active' : ''}
-                    onMouseEnter={() => handleButton(0)}
-                    onClick={() => handleButton(0)}
+                    className={activeButton === 2 ? 'active' : ''}
+                    onMouseEnter={() => handleButton(2)}
+                    onClick={() => handleButton(2)}
                 >
                     <span className="text">Case Hotspots</span>
                 </CTAButton>
@@ -245,23 +245,23 @@ function FastTrackInsights() {
                     <span className="text">Vaccination Progress</span>
                 </CTAButton>
                 <CTAButton
-                    className={activeButton === 2 ? 'active' : ''}
-                    onMouseEnter={() => handleButton(2)}
-                    onClick={() => handleButton(2)}
+                    className={activeButton === 0 ? 'active' : ''}
+                    onMouseEnter={() => handleButton(0)}
+                    onClick={() => handleButton(0)}
                 >
                     <span className="text">Health Inequities</span>
                 </CTAButton>
             </ButtonContainer>
             <SummaryContainer buttonIndex={activeButton}>
-                {activeButton === 0 && (
+                {activeButton === 2 && (
                     <SummaryItem>
                         <Grid container spacing={5}>
                             <Grid item xs={12} md={3}>
                                 <TextContainer>
                                     <h3 className="metricTitle">
-                                        National
+                                        National 7-Day New
                                         <br />
-                                        7-Day New Cases
+                                        Cases on 12/31/22
                                     </h3>
                                 </TextContainer>
                                 <TextContainer>
@@ -323,8 +323,8 @@ function FastTrackInsights() {
                             <Grid item xs={12} md={3}>
                                 <TextContainer>
                                     <h3 className="metricTitle">
-                                        National
-                                        <br />% Fully Vaccinated (All People)
+                                        National Fully Vaccinated
+                                        <br /> As of 12/31/2022 
                                     </h3>
                                 </TextContainer>
                                 <TextContainer>
@@ -380,7 +380,7 @@ function FastTrackInsights() {
                         </Grid>
                     </SummaryItem>
                 )}
-                {activeButton === 2 && (
+                {activeButton === 0 && (
                     <SummaryItem>
                         <Grid container spacing={5}>
                             <Grid item xs={12} md={4}>
@@ -422,18 +422,19 @@ function FastTrackInsights() {
                 <GoToMap
                     href={
                         activeButton === 0
-                            ? 'map?src=county_nyt&var=Confirmed_Count_per_100K_Population&mthd=lisa&v=2'
-                            : activeButton === 3
+                            ? 'map?src=cdc&var=Percent_Essential_Workers&v=2'
+                            : activeButton === 1
                             ? 'map?src=cdc_h&var=Percent_Fully_Vaccinated&v=2'
-                            : 'map?src=cdc&var=Percent_Essential_Workers&v=2'
+                            : 'map?src=county_nyt&var=Confirmed_Count_per_100K_Population&mthd=lisa&v=2'
+
                     }
                 >
                     {' '}
                     {
                         [
-                            'See Current Hotspots',
-                            'Map Vaccine Rates',
                             "Explore COVID-19's Unequal Impact",
+                            'Map Vaccine Rates',
+                            'See Hotspots From Dec 2022',
                         ][activeButton]
                     }{' '}
                     {arrow}{' '}

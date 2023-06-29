@@ -465,7 +465,7 @@ function Home() {
 
             <Gutter h={20} />
           </Hero>
-          {/* <FastTrackInsights /> */}
+           <FastTrackInsights /> 
           <Features>
             <Grid container spacing={1}>
               <Grid item xs={12}>
