@@ -40,6 +40,9 @@ import colors from '../../config/colors'
 
 import useMapData from '../../hooks/useMapData'
 import { StoryViewerPane } from '../Panels/StoryViewerPane'
+import { ALERT_POPUP_FLAG } from '../../config'
+import { Alert, Button, Snackbar } from '@mui/material'
+import { Box } from '@mui/system'
 import { getDefaultDimensions } from '../../utils/getDefaultDimensions'
 import { paramsSelectors, paramsActions } from '../../stores/paramsStore'
 import useUrlParamActions from '../../hooks/useUrlParamActions'
@@ -138,6 +141,48 @@ const MapApp = styled.div`
             display: none;
         }
     }
+`
+
+const AlertBox = styled(Box)`
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    flex-direction: column;
+    p {
+        max-width: 50ch;
+        margin: 1em 0;
+    }
+    button,
+    a {
+        background: none;
+        outline: none;
+        color: ${colors.teal};
+        font-weight: bold;
+        font-size: 1rem;
+        padding: 0.25em 0.5em;
+        border: none;
+        cursor: pointer;
+    }
+    button {
+        background: ${colors.lightgray}55;
+        border: 1px solid ${colors.gray};
+    }
+    button:focus {
+        border: 1px solid ${colors.teal};
+    }
+    a {
+    }
+`
+
+const CloseButton = styled(Button)`
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0 0.5em;
+    min-width: initial;
 `
 
 export default function Map() {
@@ -297,6 +342,50 @@ const MapPageContainer = () => {
 
     return (
         <MapContainer>
+            {(ALERT_POPUP_FLAG === "true") && (<Snackbar
+                open={storiesSnackbar}
+                autoHideDuration={10000}
+                onClose={() => setStoriesSnackbar(false)}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            >
+                <Alert
+                    severity="info"
+                    sx={{ width: '100%', textAlign: 'center' }}
+                >
+                    <AlertBox>
+                        <h3>Want a $20 Amazon Gift Card?</h3>
+                        <div>
+                            <p>
+                                If you've used the U.S. Covid Atlas, we'd love to hear from you.
+
+                                Complete the survey to receive a $20 Amazon gift card!
+                            </p>
+                        </div>
+                        <div>
+                            <Button
+                                onClick={() =>
+                                    (window.location.href =
+                                        'https://go.illinois.edu/atlas-survey')
+                                }
+                                variant="contained"
+                                sx={{
+                                    background: `${colors.yellow} !important`,
+                                    textTransform: 'none',
+                                }}
+                            >
+                                Fill out the survey now!
+                            </Button>
+                            {/* <button onClick={handleOpenStories}>See Stories</button> */}
+                        </div>
+                        <CloseButton
+                            variant="text"
+                            onClick={() => setStoriesSnackbar(false)}
+                        >
+                            &times;
+                        </CloseButton>
+                    </AlertBox>
+                </Alert>
+            </Snackbar>)}
             {false && (
                 <div id="loadingIcon">
                     <img
