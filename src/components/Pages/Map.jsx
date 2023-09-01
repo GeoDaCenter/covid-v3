@@ -40,6 +40,7 @@ import colors from '../../config/colors'
 
 import useMapData from '../../hooks/useMapData'
 import { StoryViewerPane } from '../Panels/StoryViewerPane'
+import { ALERT_POPUP_FLAG } from '../../config'
 import { Alert, Button, Snackbar } from '@mui/material'
 import { Box } from '@mui/system'
 import { getDefaultDimensions } from '../../utils/getDefaultDimensions'
@@ -341,7 +342,7 @@ const MapPageContainer = () => {
 
     return (
         <MapContainer>
-            <Snackbar
+            {(ALERT_POPUP_FLAG === "true") && (<Snackbar
                 open={storiesSnackbar}
                 autoHideDuration={10000}
                 onClose={() => setStoriesSnackbar(false)}
@@ -384,7 +385,7 @@ const MapPageContainer = () => {
                         </CloseButton>
                     </AlertBox>
                 </Alert>
-            </Snackbar>
+            </Snackbar>)}
             {false && (
                 <div id="loadingIcon">
                     <img
