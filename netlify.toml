@@ -26,6 +26,6 @@
   force = true
 
 [[redirects]]
-  from = "https://theuscovidatlas/*"
+  from = "https://theuscovidatlas.org/*"
   to = "https://uscovidatlas.org/:splat"
   force = true
