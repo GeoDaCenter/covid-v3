@@ -19,3 +19,13 @@
   for = "/pbf/*"
     [headers.values]
     Access-Control-Allow-Origin = "*"
+
+[[redirects]]
+  from = "https://theuscovidatlas.org/"
+  to = "https://uscovidatlas.org/"
+  force = true
+
+[[redirects]]
+  from = "https://theuscovidatlas/*"
+  to = "https://uscovidatlas.org/:splat"
+  force = true
