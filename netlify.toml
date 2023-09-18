@@ -29,3 +29,9 @@
   from = "https://theuscovidatlas.org/*"
   to = "https://uscovidatlas.org/:splat"
   force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = true
