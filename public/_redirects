@@ -1,2 +1,3 @@
-https://theuscovidatlas.org/* https://uscovidatlas.org/index.html
+https://theuscovidatlas.org https://uscovidatlas.org
+https://theuscovidatlas.org/* https://uscovidatlas.org/:splat
 /* /index.html 200
