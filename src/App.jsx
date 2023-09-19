@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Home, LoadingMessage, ErrorPage } from './components'
-import useTrackUserActions from './hooks/useTrackUserActions.js'
 import { MuiThemeProvider } from './Theme'
 
 const Archive = React.lazy(() => import('./components/Pages/Archive'))
@@ -38,7 +37,6 @@ const Trends = React.lazy(() => import('./components/Pages/Trends'))
 const IconDict = React.lazy(() => import('./components/_dev/_iconDictionary'))
 
 export default function App() {
-  useTrackUserActions()
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <div>
