@@ -21,7 +21,7 @@ function getIconName(size) {
 }
 
 function getIconSize(size) {
-  return Math.min(100, size) / 100 + 1;
+  return Math.min(100, size) / 100 + 1.5;
 }
 
 export default class IconClusterLayer extends CompositeLayer {
