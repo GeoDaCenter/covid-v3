@@ -12,13 +12,13 @@
         "mapbox:groups": {},
         "mapbox:uiParadigm": "global"
     },
-    "center": [-108.45890805033024, 35.083773945493405],
-    "zoom": 6.83649623034603,
+    "center": [-93.98086389037911, 33.431419271988844],
+    "zoom": 4.31906098818731,
     "bearing": 0,
     "pitch": 0,
     "sources": {
         "composite": {
-            "url": "mapbox://mapbox.mapbox-streets-v8,mapbox.mapbox-terrain-v2,herop-lab.8b1l9ay4,herop-lab.btf65ira,herop-lab.1gd4j8dk,herop-lab.5pgm3g0k,herop-lab.2ywagn11,herop-lab.4pzafbi4",
+            "url": "mapbox://mapbox.mapbox-streets-v8,mapbox.mapbox-terrain-v2,herop-lab.8b1l9ay4,herop-lab.btf65ira,herop-lab.1gd4j8dk,herop-lab.5pgm3g0k,herop-lab.4hg6pqzx,herop-lab.563pzeh1,herop-lab.4z8dyzta",
             "type": "vector"
         }
     },
@@ -51,7 +51,7 @@
             "id": "native_american_reservations-geom",
             "type": "fill",
             "source": "composite",
-            "source-layer": "res98-disjoint-9blzy1",
+            "source-layer": "tp2-agq9sb",
             "layout": {"visibility": "none"},
             "paint": {
                 "fill-color": "hsla(0, 0%, 0%, 0.5)",
@@ -1247,15 +1247,33 @@
             }
         },
         {
-            "id": "native_american_reservations-label",
+            "id": "segregated_cities-label",
             "type": "symbol",
             "source": "composite",
-            "source-layer": "res-centroid-wgs84-7eiidb",
+            "source-layer": "seg-cities-labels-53tq0p",
             "layout": {
                 "text-font": ["Lato Bold", "Arial Unicode MS Regular"],
                 "text-size": ["interpolate", ["linear"], ["zoom"], 4, 8, 9, 24],
                 "symbol-sort-key": ["*", ["get", "AREA"], 1],
                 "text-field": ["to-string", ["get", "NAME"]],
+                "visibility": "none"
+            },
+            "paint": {
+                "text-halo-color": "hsl(0, 0%, 100%)",
+                "text-halo-width": 1,
+                "text-halo-blur": 1
+            }
+        },
+        {
+            "id": "native_american_reservations-label",
+            "type": "symbol",
+            "source": "composite",
+            "source-layer": "BIA-merged-labels-2uflmy",
+            "layout": {
+                "text-font": ["Lato Bold", "Arial Unicode MS Regular"],
+                "text-size": ["interpolate", ["linear"], ["zoom"], 4, 8, 9, 24],
+                "symbol-sort-key": ["*", ["get", "AREA"], 1],
+                "text-field": ["to-string", ["get", "DISP_NAME"]],
                 "visibility": "none"
             },
             "paint": {
@@ -1266,7 +1284,7 @@
         }
     ],
     "created": "2023-11-07T20:00:30.235Z",
-    "modified": "2023-11-07T21:42:05.871Z",
+    "modified": "2023-11-10T09:51:37.081Z",
     "id": "cloora2vu00bz01nsc9h5akij",
     "owner": "herop-lab",
     "visibility": "private",
