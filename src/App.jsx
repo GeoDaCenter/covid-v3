@@ -5,7 +5,6 @@ import { MuiThemeProvider } from './Theme'
 
 const Archive = React.lazy(() => import('./components/Pages/Archive'))
 const About = React.lazy(() => import('./components/Pages/About'))
-const Api = React.lazy(() => import('./components/Pages/Api'))
 const Cab = React.lazy(() => import('./components/Pages/Cab'))
 const Choropleth = React.lazy(() => import('./components/Pages/Choropleth'))
 const CodeOfConduct = React.lazy(() =>
@@ -55,8 +54,6 @@ export default function App() {
               <Route path="/contact" component={Contact} />
               <Route path="/contact.html" component={Contact} />
               <Route path="/insights" component={Insights} />
-              <Route path="/api" component={Api} />
-              <Route path="/api.html" component={Api} />
               <Route path="/data" component={Data} />
               <Route path="/data.html" component={Data} />
               <Route path="/data-loading" component={DataLoading} />

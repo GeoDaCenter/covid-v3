@@ -31,8 +31,7 @@ function Data() {
         <p>
           Below is a high-level description of the currently available datasets
           in the US Covid Atlas. For further documentation, please see the
-          detailed data descriptions menu below. For data access, see our{' '}
-          <NavLink to="/api">API</NavLink> or use the bulk CSV downloader at the
+          detailed data descriptions menu below. For data access, use the bulk CSV downloader at the
           bottom of this page.
         </p>
         <Gutter h={10} />
