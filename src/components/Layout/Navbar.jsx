@@ -339,11 +339,6 @@ const defaultDropDowns = {
       desc: 'Interactive data downloader to access cleaned CSV data on the Atlas.',
       link: '/download',
     },
-    {
-      header: 'API',
-      desc: 'Sign up for access to data and spatial statistics via the Atlas API',
-      link: '/api',
-    },
   ],
   INSIGHTS: [
     {

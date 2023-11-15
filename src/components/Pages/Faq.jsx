@@ -137,7 +137,7 @@ const faqQuestions = [
         >
           GitHub
         </a>
-        , through our <NavLink to="/api">API</NavLink>, or using the{' '}
+        , or using the{' '}
         <NavLink to="/data">Bulk Data Download</NavLink> tool.
       </p>
     ),
