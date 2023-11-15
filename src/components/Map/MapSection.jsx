@@ -694,7 +694,7 @@ function MapSection({
             pickable: true,
             getPosition: (d) => d.centroid,
             onClick: handleStoryClick,
-            sizeScale: 60,
+            sizeScale: 20,
             activeId: selectedStory?.id,
         }),
         cartogramText: new TextLayer({
