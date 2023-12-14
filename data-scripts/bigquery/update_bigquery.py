@@ -177,15 +177,15 @@ if __name__ == "__main__":
 
     credentials = service_account.Credentials.from_service_account_info({
         "type":"service_account",
-        "project_id":"covid-atlas",
-        "private_key_id":os.getenv('SK_ID'),
-        "private_key":os.getenv('SK').replace('\\\\n', '\n').replace('\\n', '\n'),
-        "client_email":os.getenv('G_CLIENT_EMAIL'),
-        "client_id":os.getenv('G_ID'),
+        "project_id":os.getenv('BIGQUERY_PROJECT_ID'),
+        "private_key_id":os.getenv('BIGQUERY_SECRET_KEY_ID'),
+        "private_key":os.getenv('BIGQUERY_SECRET_KEY').replace('\\\\n', '\n').replace('\\n', '\n'),
+        "client_email":os.getenv('BIGQUERY_CLIENT_EMAIL'),
+        "client_id":os.getenv('BIGQUERY_CLIENT_ID'),
         "auth_uri":"https://accounts.google.com/o/oauth2/auth",
         "token_uri":"https://oauth2.googleapis.com/token",
         "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
-        "client_x509_cert_url":os.getenv('G_CERT_URL')
+        "client_x509_cert_url":os.getenv('BIGQUERY_CLIENT_X509_CERT_URL')
     })
 
     with open(os.path.join(repo_root,'functions/meta/columns.json')) as json_file:
