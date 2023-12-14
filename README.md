@@ -127,23 +127,42 @@ There are various other branch deploys on the US Covid Atlas web hosting (netlif
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Required Environment Variables
-- REACT_APP_STORIES_PUBLIC_URL (string): URL to the stories public folder
 
-### App
-To access the Atlas Stories data, you must set the following environment variables in your `.env` file in the root of the repository:
+`REACT_APP_MAPBOX_ACCESS_TOKEN=<token>` Enter your mapbox token (must have access to the resources that are hard-coded into the `style.json` and `style_light.json` files).
+
+`REACT_APP_ALERT_POPUP_FLAG=false` Just leave this "false".
+
+Variables to connect with the Covid Stories content:
+
 ```
-REACT_APP_STORIES_PUBLIC_URL=https://link-to-cdn.net
-REACT_APP_EMAIL_FORM_URL=https://form-link.com
+REACT_APP_EMAIL_FORM_URL=
+REACT_APP_STORIES_PUBLIC_URL=
 ```
 
+The following are all related to Google BigQuery credentials:
+
+```
+BIGQUERY_PROJECT_ID=
+BIGQUERY_CLIENT_ID=
+BIGQUERY_CLIENT_EMAIL=
+BIGQUERY_CLIENT_X509_CERT_URL=
+BIGQUERY_SECRET_KEY=
+BIGQUERY_SECRET_KEY_ID=
+```
+
+### Env in production and workflows
+
+All of the above variables (and perhaps a couple of others must also exist in the Netlify environment. If the data-pull-1.yml workflow is enabled, then the BigQuery variables must also be added to this repositories list of secrets.
 
 ## Quickstart
 
 1. Clone this repository
-2. Install node / npm, and install yarn with `npm i -g yarn`
-3. From the repository root, run `yarn` to install dependencies
-4. From the repository root, run `yarn fetch-data` to fetch the latest data
-5. From the repository root, run `yarn start` to start the app
+2. Use `cp .env.example .env` to create a local .env file and update values as needed.
+3. Install node / npm, and install yarn with `npm i -g yarn`
+4. From the repository root, run `yarn` to install dependencies
+5. From the repository root, run `yarn fetch-data` to fetch the latest data
+6. From the repository root, run `yarn start` to start the app
+
 ## Available Scripts
 
 In the project directory, you can run:

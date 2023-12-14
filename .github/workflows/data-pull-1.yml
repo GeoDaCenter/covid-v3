@@ -70,11 +70,12 @@ jobs:
       - name: execute update bigquery
         run: python data-scripts/bigquery/update_bigquery.py
         env:
-          SK_ID: ${{secrets.GOOGLE_SK_ID}}
-          SK: ${{secrets.GOOGLE_SK}}
-          G_CLIENT_EMAIL: ${{secrets.GOOGLE_G_CLIENT_EMAIL}}
-          G_ID: ${{secrets.GOOGLE_G_ID}}
-          G_CERT_URL: ${{secrets.GOOGLE_G_CERT_URL}}
+          BIGQUERY_PROJECT_ID: $${{secrets.BIGQUERY_PROJECT_ID}}
+          BIGQUERY_SECRET_KEY_ID: ${{secrets.BIGQUERY_SECRET_KEY_ID}}
+          BIGQUERY_SECRET_KEY: ${{secrets.BIGQUERY_SECRET_KEY}}
+          BIGQUERY_CLIENT_EMAIL: ${{secrets.BIGQUERY_CLIENT_EMAIL}}
+          BIGQUERY_CLIENT_ID: ${{secrets.BIGQUERY_CLIENT_ID}}
+          BIGQUERY_CLIENT_X509_CERT_URL: ${{secrets.BIGQUERY_CLIENT_X509_CERT_URL}}
           
       - name: timestamp last-updated
         run: python data-scripts/timestamp/last-updated.py

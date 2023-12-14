@@ -54,7 +54,6 @@ import { TextStatistics } from './TextStatistics';
 import { StyledDropDown, StyledDropDownNoLabel } from './Interface/StyledDropDown';
 // pages
 import About from './Pages/About';
-import Api from './Pages/Api';
 import CodeOfConduct from './Pages/CodeOfConduct';
 import Contact from './Pages/Contact';
 import Choropleth from './Pages/Choropleth';
@@ -128,7 +127,6 @@ export {
   StyledDropDown,
   StyledDropDownNoLabel,
   About,
-  Api,
   CodeOfConduct,
   Contact,
   Choropleth,
