@@ -17,8 +17,10 @@ function StoryPlayer({
     }
     switch (story.type) {
         case "video": {
-            const mediaUrl = `${process.env.REACT_APP_STORIES_PUBLIC_URL}/${story.id}${story.fileType}`
-            const captionUrl = `${process.env.REACT_APP_STORIES_PUBLIC_URL}/${story.id}_otter_ai.vtt`
+            // if there is a short version of this video, play it here, otherwise play full video
+            const vidBaseName = story.shortPresent ? `${story.id}-short` : story.id
+            const mediaUrl = `${process.env.REACT_APP_STORIES_PUBLIC_URL}/${vidBaseName}${story.fileType}`
+            const captionUrl = `${process.env.REACT_APP_STORIES_PUBLIC_URL}/${vidBaseName}_otter_ai.vtt`
             const videoSrc = {
                 type: "video",
                 sources: [

@@ -36,7 +36,7 @@ export const StoriesProvider = ({ children }) => {
   } = useStories({
     selectedStory
   });
-  
+
   return (
     <StoriesContext.Provider value={{ stories, relatedStories, setSelectedStory, selectedStory }}>
       {children}
@@ -63,4 +63,5 @@ export const useStoriesContext = () => {
  * @property {string} county - Story county 
  * @property {string[]} tags - Story tags
  * @property {string} type - type of story (eg. written, video)
+ * @property {boolean} shortPresent - whether there is a short version of this story
  */
