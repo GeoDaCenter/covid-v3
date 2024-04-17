@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import React from 'react';
 import {MarkdownViewer} from './MarkdownViewer';
 const Plyr = React.lazy(() => import("plyr-react"));
@@ -12,13 +13,15 @@ const Plyr = React.lazy(() => import("plyr-react"));
 function StoryPlayer({
     story
 }){
+    let [showShort, setShowShort] = useState(true);
     if (!story?.type) {
         return null;
     }
     switch (story.type) {
         case "video": {
-            const mediaUrl = `${process.env.REACT_APP_STORIES_PUBLIC_URL}/${story.id}${story.fileType}`
-            const captionUrl = `${process.env.REACT_APP_STORIES_PUBLIC_URL}/${story.id}_otter_ai.vtt`
+            const vidBaseName = showShort ? `${story.id}-short` : story.id
+            const mediaUrl = `${process.env.REACT_APP_STORIES_PUBLIC_URL}/${vidBaseName}${story.fileType}`
+            const captionUrl = `${process.env.REACT_APP_STORIES_PUBLIC_URL}/${vidBaseName}_otter_ai.vtt`
             const videoSrc = {
                 type: "video",
                 sources: [
@@ -35,7 +38,14 @@ function StoryPlayer({
                     }
                 ]
             };
-            return <div><Plyr source={videoSrc} crossOrigin="anonymous" /></div>
+            return <>
+                <div><Plyr source={videoSrc} crossOrigin="anonymous" /></div>
+                {story.shortPresent &&
+                    <button style={{color:'white', padding: '5px'}} onClick={() => {setShowShort(!showShort)}}>
+                        Show {showShort ? 'full' : 'short'} video
+                    </button>
+                }
+                </>
         }
         case "photo": {
             const photoUrl = `${process.env.REACT_APP_STORIES_PUBLIC_URL}/${story.id}${story.fileType}`

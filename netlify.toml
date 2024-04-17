@@ -19,14 +19,3 @@
   for = "/pbf/*"
     [headers.values]
     Access-Control-Allow-Origin = "*"
-
-#[[redirects]]
-#  from = "https://theuscovidatlas.org/*"
-#  to = "https://uscovidatlas.org/index.html"
-#  force = true
-
-#[[redirects]]
-#  from = "/*"
-#  to = "/index.html"
-#  status = 200
-#  force = true
