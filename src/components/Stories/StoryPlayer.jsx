@@ -19,7 +19,7 @@ function StoryPlayer({
     }
     switch (story.type) {
         case "video": {
-            const vidBaseName = showShort ? `${story.id}-short` : story.id
+            const vidBaseName = story.shortPresent && showShort ? `${story.id}-short` : story.id
             const mediaUrl = `${process.env.REACT_APP_STORIES_PUBLIC_URL}/${vidBaseName}${story.fileType}`
             const captionUrl = `${process.env.REACT_APP_STORIES_PUBLIC_URL}/${vidBaseName}_otter_ai.vtt`
             const videoSrc = {
