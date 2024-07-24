@@ -33,6 +33,12 @@ const Methodology = () => {
       <ContentContainer>
         <h1>Methodology</h1>
         <hr />
+        <p> 
+          The Atlas incorporates multiple visual analytic methods to explore data across space and time, 
+          as well as spatial statistical products to measure spatial clusters and outliers.
+
+        </p>
+        
         <h3>Interactive Exploration</h3>
         <br />
         <p>
