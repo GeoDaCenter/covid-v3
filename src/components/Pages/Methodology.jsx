@@ -154,9 +154,53 @@ const Methodology = () => {
 
         <h3>Spatial Statistics</h3>
         <br />
-        <h2>HOT SPOT OVERVIEW</h2>
+
+        <h2>HOT SPOT ANALYSIS: LISA STATISTIC</h2>
         <p>
-          The Atlas team identified hot spots two ways: using the <b>total number of
+        Statistical spatial cluster identification based on local indicators of spatial association (Anselin, 1995),
+        known as the <b>LISA Statistic</b>, is implemented on case and death variables. 
+        The clustering technique allows users to identify groups of contiguous counties that are statistically similar based on the COVID-19 indicator (accumulative COVID-19 cases, daily new cases, etc.). 
+        </p>
+        <br />
+
+        <p>
+        To interpret LISA statistics, consider the following:
+        <ul>
+          <li>High-High: These <b>red </b>spatial clusters show an area with high numbers/rates, and are surrounded by areas with high numbers/rates.</li>
+          <li>Low-Low: These <b>blue </b>spatial clusters show show an area with low numbers/rates, and are surrounded by areas with low numbers/rates.</li>
+          <li>High-Low: These <b>light red </b>spatial outliers show an area with high numbers/rates, and are surrounded by areas with low numbers/rates.</li>
+          <li>Low-High: These <b>light blue </b>spatial outliers show an area with low numbers/rates, and are surrounded by areas with high numbers/rates.</li>
+        </ul>
+        </p>
+        <br />
+
+        <p>
+        The “high-high” cluster, for example, can be of particular interest as it allows identification of a group of areas (i.e., counties, or states, in Atlas) where not only their own COVID-19 indicators are high but also they are surrounded by neighboring areas where the COVID-19 indicators are high.
+        </p>
+        <br />
+        <p>
+        <i>Technical Specifications:</i> We use a first-order queen contiguity weight and one CPU core2 to estimate the local Moran's I, with 999 Monte Carlo permutations and a 0.05 threshold for statistical significance. However, using GeoDa,3 others can replicate these results or employ different hyperparameters, such as different spatial weights to measure geographical similarity, different randomization options (e.g., number of Monte Carlo permutations and specific seeds), or different thresholds for statistical significance.
+        </p>
+        <br />
+
+        <p>For more resources on LISA statistics and how to use them in the US Covid Atlas:
+          <li>
+            <a href="https://geodacenter.github.io/glossary.html#lisa2"> GeoDa Glossary</a> & Chapter on 
+              <a href="https://geodacenter.github.io/workbook/6a_local_auto/lab6a.html"> Local Spatial Autocorrelation</a>
+          </li>
+          <li>
+            Anselin, Luc. 1995. “Local Indicators of Spatial Association —
+            LISA.”<i>Geographical Analysis</i> G 27: 93–115
+          </li>
+          <li>
+            US Covid Atlas <a href="https://uscovidatlas.org/learn/hotspot-maps"> Hot Spot Map </a> tutorial
+          </li>
+        </p>
+        <br />
+
+        <h2>HOT SPOT BEST PRACTICES</h2>
+        <p>
+          The Atlas team recommends identifying hot spots two ways: using the <b>total number of
           confirmed cases</b> and by <b>adjusting for population</b>. Because of the
           infectious nature of COVID, high numbers of cases anywhere will be of
           concern. At the same time, identifying areas that have a
@@ -170,57 +214,8 @@ const Methodology = () => {
           a high number of cases. Outliers are areas that have a high number of
           cases within the county and fewer cases in neighboring counties,
           highlighting an emerging risk or priority for containment. </p>
-          
-        <h2>HOT SPOT ANALYSIS: LISA STATISTIC</h2>
-        <p>
-        Statistical spatial cluster identification based on local indicators of spatial association (LISA; Anselin, 2010, 2019; Anselin & Li, 2019) is implemented on case and death variables daily using an on-the-fly libgeoda service (see Section 2.3 for details). The clustering technique allows users to identify groups of contiguous counties that are statistically similar based on the COVID-19 indicator (accumulative COVID-19 cases, daily new cases, etc.). The “high-high” cluster, for example, can be of particular interest as it allows identification of a group of areas (i.e., counties, or states, in Atlas) where not only their own COVID-19 indicators are high but also they are surrounded by neighboring areas where the COVID-19 indicators are high.
-        </p>
-    
-        <br />
 
-        <p>
-        We intentionally designed Atlas to be accessible to a wide audience. Therefore, we preset it with certain hyperparameters. Specifically, we use a first-order queen contiguity weight and one CPU core2 to estimate the local Moran's I, with 999 Monte Carlo permutations and a 0.05 threshold for statistical significance. However, using GeoDa,3 others can replicate these results or employ different hyperparameters, such as different spatial weights to measure geographical similarity, different randomization options (e.g., number of Monte Carlo permutations and specific seeds), or different thresholds for statistical significance.
-        </p>
-
-        <ul>
-          <li>
-            For more details:
-            <ul>
-              <li>
-                <a
-                  href="https://geodacenter.github.io/glossary.html#lisa2"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  GeoDa Glossary
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://geodacenter.github.io/workbook/6a_local_auto/lab6a.html"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  GeoDa: Local Spatial Autocorrelation
-                </a>
-              </li>
-              <li>
-                Anselin, Luc. 1995. “Local Indicators of Spatial Association —
-                LISA.” Geographical Analysis 27: 93–115.
-              </li>
-              <li>
-                Anselin, Luc. 2018. “A Local Indicator of Multivariate Spatial
-                Association, Extending Geary’s c.” Geographical Analysis.
-              </li>
-              <li>
-                Anselin, Luc, and Xun Li. 2019. “Operational Local Join Count
-                Statistics for Cluster Detection.” Journal of Geographical
-                Systems.
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <img
+          <img
           className="hotspot"
           src={`${process.env.PUBLIC_URL}/img/confirmed_LISA.png`}
           alt="LISA hotspot map"
@@ -242,31 +237,43 @@ const Methodology = () => {
         <h3>Limitations</h3>
         <br />
         <p>
-          Known limitations exist regarding actual fatality rates, for example,
-          as we may not be aware of the total population infected until testing
-          is expanded. County estimates are in the process of being validated
-          across multiple sources, and may still not be the most updated. Local
-          health departments continue to serve as the most accurate, up-to-date
-          sources. Our team continues to grow new collaborations to better
-          identify the metrics needed for this rapidly changing situation.
-          Issues are encouraged to be posted at{' '}
-          <a
-            href="https://github.com/geodacenter/covid/issues"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            github.com/geodacenter/covid/issues
-          </a>{' '}
-          and/or by emailing{' '}
-          <a
-            href="mkolak@uchicago.edu"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            mkolak@uchicago.edu
-          </a>{' '}
-          directly.
-        </p>
+        There are multiple limitations in the analytic approach of the Atlas, though we attempt 
+        to minimize them.         </p>
+   
+        <br />
+
+        <ul>
+        <li> 
+        LISA cluster analyses rely on computational inference which can generate 
+        sensitive results. Depending on the mechanism of disease spread (e.g., outbreaks in a 
+        small concentrated population versus slow community spread) and how the testing resources 
+        are utilized, the new case count time series can be clumped at times or suffer from 
+        seasonality. In such instances, LISA clusters can vary from one day to another. 
+        To alleviate this, we added the 7-day moving average of new cases, but these patterns 
+        could persist in the data and impact the calculation of LISA clusters. </li>
+
+        <li> While our dashboard provides a nuanced view of how the spatial patterns change 
+          over time and across the USA, it provides limited information 
+          with what could be the potential drivers, such as state-level policy and local mobility, 
+           and whether the pandemic is affecting certain groups of population disproportionately. </li>
+        
+        <li>An effective and rapid policy response is highly dependent on having a good 
+        understanding of the underlying transmission mechanisms and vulnerable populations. 
+        Including fine-resolution, sub-county non-pharmaceutical policies, social mobility, 
+        hospitalization, and infection rates by race and ethnicity, would improve the policy 
+        response and adaptation in future Pandemics.</li> 
+        
+        <li>The true spatial scale of the COVID-19 pandemic is arguably at an even finer resolution 
+          than county level, but the data below the county-level resolution currently remains 
+          unavailable for the entire country. </li>
+        </ul>
+
+          <br />
+        <p>In the early stages of the pandemic, individual variables were thought to better capture 
+         the different phenomena that were considered important and interesting to the widest range of 
+         users that we worked with. As the pandemic shifted towards recovery and equilibrium, multiple
+         composite indices have emerged to be tailored to unique features of the pandemic directly.</p>
+         
         <Gutter h={40} />
       </ContentContainer>
       <Footer />
