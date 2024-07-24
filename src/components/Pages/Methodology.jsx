@@ -42,19 +42,18 @@ const Methodology = () => {
         <br />
         <p> 
           For a more complete view of the data, methods, and technological framework developed for the Atlas,
-          be sure to read through the <a href="https://uscovidatlas.org/learn">Learn Toolkit</a>,  <a href="https://uscovidatlas.org/data">Data</a>
-          <a href="https://uscovidatlas.org/insights#research">Research</a>, and <a href="">Tech</a> pages on this site.
+          be sure to read through the <a href="https://uscovidatlas.org/learn">Learn Toolkit</a>,<a href="https://uscovidatlas.org/data"> Data</a>, 
+          <a href="https://uscovidatlas.org/insights#research"> Research</a>, and <a href="">Tech</a> pages on this site.
         </p>
-        <br />
 
+        <Gutter h={30} />
         
         <h3>Spatial Scale</h3>
         <br />
         <p>
           When the Pandemic first emerged in early 2020, county-level visualizations were rare 
-          but when viewed, show a dramatically more nuanced and detailed pandemic landscape. The 
-          <a href="https://news.uchicago.edu/story/state-level-data-misses-growing-coronavirus-hot-spots-us-including-south#">
-          US Covid Atlas was the first dashboard</a> to visualize data at both state and county-scale as total cases, deaths,
+          but when viewed, show a dramatically more nuanced and detailed pandemic landscape. The  US Covid Atlas was the   
+          <a href="https://news.uchicago.edu/story/state-level-data-misses-growing-coronavirus-hot-spots-us-including-south#"> first dashboard</a> to visualize data at both state and county-scale as total cases, deaths,
           and population-weighted rates to provide a richer understanding of the
           pandemic. Case information can be explored by clicking on county or
           state areas to generate pop-up windows, or to change graphs of
@@ -71,7 +70,7 @@ const Methodology = () => {
           there are additional options for viewing including both 2D and 3D styles of mapping.
         </p>
         
-        <Gutter h={40} />
+        <Gutter h={30} />
         
         <h3>Time Scale</h3>
         <br />
@@ -80,20 +79,22 @@ const Methodology = () => {
           data over time for historical exploration using a time slider tool. A temporal slider allows the current 
           view to be updated over time, providing users the ability to watch the pandemic emerge over time.
         </p>
+        <br />
         <p> In addition, you'll find data available at different time scales, including:       
-          <li>Cumulative: Total number of instances, such as confirmed cases, deaths, or vaccines, since the start of the pandemic or the start of data collected.</li>
-          <li>Daily New: The number of new instances per day for which data is available.</li>
-          <li>7-Day Average: The average number of instances over the previous 7-day period for which data is available.</li>
-          <li>Custom Range: Use the Time Slider and Calendar to choose a custom date range; i.e. the last month, 6 months, the latest variant, etc.</li>
+          <li><b>Cumulative:</b> Total number of instances, such as confirmed cases, deaths, or vaccines, since the start of the pandemic or the start of data collected.</li>
+          <li><b>Daily New:</b> The number of new instances per day for which data is available.</li>
+          <li><b>7-Day Average:</b> The average number of instances over the previous 7-day period for which data is available.</li>
+          <li><b>Custom Range:</b> Use the Time Slider and Calendar to choose a custom date range; i.e. the last month, 6 months, the latest variant, etc.</li>
         </p>  
+        <br />
         <p>        For example, applying the natural breaks with fixed bins on accumulative confirmed COVID-19 cases displays how the disease has spread over time since the very beginning: from just a few counties in March 2020 to almost the entire country by June. Alternatively, visualizing the temporal change based on the daily new confirmed cases (or 7-day average) helps detect areas with emerging cases. Interactive, explorative temporal detection like this allows us to capture not only the base rate, but also the changes that are both critical to tracking areas of concern.
         </p>
-
-        <Gutter h={40} />
+        <Gutter h={30} />
         
         <h3>Dynamic Exploration</h3>
         <br />
-        <p>        Individual counties or states are also interactive. An information window is enabled on hover, providing details on the location (i.e., state name or county name) and basic COVID-19 case and death data. Upon clicking, a county-specific data dashboard opens (on the right-hand side) with detailed health indicators and community risk factors. Data are updated by clicking on a new county. A graph showing new cases and smoothed trends for the selected county is updated on the left-hand side accordingly.
+        <p> 
+          In addition to spatiotemporal exploration possibilities, individual counties or states are also interactive. An information window is enabled on hover, providing details on the location (i.e., state name or county name) and basic COVID-19 case and death data. Upon clicking, a county-specific data dashboard opens (on the right-hand side) with detailed health indicators and community risk factors. Data are updated by clicking on a new county. A graph showing new cases and smoothed trends for the selected county is updated on the left-hand side accordingly.
         </p>
 
         <Gutter h={40} />
@@ -150,37 +151,38 @@ const Methodology = () => {
           </li>
         </ul>
         <Gutter h={40} />
-        <h2>HOTSPOT MAP: Local Moran's I</h2>
+
+        <h3>Spatial Statistics</h3>
+        <br />
+        <h2>HOT SPOT OVERVIEW</h2>
         <p>
-          The CSDS team identifies hot spots two ways: using the total number of
-          confirmed cases and by adjusting for population. Because of the
+          The Atlas team identified hot spots two ways: using the <b>total number of
+          confirmed cases</b> and by <b>adjusting for population</b>. Because of the
           infectious nature of COVID, high numbers of cases anywhere will be of
           concern. At the same time, identifying areas that have a
           disproportionately high number of cases within the population is
-          needed to locate areas hit hardest by the pandemic. The team further
-          differentiates hot spot clusters and outliers: clusters are counties
+          needed to locate areas hit hardest by the pandemic. 
+        </p>
+        <br />
+          <p>
+          The team further differentiates hot spot clusters and outliers: clusters are counties
           that have a high number of cases, and are surrounded by counties with
           a high number of cases. Outliers are areas that have a high number of
           cases within the county and fewer cases in neighboring counties,
-          highlighting an emerging risk or priority for containment. We utilize
-          local spatial autocorrelation statistics (LISA) using queen-contiguity
-          spatial weights and 999 Monte Carlo permutations to generate these
-          metrics.
+          highlighting an emerging risk or priority for containment. </p>
+          
+        <h2>HOT SPOT ANALYSIS: LISA STATISTIC</h2>
+        <p>
+        Statistical spatial cluster identification based on local indicators of spatial association (LISA; Anselin, 2010, 2019; Anselin & Li, 2019) is implemented on case and death variables daily using an on-the-fly libgeoda service (see Section 2.3 for details). The clustering technique allows users to identify groups of contiguous counties that are statistically similar based on the COVID-19 indicator (accumulative COVID-19 cases, daily new cases, etc.). The “high-high” cluster, for example, can be of particular interest as it allows identification of a group of areas (i.e., counties, or states, in Atlas) where not only their own COVID-19 indicators are high but also they are surrounded by neighboring areas where the COVID-19 indicators are high.
         </p>
+    
         <br />
+
+        <p>
+        We intentionally designed Atlas to be accessible to a wide audience. Therefore, we preset it with certain hyperparameters. Specifically, we use a first-order queen contiguity weight and one CPU core2 to estimate the local Moran's I, with 999 Monte Carlo permutations and a 0.05 threshold for statistical significance. However, using GeoDa,3 others can replicate these results or employ different hyperparameters, such as different spatial weights to measure geographical similarity, different randomization options (e.g., number of Monte Carlo permutations and specific seeds), or different thresholds for statistical significance.
+        </p>
+
         <ul>
-          <li>
-            The Local Clustering maps identify clusters or collections of
-            geographical units similar, in statistical terms, based on the
-            indicator used. They can be used to identify hot spots of cold spots
-            across space. Hot spots are of particular interests in
-            epidemiological analysis such as the spread of covid19, as it allows
-            the identification of “hot” groups of areas (e.g. States, counties)
-            significantly affected by the virus. It is, collection of counties,
-            for instance, with a relatively high indicator which are also
-            surrounded by areas of high indicators. In the maps, such areas are
-            represented by the red colors.
-          </li>
           <li>
             For more details:
             <ul>
@@ -236,35 +238,7 @@ const Methodology = () => {
           COVID-19 cases
         </p>
         <Gutter h={40} />
-        <h3>GeoStack</h3>
-        <br />
-        <p>
-          The app is made using Libgeoda as a lightweight C/C++ library that
-          acts as a wrapper to the core features of GeoDa, an open source
-          spatial analysis software developed by the Center. For this web map,
-          it’s customized and compiled to WebAssembly, a format supported by
-          most modern web browsers, and bound to the geo-visualization module
-          via Javascript, which is implemented using deck.gl, d3.js and Mapbox.
-        </p>
-        <Gutter h={40} />
-        <br />
-        <h3>Opensource</h3>
-        <br />
-        <p>
-          The Github for our project is public and available at{' '}
-          <a
-            href="https://github.com/GeoDaCenter/covid"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            github.com/GeoDaCenter/covid.
-          </a>{' '}
-          Contributions are welcome. Volunteers are encouraged to start on the
-          “Issues” page and identify “good first issues” to maximize help
-          efforts. A public release of the application will continue to be
-          updated with new data and features on a regular basis.
-        </p>
-        <Gutter h={40} />
+
         <h3>Limitations</h3>
         <br />
         <p>
