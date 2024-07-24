@@ -349,7 +349,8 @@ const defaultDropDowns = {
     {
       header: 'Blog',
       desc: "Snapshots and short-form articles of what we're seeing and how we're working.",
-      link: '/insights#blog',
+      link: 'https://medium.com/covidatlas',
+      external: true,
     },
     {
       header: 'Viz',
@@ -511,8 +512,8 @@ function NavBar({light, pageDropDowns=defaultDropDowns}) {
               <p>Pages</p>
               {pageDropDowns[currentDropdown].map((entry) => (
                 <PageSection key={entry.header}>
-                  <a href={entry.link}>
-                    {entry.header}
+                  <a href={entry.link} target={entry.external ? '_blank' : ""}>
+                    {entry.header}{entry.external && ' ↗'}
                     <span>❱</span>
                   </a>
                 </PageSection>
@@ -530,8 +531,8 @@ function NavBar({light, pageDropDowns=defaultDropDowns}) {
         <SuperDropdown light={light}>
           {pageDropDowns[currentDropdown].map((entry) => (
             <PageSection key={entry.header}>
-              <a href={entry.link}>
-                {entry.header}
+              <a href={entry.link} target={entry.external ? '_blank' : ""}>
+                {entry.header}{entry.external && ' ↗'}
                 <span>❱</span>
               </a>
               <p>{entry.desc}</p>

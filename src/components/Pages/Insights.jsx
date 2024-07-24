@@ -238,13 +238,6 @@ export default function Insights() {
       <ContentContainer>
         <TabBar position="static">
           <Tab
-            {...a11yProps(0)}
-            active={tabValue === 0}
-            onClick={() => setTabValue(0)}
-          >
-            Blog
-          </Tab>
-          <Tab
             {...a11yProps(1)}
             active={tabValue === 1}
             onClick={() => setTabValue(1)}
@@ -264,6 +257,13 @@ export default function Insights() {
             onClick={() => setTabValue(3)}
           >
             Media
+          </Tab>
+          <Tab
+            {...a11yProps(0)}
+            active={tabValue === 0}
+            onClick={() => window.open("https://medium.com/covidatlas", "_blank")}
+          >
+            Blog ↗
           </Tab>
         </TabBar>
         <TabPanel display={tabValue === 0}>
