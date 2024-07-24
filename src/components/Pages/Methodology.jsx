@@ -42,7 +42,7 @@ const Methodology = () => {
         <br />
         <p> 
           For a more complete view of the data, methods, and technological framework developed for the Atlas,
-          be sure to read through the <a href="https://uscovidatlas.org/learn">Learn toolkit</a>, 
+          be sure to read through the <a href="https://uscovidatlas.org/learn">Learn Toolkit</a>,  <a href="https://uscovidatlas.org/data">Data</a>
           <a href="https://uscovidatlas.org/insights#research">Research</a>, and <a href="">Tech</a> pages on this site.
         </p>
         <br />
@@ -70,12 +70,15 @@ const Methodology = () => {
           project and the steps required to display each map available in an earlier version of the Atlas. Today,
           there are additional options for viewing including both 2D and 3D styles of mapping.
         </p>
+        
         <Gutter h={40} />
+        
         <h3>Time Scale</h3>
         <br />
         <p>
-          A temporal slider allows the current view to be updated over time,
-          providing users the ability to watch the pandemic emerge over time.
+          The thematic maps on the Atlas are interactive and quickly provide access to multiple sources of COVID-19 
+          data over time for historical exploration using a time slider tool. A temporal slider allows the current 
+          view to be updated over time, providing users the ability to watch the pandemic emerge over time.
         </p>
         <p> In addition, you'll find data available at different time scales, including:       
           <li>Cumulative: Total number of instances, such as confirmed cases, deaths, or vaccines, since the start of the pandemic or the start of data collected.</li>
@@ -83,9 +86,22 @@ const Methodology = () => {
           <li>7-Day Average: The average number of instances over the previous 7-day period for which data is available.</li>
           <li>Custom Range: Use the Time Slider and Calendar to choose a custom date range; i.e. the last month, 6 months, the latest variant, etc.</li>
         </p>  
+        <p>        For example, applying the natural breaks with fixed bins on accumulative confirmed COVID-19 cases displays how the disease has spread over time since the very beginning: from just a few counties in March 2020 to almost the entire country by June. Alternatively, visualizing the temporal change based on the daily new confirmed cases (or 7-day average) helps detect areas with emerging cases. Interactive, explorative temporal detection like this allows us to capture not only the base rate, but also the changes that are both critical to tracking areas of concern.
+        </p>
 
         <Gutter h={40} />
-        <h3>Map Options</h3>
+        
+        <h3>Dynamic Exploration</h3>
+        <br />
+        <p>        Individual counties or states are also interactive. An information window is enabled on hover, providing details on the location (i.e., state name or county name) and basic COVID-19 case and death data. Upon clicking, a county-specific data dashboard opens (on the right-hand side) with detailed health indicators and community risk factors. Data are updated by clicking on a new county. A graph showing new cases and smoothed trends for the selected county is updated on the left-hand side accordingly.
+        </p>
+
+        <Gutter h={40} />
+        
+        <h3>Thematic Mapping</h3>
+        <br />
+
+        <p>The Atlas provides <b>choropleth maps</b> for geovisualization, a thematic map style that represents data through various shading patterns on predetermined geographic areas (e.g., counties, states).</p>
         <br />
         <h2>CHOROPLETH MAPS: NATURAL BREAKS</h2>
         <ul>
