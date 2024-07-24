@@ -71,13 +71,19 @@ const Methodology = () => {
           there are additional options for viewing including both 2D and 3D styles of mapping.
         </p>
         <Gutter h={40} />
-        <h3>Temporal Exploration</h3>
+        <h3>Time Scale</h3>
         <br />
         <p>
           A temporal slider allows the current view to be updated over time,
           providing users the ability to watch the pandemic emerge over time.
-          {/* See this animation of COVID population centered clusters over time as an example here. */}
         </p>
+        <p> In addition, you'll find data available at different time scales, including:       
+          <li>Cumulative: Total number of instances, such as confirmed cases, deaths, or vaccines, since the start of the pandemic or the start of data collected.</li>
+          <li>Daily New: The number of new instances per day for which data is available.</li>
+          <li>7-Day Average: The average number of instances over the previous 7-day period for which data is available.</li>
+          <li>Custom Range: Use the Time Slider and Calendar to choose a custom date range; i.e. the last month, 6 months, the latest variant, etc.</li>
+        </p>  
+
         <Gutter h={40} />
         <h3>Map Options</h3>
         <br />
