@@ -35,9 +35,17 @@ const Methodology = () => {
         <hr />
         <p> 
           The Atlas incorporates multiple visual analytic methods to explore data across space and time, 
-          as well as spatial statistical products to measure spatial clusters and outliers.
+          as well as spatial statistical products to measure spatial clusters and outliers. This section highlights analytic methods used on the US Covid Atlas Dashboard,
+          tying content posted in early days of the Pandemic, as well as from our work published
+          in <a href="https://onlinelibrary.wiley.com/doi/10.1111/tgis.12786"><i>Transacations of GIS</i></a>.
+        </p>
+        <p> 
+          For a more complete view of the data, methods, and technological framework developed for the Atlas,
+          be sure to read through the <a href="">Learn toolkit</a>, <a href="">published research</a>, and <a href="">Tech</a> pages on this site.
         </p>
         <br />
+
+        
         <h3>Spatial Scale</h3>
         <br />
         <p>
