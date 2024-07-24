@@ -347,12 +347,6 @@ const defaultDropDowns = {
       link: '/insights#research',
     },
     {
-      header: 'Blog',
-      desc: "Snapshots and short-form articles of what we're seeing and how we're working.",
-      link: 'https://medium.com/covidatlas',
-      external: true,
-    },
-    {
       header: 'Viz',
       desc: 'Data visualizations that highlight the challenges, reality, and complexity of COVID-19.',
       link: '/insights#viz',
@@ -361,6 +355,12 @@ const defaultDropDowns = {
       header: 'Media',
       desc: 'Media and press coverage of our research, insights, and data.',
       link: '/insights#media',
+    },
+    {
+      header: 'Blog',
+      desc: "Snapshots and short-form articles of what we're seeing and how we're working.",
+      link: 'https://medium.com/covidatlas',
+      external: true,
     },
   ],
   STORIES: [
