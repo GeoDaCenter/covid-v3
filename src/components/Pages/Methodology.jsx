@@ -51,7 +51,7 @@ const Methodology = () => {
         <p>
           When the Pandemic first emerged in early 2020, county-level visualizations were rare 
           but when viewed, show a dramatically more nuanced and detailed pandemic landscape. The <a href="https://onlinelibrary.wiley.com/doi/10.1111/tgis.12786#">
-          </a>US Covid Atlas was the first dashboard</a> to visualize data at both state and county-scale as total cases, deaths,
+          US Covid Atlas was the first dashboard</a> to visualize data at both state and county-scale as total cases, deaths,
           and population-weighted rates to provide a richer understanding of the
           pandemic. Case information can be explored by clicking on county or
           state areas to generate pop-up windows, or to change graphs of
