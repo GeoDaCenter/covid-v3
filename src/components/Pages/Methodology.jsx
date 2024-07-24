@@ -36,17 +36,14 @@ const Methodology = () => {
         <p> 
           The Atlas incorporates multiple visual analytic methods to explore data across space and time, 
           as well as spatial statistical products to measure spatial clusters and outliers.
-
         </p>
-        
-        <h3>Interactive Exploration</h3>
+        <br />
+        <h3>Spatial Scale</h3>
         <br />
         <p>
-          COVID cases are commonly visualized across multiple dashboards as
-          quantile choropleth maps or graduated points around state centroids.
-          County-level visualizations are rare but when viewed, show a
-          dramatically more nuanced and detailed pandemic landscape. We
-          visualize data at both state and county-scale as total cases, deaths,
+          When the Pandemic first emerged in early 2020, county-level visualizations were rare 
+          but when viewed, show a dramatically more nuanced and detailed pandemic landscape. The <a href="https://onlinelibrary.wiley.com/doi/10.1111/tgis.12786#">
+          </a>US Covid Atlas was the first dashboard</a> to visualize data at both state and county-scale as total cases, deaths,
           and population-weighted rates to provide a richer understanding of the
           pandemic. Case information can be explored by clicking on county or
           state areas to generate pop-up windows, or to change graphs of
@@ -59,7 +56,8 @@ const Methodology = () => {
         />
         <p className="caption">
           Figure displays the options available at the current state of the
-          project and the steps required to display each map available
+          project and the steps required to display each map available in an earlier version of the Atlas. Today,
+          there are additional options for viewing including both 2D and 3D styles of mapping.
         </p>
         <Gutter h={40} />
         <h3>Temporal Exploration</h3>
