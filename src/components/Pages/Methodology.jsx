@@ -39,9 +39,11 @@ const Methodology = () => {
           tying content posted in early days of the Pandemic, as well as from our work published
           in <a href="https://onlinelibrary.wiley.com/doi/10.1111/tgis.12786"><i>Transacations of GIS</i></a>.
         </p>
+        <br />
         <p> 
           For a more complete view of the data, methods, and technological framework developed for the Atlas,
-          be sure to read through the <a href="">Learn toolkit</a>, <a href="">published research</a>, and <a href="">Tech</a> pages on this site.
+          be sure to read through the <a href="https://uscovidatlas.org/learn">Learn toolkit</a>, 
+          <a href="https://uscovidatlas.org/insights#research">Research</a>, and <a href="">Tech</a> pages on this site.
         </p>
         <br />
 
@@ -50,7 +52,8 @@ const Methodology = () => {
         <br />
         <p>
           When the Pandemic first emerged in early 2020, county-level visualizations were rare 
-          but when viewed, show a dramatically more nuanced and detailed pandemic landscape. The <a href="https://onlinelibrary.wiley.com/doi/10.1111/tgis.12786#">
+          but when viewed, show a dramatically more nuanced and detailed pandemic landscape. The 
+          <a href="https://news.uchicago.edu/story/state-level-data-misses-growing-coronavirus-hot-spots-us-including-south#">
           US Covid Atlas was the first dashboard</a> to visualize data at both state and county-scale as total cases, deaths,
           and population-weighted rates to provide a richer understanding of the
           pandemic. Case information can be explored by clicking on county or
