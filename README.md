@@ -83,24 +83,12 @@ We are growing a coalition of research partners that have been integral to devel
 + [AFI DSI COVID-19 Research Group](https://datascience.wisc.edu/covid19/) at UW-Madison. This group led by [Brian Yandell](https://datascience.wisc.edu/covid19) was an early institutional partner to amplify regional efforts to respond to the pandemic. Kevin Little of [Informing Ecological Design](https://www.iecodesign.com) was critical in connecting the Atlas team with a nationwide network and leading user-group sessions to review the atlas, align priorities, and ensure it was effective for a wide audience. [Steve Goldstein](https://biostat.wiscweb.wisc.edu/staff/goldstein-steve/) continues to work with our team in data validation efforts.
 
 ### Contributors:
-We highly appreciate our many contributors and volunteers, including: 
-
-+ Erin Abbott (CSDS) 
-+ [Sihan Mao](https://www.linkedin.com/in/sihan-mao/) (CSDS Alumni, City of Pittsburgh)
-+ Karina Acoste (CSDS) 
-+ Julia Koschinsky (CSDS) 
-+ [Luc Anselin](https://spatial.uchicago.edu/directory/luc-anselin-phd) (CSDS)
-+ Bibind Vasu (CSDS)
-+ [John Steill](https://www.linkedin.com/in/johnsteill/) (UW-Madison)
-+ [Sean Kent](http://pages.cs.wisc.edu/~kent/) (UW-Madison) 
-+ [Steven Wangen](https://www.linkedin.com/in/steven-wangen/) (UW-Madison) 
-+ [Yuetian Luo](https://www.linkedin.com/in/yuetian-luo-3b394b113/) (UW-Madison)
-+ Fletcher Barryman (CSDS)
+Check out the **Team** page for more information about the many contributors to the *Atlas*: [https://uscovidatlas.org/about#team](https://uscovidatlas.org/about#team). The **Advisory** page details information about the Community Advisory board: [https://uscovidatlas.org/about#advisory](https://uscovidatlas.org/about#advisory).
 
 ## CONTACT US
 If you have a question regarding a specific dataset, please contact the dataset author(s) directly. If you have any questions regarding the Atlas, contact us by via: [https://uscovidatlas.org/contact](https://uscovidatlas.org/contact)
 
-## HOW TO CITE US
+### Citations
 Please cite us according to how you used the US Covid Atlas: 
 
 **Website**: Marynia Kolak, Qinyun Lin, Dylan Halpern, Susan Paykin, Aresha Martinez-Cardoso, and Xun Li. The US Covid Atlas, 2022. Center for Spatial Data Science at University of Chicago. https://www.uscovidatlas.org
@@ -108,6 +96,8 @@ Please cite us according to how you used the US Covid Atlas:
 **Published Work of Version 1**: Kolak, Marynia, Xun Li, Qinyun Lin, Ryan Wang, Moksha Menghaney, Stephanie Yang, and Vidal Anguiano Jr. "The US COVID Atlas: A dynamic cyberinfrastructure surveillance system for interactive exploration of the pandemic." *Transactions in GIS* 25, no. 4 (2021): 1741-1765.
 
 **Codebase of Version 1**: Xun Li, Qinyun Lin, Marynia Kolak, Robert Martin, Stephanie Yang, Moksha Menghaney, Ari Israel, Ryan Wang, Vidal Anguiano Jr., Erin Abbott, Dylan Halpern, Sihan-Mao. (2020, October 12). GeoDaCenter/covid: beta (Version beta). Zenodo. http://doi.org/10.5281/zenodo.4081869
+
+--- 
 
 ## INFRASTRUCTURE DETAILS
 
