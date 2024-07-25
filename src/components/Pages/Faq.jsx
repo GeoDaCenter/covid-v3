@@ -189,7 +189,7 @@ const faqQuestions = [
           shared on the orginal home page. Check out addditional 
           <a href="http://uscovidatlas.org/insights"> insights</a> from the Atlas team,
           <a href="http://uscovidatlas.org/learn"> learn</a> how to explore the Pandemic historically, and/or read about more ways 
-          that the Atlas was used in our <a href="http://uscovidatlas.org/eval"> evaluation</a> report.</p>
+          that the Atlas was used in our <a href="#"> evaluation</a> report (coming soon!)</p>
           </Grid>
           <Grid item xs={12} md={6}>
           <Usage color="yellow">Usage #1</Usage>
