@@ -103,16 +103,15 @@ If you have a question regarding a specific dataset, please contact the dataset 
 ## HOW TO CITE US
 Please cite us according to how you used the US Covid Atlas: 
 
-*Website*
-Marynia Kolak, Qinyun Lin, Dylan Halpern, Susan Paykin, Aresha Martinez-Cardoso, and Xun Li. The US Covid Atlas, 2022. Center for Spatial Data Science at University of Chicago. https://www.uscovidatlas.org
+**Website**: Marynia Kolak, Qinyun Lin, Dylan Halpern, Susan Paykin, Aresha Martinez-Cardoso, and Xun Li. The US Covid Atlas, 2022. Center for Spatial Data Science at University of Chicago. https://www.uscovidatlas.org
 
-*Published Work of Version 1*
-Kolak, Marynia, Xun Li, Qinyun Lin, Ryan Wang, Moksha Menghaney, Stephanie Yang, and Vidal Anguiano Jr. "The US COVID Atlas: A dynamic cyberinfrastructure surveillance system for interactive exploration of the pandemic." *Transactions in GIS* 25, no. 4 (2021): 1741-1765.
+**Published Work of Version 1**: Kolak, Marynia, Xun Li, Qinyun Lin, Ryan Wang, Moksha Menghaney, Stephanie Yang, and Vidal Anguiano Jr. "The US COVID Atlas: A dynamic cyberinfrastructure surveillance system for interactive exploration of the pandemic." *Transactions in GIS* 25, no. 4 (2021): 1741-1765.
 
-*Codebase of Version 1*
-Xun Li, Qinyun Lin, Marynia Kolak, Robert Martin, Stephanie Yang, Moksha Menghaney, Ari Israel, Ryan Wang, Vidal Anguiano Jr., Erin Abbott, Dylan Halpern, Sihan-Mao. (2020, October 12). GeoDaCenter/covid: beta (Version beta). Zenodo. http://doi.org/10.5281/zenodo.4081869
+**Codebase of Version 1**: Xun Li, Qinyun Lin, Marynia Kolak, Robert Martin, Stephanie Yang, Moksha Menghaney, Ari Israel, Ryan Wang, Vidal Anguiano Jr., Erin Abbott, Dylan Halpern, Sihan-Mao. (2020, October 12). GeoDaCenter/covid: beta (Version beta). Zenodo. http://doi.org/10.5281/zenodo.4081869
 
-## Current Repos, Subdomains and branches of the Atlas
+## INFRASTRUCTURE DETAILS
+
+### Current Repos, Subdomains and branches of the Atlas
 
 Repositories
 - Main Repo: [geodacenter/covid-v3](https://github.com/geodacenter/covid-v3)
@@ -127,11 +126,11 @@ URLs
 
 There are various other branch deploys on the US Covid Atlas web hosting (netlify) that are not publicly listed.
 
-## Running the React App
+### Running the React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Required Environment Variables
+### Required Environment Variables
 
 `REACT_APP_MAPBOX_ACCESS_TOKEN=<token>` Enter your mapbox token (must have access to the resources that are hard-coded into the `style.json` and `style_light.json` files).
 
@@ -159,7 +158,7 @@ BIGQUERY_SECRET_KEY_ID=
 
 All of the above variables (and perhaps a couple of others must also exist in the Netlify environment. If the data-pull-1.yml workflow is enabled, then the BigQuery variables must also be added to this repositories list of secrets.
 
-## Quickstart
+#### Quickstart
 
 1. Clone this repository
 2. Use `cp .env.example .env` to create a local .env file and update values as needed.
@@ -168,14 +167,14 @@ All of the above variables (and perhaps a couple of others must also exist in th
 5. From the repository root, run `yarn fetch-data` to fetch the latest data
 6. From the repository root, run `yarn start` to start the app
 
-## Available Scripts
+### Available Scripts
 
 In the project directory, you can run:
 
-## `yarn fetch-data`
+#### `yarn fetch-data`
 
 Updates the data in the public data directory as required by the frontend application.
-### `yarn start`
+#### `yarn start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -183,15 +182,15 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `yarn docs`
+#### `yarn docs`
 Generates JSDoc site, output to the folder `jsdocs`. See `jsdoc` folder for configuration.
 
-### `yarn test`
+#### `yarn test`
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+#### `yarn build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
@@ -201,7 +200,7 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
+#### `yarn eject`
 
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
