@@ -41,7 +41,6 @@ Previously used  Datasets:
 <!-- + [HHS Hospital Data](https://healthdata.gov/dataset/covid-19-reported-patient-impact-and-hospital-capacity-facility): Facility Level data on hospital occupancy. -->
 
 ### Data Details
-#### USAFacts
 <!-- You can download the most updated county level data merged with USAFacts [here](https://github.com/GeoDaCenter/covid/tree/master/): 
 + usafacts_confirmed_*date*.geojson: the county level data (confirmed cases) using [*USAFacts*](https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/?utm_source=MailChimp&utm_campaign=census-covid2), together with population and number of hospital beds. 
 + usafacts_deaths_*date*.geojson: the county level data (death counts) using [*USAFacts*](https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/?utm_source=MailChimp&utm_campaign=census-covid2), together with population and number of hospital beds. 
@@ -99,10 +98,18 @@ We highly appreciate our many contributors and volunteers, including:
 + Fletcher Barryman (CSDS)
 
 ## CONTACT US
-If you have a question regarding a specific dataset, please contact the dataset author(s) directly. If you have any questions regarding the Atlas, feel free to pose an issue here or contact us by: mkolak@uchicago.edu or qinyunlin@uchicago.edu.  
+If you have a question regarding a specific dataset, please contact the dataset author(s) directly. If you have any questions regarding the Atlas, contact us by via: [https://uscovidatlas.org/contact](https://uscovidatlas.org/contact)
 
 ## HOW TO CITE US
-Please cite us using: 
+Please cite us according to how you used the US Covid Atlas: 
+
+*Website*
+Marynia Kolak, Qinyun Lin, Dylan Halpern, Susan Paykin, Aresha Martinez-Cardoso, and Xun Li. The US Covid Atlas, 2022. Center for Spatial Data Science at University of Chicago. https://www.uscovidatlas.org
+
+*Published Work of Version 1*
+Kolak, Marynia, Xun Li, Qinyun Lin, Ryan Wang, Moksha Menghaney, Stephanie Yang, and Vidal Anguiano Jr. "The US COVID Atlas: A dynamic cyberinfrastructure surveillance system for interactive exploration of the pandemic." *Transactions in GIS* 25, no. 4 (2021): 1741-1765.
+
+*Codebase of Version 1*
 Xun Li, Qinyun Lin, Marynia Kolak, Robert Martin, Stephanie Yang, Moksha Menghaney, Ari Israel, Ryan Wang, Vidal Anguiano Jr., Erin Abbott, Dylan Halpern, Sihan-Mao. (2020, October 12). GeoDaCenter/covid: beta (Version beta). Zenodo. http://doi.org/10.5281/zenodo.4081869
 
 ## Current Repos, Subdomains and branches of the Atlas
