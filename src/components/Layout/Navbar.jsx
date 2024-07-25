@@ -297,7 +297,7 @@ const defaultDropDowns = {
     },
     {
       header: 'Methods',
-      desc: 'Overview of the methods behind our analytics and data.',
+      desc: 'Overview of the methods behind our analytics.',
       link: '/methods',
     },
     {
