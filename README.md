@@ -2,15 +2,13 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/f97601fe-2d82-482a-befe-b58f1bd7aa90/deploy-status)](https://app.netlify.com/sites/hardcore-wozniak-6dbde2/deploys)
 
-The U.S. COVID-19 Atlas provides county-level visualizations and analytics to reveal a more detailed pandemic landscape with local hotspots of surging COVID cases that are missed by state-level data. 
-
-The current Atlas is available here: [https://USCovidAtlas.org](https://USCovidAtlas.org). The Atlas is being updated everyday by midnight EST. We are working on releasing regular updates with more data, functions, and analysis.
+The U.S. COVID-19 Atlas provides county-level visualizations and analytics to reveal a more detailed pandemic landscape with local hotspots of surging COVID cases that are missed by state-level data. The Atlas is live at: [https://USCovidAtlas.org](https://USCovidAtlas.org). 
 
 ![screenshot](https://github.com/GeoDaCenter/covid/raw/master/public/img/screenshot.png)
 
 ## DATA
 
-For more information about additional datasets used in the Atlas, see our Data page. Detailed data documentations about different variables and data sources are available at the [data-docs](https://github.com/GeoDaCenter/covid/tree/master/data-docs) folder. 
+For more information about additional datasets used in the Atlas, see our [Data page](https://USCovidAtlas.org/data). Detailed data documentations about different variables and data sources are available at the [data-docs](https://github.com/GeoDaCenter/covid/tree/master/data-docs) folder. 
 
 ### Current Release
 Because there is no one single validated source for county-level COVID cases and deaths for real-time analysis, we incorporate multiple datasets from multiple projects to allow for comparisons. For now, two datasets are available. More will be incorporated later. 
