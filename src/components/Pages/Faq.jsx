@@ -151,7 +151,7 @@ const faqQuestions = [
         summaries of all the datasets currently featured on the Atlas. This page
         also includes links to our{' '}
         <a
-          href="https://github.com/GeoDaCenter/covid/"
+          href="https://github.com/GeoDaCenter/covid-v3"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -185,7 +185,7 @@ const faqQuestions = [
         <Grid container spacing={3}>
           <Grid item xs={12} md={12}>
           <p>The Atlas was used in multiple ways. Below we higlight five core 
-          usage scnenarios common in earlier stages of the Pandemic, as they were 
+          usage scenarios common in earlier stages of the Pandemic, as they were 
           shared on the orginal home page. Check out addditional 
           <a href="http://uscovidatlas.org/insights"> insights</a> from the Atlas team,
           <a href="http://uscovidatlas.org/learn"> learn</a> how to explore the Pandemic historically, and/or read about more ways 
@@ -199,9 +199,9 @@ const faqQuestions = [
               data or by adjusting for population. Because of the
               infectious nature of COVID, high numbers of cases anywhere
               would be of concern. At the same time, identifying areas that
-              had a disporotionately high number of cases within the
+              had a disproportionately higher number of cases within the
               population was necessary to locate areas hit hardest by the
-              pandemic.
+              Pandemic.
             </p>
           </Grid>
           <Grid item xs={12} md={6}>
@@ -220,8 +220,8 @@ const faqQuestions = [
             <p>
               Users could visualize change over time to better understand the
               distribution and spread of COVID in the US throughout the
-              pandemic. Move the time slider or click the play
-              button to watch the spread of COVID. Analyzing patterns of
+              Pandemic. Moving the time slider or clicking the play
+              button enabled the user to watch the spread of COVID. Analyzing patterns of
               the spread was essential to support planning for resource allocation.
             </p>
           </Grid>
@@ -237,14 +237,14 @@ const faqQuestions = [
           <Grid item xs={12} md={6}>
           <Usage color="yellow">Usage #3</Usage>
             <h5>
-              Interacting and forecasting viral spread at state and county
+              Forecasting viral spread at state and county
               levels
             </h5>
             <p>
-              Switching between the state and county thematic maps (ie.
-              choropleth maps) helped find COVID at a local level. Then,
+              Switching between the state and county thematic maps helped zero in on 
+              COVID clusters at a local level. Then,
               selecting and tracking hotspots over time using the Local Moran's
-              I statistic helped confirm areas of concern, and track them over time. 
+              I statistic helped confirm and explore areas of concern. 
               The Atlas served as a powerful visual analytic tool to find
               COVID spillovers along state borders, emerging from one
               county to areas nearby, and more.
@@ -314,14 +314,14 @@ const faqQuestions = [
       <p>
         The impact of COVID-19 reaches far beyond a single data metric. The
         Atlas makes multiple COVID and community context variables available in
-        order to paint a more complete picture of the ways in which the pandemic
+        order to paint a more complete picture of the ways in which the Pandemic
         has affected different communities in different ways.
         <br />
         <br />
         For variables like COVID cases and death rates, we provide multiple data
         sources in order to allow users to compare and contrast reported data.
-        This was particularly important earlier in the pandemic. For most of the
-        first year of the pandemic, there had been no single, authoritative
+        This was particularly important earlier in the Pandemic. For most of the
+        first year, there had been no single, authoritative
         source of COVID case data in the United States. When we launched the
         Atlas in mid-March, we incorporated data from{' '}
         <a
@@ -335,7 +335,7 @@ const faqQuestions = [
         first available county-level data for public use, as well as USAFacts, a
         journalistic dataset making county-level data available early on. As the
         Atlas has expanded and evolved alongside national data collection and
-        reporting efforts, we’ve also incorporated county-level reports from{' '}
+        reporting efforts, we also incorporated county-level reports from{' '}
         <a
           href="https://github.com/nytimes/covid-19-data"
           target="_blank"
@@ -343,7 +343,7 @@ const faqQuestions = [
         >
           The New York Times
         </a>
-        . We source COVID vaccination rates and testing data directly from the{' '}
+        . We sourced COVID vaccination rates and testing data directly from the{' '}
         <a
           href="https://covid.cdc.gov/covid-data-tracker/#datatracker-home"
           target="_blank"
@@ -366,7 +366,7 @@ const faqQuestions = [
         landscape, while state-level or national aggregate data may obscure
         local hotspots of surging cases. By focusing on state-wide or even
         national metrics, it’s easy to miss rapidly surging cases locally and
-        pillover across state boundaries. County-level data (and finer
+        spillover across state boundaries. County-level data (and finer
         resolution, when available) is critical for targeting efforts, whether
         isolating virus spread or identifying a disproportionately hit area for
         recovery priority.
@@ -391,20 +391,12 @@ const faqQuestions = [
           First Dose Administered, Second Dose Administered, and Doses to be
           Distributed.
         </i>
-        (Thus far, the CDC has only released state-level data on vaccinations.
-        As soon as county-level vaccination data is widely available, we’ll
-        incorporate it into the Atlas.)
         <br />
         <br />
         The <i>Doses to be Distributed variable</i> is taken from the total
         doses distributed subtracted by the total doses administered. This gives
         an estimation of the number of doses "on hand" for each state. See our
         detailed data descriptions for more information.
-        <br />
-        <br />
-        As the available vaccine manufacturers continued to change and the
-        distribution pipeline evolves, we continued to explore how best to
-        capture the state of vaccination efforts.
       </p>
     ),
   },
