@@ -90,7 +90,7 @@ The **Advisory** page details information about the Community Advisory Board: [h
 ### Learn
 There are multiple resources the learn more about the data, methods, technical infrastructure, and more at the main Covid Atlas site:
 + [Learn Toolkit](https://uscovidatlas.org/learn)
-+ [Analytic Methods](https://uscovidatlas.org/learn)
++ [Analytic Methods](https://uscovidatlas.org/methods)
 + [Commonly Asked Questions During the Pandemic](https://uscovidatlas.org/faq)
 + [Atlas Published Research](https://uscovidatlas.org/insights#research)
 + [Covid Atlas Insights Research Blog](medium.com/covidatlas)
