@@ -88,13 +88,13 @@ The **Advisory** page details information about the Community Advisory Board: [h
 ## RESOURCES
 
 ### Learn
-There are multiple resources the learn more about the data, methods, technical infrastructure, and more at the main Covid Atlas site. Check out:
-+ [https://uscovidatlas.org/learn](Learn Toolkit)
-+ [[https://uscovidatlas.org/learn](Analytic Methods)
-+ [https://uscovidatlas.org/faq](Commonly Asked Questions During the Pandemic)
-+ [https://uscovidatlas.org/insights#research](Atlas Published Research)
-+ [medium.com/covidatlas](Covid Atlas Insights Research Blog)
-+ [https://stories.uscovidatlas.org/](Oral Histories Project: Atlas Stories)
+There are multiple resources the learn more about the data, methods, technical infrastructure, and more at the main Covid Atlas site:
++ [Learn Toolkit](https://uscovidatlas.org/learn)
++ [Analytic Methods]([https://uscovidatlas.org/learn)
++ [Commonly Asked Questions During the Pandemic](https://uscovidatlas.org/faq)
++ [Atlas Published Research](https://uscovidatlas.org/insights#research)
++ [Covid Atlas Insights Research Blog](medium.com/covidatlas)
++ [Oral Histories Project: Atlas Stories](https://stories.uscovidatlas.org/)
 
 ### Questions
 If you have a question regarding a specific dataset, please contact the dataset author(s) directly. If you have any questions regarding the Atlas, contact us by via: [https://uscovidatlas.org/contact](https://uscovidatlas.org/contact)
