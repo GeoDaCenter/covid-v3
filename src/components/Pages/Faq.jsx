@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import Grid from "@mui/material/Grid";
 
 // import Grid from '@mui/material/Grid';
 import MuiAccordion from '@mui/material/Accordion';
@@ -33,6 +34,60 @@ const FaqPage = styled.div`
 //     padding: 10px 0;
 //   }
 // `;
+
+const Usage = styled.span`
+  background: ${(props) => colors[props.color]};
+  padding: 10px 15px;
+  border-radius: 15px;
+  font-weight: bold;
+  line-height: 4;
+  font-size: 1rem;
+  transform: translateY(-100%);
+`;
+
+const Feature = styled(Grid)`
+  text-align: center;
+  h5 {
+    font-family: "Playfair Display", serif;
+    font-size: 19px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: ${colors.skyblue};
+    margin-bottom: 20px;
+  }
+  img {
+    margin: 20px auto;
+    width: 100%;
+    max-width: 100px;
+  }
+  img.responsive {
+    max-width: 100%;
+  }
+  p {
+    color: white;
+    font-family: Lato;
+    font-size: 16px;
+    font-weight: 300;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.63;
+    letter-spacing: normal;
+    color: ${colors.white};
+    @media (max-width: 960px) {
+      max-width: 400px;
+      margin: 0 auto 40px auto;
+    }
+  }
+`;
+
+const CenteredGrid = styled(Grid)`
+  display: flex;
+  align-content: center;
+  padding-top: 4em;
+`;
 
 const Accordion = styled(MuiAccordion)`
   &.MuiPaper-elevation1 {
@@ -124,22 +179,132 @@ const faqQuestions = [
     ),
   },
   {
-    header:
-      'Is it possible to download or access the data featured on the Atlas?',
+    header: 'How was the Atlas be used during the Covid-19 Pandemic?',
     content: (
-      <p>
-        Yes, absolutely. We are committed to providing open and easy access to
-        the data we feature on the Atlas. You can access our data via{' '}
-        <a
-          href="https://github.com/GeoDaCenter/covid/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          GitHub
-        </a>
-        , or using the{' '}
-        <NavLink to="/data">Bulk Data Download</NavLink> tool.
-      </p>
+
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={12}>
+          <p>The Atlas was used in multiple ways. Below we higlight five core 
+          usage scnenarios common in earlier stages of the Pandemic, as they were 
+          shared on the orginal home page. Check out addditional 
+          <a href="http://uscovidatlas.org/insights"> insights</a> from the Atlas team,
+          <a href="http://uscovidatlas.org/learn"> learn</a> how to explore the Pandemic historically, and/or read about more ways 
+          that the Atlas was used in our <a href="http://uscovidatlas.org/eval"> evaluation</a> report.</p>
+          </Grid>
+          <Grid item xs={12} md={6}>
+          <Usage color="yellow">Usage #1</Usage>
+            <h5>Identifying Regional Hotspots for Mitigation</h5>
+            <p>
+              Users couold generate spatial statistics to detect hot spots with raw case
+              data or by adjusting for population. Because of the
+              infectious nature of COVID, high numbers of cases anywhere
+              would be of concern. At the same time, identifying areas that
+              had a disporotionately high number of cases within the
+              population was necessary to locate areas hit hardest by the
+              pandemic.
+            </p>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <video autoPlay={true} muted={true} loop={true}>
+              <source
+                src={`${process.env.PUBLIC_URL}/img/use_case1.mp4`}
+                type="video/mp4"
+              />
+              Your browser does not support the video tag.
+            </video>
+          </Grid>
+          <Gutter h={10} />
+          <Grid item xs={12} md={6}>
+            <Usage color="orange">Usage #2</Usage>
+            <h5>Tracking patterns to better plan ahead</h5>
+            <p>
+              Users could visualize change over time to better understand the
+              distribution and spread of COVID in the US throughout the
+              pandemic. Move the time slider or click the play
+              button to watch the spread of COVID. Analyzing patterns of
+              the spread was essential to support planning for resource allocation.
+            </p>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <img
+              src={`${process.env.PUBLIC_URL}/img/Landingpage_usage2.gif`}
+              height = "300"
+              alt="Use Case 2: Tracking COVID Patterns over time"
+              loading="lazy"
+            />
+          </Grid>
+          <Gutter h={10} />
+          <Grid item xs={12} md={6}>
+          <Usage color="yellow">Usage #3</Usage>
+            <h5>
+              Interacting and forecasting viral spread at state and county
+              levels
+            </h5>
+            <p>
+              Switching between the state and county thematic maps (ie.
+              choropleth maps) helped find COVID at a local level. Then,
+              selecting and tracking hotspots over time using the Local Moran's
+              I statistic helped confirm areas of concern, and track them over time. 
+              The Atlas served as a powerful visual analytic tool to find
+              COVID spillovers along state borders, emerging from one
+              county to areas nearby, and more.
+            </p>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <img
+              src={`${process.env.PUBLIC_URL}/img/Landingpage_usage3.gif`}
+              height = "300"
+              alt="Use Case 3: Forecasting viral spreads"
+              loading="lazy"
+            />
+          </Grid>
+          <Gutter h={10} />
+          <Grid item xs={12} md={6}>
+            <Usage color="orange">Usage #4</Usage>
+            <h5>Making visible vulnerable communities</h5>
+            <p>
+              Users could click on counties to get more information about community
+              health factors and socioeconomic indicators like average
+              length of life in an area, percent uninsured, or income
+              inequality metrics. In the main selection panel, overlaying
+              segregated cities or Native American Reservation boundaries
+              could help identify uniquely vulnerable locales.
+            </p>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <img
+              src={`${process.env.PUBLIC_URL}/img/Landingpage_usage4.gif`}
+              height = "300"
+              alt="Use Case 4: Make visible vulnerable communities"
+              loading="lazy"
+            />
+          </Grid>
+          <Gutter h={10} />
+          <Grid item xs={12} md={6}>
+
+          <Usage color="yellow">Usage #5</Usage>
+            <h5>Identifying emerging risk</h5>
+            <p>
+              The Atlas enabled exploring how hotspots progressed or diminished over time, 
+              and also helped identify
+              areas of emerging risk early. Some hotspots began as spatial
+              outliers -- shown as pink in the map, meaning cases were high
+              in that county but low in neighboring counties. If cases
+              continued to grow and spillover nearby counties, the areas
+              would turn red. Mature hotspots were defined as clusters of counties that
+              remained red over time, and continued to grow.
+            </p>
+
+          </Grid>
+          <Grid item xs={12} md={6}>
+          <img
+              src={`${process.env.PUBLIC_URL}/img/Landingpage_usage5.gif`}
+              height = "300"
+              alt="Use Case 5: Forecasting viral spreads"
+              loading="lazy"
+            />
+          </Grid>
+        </Grid>
     ),
   },
   {
