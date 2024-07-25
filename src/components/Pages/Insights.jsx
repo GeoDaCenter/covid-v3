@@ -14,49 +14,6 @@ const InsightsPage = styled.div`
   }
 `;
 
-const ArticleCard = styled(Grid)`
-  padding: 0;
-  margin-bottom: 20px;
-  transition: 250ms all;
-  border: 1px solid ${colors.lightgray};
-  background: white;
-  .thumbnailContainer {
-    overflow: hidden;
-    height: 0;
-    padding-top: 56.25%;
-  }
-  img {
-    margin-top: -56.25%;
-    width: 100%;
-    display: block;
-  }
-  h2.cardTitle {
-    letter-spacing: 0;
-    font-size: 1.25rem;
-    color: ${colors.black};
-    transition: 250ms all;
-    padding: 10px 40px 0px 10px;
-    margin: 0;
-  }
-  p.date {
-    padding: 0px 40px 10px 10px;
-    font-size: 0.75rem;
-  }
-  p.description {
-    text-overflow: ellipsis;
-    max-height: 2rem;
-  }
-  &:hover {
-    @media (min-width: 1024px) {
-      transform: scale(1.1) translateY(-10%);
-      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    }
-    h2.cardTitle {
-      color: ${colors.pink};
-    }
-  }
-`;
-
 const ProductCard = styled(Grid)`
   padding: 0;
   margin-bottom: 20px;
@@ -205,13 +162,9 @@ function a11yProps(index) {
   };
 }
 
-const availableTabs = ['#blog', '#research', '#viz', '#media']
+const availableTabs = ['#research', '#viz', '#media']
 
 export default function Insights() {
-  const [rssFeed, setRssFeed] = useState({
-    feed: {},
-    items: [],
-  });
 
   const [tabValue, setTabValue] = useState(
     window.location.hash.length
@@ -222,13 +175,6 @@ export default function Insights() {
   const handleHashChange = () => setTabValue(availableTabs.indexOf(window.location.hash));
 
   useEffect(() => {
-    fetch(
-      'https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/covidatlas',
-    )
-      .then((r) => r.json())
-      .then((r) => {
-        setRssFeed(r);
-      });
     window.addEventListener('hashchange', handleHashChange, false);
   }, []);
 
@@ -242,77 +188,27 @@ export default function Insights() {
             active={tabValue === 0}
             onClick={() => setTabValue(0)}
           >
-            Blog
+            Research
           </Tab>
           <Tab
             {...a11yProps(1)}
             active={tabValue === 1}
             onClick={() => setTabValue(1)}
           >
-            Research
+            Viz
           </Tab>
           <Tab
             {...a11yProps(2)}
             active={tabValue === 2}
             onClick={() => setTabValue(2)}
           >
-            Viz
-          </Tab>
-          <Tab
-            {...a11yProps(3)}
-            active={tabValue === 3}
-            onClick={() => setTabValue(3)}
-          >
             Media
+          </Tab>
+          <Tab onClick={() => window.open("https://medium.com/covidatlas", "_blank")}>
+            Blog ↗
           </Tab>
         </TabBar>
         <TabPanel display={tabValue === 0}>
-          <Gutter h={20} />
-          {rssFeed.items.map((article) => (
-            <ArticleCard container spacing={0}>
-              <Grid item xs={12} md={4} lg={2}>
-                <a
-                  href={article.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <div className="thumbnailContainer">
-                    <img
-                      src={article.thumbnail}
-                      alt={`Thumbnail for ${article.title}`}
-                    />
-                  </div>
-                </a>
-              </Grid>
-              <Grid item xs={12} md={8} lg={10}>
-                <a
-                  href={article.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <h2
-                    className="cardTitle"
-                    dangerouslySetInnerHTML={{ __html: article.title }}
-                  ></h2>
-                  <p className="date">{article.pubDate?.split(' ')[0]}</p>
-                </a>
-              </Grid>
-            </ArticleCard>
-          ))}
-          <hr />
-          <p>
-            Read more at{' '}
-            <a
-              href="https://medium.com/covidatlas"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Medium.com/CovidAtlas
-            </a>
-          </p>
-        </TabPanel>
-
-        <TabPanel display={tabValue === 1}>
           <Gutter h={20} />
           <hr />
           <Gutter h={20} />
@@ -340,7 +236,7 @@ export default function Insights() {
             </ProductCard>
           ))}
         </TabPanel>
-        <TabPanel display={tabValue === 2}>
+        <TabPanel display={tabValue === 1}>
           <Gutter h={20} />
           <p>
             Not every COVID-19 story fits neatly in the Atlas, so the projects
@@ -367,7 +263,7 @@ export default function Insights() {
             </ProductCard>
           ))}
         </TabPanel>
-        <TabPanel display={tabValue === 3}>
+        <TabPanel display={tabValue === 2}>
           <Gutter h={20} />
           <p>
             Atlas research, insights, and data have been featured in leading national and local media outlets, including NPR, The Washington Post, Scientific American, and The Root.
