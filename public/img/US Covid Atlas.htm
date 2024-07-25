@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://localhost:3000/methods -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style data-emotion="css" data-s="">.css-a5rdam-MuiGrid-root{box-sizing:border-box;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-flex-wrap:wrap;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;width:100%;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;margin-top:-8px;width:calc(100% + 8px);margin-left:-8px;}</style><style data-emotion="css" data-s="">.css-a5rdam-MuiGrid-root>.MuiGrid-item{padding-top:8px;}</style><style data-emotion="css" data-s="">.css-a5rdam-MuiGrid-root>.MuiGrid-item{padding-left:8px;}</style><style data-emotion="css" data-s="">.css-1unik2p-MuiGrid-root{box-sizing:border-box;margin:0;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-flex-basis:50%;-ms-flex-preferred-size:50%;flex-basis:50%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:50%;}</style><style data-emotion="css" data-s="">@media (min-width:600px){.css-1unik2p-MuiGrid-root{-webkit-flex-basis:50%;-ms-flex-preferred-size:50%;flex-basis:50%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:50%;}}</style><style data-emotion="css" data-s="">@media (min-width:900px){.css-1unik2p-MuiGrid-root{-webkit-flex-basis:25%;-ms-flex-preferred-size:25%;flex-basis:25%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:25%;}}</style><style data-emotion="css" data-s="">@media (min-width:1200px){.css-1unik2p-MuiGrid-root{-webkit-flex-basis:25%;-ms-flex-preferred-size:25%;flex-basis:25%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:25%;}}</style><style data-emotion="css" data-s="">@media (min-width:1536px){.css-1unik2p-MuiGrid-root{-webkit-flex-basis:25%;-ms-flex-preferred-size:25%;flex-basis:25%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:25%;}}</style><style data-emotion="css" data-s="">.css-14a3zbu-MuiGrid-root{box-sizing:border-box;margin:0;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-flex-basis:50%;-ms-flex-preferred-size:50%;flex-basis:50%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:50%;}</style><style data-emotion="css" data-s="">@media (min-width:600px){.css-14a3zbu-MuiGrid-root{-webkit-flex-basis:50%;-ms-flex-preferred-size:50%;flex-basis:50%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:50%;}}</style><style data-emotion="css" data-s="">@media (min-width:900px){.css-14a3zbu-MuiGrid-root{-webkit-flex-basis:33.333333%;-ms-flex-preferred-size:33.333333%;flex-basis:33.333333%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:33.333333%;}}</style><style data-emotion="css" data-s="">@media (min-width:1200px){.css-14a3zbu-MuiGrid-root{-webkit-flex-basis:33.333333%;-ms-flex-preferred-size:33.333333%;flex-basis:33.333333%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:33.333333%;}}</style><style data-emotion="css" data-s="">@media (min-width:1536px){.css-14a3zbu-MuiGrid-root{-webkit-flex-basis:33.333333%;-ms-flex-preferred-size:33.333333%;flex-basis:33.333333%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:33.333333%;}}</style><style data-emotion="css" data-s="">.css-urj5pv-MuiGrid-root{box-sizing:border-box;margin:0;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-flex-basis:100%;-ms-flex-preferred-size:100%;flex-basis:100%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:100%;}</style><style data-emotion="css" data-s="">@media (min-width:600px){.css-urj5pv-MuiGrid-root{-webkit-flex-basis:100%;-ms-flex-preferred-size:100%;flex-basis:100%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:100%;}}</style><style data-emotion="css" data-s="">@media (min-width:900px){.css-urj5pv-MuiGrid-root{-webkit-flex-basis:41.666667%;-ms-flex-preferred-size:41.666667%;flex-basis:41.666667%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:41.666667%;}}</style><style data-emotion="css" data-s="">@media (min-width:1200px){.css-urj5pv-MuiGrid-root{-webkit-flex-basis:41.666667%;-ms-flex-preferred-size:41.666667%;flex-basis:41.666667%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:41.666667%;}}</style><style data-emotion="css" data-s="">@media (min-width:1536px){.css-urj5pv-MuiGrid-root{-webkit-flex-basis:41.666667%;-ms-flex-preferred-size:41.666667%;flex-basis:41.666667%;-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;max-width:41.666667%;}}</style>
+    
+    <title>US Covid Atlas</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta property="og:title" content="US Covid Atlas">  
+    <meta property="og:description" content="Near Real-Time Exploration of the COVID-19 Pandemic. The US COVID Atlas is a visualization tool led by a University of Chicago research coalition.
+    In a quickly changing pandemic landscape, our tool connects COVID case data and community indicators across the United States from its beginning to today. ">
+    <meta property="og:image" content="https://theuscovidatlas.org/img/thumbnail.jpg">
+    <meta name="twitter:image" content="https://theuscovidatlas.org/img/thumbnail.jpg">
+    <meta property="og:url" content="https://uscovidatlas.org">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- EXTERNAL CSS -->
+    <link rel="stylesheet" type="text/css" href="./US Covid Atlas_files/plyr.css">
+    <link rel="stylesheet" type="text/css" href="./US Covid Atlas_files/mapbox.css">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="57x57" href="http://localhost:3000/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="http://localhost:3000/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="http://localhost:3000/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="http://localhost:3000/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="http://localhost:3000/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="http://localhost:3000/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="http://localhost:3000/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="http://localhost:3000/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="http://localhost:3000/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="./US Covid Atlas_files/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:3000/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="http://localhost:3000/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:3000/favicon/favicon-16x16.png">
+    <link rel="manifest" href="http://localhost:3000/manifest.json">
+    <meta name="msapplication-TileColor" content="#ec1e24">
+    <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ec1e24">
+    <script defer="" data-domain="uscovidatlas.org" src="./US Covid Atlas_files/script.js"></script>
+  <script defer="" src="./US Covid Atlas_files/bundle.js"></script><style>.react-calendar {
+  width: 350px;
+  max-width: 100%;
+  background: white;
+  border: 1px solid #a0a096;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.125em;
+}
+.react-calendar--doubleView {
+  width: 700px;
+}
+.react-calendar--doubleView .react-calendar__viewContainer {
+  display: flex;
+  margin: -0.5em;
+}
+.react-calendar--doubleView .react-calendar__viewContainer > * {
+  width: 50%;
+  margin: 0.5em;
+}
+.react-calendar,
+.react-calendar *,
+.react-calendar *:before,
+.react-calendar *:after {
+  box-sizing: border-box;
+}
+.react-calendar button {
+  margin: 0;
+  border: 0;
+  outline: none;
+}
+.react-calendar button:enabled:hover {
+  cursor: pointer;
+}
+.react-calendar__navigation {
+  display: flex;
+  height: 44px;
+  margin-bottom: 1em;
+}
+.react-calendar__navigation button {
+  min-width: 44px;
+  background: none;
+}
+.react-calendar__navigation button:disabled {
+  background-color: #f0f0f0;
+}
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  background-color: #e6e6e6;
+}
+.react-calendar__month-view__weekdays {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.75em;
+}
+.react-calendar__month-view__weekdays__weekday {
+  padding: 0.5em;
+}
+.react-calendar__month-view__weekNumbers .react-calendar__tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75em;
+  font-weight: bold;
+}
+.react-calendar__month-view__days__day--weekend {
+  color: #d10000;
+}
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: #757575;
+}
+.react-calendar__year-view .react-calendar__tile,
+.react-calendar__decade-view .react-calendar__tile,
+.react-calendar__century-view .react-calendar__tile {
+  padding: 2em 0.5em;
+}
+.react-calendar__tile {
+  max-width: 100%;
+  padding: 10px 6.6667px;
+  background: none;
+  text-align: center;
+  line-height: 16px;
+}
+.react-calendar__tile:disabled {
+  background-color: #f0f0f0;
+}
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background-color: #e6e6e6;
+}
+.react-calendar__tile--now {
+  background: #ffff76;
+}
+.react-calendar__tile--now:enabled:hover,
+.react-calendar__tile--now:enabled:focus {
+  background: #ffffa9;
+}
+.react-calendar__tile--hasActive {
+  background: #76baff;
+}
+.react-calendar__tile--hasActive:enabled:hover,
+.react-calendar__tile--hasActive:enabled:focus {
+  background: #a9d4ff;
+}
+.react-calendar__tile--active {
+  background: #006edc;
+  color: white;
+}
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+  background: #1087ff;
+}
+.react-calendar--selectRange .react-calendar__tile--hover {
+  background-color: #e6e6e6;
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL25vZGVfbW9kdWxlcy9yZWFjdC1jYWxlbmRhci9kaXN0L0NhbGVuZGFyLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFlBQVk7RUFDWixlQUFlO0VBQ2YsaUJBQWlCO0VBQ2pCLHlCQUF5QjtFQUN6Qix5Q0FBeUM7RUFDekMsb0JBQW9CO0FBQ3RCO0FBQ0E7RUFDRSxZQUFZO0FBQ2Q7QUFDQTtFQUNFLGFBQWE7RUFDYixjQUFjO0FBQ2hCO0FBQ0E7RUFDRSxVQUFVO0VBQ1YsYUFBYTtBQUNmO0FBQ0E7Ozs7RUFNRSxzQkFBc0I7QUFDeEI7QUFDQTtFQUNFLFNBQVM7RUFDVCxTQUFTO0VBQ1QsYUFBYTtBQUNmO0FBQ0E7RUFDRSxlQUFlO0FBQ2pCO0FBQ0E7RUFDRSxhQUFhO0VBQ2IsWUFBWTtFQUNaLGtCQUFrQjtBQUNwQjtBQUNBO0VBQ0UsZUFBZTtFQUNmLGdCQUFnQjtBQUNsQjtBQUNBO0VBQ0UseUJBQXlCO0FBQzNCO0FBQ0E7O0VBRUUseUJBQXlCO0FBQzNCO0FBQ0E7RUFDRSxrQkFBa0I7RUFDbEIseUJBQXlCO0VBQ3pCLGlCQUFpQjtFQUNqQixpQkFBaUI7QUFDbkI7QUFDQTtFQUNFLGNBQWM7QUFDaEI7QUFDQTtFQUNFLGFBQWE7RUFDYixtQkFBbUI7RUFDbkIsdUJBQXVCO0VBQ3ZCLGlCQUFpQjtFQUNqQixpQkFBaUI7QUFDbkI7QUFDQTtFQUNFLGNBQWM7QUFDaEI7QUFDQTtFQUNFLGNBQWM7QUFDaEI7QUFDQTs7O0VBR0Usa0JBQWtCO0FBQ3BCO0FBQ0E7RUFDRSxlQUFlO0VBQ2Ysc0JBQXNCO0VBQ3RCLGdCQUFnQjtFQUNoQixrQkFBa0I7RUFDbEIsaUJBQWlCO0FBQ25CO0FBQ0E7RUFDRSx5QkFBeUI7QUFDM0I7QUFDQTs7RUFFRSx5QkFBeUI7QUFDM0I7QUFDQTtFQUNFLG1CQUFtQjtBQUNyQjtBQUNBOztFQUVFLG1CQUFtQjtBQUNyQjtBQUNBO0VBQ0UsbUJBQW1CO0FBQ3JCO0FBQ0E7O0VBRUUsbUJBQW1CO0FBQ3JCO0FBQ0E7RUFDRSxtQkFBbUI7RUFDbkIsWUFBWTtBQUNkO0FBQ0E7O0VBRUUsbUJBQW1CO0FBQ3JCO0FBQ0E7RUFDRSx5QkFBeUI7QUFDM0IiLCJzb3VyY2VzQ29udGVudCI6WyIucmVhY3QtY2FsZW5kYXIge1xuICB3aWR0aDogMzUwcHg7XG4gIG1heC13aWR0aDogMTAwJTtcbiAgYmFja2dyb3VuZDogd2hpdGU7XG4gIGJvcmRlcjogMXB4IHNvbGlkICNhMGEwOTY7XG4gIGZvbnQtZmFtaWx5OiBBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmO1xuICBsaW5lLWhlaWdodDogMS4xMjVlbTtcbn1cbi5yZWFjdC1jYWxlbmRhci0tZG91YmxlVmlldyB7XG4gIHdpZHRoOiA3MDBweDtcbn1cbi5yZWFjdC1jYWxlbmRhci0tZG91YmxlVmlldyAucmVhY3QtY2FsZW5kYXJfX3ZpZXdDb250YWluZXIge1xuICBkaXNwbGF5OiBmbGV4O1xuICBtYXJnaW46IC0wLjVlbTtcbn1cbi5yZWFjdC1jYWxlbmRhci0tZG91YmxlVmlldyAucmVhY3QtY2FsZW5kYXJfX3ZpZXdDb250YWluZXIgPiAqIHtcbiAgd2lkdGg6IDUwJTtcbiAgbWFyZ2luOiAwLjVlbTtcbn1cbi5yZWFjdC1jYWxlbmRhcixcbi5yZWFjdC1jYWxlbmRhciAqLFxuLnJlYWN0LWNhbGVuZGFyICo6YmVmb3JlLFxuLnJlYWN0LWNhbGVuZGFyICo6YWZ0ZXIge1xuICAtbW96LWJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gIC13ZWJraXQtYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbn1cbi5yZWFjdC1jYWxlbmRhciBidXR0b24ge1xuICBtYXJnaW46IDA7XG4gIGJvcmRlcjogMDtcbiAgb3V0bGluZTogbm9uZTtcbn1cbi5yZWFjdC1jYWxlbmRhciBidXR0b246ZW5hYmxlZDpob3ZlciB7XG4gIGN1cnNvcjogcG9pbnRlcjtcbn1cbi5yZWFjdC1jYWxlbmRhcl9fbmF2aWdhdGlvbiB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGhlaWdodDogNDRweDtcbiAgbWFyZ2luLWJvdHRvbTogMWVtO1xufVxuLnJlYWN0LWNhbGVuZGFyX19uYXZpZ2F0aW9uIGJ1dHRvbiB7XG4gIG1pbi13aWR0aDogNDRweDtcbiAgYmFja2dyb3VuZDogbm9uZTtcbn1cbi5yZWFjdC1jYWxlbmRhcl9fbmF2aWdhdGlvbiBidXR0b246ZGlzYWJsZWQge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZjBmMGYwO1xufVxuLnJlYWN0LWNhbGVuZGFyX19uYXZpZ2F0aW9uIGJ1dHRvbjplbmFibGVkOmhvdmVyLFxuLnJlYWN0LWNhbGVuZGFyX19uYXZpZ2F0aW9uIGJ1dHRvbjplbmFibGVkOmZvY3VzIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2U2ZTZlNjtcbn1cbi5yZWFjdC1jYWxlbmRhcl9fbW9udGgtdmlld19fd2Vla2RheXMge1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIHRleHQtdHJhbnNmb3JtOiB1cHBlcmNhc2U7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xuICBmb250LXNpemU6IDAuNzVlbTtcbn1cbi5yZWFjdC1jYWxlbmRhcl9fbW9udGgtdmlld19fd2Vla2RheXNfX3dlZWtkYXkge1xuICBwYWRkaW5nOiAwLjVlbTtcbn1cbi5yZWFjdC1jYWxlbmRhcl9fbW9udGgtdmlld19fd2Vla051bWJlcnMgLnJlYWN0LWNhbGVuZGFyX190aWxlIHtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gIGZvbnQtc2l6ZTogMC43NWVtO1xuICBmb250LXdlaWdodDogYm9sZDtcbn1cbi5yZWFjdC1jYWxlbmRhcl9fbW9udGgtdmlld19fZGF5c19fZGF5LS13ZWVrZW5kIHtcbiAgY29sb3I6ICNkMTAwMDA7XG59XG4ucmVhY3QtY2FsZW5kYXJfX21vbnRoLXZpZXdfX2RheXNfX2RheS0tbmVpZ2hib3JpbmdNb250aCB7XG4gIGNvbG9yOiAjNzU3NTc1O1xufVxuLnJlYWN0LWNhbGVuZGFyX195ZWFyLXZpZXcgLnJlYWN0LWNhbGVuZGFyX190aWxlLFxuLnJlYWN0LWNhbGVuZGFyX19kZWNhZGUtdmlldyAucmVhY3QtY2FsZW5kYXJfX3RpbGUsXG4ucmVhY3QtY2FsZW5kYXJfX2NlbnR1cnktdmlldyAucmVhY3QtY2FsZW5kYXJfX3RpbGUge1xuICBwYWRkaW5nOiAyZW0gMC41ZW07XG59XG4ucmVhY3QtY2FsZW5kYXJfX3RpbGUge1xuICBtYXgtd2lkdGg6IDEwMCU7XG4gIHBhZGRpbmc6IDEwcHggNi42NjY3cHg7XG4gIGJhY2tncm91bmQ6IG5vbmU7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgbGluZS1oZWlnaHQ6IDE2cHg7XG59XG4ucmVhY3QtY2FsZW5kYXJfX3RpbGU6ZGlzYWJsZWQge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZjBmMGYwO1xufVxuLnJlYWN0LWNhbGVuZGFyX190aWxlOmVuYWJsZWQ6aG92ZXIsXG4ucmVhY3QtY2FsZW5kYXJfX3RpbGU6ZW5hYmxlZDpmb2N1cyB7XG4gIGJhY2tncm91bmQtY29sb3I6ICNlNmU2ZTY7XG59XG4ucmVhY3QtY2FsZW5kYXJfX3RpbGUtLW5vdyB7XG4gIGJhY2tncm91bmQ6ICNmZmZmNzY7XG59XG4ucmVhY3QtY2FsZW5kYXJfX3RpbGUtLW5vdzplbmFibGVkOmhvdmVyLFxuLnJlYWN0LWNhbGVuZGFyX190aWxlLS1ub3c6ZW5hYmxlZDpmb2N1cyB7XG4gIGJhY2tncm91bmQ6ICNmZmZmYTk7XG59XG4ucmVhY3QtY2FsZW5kYXJfX3RpbGUtLWhhc0FjdGl2ZSB7XG4gIGJhY2tncm91bmQ6ICM3NmJhZmY7XG59XG4ucmVhY3QtY2FsZW5kYXJfX3RpbGUtLWhhc0FjdGl2ZTplbmFibGVkOmhvdmVyLFxuLnJlYWN0LWNhbGVuZGFyX190aWxlLS1oYXNBY3RpdmU6ZW5hYmxlZDpmb2N1cyB7XG4gIGJhY2tncm91bmQ6ICNhOWQ0ZmY7XG59XG4ucmVhY3QtY2FsZW5kYXJfX3RpbGUtLWFjdGl2ZSB7XG4gIGJhY2tncm91bmQ6ICMwMDZlZGM7XG4gIGNvbG9yOiB3aGl0ZTtcbn1cbi5yZWFjdC1jYWxlbmRhcl9fdGlsZS0tYWN0aXZlOmVuYWJsZWQ6aG92ZXIsXG4ucmVhY3QtY2FsZW5kYXJfX3RpbGUtLWFjdGl2ZTplbmFibGVkOmZvY3VzIHtcbiAgYmFja2dyb3VuZDogIzEwODdmZjtcbn1cbi5yZWFjdC1jYWxlbmRhci0tc2VsZWN0UmFuZ2UgLnJlYWN0LWNhbGVuZGFyX190aWxlLS1ob3ZlciB7XG4gIGJhY2tncm91bmQtY29sb3I6ICNlNmU2ZTY7XG59XG4iXSwic291cmNlUm9vdCI6IiJ9 */</style><style>.react-date-picker {
+  display: inline-flex;
+  position: relative;
+}
+.react-date-picker,
+.react-date-picker *,
+.react-date-picker *:before,
+.react-date-picker *:after {
+  box-sizing: border-box;
+}
+.react-date-picker--disabled {
+  background-color: #f0f0f0;
+  color: #6d6d6d;
+}
+.react-date-picker__wrapper {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 0;
+  border: thin solid gray;
+}
+.react-date-picker__inputGroup {
+  min-width: calc((4px * 3) +  0.54em * 8  +  0.217em * 2);
+  flex-grow: 1;
+  padding: 0 2px;
+  box-sizing: content-box;
+}
+.react-date-picker__inputGroup__divider {
+  padding: 1px 0;
+  white-space: pre;
+}
+.react-date-picker__inputGroup__input {
+  min-width: 0.54em;
+  height: 100%;
+  position: relative;
+  padding: 0 1px;
+  border: 0;
+  background: none;
+  font: inherit;
+  box-sizing: content-box;
+  -moz-appearance: textfield;
+}
+.react-date-picker__inputGroup__input::-webkit-outer-spin-button,
+.react-date-picker__inputGroup__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.react-date-picker__inputGroup__input:invalid {
+  background: rgba(255, 0, 0, 0.1);
+}
+.react-date-picker__inputGroup__input--hasLeadingZero {
+  margin-left: -0.54em;
+  padding-left: calc(1px +  0.54em);
+}
+.react-date-picker__button {
+  border: 0;
+  background: transparent;
+  padding: 4px 6px;
+}
+.react-date-picker__button:enabled {
+  cursor: pointer;
+}
+.react-date-picker__button:enabled:hover .react-date-picker__button__icon,
+.react-date-picker__button:enabled:focus .react-date-picker__button__icon {
+  stroke: #0078d7;
+}
+.react-date-picker__button:disabled .react-date-picker__button__icon {
+  stroke: #6d6d6d;
+}
+.react-date-picker__button svg {
+  display: inherit;
+}
+.react-date-picker__calendar {
+  width: 350px;
+  max-width: 100vw;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+}
+.react-date-picker__calendar--closed {
+  display: none;
+}
+.react-date-picker__calendar .react-calendar {
+  border-width: thin;
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL25vZGVfbW9kdWxlcy9yZWFjdC1kYXRlLXBpY2tlci9kaXN0L0RhdGVQaWNrZXIuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0Usb0JBQW9CO0VBQ3BCLGtCQUFrQjtBQUNwQjtBQUNBOzs7O0VBTUUsc0JBQXNCO0FBQ3hCO0FBQ0E7RUFDRSx5QkFBeUI7RUFDekIsY0FBYztBQUNoQjtBQUNBO0VBQ0UsYUFBYTtFQUNiLFlBQVk7RUFDWixjQUFjO0VBQ2QsdUJBQXVCO0FBQ3pCO0FBQ0E7RUFDRSx3REFBd0Q7RUFDeEQsWUFBWTtFQUNaLGNBQWM7RUFDZCx1QkFBdUI7QUFDekI7QUFDQTtFQUNFLGNBQWM7RUFDZCxnQkFBZ0I7QUFDbEI7QUFDQTtFQUNFLGlCQUFpQjtFQUNqQixZQUFZO0VBQ1osa0JBQWtCO0VBQ2xCLGNBQWM7RUFDZCxTQUFTO0VBQ1QsZ0JBQWdCO0VBQ2hCLGFBQWE7RUFDYix1QkFBdUI7RUFDdkIsMEJBQTBCO0FBQzVCO0FBQ0E7O0VBRUUsd0JBQXdCO0VBQ3hCLFNBQVM7QUFDWDtBQUNBO0VBQ0UsZ0NBQWdDO0FBQ2xDO0FBQ0E7RUFDRSxvQkFBb0I7RUFDcEIsaUNBQWlDO0FBQ25DO0FBQ0E7RUFDRSxTQUFTO0VBQ1QsdUJBQXVCO0VBQ3ZCLGdCQUFnQjtBQUNsQjtBQUNBO0VBQ0UsZUFBZTtBQUNqQjtBQUNBOztFQUVFLGVBQWU7QUFDakI7QUFDQTtFQUNFLGVBQWU7QUFDakI7QUFDQTtFQUNFLGdCQUFnQjtBQUNsQjtBQUNBO0VBQ0UsWUFBWTtFQUNaLGdCQUFnQjtFQUNoQixrQkFBa0I7RUFDbEIsU0FBUztFQUNULE9BQU87RUFDUCxVQUFVO0FBQ1o7QUFDQTtFQUNFLGFBQWE7QUFDZjtBQUNBO0VBQ0Usa0JBQWtCO0FBQ3BCIiwic291cmNlc0NvbnRlbnQiOlsiLnJlYWN0LWRhdGUtcGlja2VyIHtcbiAgZGlzcGxheTogaW5saW5lLWZsZXg7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbn1cbi5yZWFjdC1kYXRlLXBpY2tlcixcbi5yZWFjdC1kYXRlLXBpY2tlciAqLFxuLnJlYWN0LWRhdGUtcGlja2VyICo6YmVmb3JlLFxuLnJlYWN0LWRhdGUtcGlja2VyICo6YWZ0ZXIge1xuICAtbW96LWJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gIC13ZWJraXQtYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbn1cbi5yZWFjdC1kYXRlLXBpY2tlci0tZGlzYWJsZWQge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZjBmMGYwO1xuICBjb2xvcjogIzZkNmQ2ZDtcbn1cbi5yZWFjdC1kYXRlLXBpY2tlcl9fd3JhcHBlciB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZ3JvdzogMTtcbiAgZmxleC1zaHJpbms6IDA7XG4gIGJvcmRlcjogdGhpbiBzb2xpZCBncmF5O1xufVxuLnJlYWN0LWRhdGUtcGlja2VyX19pbnB1dEdyb3VwIHtcbiAgbWluLXdpZHRoOiBjYWxjKCg0cHggKiAzKSArICAwLjU0ZW0gKiA4ICArICAwLjIxN2VtICogMik7XG4gIGZsZXgtZ3JvdzogMTtcbiAgcGFkZGluZzogMCAycHg7XG4gIGJveC1zaXppbmc6IGNvbnRlbnQtYm94O1xufVxuLnJlYWN0LWRhdGUtcGlja2VyX19pbnB1dEdyb3VwX19kaXZpZGVyIHtcbiAgcGFkZGluZzogMXB4IDA7XG4gIHdoaXRlLXNwYWNlOiBwcmU7XG59XG4ucmVhY3QtZGF0ZS1waWNrZXJfX2lucHV0R3JvdXBfX2lucHV0IHtcbiAgbWluLXdpZHRoOiAwLjU0ZW07XG4gIGhlaWdodDogMTAwJTtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xuICBwYWRkaW5nOiAwIDFweDtcbiAgYm9yZGVyOiAwO1xuICBiYWNrZ3JvdW5kOiBub25lO1xuICBmb250OiBpbmhlcml0O1xuICBib3gtc2l6aW5nOiBjb250ZW50LWJveDtcbiAgLW1vei1hcHBlYXJhbmNlOiB0ZXh0ZmllbGQ7XG59XG4ucmVhY3QtZGF0ZS1waWNrZXJfX2lucHV0R3JvdXBfX2lucHV0Ojotd2Via2l0LW91dGVyLXNwaW4tYnV0dG9uLFxuLnJlYWN0LWRhdGUtcGlja2VyX19pbnB1dEdyb3VwX19pbnB1dDo6LXdlYmtpdC1pbm5lci1zcGluLWJ1dHRvbiB7XG4gIC13ZWJraXQtYXBwZWFyYW5jZTogbm9uZTtcbiAgbWFyZ2luOiAwO1xufVxuLnJlYWN0LWRhdGUtcGlja2VyX19pbnB1dEdyb3VwX19pbnB1dDppbnZhbGlkIHtcbiAgYmFja2dyb3VuZDogcmdiYSgyNTUsIDAsIDAsIDAuMSk7XG59XG4ucmVhY3QtZGF0ZS1waWNrZXJfX2lucHV0R3JvdXBfX2lucHV0LS1oYXNMZWFkaW5nWmVybyB7XG4gIG1hcmdpbi1sZWZ0OiAtMC41NGVtO1xuICBwYWRkaW5nLWxlZnQ6IGNhbGMoMXB4ICsgIDAuNTRlbSk7XG59XG4ucmVhY3QtZGF0ZS1waWNrZXJfX2J1dHRvbiB7XG4gIGJvcmRlcjogMDtcbiAgYmFja2dyb3VuZDogdHJhbnNwYXJlbnQ7XG4gIHBhZGRpbmc6IDRweCA2cHg7XG59XG4ucmVhY3QtZGF0ZS1waWNrZXJfX2J1dHRvbjplbmFibGVkIHtcbiAgY3Vyc29yOiBwb2ludGVyO1xufVxuLnJlYWN0LWRhdGUtcGlja2VyX19idXR0b246ZW5hYmxlZDpob3ZlciAucmVhY3QtZGF0ZS1waWNrZXJfX2J1dHRvbl9faWNvbixcbi5yZWFjdC1kYXRlLXBpY2tlcl9fYnV0dG9uOmVuYWJsZWQ6Zm9jdXMgLnJlYWN0LWRhdGUtcGlja2VyX19idXR0b25fX2ljb24ge1xuICBzdHJva2U6ICMwMDc4ZDc7XG59XG4ucmVhY3QtZGF0ZS1waWNrZXJfX2J1dHRvbjpkaXNhYmxlZCAucmVhY3QtZGF0ZS1waWNrZXJfX2J1dHRvbl9faWNvbiB7XG4gIHN0cm9rZTogIzZkNmQ2ZDtcbn1cbi5yZWFjdC1kYXRlLXBpY2tlcl9fYnV0dG9uIHN2ZyB7XG4gIGRpc3BsYXk6IGluaGVyaXQ7XG59XG4ucmVhY3QtZGF0ZS1waWNrZXJfX2NhbGVuZGFyIHtcbiAgd2lkdGg6IDM1MHB4O1xuICBtYXgtd2lkdGg6IDEwMHZ3O1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMTAwJTtcbiAgbGVmdDogMDtcbiAgei1pbmRleDogMTtcbn1cbi5yZWFjdC1kYXRlLXBpY2tlcl9fY2FsZW5kYXItLWNsb3NlZCB7XG4gIGRpc3BsYXk6IG5vbmU7XG59XG4ucmVhY3QtZGF0ZS1waWNrZXJfX2NhbGVuZGFyIC5yZWFjdC1jYWxlbmRhciB7XG4gIGJvcmRlci13aWR0aDogdGhpbjtcbn1cbiJdLCJzb3VyY2VSb290IjoiIn0= */</style><style>@import url(https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,900;1,400;1,700&family=Playfair+Display:ital@1&display=swap);</style><style>* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+}
+
+body,
+button {
+  background: rgb(15, 15, 15);
+  font-family: 'Lato', sans-serif;
+}
+@media print {
+  body {
+    background: white;
+  }
+}
+
+/* bottom drawer */
+#bottom-drawer.hidden {
+  bottom: -266px;
+}
+
+div.MuiPaper-root.MuiPopover-paper {
+  background: #1a1a1a;
+  border:1px solid white;
+  border-radius:0;
+}
+
+#mouse-over-popover div.MuiPaper-root.MuiPopover-paper {
+  color: white;
+  padding: 10px;
+}
+div.MuiPaper-root.MuiPopover-paper li.MuiMenuItem-root {
+  color: white;
+  font-family: 'Lato', sans-serif !important;
+}
+div.MuiPaper-root.MuiPopover-paper li.MuiMenuItem-root:hover {
+  background: #2b2b2b;
+}
+div.MuiPaper-root.MuiPopover-paper li.MuiListSubheader-root {
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
+  font-feature-settings: "smcp";
+  font-variant: small-caps;
+}
+#variableMenu .MuiPaper-root ul {
+  /* columns:2; */
+  padding-bottom: 20px;
+}
+#variableMenu .MuiPaper-root ul li.Mui-disabled {
+  break-after: avoid-column;
+}
+
+@media (max-width: 768px) {
+  #variableMenu .MuiPaper-root ul {
+    columns: 1;
+  }
+}
+
+/* break-after: avoid; */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Lato, sans-serif !important;
+  font-size: 13px;
+  /* background-color: #111333; */
+  overflow-x: hidden;
+}
+
+#mainContainer {
+  position: absolute;
+  top: 50px;
+  width: 100%;
+  height: calc(100% - 50px);
+  overflow: hidden;
+  z-index: 1;
+}
+
+#mainContainer.loading {
+  opacity: 0.7;
+}
+
+#mainContainer.loading #variablePanel {
+  pointer-events: none;
+}
+
+#root {
+  height: calc(100% - 50px);
+}
+
+.navbar {
+  display: flex;
+  width: auto;
+  height: 50px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 999;
+  font-family: Lato, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: 1.75px;
+  font-weight: 400;
+  font-stretch: normal;
+  color: #0d0d0d;
+}
+
+@media print {
+  #mainContainer {
+    display: none;
+  }
+  .navbar {
+    display: none;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .navbar ul {
+    display: none !important;
+  }
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  height: 100%;
+  margin: 0px;
+}
+
+.navbar a {
+  color: #ddd;
+  text-align: center;
+}
+
+.nav-logo {
+  color: white;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  font-size: 20px;
+}
+
+.navbar li {
+  display: flex;
+  align-items: center;
+}
+
+.navbar li:hover {
+  background: #444;
+  color: #eee;
+}
+
+.navbar a {
+  padding-left: 20px;
+  padding-right: 20px;
+  text-decoration: none;
+}
+
+.mapboxgl-ctrl-top-right .mapboxgl-ctrl {
+  margin: 7px 7px 0 0;
+}
+.mapboxgl-ctrl-top-right {
+  position: fixed !important;
+  max-height: 43px !important;
+  overflow: hidden !important;
+}
+
+#view-MapView div,
+.mapboxgl-control-container {
+  z-index: 5 !important;
+}
+/* svg styles */
+
+.cls-1 {
+  stroke-miterlimit: 10;
+  stroke-width: 4px;
+}
+
+/* mapbox fix */
+
+button.mapboxgl-ctrl-attrib-button {
+  display: none;
+}
+
+.highlighted {
+  animation: highlightedShadow 1.5s linear infinite;
+  transition: 250ms all;
+  /* box-shadow:0px 0px 3px red, -5px 0px 3px red, 5px -5px 3px red, 0px 5px 3px red !important; */
+}
+
+@keyframes highlightedShadow {
+  0% {
+    box-shadow: inset 0px 0px 0.5vw #ffce00;
+  }
+  25% {
+    box-shadow: inset 0px 0px 0.5vw #ffce0055;
+  }
+  50% {
+    box-shadow: inset 0px 0px 0.5vw #ffce00;
+  }
+  75% {
+    box-shadow: inset 0px 0px 0.5vw #ffce0055;
+  }
+  100% {
+    box-shadow: inset 0px 0px 0.5vw #ffce00;
+  }
+}
+
+/* @keyframes highlightedShadow {
+  0% {box-shadow:0px 0px 3px red, -5px 0px 3px red, 5px -5px 3px red, 0px 5px 3px red !important;}
+  25% {box-shadow:5px -5px 3px red, -5px 5px 3px red, 5px 5px 3px red, -5px -5px 3px red !important;}
+  50% {box-shadow:-5px -5px 3px red, 0px 0px 3px red, 0px -5px 3px red, 0px 5px 3px red !important;}
+  75% {box-shadow:5px 0px 3px red, -5px -5px 3px red, 5px 5px 3px red, -5px 0px 3px red !important;}
+  100% {box-shadow:0px 0px 3px red, -5px 0px 3px red, 5px -5px 3px red, 0px 5px 3px red !important;}
+}
+
+@-webkit-keyframes highlightedShadow {
+  0% {box-shadow:0px 0px 3px red, -5px 0px 3px red, 5px -5px 3px red, 0px 5px 3px red !important;}
+  25% {box-shadow:5px -5px 3px red, -5px 5px 3px red, 5px 5px 3px red, -5px -5px 3px red !important;}
+  50% {box-shadow:-5px -5px 3px red, 0px 0px 3px red, 0px -5px 3px red, 0px 5px 3px red !important;}
+  75% {box-shadow:5px 0px 3px red, -5px -5px 3px red, 5px 5px 3px red, -5px 0px 3px red !important;}
+  100% {box-shadow:0px 0px 3px red, -5px 0px 3px red, 5px -5px 3px red, 0px 5px 3px red !important;}
+} */
+
+#loadingIcon {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  z-index: 50;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 1;
+  pointer-events: none;
+  mix-blend-mode: lighten;
+}
+#loadingIcon img {
+  width: 100%;
+  height: 100%;
+}
+
+#loadingIcon:after {
+  content: 'Loading Data...';
+  color: black;
+  font-weight: bold;
+  position: absolute;
+  bottom: -30px;
+  text-align: center;
+  width: 100%;
+  transform: translateX(-100%);
+  background: white;
+}
+
+/* clear cache button */
+
+#new-content-button {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  background: white;
+  text-align: left;
+  font-size: 1rem;
+  opacity: 1;
+  outline: none;
+  border: none;
+  padding: 5px;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  background-color: #f5f5f5;
+  visibility: visible;
+  transition: visibility 0s, opacity 0.5s linear;
+  cursor: pointer;
+  z-index: 500;
+}
+
+#new-content-button.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear;
+}
+
+#new-content-button span {
+  font-weight: bold;
+  display: block;
+}
+
+/* Mapbox */
+
+.mapboxgl-ctrl-bottom-right * {
+  display:none;
+}
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9pbmRleC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBRUE7RUFDRSxzQkFBc0I7RUFDdEIsVUFBVTtFQUNWLFNBQVM7RUFDVCwrQkFBK0I7QUFDakM7O0FBRUE7O0VBRUUsMkJBQTJCO0VBQzNCLCtCQUErQjtBQUNqQztBQUNBO0VBQ0U7SUFDRSxpQkFBaUI7RUFDbkI7QUFDRjs7QUFFQSxrQkFBa0I7QUFDbEI7RUFDRSxjQUFjO0FBQ2hCOztBQUVBO0VBQ0UsbUJBQW1CO0VBQ25CLHNCQUFzQjtFQUN0QixlQUFlO0FBQ2pCOztBQUVBO0VBQ0UsWUFBWTtFQUNaLGFBQWE7QUFDZjtBQUNBO0VBQ0UsWUFBWTtFQUNaLDBDQUEwQztBQUM1QztBQUNBO0VBQ0UsbUJBQW1CO0FBQ3JCO0FBQ0E7RUFDRSxnQkFBZ0I7RUFDaEIsK0JBQStCO0VBQy9CLDZCQUF3QjtFQUF4Qix3QkFBd0I7QUFDMUI7QUFDQTtFQUNFLGVBQWU7RUFDZixvQkFBb0I7QUFDdEI7QUFDQTtFQUNFLHlCQUF5QjtBQUMzQjs7QUFFQTtFQUNFO0lBQ0UsVUFBVTtFQUNaO0FBQ0Y7O0FBRUEsd0JBQXdCO0FBQ3hCO0VBQ0UsU0FBUztFQUNULFVBQVU7RUFDVix3Q0FBd0M7RUFDeEMsZUFBZTtFQUNmLCtCQUErQjtFQUMvQixrQkFBa0I7QUFDcEI7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsU0FBUztFQUNULFdBQVc7RUFDWCx5QkFBeUI7RUFDekIsZ0JBQWdCO0VBQ2hCLFVBQVU7QUFDWjs7QUFFQTtFQUNFLFlBQVk7QUFDZDs7QUFFQTtFQUNFLG9CQUFvQjtBQUN0Qjs7QUFFQTtFQUNFLHlCQUF5QjtBQUMzQjs7QUFFQTtFQUNFLGFBQWE7RUFDYixXQUFXO0VBQ1gsWUFBWTtFQUNaLGtCQUFrQjtFQUNsQixRQUFRO0VBQ1IsU0FBUztFQUNULFlBQVk7RUFDWiw2QkFBNkI7RUFDN0IsZUFBZTtFQUNmLGdCQUFnQjtFQUNoQixzQkFBc0I7RUFDdEIsZ0JBQWdCO0VBQ2hCLG9CQUFvQjtFQUNwQixjQUFjO0FBQ2hCOztBQUVBO0VBQ0U7SUFDRSxhQUFhO0VBQ2Y7RUFDQTtJQUNFLGFBQWE7RUFDZjtBQUNGO0FBQ0E7RUFDRTtJQUNFLHdCQUF3QjtFQUMxQjtBQUNGOztBQUVBO0VBQ0UsZ0JBQWdCO0VBQ2hCLGFBQWE7RUFDYixZQUFZO0VBQ1osV0FBVztBQUNiOztBQUVBO0VBQ0UsV0FBVztFQUNYLGtCQUFrQjtBQUNwQjs7QUFFQTtFQUNFLFlBQVk7RUFDWixhQUFhO0VBQ2IsbUJBQW1CO0VBQ25CLGtCQUFrQjtFQUNsQixlQUFlO0FBQ2pCOztBQUVBO0VBQ0UsYUFBYTtFQUNiLG1CQUFtQjtBQUNyQjs7QUFFQTtFQUNFLGdCQUFnQjtFQUNoQixXQUFXO0FBQ2I7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsbUJBQW1CO0VBQ25CLHFCQUFxQjtBQUN2Qjs7QUFFQTtFQUNFLG1CQUFtQjtBQUNyQjtBQUNBO0VBQ0UsMEJBQTBCO0VBQzFCLDJCQUEyQjtFQUMzQiwyQkFBMkI7QUFDN0I7O0FBRUE7O0VBRUUscUJBQXFCO0FBQ3ZCO0FBQ0EsZUFBZTs7QUFFZjtFQUNFLHFCQUFxQjtFQUNyQixpQkFBaUI7QUFDbkI7O0FBRUEsZUFBZTs7QUFFZjtFQUNFLGFBQWE7QUFDZjs7QUFFQTtFQUNFLGlEQUFpRDtFQUNqRCxxQkFBcUI7RUFDckIsZ0dBQWdHO0FBQ2xHOztBQUVBO0VBQ0U7SUFDRSx1Q0FBdUM7RUFDekM7RUFDQTtJQUNFLHlDQUF5QztFQUMzQztFQUNBO0lBQ0UsdUNBQXVDO0VBQ3pDO0VBQ0E7SUFDRSx5Q0FBeUM7RUFDM0M7RUFDQTtJQUNFLHVDQUF1QztFQUN6QztBQUNGOztBQUVBOzs7Ozs7Ozs7Ozs7OztHQWNHOztBQUVIO0VBQ0UsZUFBZTtFQUNmLFNBQVM7RUFDVCxRQUFRO0VBQ1IsZ0NBQWdDO0VBQ2hDLFlBQVk7RUFDWixhQUFhO0VBQ2IsV0FBVztFQUNYLHNCQUFzQjtFQUN0Qiw0QkFBNEI7RUFDNUIsVUFBVTtFQUNWLG9CQUFvQjtFQUNwQix1QkFBdUI7QUFDekI7QUFDQTtFQUNFLFdBQVc7RUFDWCxZQUFZO0FBQ2Q7O0FBRUE7RUFDRSwwQkFBMEI7RUFDMUIsWUFBWTtFQUNaLGlCQUFpQjtFQUNqQixrQkFBa0I7RUFDbEIsYUFBYTtFQUNiLGtCQUFrQjtFQUNsQixXQUFXO0VBQ1gsNEJBQTRCO0VBQzVCLGlCQUFpQjtBQUNuQjs7QUFFQSx1QkFBdUI7O0FBRXZCO0VBQ0UsZUFBZTtFQUNmLFdBQVc7RUFDWCxZQUFZO0VBQ1osaUJBQWlCO0VBQ2pCLGdCQUFnQjtFQUNoQixlQUFlO0VBQ2YsVUFBVTtFQUNWLGFBQWE7RUFDYixZQUFZO0VBQ1osWUFBWTtFQUdaLHdDQUF3QztFQUN4QyxrQkFBa0I7RUFDbEIseUJBQXlCO0VBQ3pCLG1CQUFtQjtFQUNuQiw4Q0FBOEM7RUFDOUMsZUFBZTtFQUNmLFlBQVk7QUFDZDs7QUFFQTtFQUNFLGtCQUFrQjtFQUNsQixVQUFVO0VBQ1YsOENBQThDO0FBQ2hEOztBQUVBO0VBQ0UsaUJBQWlCO0VBQ2pCLGNBQWM7QUFDaEI7O0FBRUEsV0FBVzs7QUFFWDtFQUNFLFlBQVk7QUFDZCIsInNvdXJjZXNDb250ZW50IjpbIkBpbXBvcnQgdXJsKCdodHRwczovL2ZvbnRzLmdvb2dsZWFwaXMuY29tL2NzczI/ZmFtaWx5PUxhdG86aXRhbCx3Z2h0QDAsNDAwOzAsOTAwOzEsNDAwOzEsNzAwJmZhbWlseT1QbGF5ZmFpcitEaXNwbGF5Oml0YWxAMSZkaXNwbGF5PXN3YXAnKTtcblxuKiB7XG4gIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gIHBhZGRpbmc6IDA7XG4gIG1hcmdpbjogMDtcbiAgZm9udC1mYW1pbHk6ICdMYXRvJywgc2Fucy1zZXJpZjtcbn1cblxuYm9keSxcbmJ1dHRvbiB7XG4gIGJhY2tncm91bmQ6IHJnYigxNSwgMTUsIDE1KTtcbiAgZm9udC1mYW1pbHk6ICdMYXRvJywgc2Fucy1zZXJpZjtcbn1cbkBtZWRpYSBwcmludCB7XG4gIGJvZHkge1xuICAgIGJhY2tncm91bmQ6IHdoaXRlO1xuICB9XG59XG5cbi8qIGJvdHRvbSBkcmF3ZXIgKi9cbiNib3R0b20tZHJhd2VyLmhpZGRlbiB7XG4gIGJvdHRvbTogLTI2NnB4O1xufVxuXG5kaXYuTXVpUGFwZXItcm9vdC5NdWlQb3BvdmVyLXBhcGVyIHtcbiAgYmFja2dyb3VuZDogIzFhMWExYTtcbiAgYm9yZGVyOjFweCBzb2xpZCB3aGl0ZTtcbiAgYm9yZGVyLXJhZGl1czowO1xufVxuXG4jbW91c2Utb3Zlci1wb3BvdmVyIGRpdi5NdWlQYXBlci1yb290Lk11aVBvcG92ZXItcGFwZXIge1xuICBjb2xvcjogd2hpdGU7XG4gIHBhZGRpbmc6IDEwcHg7XG59XG5kaXYuTXVpUGFwZXItcm9vdC5NdWlQb3BvdmVyLXBhcGVyIGxpLk11aU1lbnVJdGVtLXJvb3Qge1xuICBjb2xvcjogd2hpdGU7XG4gIGZvbnQtZmFtaWx5OiAnTGF0bycsIHNhbnMtc2VyaWYgIWltcG9ydGFudDtcbn1cbmRpdi5NdWlQYXBlci1yb290Lk11aVBvcG92ZXItcGFwZXIgbGkuTXVpTWVudUl0ZW0tcm9vdDpob3ZlciB7XG4gIGJhY2tncm91bmQ6ICMyYjJiMmI7XG59XG5kaXYuTXVpUGFwZXItcm9vdC5NdWlQb3BvdmVyLXBhcGVyIGxpLk11aUxpc3RTdWJoZWFkZXItcm9vdCB7XG4gIGZvbnQtd2VpZ2h0OiA3MDA7XG4gIGNvbG9yOiByZ2JhKDI1NSwgMjU1LCAyNTUsIDAuNyk7XG4gIGZvbnQtdmFyaWFudDogc21hbGwtY2Fwcztcbn1cbiN2YXJpYWJsZU1lbnUgLk11aVBhcGVyLXJvb3QgdWwge1xuICAvKiBjb2x1bW5zOjI7ICovXG4gIHBhZGRpbmctYm90dG9tOiAyMHB4O1xufVxuI3ZhcmlhYmxlTWVudSAuTXVpUGFwZXItcm9vdCB1bCBsaS5NdWktZGlzYWJsZWQge1xuICBicmVhay1hZnRlcjogYXZvaWQtY29sdW1uO1xufVxuXG5AbWVkaWEgKG1heC13aWR0aDogNzY4cHgpIHtcbiAgI3ZhcmlhYmxlTWVudSAuTXVpUGFwZXItcm9vdCB1bCB7XG4gICAgY29sdW1uczogMTtcbiAgfVxufVxuXG4vKiBicmVhay1hZnRlcjogYXZvaWQ7ICovXG5ib2R5IHtcbiAgbWFyZ2luOiAwO1xuICBwYWRkaW5nOiAwO1xuICBmb250LWZhbWlseTogTGF0bywgc2Fucy1zZXJpZiAhaW1wb3J0YW50O1xuICBmb250LXNpemU6IDEzcHg7XG4gIC8qIGJhY2tncm91bmQtY29sb3I6ICMxMTEzMzM7ICovXG4gIG92ZXJmbG93LXg6IGhpZGRlbjtcbn1cblxuI21haW5Db250YWluZXIge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogNTBweDtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogY2FsYygxMDAlIC0gNTBweCk7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIHotaW5kZXg6IDE7XG59XG5cbiNtYWluQ29udGFpbmVyLmxvYWRpbmcge1xuICBvcGFjaXR5OiAwLjc7XG59XG5cbiNtYWluQ29udGFpbmVyLmxvYWRpbmcgI3ZhcmlhYmxlUGFuZWwge1xuICBwb2ludGVyLWV2ZW50czogbm9uZTtcbn1cblxuI3Jvb3Qge1xuICBoZWlnaHQ6IGNhbGMoMTAwJSAtIDUwcHgpO1xufVxuXG4ubmF2YmFyIHtcbiAgZGlzcGxheTogZmxleDtcbiAgd2lkdGg6IGF1dG87XG4gIGhlaWdodDogNTBweDtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB0b3A6IDBweDtcbiAgbGVmdDogMHB4O1xuICB6LWluZGV4OiA5OTk7XG4gIGZvbnQtZmFtaWx5OiBMYXRvLCBzYW5zLXNlcmlmO1xuICBmb250LXNpemU6IDE0cHg7XG4gIGxpbmUtaGVpZ2h0OiAxLjU7XG4gIGxldHRlci1zcGFjaW5nOiAxLjc1cHg7XG4gIGZvbnQtd2VpZ2h0OiA0MDA7XG4gIGZvbnQtc3RyZXRjaDogbm9ybWFsO1xuICBjb2xvcjogIzBkMGQwZDtcbn1cblxuQG1lZGlhIHByaW50IHtcbiAgI21haW5Db250YWluZXIge1xuICAgIGRpc3BsYXk6IG5vbmU7XG4gIH1cbiAgLm5hdmJhciB7XG4gICAgZGlzcGxheTogbm9uZTtcbiAgfVxufVxuQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA2MDBweCkge1xuICAubmF2YmFyIHVsIHtcbiAgICBkaXNwbGF5OiBub25lICFpbXBvcnRhbnQ7XG4gIH1cbn1cblxuLm5hdmJhciB1bCB7XG4gIGxpc3Qtc3R5bGU6IG5vbmU7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGhlaWdodDogMTAwJTtcbiAgbWFyZ2luOiAwcHg7XG59XG5cbi5uYXZiYXIgYSB7XG4gIGNvbG9yOiAjZGRkO1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG5cbi5uYXYtbG9nbyB7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgcGFkZGluZy1sZWZ0OiAyMHB4O1xuICBmb250LXNpemU6IDIwcHg7XG59XG5cbi5uYXZiYXIgbGkge1xuICBkaXNwbGF5OiBmbGV4O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xufVxuXG4ubmF2YmFyIGxpOmhvdmVyIHtcbiAgYmFja2dyb3VuZDogIzQ0NDtcbiAgY29sb3I6ICNlZWU7XG59XG5cbi5uYXZiYXIgYSB7XG4gIHBhZGRpbmctbGVmdDogMjBweDtcbiAgcGFkZGluZy1yaWdodDogMjBweDtcbiAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xufVxuXG4ubWFwYm94Z2wtY3RybC10b3AtcmlnaHQgLm1hcGJveGdsLWN0cmwge1xuICBtYXJnaW46IDdweCA3cHggMCAwO1xufVxuLm1hcGJveGdsLWN0cmwtdG9wLXJpZ2h0IHtcbiAgcG9zaXRpb246IGZpeGVkICFpbXBvcnRhbnQ7XG4gIG1heC1oZWlnaHQ6IDQzcHggIWltcG9ydGFudDtcbiAgb3ZlcmZsb3c6IGhpZGRlbiAhaW1wb3J0YW50O1xufVxuXG4jdmlldy1NYXBWaWV3IGRpdixcbi5tYXBib3hnbC1jb250cm9sLWNvbnRhaW5lciB7XG4gIHotaW5kZXg6IDUgIWltcG9ydGFudDtcbn1cbi8qIHN2ZyBzdHlsZXMgKi9cblxuLmNscy0xIHtcbiAgc3Ryb2tlLW1pdGVybGltaXQ6IDEwO1xuICBzdHJva2Utd2lkdGg6IDRweDtcbn1cblxuLyogbWFwYm94IGZpeCAqL1xuXG5idXR0b24ubWFwYm94Z2wtY3RybC1hdHRyaWItYnV0dG9uIHtcbiAgZGlzcGxheTogbm9uZTtcbn1cblxuLmhpZ2hsaWdodGVkIHtcbiAgYW5pbWF0aW9uOiBoaWdobGlnaHRlZFNoYWRvdyAxLjVzIGxpbmVhciBpbmZpbml0ZTtcbiAgdHJhbnNpdGlvbjogMjUwbXMgYWxsO1xuICAvKiBib3gtc2hhZG93OjBweCAwcHggM3B4IHJlZCwgLTVweCAwcHggM3B4IHJlZCwgNXB4IC01cHggM3B4IHJlZCwgMHB4IDVweCAzcHggcmVkICFpbXBvcnRhbnQ7ICovXG59XG5cbkBrZXlmcmFtZXMgaGlnaGxpZ2h0ZWRTaGFkb3cge1xuICAwJSB7XG4gICAgYm94LXNoYWRvdzogaW5zZXQgMHB4IDBweCAwLjV2dyAjZmZjZTAwO1xuICB9XG4gIDI1JSB7XG4gICAgYm94LXNoYWRvdzogaW5zZXQgMHB4IDBweCAwLjV2dyAjZmZjZTAwNTU7XG4gIH1cbiAgNTAlIHtcbiAgICBib3gtc2hhZG93OiBpbnNldCAwcHggMHB4IDAuNXZ3ICNmZmNlMDA7XG4gIH1cbiAgNzUlIHtcbiAgICBib3gtc2hhZG93OiBpbnNldCAwcHggMHB4IDAuNXZ3ICNmZmNlMDA1NTtcbiAgfVxuICAxMDAlIHtcbiAgICBib3gtc2hhZG93OiBpbnNldCAwcHggMHB4IDAuNXZ3ICNmZmNlMDA7XG4gIH1cbn1cblxuLyogQGtleWZyYW1lcyBoaWdobGlnaHRlZFNoYWRvdyB7XG4gIDAlIHtib3gtc2hhZG93OjBweCAwcHggM3B4IHJlZCwgLTVweCAwcHggM3B4IHJlZCwgNXB4IC01cHggM3B4IHJlZCwgMHB4IDVweCAzcHggcmVkICFpbXBvcnRhbnQ7fVxuICAyNSUge2JveC1zaGFkb3c6NXB4IC01cHggM3B4IHJlZCwgLTVweCA1cHggM3B4IHJlZCwgNXB4IDVweCAzcHggcmVkLCAtNXB4IC01cHggM3B4IHJlZCAhaW1wb3J0YW50O31cbiAgNTAlIHtib3gtc2hhZG93Oi01cHggLTVweCAzcHggcmVkLCAwcHggMHB4IDNweCByZWQsIDBweCAtNXB4IDNweCByZWQsIDBweCA1cHggM3B4IHJlZCAhaW1wb3J0YW50O31cbiAgNzUlIHtib3gtc2hhZG93OjVweCAwcHggM3B4IHJlZCwgLTVweCAtNXB4IDNweCByZWQsIDVweCA1cHggM3B4IHJlZCwgLTVweCAwcHggM3B4IHJlZCAhaW1wb3J0YW50O31cbiAgMTAwJSB7Ym94LXNoYWRvdzowcHggMHB4IDNweCByZWQsIC01cHggMHB4IDNweCByZWQsIDVweCAtNXB4IDNweCByZWQsIDBweCA1cHggM3B4IHJlZCAhaW1wb3J0YW50O31cbn1cblxuQC13ZWJraXQta2V5ZnJhbWVzIGhpZ2hsaWdodGVkU2hhZG93IHtcbiAgMCUge2JveC1zaGFkb3c6MHB4IDBweCAzcHggcmVkLCAtNXB4IDBweCAzcHggcmVkLCA1cHggLTVweCAzcHggcmVkLCAwcHggNXB4IDNweCByZWQgIWltcG9ydGFudDt9XG4gIDI1JSB7Ym94LXNoYWRvdzo1cHggLTVweCAzcHggcmVkLCAtNXB4IDVweCAzcHggcmVkLCA1cHggNXB4IDNweCByZWQsIC01cHggLTVweCAzcHggcmVkICFpbXBvcnRhbnQ7fVxuICA1MCUge2JveC1zaGFkb3c6LTVweCAtNXB4IDNweCByZWQsIDBweCAwcHggM3B4IHJlZCwgMHB4IC01cHggM3B4IHJlZCwgMHB4IDVweCAzcHggcmVkICFpbXBvcnRhbnQ7fVxuICA3NSUge2JveC1zaGFkb3c6NXB4IDBweCAzcHggcmVkLCAtNXB4IC01cHggM3B4IHJlZCwgNXB4IDVweCAzcHggcmVkLCAtNXB4IDBweCAzcHggcmVkICFpbXBvcnRhbnQ7fVxuICAxMDAlIHtib3gtc2hhZG93OjBweCAwcHggM3B4IHJlZCwgLTVweCAwcHggM3B4IHJlZCwgNXB4IC01cHggM3B4IHJlZCwgMHB4IDVweCAzcHggcmVkICFpbXBvcnRhbnQ7fVxufSAqL1xuXG4jbG9hZGluZ0ljb24ge1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIGxlZnQ6IDUwJTtcbiAgdG9wOiA1MCU7XG4gIHRyYW5zZm9ybTogdHJhbnNsYXRlKC01MCUsIC01MCUpO1xuICB3aWR0aDogMTAwcHg7XG4gIGhlaWdodDogMTAwcHg7XG4gIHotaW5kZXg6IDUwO1xuICBiYWNrZ3JvdW5kLXNpemU6IGNvdmVyO1xuICBiYWNrZ3JvdW5kLXJlcGVhdDogbm8tcmVwZWF0O1xuICBvcGFjaXR5OiAxO1xuICBwb2ludGVyLWV2ZW50czogbm9uZTtcbiAgbWl4LWJsZW5kLW1vZGU6IGxpZ2h0ZW47XG59XG4jbG9hZGluZ0ljb24gaW1nIHtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogMTAwJTtcbn1cblxuI2xvYWRpbmdJY29uOmFmdGVyIHtcbiAgY29udGVudDogJ0xvYWRpbmcgRGF0YS4uLic7XG4gIGNvbG9yOiBibGFjaztcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgYm90dG9tOiAtMzBweDtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICB3aWR0aDogMTAwJTtcbiAgdHJhbnNmb3JtOiB0cmFuc2xhdGVYKC0xMDAlKTtcbiAgYmFja2dyb3VuZDogd2hpdGU7XG59XG5cbi8qIGNsZWFyIGNhY2hlIGJ1dHRvbiAqL1xuXG4jbmV3LWNvbnRlbnQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICByaWdodDogMTBweDtcbiAgYm90dG9tOiAxMHB4O1xuICBiYWNrZ3JvdW5kOiB3aGl0ZTtcbiAgdGV4dC1hbGlnbjogbGVmdDtcbiAgZm9udC1zaXplOiAxcmVtO1xuICBvcGFjaXR5OiAxO1xuICBvdXRsaW5lOiBub25lO1xuICBib3JkZXI6IG5vbmU7XG4gIHBhZGRpbmc6IDVweDtcbiAgLW1vei1ib3gtc2hhZG93OiAwIDAgMnB4IHJnYmEoMCwgMCwgMCwgMC4xKTtcbiAgLXdlYmtpdC1ib3gtc2hhZG93OiAwIDAgMnB4IHJnYmEoMCwgMCwgMCwgMC4xKTtcbiAgYm94LXNoYWRvdzogMCAwIDAgMnB4IHJnYmEoMCwgMCwgMCwgMC4xKTtcbiAgYm9yZGVyLXJhZGl1czogNHB4O1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZjVmNWY1O1xuICB2aXNpYmlsaXR5OiB2aXNpYmxlO1xuICB0cmFuc2l0aW9uOiB2aXNpYmlsaXR5IDBzLCBvcGFjaXR5IDAuNXMgbGluZWFyO1xuICBjdXJzb3I6IHBvaW50ZXI7XG4gIHotaW5kZXg6IDUwMDtcbn1cblxuI25ldy1jb250ZW50LWJ1dHRvbi5oaWRkZW4ge1xuICB2aXNpYmlsaXR5OiBoaWRkZW47XG4gIG9wYWNpdHk6IDA7XG4gIHRyYW5zaXRpb246IHZpc2liaWxpdHkgMHMsIG9wYWNpdHkgMC41cyBsaW5lYXI7XG59XG5cbiNuZXctY29udGVudC1idXR0b24gc3BhbiB7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xuICBkaXNwbGF5OiBibG9jaztcbn1cblxuLyogTWFwYm94ICovXG5cbi5tYXBib3hnbC1jdHJsLWJvdHRvbS1yaWdodCAqIHtcbiAgZGlzcGxheTpub25lO1xufSJdLCJzb3VyY2VSb290IjoiIn0= */</style><style data-styled="active" data-styled-version="5.3.6">.iHomqk{width:100%;max-width:1140px;padding:20px;margin:0 auto;}.iHomqk h1,.iHomqk h2,.iHomqk h3,.iHomqk h4,.iHomqk h5,.iHomqk h6,.iHomqk p{color:#0d0d0d;}.iHomqk h1{font-family:'Playfair Display',serif;font-size:49px;font-weight:300;font-style:italic;}.iHomqk h2{font-family:'Lato',sans-serif;font-size:16px;line-height:1.5;-webkit-letter-spacing:1.75px;-moz-letter-spacing:1.75px;-ms-letter-spacing:1.75px;letter-spacing:1.75px;font-weight:700;font-stretch:normal;margin:20px 0;}.iHomqk h3{font-family:'Playfair Display',serif;font-size:24px;font-weight:300;font-style:italic;}.iHomqk p,.iHomqk a,.iHomqk ul li,.iHomqk ol li{font-family:'Lato',sans-serif;font-size:16px;font-weight:400;font-stretch:normal;font-style:normal;line-height:1.63;-webkit-letter-spacing:normal;-moz-letter-spacing:normal;-ms-letter-spacing:normal;letter-spacing:normal;}.iHomqk ul,.iHomqk ol{padding-left:20px;}.iHomqk a{font-weight:bold;-webkit-text-decoration:none;text-decoration:none;color:#007bff;}.iHomqk hr{display:block;height:1px;border:0;border-top:1px solid #c1ebeb;margin:1em 0;padding:0;}.ctCtLt{width:100%;background:#00575c;}.ctCtLt h1{font-family:'Playfair Display',serif;font-size:49px;font-weight:300;text-align:left;font-style:italic;color:#d8d8d8;width:80vw;max-width:940px;margin:0;font-size:4rem;}@media (max-width:960px){.ctCtLt h1{font-size:2rem;width:100%;}}.ctCtLt .h1,.ctCtLt .h2,.ctCtLt .h3,.ctCtLt .h4,.ctCtLt .h5,.ctCtLt .h6,.ctCtLt h1,.ctCtLt h2,.ctCtLt h3,.ctCtLt h4,.ctCtLt h5,.ctCtLt h6{margin-bottom:0.5rem;font-weight:500;line-height:1.2;}.ctCtLt p{color:#d8d8d8;font-size:1rem;}.ctCtLt h6{margin-top:0;margin-bottom:12px;font-size:1rem;font-weight:600;font-stretch:normal;font-style:normal;line-height:normal;-webkit-letter-spacing:normal;-moz-letter-spacing:normal;-ms-letter-spacing:normal;letter-spacing:normal;color:#ffffff;}.ctCtLt a{-webkit-text-decoration:none;text-decoration:none;color:#c1ebeb;opacity:0.8;}.ctCtLt a:hover{opacity:1;}.ctCtLt img{margin-bottom:10px;}@media (max-width:960px){.ctCtLt img{max-width:50%;display:block;margin:40px auto;}}.ctCtLt hr.footerHr{margin:20px 0;}.izBNlC{width:100%;max-width:1140px;margin:0 auto;}.hhzNRs{width:100%;padding:50px;}.hhzNRs ul{list-style:none;}.hhzNRs ul li{line-height:1.5;}.hhzNRs p.copyright{font-size:0.9rem;color:#d8d8d8;}@media (max-width:960px){.hhzNRs{text-align:center;}}.dBWVhH{width:100%;display:block;height:30px;}.dmjnfg{width:100%;display:block;height:40px;}.bzQskR{width:100%;background:#c1ebeb;border-bottom:none;z-index:1;position:relative;pointer-events:none;}@media print{.bzQskR{display:none;}}.heWMOo{width:100%;max-width:1140px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;margin:0 auto;color:#0d0d0d;z-index:249;pointer-events:none;}.heWMOo div,.heWMOo ul{pointer-events:all;}.heWMOo ul{list-style:none;margin:0;-webkit-order:1;-ms-flex-order:1;order:1;}@media (min-width:1025px){.heWMOo ul{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;margin:0 0 0 auto;}}.heWMOo ul li{-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;box-sizing:border-box;}@media (min-width:1024px){.heWMOo ul li{height:50px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;}}.heWMOo a,.heWMOo button{margin:auto;height:100%;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-flex:1;-ms-flex:1;flex:1;color:#1a1a1a;text-align:center;padding:10px;-webkit-text-decoration:none;text-decoration:none;-webkit-transition:250ms all;transition:250ms all;background:none;border:none;font-family:Lato,sans-serif;font-size:0.9rem;line-height:1.5;-webkit-letter-spacing:1.75px;-moz-letter-spacing:1.75px;-ms-letter-spacing:1.75px;letter-spacing:1.75px;font-weight:400;font-stretch:normal;font-opacity:30%;cursor:pointer;}.heWMOo a:hover,.heWMOo button:hover{background:#00575c55;color:#00575c;}.heWMOo a.active,.heWMOo button.active{background:#00575c;color:#eee;}.heWMOo button{padding-right:20px;}.heWMOo button::after{content:'❱';-webkit-transform:rotate(90deg) scaleY(0.75) translateX(2px);-ms-transform:rotate(90deg) scaleY(0.75) translateX(2px);transform:rotate(90deg) scaleY(0.75) translateX(2px);padding-bottom:15px;color:#00575c;}.heWMOo button.active::after{color:#eee;}@media (max-width:1025px){.heWMOo button{color:#1a1a1a;font-size:0.9rem;color:white;font-weight:bold;font-size:2rem;text-align:left;margin:0;}.heWMOo button::after{content:'❱';-webkit-transform:scaleY(0.75) translate(5px,5px);-ms-transform:scaleY(0.75) translate(5px,5px);transform:scaleY(0.75) translate(5px,5px);padding-bottom:15px;color:#ffffff;}}.bkdmDb{color:white;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;padding:0 0 0 2px;font-size:20px;}.bkdmDb span{padding-left:10px;}@media (max-width:1025px){.jXgXPa{position:absolute;top:50px;padding-left:5vw;-webkit-transition:250ms all;transition:250ms all;width:100%;height:calc(100vh - 50px);background:#00575cee;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:start;-webkit-justify-content:flex-start;-ms-flex-pack:start;justify-content:flex-start;}.jXgXPa ul{-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;z-index:500;}.jXgXPa ul li{display:block;}.jXgXPa ul li a{color:white;font-weight:bold;font-size:2rem;}.jXgXPa ul li a:hover{background:#A1E1E3ee;}}.imSnFm{background:#2b2b2b;min-height:100vh;}.imSnFm h2{position:fixed;left:50%;top:60%;-webkit-transform:translateX(-50%);-ms-transform:translateX(-50%);transform:translateX(-50%);color:white;}.imSnFm img{width:100px;height:86px;position:fixed;left:50%;top:50%;-webkit-transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%);transform:translate(-50%,-50%);}.dEVhOO{background:white;}.dEVhOO img#workflow,.dEVhOO img.hotspot{width:100%;max-width:800px;display:block;}.dEVhOO img.thematic-map-style{width:100%;max-width:900px;display:block;}.dEVhOO img.jenks{display:block;}.dEVhOO img.hotspot{margin-bottom:0;}.dEVhOO p.caption{text-align:left;opacity:0.7;margin-top:0;}.hQazpG{background:white;}.hQazpG img#workflow,.hQazpG img.hotspot{width:100%;max-width:800px;display:block;}.hQazpG img.thematic-map-style{width:100%;max-width:900px;display:block;}.hQazpG img.jenks{display:block;}.hQazpG img.hotspot{margin-bottom:0;}.hQazpG p.caption{text-align:left;opacity:0.7;margin-top:0;}.flYaAo{background:white;}.flYaAo img#workflow,.flYaAo img.hotspot{width:100%;max-width:800px;display:block;}.flYaAo img.thematic-map-style{width:100%;max-width:900px;display:block;}.flYaAo img.jenks{display:block;}.flYaAo img.hotspot{margin-bottom:0;}.flYaAo p.caption{text-align:left;opacity:0.7;margin-top:0;}</style></head>
+  <body>
+    <noscript style="color: pink;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);">You need to enable JavaScript to run this app.</noscript>
+    <div id="root"><div><div class="sc-enHPVx flYaAo"><div class="sc-jGNhvO bzQskR"><nav class="sc-bQmOxr heWMOo"><div class="sc-fWQKxP bkdmDb"><a href="http://localhost:3000/"><img src="./US Covid Atlas_files/android-icon-192x192.png" alt="US Covid Atlas Logo" style="height: 30px; padding-right: 5px;"><span>US COVID ATLAS</span></a></div><div class="sc-EJAja jXgXPa"><ul><li><a href="http://localhost:3000/map">MAP</a></li><li><button class="">LEARN</button></li><li><button class="">ABOUT</button></li><li><button class="">DATA</button></li><li><button class="">INSIGHTS</button></li><li><button class="">STORIES</button></li><li><a href="http://localhost:3000/contact">CONTACT</a></li></ul></div></nav></div><div class="sc-jSUZER iHomqk"><h1>Methodology</h1><hr><p>The Atlas incorporates multiple visual analytic methods to explore data across space and time, as well as spatial statistical products to measure spatial clusters and outliers. This section highlights analytic methods used on the US Covid Atlas Dashboard, tying content posted in early days of the Pandemic, as well as from our work published in <a href="https://onlinelibrary.wiley.com/doi/10.1111/tgis.12786"><i>Transactions of GIS</i></a>.</p><br><p>For a more complete view of the data, methods, and technological framework developed for the Atlas, be sure to read through the <a href="https://uscovidatlas.org/learn">Learn Toolkit</a>,<a href="https://uscovidatlas.org/data"> Data</a>,<a href="https://uscovidatlas.org/insights#research"> Research</a>, and <a href="http://localhost:3000/methods">Tech</a> pages on this site.</p><div class="sc-hTBuwn dBWVhH"></div><h3>Spatial Scale</h3><br><p>When the Pandemic first emerged in early 2020, county-level visualizations were rare but when viewed, show a dramatically more nuanced and detailed pandemic landscape. The  US Covid Atlas was the<a href="https://news.uchicago.edu/story/state-level-data-misses-growing-coronavirus-hot-spots-us-including-south#"> first dashboard</a> to visualize data at both state and county-scale as total cases, deaths, and population-weighted rates to provide a richer understanding of the pandemic. Case information can be explored by clicking on county or state areas to generate pop-up windows, or to change graphs of confirmed cases.</p><br><p>Tutorials to learn how to explore spatial scale:<li><a href="https://uscovidatlas.org/learn/getting-started"> Getting Started: Atlas 101 </a></li><li><a href="https://uscovidatlas.org/learn/spatial-time-scales"> Spatial &amp; Time Scales </a></li></p><img id="workflow" src="./US Covid Atlas_files/workflow_fig1.png" alt="Interactive Workflow"><p class="caption"><i>Steps required to display each map available in an earlier version of the Atlas. Today, there are additional options for viewing (ex. 2D and 3D styles).</i></p><div class="sc-hTBuwn dBWVhH"></div><h3>Time Scale</h3><br><p>The thematic maps on the Atlas are interactive and quickly provide access to multiple sources of COVID-19 data over time for historical exploration using a time slider tool. A temporal slider allows the current view to be updated over time, providing users the ability to watch the pandemic emerge over time.</p><br><p> In addition, you'll find data available at different time scales, including:<li><b>Cumulative:</b> Total number of instances, such as confirmed cases, deaths, or vaccines, since the start of the pandemic or the start of data collected.</li><li><b>Daily New:</b> The number of new instances per day for which data is available.</li><li><b>7-Day Average:</b> The average number of instances over the previous 7-day period for which data is available.</li><li><b>Custom Range:</b> Use the Time Slider and Calendar to choose a custom date range; i.e. the last month, 6 months, the latest variant, etc.</li></p><br><p>        For example, applying the natural breaks with fixed bins on accumulative confirmed COVID-19 cases displays how the disease has spread over time since the very beginning: from just a few counties in March 2020 to almost the entire country by June. Alternatively, visualizing the temporal change based on the daily new confirmed cases (or 7-day average) helps detect areas with emerging cases. Interactive, explorative temporal detection like this allows us to capture not only the base rate, but also the changes that are both critical to tracking areas of concern.</p><br><p>Tutorials to learn how to explore temporal scale:<li><a href="https://uscovidatlas.org/learn/spatial-time-scales"> Spatial &amp; Time Scales </a></li><li><a href="https://uscovidatlas.org/learn/trends-over-time"> Trends Over Time </a></li></p><div class="sc-hTBuwn dBWVhH"></div><h3>Dynamic Exploration</h3><br><p>In addition to spatiotemporal exploration possibilities, individual counties or states are also interactive. An information window is enabled on hover, providing details on the location (i.e., state name or county name) and basic COVID-19 case and death data. Upon clicking, a county-specific data dashboard opens (on the right-hand side) with detailed health indicators and community risk factors. Data are updated by clicking on a new county. A graph showing new cases and smoothed trends for the selected county is updated on the left-hand side accordingly.</p><br><p>Tutorials to learn how to explore temporal scale:<li><a href="https://uscovidatlas.org/learn/getting-started"> Getting Started: Atlas 101 </a></li><li><a href="https://uscovidatlas.org/learn/community-contexts"> Community Contexts </a></li></p><div class="sc-hTBuwn dmjnfg"></div><h3>Thematic Mapping</h3><br><h2> MAPPING STYLES</h2><p>The Atlas provides three thematic mapping options:<ul><li><b>Choropleth Maps</b>: uniformly colors each non-overlapping enumeration unit according to the represented value. </li><li><b>Cartogram</b>: scales the size of an enumeration unit proportionally to the represented value. </li><li><b>Dot Density Map</b>: places dots within an enumeration unit in proportion to the represented value to preserve the distribution and variation of density of a phenomenon.</li></ul></p><br><p>Choropleth maps are most commonly used for geovisualization, a thematic map style that represents data through various shading patterns on predetermined geographic areas (e.g., counties, states). Default examples will often use choropleth mapping. Cartograms resize places according to the value represented. We recommend using this technique for states, rather than smaller units like counties, to help with interpretation. Dot density maps can be useful to see the population distribution below county level on the Atlas. We used this approach in an "Assessment of Structural Barriers and Racial Group Disparities of COVID-19 Mortality With Spatial Analysis," published in <a href="https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2789619">Jama Network Open</a>.</p><img class="dot-density" src="http://localhost:3000/img/dot-density.png" alt="Dot density map from Jama Network Open article"><br><h2>DATA CLASSIFICATION: NATURAL BREAKS</h2><p>For geo-visualization, we adopt jenks natural breaks maps to classify the values of the pandemic data for each state/county. A natural breaks map uses a nonlinear algorithm to create groups where within-group homogeneity is maximized, grouping and highlighting extreme observations.</p><br><p> The Jenks break is a method designed by <a href="https://www.semanticscholar.org/paper/The-Data-Model-Concept-in-Statistical-Mapping-Jenks/9551c4531a87b4ab01931bf5b68dac945ef3f9ab">Jenks (1967)</a>. The method assigns each observation to the best classification it could belong to. It aims to find the best possible arrangement of the geographical units into classes, such that the deviation from the mean within classes is minimized, while the differences between classes in maximized. In other words, it aims to group more alike geographical units, while trying to maximize the differences between the groups created.</p><br><p>For illustration purposes only, assume that we want to classify three counties based on its number of COVID-19 cases into two groups. The Jenks strategy works as follows:<br><img class="jenks" src="./US Covid Atlas_files/workflow_fig2a.png" alt="Jenks natural breaks workflow diagram"><img class="jenks" src="./US Covid Atlas_files/workflow_fig2b.png" alt="Jenks natural breaks workflow diagram"><img class="jenks" src="./US Covid Atlas_files/workflow_fig2c.png" alt="Jenks natural breaks workflow diagram"></p><br><h2>DATA CLASSIFICATION: BOX MAPS</h2><p>Selecting Box Map will plot the selected variable by categorizing data into bins according to where it would lie on a box plot chart (25th, 50th, 75th percentile, etc.) This is useful for identifying outlier data -- data that is significantly different from the rest, i.e. counties with much higher or lower rates compared to all other counties.</p><br><p>This is the mapped version of a traditional<a href="https://en.wikipedia.org/wiki/Box_plot"> box plot</a>.</p><img class="thematic-map-style" src="./US Covid Atlas_files/thematic-map-style.png" alt="jenks vs boxmap"><p class="caption">On the left, a map of confirmed cases per 100,000 persons using a Jenks classification. On the right, a Box Map.</p><br><p> Resources to learn how to use thematic maps:<li>US Covid Atlas <a href="https://uscovidatlas.org/learn/thematic-maps"> Create a Thematic Map </a> Tutorial</li><li>UCGIS Book of Knowledge: <a href="https://uscovidatlas.org/learn/thematic-maps"> Common Thematic Map Types </a></li></p><div class="sc-hTBuwn dmjnfg"></div><h3>Spatial Statistics</h3><br><h2>HOT SPOT ANALYSIS: LISA STATISTIC</h2><p>Statistical spatial cluster identification based on local indicators of spatial association (Anselin, 1995), known as the <b>LISA Statistic</b>, is implemented on case and death variables. The clustering technique allows users to identify groups of contiguous counties that are statistically similar based on the COVID-19 indicator (accumulative COVID-19 cases, daily new cases, etc.).</p><br><p>To interpret LISA statistics, consider the following:<ul><li>High-High: These <b>red </b>spatial clusters show an area with high numbers/rates, and are surrounded by areas with high numbers/rates.</li><li>Low-Low: These <b>blue </b>spatial clusters show show an area with low numbers/rates, and are surrounded by areas with low numbers/rates.</li><li>High-Low: These <b>light red </b>spatial outliers show an area with high numbers/rates, and are surrounded by areas with low numbers/rates.</li><li>Low-High: These <b>light blue </b>spatial outliers show an area with low numbers/rates, and are surrounded by areas with high numbers/rates.</li></ul></p><br><p>The “high-high” cluster, for example, can be of particular interest as it allows identification of a group of areas (i.e., counties, or states, in Atlas) where not only their own COVID-19 indicators are high but also they are surrounded by neighboring areas where the COVID-19 indicators are high.</p><br><p><i>Technical Specifications:</i> We use a first-order queen contiguity weight and one CPU core2 to estimate the local Moran's I, with 999 Monte Carlo permutations and a 0.05 threshold for statistical significance. However, using GeoDa,3 others can replicate these results or employ different hyperparameters, such as different spatial weights to measure geographical similarity, different randomization options (e.g., number of Monte Carlo permutations and specific seeds), or different thresholds for statistical significance.</p><br><p>For more resources on LISA statistics and how to use them in the US Covid Atlas:<li><a href="https://geodacenter.github.io/glossary.html#lisa2"> GeoDa Glossary</a> &amp; Chapter on<a href="https://geodacenter.github.io/workbook/6a_local_auto/lab6a.html"> Local Spatial Autocorrelation</a></li><li>Anselin, Luc. 1995. “Local Indicators of Spatial Association — LISA.”<i>Geographical Analysis</i> G 27: 93–115</li><li>US Covid Atlas <a href="https://uscovidatlas.org/learn/hotspot-maps"> Hot Spot Map </a> tutorial</li></p><br><h2>HOT SPOT BEST PRACTICES</h2><p>The Atlas team recommends identifying hot spots two ways: using the <b>total number of confirmed cases</b> and by <b>adjusting for population</b>. Because of the infectious nature of COVID, high numbers of cases anywhere will be of concern. At the same time, identifying areas that have a disproportionately high number of cases within the population is needed to locate areas hit hardest by the pandemic.</p><br><p>The team further differentiates hot spot clusters and outliers: clusters are counties that have a high number of cases, and are surrounded by counties with a high number of cases. Outliers are areas that have a high number of cases within the county and fewer cases in neighboring counties, highlighting an emerging risk or priority for containment. </p><img class="hotspot" src="./US Covid Atlas_files/confirmed_LISA.png" alt="LISA hotspot map"><p class="caption">County cluster hot spots(red) using confirmed cases of COVID-19</p><img class="hotspot" src="./US Covid Atlas_files/popweight_LISA.png" alt="LISA hotspot map"><p class="caption">County cluster hot spots(red) using population-weighted adjustment of COVID-19 cases</p><div class="sc-hTBuwn dmjnfg"></div><h3>Limitations</h3><br><p>There are multiple limitations in the analytic approach of the Atlas, though we attempt to minimize them.         </p><br><ul><li>LISA cluster analyses rely on computational inference which can generate sensitive results. Depending on the mechanism of disease spread (e.g., outbreaks in a small concentrated population versus slow community spread) and how the testing resources are utilized, the new case count time series can be clumped at times or suffer from seasonality. In such instances, LISA clusters can vary from one day to another. To alleviate this, we added the 7-day moving average of new cases, but these patterns could persist in the data and impact the calculation of LISA clusters. </li><li> While our dashboard provides a nuanced view of how the spatial patterns change over time and across the USA, it provides limited information with what could be the potential drivers, such as state-level policy and local mobility, and whether the pandemic is affecting certain groups of population disproportionately. </li><li>An effective and rapid policy response is highly dependent on having a good understanding of the underlying transmission mechanisms and vulnerable populations. Including fine-resolution, sub-county non-pharmaceutical policies, social mobility, hospitalization, and infection rates by race and ethnicity, would improve the policy response and adaptation in future Pandemics. The true spatial scale of the COVID-19 pandemic is arguably at an even finer resolution than county level, but the data below the county-level resolution currently remains unavailable for the entire country. </li></ul><br><p>In the early stages of the pandemic, individual variables were thought to better capture the different phenomena that were considered important and interesting to the widest range of users that we worked with. As the pandemic shifted towards recovery and equilibrium, multiple composite indices have emerged to be tailored to unique features of the pandemic directly.</p><div class="sc-hTBuwn dmjnfg"></div></div><footer class="sc-bCfvAP ctCtLt"><div class="sc-cOxWqc izBNlC"><div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 sc-AHaJN hhzNRs css-a5rdam-MuiGrid-root"><div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 MuiGrid-grid-md-3 css-1unik2p-MuiGrid-root"><span><h6>Explore</h6><ul><li><a href="http://localhost:3000/map">The Atlas</a></li><li><a href="http://localhost:3000/data">Data</a></li><li><a aria-current="page" class="active" href="http://localhost:3000/methods">Methods</a></li><li><a href="http://localhost:3000/learn">Learn Toolkit</a></li><li><a href="http://localhost:3000/https://stories.uscovidatlas.org/">Stories</a></li></ul></span></div><div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 MuiGrid-grid-md-4 css-14a3zbu-MuiGrid-root"><span><h6>About</h6><ul><li><a href="http://localhost:3000/about">Our Team</a></li><li><a href="http://localhost:3000/contact">Contact Us</a></li><li><a href="https://geodacenter.github.io/" target="_blank" rel="noopener noreferrer">GeoDa Open Software</a></li><li><a href="https://covidatlas.healthcarecommunities.org/" target="_blank" rel="noopener noreferrer">Learning Community</a></li><li><a href="http://localhost:3000/conduct">Code of Conduct</a></li><li><a href="http://localhost:3000/privacy">Privacy Policy</a></li></ul></span></div><div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-5 css-urj5pv-MuiGrid-root"><p class="copyright">The Atlas is led by the  <a href="http://healthyregions.org/" target="_blank" rel="noopener noreferrer">Healthy Regions &amp; Policies Lab</a>, at the University of Illinois at Urbana, and the University of Chicago. Funded in part by the <a href="https://www.rwjf.org/" target="_blank" rel="noopener noreferrer">Robert Wood Johnson Foundation</a>.</p><br><p class="copyright">Powered by               <a href="http://netlify.com/" target="_blank" rel="noopener noreferrer">Netlify</a>. Map driven by  <a href="https://geodacenter.github.io/" target="_blank" rel="noopener noreferrer">GeoDa</a>.</p></div></div></div></footer></div></div></div>
+  
+
+<iframe id="25xng1if" frameborder="0" src="./US Covid Atlas_files/translateSandbox.html" style="width: 0px; height: 0px; display: none;"></iframe></body></html>
