@@ -18,7 +18,7 @@ Because there is no one single validated source for county-level COVID cases and
 + [*New York Times*](https://github.com/nytimes/covid-19-data): the New York Times newspaper releases time-series data compiled from state and local governments and health departments. The data is available via their github repository and was updated several times each day during the Pandemic.
 
 We also include information from the following datasets: 
-+ *American Community Survey*. We incorporate population data used to generate rates, and will add more information as needed in future iterations.
++ [*American Community Survey*](https://www.census.gov/programs-surveys/acs/technical-documentation/table-and-geography-changes/2018/5-year.html). We incorporate population data used to generate rates.
 + [*COVIDCareMap*](https://github.com/covidcaremap/covid19-healthsystemcapacity/tree/v0.2/data). Healthcare System Capacity includes Staffed beds, Staffed ICU beds, Licensed Beds by County. This data aggregates information about the healthcare system capacity with additions/edits allowed in real-time.. It sources data from the [Healthcare Cost Report Information System (HCRIS)](https://github.com/covidcaremap/covid19-healthsystemcapacity/tree/v0.2/data#healthcare-cost-report-information-system-hcris-data) and an open hospital facilities dataset by [Definitive Healthcare](https://github.com/covidcaremap/covid19-healthsystemcapacity/tree/v0.2/data#definitive-health-dh-data).
 + [County Health Rankings & Roadmaps](https://www.countyhealthrankings.org/explore-health-rankings/rankings-data-documentation): social, economic, and health indicators by County. 
 + [Native American Reservations](https://hifld-geoplatform.opendata.arcgis.com/datasets/54cb67feef5746e8ac7c4ab467c8ae64): boundary for Native American Reservations.
@@ -90,7 +90,7 @@ The **Advisory** page details information about the Community Advisory Board: [h
 ### Learn
 There are multiple resources the learn more about the data, methods, technical infrastructure, and more at the main Covid Atlas site:
 + [Learn Toolkit](https://uscovidatlas.org/learn)
-+ [Analytic Methods]([https://uscovidatlas.org/learn)
++ [Analytic Methods](https://uscovidatlas.org/learn)
 + [Commonly Asked Questions During the Pandemic](https://uscovidatlas.org/faq)
 + [Atlas Published Research](https://uscovidatlas.org/insights#research)
 + [Covid Atlas Insights Research Blog](medium.com/covidatlas)
