@@ -11,11 +11,11 @@ The U.S. COVID-19 Atlas provides county-level visualizations and analytics to re
 For more information about additional datasets used in the Atlas, see our [Data page](https://USCovidAtlas.org/data). Detailed data documentations about different variables and data sources are available at the [data-docs](https://github.com/GeoDaCenter/covid/tree/master/data-docs) folder. 
 
 ### Current Release
-Because there is no one single validated source for county-level COVID cases and deaths for real-time analysis, we incorporate multiple datasets from multiple projects to allow for comparisons. For now, two datasets are available. More will be incorporated later. 
+Because there is no one single validated source for county-level COVID cases and deaths for real-time analysis, we incorporate multiple datasets from multiple projects to allow for comparisons. 
 + [*USAFacts*](https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/?utm_source=MailChimp&utm_campaign=census-covid2):this dataset is provided by a non-profit organization. The data are aggregated from CDC, state- and local-level public health agencies. County-level data is confirmed by referencing state and local agencies directly.
 + [*1P3A*](https://coronavirus.1point3acres.com/en): This was the initial, crowdsourced data project that served as a volunteer project led by Dr. Yu Gao, Head of Machine Learning Platform at Uber. We access this data stream using a token provided by the group.
 + [*CDC*](https://covid.cdc.gov/covid-data-tracker): the US Center for Disease Control and Prevention is the nation's health protection agency. The data provided includes vaccination and county level testing data.
-+ [*New York Times*](https://github.com/nytimes/covid-19-data): the New York Times newspaper releases time-series data compiled from state and local governments and health departments. The data is available via their github repository and is updated several times each day.
++ [*New York Times*](https://github.com/nytimes/covid-19-data): the New York Times newspaper releases time-series data compiled from state and local governments and health departments. The data is available via their github repository and was updated several times each day during the Pandemic.
 
 We also include information from the following datasets: 
 + *American Community Survey*. We incorporate population data used to generate rates, and will add more information as needed in future iterations.
@@ -70,20 +70,33 @@ The hotspot detection (a Local Indicator of Spatial Autocorrelation) is powered 
 More information about the Geoda project can be found [here](https://geodacenter.github.io/).
 
 ## COLLABORATORS
+The US Covid Atlas was comprised of a coalition of research partners that were been integral to developing and expanding the Covid Atlas to meet the needs of health practitioners, planners, researchers, and the public. This was and remains an open-source, collaborative project. 
 
-We are growing a coalition of research partners that have been integral to developing and expanding the Covid Atlas to meet the needs of health practitioners, planners, researchers, and the public. This is an open-source collaborative project. 
+### Team
+Check out the **Team** page for more information about the many contributors to the *Atlas*: [https://uscovidatlas.org/about#team](https://uscovidatlas.org/about#team). 
+
+### Advisory
+The **Advisory** page details information about the Community Advisory Board: [https://uscovidatlas.org/about#advisory](https://uscovidatlas.org/about#advisory).
 
 ### Research Partners: 
-+ [Center for Spatial Data Science](https://spatial.uchicago.edu/) (CSDS) at the University of Chicago. The Atlas was originally developed as a project co-led by Marynia Kolak, Xun Li, and Qinyun Lin at the Center for Spatial Data Science, where it remains as its home institution. CSDS leads the development and management of the atlas with developers Robert Martin and Arianna Israel.
++ [Healthy Regions & Policies Lab](https://healthyregions.org) and the [Center for Spatial Data Science](https://spatial.uchicago.edu/) (CSDS) at the University of Chicago. The Atlas was originally developed as a project co-led by Marynia Kolak, Xun Li, and Qinyun Lin at the Center for Spatial Data Science. The HEROP Lab at CSDS led the project until late 2022, when HEROP moved to the University of Illinois at Urbana-Champaign, where it remains as its home institution. 
 + [The Yu Group](https://www.stat.berkeley.edu/~yugroup/people.html) at UC Berkeley’s Department of Statistics is working with [Response4Life](https://response4life.org/) to develop a [severity index](https://github.com/Yu-Group/covid19-severity-prediction) for each hospital to help distribute supplies when they become available. The Yu Group generates daily updates of COVID data and contributes both hospital and county-level severity index data for the Atlas. 
 + [County Health Rankings & Roadmaps (CHR&R)](https://www.countyhealthrankings.org/) led by Lawrence Brown. CHR’s goal is to improve health outcomes for all and to close the health gaps between those with the most and least opportunities for good health. CHR leads efforts to connect socioeconomic and health vulnerability indicators to the Atlas to better contextualize and inform findings.
 + [CSI Solutions](https://spreadinnovation.com/) led by Roger L. Chaufournier and Kathy Reims are critical to connecting the Atlas with rural health partners across the country to define and prioritize needs for care management during the pandemic. CSI leads efforts in developing and refining this “Communities of Practice” forum.
 + [AFI DSI COVID-19 Research Group](https://datascience.wisc.edu/covid19/) at UW-Madison. This group led by [Brian Yandell](https://datascience.wisc.edu/covid19) was an early institutional partner to amplify regional efforts to respond to the pandemic. Kevin Little of [Informing Ecological Design](https://www.iecodesign.com) was critical in connecting the Atlas team with a nationwide network and leading user-group sessions to review the atlas, align priorities, and ensure it was effective for a wide audience. [Steve Goldstein](https://biostat.wiscweb.wisc.edu/staff/goldstein-steve/) continues to work with our team in data validation efforts.
 
-### Contributors:
-Check out the **Team** page for more information about the many contributors to the *Atlas*: [https://uscovidatlas.org/about#team](https://uscovidatlas.org/about#team). The **Advisory** page details information about the Community Advisory board: [https://uscovidatlas.org/about#advisory](https://uscovidatlas.org/about#advisory).
+## RESOURCES
 
-## CONTACT US
+### Learn
+There are multiple resources the learn more about the data, methods, technical infrastructure, and more at the main Covid Atlas site. Check out:
++ [https://uscovidatlas.org/learn](Learn Toolkit)
++ [[https://uscovidatlas.org/learn](Analytic Methods)
++ [https://uscovidatlas.org/faq](Commonly Asked Questions During the Pandemic)
++ [https://uscovidatlas.org/insights#research](Atlas Published Research)
++ [medium.com/covidatlas](Covid Atlas Insights Research Blog)
++ [https://stories.uscovidatlas.org/](Oral Histories Project: Atlas Stories)
+
+### Questions
 If you have a question regarding a specific dataset, please contact the dataset author(s) directly. If you have any questions regarding the Atlas, contact us by via: [https://uscovidatlas.org/contact](https://uscovidatlas.org/contact)
 
 ### Citations
