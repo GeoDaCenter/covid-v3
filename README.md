@@ -2,7 +2,7 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/f97601fe-2d82-482a-befe-b58f1bd7aa90/deploy-status)](https://app.netlify.com/sites/hardcore-wozniak-6dbde2/deploys)
 
-The U.S. COVID-19 Atlas provides county-level visualizations and analytics to reveal a more detailed pandemic landscape with local hotspots of surging COVID cases that are missed by state-level data. The Atlas is live at: [https://USCovidAtlas.org](https://USCovidAtlas.org). 
+The U.S. COVID-19 Atlas provided county-level visualizations and analytics to reveal a more detailed pandemic landscape with local hotspots of surging COVID cases that were missed by state-level data. The Atlas is live at: [https://USCovidAtlas.org](https://USCovidAtlas.org). 
 
 ![screenshot](https://github.com/GeoDaCenter/covid/raw/master/public/img/screenshot.png)
 
