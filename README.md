@@ -91,9 +91,9 @@ Please cite us according to how you used the US Covid Atlas:
 
 **Website**: Marynia Kolak, Qinyun Lin, Dylan Halpern, Susan Paykin, Aresha Martinez-Cardoso, and Xun Li. The US Covid Atlas, 2022. Center for Spatial Data Science at University of Chicago. https://www.uscovidatlas.org
 
-**Published Work of Version 1**: Kolak, Marynia, Xun Li, Qinyun Lin, Ryan Wang, Moksha Menghaney, Stephanie Yang, and Vidal Anguiano Jr. "The US COVID Atlas: A dynamic cyberinfrastructure surveillance system for interactive exploration of the pandemic." *Transactions in GIS* 25, no. 4 (2021): 1741-1765.
+**Published Work of** *beta* **Version**: Kolak, Marynia, Xun Li, Qinyun Lin, Ryan Wang, Moksha Menghaney, Stephanie Yang, and Vidal Anguiano Jr. "The US COVID Atlas: A dynamic cyberinfrastructure surveillance system for interactive exploration of the pandemic." *Transactions in GIS* 25, no. 4 (2021): 1741-1765.
 
-**Codebase of Version 1**: Xun Li, Qinyun Lin, Marynia Kolak, Robert Martin, Stephanie Yang, Moksha Menghaney, Ari Israel, Ryan Wang, Vidal Anguiano Jr., Erin Abbott, Dylan Halpern, Sihan-Mao. (2020, October 12). GeoDaCenter/covid: beta (Version beta). Zenodo. http://doi.org/10.5281/zenodo.4081869
+**Codebase of** *beta* **Version**: Xun Li, Qinyun Lin, Marynia Kolak, Robert Martin, Stephanie Yang, Moksha Menghaney, Ari Israel, Ryan Wang, Vidal Anguiano Jr., Erin Abbott, Dylan Halpern, Sihan-Mao. (2020, October 12). GeoDaCenter/covid: beta (Version beta). Zenodo. http://doi.org/10.5281/zenodo.4081869
 
 --- 
 
