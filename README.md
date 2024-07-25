@@ -42,8 +42,6 @@ Previously used  Datasets:
 
 ### Data Details
 #### USAFacts
-You can access USAFacts data via our API <a href="https://theuscovidatlas.org/api.html" target="_blank">here</a>.
-<!-- DEPRICATED >
 <!-- You can download the most updated county level data merged with USAFacts [here](https://github.com/GeoDaCenter/covid/tree/master/): 
 + usafacts_confirmed_*date*.geojson: the county level data (confirmed cases) using [*USAFacts*](https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/?utm_source=MailChimp&utm_campaign=census-covid2), together with population and number of hospital beds. 
 + usafacts_deaths_*date*.geojson: the county level data (death counts) using [*USAFacts*](https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/?utm_source=MailChimp&utm_campaign=census-covid2), together with population and number of hospital beds. 
@@ -61,9 +59,9 @@ Not all cases from 1P3A data can be assigned to a particular county, see followi
 
 ## METHOD
 
-For a complete breakdown about the methods used in the Atlas, see our [Methods](https://geodacenter.github.io/covid/methods.html) page.
+For a complete breakdown about the methods used in the Atlas, see our [Methods](https://uscovidatlas.org/methods.html) page.
 
-The hotspot detection ( a Local Indicator of Spatial Autocorrelation) is powered by **Geoda**. We also use many other features from **GeoDa** including natural breaks classification and cartogram techniques. See below for how one can apply these methods to reproduce the results using above datasets.  
+The hotspot detection (a Local Indicator of Spatial Autocorrelation) is powered by **Geoda**. We also use many other features from **GeoDa** including natural breaks classification and cartogram techniques. See below for how one can apply these methods to reproduce the results using above datasets.  
 
 + [Natural breaks choropleth map](http://geodacenter.github.io/workbook/3a_mapping/lab3a.html#natural-breaks-map)
 + [Cartogram](http://geodacenter.github.io/workbook/3a_mapping/lab3a.html#cartogram)
