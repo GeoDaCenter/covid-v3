@@ -84,6 +84,25 @@ const products = [
 
 const research = [
   {
+    'title': 'Visualizing Public Health Data: Using the U.S. Covid Atlas and GeoDa for Spatial Insights',
+    'description': <p>
+      <i>Cecilia Smith and Marynia Kolak</i>
+      <br /><br />
+      Studying the geography of health indicators in the context of socioeconomic data enables researchers to mitigate, predict, 
+      and plan for future crises. Spatial data visualization is an essential first step that facilitates the exploration of current 
+      patterns and emerging trends in public health, generating and refining hypotheses. This chapter discusses quantitative thematic 
+      maps as powerful tools for assessing and disseminating information about public health. In addition to providing a foundation 
+      for the primary types of thematic maps, this chapter reviews the key spatial literacy skills for interpreting and creating 
+      authoritative maps using public health and socioeconomic data. The authors draw on examples from the U.S. Covid Atlas, 
+      a project that visualizes COVID-19 health outcomes and community context over the course of 
+      the pandemic, to demonstrate the impact of thematic map type and choice of data classification, resolution, and scale on 
+      discerning real-world trends. 
+       <br /><br />
+    </p>,
+    'thumbnail': `${process.env.PUBLIC_URL}/research/spatial-literacy.jpg`,
+    'link': 'https://alastore.ala.org/spatial-literacy-public-health-faculty-librarian-teaching-collaborations',
+  },
+  {
     'title': 'Assessing Structural Barriers & Racial Disparities of COVID-19 Mortality With Spatial Analysis',
     'description': <p>
       <i>Qinyun Lin, Susan Paykin, Dylan Halpern, Aresha Martinez-Cardoso, and Marynia Kolak</i>
@@ -93,6 +112,7 @@ const research = [
       <b>Findings</b>  In this cross-sectional study of 3142 counties in 50 US states and the District of Columbia, the associations between different measures of social determinants of health and COVID-19 mortality varied across racial and ethnic groups (Black or African American, Hispanic or Latinx, and non-Hispanic White populations) and different community types (rural, suburban, and urban areas).
       <br />
       <b>Meaning</b>  Findings from this study suggest the need for future research that addresses health inequity and guides policies and programs by further exploring the different dimensions and regional patterns of social determinants of health.
+      <br /><br />
       <br /><br />
     </p>,
     'thumbnail': `${process.env.PUBLIC_URL}/research/structuralBarriers.jpg`,
