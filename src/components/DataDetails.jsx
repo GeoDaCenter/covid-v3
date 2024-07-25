@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import * as gfm from 'remark-gfm';
+import gfm from 'remark-gfm';
 
 import ReactMarkdown from 'react-markdown';
 import MuiAccordion from '@mui/material/Accordion';
@@ -52,7 +52,18 @@ const Accordion = styled(MuiAccordion)``;
 
 const AccordionSummary = styled(MuiAccordionSummary)``;
 
-const AccordionDetails = styled(MuiAccordionDetails)``;
+const AccordionDetails = styled(MuiAccordionDetails)`
+  ul {
+    color: black;
+  }
+   table {
+    color: black;
+    font-size: 1.1em;
+  }
+  th {
+    padding: 4px;
+  }
+`;
 
 const AccordionHeader = styled(Typography)`
   span.tag {
@@ -183,7 +194,7 @@ function DataDetails(){
           </AccordionSummary>
           <AccordionDetails>
             <div>
-              <ReactMarkdown plugins={[gfm]}>
+              <ReactMarkdown remarkPlugins={[gfm]}>
                 {dataDescriptions[index]}
               </ReactMarkdown>
             </div>
