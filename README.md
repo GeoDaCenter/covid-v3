@@ -70,7 +70,7 @@ The hotspot detection (a Local Indicator of Spatial Autocorrelation) is powered 
 More information about the Geoda project can be found [here](https://geodacenter.github.io/).
 
 ## COLLABORATORS
-The US Covid Atlas was comprised of a coalition of research partners that were been integral to developing and expanding the Covid Atlas to meet the needs of health practitioners, planners, researchers, and the public. This was and remains an open-source, collaborative project. 
+The US Covid Atlas was comprised of a coalition of research partners that were been integral to developing and expanding the Covid Atlas to meet the needs of health practitioners, planners, researchers, and the public. 
 
 ### Team
 Check out the **Team** page for more information about the many contributors to the *Atlas*: [https://uscovidatlas.org/about#team](https://uscovidatlas.org/about#team). 
