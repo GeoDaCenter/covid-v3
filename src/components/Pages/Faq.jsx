@@ -228,7 +228,7 @@ const faqQuestions = [
           <Grid item xs={12} md={6}>
             <img
               src={`${process.env.PUBLIC_URL}/img/Landingpage_usage2.gif`}
-              height = "300"
+              height = "350"
               alt="Use Case 2: Tracking COVID Patterns over time"
               loading="lazy"
             />
@@ -253,7 +253,7 @@ const faqQuestions = [
           <Grid item xs={12} md={6}>
             <img
               src={`${process.env.PUBLIC_URL}/img/Landingpage_usage3.gif`}
-              height = "300"
+              height = "350"
               alt="Use Case 3: Forecasting viral spreads"
               loading="lazy"
             />
@@ -274,7 +274,7 @@ const faqQuestions = [
           <Grid item xs={12} md={6}>
             <img
               src={`${process.env.PUBLIC_URL}/img/Landingpage_usage4.gif`}
-              height = "300"
+              height = "350"
               alt="Use Case 4: Make visible vulnerable communities"
               loading="lazy"
             />
@@ -299,7 +299,7 @@ const faqQuestions = [
           <Grid item xs={12} md={6}>
           <img
               src={`${process.env.PUBLIC_URL}/img/Landingpage_usage5.gif`}
-              height = "300"
+              height = "350"
               alt="Use Case 5: Forecasting viral spreads"
               loading="lazy"
             />
