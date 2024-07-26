@@ -529,7 +529,117 @@ function Home() {
             </h3>
             <Arrow />
           </BreakQuestion>
-
+          <UseCasesContainer>
+            <UseCases>
+              <Grid container spacing={5}>
+                <Grid item xs={12} md={6}>
+                  <video autoPlay={true} muted={true} loop={true}>
+                    <source
+                      src={`${process.env.PUBLIC_URL}/img/use_case1.mp4`}
+                      type="video/mp4"
+                    />
+                    Your browser does not support the video tag.
+                  </video>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Usage color="yellow">Usage #1</Usage>
+                  <h5>Identify Regional Hotspots for Mitigation</h5>
+                  <p>
+                    Use spatial statistics to detect hot spots with raw case
+                    data or by adjusting for population. Because of the
+                    infectious nature of COVID, high numbers of cases anywhere
+                    will be of concern. At the same time, identifying areas that
+                    have a disporotionately high number of cases within the
+                    population is necessary to locate areas hit hardest by the
+                    pandemic.
+                  </p>
+                </Grid>
+                <Gutter h={80} />
+                <Grid item xs={12} md={6}>
+                  <Usage color="orange">Usage #2</Usage>
+                  <h5>Track patterns to better plan ahead</h5>
+                  <p>
+                    Visualize change over time to better understand the
+                    distribution and spread of COVID in the US throughout the
+                    pandemic. Move the time slider yourself or click the play
+                    button and watch the spread of COVID. Analyze patterns of
+                    the spread to support planning for resource allocation.
+                  </p>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <img
+                    src={`${process.env.PUBLIC_URL}/img/Landingpage_usage2.gif`}
+                    alt="Use Case 2: Tracking COVID Patterns over time"
+                    loading="lazy"
+                  />
+                </Grid>
+                <Gutter h={80} />
+                <Grid item xs={12} md={6}>
+                  <img
+                    src={`${process.env.PUBLIC_URL}/img/Landingpage_usage3.gif`}
+                    alt="Use Case 3: Forecasting viral spreads"
+                    loading="lazy"
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Usage color="yellow">Usage #3</Usage>
+                  <h5>
+                    Interact and forecast viral spread at state and county
+                    levels
+                  </h5>
+                  <p>
+                    Switch between the state and county thematic maps (ie.
+                    choropleth maps) to find COVID at a local level. Then,
+                    select and track hotspots over time using the Local Moran's
+                    I statistic. Use a powerful visual analytic tool to find
+                    COVID spillovers along state borders, emerging from one
+                    county to areas nearby, and more.
+                  </p>
+                </Grid>
+                <Gutter h={80} />
+                <Grid item xs={12} md={6}>
+                  <Usage color="orange">Usage #4</Usage>
+                  <h5>Make visible vulnerable communities</h5>
+                  <p>
+                    Click on counties to get more information about community
+                    health factors and socioeconomic indicators like average
+                    length of life in an area, percent uninsured, or income
+                    inequality metrics. In the main selection panel, overlay
+                    segregated cities or Native American Reservation boundaries
+                    to identify uniquely vulnerable locales.
+                  </p>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <img
+                    src={`${process.env.PUBLIC_URL}/img/Landingpage_usage4.gif`}
+                    alt="Use Case 4: Make visible vulnerable communities"
+                    loading="lazy"
+                  />
+                </Grid>
+                <Gutter h={80} />
+                <Grid item xs={12} md={6}>
+                  <img
+                    src={`${process.env.PUBLIC_URL}/img/Landingpage_usage5.gif`}
+                    alt="Use Case 5: Forecasting viral spreads"
+                    loading="lazy"
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Usage color="yellow">Usage #5</Usage>
+                  <h5>Identify emerging risk</h5>
+                  <p>
+                    Watch hotspots progress or diminish over time, and identify
+                    areas of emerging risk early. Some hotspots begin as spatial
+                    outliers -- shown as pink in the map, meaning cases are high
+                    in that county but low in neighboring counties. If cases
+                    continue to grow and spillover nearby counties, the areas
+                    will turn red. Mature hotspots are clusters of counties that
+                    remain red over time and continue to grow.
+                  </p>
+                </Grid>
+              </Grid>
+            </UseCases>
+          </UseCasesContainer>
         </HomePageContent>
         <Footer signUp={false} />
         <ExploreButton to="/map" id="floating-cta" active={ctaActive}>
