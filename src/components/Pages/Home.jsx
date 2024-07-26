@@ -556,8 +556,8 @@ function Home() {
               </Button>
               <Gutter h={20} /> */}
               <p>
-                Atlas Stories by the US Covid Atlas collects stories behind the
-                statistics and data. We seek perspectives that represent the
+                Atlas Stories by the US Covid Atlas is a collection of stories behind the
+                statistics and data. We captured perspectives that represent the
                 diversity of experiences in the United States, in order to build
                 a more holistic archive of the pandemic.
               </p>
