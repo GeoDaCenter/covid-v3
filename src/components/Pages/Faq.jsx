@@ -701,6 +701,10 @@ export default function Faq() {
         <Gutter h={40} /> */}
 
         <h2>FREQUENTLY ASKED QUESTIONS, AND THEIR ANSWERS.</h2>
+        <p>
+          These questions were posed to the U.S. Covid Atlas team over the duration of the Pandemic. 
+          We retain them for archival purposes, and add context.
+        </p>
         <hr />
         {faqQuestions.map((question, index) => (
           <Accordion
