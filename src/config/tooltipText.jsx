@@ -309,5 +309,10 @@ export const tooltipInfo = {
                 Cartography and GIS.
             </a>
         </p>
+    ),
+    Stories: (
+        <p>
+            Add the locations of all pandemic stories participants submitted through the course of the project.
+        </p>
     )
 }
