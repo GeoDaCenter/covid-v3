@@ -530,6 +530,164 @@ function Home() {
             <Arrow />
           </BreakQuestion>
 
+
+          <UseCasesContainer>
+            <UseCases>
+              <Grid container spacing={5}>
+                  <Grid item xs={12} md={6}>
+
+                    <h1>Learn</h1>
+                    <p>
+                      Use spatial statistics to detect hot spots with raw case
+                      data or by adjusting for population. Because of the
+                      infectious nature of COVID, high numbers of cases anywhere
+                      will be of concern. At the same time, identifying areas that
+                      have a disporotionately high number of cases within the
+                      population is necessary to locate areas hit hardest by the
+                      pandemic.
+                    </p>
+
+                  </Grid>
+
+                  <Grid item xs={12} md={6}>
+
+                  <p>
+                    add image here
+                  </p>
+
+                  </Grid>
+
+                  
+                  <Grid item xs={12/5} md={6/5}>
+                 1
+                  </Grid>
+
+                  <Grid item xs={12/5} md={6/5}>
+                  2
+                  </Grid>
+
+
+                  <Grid item xs={12/5} md={6/5}>
+                  3
+                  </Grid>
+
+
+                  <Grid item xs={12/5} md={6/5}>
+                  4
+                  </Grid>
+
+                  <Grid item xs={12/5} md={6/5}>
+                  5
+                  </Grid>
+              </Grid>
+
+              <Gutter h={80} />
+
+
+              <Grid container spacing={5}>
+                  <Grid item xs={12} md={8}>
+
+                    <h1>Learn</h1>
+                    <p>
+                      Use spatial statistics to detect hot spots with raw case
+                      data or by adjusting for population. Because of the
+                      infectious nature of COVID, high numbers of cases anywhere
+                      will be of concern. At the same time, identifying areas that
+                      have a disporotionately high number of cases within the
+                      population is necessary to locate areas hit hardest by the
+                      pandemic.
+                    </p>
+
+                  </Grid>
+
+                  <Grid item xs={12} md={4}>
+
+                  <p>
+                    add image here
+                  </p>
+
+                  </Grid>
+
+                  
+                  <Grid item xs={12/5} md={8/5}>
+                 1
+                  </Grid>
+
+                  <Grid item xs={12/5} md={8/5}>
+                  2
+                  </Grid>
+
+
+                  <Grid item xs={12/5} md={8/5}>
+                  3
+                  </Grid>
+
+
+                  <Grid item xs={12/5} md={8/5}>
+                  4
+                  </Grid>
+
+                  <Grid item xs={12/5} md={8/5}>
+                  5
+                  </Grid>
+              </Grid>
+
+              <Gutter h={80} />
+
+  
+              <Grid container spacing={5}>
+                  <Grid item xs={12} md={6}>
+
+                    <h1>Learn</h1>
+                    <p>
+                      Use spatial statistics to detect hot spots with raw case
+                      data or by adjusting for population. Because of the
+                      infectious nature of COVID, high numbers of cases anywhere
+                      will be of concern. At the same time, identifying areas that
+                      have a disporotionately high number of cases within the
+                      population is necessary to locate areas hit hardest by the
+                      pandemic.
+                    </p>
+
+                  </Grid>
+
+                  <Grid item xs={12} md={6}>
+
+                  <p>
+                    add image here
+                  </p>
+
+                  </Grid>
+
+                  
+                  <Grid item xs={12/5} md={6/5}>
+                 1
+                  </Grid>
+
+                  <Grid item xs={12/5} md={6/5}>
+                  2
+                  </Grid>
+
+
+                  <Grid item xs={12/5} md={6/5}>
+                  3
+                  </Grid>
+
+
+                  <Grid item xs={12/5} md={6/5}>
+                  4
+                  </Grid>
+
+                  <Grid item xs={12/5} md={6/5}>
+                  5
+                  </Grid>
+              </Grid>
+
+              <Gutter h={80} />
+
+            </UseCases>
+          </UseCasesContainer>
+
         </HomePageContent>
         <Footer signUp={false} />
         <ExploreButton to="/map" id="floating-cta" active={ctaActive}>
