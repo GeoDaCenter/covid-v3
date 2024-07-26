@@ -970,7 +970,7 @@ function Home() {
                   </Grid>
 
 
-                  <Grid item xs={12/5} md={5/5}>
+                  <Grid item xs={12/5} md={7/5}>
                     <Features2>
                     <RoleIcon>
 
@@ -1021,13 +1021,13 @@ function Home() {
 
               </Grid>
 
-              <Gutter h={80} />
+              <Gutter h={100} />
 
 
               <Grid container spacing={5}>
                   <Grid item xs={12} md={8}>
 
-                    <h1>Learn</h1>
+                    <h1>Listen</h1>
 
                       <br />                      <br />
 
@@ -1036,19 +1036,56 @@ function Home() {
                     and more with Learn toolkit. 
                     </p>
 
+
+                    <Button 
+                      onClick={() => setVideoModalInner(true)}
+                      variant="contained"
+                      sx={{
+                        textTransform: "none",
+                        fontWeight: "bold",
+                        background: colors.orange,
+                        fontSize: '18px',
+                        margin: 0,
+                        padding: '0.25em 0.5em',
+                      }}
+                      >
+                      <span style={{fontSize:32, lineHeight:0, marginRight: 6}}>&#9656;</span> Explore the Story Archive
+                    </Button>
+
+                  <Button 
+                      onClick={() => setVideoModalInner(true)}
+                      variant="contained"
+                      sx={{
+                        textTransform: "none",
+                        fontWeight: "bold",
+                        color: colors.white,
+                        background: colors.teal,
+                        fontSize: '18px',
+                        margin: '2em',
+                        padding: '0.25em 0.5em',
+                      }}
+                      >
+                      <span style={{fontSize:32, lineHeight:0, marginRight: 6}}>&#9656;</span> Click Stories on in Map
+                    </Button>
+
                   </Grid>
 
                   <Grid item xs={12} md={4}>
 
                   <p>
-                    <img
-                      src={`${process.env.PUBLIC_URL}/icons/regional-hot-spots.png`}
-                      alt="Regional Hotspots"
+                  <img
+                      src={`${process.env.PUBLIC_URL}/img/story.png`}
+                      alt="Story"
                       loading="lazy"
                     />
                   </p>
 
                   </Grid>
+
+  
+
+
+
 
               </Grid>
 
@@ -1072,11 +1109,7 @@ function Home() {
                   <Grid item xs={12} md={4}>
 
                   <p>
-                    <img
-                      src={`${process.env.PUBLIC_URL}/icons/regional-hot-spots.png`}
-                      alt="Regional Hotspots"
-                      loading="lazy"
-                    />
+  
                   </p>
 
                   </Grid>
