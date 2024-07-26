@@ -529,89 +529,172 @@ function Home() {
             </h3>
             <Arrow />
           </BreakQuestion>
+          <UseCasesContainer>
+            <UseCases>
+              <Grid container spacing={5}>
+                  <Grid item xs={12} md={6}>
 
+                    <h1>Learn</h1>
+                    <p>
+                      Use spatial statistics to detect hot spots with raw case
+                      data or by adjusting for population. Because of the
+                      infectious nature of COVID, high numbers of cases anywhere
+                      will be of concern. At the same time, identifying areas that
+                      have a disporotionately high number of cases within the
+                      population is necessary to locate areas hit hardest by the
+                      pandemic.
+                    </p>
+
+                  </Grid>
+
+                  <Grid item xs={12} md={6}>
+
+                  <p>
+                    add image here
+                  </p>
+
+                  </Grid>
+
+                  
+                  <Grid item xs={12/5} md={6/5}>
+                 1
+                  </Grid>
+
+                  <Grid item xs={12/5} md={6/5}>
+                  2
+                  </Grid>
+
+
+                  <Grid item xs={12/5} md={6/5}>
+                  3
+                  </Grid>
+
+
+                  <Grid item xs={12/5} md={6/5}>
+                  4
+                  </Grid>
+
+                  <Grid item xs={12/5} md={6/5}>
+                  5
+                  </Grid>
+              </Grid>
+
+              <Gutter h={80} />
+
+
+              <Grid container spacing={5}>
+                  <Grid item xs={12} md={8}>
+
+                    <h1>Learn</h1>
+                    <p>
+                      Use spatial statistics to detect hot spots with raw case
+                      data or by adjusting for population. Because of the
+                      infectious nature of COVID, high numbers of cases anywhere
+                      will be of concern. At the same time, identifying areas that
+                      have a disporotionately high number of cases within the
+                      population is necessary to locate areas hit hardest by the
+                      pandemic.
+                    </p>
+
+                  </Grid>
+
+                  <Grid item xs={12} md={4}>
+
+                  <p>
+                    add image here
+                  </p>
+
+                  </Grid>
+
+                  
+                  <Grid item xs={12/5} md={8/5}>
+                 1
+                  </Grid>
+
+                  <Grid item xs={12/5} md={8/5}>
+                  2
+                  </Grid>
+
+
+                  <Grid item xs={12/5} md={8/5}>
+                  3
+                  </Grid>
+
+
+                  <Grid item xs={12/5} md={8/5}>
+                  4
+                  </Grid>
+
+                  <Grid item xs={12/5} md={8/5}>
+                  5
+                  </Grid>
+              </Grid>
+
+              <Gutter h={80} />
+
+  
+              <Grid container spacing={5}>
+                  <Grid item xs={12} md={6}>
+
+                    <h1>Learn</h1>
+                    <p>
+                      Use spatial statistics to detect hot spots with raw case
+                      data or by adjusting for population. Because of the
+                      infectious nature of COVID, high numbers of cases anywhere
+                      will be of concern. At the same time, identifying areas that
+                      have a disporotionately high number of cases within the
+                      population is necessary to locate areas hit hardest by the
+                      pandemic.
+                    </p>
+
+                  </Grid>
+
+                  <Grid item xs={12} md={6}>
+
+                  <p>
+                    add image here
+                  </p>
+
+                  </Grid>
+
+                  
+                  <Grid item xs={12/5} md={6/5}>
+                 1
+                  </Grid>
+
+                  <Grid item xs={12/5} md={6/5}>
+                  2
+                  </Grid>
+
+
+                  <Grid item xs={12/5} md={6/5}>
+                  3
+                  </Grid>
+
+
+                  <Grid item xs={12/5} md={6/5}>
+                  4
+                  </Grid>
+
+                  <Grid item xs={12/5} md={6/5}>
+                  5
+                  </Grid>
+              </Grid>
+
+              <Gutter h={80} />
+
+            </UseCases>
+          </UseCasesContainer>
         </HomePageContent>
         <Footer signUp={false} />
         <ExploreButton to="/map" id="floating-cta" active={ctaActive}>
           Explore the Atlas
         </ExploreButton>
-        <Modal open={storiesModal} onClose={() => setStoriesModal(false)}>
-          <ModalContent>
-            <ModalContentInner>
-              <h3>Atlas Stories is live!</h3>
-              <Gutter h={20} />
-              {/* <Button 
-                onClick={() => setVideoModalInner(true)}
-                variant="contained"
-                sx={{
-                  textTransform: "none",
-                  fontWeight: "bold",
-                  background: colors.yellow,
-                  fontSize: '24px',
-                  margin: 0,
-                  padding: '0.25em 0.5em' 
-                }}
-                >
-                <span style={{fontSize:32, lineHeight:0, marginRight: 6}}>&#9656;</span> Share Your Pandemic Experience
-              </Button>
-              <Gutter h={20} /> */}
-              <p>
-                Atlas Stories by the US Covid Atlas collects stories behind the
-                statistics and data. We seek perspectives that represent the
-                diversity of experiences in the United States, in order to build
-                a more holistic archive of the pandemic.
-              </p>
-              <Gutter h={20} />
-              <div style={{display:'flex'}}>
-              <Button 
-                onClick={() => setVideoModalInner(true)}
-                variant="contained"
-                sx={{
-                  textTransform: "none",
-                  fontWeight: "bold",
-                  background: colors.orange,
-                  fontSize: '24px',
-                  margin: 0,
-                  padding: '0.25em 0.5em',
-                }}
-                >
-                <span style={{fontSize:32, lineHeight:0, marginRight: 6}}>&#9656;</span> Learn more
-              </Button>
-              <Button 
-                onClick={() => window.location.href = "https://stories.uscovidatlas.org/"}
-                variant="contained"
-                sx={{
-                  textTransform: "none",
-                  fontWeight: "bold",
-                  background: colors.yellow,
-                  fontSize: '24px',
-                  margin: 0,
-                  padding: '0.25em 0.5em',
-                }}
-                >
-                  Submit a Story
-              </Button>
-              </div>
-              {/* <Gutter h={20} />
-              <p>
-                <a href="https://stories.uscovidatlas.org/">
-                  Share Your Pandemic Experience
-                </a>
-              </p>
-              <Gutter h={20} />
-              <p>
-                See the{" "}
-                <a href="/map?lat=38.454&lon=-92.534&z=4.4&src=county_nyt&var=Confirmed_Count_per_100K_Population&mthd=natural_breaks&date=922&range=7&ovr=stories&viz=2D&v=2">
-                  Stories Map
-                </a>{" "}
-                or <a href="/archive">Interactive Archive</a>.
-              </p> */}
-              <CloseButton onClick={() => setStoriesModal(false)}>
-                &times;
-              </CloseButton>
-            </ModalContentInner>
-          </ModalContent>
-        </Modal>
+ 
+
+
+
+
         <VideoModal
           open={videoModalInner}
           onClose={() => setVideoModalInner(false)}
