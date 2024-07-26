@@ -51,20 +51,20 @@ def lambda_handler(event, context):
 	# Select proper data source
 	if source == "usafacts":
 		if _type == "confirmed":
-			response = s3.get_object(Bucket='geoda-covid-atlas', Key= "lisa_county_confirmed_usafacts.json")
+			response = s3.get_object(Bucket='geoda-covid-atlas2', Key= "lisa_county_confirmed_usafacts.json")
 		else:
-			response = s3.get_object(Bucket='geoda-covid-atlas', Key= "lisa_county_death_usafacts.json")
+			response = s3.get_object(Bucket='geoda-covid-atlas2', Key= "lisa_county_death_usafacts.json")
 	else:
 		if _type == "confirmed":
 			if level == "county":
-				response = s3.get_object(Bucket='geoda-covid-atlas', Key= "lisa_county_confirmed_1P3A.json")
+				response = s3.get_object(Bucket='geoda-covid-atlas2', Key= "lisa_county_confirmed_1P3A.json")
 			else:
-				response = s3.get_object(Bucket='geoda-covid-atlas', Key= "lisa_state_confirmed_1P3A.json")
+				response = s3.get_object(Bucket='geoda-covid-atlas2', Key= "lisa_state_confirmed_1P3A.json")
 		else:
 			if level == "county":
-				response = response = s3.get_object(Bucket='geoda-covid-atlas', Key= "lisa_county_death_1P3A.json")
+				response = response = s3.get_object(Bucket='geoda-covid-atlas2', Key= "lisa_county_death_1P3A.json")
 			else:
-				response = response = s3.get_object(Bucket='geoda-covid-atlas', Key= "lisa_state_death_1P3A.json")
+				response = response = s3.get_object(Bucket='geoda-covid-atlas2', Key= "lisa_state_death_1P3A.json")
 
 
 	text = response['Body'].read().decode()

@@ -76,24 +76,24 @@ def lambda_handler(event, context):
 			if _type == "confirmed":
 
 				if level == "state":
-					response = s3.Object(bucket_name='geoda-covid-atlas', key="lisa_state_confirmed_1P3A.json")
+					response = s3.Object(bucket_name='geoda-covid-atlas2', key="lisa_state_confirmed_1P3A.json")
 
 				else:
-					response = s3.Object(bucket_name='geoda-covid-atlas', key="lisa_county_confirmed_1P3A.json")
+					response = s3.Object(bucket_name='geoda-covid-atlas2', key="lisa_county_confirmed_1P3A.json")
 
 			else:
 				if level == "state":
-					response = s3.Object(bucket_name='geoda-covid-atlas', key="lisa_state_death_1P3A.json")
+					response = s3.Object(bucket_name='geoda-covid-atlas2', key="lisa_state_death_1P3A.json")
 
 				else:
-					response = s3.Object(bucket_name='geoda-covid-atlas', key="lisa_county_death_1P3A.json")
+					response = s3.Object(bucket_name='geoda-covid-atlas2', key="lisa_county_death_1P3A.json")
 		
 		else:
 			if _type == "confirmed":
-				response = s3.Object(bucket_name='geoda-covid-atlas', key="lisa_county_confirmed_usafacts.json")
+				response = s3.Object(bucket_name='geoda-covid-atlas2', key="lisa_county_confirmed_usafacts.json")
 
 			else:
-				response = s3.Object(bucket_name='geoda-covid-atlas', key="lisa_county_death_usafacts.json")
+				response = s3.Object(bucket_name='geoda-covid-atlas2', key="lisa_county_death_usafacts.json")
 		
 		text = response.get()['Body'].read().decode()
 		data = json.loads(text)
@@ -101,13 +101,13 @@ def lambda_handler(event, context):
 
 	elif category == "data":
 		if _type == "death":
-			response = s3.Object(bucket_name='geoda-covid-atlas', key="covid_deaths_usafacts.geojson")
+			response = s3.Object(bucket_name='geoda-covid-atlas2', key="covid_deaths_usafacts.geojson")
 			text = response.get()['Body'].read().decode()
 			data = json.loads(text)			
 			output = search_usafacts(data, state_input, start, end, source, _type, level, category)
 		
 		elif _type == "confirmed":
-			response = s3.Object(bucket_name='geoda-covid-atlas', key="covid_confirmed_usafacts.geojson")
+			response = s3.Object(bucket_name='geoda-covid-atlas2', key="covid_confirmed_usafacts.geojson")
 			text = response.get()['Body'].read().decode()
 			data = json.loads(text)			
 			output = search_usafacts(data, state_input, start, end, source, _type, level, category)
@@ -121,7 +121,7 @@ def lambda_handler(event, context):
 
 		else:
 			if level == "state":
-				response = s3.Object(bucket_name='geoda-covid-atlas', key="state_testing.json")
+				response = s3.Object(bucket_name='geoda-covid-atlas2', key="state_testing.json")
 				text = response.get()['Body'].read().decode()
 				data = json.loads(text)			
 				output = search_state_testing(data, state_input, start, end, source, _type, level, category)
@@ -132,9 +132,9 @@ def lambda_handler(event, context):
 	# 7-day rolling average
 	else:
 		if _type == "death":
-			response = s3.Object(bucket_name='geoda-covid-atlas', key="seven_day_deaths_usafacts.json")
+			response = s3.Object(bucket_name='geoda-covid-atlas2', key="seven_day_deaths_usafacts.json")
 		else:
-			response = s3.Object(bucket_name='geoda-covid-atlas', key="seven_day_confirmed_usafacts.json")
+			response = s3.Object(bucket_name='geoda-covid-atlas2', key="seven_day_confirmed_usafacts.json")
 		text = response.get()['Body'].read().decode()
 		data = json.loads(text)	
 		output = search_seven_day_rolling(data, state_input, start, end, source, _type, level, category)

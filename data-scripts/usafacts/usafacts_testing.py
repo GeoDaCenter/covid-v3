@@ -39,8 +39,8 @@ def usafacts_testing():
     try:
         print('Writing to S3...')
         s3 = boto3.resource('s3')
-        s3.Object('geoda-covid-atlas', 'testing_usafacts.csv').put(Body=open(os.path.join(repo_root, 'public/covid_testing_usafacts.csv'), 'rb'))
-        s3.Object('geoda-covid-atlas', 'testingpos_usafacts.csv').put(Body=open(os.path.join(repo_root, 'public/covid_positivity_usafacts.csv'), 'rb'))
+        s3.Object('geoda-covid-atlas2', 'testing_usafacts.csv').put(Body=open(os.path.join(repo_root, 'public/covid_testing_usafacts.csv'), 'rb'))
+        s3.Object('geoda-covid-atlas2', 'testingpos_usafacts.csv').put(Body=open(os.path.join(repo_root, 'public/covid_positivity_usafacts.csv'), 'rb'))
         print('Write to S3 complete.')
 
     except Exception as e:
