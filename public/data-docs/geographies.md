@@ -15,7 +15,7 @@ All geospatial data used in the Atlas are available under [GeoDaCenter/covid/pub
     * 1 Point 3 Acres [state_1p3a.geojson](https://raw.githubusercontent.com/GeoDaCenter/covid/master/public/geojson/state_1p3a.geojson)
     * New York Times [state_nyt.geojson](https://raw.githubusercontent.com/GeoDaCenter/covid/master/public/geojson/state_nyt.geojson)
     * USA Facts [state_usafacts.geojson](https://raw.githubusercontent.com/GeoDaCenter/covid/master/public/geojson/state_usafacts.geojson)
-* Congressional District Geographies
+* Congressional District Geographies (2018)
     * District Centroids (Labels) [district_centroids.geojson](https://raw.githubusercontent.com/GeoDaCenter/covid/master/public/geojson/district_centroids.geojson)
     * District Boundaries [districts.geojson](https://raw.githubusercontent.com/GeoDaCenter/covid/master/public/geojson/districts.geojson)
 * Overlay Highlights

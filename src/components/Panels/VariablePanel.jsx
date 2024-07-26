@@ -729,7 +729,7 @@ function VariablePanel() {
                                     value={'uscongress-districts'}
                                     key={'uscongress-districts'}
                                 >
-                                    US Congressional Districts{' '}
+                                    US Congressional Districts (2018){' '}
                                     <Tooltip id="USCongress" />
                                 </MenuItem>
                                 <MenuItem
