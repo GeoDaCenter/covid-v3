@@ -788,7 +788,7 @@ function VariablePanel() {
                                     value={'vaccinationSites'}
                                     key={'variable4'}
                                 >
-                                    Federal Vaccination Sites
+                                    Federal Vaccination Sites (as of April, 2023)
                                     <Tooltip id="vaccinationSites" />
                                 </MenuItem>
                             </Select>

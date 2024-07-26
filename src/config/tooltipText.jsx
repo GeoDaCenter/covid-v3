@@ -261,10 +261,10 @@ export const tooltipInfo = {
     ),
     vaccinationSites: (
         <p>
-            The White House is supporting large vaccine centers to conduct
-            high-volume vaccinations, and HRSA is partnering with Federally
+            The White House supported large vaccine centers to conduct
+            high-volume vaccinations, and HRSA partnered with Federally
             Qualified Health Clinics (FQHCs) to reach disproportionately
-            impacted or hard to reach communities.
+            impacted or hard to reach communities. <em>Sites shown were active as of April, 2023.</em>
         </p>
     ),
     vaccineCenter: <p>High-volume federally-supported vaccination site.</p>,
