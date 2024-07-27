@@ -62,11 +62,17 @@ const HomePage = styled.div`
     border: 0;
     border-top: 1px solid ${colors.skyblue};
   }
+
   p {
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
     color: #212529;
+  }
+  ul{
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    margin-left: 2.0rem;
   }
   .desktop-only {
     @media (max-width: 960px) {
@@ -79,6 +85,7 @@ const HomePage = styled.div`
     }
   }
 `;
+
 
 const HomePageContent = styled.div`
   width: 100%;
@@ -448,8 +455,6 @@ const RoleButton = styled(Button)`
   /* white-space: nowrap; */
 `;
 
-
-
 const Roles = [
   {
     title: "Public Health",
@@ -483,230 +488,6 @@ const Roles = [
   },
 ];
 
-const RolesContent = [
-  {
-    ref: "health",
-    title: "Public Health",
-    image: "/img/learn/public-health.jpeg",
-    imageAlt: "",
-    description:
-      <span> <b>Public health professionals need access to reliable data easily accessible data.</b> The US Covid Atlas can help fill in the gaps. The Atlas lets you explore trends over time to understand and inform public health decisions. Grab screenshots of maps, share a unique link to a specific county map view, or embed an Atlas map view on your website to bolster public outreach and communications. </span>
-    ,
-    topics: [
-      {
-        text: "Creating Thematic Maps",
-        link: "/learn/thematic-maps",
-      },
-      {
-        text: "Exploring Changes Over Time",
-        link: "/learn/trends-over-time",
-      },
-      {
-        text: "Sharing Data and Findings",
-        link: "/learn/sharing-data",
-      },
-    ],
-    useCasesTitle: "How has the Atlas been used in public health?",
-    useCases: [
-      {
-        text: "Assessing spatial and racial disparities in COVID-19 mortality",
-        link: "https://medium.com/covidatlas/assessing-spatial-racial-disparities-in-covid-19-mortality-fbd2e389a33e",
-      },
-      {
-        text: "Understanding how COVID was impacting rural areas early in the pandemic",
-        link: "https://www.youtube.com/watch?v=uqGXzWCD9Xk",
-      },
-      {
-        text: "Exploring where new hotspots were forming during the Delta variant wave",
-        link: "https://www.youtube.com/watch?v=uqGXzWCD9Xk",
-      },
-    ],
-    quote: {
-      text:
-        <span>Want to be featured here? <a href="/contact">Let us know</a> how you use the Atlas.</span>,
-      author: "",
-    },
-    background: "#e79b45",
-    icon: "health",
-    iconText: "Public Health",
-  },
-
-  {
-    ref: "policy",
-    title: "Policy",
-    image: "/img/learn/hand-book.jpg",
-    imageAlt: "",
-    description:
-      <span><b>Policy relies on data-driven evidence.</b> Policymakers and staff can explore the impacts of events in their communities using Atlas data and tools. Create a customizable Community Report to communicate data and findings in an easy-to-share online or printable format. Present data tables, maps, and line charts to communicate with stakeholders. Analyze the impact of policy responses over time with temporal exploration.
-      </span>,
-    topics: [
-      {
-        text: "Creating Thematic Maps",
-        link: "/learn/thematic-maps",
-      },
-      {
-        text: "Spatial and Time Scales",
-        link: "/learn/spatial-time-scales",
-      },
-      {
-        text: "Customizable Community Reports",
-        link: "/learn/create-a-report",
-      },
-    ],
-    useCasesTitle: "How has the Atlas been used in policy contexts?",
-    useCases: [
-      {
-        text: "Mapping Michigan’s COVID-19 rates alongside local school district masking policies",
-        link: "https://medium.com/covidatlas/masking-rules-in-michigan-schools-covid-data-and-citizen-science-3127a3f1669b",
-      },
-      {
-        text: "Evaluating the impact of early COVID outbreaks on food supply chains and workers",
-        link: "https://medium.com/covidatlas/unpacking-the-covid-outbreaks-in-the-meatpacking-industry-2c03ffe8264d",
-      },
-    ],
-    quote: {
-      text: <span>Want to be featured here? <a href="/contact">Let us know</a> how you use the Atlas.</span>,
-      author: "",
-    },
-    background: "#D8D8D8",
-    icon: "policy",
-    iconText: "Policy",
-  },
-
-  {
-    ref: "advocacy",
-    title: "Advocacy",
-    image: "/img/learn/advocacy.jpeg",
-    imageAlt: "",
-    description:
-      <span>
-        <b>Strengthen your advocacy with pandemic data linked to community statistics and social determinants of health.</b> Click on counties for more information on health and socioeconomic indicators, like median income and percent of essential workers. Overlay boundaries of disproportionately impacted communities such as hypersegregated cities and federal Native American Reservations. Visualize racial and ethnic group populations by county to compare with COVID trends.
-      </span>,
-    topics: [
-      {
-        text: "Explore Community Contexts",
-        link: "/learn/community-contexts",
-      },
-      {
-        text: "Share Data and Findings",
-        link: "/learn/sharing-data",
-      },
-      {
-        text: "Add Custom Data",
-        link: "/learn/add-custom-data",
-      },
-    ],
-    useCasesTitle: "How has the Atlas been used in advocacy?",
-    useCases: [
-      {
-        text: "Evaluating conditions in the Arkansas Delta to help make care decisions for aging family members",
-        link: "https://medium.com/covidatlas/using-the-u-s-covid-atlas-in-the-arkansas-delta-dbddcf41fa01",
-      },
-      {
-        text: "Calling attention to risks associated with in-person worship and religious gatherings during the pandemic",
-        link: "https://medium.com/covidatlas/whats-wrong-with-these-people-f6ac287dbca3",
-      },
-      {
-        text: "Advocating for more complex perspectives in public health maps, linking contexts of history and place",
-        link: "https://www.statnews.com/2021/03/31/integrate-social-determinants-time-place-public-health-maps/",
-      },
-    ],
-    quote: {
-      text: <span>Want to be featured here? <a href="/contact">Let us know</a> how you use the Atlas.</span>,
-      author: "",
-    },
-    background: "#e8d48e",
-    icon: "advocacy",
-    iconText: "Advocacy",
-  },
-
-  {
-    ref: "research",
-    title: "Research",
-    image: "/img/learn/research.jpeg",
-    imageAlt: "",
-    description:
-      "Explore validated state- and county-level COVID rates and community contextual data from the start of the pandemic until today. The Atlas features data from multiple sources so you can visualize and compare trends across time and place. View raw totals or population-averaged rates for COVID and health indicators. Download data for your own independent research and analysis.",
-    topics: [
-      {
-        text: "Hotspot Analysis and Maps",
-        link: "/learn/hotspot-maps",
-      },
-      {
-        text: "Identifying Trends Over Time",
-        link: "/learn/trends-over-time",
-      },
-      {
-        text: "Sharing Data and Fidings",
-        link: "/learn/sharing-data",
-      },
-    ],
-    useCasesTitle: "How has the Atlas been used in research?",
-    useCases: [
-      {
-        text: "Assessing the structural barriers and racial group disparities of COVID-19 mortality with spatial analysis",
-        link: "https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2789619",
-      },
-      {
-        text: "Exploring dimensions of uncertainty with a spatiotemporal review of five COVID-19 datasets",
-        link: "https://www.tandfonline.com/doi/full/10.1080/15230406.2021.1975311",
-      },
-      {
-        text: "Creating a dynamic cyberinfrastructure for interactive exploration of the pandemic",
-        link: "https://onlinelibrary.wiley.com/doi/10.1111/tgis.12786",
-      },
-    ],
-    quote: {
-      text: <span>Want to be featured here? <a href="/contact">Let us know</a> how you use the Atlas.</span>,
-      author: "",
-    },
-    background: "#d8d8d8",
-    icon: "research",
-    iconText: "Research",
-  },
-
-  {
-    ref: "media",
-    title: "Media",
-    image: "/img/learn/media.jpeg",
-    imageAlt: "",
-    description:
-      "Report data and embed maps for fact-based journalism. Compare multiple validated county- and state-level data sources for the entire country to check local reporting and case or vaccination trends. Look back to the day, week, or month of major events in your region and watch how COVID rates changed. Download data to conduct analyses for further reporting and investigation.",
-    topics: [
-      {
-        text: "Identifying Trends Over Time",
-        link: "/learn/trends-over-time",
-      },
-      {
-        text: "Understanding Community Contexts",
-        link: "/learn/community-contexts",
-      },
-      {
-        text: "Creating Thematic Maps",
-        link: "/learn/thematic-maps",
-      },
-    ],
-    useCasesTitle: "How has the Atlas been used in media and journalism?",
-    useCases: [
-      {
-        text: "Investigating the link between COVID-19 mortality and internet access",
-        link: "https://www.vox.com/22979086/covid-pandemic-deaths-mortality-broadband-internet-access",
-      },
-      {
-        text: "Reporting on holiday travel during pandemic and infection positivity rates",
-        link: "https://www.nbcnews.com/meet-the-press/video/holiday-travel-busts-open-divided-political-and-vaccine-bubbles-127343685885",
-      },
-    ],
-    quote: {
-      text: <span>Want to be featured here? <a href="/contact">Let us know</a> how you use the Atlas.</span>,
-      author: "",
-    },
-    background: "#e79b45",
-    icon: "media",
-    iconText: "Media",
-  },
-
-];
 
 
 
@@ -907,6 +688,7 @@ function Home() {
 
                   <a href="http://www.uscovidatlas.org/learn/getting-started">
                   <Button 
+                      variant="contained"
                       title="Getting Started"
                       sx={{
                         textTransform: "none",
@@ -926,6 +708,7 @@ function Home() {
                     
                     <a href="https://uscovidatlas.org/learn/trends-over-time">
                     <Button 
+                      variant="contained"                    
                       sx={{
                         textTransform: "none",
                         fontWeight: "bold",
@@ -944,6 +727,7 @@ function Home() {
                     
                     <a href="https://uscovidatlas.org/learn/community-contexts">
                     <Button 
+                      variant="contained"
                       sx={{
                         textTransform: "none",
                         fontWeight: "bold",
@@ -1037,13 +821,13 @@ function Home() {
                       <br />                      <br />
 
                     <p>
-                    Explore tutorials, video demos, examples of how the Atlas is used in different fields, 
-                    and more with Learn toolkit. 
+                    Data is not enough to understand the impact of the Pandemic. 
+                    Watch, listen, and explore <i>Atlas Stories</i>, oral histories of people's experiences
+                    across the country, from the Mississippi Delta to Chicago, to each coast. 
                     </p>
 
-
+                    <a href="http://www.uscovidatlas.org/archive">
                     <Button 
-                      onClick={() => setVideoModalInner(true)}
                       variant="contained"
                       sx={{
                         textTransform: "none",
@@ -1056,9 +840,10 @@ function Home() {
                       >
                       <span style={{fontSize:32, lineHeight:0, marginRight: 6}}>&#9656;</span> Explore the Story Archive
                     </Button>
+                    </a>
 
+                  <a href="http://www.uscovidatlas.org/map">
                   <Button 
-                      onClick={() => setVideoModalInner(true)}
                       variant="contained"
                       sx={{
                         textTransform: "none",
@@ -1072,6 +857,7 @@ function Home() {
                       >
                       <span style={{fontSize:32, lineHeight:0, marginRight: 6}}>&#9656;</span> Click Stories on in Map
                     </Button>
+                    </a>
 
                   </Grid>
 
@@ -1103,15 +889,24 @@ function Home() {
                     <h1>Research</h1>
                     <br /><br />
                     <p>
-                      Use spatial statistics to detect hot spots with raw case
-                      data or by adjusting for population. Because of the
-                      infectious nature of COVID, high numbers of cases anywhere
-                      will be of concern. At the same time, identifying areas that
-                      have a disporotionately high number of cases within the
-                      population is necessary to locate areas hit hardest by the
-                      pandemic.
+                    By integrating spatial data science, cutting-edge web architecture,
+                    design thinking, and deep knowledge in health geography, the Atlas became:
                     </p>
-
+                    <p>
+                      <ul>
+                        <li>the first dashboard to show <b>county-level trends</b></li>
+                        <li>the first to include <b>statistical</b> hot spot detection on-the-fly</li>
+                        <li>the only dashboard to compare <b>multiple sources</b> of COVID data</li>
+                        <li>one of the first to incorporate <b>social determinants of health</b></li>
+                        <li>the only dashboard to include <b>stories</b> alongside data across the U.S.</li>
+                      </ul>
+                    </p>
+                    
+                    <p> As an <a href="https://github.com/GeoDaCenter/covid-v3"><b>Open Science </b></a> 
+                    project, we encourage others
+                    to build on the Atlas's work to better understand the Pandemic's impact, as well as 
+                    support new structures for improved resilience in future pandemics. Download data, review the tech stack, and
+                    explore multiple years of insights and community input.</p>
                   </Grid>
 
                   <Grid item xs={12} md={4}>
@@ -1129,15 +924,32 @@ function Home() {
                         The U.S. Covid Atlas earned top distinction in Dynamic <a href="">Health Geography</a> Visualizations
                         in 2021, and also received an honorable mention for innovative design by <i>Fast Company</i>.
 
-
+                  <a href="#">
+                  <Button 
+                      variant="contained"
+                      sx={{
+                        textTransform: "none",
+                        fontWeight: "bold",
+                        color: colors.white,
+                        background: colors.teal,
+                        fontSize: '18px',
+                        margin: '2.0em',
+                        padding: '0.25em 0.5em',
+                      }}
+                      >
+                      <span style={{fontSize:32, lineHeight:0, marginRight: 6}}></span> 
+                      Atlas Evaluation Report (2024)
+                    </Button>
+                    </a>
 
                   </Grid>
 
                   <Grid item xs={12/5} md={7/5}>
                     <Features2>
                     <RoleIcon>
-
+                      <a href="http://www.uscovidatlas.org/data">
                       <Icon symbol={'datad'}/>
+                      </a>
                       <h5>Data</h5>
 
                     </RoleIcon>
@@ -1148,8 +960,8 @@ function Home() {
                   <Grid item xs={12/5} md={7/5}>
                     <Features2>
                     <RoleIcon>
-
-                      <Icon  symbol={'intelligence'} />
+                      <a href="http://www.uscovidatlas.org/tech">
+                      <Icon  symbol={'intelligence'} /></a>
                       <h5>Tech</h5>
                   
                     </RoleIcon>
@@ -1159,8 +971,8 @@ function Home() {
                   <Grid item xs={12/5} md={7/5}>
                     <Features2>
                     <RoleIcon>
-
-                       <Icon symbol={'innovation'} />
+                       <a href="http://www.uscovidatlas.org/insights">
+                       <Icon symbol={'innovation'} /></a>
                        <h5>Insights</h5>
 
                   </RoleIcon>
@@ -1170,8 +982,8 @@ function Home() {
                   <Grid item xs={12/5} md={7/5}>
                     <Features2>
                     <RoleIcon>
-
-                      <Icon  symbol={'ai'} />
+                      <a href="medium.com/covidatlas">
+                      <Icon  symbol={'ai'} /></a>
                       <h5>Blog</h5>
                   
                     </RoleIcon>
