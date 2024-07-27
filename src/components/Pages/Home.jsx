@@ -1121,7 +1121,7 @@ function Home() {
                         />
                       </p>
                       <br />
-                        The U.S. Covid Atlas earned top distinction in Dynamic <a href="https://aag-hmgsg.org/awards/health-data-visualization-award/">Health Geography</a> Visualizations
+                        The U.S. Covid Atlas earned top distinction in Dynamic <a href="">Health Geography</a> Visualizations
                         in 2021, and also received an honorable mention for innovative design by <i>Fast Company</i>.
 
 
