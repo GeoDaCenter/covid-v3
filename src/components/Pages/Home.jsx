@@ -889,13 +889,13 @@ function Home() {
                     <h1>Learn</h1>
                     <br /><br />
                     <p>
-                      Use spatial statistics to detect hot spots with raw case
-                      data or by adjusting for population. Because of the
-                      infectious nature of COVID, high numbers of cases anywhere
-                      will be of concern. At the same time, identifying areas that
-                      have a disporotionately high number of cases within the
-                      population is necessary to locate areas hit hardest by the
-                      pandemic.
+                    Explore tutorials, <a href="https://www.youtube.com/playlist?list=PLi9Z7UD_p9f8xEga76YV3FyLhiyL8twmm">video demos</a>, 
+                    examples of how the Atlas is used in different fields with the <a href="https://uscovidatlas.org/learn"><i>Learn</i></a> toolkit. 
+                    Get additional details on <a href="https://uscovidatlas.org/methods">analytical methods</a> used on the Atlas and learn 
+                    about <a href="https://uscovidatlas.org/faq">frequently asked questions</a> posed during the Pandemic.
+                    Educators can also get more background, context, and activities on
+                    using the Atlas to support building <a href="https://alastore.ala.org/spatial-literacy-public-health-faculty-librarian-teaching-collaborations">
+                    spatial literacy skills in public health</a>.
                     </p>
 
                   </Grid>
@@ -912,7 +912,7 @@ function Home() {
                         fontWeight: "bold",
                         background: colors.orange,
                         fontSize: '18px',
-                        margin: 0,
+                        marginTop: '1.0em',
                         padding: '0.25em 0.5em',
                       }}
                       >
