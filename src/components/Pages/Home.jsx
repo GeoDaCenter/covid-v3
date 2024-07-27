@@ -889,8 +889,8 @@ function Home() {
                     <h1>Learn</h1>
                     <br /><br />
                     <p>
-                    Explore tutorials, <a href="https://www.youtube.com/playlist?list=PLi9Z7UD_p9f8xEga76YV3FyLhiyL8twmm">video demos</a>, 
-                    examples of how the Atlas is used in different fields with the <a href="https://uscovidatlas.org/learn"><i>Learn</i></a> toolkit. 
+                    Explore tutorials, <a href="https://www.youtube.com/playlist?list=PLi9Z7UD_p9f8xEga76YV3FyLhiyL8twmm">video demos</a>, and
+                    examples of how the Atlas is used for different applications with the <a href="https://uscovidatlas.org/learn"><i>Learn</i></a> toolkit. 
                     Get additional details on <a href="https://uscovidatlas.org/methods">analytical methods</a> used on the Atlas and learn 
                     about <a href="https://uscovidatlas.org/faq">frequently asked questions</a> posed during the Pandemic.
                     Educators can also get more background, context, and activities on
@@ -904,12 +904,14 @@ function Home() {
 
                   <br />                      <br /> 
                   <p>
+
+                  <a href="http://www.uscovidatlas.org/learn/getting-started">
                   <Button 
-                      onClick={() => setVideoModalInner(true)}
-                      variant="contained"
+                      title="Getting Started"
                       sx={{
                         textTransform: "none",
                         fontWeight: "bold",
+                        color: colors.black, 
                         background: colors.orange,
                         fontSize: '18px',
                         marginTop: '1.0em',
@@ -918,12 +920,12 @@ function Home() {
                       >
                       <span style={{fontSize:32, lineHeight:0, marginRight: 6}}>&#9656;</span> Getting Started: Atlas 101
                     </Button>
+                    </a>
 
                     <br />                      <br />
                     
+                    <a href="https://uscovidatlas.org/learn/trends-over-time">
                     <Button 
-                      onClick={() => setVideoModalInner(true)}
-                      variant="contained"
                       sx={{
                         textTransform: "none",
                         fontWeight: "bold",
@@ -936,12 +938,12 @@ function Home() {
                       >
                       <span style={{fontSize:32, lineHeight:0, marginRight: 6}}>&#9656;</span> Explore Trends Over Time
                     </Button>
+                    </a>
 
                     <br />                      <br />
                     
+                    <a href="https://uscovidatlas.org/learn/community-contexts">
                     <Button 
-                      onClick={() => setVideoModalInner(true)}
-                      variant="contained"
                       sx={{
                         textTransform: "none",
                         fontWeight: "bold",
@@ -954,29 +956,32 @@ function Home() {
                       >
                       <span style={{fontSize:32, lineHeight:0, marginRight: 6}}>&#9656;</span> Link Community Context
                     </Button>
+                    </a>
                   </p>
 
                   </Grid>
-
-                  <Grid item xs={12/5} md={7/5}>
-                    <Features2>
-                    <RoleIcon>
-
-                  <Icon symbol={'health'}/>
-                  <h5>Health</h5>
-
-                    </RoleIcon>
-                    </Features2>
-                  </Grid>
-
-
-                  <Grid item xs={12/5} md={7/5}>
-                    <Features2>
-                    <RoleIcon>
-
-                      <Icon  symbol={'policy'} />
-                      <h5>Policy</h5>
                   
+
+
+                  <Grid item xs={12/5} md={7/5}>
+                    <Features2>
+                    <RoleIcon>
+                      <a href="http://www.uscovidatlas.org/learn">
+                      <Icon symbol={'health'}/>
+                      </a>
+                      <h5>Health</h5>
+                    </RoleIcon>
+                    </Features2>
+                  </Grid>
+
+
+                  <Grid item xs={12/5} md={7/5}>
+                    <Features2>
+                    <RoleIcon>
+                      <a href="http://www.uscovidatlas.org/learn">
+                      <Icon  symbol={'policy'} />
+                      </a>
+                      <h5>Policy</h5>
                     </RoleIcon>
                     </Features2>
                   </Grid>
@@ -984,21 +989,11 @@ function Home() {
                   <Grid item xs={12/5} md={7/5}>
                     <Features2>
                     <RoleIcon>
-
+                       <a href="http://www.uscovidatlas.org/learn">
                        <Icon symbol={'advocacy'} />
+                       </a>
                        <h5>Advocacy</h5>
 
-                  </RoleIcon>
-                    </Features2>
-                  </Grid>
-
-                  <Grid item xs={12/5} md={7/5}>
-                  <Features2>
-                  <RoleIcon>
-
-                  <Icon symbol={'research'} />
-                  <h5>Research</h5>
-
                     </RoleIcon>
                     </Features2>
                   </Grid>
@@ -1006,18 +1001,28 @@ function Home() {
                   <Grid item xs={12/5} md={7/5}>
                     <Features2>
                     <RoleIcon>
+                      <a href="http://www.uscovidatlas.org/learn">
+                      <Icon symbol={'research'} />
+                      </a>
+                      <h5>Research</h5>
+                    </RoleIcon>
+                    </Features2>
+                  </Grid>
 
-                  <Icon symbol={'media'} />
-                  <h5>Media</h5>
-
-                  </RoleIcon>
+                  <Grid item xs={12/5} md={7/5}>
+                    <Features2>
+                    <RoleIcon>
+                      <a href="http://www.uscovidatlas.org/insights#media">
+                      <Icon symbol={'media'} />
+                      </a>
+                      <h5>Media</h5>
+                    </RoleIcon>
                     </Features2>
                   </Grid>
 
                   <Grid item xs={12/5} md={7/5}>
 
                   </Grid>
-
 
               </Grid>
 
