@@ -1021,8 +1021,8 @@ function Home() {
 
               </Grid>
 
-              <Gutter h={100} />
-
+              <Gutter h={40} />
+              <hr></hr>
 
               <Grid container spacing={5}>
                   <Grid item xs={12} md={8}>
@@ -1089,29 +1089,88 @@ function Home() {
 
               </Grid>
 
-              <Gutter h={80} />
-
+              <Gutter h={40} />
+              <hr></hr>
 
               <Grid container spacing={5}>
                   <Grid item xs={12} md={8}>
 
-                    <h1>Learn</h1>
-
-                      <br />                      <br />
-
+                    <h1>Research</h1>
+                    <br /><br />
                     <p>
-                    Explore tutorials, video demos, examples of how the Atlas is used in different fields, 
-                    and more with Learn toolkit. 
+                      Use spatial statistics to detect hot spots with raw case
+                      data or by adjusting for population. Because of the
+                      infectious nature of COVID, high numbers of cases anywhere
+                      will be of concern. At the same time, identifying areas that
+                      have a disporotionately high number of cases within the
+                      population is necessary to locate areas hit hardest by the
+                      pandemic.
                     </p>
 
                   </Grid>
 
                   <Grid item xs={12} md={4}>
 
-                  <p>
-  
-                  </p>
+                  <br />                      <br /> 
 
+                  <p>
+                      <img
+                          src={`${process.env.PUBLIC_URL}/img/fast-company.webp`}
+                          alt="Story"
+                          loading="lazy"
+                        />
+                      </p>
+                      <br />
+                        The U.S. Covid Atlas earned top distinction in Dynamic <a href="https://aag-hmgsg.org/awards/health-data-visualization-award/">Health Geography</a> Visualizations
+                        in 2021, and also received an honorable mention for innovative design by <i>Fast Company</i>.
+
+
+
+                  </Grid>
+
+                  <Grid item xs={12/5} md={7/5}>
+                    <Features2>
+                    <RoleIcon>
+
+                      <Icon symbol={'datad'}/>
+                      <h5>Data</h5>
+
+                    </RoleIcon>
+                    </Features2>
+                  </Grid>
+
+
+                  <Grid item xs={12/5} md={7/5}>
+                    <Features2>
+                    <RoleIcon>
+
+                      <Icon  symbol={'intelligence'} />
+                      <h5>Tech</h5>
+                  
+                    </RoleIcon>
+                    </Features2>
+                  </Grid>
+
+                  <Grid item xs={12/5} md={7/5}>
+                    <Features2>
+                    <RoleIcon>
+
+                       <Icon symbol={'innovation'} />
+                       <h5>Insights</h5>
+
+                  </RoleIcon>
+                    </Features2>
+                  </Grid>
+
+                  <Grid item xs={12/5} md={7/5}>
+                    <Features2>
+                    <RoleIcon>
+
+                      <Icon  symbol={'smartoffice'} />
+                      <h5>Blog</h5>
+                  
+                    </RoleIcon>
+                    </Features2>
                   </Grid>
 
               </Grid>
