@@ -1166,7 +1166,7 @@ function Home() {
                     <Features2>
                     <RoleIcon>
 
-                      <Icon  symbol={'smartoffice'} />
+                      <Icon  symbol={'ai'} />
                       <h5>Blog</h5>
                   
                     </RoleIcon>
