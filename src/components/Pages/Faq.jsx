@@ -96,7 +96,7 @@ const faqQuestions = [
         summaries of all the datasets currently featured on the Atlas. This page
         also includes links to our{' '}
         <a
-          href="https://github.com/GeoDaCenter/covid/"
+          href="https://github.com/GeoDaCenter/covid-v3/"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -131,7 +131,7 @@ const faqQuestions = [
         Yes, absolutely. We are committed to providing open and easy access to
         the data we feature on the Atlas. You can access our data via{' '}
         <a
-          href="https://github.com/GeoDaCenter/covid/"
+          href="https://github.com/GeoDaCenter/covid-v3/"
           target="_blank"
           rel="noopener noreferrer"
         >

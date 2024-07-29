@@ -4,7 +4,7 @@ export GOOGLE_APPLICATION_CREDENTIALS="/root/.ssh/gbq-credentials.json"
 git config --global user.email "theuscovidatlas@gmail.com"
 git config --global user.name "theuscovidatlas"
 
-git clone --depth 1 git@github.com:GeoDaCenter/covid.git && cd covid
+git clone --depth 1 git@github.com:GeoDaCenter/covid-3.git && cd covid
 
 case $DATA_SOURCE in
 

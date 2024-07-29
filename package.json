@@ -1,18 +1,18 @@
 {
   "name": "covid-atlas",
   "version": "1.0.0",
-  "description": "COVID Atlas [v2]",
+  "description": "The US COVID Atlas",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GeoDaCenter/covid.git"
+    "url": "git+https://github.com/GeoDaCenter/covid-v3.git"
   },
   "author": "Spatial@UChicago <spatial@uchicago.edu>",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/GeoDaCenter/covid/issues"
+    "url": "https://github.com/GeoDaCenter/covid-v3/issues"
   },
-  "homepage": "https://theuscovidatlas.org",
+  "homepage": "https://uscovidatlas.org",
   "dependencies": {
     "@date-io/dayjs": "^2.11.0",
     "@deck.gl/core": "8.6.4",

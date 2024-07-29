@@ -535,11 +535,11 @@ export default function Methodology() {
           <p>
             The Github for our project is public and available at{' '}
             <a
-              href="https://github.com/GeoDaCenter/covid"
+              href="https://github.com/GeoDaCenter/covid-v3"
               target="_blank"
               rel="noopener noreferrer"
             >
-              github.com/GeoDaCenter/covid.
+              github.com/GeoDaCenter/covid-v3.
             </a>{' '}
             Contributions are welcome. Volunteers are encouraged to start on the
             “Issues” page and identify “good first issues” to maximize help
@@ -559,11 +559,11 @@ export default function Methodology() {
             collaborations to better identify the metrics needed for this
             rapidly changing situation. Issues are encouraged to be posted at{' '}
             <a
-              href="https://github.com/geodacenter/covid/issues"
+              href="https://github.com/GeoDaCenter/covid-v3/issues"
               target="_blank"
               rel="noopener noreferrer"
             >
-              github.com/geodacenter/covid/issues
+              github.com/GeoDaCenter/covid-v3/issues
             </a>{' '}
             and/or by emailing{' '}
             <a

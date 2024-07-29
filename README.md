@@ -6,7 +6,7 @@ The U.S. COVID-19 Atlas provides county-level visualizations and analytics to re
 
 The current Atlas is available here: [https://USCovidAtlas.org](https://USCovidAtlas.org). The Atlas is being updated everyday by midnight EST. We are working on releasing regular updates with more data, functions, and analysis.
 
-![screenshot](https://github.com/GeoDaCenter/covid/raw/master/public/img/screenshot.png)
+![screenshot](https://github.com/GeoDaCenter/covid-v3/raw/master/public/img/screenshot.png)
 
 ## DATA
 
@@ -44,7 +44,7 @@ Previously used  Datasets:
 #### USAFacts
 You can access USAFacts data via our API <a href="https://theuscovidatlas.org/api.html" target="_blank">here</a>.
 <!-- DEPRICATED >
-<!-- You can download the most updated county level data merged with USAFacts [here](https://github.com/GeoDaCenter/covid/tree/master/): 
+<!-- You can download the most updated county level data merged with USAFacts [here](https://github.com/GeoDaCenter/covid-v3/tree/master/): 
 + usafacts_confirmed_*date*.geojson: the county level data (confirmed cases) using [*USAFacts*](https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/?utm_source=MailChimp&utm_campaign=census-covid2), together with population and number of hospital beds. 
 + usafacts_deaths_*date*.geojson: the county level data (death counts) using [*USAFacts*](https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/?utm_source=MailChimp&utm_campaign=census-covid2), together with population and number of hospital beds. 
 + *date*_confirm_per10K_usafacts.gif: the animation (.gif) showing how the pandemic has been changing over time (using confirmed cases per 100K population), which is also displayed in the Atlas. The GIF is updated weekly. If you would like to get a more timely gif, send us an email (qinyunlin@uchicago.edu) and we can prepare that for you.   -->
