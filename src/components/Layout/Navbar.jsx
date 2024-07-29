@@ -322,11 +322,11 @@ const defaultDropDowns = {
       desc: 'The community advisory board driving engagement from 2021 onward.',
       link: '/cab',
     },
-    // {
-    //   header: 'FAQ',
-    //   desc: 'Frequently asked questions on data, maps, and the project.',
-    //   link: '/faq'
-    // },
+    {
+      header: 'Tech',
+      desc: 'About the US Covid Atlas stack.',
+      link: '/tech'
+    },
   ],
   DATA: [
     {

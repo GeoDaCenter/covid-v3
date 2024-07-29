@@ -29,6 +29,7 @@ const PrivacyPolicy = React.lazy(() =>
 )
 const Report = React.lazy(() => import('./components/Pages/Report'))
 const Story = React.lazy(() => import('./components/Pages/Story'))
+const Tech = React.lazy(() => import('./components/Pages/Tech'))
 const Time = React.lazy(() => import('./components/Pages/Time'))
 const Trends = React.lazy(() => import('./components/Pages/Trends'))
 
@@ -69,6 +70,8 @@ export default function App() {
               <Route path="/report" component={Report} />
               <Route path="/time" component={Time} />
               <Route path="/time.html" component={Time} />
+              <Route path="/tech" component={Tech} />
+              <Route path="/tech.html" component={Tech} />
               <Route path="/choropleth" component={Choropleth} />
               <Route path="/choropleth.html" component={Choropleth} />
               <Route path="/hotspot" component={Hotspots} />
