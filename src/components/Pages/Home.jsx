@@ -90,6 +90,10 @@ const HomePage = styled.div`
 const HomePageContent = styled.div`
   width: 100%;
   margin: 0 auto;
+  a {
+    font-weight: 600;
+    color: ${colors.teal};
+  }
 `;
 
 const Hero = styled.div`
