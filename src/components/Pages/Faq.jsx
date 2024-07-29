@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import Grid from "@mui/material/Grid";
 
 // import Grid from '@mui/material/Grid';
 import MuiAccordion from '@mui/material/Accordion';
@@ -33,6 +34,60 @@ const FaqPage = styled.div`
 //     padding: 10px 0;
 //   }
 // `;
+
+const Usage = styled.span`
+  background: ${(props) => colors[props.color]};
+  padding: 10px 15px;
+  border-radius: 15px;
+  font-weight: bold;
+  line-height: 4;
+  font-size: 1rem;
+  transform: translateY(-100%);
+`;
+
+const Feature = styled(Grid)`
+  text-align: center;
+  h5 {
+    font-family: "Playfair Display", serif;
+    font-size: 19px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: ${colors.skyblue};
+    margin-bottom: 20px;
+  }
+  img {
+    margin: 20px auto;
+    width: 100%;
+    max-width: 100px;
+  }
+  img.responsive {
+    max-width: 100%;
+  }
+  p {
+    color: white;
+    font-family: Lato;
+    font-size: 16px;
+    font-weight: 300;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.63;
+    letter-spacing: normal;
+    color: ${colors.white};
+    @media (max-width: 960px) {
+      max-width: 400px;
+      margin: 0 auto 40px auto;
+    }
+  }
+`;
+
+const CenteredGrid = styled(Grid)`
+  display: flex;
+  align-content: center;
+  padding-top: 4em;
+`;
 
 const Accordion = styled(MuiAccordion)`
   &.MuiPaper-elevation1 {
@@ -87,11 +142,11 @@ const faqQuestions = [
   //     `
   // }
   {
-    header: 'What data can I visualize using the US COVID Altas?',
+    header: 'What data can I visualize using the US COVID Atlas?',
     content: (
       <p>
-        The Atlas features near real-time COVID pandemic and community
-        characteristics data from the beginning of the pandemic until today. On
+        The Atlas features COVID pandemic and community
+        contextual data across the duration of the Pandemic. On
         our <NavLink to="/data">Data</NavLink> page, you can find high-level
         summaries of all the datasets currently featured on the Atlas. This page
         also includes links to our{' '}
@@ -107,9 +162,9 @@ const faqQuestions = [
         <br />
         <br />
         Data includes county- and state-level COVID case counts and infection
-        rates, death rates, testing rates, and vaccination rates (currently only
+        rates, death rates, testing rates, and vaccination rates (only
         available from the CDC at the state-level). To provide a robust
-        understanding of the scale and scope of the pandemic’s impact, we also
+        understanding of the scale and scope of the Pandemic’s impact, we also
         incorporate data on health system capacity, hospital forecasting,
         mobility trends, as well as community health characteristics.
         <br />
@@ -124,22 +179,132 @@ const faqQuestions = [
     ),
   },
   {
-    header:
-      'Is it possible to download or access the data featured on the Atlas?',
+    header: 'How was the Atlas used during the Covid-19 Pandemic?',
     content: (
-      <p>
-        Yes, absolutely. We are committed to providing open and easy access to
-        the data we feature on the Atlas. You can access our data via{' '}
-        <a
-          href="https://github.com/GeoDaCenter/covid-v3/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          GitHub
-        </a>
-        , or using the{' '}
-        <NavLink to="/data">Bulk Data Download</NavLink> tool.
-      </p>
+
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={12}>
+          <p>The Atlas was used in multiple ways. Below we higlight five core 
+          usage scenarios common in earlier stages of the Pandemic, as they were 
+          shared on the orginal home page. Check out addditional 
+          <a href="http://uscovidatlas.org/insights"> insights</a> from the Atlas team,
+          <a href="http://uscovidatlas.org/learn"> learn</a> how to explore the Pandemic historically, and/or read about more ways 
+          that the Atlas was used in our <a href="#"> evaluation</a> report (coming soon!)</p>
+          </Grid>
+          <Grid item xs={12} md={6}>
+          <Usage color="yellow">Usage #1</Usage>
+            <h5>Identifying Regional Hotspots for Mitigation</h5>
+            <p>
+              Users could generate spatial statistics to detect hot spots with raw case
+              data or by adjusting for population. Because of the
+              infectious nature of COVID, high numbers of cases anywhere
+              would be of concern. At the same time, identifying areas that
+              had a disproportionately higher number of cases within the
+              population was necessary to locate areas hit hardest by the
+              Pandemic.
+            </p>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <video autoPlay={true} muted={true} loop={true}>
+              <source
+                src={`${process.env.PUBLIC_URL}/img/use_case1.mp4`}
+                type="video/mp4"
+              />
+              Your browser does not support the video tag.
+            </video>
+          </Grid>
+          <Gutter h={10} />
+          <Grid item xs={12} md={6}>
+            <Usage color="orange">Usage #2</Usage>
+            <h5>Tracking patterns to better plan ahead</h5>
+            <p>
+              Users could visualize change over time to better understand the
+              distribution and spread of COVID in the US throughout the
+              Pandemic. Moving the time slider or clicking the play
+              button enabled the user to watch the spread of COVID. Analyzing patterns of
+              the spread was essential to support planning for resource allocation.
+            </p>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <img
+              src={`${process.env.PUBLIC_URL}/img/Landingpage_usage2.gif`}
+              height = "350"
+              alt="Use Case 2: Tracking COVID Patterns over time"
+              loading="lazy"
+            />
+          </Grid>
+          <Gutter h={10} />
+          <Grid item xs={12} md={6}>
+          <Usage color="yellow">Usage #3</Usage>
+            <h5>
+              Forecasting viral spread at state and county
+              levels
+            </h5>
+            <p>
+              Switching between the state and county thematic maps helped zero in on 
+              COVID clusters at a local level. Then,
+              selecting and tracking hotspots over time using the Local Moran's
+              I statistic helped confirm and explore areas of concern. 
+              The Atlas served as a powerful visual analytic tool to find
+              COVID spillovers along state borders, emerging from one
+              county to areas nearby, and more.
+            </p>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <img
+              src={`${process.env.PUBLIC_URL}/img/Landingpage_usage3.gif`}
+              height = "350"
+              alt="Use Case 3: Forecasting viral spreads"
+              loading="lazy"
+            />
+          </Grid>
+          <Gutter h={10} />
+          <Grid item xs={12} md={6}>
+            <Usage color="orange">Usage #4</Usage>
+            <h5>Making visible vulnerable communities</h5>
+            <p>
+              Users could click on counties to get more information about community
+              health factors and socioeconomic indicators like average
+              length of life in an area, percent uninsured, or income
+              inequality metrics. In the main selection panel, overlaying
+              segregated cities or Native American Reservation boundaries
+              could help identify uniquely vulnerable locales.
+            </p>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <img
+              src={`${process.env.PUBLIC_URL}/img/Landingpage_usage4.gif`}
+              height = "350"
+              alt="Use Case 4: Make visible vulnerable communities"
+              loading="lazy"
+            />
+          </Grid>
+          <Gutter h={10} />
+          <Grid item xs={12} md={6}>
+
+          <Usage color="yellow">Usage #5</Usage>
+            <h5>Identifying emerging risk</h5>
+            <p>
+              The Atlas enabled exploring how hotspots progressed or diminished over time, 
+              and also helped identify
+              areas of emerging risk early. Some hotspots began as spatial
+              outliers -- shown as pink in the map, meaning cases were high
+              in that county but low in neighboring counties. If cases
+              continued to grow and spillover nearby counties, the areas
+              would turn red. Mature hotspots were defined as clusters of counties that
+              remained red over time, and continued to grow.
+            </p>
+
+          </Grid>
+          <Grid item xs={12} md={6}>
+          <img
+              src={`${process.env.PUBLIC_URL}/img/Landingpage_usage5.gif`}
+              height = "350"
+              alt="Use Case 5: Forecasting viral spreads"
+              loading="lazy"
+            />
+          </Grid>
+        </Grid>
     ),
   },
   {
@@ -149,14 +314,14 @@ const faqQuestions = [
       <p>
         The impact of COVID-19 reaches far beyond a single data metric. The
         Atlas makes multiple COVID and community context variables available in
-        order to paint a more complete picture of the ways in which the pandemic
+        order to paint a more complete picture of the ways in which the Pandemic
         has affected different communities in different ways.
         <br />
         <br />
         For variables like COVID cases and death rates, we provide multiple data
         sources in order to allow users to compare and contrast reported data.
-        This was particularly important earlier in the pandemic. For most of the
-        first year of the pandemic, there had been no single, authoritative
+        This was particularly important earlier in the Pandemic. For most of the
+        first year, there had been no single, authoritative
         source of COVID case data in the United States. When we launched the
         Atlas in mid-March, we incorporated data from{' '}
         <a
@@ -170,7 +335,7 @@ const faqQuestions = [
         first available county-level data for public use, as well as USAFacts, a
         journalistic dataset making county-level data available early on. As the
         Atlas has expanded and evolved alongside national data collection and
-        reporting efforts, we’ve also incorporated county-level reports from{' '}
+        reporting efforts, we also incorporated county-level reports from{' '}
         <a
           href="https://github.com/nytimes/covid-19-data"
           target="_blank"
@@ -178,7 +343,7 @@ const faqQuestions = [
         >
           The New York Times
         </a>
-        . We source COVID vaccination rates and testing data directly from the{' '}
+        . We sourced COVID vaccination rates and testing data directly from the{' '}
         <a
           href="https://covid.cdc.gov/covid-data-tracker/#datatracker-home"
           target="_blank"
@@ -187,56 +352,59 @@ const faqQuestions = [
           CDC
         </a>
         .
+      <br />      <br />
+        Our <a href="https://www.tandfonline.com/doi/full/10.1080/15230406.2021.1975311">
+        research</a> has further demonstrated the importance of reviewing multiple COVID-19 data metrics.
       </p>
     ),
   },
   {
     header: 'Why the focus on county-level data?',
     content: (
-      <p>
+      <><p>
         County-level visualizations show a dramatically more detailed pandemic
         landscape, while state-level or national aggregate data may obscure
         local hotspots of surging cases. By focusing on state-wide or even
         national metrics, it’s easy to miss rapidly surging cases locally and
-        pillover across state boundaries. County-level data (and finer
+        spillover across state boundaries. County-level data (and finer
         resolution, when available) is critical for targeting efforts, whether
         isolating virus spread or identifying a disproportionately hit area for
         recovery priority.
-      </p>
+      </p><br />
+      <p>
+          The US Covid Atlas was the <a href="https://news.uchicago.edu/story/state-level-data-misses-growing-coronavirus-hot-spots-us-including-south"> first dashboard </a>
+
+          to visualize data at both state
+          and county-scale as total cases, deaths, and population-weighted rates to provide
+          a richer understanding of the pandemic.
+        </p></>
+
     ),
   },
   {
-    header: 'Can I track vaccination rates in my state or region?',
+    header: 'Could users track vaccination rates in their state or region during the Pandemic?',
     content: (
       <p>
-        Yes. The Atlas currently features three vaccination metrics, sourced
+        Yes. The Atlas featured three vaccination metrics, sourced
         from the CDC:
         <i>
           First Dose Administered, Second Dose Administered, and Doses to be
           Distributed.
         </i>
-        (Thus far, the CDC has only released state-level data on vaccinations.
-        As soon as county-level vaccination data is widely available, we’ll
-        incorporate it into the Atlas.)
         <br />
         <br />
         The <i>Doses to be Distributed variable</i> is taken from the total
         doses distributed subtracted by the total doses administered. This gives
         an estimation of the number of doses "on hand" for each state. See our
         detailed data descriptions for more information.
-        <br />
-        <br />
-        As the available vaccine manufacturers continue to change and the
-        distribution pipeline evolves, we continue to explore how best to
-        capture the state of vaccination efforts.
       </p>
     ),
   },
   {
     header: 'How can I explore trends in vulnerable populations?',
     content: (
-      <p>
-        COVID has disproportionately impacted communities of color and
+      <><p>
+        COVID disproportionately impacted communities of color and
         low-income communities across the country, exacerbating already-existing
         disparities. To draw attention to these disparities and help with
         efforts to track and implement an equitable recovery, there are several
@@ -300,13 +468,17 @@ const faqQuestions = [
         click), then the Report button on the right side of the map. Scroll down
         for the full data report.
       </p>
+      <br />
+      <p>
+          Read more about mapping community context in the <a href="https://uscovidatlas.org/learn">learn toolkit</a>.
+        </p></>
     ),
   },
   {
-    header: 'What do the new mobility metrics show?',
+    header: 'What do mobility metrics show?',
     content: (
       <p>
-        We recently added three mobility metrics on the Atlas:{' '}
+        Three mobility metrics were added to the Atlas:{' '}
         <i>Percent Home on Workdays, Percent Full Time on Workdays, </i>
         and <i>Percent Part Time on Workdays</i>. These metrics reflect the
         percent of devices observed as completely at home, at a workplace for
@@ -322,7 +494,7 @@ const faqQuestions = [
         .
         <br />
         <br />
-        We have also added an <i>Essential Workers</i> data layer to
+        We also added an <i>Essential Workers</i> data layer to
         contextualize these mobility metrics. This variable (found under
         Variables {`>`} Community Health Information) estimates the percentage
         of adult workers in essential occupations, based on 2019 American
@@ -335,7 +507,7 @@ const faqQuestions = [
         up to the county and state level for Atlas mapping. Safegraph data is
         generated from a series of location pings throughout the day, which
         determine various behaviors, such as staying completely home, full time
-        work, part time work, and delivery (multiple, short visits).See our{' '}
+        work, part time work, and delivery (multiple, short visits). See our{' '}
         <NavLink to="/data">detailed data descriptions</NavLink> for more
         information.
       </p>
@@ -345,7 +517,7 @@ const faqQuestions = [
     header:
       'Can you explain the Map Type options? What’s the difference between natural breaks, box maps, and hotspot maps?',
     content: (
-      <p>
+      <><p>
         We provide multiple <i>Map Type</i> options to facilitate different
         views for exploratory analysis. Different maps emphasize different
         aspects of the data, and can help reveal and communicate data insights
@@ -354,18 +526,10 @@ const faqQuestions = [
         Visualization Types (2D, 3D, or Cartogram) for each map.
         <br />
         <br />
-        <b>Natural Breaks chloropleth maps</b> use color to show the count or
+        <b>Natural Breaks maps</b> use color to show the count or
         percentage of a variable. The Atlas uses color to show the counts and
         percentages of COVID cases, deaths, testing, vaccinations, mobility, and
         community health contextual factors.
-        <br />
-        <br />
-        <b>Hotspot maps</b> show local clusters of areas where neighbors share a
-        particular quality, such as high rates or numbers of confirmed COVID
-        cases. A hotspot is an area (on the Atlas, an area is a state or county)
-        that is significantly different from the areas surrounding it. On these
-        maps, a hotspot may be one area, or a cluster of areas. Read more about
-        hotspot maps here.
         <br />
         <br />
         <b>Box maps</b> are useful for detecting outliers and gaining an
@@ -373,14 +537,23 @@ const faqQuestions = [
         (i.e. COVID case counts or rates) into six fixed categories: Four
         quartiles (1-25%, 25-50%, 50-75%, and 75-100%) plus two outlier
         categories at the low and high end of the distribution.
-      </p>
+        <br />
+        <br />
+        <b>Hotspot maps</b> show local clusters of areas where neighbors share a
+        particular quality, such as high rates or numbers of confirmed COVID
+        cases. A hotspot is an area (on the Atlas, an area is a state or county)
+        that is significantly different from the areas surrounding it. On these
+        maps, a hotspot may be one area, or a cluster of areas. 
+      </p><br /><p>
+          Read more about mapping styles on the <a href="https://uscovidatlas.org/methods">Methodology</a> page.
+        </p></>
     ),
   },
   {
     header:
-      'Should I be concerned about hotspot areas other than High-High clusters?',
+      'During the Pandemic, were users concerned about hotspot areas other than "High-High" clusters?',
     content: (
-      <p>
+      <><p>
         The Atlas shows four types of hotspot areas. High-High areas are
         significant because they indicate areas with high numbers or rates that
         are surrounded by neighbors also with high numbers, compared to the rest
@@ -418,47 +591,52 @@ const faqQuestions = [
             spread of the virus from surrounding areas in future weeks.
           </li>
         </ul>
-        Learn more about hotspot maps <NavLink to="/hotspot">here</NavLink>.
-      </p>
+      </p><br />
+      <p>
+          Read more about Hot Spot statistics on the <a href="https://uscovidatlas.org/methods">Methodology</a> page.
+        </p></>
     ),
   },
   {
     header: 'Can I load my own data and view it in the Atlas?',
     content: (
       <p>
-        Stay tuned - we are actively working on this feature! Check back for
-        updates in the coming months.
+       Yes, this feature was added to the Atlas. 
+       See the tutorial on <a href="https://uscovidatlas.org/learn/add-custom-data">
+       Adding Custom Data</a>. You can also generate a <a href="https://uscovidatlas.org/learn/create-a-report">
+      Custom Report</a> for your community.
       </p>
     ),
   },
   {
     header: 'When will you add COVID case data by race, age, and demographics?',
     content: (
-      <p>
-        At this time, COVID data is not available by race, age, and demographics
-        in a single data source for all counties across the United States. This
-        data is at the top of our “wishlist”, so if it does become available, we
-        will be sure to incorporate it into the Atlas. We recommend several
-        projects currently compiling state-wide COVID race and ethnicity data
-        while also advocating for greater county-level data reporting, including
-        the{' '}
-        <a
-          href="https://covidtracking.com/race/dashboard/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          COVID Racial Data Dashboard
-        </a>{' '}
-        and{' '}
-        <a
-          href="https://d4bl.org/covid19-data"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Data 4 Black Lives
-        </a>
-        .
-      </p>
+      <><p>
+        As of 2024, COVID data is still not available by race, age, and demographics
+        in a single data source for all counties across the United States.
+      </p><br /><p>
+          During the Pandemic, we recommended several
+          projects that compiled state-wide COVID race and ethnicity data
+          while also advocating for greater county-level data reporting, including
+          the{' '}
+          <a
+            href="https://covidtracking.com/race/dashboard/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            COVID Racial Data Dashboard
+          </a>{' '}
+          and{' '}
+          <a
+            href="https://d4bl.org/covid19-data"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Data 4 Black Lives
+          </a>
+          . Check out a workshop we hosted with keynote Jamelle Watson-Daniels who spoke on
+          these challenges for more details (<a href="https://www.youtube.com/watch?v=9x2EegPLmOg">via Youtube</a>).
+        </p></>
     ),
   },
   {
@@ -466,9 +644,9 @@ const faqQuestions = [
       'Where can I learn more about insights that the Atlas is generating?',
     content: (
       <p>
-        Check out <NavLink to="/insights">Atlas Insights</NavLink>, the US COVID
-        Atlas Medium blog, for weekly COVID data updates, new feature
-        announcements, and more insights from our research coalition.
+        Check out <NavLink to="/insights">Atlas Insights</NavLink> for published research, briefs, and
+        access to the US Covid Atlas Blog. The Blog includes multiple updates from the research coalition,
+        workshop highlights, and past updates over the course of the Pandemic.
       </p>
     ),
   },
@@ -523,6 +701,10 @@ export default function Faq() {
         <Gutter h={40} /> */}
 
         <h2>FREQUENTLY ASKED QUESTIONS, AND THEIR ANSWERS.</h2>
+        <p>
+          These questions were posed to the U.S. Covid Atlas team over the duration of the Pandemic. 
+          We retain them for archival purposes, and add context.
+        </p>
         <hr />
         {faqQuestions.map((question, index) => (
           <Accordion

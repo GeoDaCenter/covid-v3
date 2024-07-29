@@ -9,8 +9,8 @@ import { LineChart, Line, Tooltip } from 'recharts'
 const Container = styled.div`
     width: 100%;
     background-color: #1a1a1a;
-    padding: 60px 0;
-    margin: 40px 0 0 0;
+    padding: 20px 0 1px 0;
+    margin: 60px auto 60px auto;
     h2 {
         text-align: center;
         color: white;
@@ -23,6 +23,14 @@ const Container = styled.div`
     }
 `
 
+const WrappedContainer = styled.div`
+    max-width: 1140px;
+    margin: 60px auto 60px auto;
+`
+
+const InsightsContainer = styled(Grid)`
+`
+
 const ButtonContainer = styled.div`
     max-width: 1140px;
     display: block;
@@ -30,7 +38,7 @@ const ButtonContainer = styled.div`
 `
 
 const CTAButton = styled.button`
-    width: 32%;
+    width: 48%;
     margin: 0;
     background: none;
     border: 1px solid ${colors.white};
@@ -68,10 +76,8 @@ const CTAButton = styled.button`
 `
 
 const SummaryContainer = styled.div`
-    border: 1px solid white;
-    padding: 20px;
+    padding: 20px 0;
     max-width: 1140px;
-    width: 100vw;
     display: block;
     margin: 20px auto;
     position: relative;
@@ -81,6 +87,17 @@ const SummaryContainer = styled.div`
         margin-bottom: 0;
     }
 `
+
+const VideoContainer = styled(Grid)`
+    P {
+        margin-bottom: 1.5rem;
+    }
+    iframe {
+        height: 18rem;
+        border-radius: 8px;
+    }
+`
+
 const SummaryItem = styled.div`
     color: white;
     h3,
@@ -212,7 +229,7 @@ function FastTrackInsights() {
             clearInterval(timerID)
             setTimerID(
                 setInterval(() => {
-                    setActiveButton((prev) => (prev + 1) % 3)
+                    setActiveButton((prev) => (prev + 1) % 2)
                 }, 10000)
             )
         }
@@ -228,218 +245,163 @@ function FastTrackInsights() {
 
     return (
         <Container>
-            <h2>Fast-track your COVID Insights</h2>
-            <ButtonContainer>
-                <CTAButton
-                    className={activeButton === 2 ? 'active' : ''}
-                    onMouseEnter={() => handleButton(2)}
-                    onClick={() => handleButton(2)}
-                >
-                    <span className="text">Case Hotspots</span>
-                </CTAButton>
-                <CTAButton
-                    className={activeButton === 1 ? 'active' : ''}
-                    onMouseEnter={() => handleButton(1)}
-                    onClick={() => handleButton(1)}
-                >
-                    <span className="text">Vaccination Progress</span>
-                </CTAButton>
-                <CTAButton
-                    className={activeButton === 0 ? 'active' : ''}
-                    onMouseEnter={() => handleButton(0)}
-                    onClick={() => handleButton(0)}
-                >
-                    <span className="text">Health Inequities</span>
-                </CTAButton>
-            </ButtonContainer>
-            <SummaryContainer buttonIndex={activeButton}>
-                {activeButton === 2 && (
-                    <SummaryItem>
-                        <Grid container spacing={5}>
-                            <Grid item xs={12} md={3}>
-                                <TextContainer>
-                                    <h3 className="metricTitle">
-                                        National 7-Day New
-                                        <br />
-                                        Cases on 12/31/22
-                                    </h3>
-                                </TextContainer>
-                                <TextContainer>
-                                    <h4>
-                                        {summary.cases.summary.weeklyAverage.toLocaleString(
-                                            'en'
-                                        )}
-                                    </h4>
-                                </TextContainer>
-                            </Grid>
-                            <Grid item xs={12} md={3}>
-                                <TextContainer>
-                                    <h3 className="metricTitle">
-                                        Week Over Week
-                                        <br /> Average Change
-                                    </h3>
-                                </TextContainer>
-                                <TextContainer>
-                                    <h4>
-                                        {summary.cases.summary.WoW > 0
-                                            ? '+'
-                                            : ''}
-                                        {summary.cases.summary.WoW}%
-                                    </h4>
-                                </TextContainer>
-                            </Grid>
-                            <Grid item xs={12} md={3}>
-                                <TextContainer>
-                                    <h3 className="metricTitle">
-                                        14-Day National
-                                        <br />
-                                        New Case Trend
-                                    </h3>
-                                </TextContainer>
-                                <TextContainer>
-                                    <LineChart
-                                        width={200}
-                                        height={75}
-                                        data={summary.cases['14-day']}
-                                    >
-                                        <Line
-                                            type="monotone"
-                                            dataKey="dailyNew"
-                                            stroke={colors.yellow}
-                                            strokeWidth={2}
-                                            dot={false}
-                                            isAnimationActive={false}
-                                        />
-                                        <Tooltip content={CustomTooltip} />
-                                    </LineChart>
-                                </TextContainer>
-                            </Grid>
-                        </Grid>
-                    </SummaryItem>
-                )}
-                {activeButton === 1 && (
-                    <SummaryItem>
-                        <Grid container spacing={5}>
-                            <Grid item xs={12} md={3}>
-                                <TextContainer>
-                                    <h3 className="metricTitle">
-                                        National Fully Vaccinated
-                                        <br /> As of 12/31/2022 
-                                    </h3>
-                                </TextContainer>
-                                <TextContainer>
-                                    <h4>
-                                        {summary.vaccination.summary.fullPct}%
-                                    </h4>
-                                </TextContainer>
-                            </Grid>
-                            <Grid item xs={12} md={3}>
-                                <TextContainer>
-                                    <h3 className="metricTitle">
-                                        National
-                                        <br />
-                                        At Least 1 Shot (All People)
-                                    </h3>
-                                </TextContainer>
-                                <TextContainer>
-                                    <h4>
-                                        {
-                                            summary.vaccination.summary
-                                                .oneOrMorePct
-                                        }
-                                        %
-                                    </h4>
-                                </TextContainer>
-                            </Grid>
-                            <Grid item xs={12} md={3}>
-                                <TextContainer>
-                                    <h3 className="metricTitle">
-                                        14-Day National
-                                        <br />
-                                        New Vaccinations Trend
-                                    </h3>
-                                </TextContainer>
-                                <TextContainer>
-                                    <LineChart
-                                        width={200}
-                                        height={75}
-                                        data={summary.vaccination['14-day']}
-                                    >
-                                        <Line
-                                            type="monotone"
-                                            dataKey="dailyFull"
-                                            stroke={colors.skyblue}
-                                            strokeWidth={2}
-                                            dot={false}
-                                            isAnimationActive={false}
-                                        />
-                                        <Tooltip content={CustomTooltip} />
-                                    </LineChart>
-                                </TextContainer>
-                            </Grid>
-                        </Grid>
-                    </SummaryItem>
-                )}
-                {activeButton === 0 && (
-                    <SummaryItem>
-                        <Grid container spacing={5}>
-                            <Grid item xs={12} md={4}>
-                                <TextContainer>
-                                    <h3 className="metricTitle">
-                                        Deaths Per 100k People in Counties with
-                                        the most Essential Workers (75%)
-                                    </h3>
-                                </TextContainer>
-                                <TextContainer>
-                                    <h4>
-                                        {
-                                            summary.equity
-                                                .quartileEssentialDeathsPer100k
-                                        }
-                                    </h4>
-                                </TextContainer>
-                            </Grid>
-                            <Grid item xs={12} md={6}>
-                                <TextContainer>
-                                    <h3 className="metricTitle">
-                                        Difference vs National Average
-                                        <br />
-                                        <br />
-                                    </h3>
-                                </TextContainer>
-                                <TextContainer>
-                                    <h4>
-                                        {summary.equity.quartileEssentialPct > 0
-                                            ? '+'
-                                            : '-'}
-                                        {summary.equity.quartileEssentialPct}%
-                                    </h4>
-                                </TextContainer>
-                            </Grid>
-                        </Grid>
-                    </SummaryItem>
-                )}
-                <GoToMap
-                    href={
-                        activeButton === 0
-                            ? 'map?src=cdc&var=Percent_Essential_Workers&v=2'
-                            : activeButton === 1
-                            ? 'map?src=cdc_h&var=Percent_Fully_Vaccinated&v=2'
-                            : 'map?src=county_nyt&var=Confirmed_Count_per_100K_Population&mthd=lisa&v=2'
-
-                    }
-                >
-                    {' '}
-                    {
-                        [
-                            "Explore COVID-19's Unequal Impact",
-                            'Map Vaccine Rates',
-                            'See Hotspots From Dec 2022',
-                        ][activeButton]
-                    }{' '}
-                    {arrow}{' '}
-                </GoToMap>
-            </SummaryContainer>
+            <WrappedContainer>
+                <Grid container spacing={8}>
+                    <InsightsContainer item xs={12} md={6}>
+                        <h2>Fast-track your COVID Insights</h2>
+                        <ButtonContainer>
+                            <CTAButton
+                                className={activeButton === 0 ? 'active' : ''}
+                                onMouseEnter={() => handleButton(1)}
+                                onClick={() => handleButton(1)}
+                            >
+                                <span className="text">Case Hotspots</span>
+                            </CTAButton>
+                            <CTAButton
+                                className={activeButton === 1 ? 'active' : ''}
+                                onMouseEnter={() => handleButton(0)}
+                                onClick={() => handleButton(0)}
+                            >
+                                <span className="text">Vaccination Progress</span>
+                            </CTAButton>
+                        </ButtonContainer>
+                        <SummaryContainer buttonIndex={activeButton}>
+                            {activeButton === 0 && (
+                                <SummaryItem>
+                                    <Grid container spacing={5}>
+                                        <Grid item xs={12} md={6}>
+                                            <TextContainer>
+                                                <h3 className="metricTitle">
+                                                    National 7-Day New
+                                                    <br />
+                                                    Cases on 12/31/22
+                                                </h3>
+                                            </TextContainer>
+                                            <TextContainer>
+                                                <h4>
+                                                    {summary.cases.summary.weeklyAverage.toLocaleString(
+                                                        'en'
+                                                    )}
+                                                </h4>
+                                            </TextContainer>
+                                        </Grid>
+                                        <Grid item xs={12} md={6}>
+                                            <TextContainer>
+                                                <h3 className="metricTitle">
+                                                    Week Over Week
+                                                    <br /> Average Change
+                                                </h3>
+                                            </TextContainer>
+                                            <TextContainer>
+                                                <h4>
+                                                    {summary.cases.summary.WoW > 0
+                                                        ? '+'
+                                                        : ''}
+                                                    {summary.cases.summary.WoW}%
+                                                </h4>
+                                            </TextContainer>
+                                        </Grid>
+                                        <Grid item xs={12} md={12}>
+                                            <TextContainer>
+                                                <h3 className="metricTitle">
+                                                    14-Day National
+                                                    <br />
+                                                    New Case Trend
+                                                </h3>
+                                            </TextContainer>
+                                            <TextContainer>
+                                                <LineChart
+                                                    width={520}
+                                                    height={75}
+                                                    data={summary.cases['14-day']}
+                                                >
+                                                    <Line
+                                                        type="monotone"
+                                                        dataKey="dailyNew"
+                                                        stroke={colors.yellow}
+                                                        strokeWidth={2}
+                                                        dot={false}
+                                                        isAnimationActive={false}
+                                                    />
+                                                    <Tooltip content={CustomTooltip} />
+                                                </LineChart>
+                                            </TextContainer>
+                                        </Grid>
+                                    </Grid>
+                                </SummaryItem>
+                            )}
+                            {activeButton === 1 && (
+                                <SummaryItem>
+                                    <Grid container spacing={5}>
+                                        <Grid item xs={12} md={6}>
+                                            <TextContainer>
+                                                <h3 className="metricTitle">
+                                                    National Fully Vaccinated
+                                                    <br /> As of 12/31/2022 
+                                                </h3>
+                                            </TextContainer>
+                                            <TextContainer>
+                                                <h4>
+                                                    {summary.vaccination.summary.fullPct}%
+                                                </h4>
+                                            </TextContainer>
+                                        </Grid>
+                                        <Grid item xs={12} md={6}>
+                                            <TextContainer>
+                                                <h3 className="metricTitle">
+                                                    National
+                                                    <br />
+                                                    At Least 1 Shot (All People)
+                                                </h3>
+                                            </TextContainer>
+                                            <TextContainer>
+                                                <h4>
+                                                    {
+                                                        summary.vaccination.summary
+                                                            .oneOrMorePct
+                                                    }
+                                                    %
+                                                </h4>
+                                            </TextContainer>
+                                        </Grid>
+                                        <Grid item xs={12} md={12}>
+                                            <TextContainer>
+                                                <h3 className="metricTitle">
+                                                    14-Day National
+                                                    <br />
+                                                    New Vaccinations Trend
+                                                </h3>
+                                            </TextContainer>
+                                            <TextContainer>
+                                                <LineChart
+                                                    width={520}
+                                                    height={75}
+                                                    data={summary.vaccination['14-day']}
+                                                >
+                                                    <Line
+                                                        type="monotone"
+                                                        dataKey="dailyFull"
+                                                        stroke={colors.skyblue}
+                                                        strokeWidth={2}
+                                                        dot={false}
+                                                        isAnimationActive={false}
+                                                    />
+                                                    <Tooltip content={CustomTooltip} />
+                                                </LineChart>
+                                            </TextContainer>
+                                        </Grid>
+                                    </Grid>
+                                </SummaryItem>
+                            )}
+                        </SummaryContainer>
+                    </InsightsContainer>
+                    <VideoContainer item xs={12} md={6}>
+                        <h2>Pandemic Stories</h2>
+                        <p style={{color:'white'}}>Pandemic Stories by the US Covid Atlas collects stories behind the statistics and data. We seek perspectives that represent the diversity of experiences in the United States, in order to build a more holistic archive of the pandemic.</p>
+                        <iframe width="100%" height="" src="https://www.youtube.com/embed/pjswdUvwbFE" title="Atlas Stories Overview" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </VideoContainer>
+                </Grid>
+            </WrappedContainer>
         </Container>
     )
 }

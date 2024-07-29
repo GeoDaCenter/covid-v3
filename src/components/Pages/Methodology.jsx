@@ -79,12 +79,14 @@ const Methodology = () => {
         <br />
 
         <p>Tutorials to learn how to explore spatial scale:
-          <li>
-            <a href="https://uscovidatlas.org/learn/getting-started"> Getting Started: Atlas 101 </a> 
+          <ul>
+            <li>
+              <a href="https://uscovidatlas.org/learn/getting-started"> Getting Started: Atlas 101 </a> 
+            </li>
+            <li>
+              <a href="https://uscovidatlas.org/learn/spatial-time-scales"> Spatial & Time Scales </a> 
           </li>
-          <li>
-            <a href="https://uscovidatlas.org/learn/spatial-time-scales"> Spatial & Time Scales </a> 
-          </li>
+          </ul>
         </p>
 
         <img
@@ -108,23 +110,27 @@ const Methodology = () => {
           view to be updated over time, providing users the ability to watch the pandemic emerge over time.
         </p>
         <br />
-        <p> In addition, you'll find data available at different time scales, including:       
-          <li><b>Cumulative:</b> Total number of instances, such as confirmed cases, deaths, or vaccines, since the start of the pandemic or the start of data collected.</li>
-          <li><b>Daily New:</b> The number of new instances per day for which data is available.</li>
-          <li><b>7-Day Average:</b> The average number of instances over the previous 7-day period for which data is available.</li>
-          <li><b>Custom Range:</b> Use the Time Slider and Calendar to choose a custom date range; i.e. the last month, 6 months, the latest variant, etc.</li>
+        <p> In addition, you'll find data available at different time scales, including:  
+          <ul>
+            <li><b>Cumulative:</b> Total number of instances, such as confirmed cases, deaths, or vaccines, since the start of the pandemic or the start of data collected.</li>
+            <li><b>Daily New:</b> The number of new instances per day for which data is available.</li>
+            <li><b>7-Day Average:</b> The average number of instances over the previous 7-day period for which data is available.</li>
+            <li><b>Custom Range:</b> Use the Time Slider and Calendar to choose a custom date range; i.e. the last month, 6 months, the latest variant, etc.</li>
+          </ul>     
         </p>  
         <br />
         <p>        For example, applying the natural breaks with fixed bins on accumulative confirmed COVID-19 cases displays how the disease has spread over time since the very beginning: from just a few counties in March 2020 to almost the entire country by June. Alternatively, visualizing the temporal change based on the daily new confirmed cases (or 7-day average) helps detect areas with emerging cases. Interactive, explorative temporal detection like this allows us to capture not only the base rate, but also the changes that are both critical to tracking areas of concern.
         </p>
         <br />
         <p>Tutorials to learn how to explore temporal scale:
-          <li>
-            <a href="https://uscovidatlas.org/learn/spatial-time-scales"> Spatial & Time Scales </a> 
-          </li>
-          <li>
-            <a href="https://uscovidatlas.org/learn/trends-over-time"> Trends Over Time </a> 
-          </li>
+          <ul>
+            <li>
+              <a href="https://uscovidatlas.org/learn/spatial-time-scales"> Spatial & Time Scales </a> 
+            </li>
+            <li>
+              <a href="https://uscovidatlas.org/learn/trends-over-time"> Trends Over Time </a> 
+            </li>
+          </ul>
         </p>
 
         <Gutter h={30} />
@@ -136,12 +142,14 @@ const Methodology = () => {
         </p>
         <br />
         <p>Tutorials to learn how to explore temporal scale:
-          <li>
-            <a href="https://uscovidatlas.org/learn/getting-started"> Getting Started: Atlas 101 </a> 
-          </li>
-          <li>
-            <a href="https://uscovidatlas.org/learn/community-contexts"> Community Contexts </a> 
-          </li>
+          <ul>
+            <li>
+              <a href="https://uscovidatlas.org/learn/getting-started"> Getting Started: Atlas 101 </a> 
+            </li>
+            <li>
+              <a href="https://uscovidatlas.org/learn/community-contexts"> Community Contexts </a> 
+            </li>
+          </ul>
         </p>
 
         <Gutter h={40} />
@@ -153,9 +161,9 @@ const Methodology = () => {
         <p>
           The Atlas provides three thematic mapping options:
           <ul>
-            <li><b>Choropleth Maps</b>: uniformly colors each non-overlapping enumeration unit according to the represented value. </li>
-            <li><b>Cartogram</b>: scales the size of an enumeration unit proportionally to the represented value. </li>
-            <li><b>Dot Density Map</b>: places dots within an enumeration unit in proportion to the represented value to preserve the distribution and variation of density of a phenomenon.</li>
+            <li><b>Choropleth Maps</b>: uniformly colors each area (e.g., county) according to the represented value. </li>
+            <li><b>Cartogram</b>: scales the size of an each area proportionally to the represented value. </li>
+            <li><b>Dot Density Map</b>: places dots within an area in proportion to the represented value, to preserve the distribution and variation of density of a phenomenon.</li>
           </ul>
         </p>
 
@@ -256,12 +264,14 @@ const Methodology = () => {
         <br />
 
         <p> Resources to learn how to use thematic maps:
-          <li>
-            US Covid Atlas <a href="https://uscovidatlas.org/learn/thematic-maps"> Create a Thematic Map </a> Tutorial
-          </li>
-          <li>
-            UCGIS Book of Knowledge: <a href="https://uscovidatlas.org/learn/thematic-maps"> Common Thematic Map Types </a> 
-          </li>
+          <ul>
+            <li>
+              US Covid Atlas <a href="https://uscovidatlas.org/learn/thematic-maps"> Create a Thematic Map </a> Tutorial
+            </li>
+            <li>
+              UCGIS Book of Knowledge: <a href="https://uscovidatlas.org/learn/thematic-maps"> Common Thematic Map Types </a> 
+            </li>
+          </ul>
 
         </p>
             
@@ -301,17 +311,19 @@ const Methodology = () => {
 
         <p>For more resources on LISA statistics and how to use them in the US Covid Atlas:
         <br />
-          <li>
-            <a href="https://geodacenter.github.io/glossary.html#lisa2"> GeoDa Glossary</a> & Chapter on 
-              <a href="https://geodacenter.github.io/workbook/6a_local_auto/lab6a.html"> Local Spatial Autocorrelation</a>
-          </li>
-          <li>
-            Anselin, Luc. 1995. “Local Indicators of Spatial Association —
-            LISA.”<i>Geographical Analysis</i> G 27: 93–115
-          </li>
-          <li>
-            US Covid Atlas <a href="https://uscovidatlas.org/learn/hotspot-maps"> Hot Spot Map </a> tutorial
-          </li>
+          <ul>
+            <li>
+              <a href="https://geodacenter.github.io/glossary.html#lisa2"> GeoDa Glossary</a> & Chapter on 
+                <a href="https://geodacenter.github.io/workbook/6a_local_auto/lab6a.html"> Local Spatial Autocorrelation</a>
+            </li>
+            <li>
+              Anselin, Luc. 1995. “Local Indicators of Spatial Association —
+              LISA.”<i>Geographical Analysis</i> G 27: 93–115
+            </li>
+            <li>
+              US Covid Atlas <a href="https://uscovidatlas.org/learn/hotspot-maps"> Hot Spot Map </a> tutorial
+            </li>
+          </ul>
         </p>
         <br />
 
@@ -361,27 +373,27 @@ const Methodology = () => {
         <br />
 
         <ul>
-        <li> 
-        LISA cluster analyses rely on computational inference which can generate 
-        sensitive results. Depending on the mechanism of disease spread (e.g., outbreaks in a 
-        small concentrated population versus slow community spread) and how the testing resources 
-        are utilized, the new case count time series can be clumped at times or suffer from 
-        seasonality. In such instances, LISA clusters can vary from one day to another. 
-        To alleviate this, we added the 7-day moving average of new cases, but these patterns 
-        could persist in the data and impact the calculation of LISA clusters. </li>
+          <li> 
+          LISA cluster analyses rely on computational inference which can generate 
+          sensitive results. Depending on the mechanism of disease spread (e.g., outbreaks in a 
+          small concentrated population versus slow community spread) and how the testing resources 
+          are utilized, the new case count time series can be clumped at times or suffer from 
+          seasonality. In such instances, LISA clusters can vary from one day to another. 
+          To alleviate this, we added the 7-day moving average of new cases, but these patterns 
+          could persist in the data and impact the calculation of LISA clusters. </li>
 
-        <li> While our dashboard provides a nuanced view of how the spatial patterns change 
-          over time and across the USA, it provides limited information 
-          with what could be the potential drivers, such as state-level policy and local mobility, 
-           and whether the pandemic is affecting certain groups of population disproportionately. </li>
-        
-        <li>An effective and rapid policy response is highly dependent on having a good 
-        understanding of the underlying transmission mechanisms and vulnerable populations. 
-        Including fine-resolution, sub-county non-pharmaceutical policies, social mobility, 
-        hospitalization, and infection rates by race and ethnicity, would improve the policy 
-        response and adaptation in future Pandemics. The true spatial scale of the COVID-19 pandemic is arguably at an even finer resolution 
-          than county level, but the data below the county-level resolution currently remains 
-          unavailable for the entire country. </li>
+          <li> While our dashboard provides a nuanced view of how the spatial patterns change 
+            over time and across the USA, it provides limited information 
+            with what could be the potential drivers, such as state-level policy and local mobility, 
+            and whether the pandemic is affecting certain groups of population disproportionately. </li>
+          
+          <li>An effective and rapid policy response is highly dependent on having a good 
+          understanding of the underlying transmission mechanisms and vulnerable populations. 
+          Including fine-resolution, sub-county non-pharmaceutical policies, social mobility, 
+          hospitalization, and infection rates by race and ethnicity, would improve the policy 
+          response and adaptation in future Pandemics. The true spatial scale of the COVID-19 pandemic is arguably at an even finer resolution 
+            than county level, but the data below the county-level resolution currently remains 
+            unavailable for the entire country. </li>
         </ul>
 
           <br />
