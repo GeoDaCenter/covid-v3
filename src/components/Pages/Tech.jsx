@@ -58,6 +58,12 @@ const Methodology = () => {
           </ul>
         </p>
         <Gutter h={40} />
+        <h3>Covid Histories</h3>
+        <br />
+        <p>
+          Video collection for the Atlas Stories project was set up and managed via a serverless architecture that utilizes AWS Lambda, S3, and CloudFront services. During the open submission period, user video or audio contributions were collected via webcam, and stored in S3 during an admin review period. After review, they were transcoded using FFMPEG through a scheduled GitHub action, and copied within the S3 bucket to a publicly accessible folder behind a CDN. Later, we began collecting long-form interviews which we transcoded locally and uploaded directly to S3 for publication.
+        </p>
+        <Gutter h={40} />
         <h3>Open Source</h3>
         <br />
         <p>
