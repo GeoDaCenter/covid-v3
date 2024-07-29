@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import * as gfm from 'remark-gfm';
+import gfm from 'remark-gfm';
 
 import ReactMarkdown from 'react-markdown';
 import MuiAccordion from '@mui/material/Accordion';
@@ -52,7 +52,18 @@ const Accordion = styled(MuiAccordion)``;
 
 const AccordionSummary = styled(MuiAccordionSummary)``;
 
-const AccordionDetails = styled(MuiAccordionDetails)``;
+const AccordionDetails = styled(MuiAccordionDetails)`
+  ul {
+    color: black;
+  }
+   table {
+    color: black;
+    font-size: 1.1em;
+  }
+  th {
+    padding: 4px;
+  }
+`;
 
 const AccordionHeader = styled(Typography)`
   span.tag {
@@ -71,67 +82,67 @@ const dataList = [
     header: 'USA Facts',
     tags: ['Cases', 'Deaths', 'County', 'State'],
     content:
-      'https://raw.githubusercontent.com/GeoDaCenter/covid/master/data-docs/usafacts.md',
+      '/data-docs/usafacts.md',
   },
   {
     header: 'New York Times',
     tags: ['Cases', 'Deaths', 'County', 'State'],
     content:
-      'https://raw.githubusercontent.com/GeoDaCenter/covid/master/data-docs/new-york-times.md',
+      '/data-docs/new-york-times.md',
   },
   {
     header: '1 Point 3 Acres',
     tags: ['Cases', 'Deaths', 'County', 'State'],
     content:
-      'https://raw.githubusercontent.com/GeoDaCenter/covid/master/data-docs/_1p3a.md',
+      '/data-docs/_1p3a.md',
   },
   {
     header: 'Center for Disease Control',
     tags: ['Testing', 'Vaccination', 'County'],
     content:
-      'https://raw.githubusercontent.com/GeoDaCenter/covid/master/data-docs/center-for-disease-control.md',
+      '/data-docs/center-for-disease-control.md',
   },
   {
     header: 'Health and Human Services',
     tags: ['Testing', 'State'],
     content:
-      'https://raw.githubusercontent.com/GeoDaCenter/covid/master/data-docs/health-and-human-services.md',
+      '/data-docs/health-and-human-services.md',
   },
   {
     header: 'County Health Rankings and Roadmaps',
     tags: ['Context'],
     content:
-      'https://raw.githubusercontent.com/GeoDaCenter/covid/master/data-docs/county-health-rankings.md',
+      '/data-docs/county-health-rankings.md',
   },
   {
     header: 'Yu Group at UC Berkeley',
     tags: ['Forecasting'],
     content:
-      'https://raw.githubusercontent.com/GeoDaCenter/covid/master/data-docs/yu-group.md',
+      '/data-docs/yu-group.md',
   },
   {
     header: 'Safegraph Social Distancing',
     tags: ['Mobility'],
     content:
-      'https://raw.githubusercontent.com/GeoDaCenter/covid/master/data-docs/safegraph_sd.md',
+      '/data-docs/safegraph_sd.md',
   },
   {
     header: 'American Community Survey',
     tags: ['Context', 'Essential Workers', 'Population'],
     content:
-      'https://raw.githubusercontent.com/GeoDaCenter/covid/master/data-docs/american-community-survey.md',
+      '/data-docs/american-community-survey.md',
   },
   {
     header: 'Hospitals and Clinics',
     tags: ['Context', 'Point Data'],
     content:
-      'https://raw.githubusercontent.com/GeoDaCenter/covid/master/data-docs/hospitals-and-clinics.md',
+      '/data-docs/hospitals-and-clinics.md',
   },
   {
     header: 'Geographies',
     tags: ['Boundaries', 'Geometry', 'County', 'State'],
     content:
-      'https://raw.githubusercontent.com/GeoDaCenter/covid/master/data-docs/geographies.md',
+      '/data-docs/geographies.md',
   },
 ];
 
@@ -183,7 +194,7 @@ function DataDetails(){
           </AccordionSummary>
           <AccordionDetails>
             <div>
-              <ReactMarkdown plugins={[gfm]}>
+              <ReactMarkdown remarkPlugins={[gfm]}>
                 {dataDescriptions[index]}
               </ReactMarkdown>
             </div>

@@ -23,11 +23,11 @@ os.makedirs(working_dir, exist_ok=True)
 def county_update_lisa_1P3A():
 
 	# Read in files
-	s3.Bucket('geoda-covid-atlas').download_file('lisa_county_confirmed_1P3A.json', os.path.join(dir_path, '_working/lisa_county_confirmed_1P3A.json'))
+	s3.Bucket('geoda-covid-atlas2').download_file('lisa_county_confirmed_1P3A.json', os.path.join(dir_path, '_working/lisa_county_confirmed_1P3A.json'))
 	with open(os.path.join(dir_path, '_working/lisa_county_confirmed_1P3A.json')) as f:
 		old_lisa_confirmed = json.load(f)
 
-	s3.Bucket('geoda-covid-atlas').download_file('lisa_county_death_1P3A.json', os.path.join(dir_path, '_working/lisa_county_death_1P3A.json'))
+	s3.Bucket('geoda-covid-atlas2').download_file('lisa_county_death_1P3A.json', os.path.join(dir_path, '_working/lisa_county_death_1P3A.json'))
 	with open(os.path.join(dir_path, '_working/lisa_county_death_1P3A.json')) as f:
 		old_lisa_death = json.load(f)
 	gdf = geopandas.read_file(os.path.join(repo_root, "data/counties_update.geojson"))
@@ -89,10 +89,10 @@ def county_update_lisa_1P3A():
 def state_update_lisa_1P3A():
 
 	# Read in files
-	s3.Bucket('geoda-covid-atlas').download_file('lisa_state_confirmed_1P3A.json', os.path.join(dir_path, '_working/lisa_state_confirmed_1P3A.json'))
+	s3.Bucket('geoda-covid-atlas2').download_file('lisa_state_confirmed_1P3A.json', os.path.join(dir_path, '_working/lisa_state_confirmed_1P3A.json'))
 	with open(os.path.join(dir_path, '_working/lisa_state_confirmed_1P3A.json')) as f:
 		old_lisa_confirmed = json.load(f)
-	s3.Bucket('geoda-covid-atlas').download_file('lisa_state_death_1P3A.json', os.path.join(dir_path, '_working/lisa_state_death_1P3A.json'))
+	s3.Bucket('geoda-covid-atlas2').download_file('lisa_state_death_1P3A.json', os.path.join(dir_path, '_working/lisa_state_death_1P3A.json'))
 	with open(os.path.join(dir_path, '_working/lisa_state_death_1P3A.json')) as f:
 		old_lisa_death = json.load(f)
 	gdf = geopandas.read_file(os.path.join(repo_root, "data/states_update.geojson"))
@@ -161,7 +161,7 @@ def update_lisa_usafacts(type_):
 	# Read file and import geometry
 	type_ = "death" if type_ == "deaths" else type_
 
-	s3.Bucket('geoda-covid-atlas').download_file('lisa_county_{}_usafacts.json'.format(type_), os.path.join(dir_path, '_working/lisa_county_{}_usafacts.json'.format(type_)))
+	s3.Bucket('geoda-covid-atlas2').download_file('lisa_county_{}_usafacts.json'.format(type_), os.path.join(dir_path, '_working/lisa_county_{}_usafacts.json'.format(type_)))
 	with open(os.path.join(dir_path, '_working/lisa_county_{}_usafacts.json'.format(type_))) as f:
 		old_lisa = json.load(f)
 	gdf = geopandas.read_file(file)
@@ -212,7 +212,7 @@ def get_month_day():
 def write_to_s3(filename):
     try:
         print('Writing {} to S3...'.format(filename))
-        s3.Object('geoda-covid-atlas', filename).put(Body=open(os.path.join(dir_path, '_working/{}'.format(filename)), 'rb'))
+        s3.Object('geoda-covid-atlas2', filename).put(Body=open(os.path.join(dir_path, '_working/{}'.format(filename)), 'rb'))
         print('Write to S3 complete.')
 
     except Exception as e:

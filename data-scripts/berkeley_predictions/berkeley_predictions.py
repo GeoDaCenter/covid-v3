@@ -137,7 +137,7 @@ def validate_and_process():
       try:
           print('Writing to S3...')
           s3 = boto3.resource('s3')
-          s3.Object('geoda-covid-atlas', 'berkeley_predictions.csv').put(Body=open(os.path.join(repo_root, 'public/csv/berkeley_predictions.csv'), 'rb'))
+          s3.Object('geoda-covid-atlas2', 'berkeley_predictions.csv').put(Body=open(os.path.join(repo_root, 'public/csv/berkeley_predictions.csv'), 'rb'))
           print('Write to S3 complete.')
       except Exception as e:
           print(e)

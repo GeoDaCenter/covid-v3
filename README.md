@@ -4,11 +4,11 @@
 
 The U.S. COVID-19 Atlas provided county-level visualizations and analytics to reveal a more detailed pandemic landscape with local hotspots of surging COVID cases that were missed by state-level data. The Atlas is live at: [https://USCovidAtlas.org](https://USCovidAtlas.org). 
 
-![screenshot](https://github.com/GeoDaCenter/covid/raw/master/public/img/screenshot.png)
+![screenshot](https://github.com/GeoDaCenter/covid-v3/raw/master/public/img/screenshot.png)
 
 ## DATA
 
-For more information about additional datasets used in the Atlas, see our [Data page](https://USCovidAtlas.org/data). Detailed data documentations about different variables and data sources are available at the [data-docs](https://github.com/GeoDaCenter/covid/tree/master/data-docs) folder. 
+For more information about additional datasets used in the Atlas, see our Data page. Detailed data documentations about different variables and data sources are available at the [data-docs](public/data-docs) folder. 
 
 ### Current Release
 Because there is no one single validated source for county-level COVID cases and deaths for real-time analysis, we incorporate multiple datasets from multiple projects to allow for comparisons. 

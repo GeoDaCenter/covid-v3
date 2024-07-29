@@ -151,7 +151,7 @@ const faqQuestions = [
         summaries of all the datasets currently featured on the Atlas. This page
         also includes links to our{' '}
         <a
-          href="https://github.com/GeoDaCenter/covid-v3"
+          href="https://github.com/GeoDaCenter/covid-v3/"
           target="_blank"
           rel="noopener noreferrer"
         >

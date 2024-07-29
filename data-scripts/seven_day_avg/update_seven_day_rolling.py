@@ -81,8 +81,8 @@ if __name__ == '__main__':
 	os.makedirs(working_dir, exist_ok=True)
 
 	try:
-		s3.Bucket('geoda-covid-atlas').download_file('seven_day_confirmed_usafacts.json', os.path.join(dir_path, '_working/seven_day_confirmed_usafacts.json'))
-		s3.Bucket('geoda-covid-atlas').download_file('seven_day_deaths_usafacts.json', os.path.join(dir_path, '_working/even_day_deaths_usafacts.json'))
+		s3.Bucket('geoda-covid-atlas2').download_file('seven_day_confirmed_usafacts.json', os.path.join(dir_path, '_working/seven_day_confirmed_usafacts.json'))
+		s3.Bucket('geoda-covid-atlas2').download_file('seven_day_deaths_usafacts.json', os.path.join(dir_path, '_working/even_day_deaths_usafacts.json'))
 	except:
 		save_file(create_file("confirmed"), "confirmed")
 		save_file(create_file("deaths"), "deaths")
