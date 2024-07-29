@@ -17,11 +17,6 @@ export default function Downloader() {
           Use the form below to download the most recent data available.
           Documentation describing the data will be included in the ZIP archive.
         </p>
-        {/* <Gutter h={10}/>
-                <p>
-                    For further data and statistics available from the US COVID Atlas,
-                    please see our <a href="/api">API</a> page for further information.
-                </p> */}
         <Gutter h={10} />
         <h2>CITATION</h2>
         <hr />
