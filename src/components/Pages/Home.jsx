@@ -660,8 +660,6 @@ function Home() {
             </h3>
             <Arrow />
           </BreakQuestion>
-
-
           <UseCasesContainer>
             <UseCases>
               <Grid container spacing={5}>
@@ -872,12 +870,6 @@ function Home() {
                   </p>
 
                   </Grid>
-
-  
-
-
-
-
               </Grid>
 
               <Gutter h={40} />
@@ -997,7 +989,6 @@ function Home() {
 
             </UseCases>
           </UseCasesContainer>
-
         </HomePageContent>
         <Footer signUp={false} />
         <ExploreButton to="/map" id="floating-cta" active={ctaActive}>
