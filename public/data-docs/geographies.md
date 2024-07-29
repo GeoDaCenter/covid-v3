@@ -19,14 +19,19 @@ All geospatial data used in the Atlas are available under [GeoDaCenter/covid/pub
     * District Centroids (Labels) [district_centroids.geojson](https://raw.githubusercontent.com/GeoDaCenter/covid/master/public/geojson/district_centroids.geojson)
     * District Boundaries [districts.geojson](https://raw.githubusercontent.com/GeoDaCenter/covid/master/public/geojson/districts.geojson)
 * Overlay Highlights
+    * **Important note:** These highlight layers are created by subtracting the original data sources (see below) from a single dissolved US geogaphy.
     * Black Belt Counties [blackbelt_highlight.geojson](https://raw.githubusercontent.com/GeoDaCenter/covid/master/public/geojson/blackbelt_highlight.geojson)
     * Native American or American Indian Reservations [reservations.geojson](https://raw.githubusercontent.com/GeoDaCenter/covid/master/public/geojson/reservations.geojson)
     * Hypersegregated City Counties [segregated_cities.geojson](https://raw.githubusercontent.com/GeoDaCenter/covid/master/public/geojson/segregated_cities.geojson)
 
 ### Data Source(s) Description:  
-County and state boundaries are sourced from the US Census [Cartographic Boundary Files](https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html) at the 20m resolution. Native American or American Indian reservation boundaries come from the [TIGER/line 2017 dataset](https://catalog.data.gov/dataset/tiger-line-shapefile-2017-nation-u-s-current-american-indian-alaska-native-native-hawaiian-area). Congressional district boundaires come from the 2018 [National Congressional District Boundaries](https://catalog.data.gov/dataset/tiger-line-shapefile-2018-nation-u-s-116th-congressional-district-national). 
-<!-- 
-Black belt counties and hypersegregated cities are based on -->
+County and state boundaries are sourced from the US Census [Cartographic Boundary Files](https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html) at the 20m resolution.
+
+Native American or American Indian reservation boundaries come from the [TIGER/line 2017 dataset](https://catalog.data.gov/dataset/tiger-line-shapefile-2017-nation-u-s-current-american-indian-alaska-native-native-hawaiian-area).
+
+Congressional district boundaires come from the 2018 [National Congressional District Boundaries](https://catalog.data.gov/dataset/tiger-line-shapefile-2018-nation-u-s-116th-congressional-district-national). 
+
+Hypersegregated cities are based on work by Massey and Tannen, 2015 ([press release](https://www.princeton.edu/news/2015/05/18/hypersegregated-cities-face-tough-road-change), [article](https://link.springer.com/article/10.1007/s13524-015-0381-6))
 
 ### Description of Data Source Tables: 
 Source geospatial data provide boundaries and a geospatial identifier (GEOID or FIPS code).
