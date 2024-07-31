@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { NavLink } from "react-router-dom";
+import { Box, Typography, Button, Modal } from "@mui/material";
 import styled from "styled-components";
 
 import Grid from "@mui/material/Grid";
@@ -9,13 +10,18 @@ import {
   Geocoder,
   HeroMap,
   Footer,
+  Icon,
   FastTrackInsights,
   Gutter,
+  ContentContainer,
 } from "../../components";
 import { MAPBOX_ACCESS_TOKEN } from "../../config";
 import colors from "../../config/colors";
-import { Button, Modal } from "@mui/material";
+
 import { VideoModal } from "../Interface/VideoModal";
+import { red } from "@mui/material/colors";
+
+const RolePressList = styled.ul``
 
 const HomePage = styled.div`
   h1 {
@@ -56,11 +62,17 @@ const HomePage = styled.div`
     border: 0;
     border-top: 1px solid ${colors.skyblue};
   }
+
   p {
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
     color: #212529;
+  }
+  ul{
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    margin-left: 2.0rem;
   }
   .desktop-only {
     @media (max-width: 960px) {
@@ -74,9 +86,14 @@ const HomePage = styled.div`
   }
 `;
 
+
 const HomePageContent = styled.div`
   width: 100%;
   margin: 0 auto;
+  a {
+    font-weight: 600;
+    color: ${colors.teal};
+  }
 `;
 
 const Hero = styled.div`
@@ -195,6 +212,17 @@ const Feature = styled(Grid)`
     color: ${colors.skyblue};
     margin-bottom: 20px;
   }
+   h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 19px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: ${colors.black};
+    margin-bottom: 20px;
+  }
   img {
     margin: 20px auto;
     width: 100%;
@@ -214,6 +242,35 @@ const Feature = styled(Grid)`
       max-width: 400px;
       margin: 0 auto 40px auto;
     }
+  }
+`;
+
+
+const Features2 = styled.div`
+  h5 {
+    font-family: "Playfair Display", serif;
+    font-size: 28px;
+    text-align: center;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: italic;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: center;
+    color: ${colors.darkgray};
+    margin-bottom: 40px;
+  }
+`;
+
+const RoleIcon = styled.div`
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  display: block;
+  margin-bottom: 1rem;
+  svg {
+    fill: ${colors.lightslategrey};
+    stroke: ${colors.lightslategrey};
   }
 `;
 
@@ -333,6 +390,7 @@ const ModalContent = styled.div`
   color: ${colors.white};
 `;
 
+
 const ModalContentInner = styled.div`
   position: relative;
   padding: 2em;
@@ -360,6 +418,83 @@ const CloseButton = styled(Button)`
   right: 0;
   color: ${colors.white};
 `;
+
+const FullHeightContainer = styled.div`
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ dark }) => (dark ? colors.darkgray : "initial")};
+  color: ${({ dark }) => (dark ? colors.white : "initial")};
+  *,
+  div * {
+    color: ${({ dark }) => (dark ? colors.white : "initial")};
+  }
+`;
+const FullHeightContent = styled.div`
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  `;
+
+
+const RoleContainer = styled.div`
+  display: flex;
+  max-width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`
+
+const RoleButton = styled(Button)`
+  text-transform: none;
+  font-size: 1.5rem;
+  flex-direction: column;
+  padding:1em 2em;
+  /* white-space: nowrap; */
+`;
+
+const Roles = [
+  {
+    title: "Public Health",
+    sectionId: "health",
+    icon: "health",
+    iconColor: "skyblue",
+  },
+  {
+    title: "Policy",
+    sectionId: "policy",
+    icon: "policy",
+    iconColor: "orange",
+  },
+  {
+    title: "Advocacy",
+    sectionId: "advocacy",
+    icon: "advocacy",
+    iconColor: "yellow",
+  },
+  {
+    title: "Research",
+    sectionId: "research",
+    icon: "research",
+    iconColor: "lightgray",
+  },
+  {
+    title: "Media",
+    sectionId: "media",
+    icon: "media",
+    iconColor: "green",
+  },
+];
+
+
+
+
 function Home() {
   const [ctaActive, setCtaActive] = useState(false);
   const [storiesModal, setStoriesModal] = useState(true);
@@ -532,112 +667,330 @@ function Home() {
           <UseCasesContainer>
             <UseCases>
               <Grid container spacing={5}>
-                <Grid item xs={12} md={6}>
-                  <video autoPlay={true} muted={true} loop={true}>
-                    <source
-                      src={`${process.env.PUBLIC_URL}/img/use_case1.mp4`}
-                      type="video/mp4"
-                    />
-                    Your browser does not support the video tag.
-                  </video>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <Usage color="yellow">Usage #1</Usage>
-                  <h5>Identify Regional Hotspots for Mitigation</h5>
+                  <Grid item xs={12} md={8}>
+
+                    <h1>Learn</h1>
+                    <br /><br />
+                    <p>
+                    Explore tutorials, <a href="https://www.youtube.com/playlist?list=PLi9Z7UD_p9f8xEga76YV3FyLhiyL8twmm">video demos</a>, and
+                    examples of how the Atlas is used for different applications with the <a href="https://uscovidatlas.org/learn"><i>Learn</i></a> toolkit. 
+                    Get additional details on <a href="https://uscovidatlas.org/methods">analytical methods</a> used on the Atlas and learn 
+                    about <a href="https://uscovidatlas.org/faq">frequently asked questions</a> posed during the Pandemic.
+                    Educators can also get more background, context, and activities on
+                    using the Atlas to support building <a href="https://alastore.ala.org/spatial-literacy-public-health-faculty-librarian-teaching-collaborations">
+                    spatial literacy skills in public health</a>.
+                    </p>
+
+                  </Grid>
+
+                  <Grid item xs={12} md={4}>
+
+                  <br />                      <br /> 
                   <p>
-                    Use spatial statistics to detect hot spots with raw case
-                    data or by adjusting for population. Because of the
-                    infectious nature of COVID, high numbers of cases anywhere
-                    will be of concern. At the same time, identifying areas that
-                    have a disporotionately high number of cases within the
-                    population is necessary to locate areas hit hardest by the
-                    pandemic.
+
+                  <a href="http://www.uscovidatlas.org/learn/getting-started">
+                  <Button 
+                      variant="contained"
+                      title="Getting Started"
+                      sx={{
+                        textTransform: "none",
+                        fontWeight: "bold",
+                        color: colors.black, 
+                        background: colors.orange,
+                        fontSize: '18px',
+                        marginTop: '1.0em',
+                        padding: '0.25em 0.5em',
+                      }}
+                      >
+                      <span style={{fontSize:32, lineHeight:0, marginRight: 6}}>&#9656;</span> Getting Started: Atlas 101
+                    </Button>
+                    </a>
+
+                    <br />                      <br />
+                    
+                    <a href="https://uscovidatlas.org/learn/trends-over-time">
+                    <Button 
+                      variant="contained"                    
+                      sx={{
+                        textTransform: "none",
+                        fontWeight: "bold",
+                        color: colors.white,
+                        background: colors.teal,
+                        fontSize: '18px',
+                        margin: 0,
+                        padding: '0.25em 0.5em',
+                      }}
+                      >
+                      <span style={{fontSize:32, lineHeight:0, marginRight: 6}}>&#9656;</span> Explore Trends Over Time
+                    </Button>
+                    </a>
+
+                    <br />                      <br />
+                    
+                    <a href="https://uscovidatlas.org/learn/community-contexts">
+                    <Button 
+                      variant="contained"
+                      sx={{
+                        textTransform: "none",
+                        fontWeight: "bold",
+                        color: colors.white,
+                        background: colors.teal,
+                        fontSize: '18px',
+                        margin: 0,
+                        padding: '0.25em 0.5em',
+                      }}
+                      >
+                      <span style={{fontSize:32, lineHeight:0, marginRight: 6}}>&#9656;</span> Link Community Context
+                    </Button>
+                    </a>
                   </p>
-                </Grid>
-                <Gutter h={80} />
-                <Grid item xs={12} md={6}>
-                  <Usage color="orange">Usage #2</Usage>
-                  <h5>Track patterns to better plan ahead</h5>
-                  <p>
-                    Visualize change over time to better understand the
-                    distribution and spread of COVID in the US throughout the
-                    pandemic. Move the time slider yourself or click the play
-                    button and watch the spread of COVID. Analyze patterns of
-                    the spread to support planning for resource allocation.
-                  </p>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <img
-                    src={`${process.env.PUBLIC_URL}/img/Landingpage_usage2.gif`}
-                    alt="Use Case 2: Tracking COVID Patterns over time"
-                    loading="lazy"
-                  />
-                </Grid>
-                <Gutter h={80} />
-                <Grid item xs={12} md={6}>
-                  <img
-                    src={`${process.env.PUBLIC_URL}/img/Landingpage_usage3.gif`}
-                    alt="Use Case 3: Forecasting viral spreads"
-                    loading="lazy"
-                  />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <Usage color="yellow">Usage #3</Usage>
-                  <h5>
-                    Interact and forecast viral spread at state and county
-                    levels
-                  </h5>
-                  <p>
-                    Switch between the state and county thematic maps (ie.
-                    choropleth maps) to find COVID at a local level. Then,
-                    select and track hotspots over time using the Local Moran's
-                    I statistic. Use a powerful visual analytic tool to find
-                    COVID spillovers along state borders, emerging from one
-                    county to areas nearby, and more.
-                  </p>
-                </Grid>
-                <Gutter h={80} />
-                <Grid item xs={12} md={6}>
-                  <Usage color="orange">Usage #4</Usage>
-                  <h5>Make visible vulnerable communities</h5>
-                  <p>
-                    Click on counties to get more information about community
-                    health factors and socioeconomic indicators like average
-                    length of life in an area, percent uninsured, or income
-                    inequality metrics. In the main selection panel, overlay
-                    segregated cities or Native American Reservation boundaries
-                    to identify uniquely vulnerable locales.
-                  </p>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <img
-                    src={`${process.env.PUBLIC_URL}/img/Landingpage_usage4.gif`}
-                    alt="Use Case 4: Make visible vulnerable communities"
-                    loading="lazy"
-                  />
-                </Grid>
-                <Gutter h={80} />
-                <Grid item xs={12} md={6}>
-                  <img
-                    src={`${process.env.PUBLIC_URL}/img/Landingpage_usage5.gif`}
-                    alt="Use Case 5: Forecasting viral spreads"
-                    loading="lazy"
-                  />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <Usage color="yellow">Usage #5</Usage>
-                  <h5>Identify emerging risk</h5>
-                  <p>
-                    Watch hotspots progress or diminish over time, and identify
-                    areas of emerging risk early. Some hotspots begin as spatial
-                    outliers -- shown as pink in the map, meaning cases are high
-                    in that county but low in neighboring counties. If cases
-                    continue to grow and spillover nearby counties, the areas
-                    will turn red. Mature hotspots are clusters of counties that
-                    remain red over time and continue to grow.
-                  </p>
-                </Grid>
+
+                  </Grid>
+                  
+
+
+                  <Grid item xs={12/5} md={7/5}>
+                    <Features2>
+                    <RoleIcon>
+                      <a href="http://www.uscovidatlas.org/learn">
+                      <Icon symbol={'health'}/>
+                      </a>
+                      <h5>Health</h5>
+                    </RoleIcon>
+                    </Features2>
+                  </Grid>
+
+
+                  <Grid item xs={12/5} md={7/5}>
+                    <Features2>
+                    <RoleIcon>
+                      <a href="http://www.uscovidatlas.org/learn">
+                      <Icon  symbol={'policy'} />
+                      </a>
+                      <h5>Policy</h5>
+                    </RoleIcon>
+                    </Features2>
+                  </Grid>
+
+                  <Grid item xs={12/5} md={7/5}>
+                    <Features2>
+                    <RoleIcon>
+                       <a href="http://www.uscovidatlas.org/learn">
+                       <Icon symbol={'advocacy'} />
+                       </a>
+                       <h5>Advocacy</h5>
+
+                    </RoleIcon>
+                    </Features2>
+                  </Grid>
+
+                  <Grid item xs={12/5} md={7/5}>
+                    <Features2>
+                    <RoleIcon>
+                      <a href="http://www.uscovidatlas.org/learn">
+                      <Icon symbol={'research'} />
+                      </a>
+                      <h5>Research</h5>
+                    </RoleIcon>
+                    </Features2>
+                  </Grid>
+
+                  <Grid item xs={12/5} md={7/5}>
+                    <Features2>
+                    <RoleIcon>
+                      <a href="http://www.uscovidatlas.org/insights#media">
+                      <Icon symbol={'media'} />
+                      </a>
+                      <h5>Media</h5>
+                    </RoleIcon>
+                    </Features2>
+                  </Grid>
+
+                  <Grid item xs={12/5} md={7/5}>
+
+                  </Grid>
+
               </Grid>
+
+              <Gutter h={40} />
+              <hr></hr>
+
+              <Grid container spacing={5}>
+                  <Grid item xs={12} md={8}>
+
+                    <h1>Listen</h1>
+
+                      <br />                      <br />
+
+                    <p>
+                    Data is not enough to understand the impact of the Pandemic. 
+                    Watch, listen, and explore <i>Atlas Stories</i>, oral histories of people's experiences
+                    across the country, from the Mississippi Delta to Chicago, to each coast. 
+                    </p>
+
+                    <a href="http://www.uscovidatlas.org/archive">
+                    <Button 
+                      variant="contained"
+                      sx={{
+                        textTransform: "none",
+                        fontWeight: "bold",
+                        background: colors.orange,
+                        fontSize: '18px',
+                        margin: 0,
+                        padding: '0.25em 0.5em',
+                      }}
+                      >
+                      <span style={{fontSize:32, lineHeight:0, marginRight: 6}}>&#9656;</span> Explore the Story Archive
+                    </Button>
+                    </a>
+
+                  <a href="http://www.uscovidatlas.org/map">
+                  <Button 
+                      variant="contained"
+                      sx={{
+                        textTransform: "none",
+                        fontWeight: "bold",
+                        color: colors.white,
+                        background: colors.teal,
+                        fontSize: '18px',
+                        margin: '2em',
+                        padding: '0.25em 0.5em',
+                      }}
+                      >
+                      <span style={{fontSize:32, lineHeight:0, marginRight: 6}}>&#9656;</span> Click Stories on in Map
+                    </Button>
+                    </a>
+
+                  </Grid>
+
+                  <Grid item xs={12} md={4}>
+
+                  <p>
+                  <img
+                      src={`${process.env.PUBLIC_URL}/img/story.png`}
+                      alt="Story"
+                      loading="lazy"
+                    />
+                  </p>
+
+                  </Grid>
+              </Grid>
+
+              <Gutter h={40} />
+              <hr></hr>
+
+              <Grid container spacing={5}>
+                  <Grid item xs={12} md={8}>
+
+                    <h1>Research</h1>
+                    <br /><br />
+                    <p>
+                    By integrating spatial data science, cutting-edge web architecture,
+                    design thinking, and deep knowledge in health geography, the Atlas became:
+                    </p>
+                    <p>
+                      <ul>
+                        <li>the first dashboard to show <b>county-level trends</b></li>
+                        <li>the first to include <b>statistical</b> hot spot detection on-the-fly</li>
+                        <li>the only dashboard to compare <b>multiple sources</b> of COVID data</li>
+                        <li>one of the first to incorporate <b>social determinants of health</b></li>
+                        <li>the only dashboard to include <b>stories</b> alongside data across the U.S.</li>
+                      </ul>
+                    </p>
+                    
+                    <p> As an <a href="https://github.com/GeoDaCenter/covid-v3"><b>Open Science </b></a> 
+                    project, we encourage others
+                    to build on the Atlas's work to better understand the Pandemic's impact, as well as 
+                    support new structures for improved resilience in future pandemics. Download data, review the tech stack, and
+                    explore multiple years of insights and community input.</p>
+                  </Grid>
+
+                  <Grid item xs={12} md={4}>
+
+                  <br />                      <br /> 
+
+                  <p>
+                      <img
+                          src={`${process.env.PUBLIC_URL}/img/fast-company.webp`}
+                          alt="Story"
+                          loading="lazy"
+                        />
+                      </p>
+                      <br />
+                        The U.S. Covid Atlas earned top distinction in Dynamic <a href="">Health Geography</a> Visualizations
+                        in 2021, and also received an honorable mention for innovative design by <i>Fast Company</i>.
+
+                  <a href="#">
+                  <Button 
+                      variant="contained"
+                      sx={{
+                        textTransform: "none",
+                        fontWeight: "bold",
+                        color: colors.white,
+                        background: colors.teal,
+                        fontSize: '18px',
+                        margin: '2.0em',
+                        padding: '0.25em 0.5em',
+                      }}
+                      >
+                      <span style={{fontSize:32, lineHeight:0, marginRight: 6}}></span> 
+                      Atlas Evaluation Report (2024)
+                    </Button>
+                    </a>
+
+                  </Grid>
+
+                  <Grid item xs={12/5} md={7/5}>
+                    <Features2>
+                    <RoleIcon>
+                      <a href="http://www.uscovidatlas.org/data">
+                      <Icon symbol={'datad'}/>
+                      </a>
+                      <h5>Data</h5>
+
+                    </RoleIcon>
+                    </Features2>
+                  </Grid>
+
+
+                  <Grid item xs={12/5} md={7/5}>
+                    <Features2>
+                    <RoleIcon>
+                      <a href="http://www.uscovidatlas.org/tech">
+                      <Icon  symbol={'intelligence'} /></a>
+                      <h5>Tech</h5>
+                  
+                    </RoleIcon>
+                    </Features2>
+                  </Grid>
+
+                  <Grid item xs={12/5} md={7/5}>
+                    <Features2>
+                    <RoleIcon>
+                       <a href="http://www.uscovidatlas.org/insights">
+                       <Icon symbol={'innovation'} /></a>
+                       <h5>Insights</h5>
+
+                  </RoleIcon>
+                    </Features2>
+                  </Grid>
+
+                  <Grid item xs={12/5} md={7/5}>
+                    <Features2>
+                    <RoleIcon>
+                      <a href="medium.com/covidatlas">
+                      <Icon  symbol={'ai'} /></a>
+                      <h5>Blog</h5>
+                  
+                    </RoleIcon>
+                    </Features2>
+                  </Grid>
+
+              </Grid>
+
+
+              <Gutter h={80} />
+
             </UseCases>
           </UseCasesContainer>
         </HomePageContent>
@@ -645,83 +998,8 @@ function Home() {
         <ExploreButton to="/map" id="floating-cta" active={ctaActive}>
           Explore the Atlas
         </ExploreButton>
-        <Modal open={storiesModal} onClose={() => setStoriesModal(false)}>
-          <ModalContent>
-            <ModalContentInner>
-              <h3>Atlas Stories is live!</h3>
-              <Gutter h={20} />
-              {/* <Button 
-                onClick={() => setVideoModalInner(true)}
-                variant="contained"
-                sx={{
-                  textTransform: "none",
-                  fontWeight: "bold",
-                  background: colors.yellow,
-                  fontSize: '24px',
-                  margin: 0,
-                  padding: '0.25em 0.5em' 
-                }}
-                >
-                <span style={{fontSize:32, lineHeight:0, marginRight: 6}}>&#9656;</span> Share Your Pandemic Experience
-              </Button>
-              <Gutter h={20} /> */}
-              <p>
-                Atlas Stories by the US Covid Atlas collects stories behind the
-                statistics and data. We seek perspectives that represent the
-                diversity of experiences in the United States, in order to build
-                a more holistic archive of the pandemic.
-              </p>
-              <Gutter h={20} />
-              <div style={{display:'flex'}}>
-              <Button 
-                onClick={() => setVideoModalInner(true)}
-                variant="contained"
-                sx={{
-                  textTransform: "none",
-                  fontWeight: "bold",
-                  background: colors.orange,
-                  fontSize: '24px',
-                  margin: 0,
-                  padding: '0.25em 0.5em',
-                }}
-                >
-                <span style={{fontSize:32, lineHeight:0, marginRight: 6}}>&#9656;</span> Learn more
-              </Button>
-              <Button 
-                onClick={() => window.location.href = "https://stories.uscovidatlas.org/"}
-                variant="contained"
-                sx={{
-                  textTransform: "none",
-                  fontWeight: "bold",
-                  background: colors.yellow,
-                  fontSize: '24px',
-                  margin: 0,
-                  padding: '0.25em 0.5em',
-                }}
-                >
-                  Submit a Story
-              </Button>
-              </div>
-              {/* <Gutter h={20} />
-              <p>
-                <a href="https://stories.uscovidatlas.org/">
-                  Share Your Pandemic Experience
-                </a>
-              </p>
-              <Gutter h={20} />
-              <p>
-                See the{" "}
-                <a href="/map?lat=38.454&lon=-92.534&z=4.4&src=county_nyt&var=Confirmed_Count_per_100K_Population&mthd=natural_breaks&date=922&range=7&ovr=stories&viz=2D&v=2">
-                  Stories Map
-                </a>{" "}
-                or <a href="/archive">Interactive Archive</a>.
-              </p> */}
-              <CloseButton onClick={() => setStoriesModal(false)}>
-                &times;
-              </CloseButton>
-            </ModalContentInner>
-          </ModalContent>
-        </Modal>
+        
+
         <VideoModal
           open={videoModalInner}
           onClose={() => setVideoModalInner(false)}

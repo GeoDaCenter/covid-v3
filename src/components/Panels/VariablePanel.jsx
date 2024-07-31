@@ -729,7 +729,7 @@ function VariablePanel() {
                                     value={'uscongress-districts'}
                                     key={'uscongress-districts'}
                                 >
-                                    US Congressional Districts{' '}
+                                    US Congressional Districts (2018){' '}
                                     <Tooltip id="USCongress" />
                                 </MenuItem>
                                 <MenuItem
@@ -788,7 +788,7 @@ function VariablePanel() {
                                     value={'vaccinationSites'}
                                     key={'variable4'}
                                 >
-                                    Federal Vaccination Sites
+                                    Federal Vaccination Sites (as of April, 2023)
                                     <Tooltip id="vaccinationSites" />
                                 </MenuItem>
                             </Select>

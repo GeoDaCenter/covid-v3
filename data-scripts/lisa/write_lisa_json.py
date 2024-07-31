@@ -185,7 +185,7 @@ def rename_column_usafacts(colnames):
 def write_to_s3(filename):
     try:
         print('Writing {} to S3...'.format(filename))
-        s3.Object('geoda-covid-atlas', filename).put(Body=open(os.path.join(dir_path, '_working/{}'.format(filename)), 'rb'))
+        s3.Object('geoda-covid-atlas2', filename).put(Body=open(os.path.join(dir_path, '_working/{}'.format(filename)), 'rb'))
         print('Write to S3 complete.')
 
     except Exception as e:

@@ -34,13 +34,13 @@ def usafacts():
     # try:
     #     print('Writing to S3...')
     #     s3 = boto3.resource('s3')
-    #     s3.Object('geoda-covid-atlas', 'covid_confirmed_usafacts.csv').put(Body=open(os.path.join(repo_root, 'public/csv/covid_confirmed_usafacts.csv'), 'rb'))
-    #     s3.Object('geoda-covid-atlas', 'covid_deaths_usafacts.csv').put(Body=open(os.path.join(repo_root, 'public/csv/covid_deaths_usafacts.csv'), 'rb'))
-    #     s3.Object('geoda-covid-atlas', 'covid_confirmed_usafacts_state.csv').put(Body=open(os.path.join(repo_root, 'public/csv/covid_confirmed_usafacts_state.csv'), 'rb'))
-    #     s3.Object('geoda-covid-atlas', 'covid_deaths_usafacts_state.csv').put(Body=open(os.path.join(repo_root, 'public/csv/covid_deaths_usafacts_state.csv'), 'rb'))
+    #     s3.Object('geoda-covid-atlas2', 'covid_confirmed_usafacts.csv').put(Body=open(os.path.join(repo_root, 'public/csv/covid_confirmed_usafacts.csv'), 'rb'))
+    #     s3.Object('geoda-covid-atlas2', 'covid_deaths_usafacts.csv').put(Body=open(os.path.join(repo_root, 'public/csv/covid_deaths_usafacts.csv'), 'rb'))
+    #     s3.Object('geoda-covid-atlas2', 'covid_confirmed_usafacts_state.csv').put(Body=open(os.path.join(repo_root, 'public/csv/covid_confirmed_usafacts_state.csv'), 'rb'))
+    #     s3.Object('geoda-covid-atlas2', 'covid_deaths_usafacts_state.csv').put(Body=open(os.path.join(repo_root, 'public/csv/covid_deaths_usafacts_state.csv'), 'rb'))
 
-    #     s3.Object('geoda-covid-atlas', 'covid_confirmed_usafacts.geojson').put(Body=open(os.path.join(repo_root, 'download/usafacts_confirmed.geojson'), 'rb'))
-    #     s3.Object('geoda-covid-atlas', 'covid_deaths_usafacts.geojson').put(Body=open(os.path.join(repo_root, 'download/usafacts_deaths.geojson'), 'rb'))
+    #     s3.Object('geoda-covid-atlas2', 'covid_confirmed_usafacts.geojson').put(Body=open(os.path.join(repo_root, 'download/usafacts_confirmed.geojson'), 'rb'))
+    #     s3.Object('geoda-covid-atlas2', 'covid_deaths_usafacts.geojson').put(Body=open(os.path.join(repo_root, 'download/usafacts_deaths.geojson'), 'rb'))
     #     print('Write to S3 complete.')
 
     # except Exception as e:

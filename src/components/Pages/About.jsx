@@ -6,7 +6,7 @@ import { contributors } from '../../meta/contributors';
 import { coreTeam, retiredTeam } from '../../meta/coreTeam';
 import colors from '../../config/colors';
 
-const phases = ['alpha', 'beta', 'v2', 'v3'];
+const phases = ['alpha', 'beta', 'v2', 'v3', 'v3.1'];
 const timelineText = [
   <p>
     Kolak, Li, and Lin begin development of the Atlas on March 14, and make it
@@ -36,6 +36,13 @@ const timelineText = [
     <a href="https://www.rwjf.org/" target="_blank" rel="noopener noreferrer">
       here.
     </a>
+  </p>,
+  <p>
+    The Project moves to the University of Illinois at Urbana Champaign and expands
+    the Atlas Stories further. We co-host multiple workshops with communities
+    disproportionately impacted by the Pandemic, and travel to communities along
+    the Mississippi River and beyond to share stories. The Atlas site is updated
+    for final archiving.
   </p>,
 ];
 
@@ -228,7 +235,7 @@ const TimelineDescription = styled.span`
     margin-left: ${(props) =>
       props.index === 0
         ? 0
-        : `calc(${100 * (props.index / 3)}% - ${50 * (props.index / 3)}ch)`};
+        : `calc(${100 * (props.index / 4)}% - ${50 * (props.index / 4)}ch)`};
     @media (max-width: 960px) {
       margin: 1em auto;
       width: 100%;
@@ -336,22 +343,25 @@ export default function About() {
         </p>
         <Timeline>
           <Grid container spacing={0}>
-            <Grid item xs={3}>
+            <Grid item xs={12/5}>
               March to April 2020
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={12/5}>
               May to October 2020
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={12/5}>
               November to May 2021
             </Grid>
-            <Grid item xs={3}>
-              June 2021 onward
+            <Grid item xs={12/5}>
+              June 2021 to December 2022
+            </Grid>
+            <Grid item xs={12/5}>
+             January 2023 to August 2024
             </Grid>
             <Grid item xs={12}>
               <hr />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={12/5}>
               <TimelineButton
                 active={phaseIndex === 0}
                 onClick={() => setPhaseIndex(0)}
@@ -359,7 +369,7 @@ export default function About() {
                 Alpha
               </TimelineButton>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={12/5}>
               <TimelineButton
                 active={phaseIndex === 1}
                 onClick={() => setPhaseIndex(1)}
@@ -367,7 +377,7 @@ export default function About() {
                 Beta
               </TimelineButton>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={12/5}>
               <TimelineButton
                 active={phaseIndex === 2}
                 onClick={() => setPhaseIndex(2)}
@@ -375,12 +385,20 @@ export default function About() {
                 v2
               </TimelineButton>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={12/5}>
               <TimelineButton
                 active={phaseIndex === 3}
                 onClick={() => setPhaseIndex(3)}
               >
                 v3
+              </TimelineButton>
+            </Grid>
+            <Grid item xs={12/5}>
+              <TimelineButton
+                active={phaseIndex === 4}
+                onClick={() => setPhaseIndex(4)}
+              >
+                v3.1
               </TimelineButton>
             </Grid>
           </Grid>

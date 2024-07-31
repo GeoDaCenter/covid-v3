@@ -430,8 +430,9 @@ function MapSection({
                         info: `
                             <h2>COVID19 Vaccine Access</h2>
                             <p>
-                                <br/>
                                 Federal Vaccination Sites only include White House/FEMA large vaccination centers and HRSA-supported clinics (FQHCs).
+                                <br/><br/>
+                                Locations shown on map were last updated April, 2023.
                                 <br/><br/>
                                 For a more complete listing of places to get the COVID19 vaccine please visit the <a href="https://vaccinefinder.org/search/" target="_blank" rel="noopener noreferrer">CDC VaccineFinder</a> or check your local jurisdiction.
                             </a>

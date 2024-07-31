@@ -3,7 +3,7 @@ const path = require('path');
 const axios = require("axios");
 var AdmZip = require("adm-zip");
 
-const BASE_URL = "https://d27o3hdsxhdrv9.cloudfront.net/zip/";
+const BASE_URL = "https://geoda-covid-atlas2.s3.us-east-2.amazonaws.com/zip/"
 const filesToUnpack = ["csv.zip", "pbf.zip", "geojson.zip"];
 
 const makeFolder = (folderName) => {

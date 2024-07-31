@@ -11,6 +11,12 @@ import colors from '../config/colors';
 import { Gutter } from '.';
 import * as JSZip from 'jszip';
 
+const rawBaseUrl = "https://raw.githubusercontent.com/GeoDaCenter/covid-v3"
+const currentApiBaseUrl = "https://api.github.com/repos/GeoDaCenter/covid-v3/contents"
+
+// the srchive repo has all CSVs committed to it, so it is used to aquire the data for download
+const archiveApiBaseUrl = "https://api.github.com/repos/GeoDaCenter/covid/contents"
+
 const CsvDownloaderContainer = styled.div`
   padding: 20px;
   border: 1px solid ${colors.darkgray};
@@ -351,7 +357,7 @@ const CsvDownloader = () => {
     // init zip and folders
     // get links from github
     const dataLinks = await fetch(
-      'https://api.github.com/repos/geodacenter/covid/contents/public/csv',
+      archiveApiBaseUrl + '/public/csv',
     )
       .then((r) => r.json())
       .then((items) =>
@@ -361,7 +367,7 @@ const CsvDownloader = () => {
           .filter((x) => x !== undefined),
       );
     const docsLinks = await fetch(
-      'https://api.github.com/repos/geodacenter/covid/contents/data-docs',
+      currentApiBaseUrl + '/data-docs',
     )
       .then((r) => r.json())
       .then((items) =>
@@ -389,7 +395,7 @@ const CsvDownloader = () => {
       values.map((v, i) => ({ name: docsLinks[i].name, data: v })),
     );
     const license = await fetch(
-      'https://raw.githubusercontent.com/GeoDaCenter/covid/master/LICENSE',
+      rawBaseUrl + '/main/LICENSE',
     ).then((r) => r.blob());
 
     var zip = new JSZip();
@@ -423,13 +429,13 @@ const CsvDownloader = () => {
             the Atlas. Select your datasets of interest with the checkboxes
             below and then click download data to receive a ZIP archive with
             your CSV files and data documentation. Please note that the full
-            dataset is currently over 70MB, and may be slow to load.
+            dataset is currently over 100MB, and may be slow to load.
           </p>
         </Grid>
         <Grid item xs={12} md={4}>
           <button
             onClick={() => GetFiles(checkboxes)}
-            ping="https://theuscovidatlas.org/trackdownloads.html"
+            ping="/trackdownloads.html"
           >
             Download Data
           </button>
