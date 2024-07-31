@@ -6,7 +6,7 @@ import { contributors } from '../../meta/contributors';
 import { coreTeam, retiredTeam } from '../../meta/coreTeam';
 import colors from '../../config/colors';
 
-const phases = ['alpha', 'beta', 'v2', 'v3', 'closeout'];
+const phases = ['alpha', 'beta', 'v2', 'v3', 'v3.1'];
 const timelineText = [
   <p>
     Kolak, Li, and Lin begin development of the Atlas on March 14, and make it
@@ -38,7 +38,11 @@ const timelineText = [
     </a>
   </p>,
   <p>
-    Closeout phase text here
+    The Project moves to the University of Illinois at Urbana Champaign and expands
+    the Atlas Stories further. We co-host multiple workshops with communities
+    disproportionately impacted by the Pandemic, and travel to communities along
+    the Mississippi River and beyond to share stories. The Atlas site is updated
+    for final archiving.
   </p>,
 ];
 
@@ -352,7 +356,7 @@ export default function About() {
               June 2021 to December 2022
             </Grid>
             <Grid item xs={12/5}>
-              January 2023 to Closeout
+             January 2023 to August 2024
             </Grid>
             <Grid item xs={12}>
               <hr />
@@ -394,7 +398,7 @@ export default function About() {
                 active={phaseIndex === 4}
                 onClick={() => setPhaseIndex(4)}
               >
-                Closeout
+                v3.1
               </TimelineButton>
             </Grid>
           </Grid>
