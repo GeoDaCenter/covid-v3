@@ -35,14 +35,13 @@ const Methodology = () => {
         <h3>Overall Architecture</h3>
         <br />
         <p>
-          The US Covid Atlas is a static web application built with React and deployed via Netlify. Through the course of the project, GitHub actions were used to run Python scraping scripts that fetched, processed, and recombined Covid-related data from <a href="/docs">many different sources</a>. This data was then zipped and pushed to AWS S3 and Google BigQuery. The build process for the site downloads and unzips these files, making them available for access by the frontend map and other visualization tools. A Google Sheet, which is also ingested at build time, provides a user-friendly configuration format that holds variable names, map symbology information, and more.<br/><br/>
-          To learn much more about the inner-workings of the React application, view our JsDocs here at <a href="https://docs.uscovidatlas.org">docs.uscovidatlas.org</a>.
+          The US Covid Atlas is a static web application built with React and deployed via Netlify. Through the course of the project, GitHub actions were used to run Python scraping scripts that fetched, processed, and recombined Covid-related data from <a href="/docs">many different sources</a>. This data was then zipped and pushed to AWS S3 and Google BigQuery. The build process for the site downloads and unzips these files, making them available for access by the frontend map and other visualization tools. A Google Sheet, which is also ingested at build time, provides a user-friendly configuration format that holds variable names, map symbology information, and more.
         </p>
         <Gutter h={40} />
         <h3>Internal JS API</h3>
         <br />
         <p>
-          Video collection for the Atlas Stories project was set up and managed via a serverless architecture that utilizes AWS Lambda, S3, and CloudFront services. During the open submission period, user video or audio contributions were collected via webcam, and stored in S3 during an admin review period. After review, they were transcoded using FFMPEG through a scheduled GitHub action, and copied within the S3 bucket to a publicly accessible folder behind a CDN. Later, we began collecting long-form interviews which we transcoded locally and uploaded directly to S3 for publication.
+          To learn much more about the inner-workings of the React application, view our JsDocs here at <a href="https://docs.uscovidatlas.org">docs.uscovidatlas.org</a>.
         </p>
         <Gutter h={40} />
         <h3>Geospatial Analysis and Visualization</h3>
@@ -89,7 +88,7 @@ const Methodology = () => {
           >
             github.com/GeoDaCenter/covid
           </a>.
-        </p>
+        </p><br /><br />
       </ContentContainer>
       <Footer />
     </TechPage>
