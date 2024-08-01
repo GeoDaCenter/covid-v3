@@ -99,6 +99,7 @@ const SuccessMessage = styled.div`
  */
 export default function ContactForm() {
     const url = `${process.env.REACT_APP_EMAIL_FORM_URL}`;
+    const slackFormUrl = `${process.env.REACT_APP_SLACK_FORM_SUBMISSION_URL}`
 
     const [formData, setFormData] = useState({
         Category: 'General',
@@ -165,6 +166,20 @@ export default function ContactForm() {
 
             const submissionURL = await generateURL(formData, url);
             await fetch(submissionURL, { method: 'GET' });
+
+            let slackText = `Submission from ${window.location.href}`
+            slackText += `\n*Name:* ${formData.Contact_Name}`
+            slackText += `\n*Email:* ${formData.Contact_Email}`
+            slackText += `\n*Phone:* ${formData.Contact_Phone}`
+            slackText += `\n*Message Category:* ${formData.Category}`
+            slackText += `\n---\n${formData.Message}`
+            await fetch(slackFormUrl, {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                method: 'POST',
+                body: JSON.stringify({text: slackText})
+            });
 
             setIsSubmitting(false);
             setSubmitted(true);
