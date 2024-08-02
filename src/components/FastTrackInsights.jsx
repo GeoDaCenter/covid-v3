@@ -252,15 +252,15 @@ function FastTrackInsights() {
                         <ButtonContainer>
                             <CTAButton
                                 className={activeButton === 0 ? 'active' : ''}
-                                onMouseEnter={() => handleButton(1)}
-                                onClick={() => handleButton(1)}
+                                onMouseEnter={() => handleButton(0)}
+                                onClick={() => handleButton(0)}
                             >
                                 <span className="text">Case Hotspots</span>
                             </CTAButton>
                             <CTAButton
                                 className={activeButton === 1 ? 'active' : ''}
-                                onMouseEnter={() => handleButton(0)}
-                                onClick={() => handleButton(0)}
+                                onMouseEnter={() => handleButton(1)}
+                                onClick={() => handleButton(1)}
                             >
                                 <span className="text">Vaccination Progress</span>
                             </CTAButton>
