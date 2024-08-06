@@ -194,7 +194,7 @@ const Footer = ({
                   <NavLink to="/learn">Learn Toolkit</NavLink>
                 </li>
                 <li>
-                  <NavLink to="https://stories.uscovidatlas.org/">Stories</NavLink>
+                  <NavLink to="/archive">Stories</NavLink>
                 </li>
               </ul>
             </span>

@@ -148,14 +148,7 @@ export const StoryContainer = ({
                 </>}
             </Grid>
             <Grid item xs={12} sx={{ pt: 2, borderTop: '1px solid #ffffff44' }}></Grid>
-            <Grid item xs={12} md={6}>
-                <ShareLink href="https://stories.uscovidatlas.org/" target="_blank" rel="noopener noreferrer">
-                    Want to contribute to Atlas Stories?
-                    <br />
-                    Share your pandemic experience.
-                </ShareLink>
-            </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12}>
                 <HarmLink href={`/contact?category=HarmfulContent&id=${story.id}`} target="_blank" rel="noopener noreferrer">
                     Is this content harmful? Report it here.
                 </HarmLink>

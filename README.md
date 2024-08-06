@@ -123,7 +123,7 @@ URLs
 - Main: [https://uscovidatlas.org/](https://uscovidatlas.org/): Main site, built using `yarn build` or `yarn netlify-build` to include pre-build data fetching and parsing 
 - Dev: [https://dev.uscovidatlas.org/](https://dev.uscovidatlas.org/): Dev site, built using same command as above on the dev branch
 - Docs: [https://docs.uscovidatlas.org/](https://docs.uscovidatlas.org/): JSDocs site for the Atlas, generated from `yarn docs` 
-- Stories: [https://stories.uscovidatlas.org/](https://stories.uscovidatlas.org/): Stories site, a next.js site. See Stories repo for more info.
+- Stories: [https://stories.uscovidatlas.org/](https://stories.uscovidatlas.org/): Stories site, a next.js site. See [Stories repo](https://github.com/GeoDaCenter/covid-histories) for more info.
 
 There are various other branch deploys on the US Covid Atlas web hosting (netlify) that are not publicly listed.
 

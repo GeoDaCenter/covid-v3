@@ -365,11 +365,6 @@ const defaultDropDowns = {
   ],
   STORIES: [
     {
-      header: 'Submit',
-      desc: 'Share your story of the pandemic and uplift the real experiences behind the data.',
-      link: 'https://stories.uscovidatlas.org/',
-    },
-    {
       header: 'Explore Map',
       desc: 'View stories from across the country on the Atlas map.',
       link: '/map',
