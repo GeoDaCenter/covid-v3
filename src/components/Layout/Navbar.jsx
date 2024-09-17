@@ -275,10 +275,10 @@ const NavHamburger = styled.button`
 `
 /**
  * @typedef {Object} DropdownEntry
- * 
+ *
  * An entry in for dropdown sub-links
- * 
- * @property {string} header - Title for dropdown 
+ *
+ * @property {string} header - Title for dropdown
  * @property {string} desc - Dropdown description
  * @property {string} link - Link for dropdown
  */
@@ -374,6 +374,11 @@ const defaultDropDowns = {
       desc: 'Explore stories by tag, topic, theme, and area in the complete archive.',
       link: '/archive',
     },
+    {
+      header: 'Latest',
+      desc: 'Read the latest stories',
+      link: '/stories',
+    }
   ],
   // 'METHODS':[
   //   {
@@ -395,14 +400,14 @@ const defaultDropDowns = {
 }
 
 /**
- * 
+ *
  * @component
  * @category Components/Layout
- * 
- * @param {Object} props 
+ *
+ * @param {Object} props
  * @param {string} props.light - Page theme light or dark
  * @param {DropdownContent} pageDropDowns - Object of dropdowns to render, defaults to defaultDropDowns in src/Components/Layout/Nav.jsx
- * @example 
+ * @example
  * function MyComponent(){
  *  return(
  *   <Nav light />
