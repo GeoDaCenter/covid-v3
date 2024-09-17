@@ -50,7 +50,7 @@ export default function Stories() {
             <ContentContainer>
                 <Grid container spacing={3}>
                     <Typography variant="h5" sx={{ pb: 3, pt: 1 }}>
-                        Latest Stories
+                        Stories Showcase
                     </Typography>
 
                     {/*<ArchiveSidebar

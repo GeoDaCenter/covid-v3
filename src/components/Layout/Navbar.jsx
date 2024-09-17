@@ -366,7 +366,7 @@ const defaultDropDowns = {
   STORIES: [
     {
       header: 'Overview',
-      desc: 'Read the latest stories in the Stories Showcase',
+      desc: 'Read the latest from the Stories Showcase',
       link: '/stories',
     },
     {
