@@ -365,6 +365,11 @@ const defaultDropDowns = {
   ],
   STORIES: [
     {
+      header: 'Overview',
+      desc: 'Read the latest stories in the Stories Showcase',
+      link: '/stories',
+    },
+    {
       header: 'Explore Map',
       desc: 'View stories from across the country on the Atlas map.',
       link: '/map',
@@ -374,11 +379,6 @@ const defaultDropDowns = {
       desc: 'Explore stories by tag, topic, theme, and area in the complete archive.',
       link: '/archive',
     },
-    {
-      header: 'Latest',
-      desc: 'Read the latest stories',
-      link: '/stories',
-    }
   ],
   // 'METHODS':[
   //   {
