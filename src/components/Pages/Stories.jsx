@@ -362,6 +362,8 @@ export default function Stories() {
         }
     }
 
+    console.log(stories);
+
     return (
         <StoriesPage>
             <NavBar light/>
