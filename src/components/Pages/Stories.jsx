@@ -300,11 +300,9 @@ const VideoIcon = styled(SvgIcon)`
   }
 `;
 
-const VideoLink = (url) => {
-    return (<a href={url} target='_blank'>
-        <VideoText><VideoIcon component={OndemandVideoIcon} inheritViewBox /></VideoText>
-    </a>);
-};
+const VideoLink = ({url}) => <a href={url} target='_blank'>
+    <VideoText><VideoIcon component={OndemandVideoIcon} inheritViewBox /></VideoText>
+</a>;
 
 export default function Stories() {
     const [filters, setFilters] = useState([]);
@@ -327,39 +325,39 @@ export default function Stories() {
         'mollit anim id est laborum.';
 
     // TODO: Data model for Stories page
-    const showcaseStories = {
+    const showcaseStories= {
         'Chicago': {
             image: placeholderImage,
             description: placeholderDescription,
             urls: [
-                'https://uscovidatlas.org/story/xrq3Z6QWAiwdteIxPhXr8',
-                'https://uscovidatlas.org/story/OPZahZe3sdjYGaHVGvPdy',
-                'https://uscovidatlas.org/story/Bb8oKNRRDRNDdTBaSUt7G',
-                'https://uscovidatlas.org/story/SPH21NEYIztOdoTppQfPk',
-                'https://uscovidatlas.org/story/034YF6t1Kx-c6UfH8tfKz',
+                '/story/xrq3Z6QWAiwdteIxPhXr8',
+                '/story/OPZahZe3sdjYGaHVGvPdy',
+                '/story/Bb8oKNRRDRNDdTBaSUt7G',
+                '/story/SPH21NEYIztOdoTppQfPk',
+                '/story/034YF6t1Kx-c6UfH8tfKz',
             ]
         },
         'Champaign-Urbana': {
             image: placeholderImage,
             description: placeholderDescription,
             urls: [
-                'https://uscovidatlas.org/story/HOFD24QogstIXDgTx_zQQ',
-                'https://uscovidatlas.org/story/m5WQ_3TtsxKolOKXUu2AW',
+                '/story/HOFD24QogstIXDgTx_zQQ',
+                '/story/m5WQ_3TtsxKolOKXUu2AW',
             ]
         },
         'Mississippi': {
             image: placeholderImage,
             description: placeholderDescription,
             urls: [
-                'https://uscovidatlas.org/story/5CSAg1X0s9Faue2lENpS0',
+                '/story/5CSAg1X0s9Faue2lENpS0',
             ]
         },
         'Geography': {
             image: placeholderImage,
             description: placeholderDescription,
             urls: [
-                'https://uscovidatlas.org/story/nUhQUof8-J9v_VwGw4Qi9',
-                'https://uscovidatlas.org/story/teiUr_zD9bW-zHid5hGoV',
+                '/story/nUhQUof8-J9v_VwGw4Qi9',
+                '/story/teiUr_zD9bW-zHid5hGoV',
             ]
         }
     }
@@ -416,7 +414,7 @@ export default function Stories() {
             </BreakQuestion>
 
             {
-                Object.keys(showcaseStories).map((keyName, keyIndex) => <>
+                Object.keys(showcaseStories).map((keyName, keyIndex) => <div key={`section-${keyName}`}>
                     {keyIndex > 0 && <Divider></Divider>}
 
                     <UseCasesContainer>
@@ -442,15 +440,17 @@ export default function Stories() {
 
                             <Grid container spacing={5}>
                                 {
-                                    showcaseStories[keyName]?.urls?.map(storyUrl => <Grid item xs={3} md={1}>
-                                        <VideoLink url={storyUrl}></VideoLink>
-                                    </Grid>)
+                                    showcaseStories[keyName]?.urls?.map((url, index) =>
+                                        <Grid key={`videoLink-${keyName}-${index}`} item xs={3} md={1}>
+                                            <VideoLink url={url}></VideoLink>
+                                        </Grid>
+                                    )
                                 }
                             </Grid>
                         </UseCases>
 
                     </UseCasesContainer>
-                </>)
+                </div>)
             }
 
             <Footer/>
