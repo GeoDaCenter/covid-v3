@@ -5,8 +5,7 @@ import {
     Footer,
     Gutter,
 } from "../../components";
-import {NavLink} from "react-router-dom";
-import {Grid, Box, Button, Modal, SvgIcon} from "@mui/material";
+import {Grid, Box, Modal, SvgIcon} from "@mui/material";
 import {useStories} from "../../hooks/useStories";
 import {StoryContainer} from "../Stories/StoryContainer";
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
@@ -301,22 +300,20 @@ const VideoIcon = styled(SvgIcon)`
   }
 `;
 
-const VideoLink = ({url}) => <a href={url} target='_blank'>
+const VideoLink = ({url}) => <a href={url} target='_blank' rel='noreferrer noopener'>
     <VideoText><VideoIcon component={OndemandVideoIcon} inheritViewBox /></VideoText>
 </a>;
 
 export default function Stories() {
-    const [filters, setFilters] = useState([]);
+    const [filters, /* setFilters */] = useState([]);
     const [activeStory, setActiveStory] = useState({});
     const {
         stories,
-        counts,
+        // counts,
         // relatedStories
     } = useStories({
         filters,
     });
-
-    console.log(stories);
 
     // TODO: Placeholders for actual page content
     const placeholderImage = '/icons/county-level-data@2x.png';
@@ -332,35 +329,35 @@ export default function Stories() {
         'Chicago': {
             image: placeholderImage,
             description: placeholderDescription,
-            urls: [
-                '/story/xrq3Z6QWAiwdteIxPhXr8',
-                '/story/OPZahZe3sdjYGaHVGvPdy',
-                '/story/Bb8oKNRRDRNDdTBaSUt7G',
-                '/story/SPH21NEYIztOdoTppQfPk',
-                '/story/034YF6t1Kx-c6UfH8tfKz',
+            storyIds: [
+                'xrq3Z6QWAiwdteIxPhXr8',
+                'OPZahZe3sdjYGaHVGvPdy',
+                'Bb8oKNRRDRNDdTBaSUt7G',
+                'SPH21NEYIztOdoTppQfPk',
+                '034YF6t1Kx-c6UfH8tfKz',
             ]
         },
         'Champaign-Urbana': {
             image: placeholderImage,
             description: placeholderDescription,
-            urls: [
-                '/story/HOFD24QogstIXDgTx_zQQ',
-                '/story/m5WQ_3TtsxKolOKXUu2AW',
+            storyIds: [
+                'HOFD24QogstIXDgTx_zQQ',
+                'm5WQ_3TtsxKolOKXUu2AW',
             ]
         },
         'Mississippi': {
             image: placeholderImage,
             description: placeholderDescription,
-            urls: [
-                '/story/5CSAg1X0s9Faue2lENpS0',
+            storyIds: [
+                '5CSAg1X0s9Faue2lENpS0',
             ]
         },
         'Geography': {
             image: placeholderImage,
             description: placeholderDescription,
-            urls: [
-                '/story/nUhQUof8-J9v_VwGw4Qi9',
-                '/story/teiUr_zD9bW-zHid5hGoV',
+            storyIds: [
+                'nUhQUof8-J9v_VwGw4Qi9',
+                'teiUr_zD9bW-zHid5hGoV',
             ]
         }
     }
@@ -443,11 +440,13 @@ export default function Stories() {
 
                             <Grid container spacing={5}>
                                 {
-                                    showcaseStories[keyName]?.urls?.map((url, index) =>
-                                        <Grid key={`videoLink-${keyName}-${index}`} item xs={3} md={1}>
-                                            <VideoLink url={url}></VideoLink>
-                                        </Grid>
-                                    )
+                                    showcaseStories[keyName]?.storyIds?.map((id, index) => {
+                                        const story = stories?.find(s => s.id === id);
+                                        return (<Grid key={`videoLink-${keyName}-${index}`} item xs={3} md={1}>
+                                            <VideoLink url={`/story/${id}`}></VideoLink>
+                                            <p>{story?.title || ''}</p>
+                                        </Grid>);
+                                    })
                                 }
                             </Grid>
                         </UseCases>
