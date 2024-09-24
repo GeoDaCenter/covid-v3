@@ -444,7 +444,7 @@ export default function Stories() {
                                 {
                                     showcaseStories[keyName]?.storyIds?.map((id, index) => {
                                         const story = stories?.find(s => s.id === id);
-                                        return (<Grid key={`videoLink-${keyName}-${index}`} item xs={3} md={1}>
+                                        return (<Grid style={{ textAlign: 'center' }} key={`videoLink-${keyName}-${index}`} item xs={3} md={1}>
                                             <VideoLink url={`/story/${id}`}></VideoLink>
                                             <small>{story?.title || 'A video story'}</small>
                                         </Grid>);
