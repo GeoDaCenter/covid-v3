@@ -444,7 +444,7 @@ export default function Stories() {
                                         const story = stories?.find(s => s.id === id);
                                         return (<Grid key={`videoLink-${keyName}-${index}`} item xs={3} md={1}>
                                             <VideoLink url={`/story/${id}`}></VideoLink>
-                                            <small>{story?.title || ''}</small>
+                                            <small>{story?.title || 'A video story'}</small>
                                         </Grid>);
                                     })
                                 }
