@@ -225,7 +225,7 @@ const UseCasesContainer = styled.div`
   background: white;
   width: 100%;
   padding: 40px 20px;
-  padding-top: 40px;
+  //padding-top: 40px;
 `;
 const UseCases = styled.div`
   width: 100%;
@@ -258,8 +258,10 @@ const UseCases = styled.div`
 `;
 
 // Default styling for body>hr is a dark gray background
-const WhiteBody = styled.body`
+const WhiteBody = styled.div`
   background: #ffffff !important;
+  padding: 1em 0;
+  margin: 0 auto;
 `;
 
 const Divider = () => {
@@ -293,7 +295,6 @@ const VideoIcon = styled(SvgIcon)`
   width: 4rem;
   height: 4rem;
   display: block;
-  margin-bottom: 1rem;
   svg {
     fill: ${colors.lightslategrey};
     stroke: ${colors.lightslategrey};
@@ -314,6 +315,8 @@ export default function Stories() {
     } = useStories({
         filters,
     });
+
+    console.log(stories);
 
     // TODO: Placeholders for actual page content
     const placeholderImage = '/icons/county-level-data@2x.png';
@@ -390,9 +393,9 @@ export default function Stories() {
                     <Grid item xs={12} md={6}>
 
                         <iframe width="90%" height="100%" src="https://www.youtube.com/embed/pjswdUvwbFE"
-                                title="Atlas Stories Overview" frameborder="0"
+                                title="Atlas Stories Overview" frameBorder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
 
                     </Grid>
 
