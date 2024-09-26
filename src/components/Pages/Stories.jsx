@@ -439,8 +439,24 @@ export default function Stories() {
                                 </Grid>
                             </Grid>
 
-
                             <Grid container spacing={5}>
+                                <Grid item xs={12}>
+                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+                                        {
+                                            showcaseStories[keyName]?.storyIds?.map((id, index) => {
+                                                const story = stories?.find(s => s.id === id);
+                                                return (<div style={{ margin: '5rem'}}>
+                                                    <VideoLink url={`/story/${id}`}></VideoLink>
+                                                    <small>{story?.title || 'A video story'}</small>
+                                                </div>);
+                                            })
+                                        }
+                                    </div>
+                                </Grid>
+                            </Grid>
+
+
+                            {/*<Grid container spacing={5}>
                                 {
                                     showcaseStories[keyName]?.storyIds?.map((id, index) => {
                                         const story = stories?.find(s => s.id === id);
@@ -450,7 +466,7 @@ export default function Stories() {
                                         </Grid>);
                                     })
                                 }
-                            </Grid>
+                            </Grid>*/}
                         </UseCases>
 
                     </UseCasesContainer>
