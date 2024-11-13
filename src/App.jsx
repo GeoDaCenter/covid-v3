@@ -29,6 +29,7 @@ const PrivacyPolicy = React.lazy(() =>
 )
 const Report = React.lazy(() => import('./components/Pages/Report'))
 const Story = React.lazy(() => import('./components/Pages/Story'))
+const Stories = React.lazy(() => import('./components/Pages/Stories'))
 const Tech = React.lazy(() => import('./components/Pages/Tech'))
 const Time = React.lazy(() => import('./components/Pages/Time'))
 const Trends = React.lazy(() => import('./components/Pages/Trends'))
@@ -85,6 +86,8 @@ export default function App() {
               <Route path="/privacy" component={PrivacyPolicy} />
               <Route path="/learn" component={Learn} exact />
               <Route path="/learn/:topic" component={LearnTopic} exact />
+              <Route path="/stories" component={Stories} exact />
+              <Route path="/stories.html" component={Stories} exact />
               <Route
                 path="/500000"
                 exact

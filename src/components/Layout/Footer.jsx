@@ -143,11 +143,11 @@ const SignupForm = styled.div`
 `;
 /**
  * Footer component, nothing fancy here.
- * 
+ *
  * @component
  * @category Components/Layout
- * 
- * @param {boolean} signUp - if true, show the signup form 
+ *
+ * @param {boolean} signUp - if true, show the signup form
  * @returns {JSX.Element} - Footer component
  */
 const Footer = ({
@@ -194,7 +194,7 @@ const Footer = ({
                   <NavLink to="/learn">Learn Toolkit</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/archive">Stories</NavLink>
+                  <NavLink to="/stories">Stories</NavLink>
                 </li>
               </ul>
             </span>
@@ -239,7 +239,7 @@ const Footer = ({
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Healthy Regions &amp; Policies Lab  
+                Healthy Regions &amp; Policies Lab
               </a>
                , at the University of Illinois at Urbana, and the University of Chicago. Funded in part by the{' '}
               <a
