@@ -275,94 +275,118 @@ const SectionHeader = styled.h1`
   padding-bottom: 2rem;
 `;
 
-const VideoText = styled.h5`
-  font-family: "Playfair Display", serif;
-  font-size: 28px;
-  text-align: center;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: italic;
-  line-height: 1.5;
-  letter-spacing: normal;
-  text-align: center;
-  color: ${colors.darkgray};
-  margin-top: 2rem;
+const CenteredGrid = styled(Grid)`
+  flex-direction: column;
+  display: flex;
+  align-self: center;
 `;
-
-const VideoIcon = styled(SvgIcon)`
-  justify-content: center;
-  width: 4rem;
-  height: 4rem;
-  display: block;
-  svg {
-    fill: ${colors.lightslategrey};
-    stroke: ${colors.lightslategrey};
-  }
-`;
-
-const VideoLink = ({url}) => <a href={url} target='_blank' rel='noreferrer noopener'>
-    <VideoText><VideoIcon component={OndemandVideoIcon} inheritViewBox /></VideoText>
-</a>;
 
 export default function Stories() {
     const [filters, /* setFilters */] = useState([]);
     const [activeStory, setActiveStory] = useState({});
     const {
-        stories,
+        // stories,
         // counts,
         // relatedStories
     } = useStories({
         filters,
     });
 
-    // TODO: Placeholders for actual page content
-    const placeholderImage = '/icons/county-level-data@2x.png';
-    const placeholderDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ' +
-        'incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ' +
-        'exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure ' +
-        'dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ' +
-        'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt ' +
-        'mollit anim id est laborum.';
-
-    // TODO: Data model for Stories page
-    const showcaseStories= {
-        'Chicago': {
-            image: placeholderImage,
-            description: placeholderDescription,
-            storyIds: [
-                'xrq3Z6QWAiwdteIxPhXr8',
-                'OPZahZe3sdjYGaHVGvPdy',
-                'Bb8oKNRRDRNDdTBaSUt7G',
-                'SPH21NEYIztOdoTppQfPk',
-                '034YF6t1Kx-c6UfH8tfKz',
-            ]
-        },
-        'Champaign-Urbana': {
-            image: placeholderImage,
-            description: placeholderDescription,
-            storyIds: [
-                'HOFD24QogstIXDgTx_zQQ',
-                'm5WQ_3TtsxKolOKXUu2AW',
-            ]
-        },
-        'Mississippi': {
-            image: placeholderImage,
-            description: placeholderDescription,
-            storyIds: [
-                '5CSAg1X0s9Faue2lENpS0',
-            ]
-        },
-        'Geography': {
-            image: placeholderImage,
-            description: placeholderDescription,
-            storyIds: [
-                'nUhQUof8-J9v_VwGw4Qi9',
-                'teiUr_zD9bW-zHid5hGoV',
-            ]
-        }
+    // Data model for Stories page
+    const showcaseStoryMap = {
+        'Chicago': [
+            {
+                id: 'xrq3Z6QWAiwdteIxPhXr8',
+                title: 'I Missed Coming to Work',
+                image: '/img/stories/xrq3Z6QWAiwdteIxPhXr8.png',
+                description: 'Theirs wasn\'t the easiest to transfer from in-person to at home, because it centers around direct services with youth, aiming to find them opportunities for work and training.',
+            },
+            {
+                id: 'OPZahZe3sdjYGaHVGvPdy',
+                title: 'Changes in Healthcare because of COVID',
+                image: '/img/stories/OPZahZe3sdjYGaHVGvPdy.png',
+                description: 'COVID shined a spotlight on the increased need for public health and epidemiology. It also allowed healthcare workers to look at a patient more holistically, coming with the recognition of the various ways that a virus can affect people.',
+            },
+            {
+                id: 'Bb8oKNRRDRNDdTBaSUt7G',
+                title: 'I Survived COVID',
+                image: '/img/stories/Bb8oKNRRDRNDdTBaSUt7G.png',
+                description: 'A person describes taking COVID seriously from the beginning, with the help of their brother, who is a Doctor of Internal Medicine. Based on previous historical events, they can somewhat understand the reasoning behind some of being skeptical about the COVID vaccine, however, they believe in doctors, science, CDC guidelines, and living in the present.',
+            },
+            {
+                id: 'SPH21NEYIztOdoTppQfPk',
+                title: 'Our Lives Changed in the Span of a Week',
+                image: '/img/stories/SPH21NEYIztOdoTppQfPk.png',
+                description: 'A person details how quickly things changed in the lives of people across the country. From daily routines, to work meetings transitioning online, COVID forced the need to adapt, and highlighted the importance of having daily interactions with people and the bigger picture of life as a whole.',
+            },
+            {
+                id: '034YF6t1Kx-c6UfH8tfKz',
+                title: 'Dealing with Loss',
+                image: '/img/stories/034YF6t1Kx-c6UfH8tfKz.png',
+                description: 'A man recounts the difficult experience of witnessing his mother having a stroke, and the frustration of not being able to be by her side when she passed away, due to the overcrowding and strict visitation rules that were in place at hospitals during the pandemic.',
+            },
+        ],
+        'Champaign-Urbana': [
+            {
+                id: 'HOFD24QogstIXDgTx_zQQ',
+                title: 'Sole Provider',
+                image: '/img/stories/HOFD24QogstIXDgTx_zQQ.png',
+                description: 'A Polish immigrant and current student details the difficulties of having to remain at home as well as being the only income-earner in her family during the pandemic.',
+            },
+            {
+                id: 'm5WQ_3TtsxKolOKXUu2AW',
+                title: 'Taking Precautions',
+                image: '/img/stories/m5WQ_3TtsxKolOKXUu2AW.png',
+                description: 'A former professor at the University of Illinois received COVID shots and did what they could to stay at home more often. It took a bit of time, but ultimately they knew that being cautious would be the best for staying healthy.',
+            },
+            {
+                id: 'MInqbCMUrlVx5bETDr2ZY',
+                title: 'My Little Brother & COVID',
+                image: '/img/stories/MInqbCMUrlVx5bETDr2ZY.png',
+                description: 'A student from the University of Illinois details her little brother’s experience with COVID and mentions the long term effects that he continues to deal with as a result.',
+            },
+        ],
+        'Mississippi': [
+            {
+                id: '5CSAg1X0s9Faue2lENpS0',
+                title: 'Connections between Academia and the Public',
+                image: '/img/stories/5CSAg1X0s9Faue2lENpS0.png',
+                description: 'A medical student details the stark differences with how she perceives and understands COVID through the lens of her studies, and how some in her family and others across the country see it as much more trivial and much less urgent than she does. They also talk about changes in their personal life over this time, and how in the future, researchers and scientists can improve in the ways they discuss the impact of diseases to the public.',
+            },
+            {
+                id: 't9YVItD6se7E1hDHgeviZ',
+                title: 'COVID, the Church, and Community',
+                image: '/img/stories/t9YVItD6se7E1hDHgeviZ.png',
+                description: 'A community liaison discusses the importance of utilizing trusted community members to spread the message regarding COVID and access to the vaccine. In the Mississippi Delta area, faith-based organizations play this role well. Although skeptical at first, they understood the importance of bringing awareness and information to the local community, especially the rural community, regarding COVID.',
+            },
+            {
+                id: 'Musl4wVXLVnYgtbGcDwIZ',
+                title: 'The Dangers of COVID: From Skepticism to Understanding',
+                image: '/img/stories/Musl4wVXLVnYgtbGcDwIZ.png',
+                description: 'A cardiopulmonary worker didn\'t understand why so many people were buying disinfectant spray in June 2020. The initial skepticism faded when their co-worker was placed on a ventilator after getting COVID.',
+            },
+        ],
+        'Geography': [
+            {
+                id: 'nUhQUof8-J9v_VwGw4Qi9',
+                title: 'A New Start',
+                image: '/img/stories/nUhQUof8-J9v_VwGw4Qi9.png',
+                description: 'A geographer and homeschooling parent details the difficulties of libraries being closed, the Canadian border being closed, preventing them from seeing family, and the challenges associated with everyone in the household being in the same space all of the time. They also discuss how they learned from those initial challenges and grew stronger as a family, and how the pandemic led them toward the field of geography.',
+            },
+            {
+                id: 'wmnMqFXDL6YxApz-OHdKR',
+                title: 'The Media Massaging the COVID story',
+                image: '/img/stories/wmnMqFXDL6YxApz-OHdKR.png',
+                description: 'A Geography professor expresses his frustration with reporters attempting to predict the severity of COVID. There are too many factors involved, and the globalization of the world means we must all be diligent in the face of a pandemic. ',
+            },
+            {
+                id: '7xiqYgM4To5YtdqUjHMfb',
+                title: 'A House of Friends',
+                image: '/img/stories/7xiqYgM4To5YtdqUjHMfb.png',
+                description: 'A teacher looks back on having to stay with a handful of friends during the pandemic, many of whom lost their jobs. They mention the difficulties students faced with online learning as well as the eventual return to in-person learning. Their research looked at the reduction of unhoused people and trash in the streets during the height of the pandemic. ',
+            },
+        ]
     }
-
-    console.log(stories);
 
     return (
         <StoriesPage>
@@ -416,7 +440,7 @@ export default function Stories() {
             </BreakQuestion>
 
             {
-                Object.keys(showcaseStories).map((keyName, keyIndex) => <div key={`section-${keyName}`}>
+                Object.keys(showcaseStoryMap).map((keyName, keyIndex) => <div key={`section-${keyName}`}>
                     {keyIndex > 0 && <Divider></Divider>}
 
                     <UseCasesContainer>
@@ -430,43 +454,23 @@ export default function Stories() {
                                                 : <>Other Stories</>
                                         }
                                     </SectionHeader>
-
-                                    <p>{showcaseStories[keyName]?.description}</p>
-                                </Grid>
-
-                                <Grid item xs={12} md={4}>
-                                    <img src={showcaseStories[keyName]?.image} alt={''} />
                                 </Grid>
                             </Grid>
 
-                            <Grid container spacing={5}>
-                                <Grid item xs={12}>
-                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-                                        {
-                                            showcaseStories[keyName]?.storyIds?.map((id, index) => {
-                                                const story = stories?.find(s => s.id === id);
-                                                return (<div style={{ margin: '5rem'}}>
-                                                    <VideoLink url={`/story/${id}`}></VideoLink>
-                                                    <small>{story?.title || 'A video story'}</small>
-                                                </div>);
-                                            })
-                                        }
-                                    </div>
+                            {showcaseStoryMap[keyName].map((story) =>
+                                <Grid container spacing={5} style={{ padding: '2rem'}}>
+                                    <Grid item xs={12} md={4}>
+                                        <a href={`/story/${story.id}`} target={'_blank'} rel='noreferrer noopener'>
+                                            <img src={story.image} alt={''} />
+                                        </a>
+                                    </Grid>
+
+                                    <CenteredGrid item xs={12} md={8}>
+                                        <h2><a href={`/story/${story.id}`} target='_blank' rel='noreferrer noopener'>{story.title}</a></h2>
+                                        <p>{story.description}</p>
+                                    </CenteredGrid>
                                 </Grid>
-                            </Grid>
-
-
-                            {/*<Grid container spacing={5}>
-                                {
-                                    showcaseStories[keyName]?.storyIds?.map((id, index) => {
-                                        const story = stories?.find(s => s.id === id);
-                                        return (<Grid style={{ textAlign: 'center' }} key={`videoLink-${keyName}-${index}`} item xs={3} md={1}>
-                                            <VideoLink url={`/story/${id}`}></VideoLink>
-                                            <small>{story?.title || 'A video story'}</small>
-                                        </Grid>);
-                                    })
-                                }
-                            </Grid>*/}
+                            )}
                         </UseCases>
 
                     </UseCasesContainer>
