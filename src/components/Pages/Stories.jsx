@@ -279,6 +279,25 @@ const CenteredGrid = styled(Grid)`
   flex-direction: column;
   display: flex;
   align-self: center;
+  
+  a {
+    text-decoration: none;
+  }
+
+  h2 {
+    font-family: "Lato", sans-serif;
+    font-size: 1.3rem;
+  }
+  p {
+    font-family: "Lato", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.4;
+    letter-spacing: normal;
+    text-align: left;
+  }
 `;
 
 export default function Stories() {
@@ -458,7 +477,7 @@ export default function Stories() {
                             </Grid>
 
                             {showcaseStoryMap[keyName].map((story) =>
-                                <Grid container spacing={5} style={{ padding: '2rem'}}>
+                                <Grid container spacing={5} style={{ padding: '1rem'}}>
                                     <Grid item xs={12} md={4}>
                                         <a href={`/story/${story.id}`} target={'_blank'} rel='noreferrer noopener'>
                                             <img src={story.image} alt={''} />
