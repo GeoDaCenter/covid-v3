@@ -53,7 +53,7 @@ function StoryPlayer({
                 'settings', // Settings menu
                 'pip', // Picture-in-picture (currently Safari only)
                 // 'airplay', // Airplay (currently Safari only)
-                'download', // Show a download button with a link to either the current source or a custom URL you specify in your options
+                //'download', // Show a download button with a link to either the current source or a custom URL you specify in your options
                 'fullscreen', // Toggle fullscreen
             ]
             return <>
