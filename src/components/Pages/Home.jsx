@@ -999,7 +999,7 @@ function Home() {
           Explore the Atlas
         </ExploreButton>
         
-
+                
         <VideoModal
           open={videoModalInner}
           onClose={() => setVideoModalInner(false)}
