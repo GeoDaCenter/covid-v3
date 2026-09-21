@@ -367,7 +367,7 @@ const CsvDownloader = () => {
           .filter((x) => x !== undefined),
       );
     const docsLinks = await fetch(
-      currentApiBaseUrl + '/data-docs',
+      archiveApiBaseUrl + '/data-docs',
     )
       .then((r) => r.json())
       .then((items) =>
